@@ -8,68 +8,31 @@ namespace Eve {
   using System.Collections;
   using System.Collections.Generic;
   using System.ComponentModel;
-  using System.ComponentModel.DataAnnotations.Schema;
-  using System.Data.Entity;
   using System.Diagnostics.Contracts;
   using System.Linq;
 
   using FreeNet;
-  using FreeNet.Configuration;
   using FreeNet.Data.Entity;
+
+  using Eve.Entities;
 
   //******************************************************************************
   /// <summary>
   /// Contains information about a unit used to format numeric values.
-  /// </summary>>
-  [Table("eveUnits")]
-  public sealed class Unit : BaseValue<UnitId, Unit> {
-
-    // Check EveDbContext.OnModelCreating() for customization of this type's
-    // data mappings.
-
-    #region Instance Fields
-    private string _displayName;
-    #endregion
+  /// </summary>
+  public class Unit : BaseValue<UnitId, UnitId, UnitEntity, Unit> {
 
     #region Constructors/Finalizers
-    //******************************************************************************
-    /// <summary>
-    /// Initializes a new instance of the Unit class.  This overload is
-    /// provided for compatibility with the Entity Framework and should not be
-    /// used.
-    /// </summary>
-    [Obsolete("Provided for compatibility with the Entity Framework.", true)]
-    public Unit() : base(0, DEFAULT_NAME, string.Empty) {
-      _displayName = string.Empty;
-    }
     //******************************************************************************
     /// <summary>
     /// Initializes a new instance of the Unit class.
     /// </summary>
     /// 
-    /// <param name="id">
-    /// The ID of the item.
+    /// <param name="entity">
+    /// The data entity that forms the basis of the adapter.
     /// </param>
-    /// 
-    /// <param name="name">
-    /// The name of the item.
-    /// </param>
-    /// 
-    /// <param name="description">
-    /// The description of the item.
-    /// </param>
-    /// 
-    /// <param name="displayName">
-    /// The display name of the unit.
-    /// </param>
-    public Unit(UnitId id, string name, string description, string displayName) : base(id, name, description) {
-      Contract.Requires(!string.IsNullOrWhiteSpace(name), Resources.Messages.BaseValue_NameCannotBeNullOrEmpty);
-
-      if (displayName == null) {
-        displayName = string.Empty;
-      }
-
-      _displayName = displayName;
+    public Unit(UnitEntity entity) : base(entity) {
+      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
     }
     //******************************************************************************
     /// <summary>
@@ -77,7 +40,6 @@ namespace Eve {
     /// </summary>
     [ContractInvariantMethod]
     private void ObjectInvariant() {
-      Contract.Invariant(_displayName != null);
     }
     #endregion
     #region Public Properties
@@ -95,18 +57,11 @@ namespace Eve {
     /// This is the suffix used to format numeric values according to the unit.
     /// </para>
     /// </remarks>
-    [Column("displayName")]
     public string DisplayName {
       get {
-        Contract.Ensures(Contract.Result<string>() != null);
-        return _displayName;
-      }
-      private set {
-        if (value == null) {
-          value = string.Empty;
-        }
+        Contract.Ensures(!string.IsNullOrWhiteSpace(Contract.Result<string>()));
 
-        _displayName = value;
+        return (string.IsNullOrWhiteSpace(Entity.DisplayName) ? Name : Entity.DisplayName);
       }
     }
     #endregion
@@ -159,8 +114,7 @@ namespace Eve {
           break;
 
         case UnitId.AttributeId:
-          // TODO: Group ID
-          result = "";
+          result = Eve.General.DataSource.GetAttributeTypeById((AttributeId) (int) value).DisplayName;
           break;
 
         case UnitId.Boolean:
@@ -168,8 +122,7 @@ namespace Eve {
           break;
 
         case UnitId.GroupId:
-          // TODO: Group ID
-          result = "";
+          result = Eve.General.DataSource.GetGroupById((GroupId) (int) value).Name;
           break;
 
         case UnitId.InverseAbsolutePercent:
@@ -238,8 +191,7 @@ namespace Eve {
           break;
 
         case UnitId.TypeId:
-          // TODO: Type ID
-          result = "";
+          result = Eve.General.DataSource.GetItemTypeById<ItemType>((int) value).Name;
           break;
 
         default:

@@ -17,8 +17,10 @@ namespace Eve {
   using FreeNet;
   using FreeNet.Collections;
   using FreeNet.Data.Entity;
+  using FreeNet.Extensions;
 
   using Eve.Data;
+  using Eve.Entities;
 
   //******************************************************************************
   /// <summary>
@@ -33,9 +35,21 @@ namespace Eve {
   /// type of value.
   /// </typeparam>
   /// 
+  /// <typeparam name="TEntityId">
+  /// The type of value that uniquely identifies an instance of 
+  /// <typeparamref name="TEntity" />.  This is usually the same as
+  /// <typeparamref name="TId" /> unless the entity adapter has a special
+  /// ID type.
+  /// </typeparam>
+  /// 
+  /// <typeparam name="TEntity">
+  /// The type of the data entity which provides data backing for
+  /// <typeparamref name="TDerived" />.
+  /// </typeparam>
+  /// 
   /// <typeparam name="TDerived">
   /// The type of the concrete derived class; i.e. to declare a "Ship"
-  /// base value, you would do <c>public class Ship : BaseValue<int, Ship></c>.
+  /// base value, you would do <c>public class Ship : BaseValue<int, ShipEntity, Ship></c>.
   /// I know this sort of pseudo-circular "Curiously Recurring Template Pattern"
   /// is generally bad practice, but it allows me to write many useful methods
   /// (Equals, CompareTo, etc.) at this base class level and save myself an
@@ -46,71 +60,39 @@ namespace Eve {
   /// </typeparam>
   /// 
   /// <remarks>
-  /// For classes derived from <c>BaseValue&lt;TId, TDerived&gt;</c>, the
-  /// values of the <see cref="Id" /> property must be unique across all
-  /// instances of the derived class as well as all classes further derived
+  /// For classes derived from <c>BaseValue&lt;TId, TEntity, TDerived&gt;</c>,
+  /// the values of the <see cref="Id" /> property must be unique across all
+  /// instances of the derived class as well as all classes that inherit
   /// from it.
   /// </remarks>
-  public abstract class BaseValue<TId, TDerived> : ImmutableEntity,
-                                                   IComparable,
-                                                   IComparable<TDerived>,
-                                                   IEquatable<TDerived>,
-                                                   IHasId<TId>, 
-                                                   IKeyItem<TId>
-                                                   where TId : new()
-                                                   where TDerived : BaseValue<TId, TDerived> {
-
-    #region Constants
-    /// <summary>
-    /// The name to use when the database contains a null value.  This
-    /// should never happen, but it shouldn't be a fatal error if it 
-    /// does.
-    /// </summary>
-    protected const string DEFAULT_NAME = "[Unknown]";
-    #endregion
+  public abstract class BaseValue<TId, TEntityId, TEntity, TDerived> : EntityAdapter<TEntity>,
+                                                                       IComparable,
+                                                                       IComparable<TDerived>,
+                                                                       IEquatable<TDerived>,
+                                                                       IHasId<TId>, 
+                                                                       IKeyItem<TId>
+                                                                       where TId : new()
+                                                                       where TEntity : BaseValueEntity<TEntityId>
+                                                                       where TDerived : BaseValue<TId, TEntityId, TEntity, TDerived> {
 
     #region Instance Fields
-    private string _description;
     private TId _id;
-    private string _name;
     #endregion
 
     #region Constructors/Finalizers
     //******************************************************************************
     /// <summary>
-    /// Initializes a new instance of the BaseValue class.  This overload is
-    /// provided for compatibility with the Entity Framework and should not be
-    /// used.
-    /// </summary>
-    [Obsolete("Provided for compatibility with the Entity Framework.", true)]
-    protected BaseValue() : this(new TId(), DEFAULT_NAME, string.Empty) {
-    }
-    //******************************************************************************
-    /// <summary>
     /// Initializes a new instance of the BaseValue class.
     /// </summary>
     /// 
-    /// <param name="id">
-    /// The ID of the item.
+    /// <param name="entity">
+    /// The data entity that forms the basis of the adapter.
     /// </param>
-    /// 
-    /// <param name="name">
-    /// The name of the item.
-    /// </param>
-    /// 
-    /// <param name="description">
-    /// The description of the item.
-    /// </param>
-    protected BaseValue(TId id, string name, string description) : base() {
-      Contract.Requires(id != null, Resources.Messages.BaseValue_IdCannotBeNull);
+    public BaseValue(TEntity entity) : base(entity) {
+      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
 
-      if (string.IsNullOrWhiteSpace(name)) {
-        name = DEFAULT_NAME;
-      }
-
-      _description = description ?? string.Empty;
-      _id = id;
-      _name = name;
+      Contract.Assume(entity.Id != null);
+      _id = ConvertEntityId(entity.Id);
     }
     //******************************************************************************
     /// <summary>
@@ -118,9 +100,7 @@ namespace Eve {
     /// </summary>
     [ContractInvariantMethod]
     private void ObjectInvariant() {
-      Contract.Invariant(_description != null);
       Contract.Invariant(_id != null);
-      Contract.Invariant(!string.IsNullOrWhiteSpace(_name));
     }
     #endregion
     #region Public Properties
@@ -135,10 +115,11 @@ namespace Eve {
     public string Description {
       get {
         Contract.Ensures(Contract.Result<string>() != null);
-        return _description;
-      }
-      protected set {
-        _description = value ?? string.Empty;
+
+        var result = Entity.Description;
+        Contract.Assume(result != null);
+
+        return result;
       }
     }
     //******************************************************************************
@@ -154,10 +135,6 @@ namespace Eve {
         Contract.Ensures(Contract.Result<TId>() != null);
         return _id;
       }
-      protected set {
-        Contract.Requires(value != null, Resources.Messages.BaseValue_IdCannotBeNull);
-        _id = value;
-      }
     }
     //******************************************************************************
     /// <summary>
@@ -171,14 +148,11 @@ namespace Eve {
     public string Name {
       get {
         Contract.Ensures(!string.IsNullOrWhiteSpace(Contract.Result<string>()));
-        return _name;
-      }
-      protected set {
-        if (string.IsNullOrWhiteSpace(value)) {
-          value = DEFAULT_NAME;
-        }
 
-        _name = value;
+        var result = Entity.Name;
+        Contract.Assume(!string.IsNullOrWhiteSpace(result));
+
+        return result;
       }
     }
     #endregion
@@ -250,6 +224,30 @@ namespace Eve {
       get {
         return Id.GetHashCode();
       }
+    }
+    #endregion
+    #region Protected Methods
+    //******************************************************************************
+    /// <summary>
+    /// Converts the specified entity ID to the adapter ID type.
+    /// </summary>
+    /// 
+    /// <param name="entityId">
+    /// The entity ID to convert.
+    /// </param>
+    /// 
+    /// <returns>
+    /// The converted ID value.
+    /// </returns>
+    protected virtual TId ConvertEntityId(TEntityId entityId) {
+      Contract.Requires(entityId != null, "The entity ID cannot be null.");
+      Contract.Ensures(Contract.Result<TId>() != null);
+
+      // Attempt automatic conversion
+      TId result = entityId.ConvertTo<TId>();
+      Contract.Assume(result != null);
+
+      return result;
     }
     #endregion
 

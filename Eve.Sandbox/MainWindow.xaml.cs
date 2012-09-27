@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,7 +18,9 @@ using System.Windows.Shapes;
 
 using Microsoft.CSharp;
 
+using FreeNet.Data;
 using FreeNet.Data.Entity;
+using FreeNet.Data.Entity.Extensions;
 
 using Eve;
 using Eve.Data;
@@ -35,20 +39,44 @@ namespace Eve.Sandbox {
     private void Button_Click_1(object sender, RoutedEventArgs e) {
       //IDbConnection connection = Eve.Data.EveDbContext.Default.Database.Connection;
       //connection.Open();
-      //textBox1.AppendText(Eve.Meta.EveCodeGenerator.Default.GenerateEnumGroupId(connection, null, null));
+      //textBox1.AppendText(Eve.Meta.EveCodeGenerator.Default.GenerateEnumSkillId(connection, null, null));
       //return;
 
-      MarketGroup group = Eve.General.DataSource.Get<MarketGroup>(x => x.Id == MarketGroupId.Ships_Frigates_StandardFrigates_Caldari).Single();
+      DbConnection connection = (DbConnection) Eve.Data.EveDbContext.Default.Database.Connection;
+      connection.Open();
+
+      Schema s = new Schema(connection, true);
+      textBox1.AppendText(s.Name + Environment.NewLine);
+
+      foreach (SchemaTable table in s.Tables) {
+        textBox1.AppendText("  " + table.Name + Environment.NewLine);
+
+        foreach (SchemaColumn column in table.Columns) {
+          textBox1.AppendText("    " + column.Description + Environment.NewLine);
+        }
+      }
+
+      return;
+
+      Group group = Eve.General.DataSource.GetGroupById(GroupId.EnergyDestabilizer);
 
       foreach (ItemType item in group.ItemTypes) {
-        textBox1.AppendText(item.Name + " (" + item.Category.Name + ")" + Environment.NewLine);
+        textBox1.AppendText(item.ToString());
       }
+
+
+      //AttributeValue value = Eve.General.DataSource.Get<AttributeValue>(x => ((x.ItemTypeId == 18) && (x.AttributeId == (AttributeId) 182))).First();
+      //textBox1.AppendText(value.ToString());
 
       //IList<Race> races = Eve.General.DataSource.GetAll<Race>();
 
       //foreach (Race race in races) {
       //  textBox1.AppendText(race.Id.ToString() + ", " + race.Name + " , " + race.Description + " , " + race.ShortDescription + Environment.NewLine);
       //}
+    }
+
+    private void Button_Click_2(object sender, RoutedEventArgs e) {
+      Eve.General.Cache.Clear();
     }
   }
 }

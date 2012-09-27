@@ -17,6 +17,7 @@ namespace Eve.Tests {
 
   using Eve;
   using Eve.Data;
+  using Eve.Entities;
 
   //******************************************************************************
   /// <summary>
@@ -33,12 +34,14 @@ namespace Eve.Tests {
     [Test()]
     public void TestFormatValue() {
 
+      UnitEntity unitEntity;
       Unit unit;
 
       // Test the unit formats that require special processing
 
       // Absolute percent
-      unit = new Unit(UnitId.AbsolutePercent, "Absolute Percent", string.Empty, string.Empty);
+      unitEntity = new UnitEntity { Id = UnitId.AbsolutePercent, Name = "Absolute Percent", Description = string.Empty, DisplayName = string.Empty };
+      unit = new Unit(unitEntity);
       Assert.AreEqual(unit.FormatValue(1), "100%");
       Assert.AreEqual(unit.FormatValue(0), "0%");
       Assert.AreEqual(unit.FormatValue(0.5), "50%");
@@ -46,7 +49,8 @@ namespace Eve.Tests {
       Assert.AreEqual(unit.FormatValue(-0.55), "-55%");
 
       // Boolean
-      unit = new Unit(UnitId.Boolean, "Boolean", string.Empty, string.Empty);
+      unitEntity = new UnitEntity { Id = UnitId.Boolean, Name = "Boolean", Description = string.Empty, DisplayName = string.Empty };
+      unit = new Unit(unitEntity);
       Assert.AreEqual(unit.FormatValue(1), "True");
       Assert.AreEqual(unit.FormatValue(0.1D), "True");
       Assert.AreEqual(unit.FormatValue(-243), "True");
@@ -54,7 +58,8 @@ namespace Eve.Tests {
       Assert.AreEqual(unit.FormatValue(0.0D), "False");
 
       // Inverse absolute percent
-      unit = new Unit(UnitId.InverseAbsolutePercent, "Inverse Absolute Percent", string.Empty, string.Empty);
+      unitEntity = new UnitEntity { Id = UnitId.InverseAbsolutePercent, Name = "Inverse Absolute Percent", Description = string.Empty, DisplayName = string.Empty };
+      unit = new Unit(unitEntity);
       Assert.AreEqual(unit.FormatValue(1), "0%");
       Assert.AreEqual(unit.FormatValue(0), "100%");
       Assert.AreEqual(unit.FormatValue(0.5), "50%");
@@ -62,14 +67,16 @@ namespace Eve.Tests {
       Assert.AreEqual(unit.FormatValue(-0.55), "155%");
 
       // Inversed modifier percent
-      unit = new Unit(UnitId.InversedModifierPercent, "Inversed Modifier Percent", string.Empty, string.Empty);
+      unitEntity = new UnitEntity { Id = UnitId.InversedModifierPercent, Name = "Inversed Modifier Percent", Description = string.Empty, DisplayName = string.Empty };
+      unit = new Unit(unitEntity);
       Assert.AreEqual(unit.FormatValue(1), "0%");
       Assert.AreEqual(unit.FormatValue(0), "100%");
       Assert.AreEqual(unit.FormatValue(0.1), "90%");
       Assert.AreEqual(unit.FormatValue(0.9), "10%");
 
       // Modifier percent
-      unit = new Unit(UnitId.ModifierPercent, "Modifier Percent", string.Empty, string.Empty);
+      unitEntity = new UnitEntity { Id = UnitId.ModifierPercent, Name = "Modifier Percent", Description = string.Empty, DisplayName = string.Empty };
+      unit = new Unit(unitEntity);
       Assert.AreEqual(unit.FormatValue(1), "+0%");
       Assert.AreEqual(unit.FormatValue(0), "-100%");
       Assert.AreEqual(unit.FormatValue(1.1), "+10%");
@@ -77,7 +84,8 @@ namespace Eve.Tests {
       Assert.AreEqual(unit.FormatValue(0.9), "-10%");
 
       // Sex
-      unit = new Unit(UnitId.Sex, "Sex", string.Empty, string.Empty);
+      unitEntity = new UnitEntity { Id = UnitId.Sex, Name = "Sex", Description = string.Empty, DisplayName = string.Empty };
+      unit = new Unit(unitEntity);
       Assert.AreEqual(unit.FormatValue(1), "Male");
       Assert.AreEqual(unit.FormatValue(1.0D), "Male");
       Assert.AreEqual(unit.FormatValue(0.9999D), "Male");
@@ -94,7 +102,8 @@ namespace Eve.Tests {
       Assert.AreEqual(unit.FormatValue(4), "Unknown");
 
       // Sizeclass
-      unit = new Unit(UnitId.Sizeclass, "Sizeclass", string.Empty, string.Empty);
+      unitEntity = new UnitEntity { Id = UnitId.Sizeclass, Name = "Sizeclass", Description = string.Empty, DisplayName = string.Empty };
+      unit = new Unit(unitEntity);
       Assert.AreEqual(unit.FormatValue(1), "Small");
       Assert.AreEqual(unit.FormatValue(1.0D), "Small");
       Assert.AreEqual(unit.FormatValue(0.9999D), "Small");

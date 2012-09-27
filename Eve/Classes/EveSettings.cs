@@ -27,6 +27,9 @@ namespace Eve {
     internal static class SettingKeys {
 
       // Keys and default values for settings
+      internal const string SETTINGKEY_CACHESIZE = "CacheSize";
+      internal const int SETTINGDEFAULT_CACHESIZE = 50;
+
       internal const string SETTINGKEY_CULTURE = "Culture";
       internal const string SETTINGDEFAULT_CULTURE = "default"; // Can be any valid culture identifier or "default" to use the current culture
     }
@@ -110,6 +113,27 @@ namespace Eve {
     #endregion
 
     #region Settings Properties
+    //******************************************************************************
+    /// <summary>
+    /// Gets the amount of memory (in megabytes) the cache is allowed to use.
+    /// </summary>
+    /// 
+    /// <value>
+    /// The amount of memory (in megabytes) the cache is allowed to use.
+    /// </value>
+    public int CacheSize {
+      get {
+        Contract.Ensures(Contract.Result<int>() >= 0);
+
+        int cacheSize = Settings.GetValue<int>(SettingKeys.SETTINGKEY_CACHESIZE, SettingKeys.SETTINGDEFAULT_CACHESIZE);
+        
+        if (cacheSize < 0) {
+          cacheSize = 0;
+        }
+
+        return cacheSize;
+      }
+    }
     //******************************************************************************
     /// <summary>
     /// Gets the culture used by the application.

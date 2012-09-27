@@ -8,132 +8,41 @@ namespace Eve {
   using System.Collections;
   using System.Collections.Generic;
   using System.ComponentModel;
-  using System.ComponentModel.DataAnnotations.Schema;
-  using System.Data.Entity;
   using System.Diagnostics.Contracts;
   using System.Linq;
 
   using FreeNet;
-  using FreeNet.Configuration;
   using FreeNet.Data.Entity;
+
+  using Eve.Entities;
 
   //******************************************************************************
   /// <summary>
   /// Contains information about an attribute of an EVE item.
-  /// </summary>>
-  [Table("dgmAttributeTypes")]
-  public class AttributeType : BaseValue<AttributeId, AttributeType>,
+  /// </summary>
+  public class AttributeType : BaseValue<AttributeId, AttributeId, AttributeTypeEntity, AttributeType>,
                                IHasIcon {
 
     // Check EveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     #region Instance Fields
-    private AttributeCategoryId? _categoryId;
-    private double _defaultValue;
-    private string _displayName;
-    private bool _highIsGood;
-    private Icon _icon;
-    private int? _iconId;
-    private bool _published;
-    private bool _stackable;
-    private UnitId? _unitId;
-
     private AttributeCategory _category;
+    private Icon _icon;
     private Unit _unit;
     #endregion
 
     #region Constructors/Finalizers
     //******************************************************************************
     /// <summary>
-    /// Initializes a new instance of the AttributeType class.  This overload is
-    /// provided for compatibility with the Entity Framework and should not be
-    /// used.
-    /// </summary>
-    [Obsolete("Provided for compatibility with the Entity Framework.", true)]
-    public AttributeType() : base(0, DEFAULT_NAME, string.Empty) {
-      _defaultValue = 0.0D;
-      _displayName = DEFAULT_NAME;
-
-      Contract.Assume(!double.IsInfinity(_defaultValue));
-    }
-    //******************************************************************************
-    /// <summary>
     /// Initializes a new instance of the AttributeType class.
     /// </summary>
     /// 
-    /// <param name="id">
-    /// The ID of the item.
+    /// <param name="entity">
+    /// The data entity that forms the basis of the adapter.
     /// </param>
-    /// 
-    /// <param name="name">
-    /// The name of the item.
-    /// </param>
-    /// 
-    /// <param name="description">
-    /// The description of the item.
-    /// </param>
-    /// 
-    /// <param name="categoryId">
-    /// The ID of the attribute category.
-    /// </param>
-    /// 
-    /// <param name="defaultValue">
-    /// The default value for the attribute.
-    /// </param>
-    /// 
-    /// <param name="displayName">
-    /// The display name of the item.
-    /// </param>
-    /// 
-    /// <param name="highIsGood">
-    /// Specifies whether a high value for the attribute is "good."
-    /// </param>
-    /// 
-    /// <param name="iconId">
-    /// The ID of the icon associated with the item, if any.
-    /// </param>
-    /// 
-    /// <param name="published">
-    /// Specifies whether the item is marked as published for
-    /// public consumption.
-    /// </param>
-    /// 
-    /// <param name="stackable">
-    /// Specifies whether the attribute is stackable without penalty.
-    /// </param>
-    /// 
-    /// <param name="unitId">
-    /// The ID of the attribute's unit, if any.
-    /// </param>
-    public AttributeType(AttributeId id,
-                         string name,
-                         string description,
-                         AttributeCategoryId? categoryId,
-                         double defaultValue,
-                         string displayName,
-                         bool highIsGood,
-                         int? iconId,
-                         bool published,
-                         bool stackable,
-                         UnitId? unitId) : base(id, name, description) {
-
-      Contract.Requires(!string.IsNullOrWhiteSpace(name), Resources.Messages.BaseValue_NameCannotBeNullOrEmpty);
-      Contract.Requires(!double.IsInfinity(defaultValue), Resources.Messages.AttributeType_DefaultValueMustBeNumeric);
-      Contract.Requires(!double.IsNaN(defaultValue), Resources.Messages.AttributeType_DefaultValueMustBeNumeric);
-
-      if (string.IsNullOrWhiteSpace(displayName)) {
-        displayName = name;
-      }
-
-      _categoryId = categoryId;
-      _defaultValue = defaultValue;
-      _displayName = displayName;
-      _highIsGood = highIsGood;
-      _iconId = iconId;
-      _published = published;
-      _stackable = stackable;
-      _unitId = unitId;
+    public AttributeType(AttributeTypeEntity entity) : base(entity) {
+      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
     }
     //******************************************************************************
     /// <summary>
@@ -141,9 +50,6 @@ namespace Eve {
     /// </summary>
     [ContractInvariantMethod]
     private void ObjectInvariant() {
-      Contract.Invariant(!double.IsInfinity(_defaultValue));
-      Contract.Invariant(!double.IsNaN(_defaultValue));
-      Contract.Invariant(!string.IsNullOrWhiteSpace(_displayName));
     }
     #endregion
     #region Public Properties
@@ -155,13 +61,22 @@ namespace Eve {
     /// <value>
     /// The category to which the attribute belongs.
     /// </value>
-    [ForeignKey("CategoryId")]
     public virtual AttributeCategory Category {
       get {
+        if (_category == null) {
+          if (CategoryId != null) {
+
+            // Load the cached version if available
+            _category = Eve.General.Cache.GetOrAdd<AttributeCategory>(CategoryId, () => {
+              AttributeCategoryEntity categoryEntity = Entity.Category;
+              Contract.Assume(categoryEntity != null);
+
+              return new AttributeCategory(categoryEntity);
+            });
+          }
+        }
+
         return _category;
-      }
-      private set {
-        _category = value;
       }
     }
     //******************************************************************************
@@ -173,13 +88,9 @@ namespace Eve {
     /// An <see cref="AttributeCategoryId" /> value specifying the category to
     /// which the attribute belongs.
     /// </value>
-    [Column("categoryID")]
     public AttributeCategoryId? CategoryId {
       get {
-        return _categoryId;
-      }
-      private set {
-        _categoryId = value;
+        return Entity.CategoryId;
       }
     }
     //******************************************************************************
@@ -190,17 +101,15 @@ namespace Eve {
     /// <value>
     /// The default value of the attribute.
     /// </value>
-    [Column("defaultValue")]
     public double DefaultValue {
       get {
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
-        return _defaultValue;
-      }
-      private set {
-        Contract.Requires(!double.IsInfinity(value), Resources.Messages.AttributeType_DefaultValueMustBeNumeric);
-        Contract.Requires(!double.IsNaN(value), Resources.Messages.AttributeType_DefaultValueMustBeNumeric);
-        _defaultValue = value;
+
+        var result = Entity.DefaultValue;
+        Contract.Assume(!double.IsInfinity(result));
+        Contract.Assume(!double.IsNaN(result));
+        return result;
       }
     }
     //******************************************************************************
@@ -211,18 +120,11 @@ namespace Eve {
     /// <value>
     /// The human-readable display name of the attribute.
     /// </value>
-    [Column("displayName")]
     public string DisplayName {
       get {
         Contract.Ensures(!string.IsNullOrWhiteSpace(Contract.Result<string>()));
-        return _displayName;
-      }
-      private set {
-        if (string.IsNullOrWhiteSpace(value)) {
-          value = Name;
-        }
 
-        _displayName = value;
+        return (string.IsNullOrWhiteSpace(Entity.DisplayName) ? Name : Entity.DisplayName);
       }
     }
     //******************************************************************************
@@ -235,31 +137,36 @@ namespace Eve {
     /// <see langword="true" /> if a high value is good; otherwise
     /// <see langword="false" />.
     /// </value>
-    [Column("highIsGood")]
     public bool HighIsGood {
       get {
-        return _highIsGood;
-      }
-      private set {
-        _highIsGood = value;
+        return Entity.HighIsGood;
       }
     }
     //******************************************************************************
     /// <summary>
-    /// Gets the icon associated with the attribute, if any.
+    /// Gets the icon associated with the item, if any.
     /// </summary>
     /// 
     /// <value>
-    /// The <see cref="Icon" /> associated with the attribute, or
-    /// <see langword="null" /> if no such attribute exists.
+    /// The <see cref="Icon" /> associated with the item, or
+    /// <see langword="null" /> if no such icon exists.
     /// </value>
-    [ForeignKey("IconId")]
-    public virtual Icon Icon {
+    public Icon Icon {
       get {
+        if (_icon == null) {
+          if (IconId != null) {
+
+            // Load the cached version if available
+            _icon = Eve.General.Cache.GetOrAdd<Icon>(IconId, () => {
+              IconEntity iconEntity = Entity.Icon;
+              Contract.Assume(iconEntity != null);
+
+              return new Icon(iconEntity);
+            });
+          }
+        }
+
         return _icon;
-      }
-      private set {
-        _icon = value;
       }
     }
     //******************************************************************************
@@ -271,13 +178,9 @@ namespace Eve {
     /// The ID of the icon associated with the attribute, or
     /// <see langword="null" /> if no such icon exists.
     /// </value>
-    [Column("iconID")]
-    public int? IconId {
+    public IconId? IconId {
       get {
-        return _iconId;
-      }
-      private set {
-        _iconId = value;
+        return Entity.IconId;
       }
     }
     //******************************************************************************
@@ -290,13 +193,9 @@ namespace Eve {
     /// <see langword="true" /> if the attribute is marked as published;
     /// otherwise <see langword="false" />.
     /// </value>
-    [Column("published")]
     public bool Published {
       get {
-        return _published;
-      }
-      private set {
-        _published = value;
+        return Entity.Published;
       }
     }
     //******************************************************************************
@@ -309,13 +208,9 @@ namespace Eve {
     /// <see langword="true" /> if the attribute can be stacked with penalty;
     /// otherwise <see langword="false" />.
     /// </value>
-    [Column("stackable")]
     public bool Stackable {
       get {
-        return _stackable;
-      }
-      private set {
-        _stackable = value;
+        return Entity.Stackable;
       }
     }
     //******************************************************************************
@@ -327,13 +222,22 @@ namespace Eve {
     /// The <see cref="Unit" /> associated with the attribute, or
     /// <see langword="null" /> if no such unit exists.
     /// </value>
-    [ForeignKey("UnitId")]
     public virtual Unit Unit {
       get {
+        if (_unit == null) {
+          if (UnitId != null) {
+
+            // Load the cached version if available
+            _unit = Eve.General.Cache.GetOrAdd<Unit>(UnitId, () => {
+              UnitEntity unitEntity = Entity.Unit;
+              Contract.Assume(unitEntity != null);
+
+              return new Unit(unitEntity);
+            });
+          }
+        }
+
         return _unit;
-      }
-      private set {
-        _unit = value;
       }
     }
     //******************************************************************************
@@ -345,17 +249,22 @@ namespace Eve {
     /// The ID of the unit associated with the attribute, or
     /// <see langword="null" /> if no such unit exists.
     /// </value>
-    [Column("unitID")]
     public UnitId? UnitId {
       get {
-        return _unitId;
-      }
-      private set {
-        _unitId = value;
+        return Entity.UnitId;
       }
     }
     #endregion
     #region Public Methods
+    //******************************************************************************
+    /// <inheritdoc />
+    public override int CompareTo(AttributeType other) {
+      if (other == null) {
+        return 1;
+      }
+
+      return DisplayName.CompareTo(other.DisplayName);
+    }
     //******************************************************************************
     /// <summary>
     /// Formats a numeric value according to the current attribute.

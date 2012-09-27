@@ -189,4 +189,37 @@
   <data name="ItemType_VolumeMustBeNumeric" xml:space="preserve">
     <value>The volume must be a finite numeric value.</value>
   </data>
+  <data name="AttributeValue_ItemTypeCannotBeNull" xml:space="preserve">
+    <value>The item type cannot be null.</value>
+  </data>
+  <data name="EntityAdapter_EntityCannotBeNull" xml:space="preserve">
+    <value>The entity cannot be null.</value>
+  </data>
+  <data name="EveCache_CacheCannotBeNull" xml:space="preserve">
+    <value>The cache cannot be null.</value>
+  </data>
+  <data name="EveCache_CacheSizeCannotBeNegative" xml:space="preserve">
+    <value>The cache size cannot be less than zero.</value>
+  </data>
+  <data name="EveCache_GeneratedValueHasInvalidId" xml:space="preserve">
+    <value>The ID of the generated value must match the provided ID.</value>
+  </data>
+  <data name="EveCache_IdCannotBeNull" xml:space="preserve">
+    <value>The ID cannot be null.</value>
+  </data>
+  <data name="EveCache_ValueCannotBeNull" xml:space="preserve">
+    <value>The value to add cannot be null.</value>
+  </data>
+  <data name="EveCache_ValueFactoryCannotBeNull" xml:space="preserve">
+    <value>The method to generate a value to add cannot be null.</value>
+  </data>
+  <data name="General_CacheCannotBeNull" xml:space="preserve">
+    <value>The cache cannot be null.</value>
+  </data>
+  <data name="IEveDataSource_CacheCannotBeNull" xml:space="preserve">
+    <value>The cache cannot be null.</value>
+  </data>
+  <data name="BaseValueCache_RegionCannotBeNull" xml:space="preserve">
+    <value>The region cannot be null.</value>
+  </data>
 </root>

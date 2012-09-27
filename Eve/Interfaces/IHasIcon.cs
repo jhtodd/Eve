@@ -49,7 +49,7 @@ namespace Eve {
     /// The ID of the icon associated with the item, or
     /// <see langword="null" /> if no such icon exists.
     /// </value>
-    int? IconId { get; }
+    IconId? IconId { get; }
     #endregion
   }
 }

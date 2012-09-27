@@ -40,11 +40,11 @@ namespace Eve.Tests {
     #region Test Methods
     //******************************************************************************
     /// <summary>
-    /// Test method for the <see cref="BaseValueCache.CacheRegionMap" /> class.
+    /// Test method for the <see cref="EveCache.CacheRegionMap" /> class.
     /// </summary>
     [Test()]
     public void TestObject() {
-      BaseValueCache.CacheRegionMap map = new BaseValueCache.CacheRegionMap();
+      EveCache.CacheRegionMap map = new EveCache.CacheRegionMap();
 
       Assert.AreEqual(0, map.InnerRegionMap.Count);
 

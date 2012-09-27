@@ -88,6 +88,15 @@ namespace Eve.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The item type cannot be null..
+        /// </summary>
+        public static string AttributeValue_ItemTypeCannotBeNull {
+            get {
+                return ResourceManager.GetString("AttributeValue_ItemTypeCannotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The value must be a finite numeric value..
         /// </summary>
         public static string AttributeValue_ValueMustBeNumeric {
@@ -151,11 +160,92 @@ namespace Eve.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The region cannot be null..
+        /// </summary>
+        public static string BaseValueCache_RegionCannotBeNull {
+            get {
+                return ResourceManager.GetString("BaseValueCache_RegionCannotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The value cannot be null..
         /// </summary>
         public static string BaseValueCache_ValueCannotBeNull {
             get {
                 return ResourceManager.GetString("BaseValueCache_ValueCannotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The entity cannot be null..
+        /// </summary>
+        public static string EntityAdapter_EntityCannotBeNull {
+            get {
+                return ResourceManager.GetString("EntityAdapter_EntityCannotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The cache cannot be null..
+        /// </summary>
+        public static string EveCache_CacheCannotBeNull {
+            get {
+                return ResourceManager.GetString("EveCache_CacheCannotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The cache size cannot be less than zero..
+        /// </summary>
+        public static string EveCache_CacheSizeCannotBeNegative {
+            get {
+                return ResourceManager.GetString("EveCache_CacheSizeCannotBeNegative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The ID of the generated value must match the provided ID..
+        /// </summary>
+        public static string EveCache_GeneratedValueHasInvalidId {
+            get {
+                return ResourceManager.GetString("EveCache_GeneratedValueHasInvalidId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The ID cannot be null..
+        /// </summary>
+        public static string EveCache_IdCannotBeNull {
+            get {
+                return ResourceManager.GetString("EveCache_IdCannotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value to add cannot be null..
+        /// </summary>
+        public static string EveCache_ValueCannotBeNull {
+            get {
+                return ResourceManager.GetString("EveCache_ValueCannotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The method to generate a value to add cannot be null..
+        /// </summary>
+        public static string EveCache_ValueFactoryCannotBeNull {
+            get {
+                return ResourceManager.GetString("EveCache_ValueFactoryCannotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The cache cannot be null..
+        /// </summary>
+        public static string General_CacheCannotBeNull {
+            get {
+                return ResourceManager.GetString("General_CacheCannotBeNull", resourceCulture);
             }
         }
         
@@ -192,6 +282,15 @@ namespace Eve.Resources {
         public static string Icon_IconFileCannotBeNull {
             get {
                 return ResourceManager.GetString("Icon_IconFileCannotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The cache cannot be null..
+        /// </summary>
+        public static string IEveDataSource_CacheCannotBeNull {
+            get {
+                return ResourceManager.GetString("IEveDataSource_CacheCannotBeNull", resourceCulture);
             }
         }
         

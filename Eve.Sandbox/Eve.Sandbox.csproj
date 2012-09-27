@@ -101,13 +101,13 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\FreeNet.Data\FreeNet.Data.csproj">
+      <Project>{4f9a7e13-951b-4bd2-8a76-60fa69195ac5}</Project>
+      <Name>FreeNet.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Eve.csproj">
       <Project>{b154b7bd-6371-4c9d-95ed-dbc770931802}</Project>
       <Name>Eve</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Eve.Meta\Eve.Meta.csproj">
-      <Project>{7e8cfe47-b8f0-467f-b445-291e927bb6d3}</Project>
-      <Name>Eve.Meta</Name>
     </ProjectReference>
     <ProjectReference Include="..\FreeNet.Data.Entity\FreeNet.Data.Entity.csproj">
       <Project>{f2a3ef11-344e-4bdc-9f35-5fe736da2df3}</Project>

@@ -7,126 +7,73 @@ namespace Eve {
   using System;
   using System.Collections;
   using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.ComponentModel.DataAnnotations.Schema;
-  using System.Data.Entity;
   using System.Diagnostics.Contracts;
   using System.Linq;
 
   using FreeNet;
   using FreeNet.Collections.ObjectModel;
-  using FreeNet.Data.Entity;
 
+  using Eve.Character;
+  using Eve.Entities;
   using Eve.Universe;
 
   //******************************************************************************
   /// <summary>
-  /// Contains information about a group to which an EVE item belongs.
-  /// </summary>>
-  [Table("invTypes")]
-  public class ItemType : BaseValue<int, ItemType>,
-                          IHasIcon {
+  /// The base class for EVE types.
+  /// </summary>
+  public abstract class ItemType : BaseValue<ItemTypeId, int, ItemTypeEntity, ItemType>,
+                                   IHasIcon {
 
-    // Check EveDbContext.OnModelCreating() for customization of this type's
-    // data mappings.
+    #region Static Methods
+    //******************************************************************************
+    /// <summary>
+    /// Creates an appropriate item type for the specified entity.
+    /// </summary>
+    /// 
+    /// <param name="entity">
+    /// The data entity.
+    /// </param>
+    /// 
+    /// <returns>
+    /// An <see cref="ItemType" /> of the appropriate derived type, based on the
+    /// contents of <paramref name="entity" />.
+    /// </returns>
+    public static ItemType Create(ItemTypeEntity entity) {
+      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Ensures(Contract.Result<ItemType>() != null);
+
+      // Use the item's group and category to determine the correct derived type
+      Group group = Eve.General.DataSource.GetGroupById(entity.GroupId);
+
+      switch (group.CategoryId) {
+
+        // All items under category Skill map to SkillType
+        case CategoryId.Skill:
+          return new SkillType(entity);
+      }
+
+      return new GenericItemType(entity);
+    }
+    #endregion
 
     #region Instance Fields
-    private decimal _basePrice;
-    private double _capacity;
-    private double _chanceOfDuplicating;
-    private GroupId _groupId;
-    private int? _iconId;
-    private MarketGroupId? _marketGroupId;
-    private double _mass;
-    private RaceId? _raceId;
-    private int _portionSize;
-    private bool _published;
-    private double _volume;
-
+    private ReadOnlyAttributeValueCollection _attributes;
+    private Group _group;
     private Icon _icon;
-    private Group _innerGroup;
     private MarketGroup _marketGroup;
     #endregion
 
     #region Constructors/Finalizers
     //******************************************************************************
     /// <summary>
-    /// Initializes a new instance of the ItemType class.  This overload is
-    /// provided for compatibility with the Entity Framework and should not be
-    /// used.
-    /// </summary>
-    [Obsolete("Provided for compatibility with the Entity Framework.", true)]
-    public ItemType() : base(0, DEFAULT_NAME, string.Empty) {
-      _basePrice = 0M;
-      _capacity = 0.0D;
-      _chanceOfDuplicating = 0.0D;
-      _mass = 0.0D;
-      _portionSize = 0;
-      _volume = 0.0D;
-    }
-    //******************************************************************************
-    /// <summary>
     /// Initializes a new instance of the ItemType class.
     /// </summary>
     /// 
-    /// <param name="id">
-    /// The ID of the item.
+    /// <param name="entity">
+    /// The data entity that forms the basis of the adapter.
     /// </param>
-    /// 
-    /// <param name="name">
-    /// The name of the item.
-    /// </param>
-    /// 
-    /// <param name="description">
-    /// The description of the item.
-    /// </param>
-    /// 
-    /// <param name="iconId">
-    /// The ID of the icon associated with the item, if any.
-    /// </param>
-    /// 
-    /// <param name="published">
-    /// Indicates whether the item is marked as published for public
-    /// consumption.
-    /// </param>
-    public ItemType(int id, 
-                    string name,
-                    string description,
-                    decimal basePrice,
-                    double capacity,
-                    double chanceOfDuplicating,
-                    GroupId groupId,
-                    int? iconId,
-                    MarketGroupId? marketGroupId,
-                    double mass,
-                    RaceId? raceId,
-                    int portionSize,
-                    bool published,
-                    double volume) : base(id, name, description) {
-      
-      Contract.Requires(!string.IsNullOrWhiteSpace(name), Resources.Messages.BaseValue_NameCannotBeNullOrEmpty);
-      Contract.Requires(!double.IsInfinity(capacity), Resources.Messages.ItemType_CapacityMustBeNumeric);
-      Contract.Requires(!double.IsNaN(capacity), Resources.Messages.ItemType_CapacityMustBeNumeric);
-      Contract.Requires(!double.IsInfinity(chanceOfDuplicating), Resources.Messages.ItemType_ChanceOfDuplicatingMustBeNumeric);
-      Contract.Requires(!double.IsNaN(chanceOfDuplicating), Resources.Messages.ItemType_ChanceOfDuplicatingMustBeNumeric);
-      Contract.Requires(!double.IsInfinity(mass), Resources.Messages.ItemType_MassMustBeNumeric);
-      Contract.Requires(!double.IsNaN(mass), Resources.Messages.ItemType_MassMustBeNumeric);
-      Contract.Requires(!double.IsInfinity(volume), Resources.Messages.ItemType_VolumeMustBeNumeric);
-      Contract.Requires(!double.IsNaN(volume), Resources.Messages.ItemType_VolumeMustBeNumeric);
-
-      _basePrice = basePrice;
-      _capacity = capacity;
-      _chanceOfDuplicating = chanceOfDuplicating;
-      _groupId = groupId;
-      _iconId = iconId;
-      _marketGroupId = marketGroupId;
-      _mass = mass;
-      _raceId = raceId;
-      _portionSize = portionSize;
-      _published = published;
-      _volume = volume;
-
-      Contract.Assume(!double.IsInfinity(_capacity)); // Shouldn't be needed, but is
+    public ItemType(ItemTypeEntity entity) : base(entity) {
+      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
     }
     //******************************************************************************
     /// <summary>
@@ -134,17 +81,37 @@ namespace Eve {
     /// </summary>
     [ContractInvariantMethod]
     private void ObjectInvariant() {
-      Contract.Invariant(!double.IsInfinity(_capacity));
-      Contract.Invariant(!double.IsNaN(_capacity));
-      Contract.Invariant(!double.IsInfinity(_chanceOfDuplicating));
-      Contract.Invariant(!double.IsNaN(_chanceOfDuplicating));
-      Contract.Invariant(!double.IsInfinity(_mass));
-      Contract.Invariant(!double.IsNaN(_mass));
-      Contract.Invariant(!double.IsInfinity(_volume));
-      Contract.Invariant(!double.IsNaN(_volume));
     }
     #endregion
     #region Public Properties
+    //******************************************************************************
+    /// <summary>
+    /// Gets the collection of child market groups under the current market group.
+    /// </summary>
+    /// 
+    /// <value>
+    /// A <see cref="ReadOnlyAttributeValueCollection" /> containing the child market
+    /// groups.
+    /// </value>
+    public ReadOnlyAttributeValueCollection Attributes {
+      get {
+        Contract.Ensures(Contract.Result<ReadOnlyAttributeValueCollection>() != null);
+
+        if (_attributes == null) {
+          if (Entity.Attributes != null) {
+
+            // No need to cache individual attributes since the whole ItemType is
+            // already being cached, and they have no usefulness outside the
+            // current ItemType
+            _attributes = new ReadOnlyAttributeValueCollection(Entity.Attributes.Select(x => new AttributeValue(x)).OrderBy(x => x));
+          } else {
+            _attributes = new ReadOnlyAttributeValueCollection(null);
+          }
+        }
+
+        return _attributes;
+      }
+    }
     //******************************************************************************
     /// <summary>
     /// Gets the base price of the item.
@@ -159,13 +126,9 @@ namespace Eve {
     /// This value is so inaccurate as to be almost meaningless in game terms.
     /// </para>
     /// </remarks>
-    [Column("basePrice")]
     public decimal BasePrice {
       get {
-        return _basePrice;
-      }
-      protected set {
-        _basePrice = value;
+        return Entity.BasePrice;
       }
     }
     //******************************************************************************
@@ -176,17 +139,16 @@ namespace Eve {
     /// <value>
     /// The cargo capacity of the item.
     /// </value>
-    [Column("capacity")]
     public double Capacity {
       get {
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
-        return _capacity;
-      }
-      protected set {
-        Contract.Requires(!double.IsInfinity(value), Resources.Messages.ItemType_CapacityMustBeNumeric);
-        Contract.Requires(!double.IsNaN(value), Resources.Messages.ItemType_CapacityMustBeNumeric);
-        _capacity = value;
+
+        var result = Entity.Capacity;
+        Contract.Assume(!double.IsInfinity(result));
+        Contract.Assume(!double.IsNaN(result));
+
+        return result;
       }
     }
     //******************************************************************************
@@ -197,11 +159,9 @@ namespace Eve {
     /// <value>
     /// The <see cref="Category" /> to which the item belongs.
     /// </value>
-    [NotMapped()]
     public Category Category {
       get {
         Contract.Ensures(Contract.Result<Category>() != null);
-
         return Group.Category;
       }
     }
@@ -213,7 +173,6 @@ namespace Eve {
     /// <value>
     /// The ID of the <see cref="Category" /> to which the item belongs.
     /// </value>
-    [NotMapped()]
     public CategoryId CategoryId {
       get {
         return Group.CategoryId;
@@ -227,17 +186,16 @@ namespace Eve {
     /// <value>
     /// The chance of duplication of the item.
     /// </value>
-    [Column("chanceOfDuplicating")]
     public double ChanceOfDuplicating {
       get {
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
-        return _chanceOfDuplicating;
-      }
-      protected set {
-        Contract.Requires(!double.IsInfinity(value), Resources.Messages.ItemType_ChanceOfDuplicatingMustBeNumeric);
-        Contract.Requires(!double.IsNaN(value), Resources.Messages.ItemType_ChanceOfDuplicatingMustBeNumeric);
-        _chanceOfDuplicating = value;
+
+        var result = Entity.ChanceOfDuplicating;
+        Contract.Assume(!double.IsInfinity(result));
+        Contract.Assume(!double.IsNaN(result));
+
+        return result;
       }
     }
     //******************************************************************************
@@ -252,11 +210,18 @@ namespace Eve {
       get {
         Contract.Ensures(Contract.Result<Group>() != null);
 
-        // This property uses a hidden navigation property backing to enforce
-        // non-null ensures
-        Group result = InnerGroup;
-        Contract.Assume(result != null); // This will be set by this point
-        return result;
+        if (_group == null) {
+
+          // Load the cached version if available
+          _group = Eve.General.Cache.GetOrAdd<Group>(GroupId, () => {
+            GroupEntity groupEntity = Entity.Group;
+            Contract.Assume(groupEntity != null);
+
+            return new Group(groupEntity);
+          });
+        }
+
+        return _group;
       }
     }
     //******************************************************************************
@@ -267,13 +232,9 @@ namespace Eve {
     /// <value>
     /// The ID of the <see cref="Group" /> to which the item belongs.
     /// </value>
-    [Column("groupID")]
     public GroupId GroupId {
       get {
-        return _groupId;
-      }
-      protected set {
-        _groupId = value;
+        return Entity.GroupId;
       }
     }
     //******************************************************************************
@@ -283,15 +244,24 @@ namespace Eve {
     /// 
     /// <value>
     /// The <see cref="Icon" /> associated with the item, or
-    /// <see langword="null" /> if no such attribute exists.
+    /// <see langword="null" /> if no such icon exists.
     /// </value>
-    [ForeignKey("IconId")]
-    public virtual Icon Icon {
+    public Icon Icon {
       get {
+        if (_icon == null) {
+          if (IconId != null) {
+            
+            // Load the cached version if available
+            _icon = Eve.General.Cache.GetOrAdd<Icon>(IconId, () => {
+              IconEntity iconEntity = Entity.Icon;
+              Contract.Assume(iconEntity != null);
+
+              return new Icon(iconEntity);
+            });
+          }
+        }
+
         return _icon;
-      }
-      protected set {
-        _icon = value;
       }
     }
     //******************************************************************************
@@ -303,13 +273,9 @@ namespace Eve {
     /// The ID of the icon associated with the item, or
     /// <see langword="null" /> if no such icon exists.
     /// </value>
-    [Column("iconID")]
-    public int? IconId {
+    public IconId? IconId {
       get {
-        return _iconId;
-      }
-      protected set {
-        _iconId = value;
+        return Entity.IconId;
       }
     }
     //******************************************************************************
@@ -320,13 +286,22 @@ namespace Eve {
     /// <value>
     /// The <see cref="MarketGroup" /> to which the item belongs.
     /// </value>
-    [ForeignKey("MarketGroupId")]
     public virtual MarketGroup MarketGroup {
       get {
+        if (_marketGroup == null) {
+          if (MarketGroupId != null) {
+
+            // Load the cached version if available
+            _marketGroup = Eve.General.Cache.GetOrAdd<MarketGroup>(MarketGroupId, () => {
+              MarketGroupEntity marketGroupEntity = Entity.MarketGroup;
+              Contract.Assume(marketGroupEntity != null);
+
+              return new MarketGroup(marketGroupEntity);
+            });
+          }
+        }
+
         return _marketGroup;
-      }
-      protected set {
-        _marketGroup = value;
       }
     }
     //******************************************************************************
@@ -337,13 +312,9 @@ namespace Eve {
     /// <value>
     /// The ID of the <see cref="MarketGroup" /> to which the item belongs.
     /// </value>
-    [Column("marketGroupID")]
     public MarketGroupId? MarketGroupId {
       get {
-        return _marketGroupId;
-      }
-      protected set {
-        _marketGroupId = value;
+        return Entity.MarketGroupId;
       }
     }
     //******************************************************************************
@@ -354,17 +325,16 @@ namespace Eve {
     /// <value>
     /// The mass of the item.
     /// </value>
-    [Column("mass")]
     public double Mass {
       get {
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
-        return _mass;
-      }
-      protected set {
-        Contract.Requires(!double.IsInfinity(value), Resources.Messages.ItemType_MassMustBeNumeric);
-        Contract.Requires(!double.IsNaN(value), Resources.Messages.ItemType_MassMustBeNumeric);
-        _mass = value;
+
+        var result = Entity.Mass;
+        Contract.Assume(!double.IsInfinity(result));
+        Contract.Assume(!double.IsNaN(result));
+
+        return result;
       }
     }
     //******************************************************************************
@@ -377,13 +347,9 @@ namespace Eve {
     /// races the current item is associated with, or <see cref="null" /> if the
     /// item is not associated with any races.
     /// </value>
-    [Column("raceID")]
     public RaceId? RaceId {
       get {
-        return _raceId;
-      }
-      protected set {
-        _raceId = value;
+        return Entity.RaceId;
       }
     }
     //******************************************************************************
@@ -396,13 +362,9 @@ namespace Eve {
     /// <value>
     /// The number of items which constitute one "lot."
     /// </value>
-    [Column("portionSize")]
     public int PortionSize {
       get {
-        return _portionSize;
-      }
-      protected set {
-        _portionSize = value;
+        return Entity.PortionSize;
       }
     }
     //******************************************************************************
@@ -415,13 +377,9 @@ namespace Eve {
     /// <see langword="true" /> if the item is marked as published;
     /// otherwise <see langword="false" />.
     /// </value>
-    [Column("published")]
     public bool Published {
       get {
-        return _published;
-      }
-      protected set {
-        _published = value;
+        return Entity.Published;
       }
     }
     //******************************************************************************
@@ -432,41 +390,16 @@ namespace Eve {
     /// <value>
     /// The volume of the item.
     /// </value>
-    [Column("volume")]
     public double Volume {
       get {
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
-        return _volume;
-      }
-      protected set {
-        Contract.Requires(!double.IsInfinity(value), Resources.Messages.ItemType_VolumeMustBeNumeric);
-        Contract.Requires(!double.IsNaN(value), Resources.Messages.ItemType_VolumeMustBeNumeric);
-        _volume = value;
-      }
-    }
-    #endregion
 
-    #region Hidden Navigation Properties
-    //******************************************************************************
-    /// <summary>
-    /// Hidden navigation property backing for the <see cref="Group" /> property.
-    /// </summary>
-    /// 
-    /// <remarks>
-    /// <para>
-    /// Necessary for required navigation properties so that the publicly accessible
-    /// wrapper can enforce non-null ensures with Code Contracts.
-    /// </para>
-    /// </remarks>
-    [ForeignKey("GroupId")]
-    protected internal virtual Group InnerGroup {
-      get {
-        return _innerGroup;
-      }
-      set {
-        Contract.Requires(value != null, Resources.Messages.ItemType_GroupCannotBeNull);
-        _innerGroup = value;
+        var result = Entity.Volume;
+        Contract.Assume(!double.IsInfinity(result));
+        Contract.Assume(!double.IsNaN(result));
+
+        return result;
       }
     }
     #endregion

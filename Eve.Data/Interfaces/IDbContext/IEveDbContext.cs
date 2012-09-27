@@ -14,6 +14,8 @@ namespace Eve.Data {
   using FreeNet;
   using FreeNet.Data.Entity;
 
+  using Eve.Entities;
+
   //******************************************************************************
   /// <summary>
   /// The base interface for objects that provide data access and change tracking
@@ -31,7 +33,7 @@ namespace Eve.Data {
     /// <value>
     /// The <see cref="DbSet{T}" /> for icons.
     /// </value>
-    IDbSet<Icon> Icons { get; }
+    IDbSet<IconEntity> Icons { get; }
     #endregion
   }
 
@@ -44,9 +46,9 @@ namespace Eve.Data {
 
     #region IEveDbContext Members
     //******************************************************************************
-    IDbSet<Icon> IEveDbContext.Icons {
+    IDbSet<IconEntity> IEveDbContext.Icons {
       get {
-        Contract.Ensures(Contract.Result<IDbSet<Icon>>() != null);
+        Contract.Ensures(Contract.Result<IDbSet<IconEntity>>() != null);
         throw new NotImplementedException();
       }
     }

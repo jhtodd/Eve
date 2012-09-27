@@ -8,75 +8,68 @@ namespace Eve {
   using System.Collections;
   using System.Collections.Generic;
   using System.ComponentModel;
-  using System.ComponentModel.DataAnnotations;
-  using System.ComponentModel.DataAnnotations.Schema;
   using System.Data.Entity;
   using System.Diagnostics.Contracts;
   using System.Linq;
 
   using FreeNet;
   using FreeNet.Collections;
+  using FreeNet.Collections.ObjectModel;
   using FreeNet.Data.Entity;
+  using FreeNet.Extensions;
+
+  using Eve.Entities;
 
   //******************************************************************************
   /// <summary>
   /// Contains information about the value of an EVE attribute.
-  /// </summary>>
-  [Table("dgmTypeAttributes")]
-  public class AttributeValue : ImmutableEntity,
+  /// </summary>
+  public class AttributeValue : EntityAdapter<AttributeValueEntity>,
                                 IComparable,
                                 IComparable<AttributeValue>,
                                 IEquatable<AttributeValue>,
-                                IKeyItem<AttributeId>,
-                                IHasIcon {
+                                IHasIcon,
+                                IHasId<long>,
+                                IKeyItem<AttributeId> {
 
-    // Check EveDbContext.OnModelCreating() for customization of this type's
-    // data mappings.
+    #region Static Methods
+    //******************************************************************************
+    /// <summary>
+    /// Computes a compound ID for the specified sub-IDs.
+    /// </summary>
+    /// 
+    /// <param name="itemTypeId">
+    /// The item type ID.
+    /// </param>
+    /// 
+    /// <param name="attributeId">
+    /// The attribute ID.
+    /// </param>
+    /// 
+    /// <returns>
+    /// A compound ID combining the two sub-IDs.
+    /// </returns>
+    public static long CreateCompoundId(ItemTypeId itemTypeId, AttributeId attributeId) {
+      return (long) ((((ulong) (long) itemTypeId) << 32) | ((ulong) (long) attributeId));
+    }
+    #endregion
 
     #region Instance Fields
-    private AttributeId _attributeId;
-    private int _itemTypeId;
-    private double _value;
-
-    private AttributeType _innerAttributeType;
+    private AttributeType _attributeType;
+    private ItemType _itemType;
     #endregion
 
     #region Constructors/Finalizers
     //******************************************************************************
     /// <summary>
-    /// Initializes a new instance of the AttributeValue class.  This overload is
-    /// provided for compatibility with the Entity Framework and should not be
-    /// used.
-    /// </summary>
-    [Obsolete("Provided for compatibility with the Entity Framework.", true)]
-    public AttributeValue() {
-      _value = double.NaN;
-
-      Contract.Assume(!double.IsInfinity(_value)); // Shouldn't be needed, but is
-    }
-    //******************************************************************************
-    /// <summary>
     /// Initializes a new instance of the AttributeValue class.
     /// </summary>
     /// 
-    /// <param name="attributeId">
-    /// The ID of the attribute associated with the value.
+    /// <param name="entity">
+    /// The data entity that forms the basis of the adapter.
     /// </param>
-    /// 
-    /// <param name="itemTypeId">
-    /// The ID of the item type the value describes.
-    /// </param>
-    /// 
-    /// <param name="value">
-    /// The numeric value of the attribute, or <see cref="double.NaN" /> to use
-    /// the default value defined by the attribute type.
-    /// </param>
-    public AttributeValue(AttributeId attributeId, int itemTypeId, double value) {
-      Contract.Requires(!double.IsInfinity(value), Resources.Messages.AttributeValue_ValueMustBeNumeric);
-
-      _attributeId = attributeId;
-      _itemTypeId = itemTypeId;
-      _value = value;
+    public AttributeValue(AttributeValueEntity entity) : base(entity) {
+      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
     }
     //******************************************************************************
     /// <summary>
@@ -84,7 +77,6 @@ namespace Eve {
     /// </summary>
     [ContractInvariantMethod]
     private void ObjectInvariant() {
-      Contract.Invariant(!double.IsInfinity(_value));
     }
     #endregion
     #region Public Properties
@@ -96,14 +88,9 @@ namespace Eve {
     /// <value>
     /// The ID of the attribute the current value applies to.
     /// </value>
-    [Column("attributeID")]
-    [Key()]
     public AttributeId AttributeId {
       get {
-        return _attributeId;
-      }
-      private set {
-        _attributeId = value;
+        return Entity.AttributeId;
       }
     }
     //******************************************************************************
@@ -118,9 +105,34 @@ namespace Eve {
       get {
         Contract.Ensures(Contract.Result<AttributeType>() != null);
 
-        AttributeType result = InnerAttributeType;
-        Contract.Assume(result != null);
-        return result;
+        if (_attributeType == null) {
+          AttributeTypeEntity attributeTypeEntity = Entity.AttributeType;
+          Contract.Assume(attributeTypeEntity != null);
+          _attributeType = new AttributeType(attributeTypeEntity);
+        }
+
+        return _attributeType;
+      }
+    }
+    //******************************************************************************
+    /// <summary>
+    /// Gets the item type the value describes.
+    /// </summary>
+    /// 
+    /// <value>
+    /// The item type the value describes.
+    /// </value>
+    public ItemType ItemType {
+      get {
+        Contract.Ensures(Contract.Result<ItemType>() != null);
+
+        if (_itemType == null) {
+          ItemTypeEntity itemTypeEntity = Entity.ItemType;
+          Contract.Assume(itemTypeEntity != null);
+          _itemType = ItemType.Create(itemTypeEntity);
+        }
+
+        return _itemType;
       }
     }
     //******************************************************************************
@@ -131,14 +143,9 @@ namespace Eve {
     /// <value>
     /// The ID of the item type the value describes.
     /// </value>
-    [Column("typeID")]
-    [Key()]
-    public int ItemTypeId {
+    public ItemTypeId ItemTypeId {
       get {
-        return _itemTypeId;
-      }
-      private set {
-        _itemTypeId = value;
+        return Entity.ItemTypeId;
       }
     }
     //******************************************************************************
@@ -154,14 +161,24 @@ namespace Eve {
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
 
-        // If _value is NaN, then it hasn't been set -- return the default
-        // value for the attribute.  This is a trick so we don't have to 
-        // load the attribute type unless absolutely necessary.
-        if (double.IsNaN(_value)) {
-          _value = AttributeType.DefaultValue;
+        double result;
+        double? valueFloat = Entity.ValueFloat;
+        double? valueInt = Entity.ValueInt;
+
+        if (valueFloat.HasValue) {
+          result = valueFloat.Value;
+
+        } else if (valueInt.HasValue) {
+          result = valueInt.Value;
+
+        } else {
+          result = 0.0D; // Should never happen if database is consistent
         }
 
-        return _value;
+        Contract.Assume(!double.IsInfinity(result));
+        Contract.Assume(!double.IsNaN(result));
+        
+        return result;
       }
     }
     #endregion
@@ -173,7 +190,7 @@ namespace Eve {
         return 1;
       }
 
-      int result = AttributeType.Name.CompareTo(other.AttributeType.Name);
+      int result = AttributeType.CompareTo(other.AttributeType);
 
       if (result == 0) {
         result = Value.CompareTo(other.Value);
@@ -266,109 +283,8 @@ namespace Eve {
     /// </returns>
     public string ToString(string format) {
 
-      // If the attribute has a unit, use it for the formatting
-      if (AttributeType.UnitId != null && AttributeType.Unit != null) {
-        return AttributeType.Name + " = " + AttributeType.Unit.FormatValue(Value, format);
-      }
-
-      // Otherwise, just format the number
-      return AttributeType.Name + " = " + Value.ToString(format);
-    }
-    #endregion
-    #region Protected Internal Properties
-    //******************************************************************************
-    /// <summary>
-    /// Hidden mapped property to set the value as a floating-point number.
-    /// </summary>
-    /// 
-    /// <value>
-    /// The value expressed as an floating-point number.
-    /// </value>
-    /// 
-    /// <remarks>
-    /// <para>
-    /// The source table contains two columns: valueInt and valueFloat.  For
-    /// every record, one column has a value and the other is null.  To 
-    /// simplify mapping, we have two corresponding properties here.  Both
-    /// assign a value to <see cref="Value" /> if they aren't passed a null
-    /// reference.
-    /// </para>
-    /// </remarks>
-    [Column("valueFloat")]
-    protected internal double? ValueFloat {
-      get {
-        return Value;
-      }
-      set {
-        Contract.Requires(value == null || !double.IsInfinity(value.Value), Resources.Messages.AttributeValue_ValueMustBeNumeric);
-        Contract.Requires(value == null || !double.IsNaN(value.Value), Resources.Messages.AttributeValue_ValueMustBeNumeric);
-
-        if (value == null) {
-          return;
-        }
-
-        _value = value.Value;
-      }
-    }
-    //******************************************************************************
-    /// <summary>
-    /// Hidden mapped property to set the value as an integer.
-    /// </summary>
-    /// 
-    /// <value>
-    /// The value expressed as an integer.
-    /// </value>
-    /// 
-    /// <remarks>
-    /// <para>
-    /// The source table contains two columns: valueInt and valueFloat.  For
-    /// every record, one column has a value and the other is null.  To 
-    /// simplify mapping, we have two corresponding properties here.  Both
-    /// assign a value to <see cref="Value" /> if they aren't passed a null
-    /// reference.
-    /// </para>
-    /// </remarks>
-    [Column("valueInt")]
-    protected internal int? ValueInt {
-      get {
-        return Convert.ToInt32(Value);
-      }
-      set {
-        if (value == null) {
-          return;
-        }
-
-        double newValue = value.Value;
-        Contract.Assume(!double.IsInfinity(newValue));
-        Contract.Assume(!double.IsNaN(newValue));
-
-        _value = newValue;
-      }
-    }
-    #endregion
-
-    #region Hidden Navigation Properties
-    //******************************************************************************
-    /// <summary>
-    /// Hidden navigation property backing for the <see cref="AttributeType" />
-    /// property.
-    /// </summary>
-    /// 
-    /// <remarks>
-    /// <para>
-    /// Necessary for required navigation properties so that the publicly accessible
-    /// wrapper can enforce non-null ensures with Code Contracts.
-    /// </para>
-    /// </remarks>
-    [ForeignKey("AttributeId")]
-    protected internal virtual AttributeType InnerAttributeType {
-      get {
-        return _innerAttributeType;
-      }
-      set {
-        Contract.Requires(value != null, Resources.Messages.AttributeValue_AttributeTypeCannotBeNull);
-        _innerAttributeType = value;
-      }
+      // Format the value according to the attribute
+      return AttributeType.DisplayName + ": " + AttributeType.FormatValue(Value, format);
     }
     #endregion
 
@@ -387,9 +303,25 @@ namespace Eve {
       }
     }
     //******************************************************************************
-    int? IHasIcon.IconId {
+    IconId? IHasIcon.IconId {
       get {
         return AttributeType.IconId;
+      }
+    }
+    #endregion
+    #region IHasId Members
+    //******************************************************************************
+    object IHasId.Id {
+      get {
+        return ((IHasId<long>) this).Id;
+      }
+    }
+    #endregion
+    #region IHasId<long> Members
+    //******************************************************************************
+    long IHasId<long>.Id {
+      get {
+        return CreateCompoundId(ItemTypeId, AttributeId);
       }
     }
     #endregion
@@ -399,6 +331,94 @@ namespace Eve {
       get {
         return AttributeId;
       }
+    }
+    #endregion
+  }
+
+  //******************************************************************************
+  /// <summary>
+  /// A read-only collection of attributes.
+  /// </summary>
+  public class ReadOnlyAttributeValueCollection : ReadOnlyKeyedCollection<AttributeId, AttributeValue> {
+
+    #region Constructors/Finalizers
+    //******************************************************************************
+    /// <summary>
+    /// Initializes a new instance of the ReadOnlyAttributeValueCollection class.
+    /// </summary>
+    /// 
+    /// <param name="contents">
+    /// The contents of the collection.
+    /// </param>
+    public ReadOnlyAttributeValueCollection(IEnumerable<AttributeValue> contents) : base() {
+      if (contents != null) {
+        foreach (AttributeValue attribute in contents) {
+          Items.AddWithoutCallback(attribute);
+        }
+      }
+    }
+    #endregion
+    #region Public Methods
+    //******************************************************************************
+    /// <summary>
+    /// Gets the value of the specified attribute, or the default value specified
+    /// by the desired attribute type if a specific value for that attribute is
+    /// not present.
+    /// </summary>
+    /// 
+    /// <typeparam name="T">
+    /// The type of the value.
+    /// </typeparam>
+    /// 
+    /// <param name="id">
+    /// The ID of the attribute whose value to retrieve.
+    /// </param>
+    /// 
+    /// <returns>
+    /// The value of the specified attribute, converted to
+    /// <typeparamref name="T" />.
+    /// </returns>
+    public T GetValue<T>(AttributeId id) {
+      AttributeValue attribute;
+
+      if (TryGetValue(id, out attribute)) {
+        return attribute.Value.ConvertTo<T>();
+      }
+
+      AttributeType type = Eve.General.DataSource.GetAttributeTypeById(id);
+      return type.DefaultValue.ConvertTo<T>();
+    }
+    //******************************************************************************
+    /// <summary>
+    /// Gets the value of the specified attribute, or the specified default value
+    /// if that attribute is not present.
+    /// </summary>
+    /// 
+    /// <typeparam name="T">
+    /// The type of the value.
+    /// </typeparam>
+    /// 
+    /// <param name="id">
+    /// The ID of the attribute whose value to retrieve.
+    /// </param>
+    /// 
+    /// <param name="defaultValue">
+    /// The value to return if the specified attribute is not contained in the
+    /// collection.
+    /// </param>
+    /// 
+    /// <returns>
+    /// The value of the specified attribute, converted to
+    /// <typeparamref name="T" />.
+    /// </returns>
+    public T GetValue<T>(AttributeId id, T defaultValue) {
+      AttributeValue attribute;
+
+      if (TryGetValue(id, out attribute)) {
+        return attribute.Value.ConvertTo<T>();
+      }
+
+      return defaultValue;
     }
     #endregion
   }

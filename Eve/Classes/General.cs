@@ -19,6 +19,7 @@ namespace Eve {
   public static partial class General {
 
     #region Static Fields
+    private static EveCache _cache = new EveCache();
     private static IEveDataSource _dataSource = EveDataSource.Default;
     private static EveSettings _settings = new EveSettings();
     #endregion
@@ -29,7 +30,43 @@ namespace Eve {
     public static event EventHandler Clean;
     #endregion
 
+    #region Static Constructor
+    //******************************************************************************
+    /// <summary>
+    /// Initializes static members of the General class.
+    /// </summary>
+    static General() {
+      DataSource.PrepopulateCache(Cache);
+    }
+    #endregion
     #region Static Properties
+    //******************************************************************************
+    /// <summary>
+    /// Gets or sets the cache used to store frequently used data.
+    /// </summary>
+    /// 
+    /// <value>
+    /// An <see cref="EveCache" /> object used to store frequently used data.
+    /// </value>
+    public static EveCache Cache {
+      get {
+        Contract.Ensures(Contract.Result<EveCache>() != null);
+        return _cache;
+      }
+      set {
+        Contract.Requires(value != null, Resources.Messages.General_CacheCannotBeNull);
+
+        // Free the previous cache, if any
+        if (_cache != null) {
+          ((IDisposable) _cache).Dispose();
+        }
+
+        // Prepopulate the new cache
+        DataSource.PrepopulateCache(value);
+
+        _cache = value;
+      }
+    }
     //******************************************************************************
     /// <summary>
     /// Gets or sets the data source used to access the EVE database.

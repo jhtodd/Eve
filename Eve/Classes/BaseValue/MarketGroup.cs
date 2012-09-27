@@ -8,8 +8,6 @@ namespace Eve {
   using System.Collections;
   using System.Collections.Generic;
   using System.ComponentModel;
-  using System.ComponentModel.DataAnnotations.Schema;
-  using System.Data.Entity;
   using System.Diagnostics.Contracts;
   using System.Linq;
 
@@ -18,26 +16,18 @@ namespace Eve {
   using FreeNet.Collections.ObjectModel;
   using FreeNet.Data.Entity;
 
+  using Eve.Entities;
+
   //******************************************************************************
   /// <summary>
   /// Contains information about a market group to which an EVE item belongs.
-  /// </summary>>
-  [Table("invMarketGroups")]
-  public class MarketGroup : BaseValue<MarketGroupId, MarketGroup>,
+  /// </summary>
+  public class MarketGroup : BaseValue<MarketGroupId, MarketGroupId, MarketGroupEntity, MarketGroup>,
                              IHasIcon {
 
-    // Check EveDbContext.OnModelCreating() for customization of this type's
-    // data mappings.
-
     #region Instance Fields
-    private bool _hasTypes;
-    private int? _iconId;
-    private MarketGroupId? _parentGroupId;
-
     private ReadOnlyMarketGroupCollection _childGroups;
     private Icon _icon;
-    private ICollection<MarketGroup> _innerChildGroups;
-    private ICollection<ItemType> _innerItemTypes;
     private ReadOnlyItemTypeCollection _itemTypes;
     private MarketGroup _parentGroup;
     #endregion
@@ -45,52 +35,14 @@ namespace Eve {
     #region Constructors/Finalizers
     //******************************************************************************
     /// <summary>
-    /// Initializes a new instance of the MarketGroup class.  This overload is
-    /// provided for compatibility with the Entity Framework and should not be
-    /// used.
-    /// </summary>
-    [Obsolete("Provided for compatibility with the Entity Framework.", true)]
-    public MarketGroup() : base(0, DEFAULT_NAME, string.Empty) {
-    }
-    //******************************************************************************
-    /// <summary>
     /// Initializes a new instance of the MarketGroup class.
     /// </summary>
     /// 
-    /// <param name="id">
-    /// The ID of the item.
+    /// <param name="entity">
+    /// The data entity that forms the basis of the adapter.
     /// </param>
-    /// 
-    /// <param name="name">
-    /// The name of the item.
-    /// </param>
-    /// 
-    /// <param name="description">
-    /// The description of the item.
-    /// </param>
-    /// 
-    /// <param name="hasTypes">
-    /// Indicates whether the group contains items or only subgroups.
-    /// </param>
-    /// 
-    /// <param name="iconId">
-    /// The ID of the icon associated with the item, if any.
-    /// </param>
-    /// 
-    /// <param name="parentGroupId">
-    /// The ID of the parent market group, if any.
-    /// </param>
-    public MarketGroup(MarketGroupId id, 
-                       string name,
-                       string description,
-                       bool hasTypes,
-                       int? iconId,
-                       MarketGroupId? parentGroupId) : base(id, name, description) {
-      Contract.Requires(!string.IsNullOrWhiteSpace(name), Resources.Messages.BaseValue_NameCannotBeNullOrEmpty);
-
-      _hasTypes = hasTypes;
-      _iconId = iconId;
-      _parentGroupId = parentGroupId;
+    public MarketGroup(MarketGroupEntity entity) : base(entity) {
+      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
     }
     //******************************************************************************
     /// <summary>
@@ -114,21 +66,9 @@ namespace Eve {
       get {
         Contract.Ensures(Contract.Result<ReadOnlyMarketGroupCollection>() != null);
 
-        // This returns a wrapper collection around the actual mapped collection.
-        // This allows us to order the results as well as provide key-based
-        // retrieval of the contents.  Initialization takes slightly longer than
-        // it otherwise would, but memory is not an issue, since the same 
-        // references are being copied to the new collection (i.e. 4 bytes
-        // per element).
-
-        // If the wrapper collection is null, it either hasn't been created yet,
-        // or has been set after the mapped collection was modified, so we create
-        // it on the fly.  Concurrent access could cause this to be generated
-        // several times on different threads, but this will be (very!) rare,
-        // and harmless apart from the cost of creating the wrapper.
         if (_childGroups == null) {
-          if (InnerChildGroups != null) {
-            _childGroups = new ReadOnlyMarketGroupCollection(InnerChildGroups.OrderBy(x => x.Name));
+          if (Entity.ChildGroups != null) {
+            _childGroups = new ReadOnlyMarketGroupCollection(Entity.ChildGroups.Select(x => new MarketGroup(x)).OrderBy(x => x));
           } else {
             _childGroups = new ReadOnlyMarketGroupCollection(null);
           }
@@ -147,13 +87,9 @@ namespace Eve {
     /// <see langword="true" /> if the group contains items, or 
     /// <see langword="false" /> if the group contains only subgroups.
     /// </value>
-    [Column("hasTypes")]
     public bool HasTypes {
       get {
-        return _hasTypes;
-      }
-      private set {
-        _hasTypes = value;
+        return Entity.HasTypes;
       }
     }
     //******************************************************************************
@@ -163,15 +99,24 @@ namespace Eve {
     /// 
     /// <value>
     /// The <see cref="Icon" /> associated with the item, or
-    /// <see langword="null" /> if no such attribute exists.
+    /// <see langword="null" /> if no such icon exists.
     /// </value>
-    [ForeignKey("IconId")]
-    public virtual Icon Icon {
+    public Icon Icon {
       get {
+        if (_icon == null) {
+          if (IconId != null) {
+
+            // Load the cached version if available
+            _icon = Eve.General.Cache.GetOrAdd<Icon>(IconId, () => {
+              IconEntity iconEntity = Entity.Icon;
+              Contract.Assume(iconEntity != null);
+
+              return new Icon(iconEntity);
+            });
+          }
+        }
+
         return _icon;
-      }
-      private set {
-        _icon = value;
       }
     }
     //******************************************************************************
@@ -183,13 +128,9 @@ namespace Eve {
     /// The ID of the icon associated with the item, or
     /// <see langword="null" /> if no such icon exists.
     /// </value>
-    [Column("iconID")]
-    public int? IconId {
+    public IconId? IconId {
       get {
-        return _iconId;
-      }
-      private set {
-        _iconId = value;
+        return Entity.IconId;
       }
     }
     //******************************************************************************
@@ -205,20 +146,14 @@ namespace Eve {
       get {
         Contract.Ensures(Contract.Result<ReadOnlyItemTypeCollection>() != null);
 
-        // This returns a wrapper collection around the actual mapped collection.
-        // This allows us to order the results.  Initialization takes slightly
-        // longer than it otherwise would, but memory is not an issue, since the
-        // same references are being copied to the new collection (i.e. 4 bytes
-        // per element).
-
-        // If the wrapper collection is null, it either hasn't been created yet,
-        // or has been set after the mapped collection was modified, so we create
-        // it on the fly.  Concurrent access could cause this to be generated
-        // several times on different threads, but this will be (very!) rare,
-        // and harmless apart from the cost of creating the wrapper.
         if (_itemTypes == null) {
-          if (HasTypes && InnerItemTypes != null) {
-            _itemTypes = new ReadOnlyItemTypeCollection(InnerItemTypes.OrderBy(x => x.Name));
+          if (Entity.ItemTypes != null) {
+
+            // Load item types from the cache if available
+            _itemTypes = new ReadOnlyItemTypeCollection(Entity.ItemTypes.Select(x => {
+              return Eve.General.Cache.GetOrAdd<ItemType>(x.Id, () => ItemType.Create(x));
+            }).OrderBy(x => x));
+
           } else {
             _itemTypes = new ReadOnlyItemTypeCollection(null);
           }
@@ -236,13 +171,22 @@ namespace Eve {
     /// The parent market group, or <see langword="null" /> if the
     /// current group doesn't have a parent group.
     /// </value>
-    [ForeignKey("ParentGroupId")]
     public virtual MarketGroup ParentGroup {
       get {
+        if (_parentGroup == null) {
+          if (ParentGroupId != null) {
+
+            // Load the cached version if available
+            _parentGroup = Eve.General.Cache.GetOrAdd<MarketGroup>(ParentGroupId, () => {
+              MarketGroupEntity parentGroupEntity = Entity.ParentGroup;
+              Contract.Assume(parentGroupEntity != null);
+
+              return new MarketGroup(parentGroupEntity);
+            });
+          }
+        }
+
         return _parentGroup;
-      }
-      private set {
-        _parentGroup = value;
       }
     }
     //******************************************************************************
@@ -254,13 +198,9 @@ namespace Eve {
     /// The ID of the parent market group, or <see langword="null" /> if the
     /// current group doesn't have a parent group.
     /// </value>
-    [Column("parentGroupID")]
     public MarketGroupId? ParentGroupId {
       get {
-        return _parentGroupId;
-      }
-      private set {
-        _parentGroupId = value;
+        return Entity.ParentGroupId;
       }
     }
     #endregion
@@ -295,59 +235,6 @@ namespace Eve {
       // Recurse upward
       Contract.Assume(ParentGroup != null); // Because we know ParentGroupId is not null
       return ParentGroup.IsChildOf(groupId);
-    }
-    #endregion
-
-    #region Hidden Navigation Properties
-    //******************************************************************************
-    /// <summary>
-    /// Hidden navigation property backing for the <see cref="ChildGroups" />
-    /// property.
-    /// </summary>
-    /// 
-    /// <remarks>
-    /// <para>
-    /// Necessary for so that the publicly accessible wrapper can enforce non-null
-    /// ensures with Code Contracts, as well as to wrap the results in a 
-    /// friendlier collection class.
-    /// </para>
-    /// </remarks>
-    protected internal virtual ICollection<MarketGroup> InnerChildGroups {
-      get {
-        return _innerChildGroups;
-      }
-      set {
-        _innerChildGroups = value;
-
-        // Unset the wrapper collection so that it will be regenerated the next
-        // time it is accessed.
-        _childGroups = null;
-      }
-    }
-    //******************************************************************************
-    /// <summary>
-    /// Hidden navigation property backing for the <see cref="ItemTypes" />
-    /// property.
-    /// </summary>
-    /// 
-    /// <remarks>
-    /// <para>
-    /// Necessary for so that the publicly accessible wrapper can enforce non-null
-    /// ensures with Code Contracts, as well as to wrap the results in a 
-    /// friendlier collection class.
-    /// </para>
-    /// </remarks>
-    protected internal virtual ICollection<ItemType> InnerItemTypes {
-      get {
-        return _innerItemTypes;
-      }
-      set {
-        _innerItemTypes = value;
-
-        // Unset the wrapper collection so that it will be regenerated the next
-        // time it is accessed.
-        _itemTypes = null;
-      }
     }
     #endregion
 
