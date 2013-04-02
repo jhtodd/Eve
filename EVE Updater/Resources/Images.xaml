@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+  <BitmapImage x:Key="ColumnImage" UriSource="Images/column.png" />
+  <BitmapImage x:Key="DatabaseImage" UriSource="Images/database.png" />
+  <BitmapImage x:Key="FolderImage" UriSource="Images/folder.png" />
+  <BitmapImage x:Key="KeyImage" UriSource="Images/key.png" />
+  <BitmapImage x:Key="TableImage" UriSource="Images/table.png" />
+</ResourceDictionary>
