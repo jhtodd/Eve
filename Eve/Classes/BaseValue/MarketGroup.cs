@@ -16,7 +16,7 @@ namespace Eve {
   using FreeNet.Collections.ObjectModel;
   using FreeNet.Data.Entity;
 
-  using Eve.Entities;
+  using Eve.Data.Entities;
 
   //******************************************************************************
   /// <summary>
@@ -28,8 +28,8 @@ namespace Eve {
     #region Instance Fields
     private ReadOnlyMarketGroupCollection _childGroups;
     private Icon _icon;
-    private ReadOnlyItemTypeCollection _itemTypes;
     private MarketGroup _parentGroup;
+    private ReadOnlyTypeCollection _types;
     #endregion
 
     #region Constructors/Finalizers
@@ -41,7 +41,7 @@ namespace Eve {
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    public MarketGroup(MarketGroupEntity entity) : base(entity) {
+    protected internal MarketGroup(MarketGroupEntity entity) : base(entity) {
       Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
     }
     //******************************************************************************
@@ -67,11 +67,7 @@ namespace Eve {
         Contract.Ensures(Contract.Result<ReadOnlyMarketGroupCollection>() != null);
 
         if (_childGroups == null) {
-          if (Entity.ChildGroups != null) {
-            _childGroups = new ReadOnlyMarketGroupCollection(Entity.ChildGroups.Select(x => new MarketGroup(x)).OrderBy(x => x));
-          } else {
-            _childGroups = new ReadOnlyMarketGroupCollection(null);
-          }
+          _childGroups = new ReadOnlyMarketGroupCollection(Eve.General.DataSource.GetMarketGroups(x => x.ParentGroupId == this.Id).OrderBy(x => x));
         }
 
         return _childGroups;
@@ -135,35 +131,6 @@ namespace Eve {
     }
     //******************************************************************************
     /// <summary>
-    /// Gets the collection of items that belong to the current market group.
-    /// </summary>
-    /// 
-    /// <value>
-    /// A <see cref="ReadOnlyItemTypeCollection" /> containing the items that
-    /// belong to the current market group.
-    /// </value>
-    public ReadOnlyItemTypeCollection ItemTypes {
-      get {
-        Contract.Ensures(Contract.Result<ReadOnlyItemTypeCollection>() != null);
-
-        if (_itemTypes == null) {
-          if (Entity.ItemTypes != null) {
-
-            // Load item types from the cache if available
-            _itemTypes = new ReadOnlyItemTypeCollection(Entity.ItemTypes.Select(x => {
-              return Eve.General.Cache.GetOrAdd<ItemType>(x.Id, () => ItemType.Create(x));
-            }).OrderBy(x => x));
-
-          } else {
-            _itemTypes = new ReadOnlyItemTypeCollection(null);
-          }
-        }
-
-        return _itemTypes;
-      }
-    }
-    //******************************************************************************
-    /// <summary>
     /// Gets the current market group's parent group, if any.
     /// </summary>
     /// 
@@ -201,6 +168,26 @@ namespace Eve {
     public MarketGroupId? ParentGroupId {
       get {
         return Entity.ParentGroupId;
+      }
+    }
+    //******************************************************************************
+    /// <summary>
+    /// Gets the collection of items that belong to the current market group.
+    /// </summary>
+    /// 
+    /// <value>
+    /// A <see cref="ReadOnlyTypeCollection" /> containing the items that
+    /// belong to the current market group.
+    /// </value>
+    public ReadOnlyTypeCollection Types {
+      get {
+        Contract.Ensures(Contract.Result<ReadOnlyTypeCollection>() != null);
+
+        if (_types == null) {
+          _types = new ReadOnlyTypeCollection(Eve.General.DataSource.GetEveTypes(x => x.MarketGroupId == this.Id).OrderBy(x => x));
+        }
+
+        return _types;
       }
     }
     #endregion

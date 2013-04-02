@@ -14,7 +14,7 @@ namespace Eve {
   using FreeNet;
   using FreeNet.Data.Entity;
 
-  using Eve.Entities;
+  using Eve.Data.Entities;
 
   //******************************************************************************
   /// <summary>
@@ -36,7 +36,7 @@ namespace Eve {
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    public Category(CategoryEntity entity) : base(entity) {
+    protected internal Category(CategoryEntity entity) : base(entity) {
       Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
     }
     //******************************************************************************
@@ -60,14 +60,16 @@ namespace Eve {
     public Icon Icon {
       get {
         if (_icon == null) {
+          if (IconId != null) {
 
-          // Load the cached version if available
-          _icon = Eve.General.Cache.GetOrAdd<Icon>(IconId, () => {
-            IconEntity iconEntity = Entity.Icon;
-            Contract.Assume(iconEntity != null);
+            // Load the cached version if available
+            _icon = Eve.General.Cache.GetOrAdd<Icon>(IconId, () => {
+              IconEntity iconEntity2 = Entity.Icon;
+              Contract.Assume(iconEntity2 != null); // TODO: entity2
 
-            return new Icon(iconEntity);
-          });
+              return new Icon(iconEntity2);
+            });
+          }
         }
 
         return _icon;

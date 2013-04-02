@@ -17,7 +17,7 @@ namespace Eve.Tests {
 
   using Eve;
   using Eve.Data;
-  using Eve.Entities;
+  using Eve.Data.Entities;
 
   //******************************************************************************
   /// <summary>

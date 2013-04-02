@@ -9,40 +9,38 @@ namespace Eve.Character {
   public enum SkillId : int {
 
     /// <summary>Skill at efficiently using Afterburners and MicroWarpdrives. 5% Bonus to Afterburner and MicroWarpdrive speed boost per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Acceleration Control", "Eve.Character.SkillId_AccelerationControl")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at efficiently using Afterburners and MicroWarpdrives. 5% Bonus to Afterbur" +
         "ner and MicroWarpdrive speed boost per skill level.")]
     AccelerationControl = 3452,
 
     /// <summary>Proficiency at squaring away the odds and ends of business transactions, keeping the check books tight.  Each level of skill reduces transaction tax by 10%.
     ///</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Accounting", "Eve.Character.SkillId_Accounting")]
     [System.ComponentModel.DescriptionAttribute("Proficiency at squaring away the odds and ends of business transactions, keeping " +
         "the check books tight.  Each level of skill reduces transaction tax by 10%.\r\n")]
     Accounting = 16622,
 
     /// <summary>Allows the use of the Drone Control Unit module. One extra module can be fitted per skill level. Each fitted Drone Control Unit allows the operation of one extra drone.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Advanced Drone Interfacing", "Eve.Character.SkillId_AdvancedDroneInterfacing")]
     [System.ComponentModel.DescriptionAttribute("Allows the use of the Drone Control Unit module. One extra module can be fitted p" +
         "er skill level. Each fitted Drone Control Unit allows the operation of one extra" +
         " drone.")]
     AdvancedDroneInterfacing = 24613,
 
     /// <summary>Advanced Skill at installing power upgrades e.g. capacitor battery and power diagnostic units. a further a further 2% reduction in energy grid upgrade CPU needs.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Advanced Energy Grid Upgrades", "Eve.Character.SkillId_AdvancedEnergyGridUpgrades")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced Skill at installing power upgrades e.g. capacitor battery and power diag" +
         "nostic units. a further a further 2% reduction in energy grid upgrade CPU needs." +
         "")]
     AdvancedEnergyGridUpgrades = 11204,
 
     /// <summary>Further training in the operation of multiple laboratories.  Ability to run 1 additional research job per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Advanced Laboratory Operation", "Eve.Character.SkillId_AdvancedLaboratoryOperation")]
+    
     [System.ComponentModel.DescriptionAttribute("Further training in the operation of multiple laboratories.  Ability to run 1 add" +
         "itional research job per skill level.")]
     AdvancedLaboratoryOperation = 24624,
 
     /// <summary>Further training in the operation of multiple factories.  Ability to run 1 additional manufacturing job per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Advanced Mass Production", "Eve.Character.SkillId_AdvancedMassProduction")]
+    
     [System.ComponentModel.DescriptionAttribute("Further training in the operation of multiple factories.  Ability to run 1 additi" +
         "onal manufacturing job per skill level.")]
     AdvancedMassProduction = 24625,
@@ -53,7 +51,7 @@ namespace Eve.Character {
     ///The skill further increases the resolution of resource data when scanning a planet to allow for very precise surveying.
     ///
     ///Note: this skill cannot be trained on trial accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Advanced Planetology", "Eve.Character.SkillId_AdvancedPlanetology")]
+    
     [System.ComponentModel.DescriptionAttribute(@"The advanced understanding of planet evolution allowing you to interpret data from scans of planets for resources at much higher resolutions.
 
 Bonus:
@@ -63,68 +61,68 @@ Note: this skill cannot be trained on trial accounts.")]
     AdvancedPlanetology = 2403,
 
     /// <summary>Advanced skill at installing sensor upgrades, e.g. signal amplifier and backup sensor array. further 2% reduction of sensor upgrade CPU needs per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Advanced Sensor Upgrades", "Eve.Character.SkillId_AdvancedSensorUpgrades")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced skill at installing sensor upgrades, e.g. signal amplifier and backup se" +
         "nsor array. further 2% reduction of sensor upgrade CPU needs per skill level.")]
     AdvancedSensorUpgrades = 11208,
 
     /// <summary>Skill at installing shield upgrades e.g. shield extenders and shield rechargers. 2% reduction in shield upgrade power needs.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Advanced Shield Upgrades", "Eve.Character.SkillId_AdvancedShieldUpgrades")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at installing shield upgrades e.g. shield extenders and shield rechargers. " +
         "2% reduction in shield upgrade power needs.")]
     AdvancedShieldUpgrades = 11206,
 
     /// <summary>The advanced operation of spaceships. Grants a 5% Bonus per skill level to the agility of ships requiring Advanced Spaceship Command. Cannot be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Advanced Spaceship Command", "Eve.Character.SkillId_AdvancedSpaceshipCommand")]
+    
     [System.ComponentModel.DescriptionAttribute("The advanced operation of spaceships. Grants a 5% Bonus per skill level to the ag" +
         "ility of ships requiring Advanced Spaceship Command. Cannot be trained on Trial " +
         "Accounts.")]
     AdvancedSpaceshipCommand = 20342,
 
     /// <summary>Reduces the powergrid needs of weapon turrets and launchers by 2% per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Advanced Weapon Upgrades", "Eve.Character.SkillId_AdvancedWeaponUpgrades")]
+    
     [System.ComponentModel.DescriptionAttribute("Reduces the powergrid needs of weapon turrets and launchers by 2% per skill level" +
         ".")]
     AdvancedWeaponUpgrades = 11207,
 
     /// <summary>Skill at using afterburners. 10% bonus to Afterburner duration per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Afterburner", "Eve.Character.SkillId_Afterburner")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at using afterburners. 10% bonus to Afterburner duration per skill level.")]
     Afterburner = 3450,
 
     /// <summary>Skill at operating Amarr battleships. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Amarr Battleship", "Eve.Character.SkillId_AmarrBattleship")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Amarr battleships. Can not be trained on Trial Accounts.")]
     AmarrBattleship = 3339,
 
     /// <summary>Skill at operating Amarr carriers.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Amarr Carrier", "Eve.Character.SkillId_AmarrCarrier")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Amarr carriers.")]
     AmarrCarrier = 24311,
 
     /// <summary>Skill at operating Amarr cruisers.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Amarr Cruiser", "Eve.Character.SkillId_AmarrCruiser")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Amarr cruisers.")]
     AmarrCruiser = 3335,
 
     /// <summary>Skill in the operation of Amarr Defensive Subsystems used on Tech III ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Amarr Defensive Systems", "Eve.Character.SkillId_AmarrDefensiveSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill in the operation of Amarr Defensive Subsystems used on Tech III ships.")]
     AmarrDefensiveSystems = 30532,
 
     /// <summary>Skill at operating Amarr dreadnoughts. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Amarr Dreadnought", "Eve.Character.SkillId_AmarrDreadnought")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Amarr dreadnoughts. Can not be trained on Trial Accounts.")]
     AmarrDreadnought = 20525,
 
     /// <summary>Specialization in the operation of advanced Amarr drones. 2% bonus to advanced Amarr drone damage per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Amarr Drone Specialization", "Eve.Character.SkillId_AmarrDroneSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialization in the operation of advanced Amarr drones. 2% bonus to advanced Am" +
         "arr drone damage per level.")]
     AmarrDroneSpecialization = 12484,
 
     /// <summary>Skill in the operation of Amarr Electronic Subsystems used on Tech III ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Amarr Electronic Systems", "Eve.Character.SkillId_AmarrElectronicSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill in the operation of Amarr Electronic Subsystems used on Tech III ships.")]
     AmarrElectronicSystems = 30536,
 
@@ -133,53 +131,53 @@ Note: this skill cannot be trained on trial accounts.")]
     ///
     ///
     ///</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Amarr Encryption Methods", "Eve.Character.SkillId_AmarrEncryptionMethods")]
+    
     [System.ComponentModel.DescriptionAttribute("Understanding of the data encryption methods used by the Amarr Empire and its all" +
         "ies.\r\n\r\n\r\n\r\n")]
     AmarrEncryptionMethods = 23087,
 
     /// <summary>Skill in the operation of Amarr Engineering Subsystems used on Tech III ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Amarr Engineering Systems", "Eve.Character.SkillId_AmarrEngineeringSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill in the operation of Amarr Engineering Subsystems used on Tech III ships.")]
     AmarrEngineeringSystems = 30539,
 
     /// <summary>Skill at operating Amarr freighters. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Amarr Freighter", "Eve.Character.SkillId_AmarrFreighter")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Amarr freighters. Can not be trained on Trial Accounts.")]
     AmarrFreighter = 20524,
 
     /// <summary>Skill at operating Amarr frigates.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Amarr Frigate", "Eve.Character.SkillId_AmarrFrigate")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Amarr frigates.")]
     AmarrFrigate = 3331,
 
     /// <summary>Skill at operating Amarr industrial ships. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Amarr Industrial", "Eve.Character.SkillId_AmarrIndustrial")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Amarr industrial ships. Can not be trained on Trial Accounts.")]
     AmarrIndustrial = 3343,
 
     /// <summary>Skill in the operation of Amarr Offensive Subsystems used on Tech III ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Amarr Offensive Systems", "Eve.Character.SkillId_AmarrOffensiveSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill in the operation of Amarr Offensive Subsystems used on Tech III ships.")]
     AmarrOffensiveSystems = 30537,
 
     /// <summary>Skill in the operation of Amarr Propulsion Subsystems used on Tech III ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Amarr Propulsion Systems", "Eve.Character.SkillId_AmarrPropulsionSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill in the operation of Amarr Propulsion Subsystems used on Tech III ships.")]
     AmarrPropulsionSystems = 30538,
 
     /// <summary>Skill at operating Amarr Strategic Cruisers.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Amarr Strategic Cruiser", "Eve.Character.SkillId_AmarrStrategicCruiser")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Amarr Strategic Cruisers.")]
     AmarrStrategicCruiser = 30650,
 
     /// <summary>Grants +5% reduction in Amarr equipment production time.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Amarr Tech", "Eve.Character.SkillId_AmarrTech")]
+    
     [System.ComponentModel.DescriptionAttribute("Grants +5% reduction in Amarr equipment production time.")]
     AmarrTech = 3381,
 
     /// <summary>Skill at operating Amarr titans.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Amarr Titan", "Eve.Character.SkillId_AmarrTitan")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Amarr titans.")]
     AmarrTitan = 3347,
 
@@ -192,7 +190,7 @@ Note: this skill cannot be trained on trial accounts.")]
     ///Needed for all research and manufacturing operations on related blueprints
     ///
     ///Can not be trained on Trial Accounts</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Amarrian Starship Engineering", "Eve.Character.SkillId_AmarrianStarshipEngineering")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Skill and knowledge of Amarrian Starship Engineering. 
 
 Used Exclusively in the research of Amarrian Ships of all Sizes.
@@ -205,19 +203,19 @@ Can not be trained on Trial Accounts")]
     AmarrianStarshipEngineering = 11444,
 
     /// <summary>Skill at Anchoring Deployables. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Anchoring", "Eve.Character.SkillId_Anchoring")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at Anchoring Deployables. Can not be trained on Trial Accounts.")]
     Anchoring = 11584,
 
     /// <summary>Proficiency at identifying and analyzing ancient artifacts.  Required skill for the use of Analyzer modules.  100% increase in chance of archaeological find per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Archaeology", "Eve.Character.SkillId_Archaeology")]
+    
     [System.ComponentModel.DescriptionAttribute("Proficiency at identifying and analyzing ancient artifacts.  Required skill for t" +
         "he use of Analyzer modules.  100% increase in chance of archaeological find per " +
         "level.")]
     Archaeology = 13278,
 
     /// <summary>Specialization in Arkonor processing and refining. Allows a skilled refiner to utilize substandard refining facilities at considerably greater efficiency. 5% reduction in Arkonor refining waste per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Arkonor Processing", "Eve.Character.SkillId_ArkonorProcessing")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialization in Arkonor processing and refining. Allows a skilled refiner to ut" +
         "ilize substandard refining facilities at considerably greater efficiency. 5% red" +
         "uction in Arkonor refining waste per skill level.")]
@@ -227,7 +225,7 @@ Can not be trained on Trial Accounts")]
     ///
     ///Reduces duration time of Reactive Armor Hardeners by 10% per level.
     ///</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Armor Resistance Phasing", "Eve.Character.SkillId_ArmorResistancePhasing")]
+    
     [System.ComponentModel.DescriptionAttribute("Improves control over, and flow between, nano membranes that react to damage by s" +
         "hifting resistances.\r\n\r\nReduces duration time of Reactive Armor Hardeners by 10%" +
         " per level.\r\n")]
@@ -236,7 +234,7 @@ Can not be trained on Trial Accounts")]
     /// <summary>Advanced understanding of armor systems. Allows makeshift modifications to armor systems through the use of rigs. 
     ///
     ///10% reduction in Armor Rig drawbacks per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Armor Rigging", "Eve.Character.SkillId_ArmorRigging")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced understanding of armor systems. Allows makeshift modifications to armor " +
         "systems through the use of rigs. \r\n\r\n10% reduction in Armor Rig drawbacks per le" +
         "vel.")]
@@ -245,106 +243,106 @@ Can not be trained on Trial Accounts")]
     /// <summary>Basic proficiency at coordinating armored warfare.  Grants a 2% bonus to fleet members' armor hit points per skill level. Note: The fleet bonus only works if you are the assigned fleet booster.
     ///
     ///Note: Fleet bonuses only affect fleet members in space within the same solar system</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Armored Warfare", "Eve.Character.SkillId_ArmoredWarfare")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Basic proficiency at coordinating armored warfare.  Grants a 2% bonus to fleet members' armor hit points per skill level. Note: The fleet bonus only works if you are the assigned fleet booster.
 
 Note: Fleet bonuses only affect fleet members in space within the same solar system")]
     ArmoredWarfare = 20494,
 
     /// <summary>Advanced proficiency at armored warfare.  Multiplies the effectiveness of armored warfare link modules by 100% per skill level after level 2 is trained.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Armored Warfare Specialist", "Eve.Character.SkillId_ArmoredWarfareSpecialist")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced proficiency at armored warfare.  Multiplies the effectiveness of armored" +
         " warfare link modules by 100% per skill level after level 2 is trained.")]
     ArmoredWarfareSpecialist = 11569,
 
     /// <summary>Specialist training in the operation of advanced assault missile launchers.  2% bonus per level to the rate of fire of modules requiring Assault Missile Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Assault Missile Specialization", "Eve.Character.SkillId_AssaultMissileSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of advanced assault missile launchers.  2% b" +
         "onus per level to the rate of fire of modules requiring Assault Missile Speciali" +
         "zation.")]
     AssaultMissileSpecialization = 25718,
 
     /// <summary>Skill with assault missiles. Special: 5% bonus to assault missile damage per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Assault Missiles", "Eve.Character.SkillId_AssaultMissiles")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill with assault missiles. Special: 5% bonus to assault missile damage per skil" +
         "l level.")]
     AssaultMissiles = 25719,
 
     /// <summary>Skill for operation of the Assault Ship class frigates. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Assault Ships", "Eve.Character.SkillId_AssaultShips")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill for operation of the Assault Ship class frigates. Can not be trained on Tri" +
         "al Accounts.")]
     AssaultShips = 12095,
 
     /// <summary>Skill at analyzing the content of celestial objects with the intent of mining them. 5% bonus to mining turret yield per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Astrogeology", "Eve.Character.SkillId_Astrogeology")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at analyzing the content of celestial objects with the intent of mining the" +
         "m. 5% bonus to mining turret yield per skill level.")]
     Astrogeology = 3410,
 
     /// <summary>Skill at the advanced operation of long range scanners. 10% reduction in scan probe scan time per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Astrometric Acquisition", "Eve.Character.SkillId_AstrometricAcquisition")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at the advanced operation of long range scanners. 10% reduction in scan pro" +
         "be scan time per level.")]
     AstrometricAcquisition = 25811,
 
     /// <summary>Greater accuracy in hunting down targets found through scanning. Reduces maximum scan deviation by 10% per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Astrometric Pinpointing", "Eve.Character.SkillId_AstrometricPinpointing")]
+    
     [System.ComponentModel.DescriptionAttribute("Greater accuracy in hunting down targets found through scanning. Reduces maximum " +
         "scan deviation by 10% per level.")]
     AstrometricPinpointing = 25810,
 
     /// <summary>Skill for the advanced operation of long range scanners. 10% increase to scan probe strength per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Astrometric Rangefinding", "Eve.Character.SkillId_AstrometricRangefinding")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill for the advanced operation of long range scanners. 10% increase to scan pro" +
         "be strength per level.")]
     AstrometricRangefinding = 25739,
 
     /// <summary>Skill at operating long range scanners. Allows one additional probe in space per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Astrometrics", "Eve.Character.SkillId_Astrometrics")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating long range scanners. Allows one additional probe in space per " +
         "level.")]
     Astrometrics = 3412,
 
     /// <summary>Skill and knowledge of Astronautics and its use in the development of advanced technology.  Allows Astronautic Engineering research to be performed with the help of a research agent. It is also needed for all research and manufacturing operations on related blueprints. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Astronautic Engineering", "Eve.Character.SkillId_AstronauticEngineering")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Skill and knowledge of Astronautics and its use in the development of advanced technology.  Allows Astronautic Engineering research to be performed with the help of a research agent. It is also needed for all research and manufacturing operations on related blueprints. Can not be trained on Trial Accounts.")]
     AstronauticEngineering = 11487,
 
     /// <summary>Advanced understanding of a ships navigational systems. Allows makeshift modifications to warp drive, sub warp drive and other navigational systems through the use of rigs. 
     ///
     ///10% reduction in Astronautics Rig drawbacks per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Astronautics Rigging", "Eve.Character.SkillId_AstronauticsRigging")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced understanding of a ships navigational systems. Allows makeshift modifica" +
         "tions to warp drive, sub warp drive and other navigational systems through the u" +
         "se of rigs. \r\n\r\n10% reduction in Astronautics Rig drawbacks per level.")]
     AstronauticsRigging = 26254,
 
     /// <summary>Skill with auto-targeting missiles. Special: 5% bonus to Auto-Targeting Missiles(light, heavy and cruise) damage per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Auto-Targeting Missiles", "Eve.Character.SkillId_AutoTargetingMissiles")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill with auto-targeting missiles. Special: 5% bonus to Auto-Targeting Missiles(" +
         "light, heavy and cruise) damage per skill level.")]
     AutoTargetingMissiles = 3322,
 
     /// <summary>Skill at operating Battlecruisers. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Battlecruisers", "Eve.Character.SkillId_Battlecruisers")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Battlecruisers. Can not be trained on Trial Accounts.")]
     Battlecruisers = 12099,
 
     /// <summary>Skill at the construction of advanced battleships. Required for advanced battleship BP manufacturing</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Battleship Construction", "Eve.Character.SkillId_BattleshipConstruction")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at the construction of advanced battleships. Required for advanced battlesh" +
         "ip BP manufacturing")]
     BattleshipConstruction = 3398,
 
     /// <summary>The science of life and of living organisms, and how chemicals affect them. 20% Bonus to attribute booster duration per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Biology", "Eve.Character.SkillId_Biology")]
+    
     [System.ComponentModel.DescriptionAttribute("The science of life and of living organisms, and how chemicals affect them. 20% B" +
         "onus to attribute booster duration per skill level.")]
     Biology = 3405,
 
     /// <summary>Specialization in Bistot processing and refining. Allows a skilled refiner to utilize substandard refining facilities at considerably greater efficiency. 5% reduction in Bistot refining waste per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Bistot Processing", "Eve.Character.SkillId_BistotProcessing")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialization in Bistot processing and refining. Allows a skilled refiner to uti" +
         "lize substandard refining facilities at considerably greater efficiency. 5% redu" +
         "ction in Bistot refining waste per skill level.")]
@@ -352,98 +350,98 @@ Note: Fleet bonuses only affect fleet members in space within the same solar sys
 
     /// <summary>Skill at forging cargo manifests and disguising contraband cargo. From a base of 90%, each level of skill reduces chance of contraband detection by 10%.
     ///</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Black Market Trading", "Eve.Character.SkillId_BlackMarketTrading")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at forging cargo manifests and disguising contraband cargo. From a base of " +
         "90%, each level of skill reduces chance of contraband detection by 10%.\r\n")]
     BlackMarketTrading = 3445,
 
     /// <summary>Skill for the operation of Black Ops. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Black Ops", "Eve.Character.SkillId_BlackOps")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill for the operation of Black Ops. Can not be trained on Trial Accounts.")]
     BlackOps = 28656,
 
     /// <summary>Basic operation of bomb delivery systems. 5% reduction of Bomb Launcher reactivation delay per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Bomb Deployment", "Eve.Character.SkillId_BombDeployment")]
+    
     [System.ComponentModel.DescriptionAttribute("Basic operation of bomb delivery systems. 5% reduction of Bomb Launcher reactivat" +
         "ion delay per skill level.")]
     BombDeployment = 28073,
 
     /// <summary>Proficiency at driving down market-related costs.  Each level of skill grants a 5% reduction in the costs associated with setting up a market order, which usually come to 1% of the order's total value. This can be further influenced by the player's standing towards the owner of the station where the order is entered.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Broker Relations", "Eve.Character.SkillId_BrokerRelations")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Proficiency at driving down market-related costs.  Each level of skill grants a 5% reduction in the costs associated with setting up a market order, which usually come to 1% of the order's total value. This can be further influenced by the player's standing towards the owner of the station where the order is entered.")]
     BrokerRelations = 3446,
 
     /// <summary>Skill at operating Caldari battleships. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Caldari Battleship", "Eve.Character.SkillId_CaldariBattleship")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Caldari battleships. Can not be trained on Trial Accounts.")]
     CaldariBattleship = 3338,
 
     /// <summary>Skill at operating Caldari carriers.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Caldari Carrier", "Eve.Character.SkillId_CaldariCarrier")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Caldari carriers.")]
     CaldariCarrier = 24312,
 
     /// <summary>Skill at operating Caldari cruisers.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Caldari Cruiser", "Eve.Character.SkillId_CaldariCruiser")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Caldari cruisers.")]
     CaldariCruiser = 3334,
 
     /// <summary>Skill in the operation of Caldari Defensive Subsystems used on Tech III ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Caldari Defensive Systems", "Eve.Character.SkillId_CaldariDefensiveSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill in the operation of Caldari Defensive Subsystems used on Tech III ships.")]
     CaldariDefensiveSystems = 30544,
 
     /// <summary>Skill at operating Caldari dreadnoughts. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Caldari Dreadnought", "Eve.Character.SkillId_CaldariDreadnought")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Caldari dreadnoughts. Can not be trained on Trial Accounts.")]
     CaldariDreadnought = 20530,
 
     /// <summary>Specialization in the operation of advanced Caldari drones. 2% bonus to advanced Caldari drone damage per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Caldari Drone Specialization", "Eve.Character.SkillId_CaldariDroneSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialization in the operation of advanced Caldari drones. 2% bonus to advanced " +
         "Caldari drone damage per level.")]
     CaldariDroneSpecialization = 12487,
 
     /// <summary>Skill in the operation of Caldari Electronic Subsystems used on Tech III ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Caldari Electronic Systems", "Eve.Character.SkillId_CaldariElectronicSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill in the operation of Caldari Electronic Subsystems used on Tech III ships.")]
     CaldariElectronicSystems = 30542,
 
     /// <summary>Understanding of the data encryption methods used by the Caldari State and its allies.
     ///</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Caldari Encryption Methods", "Eve.Character.SkillId_CaldariEncryptionMethods")]
+    
     [System.ComponentModel.DescriptionAttribute("Understanding of the data encryption methods used by the Caldari State and its al" +
         "lies.\r\n")]
     CaldariEncryptionMethods = 21790,
 
     /// <summary>Skill in the operation of Caldari Engineering Subsystems used on Tech III ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Caldari Engineering Systems", "Eve.Character.SkillId_CaldariEngineeringSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill in the operation of Caldari Engineering Subsystems used on Tech III ships.")]
     CaldariEngineeringSystems = 30548,
 
     /// <summary>Skill at operating Caldari freighters. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Caldari Freighter", "Eve.Character.SkillId_CaldariFreighter")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Caldari freighters. Can not be trained on Trial Accounts.")]
     CaldariFreighter = 20526,
 
     /// <summary>Skill at operating Caldari frigates.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Caldari Frigate", "Eve.Character.SkillId_CaldariFrigate")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Caldari frigates.")]
     CaldariFrigate = 3330,
 
     /// <summary>Skill at operating Caldari industrial ships. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Caldari Industrial", "Eve.Character.SkillId_CaldariIndustrial")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Caldari industrial ships. Can not be trained on Trial Accounts" +
         ".")]
     CaldariIndustrial = 3342,
 
     /// <summary>Skill in the operation of Caldari Offensive Subsystems used on Tech III ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Caldari Offensive Systems", "Eve.Character.SkillId_CaldariOffensiveSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill in the operation of Caldari Offensive Subsystems used on Tech III ships.")]
     CaldariOffensiveSystems = 30549,
 
     /// <summary>Skill in the operation of Caldari Propulsion Subsystems used on Tech III ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Caldari Propulsion Systems", "Eve.Character.SkillId_CaldariPropulsionSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill in the operation of Caldari Propulsion Subsystems used on Tech III ships.")]
     CaldariPropulsionSystems = 30552,
 
@@ -456,7 +454,7 @@ Note: Fleet bonuses only affect fleet members in space within the same solar sys
     ///Needed for all research and manufacturing operations on related blueprints
     ///
     ///Can not be trained on Trial Accounts</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Caldari Starship Engineering", "Eve.Character.SkillId_CaldariStarshipEngineering")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Skill and knowledge of Caldari Starship Engineering and its use in the development of advanced technology. 
 
 Used in the research of Caldari Ships of all Sizes.
@@ -469,35 +467,35 @@ Can not be trained on Trial Accounts")]
     CaldariStarshipEngineering = 11454,
 
     /// <summary>Skill at operating Caldari Strategic Cruisers.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Caldari Strategic Cruiser", "Eve.Character.SkillId_CaldariStrategicCruiser")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Caldari Strategic Cruisers.")]
     CaldariStrategicCruiser = 30651,
 
     /// <summary>Grants +5% reduction in Caldari equipment production time.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Caldari Tech", "Eve.Character.SkillId_CaldariTech")]
+    
     [System.ComponentModel.DescriptionAttribute("Grants +5% reduction in Caldari equipment production time.")]
     CaldariTech = 3382,
 
     /// <summary>Skill at operating Caldari titans.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Caldari Titan", "Eve.Character.SkillId_CaldariTitan")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Caldari titans.")]
     CaldariTitan = 3346,
 
     /// <summary>Operation of capital sized energy transfer array and other energy emission systems. 5% reduced capacitor need of capital energy emission systems per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Capital Energy Emission Systems", "Eve.Character.SkillId_CapitalEnergyEmissionSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of capital sized energy transfer array and other energy emission system" +
         "s. 5% reduced capacitor need of capital energy emission systems per skill level." +
         "")]
     CapitalEnergyEmissionSystems = 24572,
 
     /// <summary>Operation of capital energy turrets. 5% Bonus to capital energy turret damage per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Capital Energy Turret", "Eve.Character.SkillId_CapitalEnergyTurret")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of capital energy turrets. 5% Bonus to capital energy turret damage per" +
         " level.")]
     CapitalEnergyTurret = 20327,
 
     /// <summary>Operation of capital hybrid turrets. 5% Bonus to capital hybrid turret damage per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Capital Hybrid Turret", "Eve.Character.SkillId_CapitalHybridTurret")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of capital hybrid turrets. 5% Bonus to capital hybrid turret damage per" +
         " level.")]
     CapitalHybridTurret = 21666,
@@ -505,85 +503,85 @@ Can not be trained on Trial Accounts")]
     /// <summary>Skill at operating Capital Industrial Ships
     ///
     ///Cannot be trained on trial accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Capital Industrial Ships", "Eve.Character.SkillId_CapitalIndustrialShips")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Capital Industrial Ships\r\n\r\nCannot be trained on trial account" +
         "s.")]
     CapitalIndustrialShips = 28374,
 
     /// <summary>Operation of capital projectile turrets. 5% Bonus to capital projectile turret damage per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Capital Projectile Turret", "Eve.Character.SkillId_CapitalProjectileTurret")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of capital projectile turrets. 5% Bonus to capital projectile turret da" +
         "mage per level.")]
     CapitalProjectileTurret = 21667,
 
     /// <summary>Operation of capital sized remote armor repair systems. 5% reduced capacitor need for capital remote armor repair system modules per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Capital Remote Armor Repair Systems", "Eve.Character.SkillId_CapitalRemoteArmorRepairSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of capital sized remote armor repair systems. 5% reduced capacitor need" +
         " for capital remote armor repair system modules per skill level.")]
     CapitalRemoteArmorRepairSystems = 24568,
 
     /// <summary>Operation of remote capital class remote hull repair systems. 5% reduced capacitor need for capital class remote hull repair system modules per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Capital Remote Hull Repair Systems", "Eve.Character.SkillId_CapitalRemoteHullRepairSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of remote capital class remote hull repair systems. 5% reduced capacito" +
         "r need for capital class remote hull repair system modules per skill level.")]
     CapitalRemoteHullRepairSystems = 27936,
 
     /// <summary>Operation of capital armor/hull repair modules. 5% reduction in capital repair systems duration per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Capital Repair Systems", "Eve.Character.SkillId_CapitalRepairSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of capital armor/hull repair modules. 5% reduction in capital repair sy" +
         "stems duration per skill level.")]
     CapitalRepairSystems = 21803,
 
     /// <summary>Operation of capital sized shield transfer array and other shield emission systems. 5% reduced capacitor need for capital shield emission system modules per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Capital Shield Emission Systems", "Eve.Character.SkillId_CapitalShieldEmissionSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of capital sized shield transfer array and other shield emission system" +
         "s. 5% reduced capacitor need for capital shield emission system modules per skil" +
         "l level.")]
     CapitalShieldEmissionSystems = 24571,
 
     /// <summary>Operation of capital shield boosters and other shield modules. 2% reduction in capacitor need for capital shield boosters per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Capital Shield Operation", "Eve.Character.SkillId_CapitalShieldOperation")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of capital shield boosters and other shield modules. 2% reduction in ca" +
         "pacitor need for capital shield boosters per skill level.")]
     CapitalShieldOperation = 21802,
 
     /// <summary>Skill at the construction of capital ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Capital Ship Construction", "Eve.Character.SkillId_CapitalShipConstruction")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at the construction of capital ships.")]
     CapitalShipConstruction = 22242,
 
     /// <summary>The operation of capital ships.  Grants a 5% bonus per skill level to the agility of ships requiring the Capital Ships skill.  Cannot be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Capital Ships", "Eve.Character.SkillId_CapitalShips")]
+    
     [System.ComponentModel.DescriptionAttribute("The operation of capital ships.  Grants a 5% bonus per skill level to the agility" +
         " of ships requiring the Capital Ships skill.  Cannot be trained on Trial Account" +
         "s.")]
     CapitalShips = 20533,
 
     /// <summary>Skill at managing corp finances. 5% discount on all fees at non-hostile NPC station if acting as CFO of a corp. </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("CFO Training", "Eve.Character.SkillId_CfoTraining")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at managing corp finances. 5% discount on all fees at non-hostile NPC stati" +
         "on if acting as CFO of a corp. ")]
     CfoTraining = 3369,
 
     /// <summary>Skill at managing corp research. </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Chief Science Officer", "Eve.Character.SkillId_ChiefScienceOfficer")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at managing corp research. ")]
     ChiefScienceOfficer = 3370,
 
     /// <summary>Skill at the handling and firing of Citadel Cruise Missiles.  5% bonus to Citadel Cruise Missile damage per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Citadel Cruise Missiles", "Eve.Character.SkillId_CitadelCruiseMissiles")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at the handling and firing of Citadel Cruise Missiles.  5% bonus to Citadel" +
         " Cruise Missile damage per skill level.")]
     CitadelCruiseMissiles = 32435,
 
     /// <summary>Skill at the handling and firing of citadel torpedoes.  5% bonus to citadel torpedo damage per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Citadel Torpedoes", "Eve.Character.SkillId_CitadelTorpedoes")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at the handling and firing of citadel torpedoes.  5% bonus to citadel torpe" +
         "do damage per skill level.")]
     CitadelTorpedoes = 21668,
 
     /// <summary>Skill at using Cloaking devices. 10% reduction in targeting delay after uncloaking per skill level. &lt;br&gt;&lt;br&gt;Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Cloaking", "Eve.Character.SkillId_Cloaking")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at using Cloaking devices. 10% reduction in targeting delay after uncloakin" +
         "g per skill level. <br><br>Can not be trained on Trial Accounts.")]
     Cloaking = 11579,
@@ -591,43 +589,43 @@ Can not be trained on Trial Accounts")]
     /// <summary>Needed for use of the Clone Vat Bay module. 
     ///
     ///Special: Increases a Clone Vat Bay's maximum clone capacity by 15% per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Cloning Facility Operation", "Eve.Character.SkillId_CloningFacilityOperation")]
+    
     [System.ComponentModel.DescriptionAttribute("Needed for use of the Clone Vat Bay module. \r\n\r\nSpecial: Increases a Clone Vat Ba" +
         "y\'s maximum clone capacity by 15% per skill level.")]
     CloningFacilityOperation = 24606,
 
     /// <summary>Skill at controlling scout drones. 5% Bonus to drone damage of light and medium drones per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Combat Drone Operation", "Eve.Character.SkillId_CombatDroneOperation")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at controlling scout drones. 5% Bonus to drone damage of light and medium d" +
         "rones per level.")]
     CombatDroneOperation = 24241,
 
     /// <summary>Each level in this skill improves the quality of command facility available to you, in turn allowing for a greater number of connected facilities on that planet. Cannot be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Command Center Upgrades", "Eve.Character.SkillId_CommandCenterUpgrades")]
+    
     [System.ComponentModel.DescriptionAttribute("Each level in this skill improves the quality of command facility available to yo" +
         "u, in turn allowing for a greater number of connected facilities on that planet." +
         " Cannot be trained on Trial Accounts.")]
     CommandCenterUpgrades = 2505,
 
     /// <summary>Skill for the operation of Command Ships. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Command Ships", "Eve.Character.SkillId_CommandShips")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill for the operation of Command Ships. Can not be trained on Trial Accounts.")]
     CommandShips = 23950,
 
     /// <summary>Skill at operating Concord .  </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Concord", "Eve.Character.SkillId_Concord")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Concord .  ")]
     Concord = 10264,
 
     /// <summary>Skill at interacting with friendly NPCs. 4% Modifier to effective standing from friendly NPC Corporations and Factions per level. Not cumulative with Diplomacy or Criminal Connections.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Connections", "Eve.Character.SkillId_Connections")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at interacting with friendly NPCs. 4% Modifier to effective standing from f" +
         "riendly NPC Corporations and Factions per level. Not cumulative with Diplomacy o" +
         "r Criminal Connections.")]
     Connections = 3359,
 
     /// <summary>The skill at transporting contraband without getting caught. -10% chance of being caught transporting contraband. Base chance 60%.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Consumable Freight", "Eve.Character.SkillId_ConsumableFreight")]
+    
     [System.ComponentModel.DescriptionAttribute("The skill at transporting contraband without getting caught. -10% chance of being" +
         " caught transporting contraband. Base chance 60%.")]
     ConsumableFreight = 13074,
@@ -637,7 +635,7 @@ Can not be trained on Trial Accounts")]
     ///For each level of this skill the number of outstanding contracts is increased by four (up to a maximum of 21 at level 5)
     ///
     ///Note: Cannot be trained on trial accounts</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Contracting", "Eve.Character.SkillId_Contracting")]
+    
     [System.ComponentModel.DescriptionAttribute("This skill allows you to create formal agreements with other characters. \r\n\r\nFor " +
         "each level of this skill the number of outstanding contracts is increased by fou" +
         "r (up to a maximum of 21 at level 5)\r\n\r\nNote: Cannot be trained on trial account" +
@@ -645,7 +643,7 @@ Can not be trained on Trial Accounts")]
     Contracting = 25235,
 
     /// <summary>Allows better control over the capacitor use of weapon turrets. 5% reduction in capacitor need of weapon turrets per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Controlled Bursts", "Eve.Character.SkillId_ControlledBursts")]
+    
     [System.ComponentModel.DescriptionAttribute("Allows better control over the capacitor use of weapon turrets. 5% reduction in c" +
         "apacitor need of weapon turrets per skill level.")]
     ControlledBursts = 3316,
@@ -659,7 +657,7 @@ Can not be trained on Trial Accounts")]
     ///There is no limit on the number of contracts a corporation can assign to itself.
     ///
     ///Corporations have a hard limit of 500 outstanding public contracts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Corporation Contracting", "Eve.Character.SkillId_CorporationContracting")]
+    
     [System.ComponentModel.DescriptionAttribute(@"You are familiar with the intricacies of formalizing contracts between your corporation and other entities. 
 
 For each level of this skill the number of concurrent corporation/alliance contracts you make on behalf of your corporation is increased by 10 up to a maximum of 60. 
@@ -674,114 +672,114 @@ Corporations have a hard limit of 500 outstanding public contracts.")]
     /// <summary>Basic corporation operation. +10 corporation members allowed per level.
     ///
     ///Notice:  the CEO must update his corporation through the corporation user interface before the skill takes effect</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Corporation Management", "Eve.Character.SkillId_CorporationManagement")]
+    
     [System.ComponentModel.DescriptionAttribute("Basic corporation operation. +10 corporation members allowed per level.\r\n\r\nNotice" +
         ":  the CEO must update his corporation through the corporation user interface be" +
         "fore the skill takes effect")]
     CorporationManagement = 3363,
 
     /// <summary>Covert operations frigates are designed for recon and espionage operation. Their main strength is the ability to travel unseen through enemy territory and to avoid unfavorable encounters  Much of their free space is sacrificed to house an advanced spatial field control system. This allows it to utilize very advanced forms of cloaking at greatly reduced CPU cost. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Covert Ops", "Eve.Character.SkillId_CovertOps")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Covert operations frigates are designed for recon and espionage operation. Their main strength is the ability to travel unseen through enemy territory and to avoid unfavorable encounters  Much of their free space is sacrificed to house an advanced spatial field control system. This allows it to utilize very advanced forms of cloaking at greatly reduced CPU cost. Can not be trained on Trial Accounts.")]
     CovertOps = 12093,
 
     /// <summary>Skill at interacting with friendly criminal NPCs. 4% Modifier per level to effective standing towards NPCs with low Concord standing. Not cumulative with Diplomacy or Connections.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Criminal Connections", "Eve.Character.SkillId_CriminalConnections")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at interacting with friendly criminal NPCs. 4% Modifier per level to effect" +
         "ive standing towards NPCs with low Concord standing. Not cumulative with Diploma" +
         "cy or Connections.")]
     CriminalConnections = 3361,
 
     /// <summary>Specialization in Crokite processing and refining.  Allows a skilled refiner to utilize substandard refining facilities at considerably greater efficiency. 5% reduction in Crokite refining waste per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Crokite Processing", "Eve.Character.SkillId_CrokiteProcessing")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialization in Crokite processing and refining.  Allows a skilled refiner to u" +
         "tilize substandard refining facilities at considerably greater efficiency. 5% re" +
         "duction in Crokite refining waste per skill level.")]
     CrokiteProcessing = 12182,
 
     /// <summary>Specialist training in the operation of advanced cruise missile launchers.  2% bonus per level to the rate of fire of modules requiring Cruise Missile Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Cruise Missile Specialization", "Eve.Character.SkillId_CruiseMissileSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of advanced cruise missile launchers.  2% bo" +
         "nus per level to the rate of fire of modules requiring Cruise Missile Specializa" +
         "tion.")]
     CruiseMissileSpecialization = 20212,
 
     /// <summary>Skill at the handling and firing of very large guided missiles.  5% bonus to cruise missile damage per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Cruise Missiles", "Eve.Character.SkillId_CruiseMissiles")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at the handling and firing of very large guided missiles.  5% bonus to crui" +
         "se missile damage per skill level.")]
     CruiseMissiles = 3326,
 
     /// <summary>Skill at the construction of advanced cruisers. Required for advanced cruiser BP manufacturing  </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Cruiser Construction", "Eve.Character.SkillId_CruiserConstruction")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at the construction of advanced cruisers. Required for advanced cruiser BP " +
         "manufacturing  ")]
     CruiserConstruction = 3397,
 
     /// <summary>The science of interfacing biological and machine components. Allows the use of cybernetic implants.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Cybernetics", "Eve.Character.SkillId_Cybernetics")]
+    
     [System.ComponentModel.DescriptionAttribute("The science of interfacing biological and machine components. Allows the use of c" +
         "ybernetic implants.")]
     Cybernetics = 3411,
 
     /// <summary>Skill at creating effective cynosural fields. 10% reduction in liquid ozone consumption for module activation per skill level. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Cynosural Field Theory", "Eve.Character.SkillId_CynosuralFieldTheory")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at creating effective cynosural fields. 10% reduction in liquid ozone consu" +
         "mption for module activation per skill level. Can not be trained on Trial Accoun" +
         "ts.")]
     CynosuralFieldTheory = 21603,
 
     /// <summary>Specialization in Dark Ochre processing and refining.  Allows a skilled refiner to utilize substandard refining facilities at considerably greater efficiency. 5% reduction in Dark Ochre refining waste per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Dark Ochre Processing", "Eve.Character.SkillId_DarkOchreProcessing")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialization in Dark Ochre processing and refining.  Allows a skilled refiner t" +
         "o utilize substandard refining facilities at considerably greater efficiency. 5%" +
         " reduction in Dark Ochre refining waste per skill level.")]
     DarkOchreProcessing = 12183,
 
     /// <summary>Allows for remote modification of buy and sell orders.  Each level of skill increases the range at which orders may be modified. Level 1 allows for modification of orders within the same solar system, Level 2 extends that range to systems within 5 jumps, and each subsequent level then doubles it. Level 5 allows for market order modification anywhere within current region.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Daytrading", "Eve.Character.SkillId_Daytrading")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Allows for remote modification of buy and sell orders.  Each level of skill increases the range at which orders may be modified. Level 1 allows for modification of orders within the same solar system, Level 2 extends that range to systems within 5 jumps, and each subsequent level then doubles it. Level 5 allows for market order modification anywhere within current region.")]
     Daytrading = 16595,
 
     /// <summary>Skill at dealing with Concord Department and negotiating bounties 
     ///
     ///Bonus fee of 1,500 isk per pirate head per level of the skill</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("DED Connections", "Eve.Character.SkillId_DedConnections")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at dealing with Concord Department and negotiating bounties \r\n\r\nBonus fee o" +
         "f 1,500 isk per pirate head per level of the skill")]
     DedConnections = 3362,
 
     /// <summary>Skill at operating mining lasers requiring Deep Core Mining.  20% reduction per skill level in the chance of a damage cloud forming while mining Mercoxit.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Deep Core Mining", "Eve.Character.SkillId_DeepCoreMining")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating mining lasers requiring Deep Core Mining.  20% reduction per s" +
         "kill level in the chance of a damage cloud forming while mining Mercoxit.")]
     DeepCoreMining = 11395,
 
     /// <summary>Skill with anti-missile missiles. Special: 5% bonus to defender missile max velocity per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Defender Missiles", "Eve.Character.SkillId_DefenderMissiles")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill with anti-missile missiles. Special: 5% bonus to defender missile max veloc" +
         "ity per skill level.")]
     DefenderMissiles = 3323,
 
     /// <summary>Understanding of the technology used to create advanced defensive subsystems.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Defensive Subsystem Technology", "Eve.Character.SkillId_DefensiveSubsystemTechnology")]
+    
     [System.ComponentModel.DescriptionAttribute("Understanding of the technology used to create advanced defensive subsystems.")]
     DefensiveSubsystemTechnology = 30324,
 
     /// <summary>Skill at operating Destroyers.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Destroyers", "Eve.Character.SkillId_Destroyers")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Destroyers.")]
     Destroyers = 12097,
 
     /// <summary>Skill at interacting with hostile Agents. 4% Modifier per level to effective standing towards hostile Agents. Not cumulative with Connections or Criminal Connections</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Diplomacy", "Eve.Character.SkillId_Diplomacy")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at interacting with hostile Agents. 4% Modifier per level to effective stan" +
         "ding towards hostile Agents. Not cumulative with Connections or Criminal Connect" +
         "ions")]
     Diplomacy = 3357,
 
     /// <summary>Skill at negotiating ally fees with Concord. Reduces cost to hire allies in wars by 5% per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Diplomatic Relations", "Eve.Character.SkillId_DiplomaticRelations")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at negotiating ally fees with Concord. Reduces cost to hire allies in wars " +
         "by 5% per level.")]
     DiplomaticRelations = 3368,
@@ -790,62 +788,62 @@ Corporations have a hard limit of 500 outstanding public contracts.")]
     ///
     ///Improves loyalty point gain by 10% per level when working for agents in the Distribution corporation division.
     ///</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Distribution Connections", "Eve.Character.SkillId_DistributionConnections")]
+    
     [System.ComponentModel.DescriptionAttribute("Understanding of the way trade is conducted at the corporate level.\r\n\r\nImproves l" +
         "oyalty point gain by 10% per level when working for agents in the Distribution c" +
         "orporation division.\r\n")]
     DistributionConnections = 3894,
 
     /// <summary>Skill at operating titan doomsday weapons. 10% increased damage per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Doomsday Operation", "Eve.Character.SkillId_DoomsdayOperation")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating titan doomsday weapons. 10% increased damage per level.")]
     DoomsdayOperation = 24563,
 
     /// <summary>Increases drone hit points. 5% bonus to drone shield, armor and hull hit points per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Drone Durability", "Eve.Character.SkillId_DroneDurability")]
+    
     [System.ComponentModel.DescriptionAttribute("Increases drone hit points. 5% bonus to drone shield, armor and hull hit points p" +
         "er level.")]
     DroneDurability = 23618,
 
     /// <summary>The skill at transporting contraband without getting caught. -10% chance of being caught transporting contraband. Base chance 60%.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Drone Freight", "Eve.Character.SkillId_DroneFreight")]
+    
     [System.ComponentModel.DescriptionAttribute("The skill at transporting contraband without getting caught. -10% chance of being" +
         " caught transporting contraband. Base chance 60%.")]
     DroneFreight = 13072,
 
     /// <summary>Allows a captain to better maintain his drones. 20% bonus to drone damage, drone mining yield per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Drone Interfacing", "Eve.Character.SkillId_DroneInterfacing")]
+    
     [System.ComponentModel.DescriptionAttribute("Allows a captain to better maintain his drones. 20% bonus to drone damage, drone " +
         "mining yield per level.")]
     DroneInterfacing = 3442,
 
     /// <summary>Skill at controlling drones at high speeds. 5% increase in drone MicroWarpdrive speed per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Drone Navigation", "Eve.Character.SkillId_DroneNavigation")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at controlling drones at high speeds. 5% increase in drone MicroWarpdrive s" +
         "peed per level.")]
     DroneNavigation = 12305,
 
     /// <summary>Increases drone optimal range.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Drone Sharpshooting", "Eve.Character.SkillId_DroneSharpshooting")]
+    
     [System.ComponentModel.DescriptionAttribute("Increases drone optimal range.")]
     DroneSharpshooting = 23606,
 
     /// <summary>Skill at remote controlling drones. Can operate 1 drone per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Drones", "Eve.Character.SkillId_Drones")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at remote controlling drones. Can operate 1 drone per skill level.")]
     Drones = 3436,
 
     /// <summary>Advanced understanding of a ships drone control systems. Allows makeshift modifications to drone systems through the use of rigs. 
     ///
     ///10% reduction in Drone Rig drawbacks per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Drones Rigging", "Eve.Character.SkillId_DronesRigging")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced understanding of a ships drone control systems. Allows makeshift modific" +
         "ations to drone systems through the use of rigs. \r\n\r\n10% reduction in Drone Rig " +
         "drawbacks per level.")]
     DronesRigging = 26255,
 
     /// <summary>Needed to manufacture boosters. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Drug Manufacturing", "Eve.Character.SkillId_DrugManufacturing")]
+    
     [System.ComponentModel.DescriptionAttribute("Needed to manufacture boosters. Can not be trained on Trial Accounts.")]
     DrugManufacturing = 26224,
 
@@ -858,7 +856,7 @@ Corporations have a hard limit of 500 outstanding public contracts.")]
     ///Needed for all research and manufacturing operations on related blueprints.
     ///
     ///Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Electromagnetic Physics", "Eve.Character.SkillId_ElectromagneticPhysics")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Skill and knowledge of Electromagnetic Physics and its use in the development of advanced technology. 
 
 Used primarily in the research of Railgun weaponry and various electronic systems.  
@@ -873,7 +871,7 @@ Can not be trained on Trial Accounts.")]
     /// <summary>Skill for the operation of Electronic Attack Frigates
     ///
     ///Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Electronic Attack Ships", "Eve.Character.SkillId_ElectronicAttackShips")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill for the operation of Electronic Attack Frigates\r\n\r\nCan not be trained on Tr" +
         "ial Accounts.")]
     ElectronicAttackShips = 28615,
@@ -887,7 +885,7 @@ Can not be trained on Trial Accounts.")]
     ///Needed for all research and manufacturing operations on related blueprints
     ///
     ///Can not be trained on Trial Accounts</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Electronic Engineering", "Eve.Character.SkillId_ElectronicEngineering")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Skill and knowledge of Electronic Engineering and its use in the development of advanced technology. 
 
 Used in all Electronics and Drone research.  
@@ -900,14 +898,14 @@ Can not be trained on Trial Accounts")]
     ElectronicEngineering = 11453,
 
     /// <summary>Understanding of the technology used to create advanced electronic subsystems.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Electronic Subsystem Technology", "Eve.Character.SkillId_ElectronicSubsystemTechnology")]
+    
     [System.ComponentModel.DescriptionAttribute("Understanding of the technology used to create advanced electronic subsystems.")]
     ElectronicSubsystemTechnology = 30326,
 
     /// <summary>Advanced understanding of electronics systems. Allows makeshift modifications to targeting, scanning and ECM systems through the use of rigs. 
     ///
     ///10% reduction in Electronic Superiority Rig drawbacks per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Electronic Superiority Rigging", "Eve.Character.SkillId_ElectronicSuperiorityRigging")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced understanding of electronics systems. Allows makeshift modifications to " +
         "targeting, scanning and ECM systems through the use of rigs. \r\n\r\n10% reduction i" +
         "n Electronic Superiority Rig drawbacks per level.")]
@@ -916,7 +914,7 @@ Can not be trained on Trial Accounts")]
     /// <summary>Operation of ECM jamming systems. 5% less capacitor need for ECM and ECM Burst systems per skill level.
     ///
     ///Note: Does not affect capital class modules.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Electronic Warfare", "Eve.Character.SkillId_ElectronicWarfare")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of ECM jamming systems. 5% less capacitor need for ECM and ECM Burst sy" +
         "stems per skill level.\r\n\r\nNote: Does not affect capital class modules.")]
     ElectronicWarfare = 3427,
@@ -924,20 +922,20 @@ Can not be trained on Trial Accounts")]
     /// <summary>This skill is required for the operation of Electronic Warfare Drones but also gives a bonus to the control range of all drones.
     ///
     ///3,000m bonus drone control range per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Electronic Warfare Drone Interfacing", "Eve.Character.SkillId_ElectronicWarfareDroneInterfacing")]
+    
     [System.ComponentModel.DescriptionAttribute("This skill is required for the operation of Electronic Warfare Drones but also gi" +
         "ves a bonus to the control range of all drones.\r\n\r\n3,000m bonus drone control ra" +
         "nge per level.")]
     ElectronicWarfareDroneInterfacing = 23566,
 
     /// <summary>Basic understanding of spaceship sensory and computer systems. 5% Bonus to ship CPU output per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Electronics", "Eve.Character.SkillId_Electronics")]
+    
     [System.ComponentModel.DescriptionAttribute("Basic understanding of spaceship sensory and computer systems. 5% Bonus to ship C" +
         "PU output per skill level.")]
     Electronics = 3426,
 
     /// <summary>Skill at installing electronic upgrades, such as signal amplifiers, co-processors and backup sensor arrays. 5% reduction of CPU needs for all modules requiring Electronics Upgrades per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Electronics Upgrades", "Eve.Character.SkillId_ElectronicsUpgrades")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at installing electronic upgrades, such as signal amplifiers, co-processors" +
         " and backup sensor arrays. 5% reduction of CPU needs for all modules requiring E" +
         "lectronics Upgrades per skill level.")]
@@ -945,7 +943,7 @@ Can not be trained on Trial Accounts")]
 
     /// <summary>To active armor hardeners: 3% bonus per skill level to Armor EM resistance when the modules are not active
     ///To passive armor hardeners: 5% bonus per skill level to Armor EM resistance</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("EM Armor Compensation", "Eve.Character.SkillId_EmArmorCompensation")]
+    
     [System.ComponentModel.DescriptionAttribute("To active armor hardeners: 3% bonus per skill level to Armor EM resistance when t" +
         "he modules are not active\r\nTo passive armor hardeners: 5% bonus per skill level " +
         "to Armor EM resistance")]
@@ -953,7 +951,7 @@ Can not be trained on Trial Accounts")]
 
     /// <summary>To active shield hardeners: 3% bonus per skill level to Shield EM resistance when the modules are not active 
     ///To passive shield hardeners: 5% bonus per skill level to Shield EM resistance</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("EM Shield Compensation", "Eve.Character.SkillId_EmShieldCompensation")]
+    
     [System.ComponentModel.DescriptionAttribute("To active shield hardeners: 3% bonus per skill level to Shield EM resistance when" +
         " the modules are not active \r\nTo passive shield hardeners: 5% bonus per skill le" +
         "vel to Shield EM resistance")]
@@ -962,38 +960,38 @@ Can not be trained on Trial Accounts")]
     /// <summary>Advanced corporation operation. +200 corporation members allowed per level. 
     ///
     ///Notice:  the CEO must update his corporation through the corporation user interface before the skill takes effect</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Empire Control", "Eve.Character.SkillId_EmpireControl")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced corporation operation. +200 corporation members allowed per level. \r\n\r\nN" +
         "otice:  the CEO must update his corporation through the corporation user interfa" +
         "ce before the skill takes effect")]
     EmpireControl = 3732,
 
     /// <summary>Operation of energy transfer array and other energy emission systems. 5% reduced capacitor need of energy emission weapons per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Energy Emission Systems", "Eve.Character.SkillId_EnergyEmissionSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of energy transfer array and other energy emission systems. 5% reduced " +
         "capacitor need of energy emission weapons per skill level.")]
     EnergyEmissionSystems = 3423,
 
     /// <summary>Skill at installing power upgrades e.g. capacitor battery and power diagnostic units. 5% reduction in CPU needs of modules requiring Energy Grid Upgrades per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Energy Grid Upgrades", "Eve.Character.SkillId_EnergyGridUpgrades")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at installing power upgrades e.g. capacitor battery and power diagnostic un" +
         "its. 5% reduction in CPU needs of modules requiring Energy Grid Upgrades per ski" +
         "ll level.")]
     EnergyGridUpgrades = 3424,
 
     /// <summary>Skill at regulating your ship's overall energy capacity. 5% bonus to capacitor capacity per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Energy Management", "Eve.Character.SkillId_EnergyManagement")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at regulating your ship\'s overall energy capacity. 5% bonus to capacitor ca" +
         "pacity per skill level.")]
     EnergyManagement = 3418,
 
     /// <summary>Skill at using smartbombs. 5% decrease in smartbomb duration per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Energy Pulse Weapons", "Eve.Character.SkillId_EnergyPulseWeapons")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at using smartbombs. 5% decrease in smartbomb duration per skill level.")]
     EnergyPulseWeapons = 3421,
 
     /// <summary>Skill at operating your ship's capacitor, including the use of capacitor boosters and other basic energy modules. 5% reduction in capacitor recharge time per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Energy Systems Operation", "Eve.Character.SkillId_EnergySystemsOperation")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating your ship\'s capacitor, including the use of capacitor boosters" +
         " and other basic energy modules. 5% reduction in capacitor recharge time per ski" +
         "ll level.")]
@@ -1002,38 +1000,38 @@ Can not be trained on Trial Accounts")]
     /// <summary>Advanced understanding of the interface between energy weapons and the numerous ship systems. Allows makeshift modifications to ship system architecture through the use of rigs. 
     ///
     ///10% reduction in Energy Weapon Rig drawbacks per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Energy Weapon Rigging", "Eve.Character.SkillId_EnergyWeaponRigging")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced understanding of the interface between energy weapons and the numerous s" +
         "hip systems. Allows makeshift modifications to ship system architecture through " +
         "the use of rigs. \r\n\r\n10% reduction in Energy Weapon Rig drawbacks per level.")]
     EnergyWeaponRigging = 26258,
 
     /// <summary>Basic understanding of spaceship energy grid systems. 5% Bonus to ship's powergrid output per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Engineering", "Eve.Character.SkillId_Engineering")]
+    
     [System.ComponentModel.DescriptionAttribute("Basic understanding of spaceship energy grid systems. 5% Bonus to ship\'s powergri" +
         "d output per skill level.")]
     Engineering = 3413,
 
     /// <summary>Understanding of the technology used to create advanced engineering subsystems.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Engineering Subsystem Technology", "Eve.Character.SkillId_EngineeringSubsystemTechnology")]
+    
     [System.ComponentModel.DescriptionAttribute("Understanding of the technology used to create advanced engineering subsystems.")]
     EngineeringSubsystemTechnology = 30325,
 
     /// <summary>Improved skill at efficiently turning and accelerating a spaceship.  5% improved ship agility for all ships per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Evasive Maneuvering", "Eve.Character.SkillId_EvasiveManeuvering")]
+    
     [System.ComponentModel.DescriptionAttribute("Improved skill at efficiently turning and accelerating a spaceship.  5% improved " +
         "ship agility for all ships per skill level.")]
     EvasiveManeuvering = 3453,
 
     /// <summary>Skill for the operation of elite mining barges. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Exhumers", "Eve.Character.SkillId_Exhumers")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill for the operation of elite mining barges. Can not be trained on Trial Accou" +
         "nts.")]
     Exhumers = 22551,
 
     /// <summary>To active armor hardeners: 3% bonus per skill level to Armor Explosive resistance when the modules are not active
     ///To passive armor hardeners: 5% bonus per skill level to Armor Explosive resistance</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Explosive Armor Compensation", "Eve.Character.SkillId_ExplosiveArmorCompensation")]
+    
     [System.ComponentModel.DescriptionAttribute("To active armor hardeners: 3% bonus per skill level to Armor Explosive resistance" +
         " when the modules are not active\r\nTo passive armor hardeners: 5% bonus per skill" +
         " level to Armor Explosive resistance")]
@@ -1041,92 +1039,92 @@ Can not be trained on Trial Accounts")]
 
     /// <summary>To active shield hardeners: 3% bonus per skill level to Shield Explosive resistance when the modules are not active
     ///To passive shield hardeners: 5% bonus per skill level to Shield Explosive resistance</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Explosive Shield Compensation", "Eve.Character.SkillId_ExplosiveShieldCompensation")]
+    
     [System.ComponentModel.DescriptionAttribute("To active shield hardeners: 3% bonus per skill level to Shield Explosive resistan" +
         "ce when the modules are not active\r\nTo passive shield hardeners: 5% bonus per sk" +
         "ill level to Shield Explosive resistance")]
     ExplosiveShieldCompensation = 12367,
 
     /// <summary>Skill at factory operation.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Factory Management", "Eve.Character.SkillId_FactoryManagement")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at factory operation.")]
     FactoryManagement = 3366,
 
     /// <summary>Skill at interacting with Concord. 5% Bonus to effective security rating increase.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Fast Talk", "Eve.Character.SkillId_FastTalk")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at interacting with Concord. 5% Bonus to effective security rating increase" +
         ".")]
     FastTalk = 3358,
 
     /// <summary>Allows operation of fighter bomber craft. 20% increase in fighter bomber damage per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Fighter Bombers", "Eve.Character.SkillId_FighterBombers")]
+    
     [System.ComponentModel.DescriptionAttribute("Allows operation of fighter bomber craft. 20% increase in fighter bomber damage p" +
         "er level.")]
     FighterBombers = 32339,
 
     /// <summary>Allows operation of fighter craft. 20% increase in fighter damage per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Fighters", "Eve.Character.SkillId_Fighters")]
+    
     [System.ComponentModel.DescriptionAttribute("Allows operation of fighter craft. 20% increase in fighter damage per level.")]
     Fighters = 23069,
 
     /// <summary>Allows command of a Fleet. Grants the Fleet Commander the ability to command a new Wing per skill level, up to a maximum of 5 Wings.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Fleet Command", "Eve.Character.SkillId_FleetCommand")]
+    
     [System.ComponentModel.DescriptionAttribute("Allows command of a Fleet. Grants the Fleet Commander the ability to command a ne" +
         "w Wing per skill level, up to a maximum of 5 Wings.")]
     FleetCommand = 24764,
 
     /// <summary>Advanced understanding of signal waves. 10% bonus to falloff for ECM, Remote Sensor Dampeners, Tracking Disruptors, Tracking Links, Remote Sensor Boosters and Target Painters per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Frequency Modulation", "Eve.Character.SkillId_FrequencyModulation")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced understanding of signal waves. 10% bonus to falloff for ECM, Remote Sens" +
         "or Dampeners, Tracking Disruptors, Tracking Links, Remote Sensor Boosters and Ta" +
         "rget Painters per skill level.")]
     FrequencyModulation = 19760,
 
     /// <summary>Skill at the construction of advanced frigates. Required for advanced frigate BP manufacturing </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Frigate Construction", "Eve.Character.SkillId_FrigateConstruction")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at the construction of advanced frigates. Required for advanced frigate BP " +
         "manufacturing ")]
     FrigateConstruction = 3395,
 
     /// <summary>Improved control over afterburner energy consumption. 10% reduction in afterburner capacitor needs per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Fuel Conservation", "Eve.Character.SkillId_FuelConservation")]
+    
     [System.ComponentModel.DescriptionAttribute("Improved control over afterburner energy consumption. 10% reduction in afterburne" +
         "r capacitor needs per skill level.")]
     FuelConservation = 3451,
 
     /// <summary>Skill at operating Gallente battleships. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Gallente Battleship", "Eve.Character.SkillId_GallenteBattleship")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Gallente battleships. Can not be trained on Trial Accounts.")]
     GallenteBattleship = 3336,
 
     /// <summary>Skill at operating Gallente carriers.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Gallente Carrier", "Eve.Character.SkillId_GallenteCarrier")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Gallente carriers.")]
     GallenteCarrier = 24313,
 
     /// <summary>Skill at operating Gallente cruisers.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Gallente Cruiser", "Eve.Character.SkillId_GallenteCruiser")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Gallente cruisers.")]
     GallenteCruiser = 3332,
 
     /// <summary>Skill in the operation of Gallente Defensive Subsystems used on Tech III ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Gallente Defensive Systems", "Eve.Character.SkillId_GallenteDefensiveSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill in the operation of Gallente Defensive Subsystems used on Tech III ships.")]
     GallenteDefensiveSystems = 30540,
 
     /// <summary>Skill at operating Gallente dreadnoughts. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Gallente Dreadnought", "Eve.Character.SkillId_GallenteDreadnought")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Gallente dreadnoughts. Can not be trained on Trial Accounts.")]
     GallenteDreadnought = 20531,
 
     /// <summary>Specialization in the operation of advanced Gallente drones. 2% bonus to advanced Gallente drone damage per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Gallente Drone Specialization", "Eve.Character.SkillId_GallenteDroneSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialization in the operation of advanced Gallente drones. 2% bonus to advanced" +
         " Gallente drone damage per level.")]
     GallenteDroneSpecialization = 12486,
 
     /// <summary>Skill in the operation of Gallente Electronic Subsystems used on Tech III ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Gallente Electronic Systems", "Eve.Character.SkillId_GallenteElectronicSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill in the operation of Gallente Electronic Subsystems used on Tech III ships.")]
     GallenteElectronicSystems = 30541,
 
@@ -1135,55 +1133,55 @@ Can not be trained on Trial Accounts")]
     ///
     ///
     ///</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Gallente Encryption Methods", "Eve.Character.SkillId_GallenteEncryptionMethods")]
+    
     [System.ComponentModel.DescriptionAttribute("Understanding of the data encryption methods used by the Gallente Federation and " +
         "its allies.\r\n\r\n\r\n\r\n")]
     GallenteEncryptionMethods = 23121,
 
     /// <summary>Skill in the operation of Gallente Engineering Subsystems used on Tech III ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Gallente Engineering Systems", "Eve.Character.SkillId_GallenteEngineeringSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill in the operation of Gallente Engineering Subsystems used on Tech III ships." +
         "")]
     GallenteEngineeringSystems = 30546,
 
     /// <summary>Skill at operating Gallente freighters. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Gallente Freighter", "Eve.Character.SkillId_GallenteFreighter")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Gallente freighters. Can not be trained on Trial Accounts.")]
     GallenteFreighter = 20527,
 
     /// <summary>Skill at operating Gallente frigates.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Gallente Frigate", "Eve.Character.SkillId_GallenteFrigate")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Gallente frigates.")]
     GallenteFrigate = 3328,
 
     /// <summary>Skill at operating Gallente industrial ships. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Gallente Industrial", "Eve.Character.SkillId_GallenteIndustrial")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Gallente industrial ships. Can not be trained on Trial Account" +
         "s.")]
     GallenteIndustrial = 3340,
 
     /// <summary>Skill in the operation of Gallente Offensive Subsystems used on Tech III ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Gallente Offensive Systems", "Eve.Character.SkillId_GallenteOffensiveSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill in the operation of Gallente Offensive Subsystems used on Tech III ships.")]
     GallenteOffensiveSystems = 30550,
 
     /// <summary>Skill in the operation of Gallente Propulsion Subsystems used on Tech III ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Gallente Propulsion Systems", "Eve.Character.SkillId_GallentePropulsionSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill in the operation of Gallente Propulsion Subsystems used on Tech III ships.")]
     GallentePropulsionSystems = 30553,
 
     /// <summary>Skill at operating Gallente Strategic Cruisers.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Gallente Strategic Cruiser", "Eve.Character.SkillId_GallenteStrategicCruiser")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Gallente Strategic Cruisers.")]
     GallenteStrategicCruiser = 30652,
 
     /// <summary>Grants +5% reduction in Gallente equipment production time.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Gallente Tech", "Eve.Character.SkillId_GallenteTech")]
+    
     [System.ComponentModel.DescriptionAttribute("Grants +5% reduction in Gallente equipment production time.")]
     GallenteTech = 3383,
 
     /// <summary>Skill at operating Gallente titans.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Gallente Titan", "Eve.Character.SkillId_GallenteTitan")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Gallente titans.")]
     GallenteTitan = 3344,
 
@@ -1196,7 +1194,7 @@ Can not be trained on Trial Accounts")]
     ///Needed for all research and manufacturing operations on related blueprints
     ///
     ///Can not be trained on Trial Accounts</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Gallentean Starship Engineering", "Eve.Character.SkillId_GallenteanStarshipEngineering")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Skill and knowledge of Gallente Starship Engineering and its use in the development of advanced technology. 
 
 Used in the research of Gallente Ships of all Sizes.
@@ -1209,20 +1207,20 @@ Can not be trained on Trial Accounts")]
     GallenteanStarshipEngineering = 11450,
 
     /// <summary>Skill at harvesting gas clouds.  Allows use of one gas cloud harvester per level. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Gas Cloud Harvesting", "Eve.Character.SkillId_GasCloudHarvesting")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at harvesting gas clouds.  Allows use of one gas cloud harvester per level." +
         " Can not be trained on Trial Accounts.")]
     GasCloudHarvesting = 25544,
 
     /// <summary>Skill at the stowage and transportation of bulk goods
     ///5% Bonus per level to Ship Cargo Capacity</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("General Freight", "Eve.Character.SkillId_GeneralFreight")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at the stowage and transportation of bulk goods\r\n5% Bonus per level to Ship" +
         " Cargo Capacity")]
     GeneralFreight = 12834,
 
     /// <summary>Specialization in Gneiss processing and refining.  Allows a skilled refiner to utilize substandard refining facilities at considerably greater efficiency. 5% reduction in Gneiss refining waste per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Gneiss Processing", "Eve.Character.SkillId_GneissProcessing")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialization in Gneiss processing and refining.  Allows a skilled refiner to ut" +
         "ilize substandard refining facilities at considerably greater efficiency. 5% red" +
         "uction in Gneiss refining waste per skill level.")]
@@ -1237,7 +1235,7 @@ Can not be trained on Trial Accounts")]
     ///Needed for all research and manufacturing operations on related blueprints.
     ///
     ///Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Graviton Physics", "Eve.Character.SkillId_GravitonPhysics")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Skill and knowledge of Graviton physics and its use in the development of advanced technology. 
 
 Used primarily in the research of Cloaking and other spatial distortion devices as well as Graviton based missiles and smartbombs. 
@@ -1250,68 +1248,68 @@ Can not be trained on Trial Accounts.")]
     GravitonPhysics = 11446,
 
     /// <summary>Skill at precision missile homing.  Proficiency at this skill increases the accuracy of a fired missile's exact point of impact, resulting in greater damage to small targets.  5% decreased factor of signature radius for light, heavy and cruise missile explosions per level of skill.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Guided Missile Precision", "Eve.Character.SkillId_GuidedMissilePrecision")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Skill at precision missile homing.  Proficiency at this skill increases the accuracy of a fired missile's exact point of impact, resulting in greater damage to small targets.  5% decreased factor of signature radius for light, heavy and cruise missile explosions per level of skill.")]
     GuidedMissilePrecision = 20312,
 
     /// <summary>Basic turret operation skill. 2% Bonus to weapon turrets' rate of fire per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Gunnery", "Eve.Character.SkillId_Gunnery")]
+    
     [System.ComponentModel.DescriptionAttribute("Basic turret operation skill. 2% Bonus to weapon turrets\' rate of fire per skill " +
         "level.")]
     Gunnery = 3300,
 
     /// <summary>Proficiency at breaking into guarded computer systems.  Required skill for the use of codebreaker modules.  100% increase in chance of data retrieval per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Hacking", "Eve.Character.SkillId_Hacking")]
+    
     [System.ComponentModel.DescriptionAttribute("Proficiency at breaking into guarded computer systems.  Required skill for the us" +
         "e of codebreaker modules.  100% increase in chance of data retrieval per level.")]
     Hacking = 21718,
 
     /// <summary>The skill at transporting contraband without getting caught. -10% chance of being caught transporting contraband. Base chance 60%.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Hazardous Material Freight", "Eve.Character.SkillId_HazardousMaterialFreight")]
+    
     [System.ComponentModel.DescriptionAttribute("The skill at transporting contraband without getting caught. -10% chance of being" +
         " caught transporting contraband. Base chance 60%.")]
     HazardousMaterialFreight = 13075,
 
     /// <summary>Skill for operation of the Heavy Assault class cruisers. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Heavy Assault Ships", "Eve.Character.SkillId_HeavyAssaultShips")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill for operation of the Heavy Assault class cruisers. Can not be trained on Tr" +
         "ial Accounts.")]
     HeavyAssaultShips = 16591,
 
     /// <summary>Skill at controlling heavy combat drones. 5% Bonus to heavy drone damage per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Heavy Drone Operation", "Eve.Character.SkillId_HeavyDroneOperation")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at controlling heavy combat drones. 5% Bonus to heavy drone damage per leve" +
         "l.")]
     HeavyDroneOperation = 3441,
 
     /// <summary>Skill for operation of the Heavy Interdictor class cruisers. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Heavy Interdictors", "Eve.Character.SkillId_HeavyInterdictors")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill for operation of the Heavy Interdictor class cruisers. Can not be trained o" +
         "n Trial Accounts.")]
     HeavyInterdictors = 28609,
 
     /// <summary>Specialist training in the operation of advanced heavy missile launchers.  2% bonus per level to the rate of fire of modules requiring Heavy Missile Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Heavy Missile Specialization", "Eve.Character.SkillId_HeavyMissileSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of advanced heavy missile launchers.  2% bon" +
         "us per level to the rate of fire of modules requiring Heavy Missile Specializati" +
         "on.")]
     HeavyMissileSpecialization = 20211,
 
     /// <summary>Skill with heavy missiles. Special: 5% bonus to heavy missile damage per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Heavy Missiles", "Eve.Character.SkillId_HeavyMissiles")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill with heavy missiles. Special: 5% bonus to heavy missile damage per skill le" +
         "vel.")]
     HeavyMissiles = 3324,
 
     /// <summary>Specialization in Hedbergite processing and refining.  Allows a skilled refiner to utilize substandard refining facilities at considerably greater efficiency.  5% reduction in Hedbergite refining waste per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Hedbergite Processing", "Eve.Character.SkillId_HedbergiteProcessing")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialization in Hedbergite processing and refining.  Allows a skilled refiner t" +
         "o utilize substandard refining facilities at considerably greater efficiency.  5" +
         "% reduction in Hedbergite refining waste per skill level.")]
     HedbergiteProcessing = 12185,
 
     /// <summary>Specialization in Hemorphite processing and refining. Allows a skilled refiner to utilize substandard refining facilities at considerably greater efficiency.  5% reduction in Hemorphite refining waste per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Hemorphite Processing", "Eve.Character.SkillId_HemorphiteProcessing")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialization in Hemorphite processing and refining. Allows a skilled refiner to" +
         " utilize substandard refining facilities at considerably greater efficiency.  5%" +
         " reduction in Hemorphite refining waste per skill level.")]
@@ -1326,7 +1324,7 @@ Can not be trained on Trial Accounts.")]
     ///Needed for all research and manufacturing operations on related blueprints
     ///
     ///Can not be trained on Trial Accounts</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("High Energy Physics", "Eve.Character.SkillId_HighEnergyPhysics")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Skill and knowledge of High Energy Physics and its use in the development of advanced technology. 
 
 Used primarily in the research of various energy system modules as well as smartbombs and laser based weaponry. 
@@ -1339,13 +1337,13 @@ Can not be trained on Trial Accounts")]
     HighEnergyPhysics = 11433,
 
     /// <summary>Skill at using MicroWarpdrives. 5% reduction in MicroWarpdrive capacitor usage per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("High Speed Maneuvering", "Eve.Character.SkillId_HighSpeedManeuvering")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at using MicroWarpdrives. 5% reduction in MicroWarpdrive capacitor usage pe" +
         "r skill level.")]
     HighSpeedManeuvering = 3454,
 
     /// <summary>Skill at maintaining your ship's armor and installing hull upgrades like expanded cargoholds and inertial stabilizers.  Grants a 5% bonus to armor hit points per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Hull Upgrades", "Eve.Character.SkillId_HullUpgrades")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at maintaining your ship\'s armor and installing hull upgrades like expanded" +
         " cargoholds and inertial stabilizers.  Grants a 5% bonus to armor hit points per" +
         " skill level.")]
@@ -1354,7 +1352,7 @@ Can not be trained on Trial Accounts")]
     /// <summary>Advanced understanding of the interface between hybrid weapons and the numerous ship systems. Allows makeshift modifications to ship system architecture through the use of rigs. 
     ///
     ///10% reduction in Hybrid Weapon Rig drawbacks per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Hybrid Weapon Rigging", "Eve.Character.SkillId_HybridWeaponRigging")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced understanding of the interface between hybrid weapons and the numerous s" +
         "hip systems. Allows makeshift modifications to ship system architecture through " +
         "the use of rigs. \r\n\r\n10% reduction in Hybrid Weapon Rig drawbacks per level.")]
@@ -1369,7 +1367,7 @@ Can not be trained on Trial Accounts")]
     ///Needed for all research and manufacturing operations on related blueprints.
     ///
     ///Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Hydromagnetic Physics", "Eve.Character.SkillId_HydromagneticPhysics")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Skill and knowledge of Hydromagnetic Physics and its use in the development of advanced technology . 
 
 Used primarily in the research of shield system.
@@ -1382,55 +1380,55 @@ Can not be trained on Trial Accounts.")]
     HydromagneticPhysics = 11443,
 
     /// <summary>Skill at navigating while cloaked. 20% per level  bonus to cloaked velocity per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Hypereuclidean Navigation", "Eve.Character.SkillId_HypereuclideanNavigation")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at navigating while cloaked. 20% per level  bonus to cloaked velocity per s" +
         "kill level.")]
     HypereuclideanNavigation = 12368,
 
     /// <summary>Skill and knowledge of Hypernet Technology such as Hacking decks,  Codebreakers and Parasites. </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Hypernet Science", "Eve.Character.SkillId_HypernetScience")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill and knowledge of Hypernet Technology such as Hacking decks,  Codebreakers a" +
         "nd Parasites. ")]
     HypernetScience = 11858,
 
     /// <summary>Skill at harvesting ice. 5% reduction per skill level to the cycle time of ice harvesters.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Ice Harvesting", "Eve.Character.SkillId_IceHarvesting")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at harvesting ice. 5% reduction per skill level to the cycle time of ice ha" +
         "rvesters.")]
     IceHarvesting = 16281,
 
     /// <summary>Skill for Ice processing and refining. Allows a skilled refiner to utilize substandard refining facilities at considerably greater efficiency. 5% reduction in Ice refining waste per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Ice Processing", "Eve.Character.SkillId_IceProcessing")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill for Ice processing and refining. Allows a skilled refiner to utilize substa" +
         "ndard refining facilities at considerably greater efficiency. 5% reduction in Ic" +
         "e refining waste per skill level.")]
     IceProcessing = 18025,
 
     /// <summary>Fake skill that specifies the owners security clearance for Imperial Navy facilities (e.g. acceleration gates).</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Imperial Navy Security Clearance", "Eve.Character.SkillId_ImperialNavySecurityClearance")]
+    
     [System.ComponentModel.DescriptionAttribute("Fake skill that specifies the owners security clearance for Imperial Navy facilit" +
         "ies (e.g. acceleration gates).")]
     ImperialNavySecurityClearance = 28631,
 
     /// <summary>Skill at operating industrial command ships. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Industrial Command Ships", "Eve.Character.SkillId_IndustrialCommandShips")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating industrial command ships. Can not be trained on Trial Accounts" +
         ".")]
     IndustrialCommandShips = 29637,
 
     /// <summary>Skill at the construction of advanced industrials.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Industrial Construction", "Eve.Character.SkillId_IndustrialConstruction")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at the construction of advanced industrials.")]
     IndustrialConstruction = 3396,
 
     /// <summary>Skill at the operation of industrial core modules.  50-unit reduction in heavy water consumption amount for module activation per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Industrial Reconfiguration", "Eve.Character.SkillId_IndustrialReconfiguration")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at the operation of industrial core modules.  50-unit reduction in heavy wa" +
         "ter consumption amount for module activation per skill level.")]
     IndustrialReconfiguration = 28585,
 
     /// <summary>Allows basic operation of factories.  4% reduction in manufacturing time per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Industry", "Eve.Character.SkillId_Industry")]
+    
     [System.ComponentModel.DescriptionAttribute("Allows basic operation of factories.  4% reduction in manufacturing time per skil" +
         "l level.")]
     Industry = 3380,
@@ -1440,7 +1438,7 @@ Can not be trained on Trial Accounts.")]
     ///Allows 1 jump clone per level.
     ///
     ///Note: Clones can only be installed in stations with medical facilities or in ships with clone vat bays. Installed clones are listed in the character sheet.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Infomorph Psychology", "Eve.Character.SkillId_InfomorphPsychology")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Psychological training that strengthens the pilot's mental tenacity. The reality of having one's consciousness detached from one's physical form, scattered across the galaxy and then placed in a vat-grown clone can be very unsettling to the untrained mind.
 
 Allows 1 jump clone per level.
@@ -1451,104 +1449,104 @@ Note: Clones can only be installed in stations with medical facilities or in shi
     /// <summary>Basic proficiency at coordinating information warfare.  Grants a 2% bonus to fleet members' targeting range per skill level.  Note: The fleet bonus only works if you are the assigned fleet booster.
     ///
     ///Note: Fleet bonuses only affect fleet members in space within the same solar system</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Information Warfare", "Eve.Character.SkillId_InformationWarfare")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Basic proficiency at coordinating information warfare.  Grants a 2% bonus to fleet members' targeting range per skill level.  Note: The fleet bonus only works if you are the assigned fleet booster.
 
 Note: Fleet bonuses only affect fleet members in space within the same solar system")]
     InformationWarfare = 20495,
 
     /// <summary>Advanced proficiency at information warfare.  Multiplies the effectiveness of information warfare link modules by 100% per skill level after level 2 is trained.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Information Warfare Specialist", "Eve.Character.SkillId_InformationWarfareSpecialist")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced proficiency at information warfare.  Multiplies the effectiveness of inf" +
         "ormation warfare link modules by 100% per skill level after level 2 is trained.")]
     InformationWarfareSpecialist = 3352,
 
     /// <summary>Skill at directing a corporation's espionage division.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Intelligence Analyst", "Eve.Character.SkillId_IntelligenceAnalyst")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at directing a corporation\'s espionage division.")]
     IntelligenceAnalyst = 3372,
 
     /// <summary>The Operation Of Advanced Interceptor class Frigates.  Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Interceptors", "Eve.Character.SkillId_Interceptors")]
+    
     [System.ComponentModel.DescriptionAttribute("The Operation Of Advanced Interceptor class Frigates.  Can not be trained on Tria" +
         "l Accounts.")]
     Interceptors = 12092,
 
     /// <summary>The Operation Of Advanced Interdictor class Destroyers. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Interdictors", "Eve.Character.SkillId_Interdictors")]
+    
     [System.ComponentModel.DescriptionAttribute("The Operation Of Advanced Interdictor class Destroyers. Can not be trained on Tri" +
         "al Accounts.")]
     Interdictors = 12098,
 
     /// <summary>For each level in this skill, you may install a command center on one additional planet, to a maximum of 6 planets. You can have only one command center per planet. Cannot be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Interplanetary Consolidation", "Eve.Character.SkillId_InterplanetaryConsolidation")]
+    
     [System.ComponentModel.DescriptionAttribute("For each level in this skill, you may install a command center on one additional " +
         "planet, to a maximum of 6 planets. You can have only one command center per plan" +
         "et. Cannot be trained on Trial Accounts.")]
     InterplanetaryConsolidation = 2495,
 
     /// <summary>Specialization in Jaspet processing and refining. Allows a skilled refiner to utilize substandard refining facilities at considerably greater efficiency.  5% reduction in Jaspet refining waste per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Jaspet Processing", "Eve.Character.SkillId_JaspetProcessing")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialization in Jaspet processing and refining. Allows a skilled refiner to uti" +
         "lize substandard refining facilities at considerably greater efficiency.  5% red" +
         "uction in Jaspet refining waste per skill level.")]
     JaspetProcessing = 12187,
 
     /// <summary>Skill at operating jove battleships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Jove Battleship", "Eve.Character.SkillId_JoveBattleship")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating jove battleships.")]
     JoveBattleship = 11078,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("Jove Cruiser", "Eve.Character.SkillId_JoveCruiser")]
+    
     JoveCruiser = 3758,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("Jove Frigate", "Eve.Character.SkillId_JoveFrigate")]
+    
     JoveFrigate = 3755,
 
     /// <summary>Skill at operating Jovian industrial ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Jove Industrial", "Eve.Character.SkillId_JoveIndustrial")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Jovian industrial ships.")]
     JoveIndustrial = 11075,
 
     /// <summary>Advanced skill at using Jump Drives.  Each skill level grants a 25% increase in maximum jump range.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Jump Drive Calibration", "Eve.Character.SkillId_JumpDriveCalibration")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced skill at using Jump Drives.  Each skill level grants a 25% increase in m" +
         "aximum jump range.")]
     JumpDriveCalibration = 21611,
 
     /// <summary>Skill at using Jump Drives.  Each skill level reduces the capacitor need of initiating a jump by 5%.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Jump Drive Operation", "Eve.Character.SkillId_JumpDriveOperation")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at using Jump Drives.  Each skill level reduces the capacitor need of initi" +
         "ating a jump by 5%.")]
     JumpDriveOperation = 3456,
 
     /// <summary>Skill for operation of the Jump Freighter class freighters. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Jump Freighters", "Eve.Character.SkillId_JumpFreighters")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill for operation of the Jump Freighter class freighters. Can not be trained on" +
         " Trial Accounts.")]
     JumpFreighters = 29029,
 
     /// <summary>Proficiency at regulating energy flow to the jump drive. 10% reduction in isotope consumption amount for jump drive operation per light year per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Jump Fuel Conservation", "Eve.Character.SkillId_JumpFuelConservation")]
+    
     [System.ComponentModel.DescriptionAttribute("Proficiency at regulating energy flow to the jump drive. 10% reduction in isotope" +
         " consumption amount for jump drive operation per light year per skill level.")]
     JumpFuelConservation = 21610,
 
     /// <summary>Skill for the generation of jump portals to distant solar systems. 10% reduced material cost for jump portal activation per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Jump Portal Generation", "Eve.Character.SkillId_JumpPortalGeneration")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill for the generation of jump portals to distant solar systems. 10% reduced ma" +
         "terial cost for jump portal activation per level.")]
     JumpPortalGeneration = 24562,
 
     /// <summary>General understanding of the inner workings of starship components. Allows makeshift modifications to ship systems through the use of rigs. Required learning for further study in the field of rigging. </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Jury Rigging", "Eve.Character.SkillId_JuryRigging")]
+    
     [System.ComponentModel.DescriptionAttribute("General understanding of the inner workings of starship components. Allows makesh" +
         "ift modifications to ship systems through the use of rigs. Required learning for" +
         " further study in the field of rigging. ")]
     JuryRigging = 26252,
 
     /// <summary>Specialization in Kernite processing and refining. Allows a skilled refiner to utilize substandard refining facilities at considerably greater efficiency.  5% reduction in Kernite refining waste per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Kernite Processing", "Eve.Character.SkillId_KerniteProcessing")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialization in Kernite processing and refining. Allows a skilled refiner to ut" +
         "ilize substandard refining facilities at considerably greater efficiency.  5% re" +
         "duction in Kernite refining waste per skill level.")]
@@ -1556,7 +1554,7 @@ Note: Fleet bonuses only affect fleet members in space within the same solar sys
 
     /// <summary>To active armor hardeners: 3% bonus per skill level to Armor Kinetic resistance when the modules are not active
     ///To passive armor hardeners: 5% bonus per skill level to Armor Kinetic resistance</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Kinetic Armor Compensation", "Eve.Character.SkillId_KineticArmorCompensation")]
+    
     [System.ComponentModel.DescriptionAttribute("To active armor hardeners: 3% bonus per skill level to Armor Kinetic resistance w" +
         "hen the modules are not active\r\nTo passive armor hardeners: 5% bonus per skill l" +
         "evel to Armor Kinetic resistance")]
@@ -1564,7 +1562,7 @@ Note: Fleet bonuses only affect fleet members in space within the same solar sys
 
     /// <summary>To active shield hardeners: 3% bonus per skill level to Shield Kinetic resistance when the modules are not active
     ///To passive shield hardeners: 5% bonus per skill level to Shield Kinetic resistance</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Kinetic Shield Compensation", "Eve.Character.SkillId_KineticShieldCompensation")]
+    
     [System.ComponentModel.DescriptionAttribute("To active shield hardeners: 3% bonus per skill level to Shield Kinetic resistance" +
         " when the modules are not active\r\nTo passive shield hardeners: 5% bonus per skil" +
         "l level to Shield Kinetic resistance")]
@@ -1573,65 +1571,65 @@ Note: Fleet bonuses only affect fleet members in space within the same solar sys
     /// <summary>Allows basic operation of research facilities.  Ability to run 1 additional research job per skill level.
     ///
     ///Note: cannot be trained on trial accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Laboratory Operation", "Eve.Character.SkillId_LaboratoryOperation")]
+    
     [System.ComponentModel.DescriptionAttribute("Allows basic operation of research facilities.  Ability to run 1 additional resea" +
         "rch job per skill level.\r\n\r\nNote: cannot be trained on trial accounts.")]
     LaboratoryOperation = 3406,
 
     /// <summary>Specialist training in the operation of advanced Large Artillery.  2% bonus per skill level to the damage of large turrets requiring Large Artillery Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Large Artillery Specialization", "Eve.Character.SkillId_LargeArtillerySpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of advanced Large Artillery.  2% bonus per s" +
         "kill level to the damage of large turrets requiring Large Artillery Specializati" +
         "on.")]
     LargeArtillerySpecialization = 12203,
 
     /// <summary>Specialist training in the operation of advanced large autocannons. 2% Bonus per skill level to the damage of large turrets requiring Large Autocannon Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Large Autocannon Specialization", "Eve.Character.SkillId_LargeAutocannonSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of advanced large autocannons. 2% Bonus per " +
         "skill level to the damage of large turrets requiring Large Autocannon Specializa" +
         "tion.")]
     LargeAutocannonSpecialization = 12209,
 
     /// <summary>Specialist training in the operation of advanced large beam lasers. 2% Bonus per skill level to the damage of large turrets requiring Large Beam Laser Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Large Beam Laser Specialization", "Eve.Character.SkillId_LargeBeamLaserSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of advanced large beam lasers. 2% Bonus per " +
         "skill level to the damage of large turrets requiring Large Beam Laser Specializa" +
         "tion.")]
     LargeBeamLaserSpecialization = 12205,
 
     /// <summary>Specialist training in the operation of advanced large blasters. 2% Bonus per skill level to the damage of large turrets requiring Large Blaster Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Large Blaster Specialization", "Eve.Character.SkillId_LargeBlasterSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of advanced large blasters. 2% Bonus per ski" +
         "ll level to the damage of large turrets requiring Large Blaster Specialization.")]
     LargeBlasterSpecialization = 12212,
 
     /// <summary>Operation of large energy turrets. 5% Bonus to large energy turret damage per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Large Energy Turret", "Eve.Character.SkillId_LargeEnergyTurret")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of large energy turrets. 5% Bonus to large energy turret damage per lev" +
         "el.")]
     LargeEnergyTurret = 3309,
 
     /// <summary>Operation of large hybrid turret. 5% Bonus to large hybrid turret damage per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Large Hybrid Turret", "Eve.Character.SkillId_LargeHybridTurret")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of large hybrid turret. 5% Bonus to large hybrid turret damage per leve" +
         "l.")]
     LargeHybridTurret = 3307,
 
     /// <summary>Operation of large projectile turret. 5% Bonus to large projectile turret damage per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Large Projectile Turret", "Eve.Character.SkillId_LargeProjectileTurret")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of large projectile turret. 5% Bonus to large projectile turret damage " +
         "per level.")]
     LargeProjectileTurret = 3308,
 
     /// <summary>Specialist training in the operation of advanced large pulse lasers. 2% bonus per skill level to the damage of large turrets requiring Large Pulse Laser Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Large Pulse Laser Specialization", "Eve.Character.SkillId_LargePulseLaserSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of advanced large pulse lasers. 2% bonus per" +
         " skill level to the damage of large turrets requiring Large Pulse Laser Speciali" +
         "zation.")]
     LargePulseLaserSpecialization = 12215,
 
     /// <summary>Specialist training in the operation of advanced large railguns. 2% bonus per skill level to the damage of large turrets requiring Large Railgun Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Large Railgun Specialization", "Eve.Character.SkillId_LargeRailgunSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of advanced large railguns. 2% bonus per ski" +
         "ll level to the damage of large turrets requiring Large Railgun Specialization.")]
     LargeRailgunSpecialization = 12207,
@@ -1645,7 +1643,7 @@ Note: Fleet bonuses only affect fleet members in space within the same solar sys
     ///Needed for all research and manufacturing operations on related blueprints.
     ///
     ///Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Laser Physics", "Eve.Character.SkillId_LaserPhysics")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Skill and knowledge of Laser Physics and its use in the development of advanced Technology. 
 
 Used primarily in the research of Laser weaponry as well as EM based missiles and smartbombs.
@@ -1660,7 +1658,7 @@ Can not be trained on Trial Accounts.")]
     /// <summary>Advanced understanding of the interface between Missile Launchers and the numerous ship systems. Allows makeshift modifications to ship system architecture through the use of rigs. 
     ///
     ///10% reduction in Launcher Rig drawbacks per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Launcher Rigging", "Eve.Character.SkillId_LauncherRigging")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced understanding of the interface between Missile Launchers and the numerou" +
         "s ship systems. Allows makeshift modifications to ship system architecture throu" +
         "gh the use of rigs. \r\n\r\n10% reduction in Launcher Rig drawbacks per level.")]
@@ -1671,7 +1669,7 @@ Can not be trained on Trial Accounts.")]
     ///Grants a 2% bonus to fleet members' targeting speed per skill level. Only the bonus of the fleet member with the highest level in this skill is used.
     ///
     ///Note: Fleet bonuses only affect fleet members in space within the same solar system</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Leadership", "Eve.Character.SkillId_Leadership")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Allows command of a squadron. Increases maximum squadron size by 2 members per skill level, up to a maximum of 10 members.
 
 Grants a 2% bonus to fleet members' targeting speed per skill level. Only the bonus of the fleet member with the highest level in this skill is used.
@@ -1680,53 +1678,53 @@ Note: Fleet bonuses only affect fleet members in space within the same solar sys
     Leadership = 3348,
 
     /// <summary>Specialist training in the operation of advanced light missile launchers and arrays.  2% bonus per level to the rate of fire of modules requiring Light Missile Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Light Missile Specialization", "Eve.Character.SkillId_LightMissileSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of advanced light missile launchers and arra" +
         "ys.  2% bonus per level to the rate of fire of modules requiring Light Missile S" +
         "pecialization.")]
     LightMissileSpecialization = 20210,
 
     /// <summary>Skill with manually targeted missiles. Special: 5% Bonus to light missile damage per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Light Missiles", "Eve.Character.SkillId_LightMissiles")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill with manually targeted missiles. Special: 5% Bonus to light missile damage " +
         "per skill level.")]
     LightMissiles = 3321,
 
     /// <summary>Skill at operating Support Cruisers. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Logistics", "Eve.Character.SkillId_Logistics")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Support Cruisers. Can not be trained on Trial Accounts.")]
     Logistics = 12096,
 
     /// <summary>Skill at the long-range operation of electronic warfare systems.  10% bonus to optimal range of ECM, Remote Sensor Dampers, Tracking Disruptors, Tracking Links, Remote Sensor Boosters and Target Painters per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Long Distance Jamming", "Eve.Character.SkillId_LongDistanceJamming")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at the long-range operation of electronic warfare systems.  10% bonus to op" +
         "timal range of ECM, Remote Sensor Dampers, Tracking Disruptors, Tracking Links, " +
         "Remote Sensor Boosters and Target Painters per skill level.")]
     LongDistanceJamming = 19759,
 
     /// <summary>Skill at long range targeting. 5% Bonus to targeting range per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Long Range Targeting", "Eve.Character.SkillId_LongRangeTargeting")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at long range targeting. 5% Bonus to targeting range per skill level.")]
     LongRangeTargeting = 3428,
 
     /// <summary>Skill for the operation of Marauder-class battleships. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Marauders", "Eve.Character.SkillId_Marauders")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill for the operation of Marauder-class battleships. Can not be trained on Tria" +
         "l Accounts.")]
     Marauders = 28667,
 
     /// <summary>Ability to make potentially risky investments work in your favor. Each level of skill reduces the percentage of ISK placed in market escrow when entering buy orders. Starting with an escrow percentage of 100% at Level 0 (untrained skill), each skill level cumulatively reduces the percentage by 25%. This will bring your total escrow down to approximately 24% at level 5.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Margin Trading", "Eve.Character.SkillId_MarginTrading")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Ability to make potentially risky investments work in your favor. Each level of skill reduces the percentage of ISK placed in market escrow when entering buy orders. Starting with an escrow percentage of 100% at Level 0 (untrained skill), each skill level cumulatively reduces the percentage by 25%. This will bring your total escrow down to approximately 24% at level 5.")]
     MarginTrading = 16597,
 
     /// <summary>Skill at selling items remotely. Each level increases the range from the seller to the item being sold. Level 1 allows for the sale of items within the same solar system, Level 2 extends that range to systems within 5 jumps, and each subsequent level then doubles it. Level 5 allows for sale of items located anywhere within current region.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Marketing", "Eve.Character.SkillId_Marketing")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Skill at selling items remotely. Each level increases the range from the seller to the item being sold. Level 1 allows for the sale of items within the same solar system, Level 2 extends that range to systems within 5 jumps, and each subsequent level then doubles it. Level 5 allows for sale of items located anywhere within current region.")]
     Marketing = 16598,
 
     /// <summary>Allows the operation of multiple factories. Ability to run 1 additional manufacturing job per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Mass Production", "Eve.Character.SkillId_MassProduction")]
+    
     [System.ComponentModel.DescriptionAttribute("Allows the operation of multiple factories. Ability to run 1 additional manufactu" +
         "ring job per level.")]
     MassProduction = 3387,
@@ -1740,7 +1738,7 @@ Note: Fleet bonuses only affect fleet members in space within the same solar sys
     ///Needed for all research and manufacturing operations on related blueprints
     ///
     ///Can not be trained on Trial Accounts</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Mechanical Engineering", "Eve.Character.SkillId_MechanicalEngineering")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Skill and knowledge of Mechanical Engineering and its use in the development of advanced technology. 
 
 Used in all Starship research as well as hull and armor repair systems.  
@@ -1753,66 +1751,66 @@ Can not be trained on Trial Accounts")]
     MechanicalEngineering = 11452,
 
     /// <summary>Skill at maintaining the mechanical components and structural integrity of a spaceship.  5% bonus to structure hit points per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Mechanics", "Eve.Character.SkillId_Mechanics")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at maintaining the mechanical components and structural integrity of a spac" +
         "eship.  5% bonus to structure hit points per skill level.")]
     Mechanics = 3392,
 
     /// <summary>Specialist training in the operation of advanced Medium Artillery.  2% bonus per skill level to the damage of medium turrets requiring Medium Artillery Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Medium Artillery Specialization", "Eve.Character.SkillId_MediumArtillerySpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of advanced Medium Artillery.  2% bonus per " +
         "skill level to the damage of medium turrets requiring Medium Artillery Specializ" +
         "ation.")]
     MediumArtillerySpecialization = 12202,
 
     /// <summary>Specialist training in the operation of advanced medium autocannons. 2% bonus per skill level to the damage of medium turrets requiring Medium Autocannon Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Medium Autocannon Specialization", "Eve.Character.SkillId_MediumAutocannonSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of advanced medium autocannons. 2% bonus per" +
         " skill level to the damage of medium turrets requiring Medium Autocannon Special" +
         "ization.")]
     MediumAutocannonSpecialization = 12208,
 
     /// <summary>Specialist training in the operation of advanced medium beam lasers. 2% bonus per skill level to the damage of medium turrets requiring Medium Beam Laser Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Medium Beam Laser Specialization", "Eve.Character.SkillId_MediumBeamLaserSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of advanced medium beam lasers. 2% bonus per" +
         " skill level to the damage of medium turrets requiring Medium Beam Laser Special" +
         "ization.")]
     MediumBeamLaserSpecialization = 12204,
 
     /// <summary>Specialist training in the operation of advanced medium blasters. 2% bonus per skill level to the damage of medium turrets requiring Medium Blaster Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Medium Blaster Specialization", "Eve.Character.SkillId_MediumBlasterSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of advanced medium blasters. 2% bonus per sk" +
         "ill level to the damage of medium turrets requiring Medium Blaster Specializatio" +
         "n.")]
     MediumBlasterSpecialization = 12211,
 
     /// <summary>Operation of medium energy turret. 5% Bonus to medium energy turret damage per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Medium Energy Turret", "Eve.Character.SkillId_MediumEnergyTurret")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of medium energy turret. 5% Bonus to medium energy turret damage per le" +
         "vel.")]
     MediumEnergyTurret = 3306,
 
     /// <summary>Operation of medium hybrid turrets. 5% Bonus to medium hybrid turret damage per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Medium Hybrid Turret", "Eve.Character.SkillId_MediumHybridTurret")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of medium hybrid turrets. 5% Bonus to medium hybrid turret damage per l" +
         "evel.")]
     MediumHybridTurret = 3304,
 
     /// <summary>Operation of medium projectile turrets. 5% Bonus to medium projectile turret damage per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Medium Projectile Turret", "Eve.Character.SkillId_MediumProjectileTurret")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of medium projectile turrets. 5% Bonus to medium projectile turret dama" +
         "ge per level.")]
     MediumProjectileTurret = 3305,
 
     /// <summary>Specialist training in the operation of advanced medium pulse lasers. 2% bonus per skill level to the damage of medium turrets requiring Medium Pulse Laser Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Medium Pulse Laser Specialization", "Eve.Character.SkillId_MediumPulseLaserSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of advanced medium pulse lasers. 2% bonus pe" +
         "r skill level to the damage of medium turrets requiring Medium Pulse Laser Speci" +
         "alization.")]
     MediumPulseLaserSpecialization = 12214,
 
     /// <summary>Specialist training in the operation of advanced medium railguns. 2% bonus per skill level to the damage of medium turrets requiring Medium Railgun Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Medium Railgun Specialization", "Eve.Character.SkillId_MediumRailgunSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of advanced medium railguns. 2% bonus per sk" +
         "ill level to the damage of medium turrets requiring Medium Railgun Specializatio" +
         "n.")]
@@ -1821,43 +1819,43 @@ Can not be trained on Trial Accounts")]
     /// <summary>Advanced corporation operation. +50 members per level.
     ///
     ///Notice:  the CEO must update his corporation through the corporation user interface before the skill takes effect</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Megacorp Management", "Eve.Character.SkillId_MegacorpManagement")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced corporation operation. +50 members per level.\r\n\r\nNotice:  the CEO must u" +
         "pdate his corporation through the corporation user interface before the skill ta" +
         "kes effect")]
     MegacorpManagement = 3731,
 
     /// <summary>Specialization in Mercoxit processing and refining.  Allows a skilled refiner to utilize substandard refining facilities at considerably greater efficiency.  5% reduction in Mercoxit refining waste per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Mercoxit Processing", "Eve.Character.SkillId_MercoxitProcessing")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialization in Mercoxit processing and refining.  Allows a skilled refiner to " +
         "utilize substandard refining facilities at considerably greater efficiency.  5% " +
         "reduction in Mercoxit refining waste per skill level.")]
     MercoxitProcessing = 12189,
 
     /// <summary>Advanced knowledge of mineral composition. 5% Bonus to material efficiency research speed per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Metallurgy", "Eve.Character.SkillId_Metallurgy")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced knowledge of mineral composition. 5% Bonus to material efficiency resear" +
         "ch speed per skill level.")]
     Metallurgy = 3409,
 
     /// <summary>Skill at using Micro Jump Drives.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Micro Jump Drive Operation", "Eve.Character.SkillId_MicroJumpDriveOperation")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at using Micro Jump Drives.")]
     MicroJumpDriveOperation = 4385,
 
     /// <summary>The skill at transporting contraband without getting caught. -10% chance of being caught transporting contraband. Base chance 60%.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Mineral Freight", "Eve.Character.SkillId_MineralFreight")]
+    
     [System.ComponentModel.DescriptionAttribute("The skill at transporting contraband without getting caught. -10% chance of being" +
         " caught transporting contraband. Base chance 60%.")]
     MineralFreight = 13070,
 
     /// <summary>Skill at using mining lasers. 5% bonus to mining turret yield per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Mining", "Eve.Character.SkillId_Mining")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at using mining lasers. 5% bonus to mining turret yield per skill level.")]
     Mining = 3386,
 
     /// <summary>Skill at operating ORE Mining Barges. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Mining Barge", "Eve.Character.SkillId_MiningBarge")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating ORE Mining Barges. Can not be trained on Trial Accounts.")]
     MiningBarge = 17940,
 
@@ -1865,77 +1863,77 @@ Can not be trained on Trial Accounts")]
     ///
     ///Improves loyalty point gain by 10% per level when working for agents in the Mining corporation division.
     ///</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Mining Connections", "Eve.Character.SkillId_MiningConnections")]
+    
     [System.ComponentModel.DescriptionAttribute("Understanding of corporate culture on the industrial level and the plight of the " +
         "worker.\r\n\r\nImproves loyalty point gain by 10% per level when working for agents " +
         "in the Mining corporation division.\r\n")]
     MiningConnections = 3893,
 
     /// <summary>Advanced proficiency at group mining.  100% bonus to effectiveness of Mining Foreman link modules per level after level 2 is trained.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Mining Director", "Eve.Character.SkillId_MiningDirector")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced proficiency at group mining.  100% bonus to effectiveness of Mining Fore" +
         "man link modules per level after level 2 is trained.")]
     MiningDirector = 22552,
 
     /// <summary>Skill at controlling mining drones. 5% Bonus to mining drone yield per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Mining Drone Operation", "Eve.Character.SkillId_MiningDroneOperation")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at controlling mining drones. 5% Bonus to mining drone yield per skill leve" +
         "l.")]
     MiningDroneOperation = 3438,
 
     /// <summary>Advanced proficiency at controlling mining drones. 3% Bonus to mining drone yield.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Mining Drone Specialization", "Eve.Character.SkillId_MiningDroneSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced proficiency at controlling mining drones. 3% Bonus to mining drone yield" +
         ".")]
     MiningDroneSpecialization = 22541,
 
     /// <summary>Basic proficiency at coordinating mining operations.  Grants a 2% bonus to fleet members' mining yield per level.  Note: The fleet bonus only works if you are the assigned fleet booster.
     ///</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Mining Foreman", "Eve.Character.SkillId_MiningForeman")]
+    
     [System.ComponentModel.DescriptionAttribute("Basic proficiency at coordinating mining operations.  Grants a 2% bonus to fleet " +
         "members\' mining yield per level.  Note: The fleet bonus only works if you are th" +
         "e assigned fleet booster.\r\n")]
     MiningForeman = 22536,
 
     /// <summary>Skill at using mining upgrades. 5% reduction per skill level in CPU penalty of mining upgrade modules.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Mining Upgrades", "Eve.Character.SkillId_MiningUpgrades")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at using mining upgrades. 5% reduction per skill level in CPU penalty of mi" +
         "ning upgrade modules.")]
     MiningUpgrades = 22578,
 
     /// <summary>Skill at operating Minmatar battleships. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Minmatar Battleship", "Eve.Character.SkillId_MinmatarBattleship")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Minmatar battleships. Can not be trained on Trial Accounts.")]
     MinmatarBattleship = 3337,
 
     /// <summary>Skill at operating Minmatar carriers.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Minmatar Carrier", "Eve.Character.SkillId_MinmatarCarrier")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Minmatar carriers.")]
     MinmatarCarrier = 24314,
 
     /// <summary>Skill at operating Minmatar cruisers.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Minmatar Cruiser", "Eve.Character.SkillId_MinmatarCruiser")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Minmatar cruisers.")]
     MinmatarCruiser = 3333,
 
     /// <summary>Skill in the operation of Minmatar Defensive Subsystems used on Tech III ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Minmatar Defensive Systems", "Eve.Character.SkillId_MinmatarDefensiveSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill in the operation of Minmatar Defensive Subsystems used on Tech III ships.")]
     MinmatarDefensiveSystems = 30545,
 
     /// <summary>Skill at operating Minmatar dreadnoughts. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Minmatar Dreadnought", "Eve.Character.SkillId_MinmatarDreadnought")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Minmatar dreadnoughts. Can not be trained on Trial Accounts.")]
     MinmatarDreadnought = 20532,
 
     /// <summary>Specialization in the operation of advanced Minmatar drones. 2% bonus to advanced Minmatar drone damage per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Minmatar Drone Specialization", "Eve.Character.SkillId_MinmatarDroneSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialization in the operation of advanced Minmatar drones. 2% bonus to advanced" +
         " Minmatar drone damage per level.")]
     MinmatarDroneSpecialization = 12485,
 
     /// <summary>Skill in the operation of Minmatar Electronic Subsystems used on Tech III ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Minmatar Electronic Systems", "Eve.Character.SkillId_MinmatarElectronicSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill in the operation of Minmatar Electronic Subsystems used on Tech III ships.")]
     MinmatarElectronicSystems = 30543,
 
@@ -1944,40 +1942,40 @@ Can not be trained on Trial Accounts")]
     ///
     ///
     ///</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Minmatar Encryption Methods", "Eve.Character.SkillId_MinmatarEncryptionMethods")]
+    
     [System.ComponentModel.DescriptionAttribute("Understanding of the data encryption methods used by the Minmatar Republic and it" +
         "s allies.\r\n\r\n\r\n\r\n")]
     MinmatarEncryptionMethods = 21791,
 
     /// <summary>Skill in the operation of Minmatar Engineering Subsystems used on Tech III ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Minmatar Engineering Systems", "Eve.Character.SkillId_MinmatarEngineeringSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill in the operation of Minmatar Engineering Subsystems used on Tech III ships." +
         "")]
     MinmatarEngineeringSystems = 30547,
 
     /// <summary>Skill at operating Minmatar freighters. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Minmatar Freighter", "Eve.Character.SkillId_MinmatarFreighter")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Minmatar freighters. Can not be trained on Trial Accounts.")]
     MinmatarFreighter = 20528,
 
     /// <summary>Skill at operating Minmatar frigates.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Minmatar Frigate", "Eve.Character.SkillId_MinmatarFrigate")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Minmatar frigates.")]
     MinmatarFrigate = 3329,
 
     /// <summary>Skill at operating Minmatar industrial ships. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Minmatar Industrial", "Eve.Character.SkillId_MinmatarIndustrial")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Minmatar industrial ships. Can not be trained on Trial Account" +
         "s.")]
     MinmatarIndustrial = 3341,
 
     /// <summary>Skill in the operation of Minmatar Offensive Subsystems used on Tech III ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Minmatar Offensive Systems", "Eve.Character.SkillId_MinmatarOffensiveSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill in the operation of Minmatar Offensive Subsystems used on Tech III ships.")]
     MinmatarOffensiveSystems = 30551,
 
     /// <summary>Skill in the operation of Minmatar Propulsion Subsystems used on Tech III ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Minmatar Propulsion Systems", "Eve.Character.SkillId_MinmatarPropulsionSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill in the operation of Minmatar Propulsion Subsystems used on Tech III ships.")]
     MinmatarPropulsionSystems = 30554,
 
@@ -1990,7 +1988,7 @@ Can not be trained on Trial Accounts")]
     ///Needed for all research and manufacturing operations on related blueprints
     ///
     ///Can not be trained on Trial Accounts</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Minmatar Starship Engineering", "Eve.Character.SkillId_MinmatarStarshipEngineering")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Skill and knowledge of Minmatar Starship Engineering and its use in the development of advanced technology. 
 
 Used in the research of Minmatar Ships of all Sizes.
@@ -2003,42 +2001,42 @@ Can not be trained on Trial Accounts")]
     MinmatarStarshipEngineering = 11445,
 
     /// <summary>Skill at operating Minmatar Strategic Cruisers.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Minmatar Strategic Cruiser", "Eve.Character.SkillId_MinmatarStrategicCruiser")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Minmatar Strategic Cruisers.")]
     MinmatarStrategicCruiser = 30653,
 
     /// <summary>Grants +5% reduction in Minmatar equipment production time.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Minmatar Tech", "Eve.Character.SkillId_MinmatarTech")]
+    
     [System.ComponentModel.DescriptionAttribute("Grants +5% reduction in Minmatar equipment production time.")]
     MinmatarTech = 3384,
 
     /// <summary>Skill at operating Minmatar titans.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Minmatar Titan", "Eve.Character.SkillId_MinmatarTitan")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Minmatar titans.")]
     MinmatarTitan = 3345,
 
     /// <summary>Proficiency at long-range missile combat. 10% bonus to all missiles' maximum flight time per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Missile Bombardment", "Eve.Character.SkillId_MissileBombardment")]
+    
     [System.ComponentModel.DescriptionAttribute("Proficiency at long-range missile combat. 10% bonus to all missiles\' maximum flig" +
         "ht time per level.")]
     MissileBombardment = 12441,
 
     /// <summary>Basic operation of missile launcher systems. 2% Bonus to missile launcher rate of fire per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Missile Launcher Operation", "Eve.Character.SkillId_MissileLauncherOperation")]
+    
     [System.ComponentModel.DescriptionAttribute("Basic operation of missile launcher systems. 2% Bonus to missile launcher rate of" +
         " fire per skill level.")]
     MissileLauncherOperation = 3319,
 
     /// <summary>Skill at boosting missile bay trigger circuits and enhancing guided missiles' ignition systems.  10% bonus to all missiles' maximum velocity per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Missile Projection", "Eve.Character.SkillId_MissileProjection")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at boosting missile bay trigger circuits and enhancing guided missiles\' ign" +
         "ition systems.  10% bonus to all missiles\' maximum velocity per level.")]
     MissileProjection = 12442,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("Mobile Factory Operation", "Eve.Character.SkillId_MobileFactoryOperation")]
+    
     MobileFactoryOperation = 3391,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("Mobile Refinery Operation", "Eve.Character.SkillId_MobileRefineryOperation")]
+    
     MobileRefineryOperation = 3390,
 
     /// <summary>Skill and knowledge of Molecular Physics and its use in the development of advanced technology. 
@@ -2051,7 +2049,7 @@ Can not be trained on Trial Accounts")]
     ///Needed for all research and manufacturing operations on related blueprints.
     ///
     ///Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Molecular Engineering", "Eve.Character.SkillId_MolecularEngineering")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Skill and knowledge of Molecular Physics and its use in the development of advanced technology. 
 
 Used primarily in the research of various hull and propulsion
@@ -2065,25 +2063,25 @@ Can not be trained on Trial Accounts.")]
     MolecularEngineering = 11529,
 
     /// <summary>Improved ability at hitting moving targets. 5% bonus per skill level to weapon turret tracking speeds.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Motion Prediction", "Eve.Character.SkillId_MotionPrediction")]
+    
     [System.ComponentModel.DescriptionAttribute("Improved ability at hitting moving targets. 5% bonus per skill level to weapon tu" +
         "rret tracking speeds.")]
     MotionPrediction = 3312,
 
     /// <summary>Skill at targeting multiple targets. +1 extra target per skill level, up to the ship's maximum allowed number of targets locked.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Multitasking", "Eve.Character.SkillId_Multitasking")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at targeting multiple targets. +1 extra target per skill level, up to the s" +
         "hip\'s maximum allowed number of targets locked.")]
     Multitasking = 3430,
 
     /// <summary>The skill at transporting contraband without getting caught. -10% chance of being caught transporting contraband. Base chance 60%.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Munitions Freight", "Eve.Character.SkillId_MunitionsFreight")]
+    
     [System.ComponentModel.DescriptionAttribute("The skill at transporting contraband without getting caught. -10% chance of being" +
         " caught transporting contraband. Base chance 60%.")]
     MunitionsFreight = 13071,
 
     /// <summary>Proficiency at reducing the severity of the side effects experienced upon injection of combat boosters.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Nanite Control", "Eve.Character.SkillId_NaniteControl")]
+    
     [System.ComponentModel.DescriptionAttribute("Proficiency at reducing the severity of the side effects experienced upon injecti" +
         "on of combat boosters.")]
     NaniteControl = 25538,
@@ -2097,7 +2095,7 @@ Can not be trained on Trial Accounts.")]
     ///Needed for all research and manufacturing operations on related blueprints
     ///
     ///Can not be trained on Trial Accounts</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Nanite Engineering", "Eve.Character.SkillId_NaniteEngineering")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Skill and knowledge of Nanorobotics and its use in the development of advanced technology . 
 
 Used primarily in the research of various armor and hull systems. 
@@ -2110,30 +2108,30 @@ Can not be trained on Trial Accounts")]
     NaniteEngineering = 11442,
 
     /// <summary>Improved control of general-purpose repair nanites, usually deployed in a paste form. 20% increase in damaged module repair amount per second.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Nanite Interfacing", "Eve.Character.SkillId_NaniteInterfacing")]
+    
     [System.ComponentModel.DescriptionAttribute("Improved control of general-purpose repair nanites, usually deployed in a paste f" +
         "orm. 20% increase in damaged module repair amount per second.")]
     NaniteInterfacing = 28880,
 
     /// <summary>Skill at operating nanites.  5% reduction in nanite consumption per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Nanite Operation", "Eve.Character.SkillId_NaniteOperation")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating nanites.  5% reduction in nanite consumption per level.")]
     NaniteOperation = 28879,
 
     /// <summary>Skill at regulating the power output of ship thrusters. 5% bonus to sub-warp ship velocity per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Navigation", "Eve.Character.SkillId_Navigation")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at regulating the power output of ship thrusters. 5% bonus to sub-warp ship" +
         " velocity per skill level.")]
     Navigation = 3449,
 
     /// <summary>Skill at agent negotiation. 5% additional pay per skill level for agent missions.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Negotiation", "Eve.Character.SkillId_Negotiation")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at agent negotiation. 5% additional pay per skill level for agent missions." +
         "")]
     Negotiation = 3356,
 
     /// <summary>Proficiency at biofeedback techniques intended to negate the side effects typically experienced upon injection of combat boosters.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Neurotoxin Recovery", "Eve.Character.SkillId_NeurotoxinRecovery")]
+    
     [System.ComponentModel.DescriptionAttribute("Proficiency at biofeedback techniques intended to negate the side effects typical" +
         "ly experienced upon injection of combat boosters.")]
     NeurotoxinRecovery = 25530,
@@ -2147,7 +2145,7 @@ Can not be trained on Trial Accounts")]
     ///Needed for all research and manufacturing operations on related blueprints.
     ///
     ///Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Nuclear Physics", "Eve.Character.SkillId_NuclearPhysics")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Skill and knowledge of Nuclear physics and its use in the development of advanced technology.  
 
 Used primarily in the research of Projectile weaponry as well as Nuclear missiles and smartbombs. 
@@ -2161,38 +2159,38 @@ Can not be trained on Trial Accounts.")]
 
     /// <summary>Understanding of the technology used to create advanced offensive subsystems.
     ///</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Offensive Subsystem Technology", "Eve.Character.SkillId_OffensiveSubsystemTechnology")]
+    
     [System.ComponentModel.DescriptionAttribute("Understanding of the technology used to create advanced offensive subsystems.\r\n")]
     OffensiveSubsystemTechnology = 30327,
 
     /// <summary>Specialization in Omber processing and refining. Allows a skilled refiner to utilize substandard refining facilities at considerably greater efficiency.  5% reduction in Omber refining waste per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Omber Processing", "Eve.Character.SkillId_OmberProcessing")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialization in Omber processing and refining. Allows a skilled refiner to util" +
         "ize substandard refining facilities at considerably greater efficiency.  5% redu" +
         "ction in Omber refining waste per skill level.")]
     OmberProcessing = 12190,
 
     /// <summary>Those who possess this are all knowing and all seeing with unlimited power and authority.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Omnipotent", "Eve.Character.SkillId_Omnipotent")]
+    
     [System.ComponentModel.DescriptionAttribute("Those who possess this are all knowing and all seeing with unlimited power and au" +
         "thority.")]
     Omnipotent = 19430,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("Ore Compression", "Eve.Character.SkillId_OreCompression")]
+    
     OreCompression = 28373,
 
     /// <summary>Skill at operating ORE industrial ships. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("ORE Industrial", "Eve.Character.SkillId_OreIndustrial")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating ORE industrial ships. Can not be trained on Trial Accounts.")]
     OreIndustrial = 3184,
 
     /// <summary>Skill at constructing outposts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Outpost Construction", "Eve.Character.SkillId_OutpostConstruction")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at constructing outposts.")]
     OutpostConstruction = 3400,
 
     /// <summary>Specialization in Plagioclase processing and refining. Allows a skilled refiner to utilize substandard refining facilities at considerably greater efficiency. 5% reduction in Plagioclase refining waste per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Plagioclase Processing", "Eve.Character.SkillId_PlagioclaseProcessing")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialization in Plagioclase processing and refining. Allows a skilled refiner t" +
         "o utilize substandard refining facilities at considerably greater efficiency. 5%" +
         " reduction in Plagioclase refining waste per skill level.")]
@@ -2204,7 +2202,7 @@ Can not be trained on Trial Accounts.")]
     ///The skill increases the resolution of resource data when scanning a planet to allow for more accurate surveying.
     ///
     ///Note: this skill cannot be trained on trial accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Planetology", "Eve.Character.SkillId_Planetology")]
+    
     [System.ComponentModel.DescriptionAttribute(@"The understanding of planet evolution allowing you to better interpret data from scans of planets for resources.
 
 Bonus:
@@ -2222,7 +2220,7 @@ Note: this skill cannot be trained on trial accounts.")]
     ///Needed for all research and manufacturing operations on related blueprints
     ///
     ///Can not be trained on Trial Accounts</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Plasma Physics", "Eve.Character.SkillId_PlasmaPhysics")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Skill and knowledge of Plasma physics and its use in the development of advanced technology. 
 
 Used primarily in the research of particle blaster weaponry as well as plasma based missiles and smartbombs. 
@@ -2235,7 +2233,7 @@ Can not be trained on Trial Accounts")]
     PlasmaPhysics = 11441,
 
     /// <summary>Skill at operating Polaris.  </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Polaris", "Eve.Character.SkillId_Polaris")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Polaris.  ")]
     Polaris = 9955,
 
@@ -2243,7 +2241,7 @@ Can not be trained on Trial Accounts")]
     ///
     ///Note: placing buy orders and directly buying an item are not the same thing.  Direct remote purchase requires no skill.
     ///</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Procurement", "Eve.Character.SkillId_Procurement")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Proficiency at placing remote buy orders on the market.  Level 1 allows for the placement of orders within the  same solar system, Level 2 extends that range to systems within 5 jumps, and each subsequent level then doubles it.  Level 5 allows for placement of remote buy orders anywhere within current region.  
 
 Note: placing buy orders and directly buying an item are not the same thing.  Direct remote purchase requires no skill.
@@ -2251,13 +2249,13 @@ Note: placing buy orders and directly buying an item are not the same thing.  Di
     Procurement = 16594,
 
     /// <summary>Skill at efficiently using factories. 5% reduction per skill level to the material requirements needed for production.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Production Efficiency", "Eve.Character.SkillId_ProductionEfficiency")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at efficiently using factories. 5% reduction per skill level to the materia" +
         "l requirements needed for production.")]
     ProductionEfficiency = 3388,
 
     /// <summary>Operation of projected ECM jamming systems. Each skill level gives a 5% reduction in module activation time.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Projected Electronic Counter Measures", "Eve.Character.SkillId_ProjectedElectronicCounterMeasures")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of projected ECM jamming systems. Each skill level gives a 5% reduction" +
         " in module activation time.")]
     ProjectedElectronicCounterMeasures = 27911,
@@ -2265,7 +2263,7 @@ Note: placing buy orders and directly buying an item are not the same thing.  Di
     /// <summary>Advanced understanding of the interface between projectile weapons and the numerous ship systems. Allows makeshift modifications to ship system architecture through the use of rigs. 
     ///
     ///10% reduction in Projectile Weapon Rig drawbacks per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Projectile Weapon Rigging", "Eve.Character.SkillId_ProjectileWeaponRigging")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced understanding of the interface between projectile weapons and the numero" +
         "us ship systems. Allows makeshift modifications to ship system architecture thro" +
         "ugh the use of rigs. \r\n\r\n10% reduction in Projectile Weapon Rig drawbacks per le" +
@@ -2273,29 +2271,29 @@ Note: placing buy orders and directly buying an item are not the same thing.  Di
     ProjectileWeaponRigging = 26257,
 
     /// <summary>Skill at using propulsion/warpdrive jammers. 5% Reduction to warp scrambler and stasis web capacitor need per skill level. </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Propulsion Jamming", "Eve.Character.SkillId_PropulsionJamming")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at using propulsion/warpdrive jammers. 5% Reduction to warp scrambler and s" +
         "tasis web capacitor need per skill level. ")]
     PropulsionJamming = 3435,
 
     /// <summary>Specialization in the operation of advanced Amarr drones. 2% bonus to advanced Amarr drone damage per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Propulsion Jamming Drone Interfacing", "Eve.Character.SkillId_PropulsionJammingDroneInterfacing")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialization in the operation of advanced Amarr drones. 2% bonus to advanced Am" +
         "arr drone damage per level.")]
     PropulsionJammingDroneInterfacing = 23599,
 
     /// <summary>Understanding of the technology used to create advanced propulsion subsystems.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Propulsion Subsystem Technology", "Eve.Character.SkillId_PropulsionSubsystemTechnology")]
+    
     [System.ComponentModel.DescriptionAttribute("Understanding of the technology used to create advanced propulsion subsystems.")]
     PropulsionSubsystemTechnology = 30788,
 
     /// <summary>Skill at managing corporate offices. </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Public Relations", "Eve.Character.SkillId_PublicRelations")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at managing corporate offices. ")]
     PublicRelations = 3371,
 
     /// <summary>Specialization in Pyroxeres processing and refining. Allows a skilled refiner to utilize substandard refining facilities at considerably greater efficiency. 5% reduction in Pyroxeres refining waste per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Pyroxeres Processing", "Eve.Character.SkillId_PyroxeresProcessing")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialization in Pyroxeres processing and refining. Allows a skilled refiner to " +
         "utilize substandard refining facilities at considerably greater efficiency. 5% r" +
         "eduction in Pyroxeres refining waste per skill level.")]
@@ -2310,7 +2308,7 @@ Note: placing buy orders and directly buying an item are not the same thing.  Di
     ///Needed for all research and manufacturing operations on related blueprints.
     ///
     ///Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Quantum Physics", "Eve.Character.SkillId_QuantumPhysics")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Skill and knowledge of Quantum Physics and its use in the development of advanced Technology. 
 
 Used primarily in the research of shield systems and Particle Blasters.  
@@ -2323,53 +2321,53 @@ Can not be trained on Trial Accounts.")]
     QuantumPhysics = 11455,
 
     /// <summary>Skill at the rapid discharge of weapon turrets.  4% bonus per skill level to weapon turret rate of fire.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Rapid Firing", "Eve.Character.SkillId_RapidFiring")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at the rapid discharge of weapon turrets.  4% bonus per skill level to weap" +
         "on turret rate of fire.")]
     RapidFiring = 3310,
 
     /// <summary>Proficiency at rapid missile launcher firing.  3% bonus to missile launcher rate of fire per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Rapid Launch", "Eve.Character.SkillId_RapidLaunch")]
+    
     [System.ComponentModel.DescriptionAttribute("Proficiency at rapid missile launcher firing.  3% bonus to missile launcher rate " +
         "of fire per level.")]
     RapidLaunch = 21071,
 
     /// <summary>The skill at transporting contraband without getting caught. -10% chance of being caught transporting contraband. Base chance 60%.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Raw Material Freight", "Eve.Character.SkillId_RawMaterialFreight")]
+    
     [System.ComponentModel.DescriptionAttribute("The skill at transporting contraband without getting caught. -10% chance of being" +
         " caught transporting contraband. Base chance 60%.")]
     RawMaterialFreight = 13073,
 
     /// <summary>Skill for the operation of Recon Ships.  Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Recon Ships", "Eve.Character.SkillId_ReconShips")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill for the operation of Recon Ships.  Can not be trained on Trial Accounts.")]
     ReconShips = 22761,
 
     /// <summary>Advanced skill at using refineries. 4% reduction in refinery waste per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Refinery Efficiency", "Eve.Character.SkillId_RefineryEfficiency")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced skill at using refineries. 4% reduction in refinery waste per skill leve" +
         "l.")]
     RefineryEfficiency = 3389,
 
     /// <summary>Skill at managing station refineries. Increases mineral yield of refinery by 5% if acting as station manager.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Refinery Management", "Eve.Character.SkillId_RefineryManagement")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at managing station refineries. Increases mineral yield of refinery by 5% i" +
         "f acting as station manager.")]
     RefineryManagement = 3367,
 
     /// <summary>Skill at using refineries.  2% reduction in refinery waste per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Refining", "Eve.Character.SkillId_Refining")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at using refineries.  2% reduction in refinery waste per skill level.")]
     Refining = 3385,
 
     /// <summary>Operation of remote armor repair systems. 5% reduced capacitor need for remote armor repair system modules per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Remote Armor Repair Systems", "Eve.Character.SkillId_RemoteArmorRepairSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of remote armor repair systems. 5% reduced capacitor need for remote ar" +
         "mor repair system modules per skill level.")]
     RemoteArmorRepairSystems = 16069,
 
     /// <summary>Operation of remote hull repair systems. 5% reduced capacitor need for remote hull repair system modules per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Remote Hull Repair Systems", "Eve.Character.SkillId_RemoteHullRepairSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of remote hull repair systems. 5% reduced capacitor need for remote hul" +
         "l repair system modules per skill level.")]
     RemoteHullRepairSystems = 27902,
@@ -2382,7 +2380,7 @@ Can not be trained on Trial Accounts.")]
     ///Level 4: allows scans within 7 ly
     ///Level 5: allows scans within 9 ly
     /// </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Remote Sensing", "Eve.Character.SkillId_RemoteSensing")]
+    
     [System.ComponentModel.DescriptionAttribute(@"The ability to gather and analyze remote sensing data from satellites in orbit around a planet and produce properly calibrated surveys.
 
 Level 1: allows scans within 1 ly
@@ -2394,36 +2392,36 @@ Level 5: allows scans within 9 ly
     RemoteSensing = 13279,
 
     /// <summary>Allows operation of logistic drones. 5% increased repair amount per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Repair Drone Operation", "Eve.Character.SkillId_RepairDroneOperation")]
+    
     [System.ComponentModel.DescriptionAttribute("Allows operation of logistic drones. 5% increased repair amount per level.")]
     RepairDroneOperation = 3439,
 
     /// <summary>Operation of armor/hull repair modules. 5% reduction in repair systems duration per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Repair Systems", "Eve.Character.SkillId_RepairSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of armor/hull repair modules. 5% reduction in repair systems duration p" +
         "er skill level.")]
     RepairSystems = 3393,
 
     /// <summary>Skill at researching more efficient production methods. 5% bonus to blueprint manufacturing time research per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Research", "Eve.Character.SkillId_Research")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at researching more efficient production methods. 5% bonus to blueprint man" +
         "ufacturing time research per skill level.")]
     Research = 3403,
 
     /// <summary>Skill at overseeing agent research and development projects.  Allows the simultaneous use of 1 additional Research and Development agent per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Research Project Management", "Eve.Character.SkillId_ResearchProjectManagement")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at overseeing agent research and development projects.  Allows the simultan" +
         "eous use of 1 additional Research and Development agent per skill level.")]
     ResearchProjectManagement = 12179,
 
     /// <summary>Ability to organize and manage market operations.  Each level raises the limit of active orders by 8.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Retail", "Eve.Character.SkillId_Retail")]
+    
     [System.ComponentModel.DescriptionAttribute("Ability to organize and manage market operations.  Each level raises the limit of" +
         " active orders by 8.")]
     Retail = 3444,
 
     /// <summary>Understanding of the techniques and methods to reverse engineer ancient technology.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Reverse Engineering", "Eve.Character.SkillId_ReverseEngineering")]
+    
     [System.ComponentModel.DescriptionAttribute("Understanding of the techniques and methods to reverse engineer ancient technolog" +
         "y.")]
     ReverseEngineering = 3408,
@@ -2437,7 +2435,7 @@ Level 5: allows scans within 9 ly
     ///Needed for all research and manufacturing operations on related blueprints
     ///
     ///Can not be trained on Trial Accounts</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Rocket Science", "Eve.Character.SkillId_RocketScience")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Skill and knowledge of Rocket Science and its use in the development of advanced technology. 
 
 Used primarily in the research of missiles and propulsion systems.  
@@ -2450,41 +2448,41 @@ Can not be trained on Trial Accounts")]
     RocketScience = 11449,
 
     /// <summary>Specialist training in the operation of advanced rocket launchers.  2% bonus per level to the rate of fire of modules requiring Rocket Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Rocket Specialization", "Eve.Character.SkillId_RocketSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of advanced rocket launchers.  2% bonus per " +
         "level to the rate of fire of modules requiring Rocket Specialization.")]
     RocketSpecialization = 20209,
 
     /// <summary>Skill with small short range missiles. Special: 5% bonus to rocket damage per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Rockets", "Eve.Character.SkillId_Rockets")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill with small short range missiles. Special: 5% bonus to rocket damage per ski" +
         "ll level.")]
     Rockets = 3320,
 
     /// <summary>Skill at controlling salvage drones. 5% increased salvage chance per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Salvage Drone Operation", "Eve.Character.SkillId_SalvageDroneOperation")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at controlling salvage drones. 5% increased salvage chance per level.")]
     SalvageDroneOperation = 3440,
 
     /// <summary>Proficiency at salvaging ship wrecks.  Required skill for the use of salvager modules.  100% increase in chance of salvage retrieval per additional level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Salvaging", "Eve.Character.SkillId_Salvaging")]
+    
     [System.ComponentModel.DescriptionAttribute("Proficiency at salvaging ship wrecks.  Required skill for the use of salvager mod" +
         "ules.  100% increase in chance of salvage retrieval per additional level.")]
     Salvaging = 25863,
 
     /// <summary>Basic understanding of scientific principles. 5% Bonus to blueprint copying speed per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Science", "Eve.Character.SkillId_Science")]
+    
     [System.ComponentModel.DescriptionAttribute("Basic understanding of scientific principles. 5% Bonus to blueprint copying speed" +
         " per level.")]
     Science = 3402,
 
     /// <summary>Skill at running research operations remotely. Each level increases the distance at which research projects can be started. Level 1 allows for range within the same solar system, Level 2 extends that range to systems within 5 jumps, and each subsequent level then doubles it. Level 5 allows for full regional range.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Scientific Networking", "Eve.Character.SkillId_ScientificNetworking")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Skill at running research operations remotely. Each level increases the distance at which research projects can be started. Level 1 allows for range within the same solar system, Level 2 extends that range to systems within 5 jumps, and each subsequent level then doubles it. Level 5 allows for full regional range.")]
     ScientificNetworking = 24270,
 
     /// <summary>Specialization in Scordite processing and refining. Allows a skilled refiner to utilize substandard refining facilities at considerably greater efficiency.  5% reduction in Scordite refining waste per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Scordite Processing", "Eve.Character.SkillId_ScorditeProcessing")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialization in Scordite processing and refining. Allows a skilled refiner to u" +
         "tilize substandard refining facilities at considerably greater efficiency.  5% r" +
         "eduction in Scordite refining waste per skill level.")]
@@ -2493,13 +2491,13 @@ Can not be trained on Trial Accounts")]
     /// <summary>Skill at controlling scout combat drones.
     ///
     ///Bonus: drone control range increased by 5000 meters per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Scout Drone Operation", "Eve.Character.SkillId_ScoutDroneOperation")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at controlling scout combat drones.\r\n\r\nBonus: drone control range increased" +
         " by 5000 meters per skill level.")]
     ScoutDroneOperation = 3437,
 
     /// <summary>Specialization in Scrapmetal processing and refining. Increases reprocessing returns for modules, ships and other reprocessable equipment. 5% reduction in ship and module refining waste per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Scrapmetal Processing", "Eve.Character.SkillId_ScrapmetalProcessing")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialization in Scrapmetal processing and refining. Increases reprocessing retu" +
         "rns for modules, ships and other reprocessable equipment. 5% reduction in ship a" +
         "nd module refining waste per skill level.")]
@@ -2508,48 +2506,48 @@ Can not be trained on Trial Accounts")]
     /// <summary>Understanding of military culture.
     ///
     ///Improves loyalty point gain by 10% per level when working for agents in the Security corporation division.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Security Connections", "Eve.Character.SkillId_SecurityConnections")]
+    
     [System.ComponentModel.DescriptionAttribute("Understanding of military culture.\r\n\r\nImproves loyalty point gain by 10% per leve" +
         "l when working for agents in the Security corporation division.")]
     SecurityConnections = 3895,
 
     /// <summary>Skill at using remote sensor booster/damper. 5% less capacitor need for sensor link per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Sensor Linking", "Eve.Character.SkillId_SensorLinking")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at using remote sensor booster/damper. 5% less capacitor need for sensor li" +
         "nk per skill level.")]
     SensorLinking = 3433,
 
     /// <summary>Skill at controlling sentry drones.  5% bonus to Sentry Drone damage per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Sentry Drone Interfacing", "Eve.Character.SkillId_SentryDroneInterfacing")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at controlling sentry drones.  5% bonus to Sentry Drone damage per level.")]
     SentryDroneInterfacing = 23594,
 
     /// <summary>Skill at long-range weapon turret firing. 5% bonus to weapon turret optimal range per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Sharpshooter", "Eve.Character.SkillId_Sharpshooter")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at long-range weapon turret firing. 5% bonus to weapon turret optimal range" +
         " per skill level.")]
     Sharpshooter = 3311,
 
     /// <summary>Improved skill for regulating energy flow to shields. 2% less capacitor need for shield boosters per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Shield Compensation", "Eve.Character.SkillId_ShieldCompensation")]
+    
     [System.ComponentModel.DescriptionAttribute("Improved skill for regulating energy flow to shields. 2% less capacitor need for " +
         "shield boosters per skill level.")]
     ShieldCompensation = 21059,
 
     /// <summary>Operation of shield transfer array and other shield emission systems. 5% reduced capacitor need for shield emission system modules per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Shield Emission Systems", "Eve.Character.SkillId_ShieldEmissionSystems")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of shield transfer array and other shield emission systems. 5% reduced " +
         "capacitor need for shield emission system modules per skill level.")]
     ShieldEmissionSystems = 3422,
 
     /// <summary>Skill at regulating a spaceship's shield systems.  5% bonus to shield capacity per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Shield Management", "Eve.Character.SkillId_ShieldManagement")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at regulating a spaceship\'s shield systems.  5% bonus to shield capacity pe" +
         "r skill level.")]
     ShieldManagement = 3419,
 
     /// <summary>Skill at operating a spaceship's shield systems, including the use of shield boosters and other basic shield modules.  5% reduction in shield recharge time per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Shield Operation", "Eve.Character.SkillId_ShieldOperation")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating a spaceship\'s shield systems, including the use of shield boos" +
         "ters and other basic shield modules.  5% reduction in shield recharge time per s" +
         "kill level.")]
@@ -2558,14 +2556,14 @@ Can not be trained on Trial Accounts")]
     /// <summary>Advanced understanding of shield systems. Allows makeshift modifications to shield systems through the use of rigs. 
     ///
     ///10% reduction in Shield Rig drawbacks per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Shield Rigging", "Eve.Character.SkillId_ShieldRigging")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced understanding of shield systems. Allows makeshift modifications to shiel" +
         "d systems through the use of rigs. \r\n\r\n10% reduction in Shield Rig drawbacks per" +
         " level.")]
     ShieldRigging = 26261,
 
     /// <summary>Skill at installing shield upgrades e.g. shield extenders and shield rechargers. 5% reduction in shield upgrade powergrid needs.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Shield Upgrades", "Eve.Character.SkillId_ShieldUpgrades")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at installing shield upgrades e.g. shield extenders and shield rechargers. " +
         "5% reduction in shield upgrade powergrid needs.")]
     ShieldUpgrades = 3425,
@@ -2573,38 +2571,38 @@ Can not be trained on Trial Accounts")]
     /// <summary>Basic proficiency at coordinating a fleet's defenses.  Grants a 2% bonus to fleet members' shield capacity per skill level.  Note: The fleet bonus only works if you are the assigned fleet booster.
     ///
     ///Note: Fleet bonuses only affect fleet members in space within the same solar system</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Siege Warfare", "Eve.Character.SkillId_SiegeWarfare")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Basic proficiency at coordinating a fleet's defenses.  Grants a 2% bonus to fleet members' shield capacity per skill level.  Note: The fleet bonus only works if you are the assigned fleet booster.
 
 Note: Fleet bonuses only affect fleet members in space within the same solar system")]
     SiegeWarfare = 3350,
 
     /// <summary>Advanced proficiency at siege warfare.  Multiplies the effectiveness of siege warfare link modules by 100% per skill level after level 2 is trained.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Siege Warfare Specialist", "Eve.Character.SkillId_SiegeWarfareSpecialist")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced proficiency at siege warfare.  Multiplies the effectiveness of siege war" +
         "fare link modules by 100% per skill level after level 2 is trained.")]
     SiegeWarfareSpecialist = 3351,
 
     /// <summary>Skill at the operation of target jamming equipment.  5% bonus to strength of all ECM jammers per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Signal Dispersion", "Eve.Character.SkillId_SignalDispersion")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at the operation of target jamming equipment.  5% bonus to strength of all " +
         "ECM jammers per skill level.")]
     SignalDispersion = 19761,
 
     /// <summary>Skill at the operation of remote sensor dampers.  5% bonus to remote sensor dampers' scan resolution and targeting range suppression per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Signal Suppression", "Eve.Character.SkillId_SignalSuppression")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at the operation of remote sensor dampers.  5% bonus to remote sensor dampe" +
         "rs\' scan resolution and targeting range suppression per skill level.")]
     SignalSuppression = 19766,
 
     /// <summary>Skill at operating Targeting systems. 5% improved targeting speed per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Signature Analysis", "Eve.Character.SkillId_SignatureAnalysis")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating Targeting systems. 5% improved targeting speed per skill level" +
         ".")]
     SignatureAnalysis = 3431,
 
     /// <summary>Advanced understanding of target painting technology. 5% bonus to target painter modules' signature radius multiplier per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Signature Focusing", "Eve.Character.SkillId_SignatureFocusing")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced understanding of target painting technology. 5% bonus to target painter " +
         "modules\' signature radius multiplier per skill level.")]
     SignatureFocusing = 19922,
@@ -2612,14 +2610,14 @@ Note: Fleet bonuses only affect fleet members in space within the same solar sys
     /// <summary>Basic proficiency at coordinating hit-and-run warfare.  Grants a 2% bonus to fleet members' agility per skill level. The fleet bonus only works if you are the assigned fleet booster.
     ///
     ///Note: Fleet bonuses only affect fleet members in space within the same solar system</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Skirmish Warfare", "Eve.Character.SkillId_SkirmishWarfare")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Basic proficiency at coordinating hit-and-run warfare.  Grants a 2% bonus to fleet members' agility per skill level. The fleet bonus only works if you are the assigned fleet booster.
 
 Note: Fleet bonuses only affect fleet members in space within the same solar system")]
     SkirmishWarfare = 3349,
 
     /// <summary>Advanced proficiency at skirmish warfare.  Multiplies the effectiveness of skirmish warfare link modules by 100% per skill level after level 2 is trained.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Skirmish Warfare Specialist", "Eve.Character.SkillId_SkirmishWarfareSpecialist")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced proficiency at skirmish warfare.  Multiplies the effectiveness of skirmi" +
         "sh warfare link modules by 100% per skill level after level 2 is trained.")]
     SkirmishWarfareSpecialist = 11572,
@@ -2629,7 +2627,7 @@ Note: Fleet bonuses only affect fleet members in space within the same solar sys
     ///The Sleepers were masters of virtual reality, neural interfacing and cryotechnology.
     ///
     ///Allows the rudimentary use of Sleeper components in the creation of advanced technology, even though the scientific theories behind them remain a mystery.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Sleeper Technology", "Eve.Character.SkillId_SleeperTechnology")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Basic understanding of interfacing with Sleeper technology.
 
 The Sleepers were masters of virtual reality, neural interfacing and cryotechnology.
@@ -2638,70 +2636,70 @@ Allows the rudimentary use of Sleeper components in the creation of advanced tec
     SleeperTechnology = 21789,
 
     /// <summary>Specialist training in the operation of advanced Small Artillery.  2% bonus per skill level to the damage of small turrets requiring Small Artillery Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Small Artillery Specialization", "Eve.Character.SkillId_SmallArtillerySpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of advanced Small Artillery.  2% bonus per s" +
         "kill level to the damage of small turrets requiring Small Artillery Specializati" +
         "on.")]
     SmallArtillerySpecialization = 12201,
 
     /// <summary>Specialist training in the operation of advanced small Autocannons. 2% bonus per skill level to the damage of small turrets requiring Small Autocannon Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Small Autocannon Specialization", "Eve.Character.SkillId_SmallAutocannonSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of advanced small Autocannons. 2% bonus per " +
         "skill level to the damage of small turrets requiring Small Autocannon Specializa" +
         "tion.")]
     SmallAutocannonSpecialization = 11084,
 
     /// <summary>Specialist training in the operation of small Beam Lasers. 2% bonus per skill level to the damage of small turrets requiring Small Beam Laser Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Small Beam Laser Specialization", "Eve.Character.SkillId_SmallBeamLaserSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of small Beam Lasers. 2% bonus per skill lev" +
         "el to the damage of small turrets requiring Small Beam Laser Specialization.")]
     SmallBeamLaserSpecialization = 11083,
 
     /// <summary>Specialist training in the operation of advanced small blasters. 2% bonus per skill level to the damage of small turrets requiring Small Blaster Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Small Blaster Specialization", "Eve.Character.SkillId_SmallBlasterSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of advanced small blasters. 2% bonus per ski" +
         "ll level to the damage of small turrets requiring Small Blaster Specialization.")]
     SmallBlasterSpecialization = 12210,
 
     /// <summary>Operation of small energy turrets. 5% Bonus to small energy turret damage per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Small Energy Turret", "Eve.Character.SkillId_SmallEnergyTurret")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of small energy turrets. 5% Bonus to small energy turret damage per lev" +
         "el.")]
     SmallEnergyTurret = 3303,
 
     /// <summary>Operation of small hybrid turrets. 5% Bonus to small hybrid turret damage per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Small Hybrid Turret", "Eve.Character.SkillId_SmallHybridTurret")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of small hybrid turrets. 5% Bonus to small hybrid turret damage per lev" +
         "el.")]
     SmallHybridTurret = 3301,
 
     /// <summary>Operation of small projectile turrets. 5% Bonus to small projectile turret damage per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Small Projectile Turret", "Eve.Character.SkillId_SmallProjectileTurret")]
+    
     [System.ComponentModel.DescriptionAttribute("Operation of small projectile turrets. 5% Bonus to small projectile turret damage" +
         " per level.")]
     SmallProjectileTurret = 3302,
 
     /// <summary>Specialist training in the operation of small pulse lasers. 2% bonus per skill level to the damage of small turrets requiring Small Pulse Laser Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Small Pulse Laser Specialization", "Eve.Character.SkillId_SmallPulseLaserSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of small pulse lasers. 2% bonus per skill le" +
         "vel to the damage of small turrets requiring Small Pulse Laser Specialization.")]
     SmallPulseLaserSpecialization = 12213,
 
     /// <summary>Specialist training in the operation of advanced small railguns. 2% bonus per skill level to the damage of small turrets requiring Small Railgun Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Small Railgun Specialization", "Eve.Character.SkillId_SmallRailgunSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of advanced small railguns. 2% bonus per ski" +
         "ll level to the damage of small turrets requiring Small Railgun Specialization.")]
     SmallRailgunSpecialization = 11082,
 
     /// <summary>Proficiency at laying low and avoiding unwanted attention. From a base of 90%, each level of skill reduces by 10% the likelihood of being scanned while transporting contraband.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Smuggling", "Eve.Character.SkillId_Smuggling")]
+    
     [System.ComponentModel.DescriptionAttribute("Proficiency at laying low and avoiding unwanted attention. From a base of 90%, ea" +
         "ch level of skill reduces by 10% the likelihood of being scanned while transport" +
         "ing contraband.")]
     Smuggling = 3448,
 
     /// <summary>Skill at social interaction. 5% bonus per level to NPC agent, corporation and faction standing increase.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Social", "Eve.Character.SkillId_Social")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at social interaction. 5% bonus per level to NPC agent, corporation and fac" +
         "tion standing increase.")]
     Social = 3355,
@@ -2709,20 +2707,20 @@ Allows the rudimentary use of Sleeper components in the creation of advanced tec
     /// <summary>Advanced corporation operation. +1000 corporation members allowed per level. 
     ///
     ///Notice:  the CEO must update his corporation through the corporation user interface before the skill takes effect</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Sovereignty", "Eve.Character.SkillId_Sovereignty")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced corporation operation. +1000 corporation members allowed per level. \r\n\r\n" +
         "Notice:  the CEO must update his corporation through the corporation user interf" +
         "ace before the skill takes effect")]
     Sovereignty = 12241,
 
     /// <summary>The basic operation of spaceships. 2% improved ship agility for all ships per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Spaceship Command", "Eve.Character.SkillId_SpaceshipCommand")]
+    
     [System.ComponentModel.DescriptionAttribute("The basic operation of spaceships. 2% improved ship agility for all ships per ski" +
         "ll level.")]
     SpaceshipCommand = 3327,
 
     /// <summary>Specialization in Spodumain processing and refining. Allows a skilled refiner to utilize substandard refining facilities at considerably greater efficiency.  5% reduction in Spodumain refining waste per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Spodumain Processing", "Eve.Character.SkillId_SpodumainProcessing")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialization in Spodumain processing and refining. Allows a skilled refiner to " +
         "utilize substandard refining facilities at considerably greater efficiency.  5% " +
         "reduction in Spodumain refining waste per skill level.")]
@@ -2733,58 +2731,58 @@ Allows the rudimentary use of Sleeper components in the creation of advanced tec
     ///Can not be trained on Trial Accounts.
     ///
     ///</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Starbase Defense Management", "Eve.Character.SkillId_StarbaseDefenseManagement")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at using starbase weapon systems. Allows control of one array per level. Ar" +
         "rays must be placed outside of the forcefield to be controlled. \r\n\r\nCan not be t" +
         "rained on Trial Accounts.\r\n\r\n")]
     StarbaseDefenseManagement = 3373,
 
     /// <summary>Skill at setting up Starbases</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Starbase Management", "Eve.Character.SkillId_StarbaseManagement")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at setting up Starbases")]
     StarbaseManagement = 3365,
 
     /// <summary>The skill at transporting contraband without getting caught. -10% chance of being caught transporting contraband. Base chance 60%.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Starship Freight", "Eve.Character.SkillId_StarshipFreight")]
+    
     [System.ComponentModel.DescriptionAttribute("The skill at transporting contraband without getting caught. -10% chance of being" +
         " caught transporting contraband. Base chance 60%.")]
     StarshipFreight = 13069,
 
     /// <summary>The operation and management of spacestations. </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Station Management", "Eve.Character.SkillId_StationManagement")]
+    
     [System.ComponentModel.DescriptionAttribute("The operation and management of spacestations. ")]
     StationManagement = 3364,
 
     /// <summary>Fake Skill to give the Stealth Bombers bonuses only to Cruise Missile Launchers.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Stealth Bombers Fake Skill", "Eve.Character.SkillId_StealthBombersFakeSkill")]
+    
     [System.ComponentModel.DescriptionAttribute("Fake Skill to give the Stealth Bombers bonuses only to Cruise Missile Launchers.")]
     StealthBombersFakeSkill = 20127,
 
     /// <summary>Proficiency at starting manufacturing jobs remotely. Each level increases the distance at which jobs can be created. Level 1 allows for range within the same solar system, Level 2 extends that range to systems within 5 jumps, and each subsequent level then doubles it. Level 5 allows for full regional range.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Supply Chain Management", "Eve.Character.SkillId_SupplyChainManagement")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Proficiency at starting manufacturing jobs remotely. Each level increases the distance at which jobs can be created. Level 1 allows for range within the same solar system, Level 2 extends that range to systems within 5 jumps, and each subsequent level then doubles it. Level 5 allows for full regional range.")]
     SupplyChainManagement = 24268,
 
     /// <summary>Knowledge of spaceships' structural weaknesses.  3% bonus per skill level to the damage of all weapon turrets.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Surgical Strike", "Eve.Character.SkillId_SurgicalStrike")]
+    
     [System.ComponentModel.DescriptionAttribute("Knowledge of spaceships\' structural weaknesses.  3% bonus per skill level to the " +
         "damage of all weapon turrets.")]
     SurgicalStrike = 3315,
 
     /// <summary>Skill at operating ship, cargo and survey scanners. 5% improvement per level in the scan speeds of those module types.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Survey", "Eve.Character.SkillId_Survey")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at operating ship, cargo and survey scanners. 5% improvement per level in t" +
         "he scan speeds of those module types.")]
     Survey = 3551,
 
     /// <summary>Skill at the operation of triage modules. 25-unit reduction in strontium clathrate consumption amount for module activation per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Tactical Logistics Reconfiguration", "Eve.Character.SkillId_TacticalLogisticsReconfiguration")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at the operation of triage modules. 25-unit reduction in strontium clathrat" +
         "e consumption amount for module activation per skill level.")]
     TacticalLogisticsReconfiguration = 27906,
 
     /// <summary>Skill at preventing damage from penetrating the shield, including the use of shield hardeners and other advanced shield modules.  Reduces the chance of damage penetrating the shield when it falls below 25% by 5% per skill level, with 0% chance at level 5.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Tactical Shield Manipulation", "Eve.Character.SkillId_TacticalShieldManipulation")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at preventing damage from penetrating the shield, including the use of shie" +
         "ld hardeners and other advanced shield modules.  Reduces the chance of damage pe" +
         "netrating the shield when it falls below 25% by 5% per skill level, with 0% chan" +
@@ -2792,7 +2790,7 @@ Allows the rudimentary use of Sleeper components in the creation of advanced tec
     TacticalShieldManipulation = 3420,
 
     /// <summary>Skill at the operation of siege modules. 25-unit reduction in strontium clathrate consumption amount for module activation per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Tactical Weapon Reconfiguration", "Eve.Character.SkillId_TacticalWeaponReconfiguration")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at the operation of siege modules. 25-unit reduction in strontium clathrate" +
         " consumption amount for module activation per skill level.")]
     TacticalWeaponReconfiguration = 22043,
@@ -2802,7 +2800,7 @@ Allows the rudimentary use of Sleeper components in the creation of advanced tec
     ///The Takmahl nation excelled in cybernetics and bio-engineering.
     ///
     ///Allows the rudimentary use of Takmahl components in the creation of advanced technology, even though the scientific theories behind them remain a mystery.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Takmahl Technology", "Eve.Character.SkillId_TakmahlTechnology")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Basic understanding of interfacing with Takmahl technology.
 
 The Takmahl nation excelled in cybernetics and bio-engineering.
@@ -2815,7 +2813,7 @@ Allows the rudimentary use of Takmahl components in the creation of advanced tec
     ///The Talocan were masters of Spatial manipulation and Hypereuclidean Mathematics.
     ///
     ///Allows the rudimentary use of Talocan components in the creation of advanced technology, even though the scientific theories behind them remain a mystery.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Talocan Technology", "Eve.Character.SkillId_TalocanTechnology")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Basic understanding of interfacing with Talocan technology.
 
 The Talocan were masters of Spatial manipulation and Hypereuclidean Mathematics.
@@ -2827,7 +2825,7 @@ Allows the rudimentary use of Talocan components in the creation of advanced tec
     ///
     ///Reduces duration time and capacitor need of Target Spectrum Breakers by 5% per level.
     ///</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Target Breaker Amplification", "Eve.Character.SkillId_TargetBreakerAmplification")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Improves the continuous reflection of active target spectrum breakers, resulting in much improved defenses against all those who wish to target any vessel in the vicinity.
 
 Reduces duration time and capacitor need of Target Spectrum Breakers by 5% per level.
@@ -2835,20 +2833,20 @@ Reduces duration time and capacitor need of Target Spectrum Breakers by 5% per l
     TargetBreakerAmplification = 4411,
 
     /// <summary>Proficiency at optimizing a missile's flight path to negate the effects of a target's speed upon the explosion's impact.  10% decrease per level in factor of target's velocity for all missiles.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Target Navigation Prediction", "Eve.Character.SkillId_TargetNavigationPrediction")]
+    
     [System.ComponentModel.DescriptionAttribute("Proficiency at optimizing a missile\'s flight path to negate the effects of a targ" +
         "et\'s speed upon the explosion\'s impact.  10% decrease per level in factor of tar" +
         "get\'s velocity for all missiles.")]
     TargetNavigationPrediction = 20314,
 
     /// <summary>Skill at using target painters. 5% less capacitor need for target painters per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Target Painting", "Eve.Character.SkillId_TargetPainting")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at using target painters. 5% less capacitor need for target painters per sk" +
         "ill level.")]
     TargetPainting = 19921,
 
     /// <summary>Skill at targeting multiple targets. +1 extra target per skill level, up to the ship's maximum allowed number of targets locked.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Targeting", "Eve.Character.SkillId_Targeting")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at targeting multiple targets. +1 extra target per skill level, up to the s" +
         "hip\'s maximum allowed number of targets locked.")]
     Targeting = 3429,
@@ -2858,25 +2856,25 @@ Reduces duration time and capacitor need of Target Spectrum Breakers by 5% per l
     ///2% reduction in SCC tax per level. 
     ///
     ///Note: This skill does not apply to taxes imposed by player corporations.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Tax Evasion", "Eve.Character.SkillId_TaxEvasion")]
+    
     [System.ComponentModel.DescriptionAttribute("Knowledge of the SCC tax regime and the ability to utilize that to one\'s own adva" +
         "ntage.\r\n\r\n2% reduction in SCC tax per level. \r\n\r\nNote: This skill does not apply" +
         " to taxes imposed by player corporations.")]
     TaxEvasion = 28261,
 
     /// <summary>This is a test skill and should never appear in the live game</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Test", "Eve.Character.SkillId_Test")]
+    
     [System.ComponentModel.DescriptionAttribute("This is a test skill and should never appear in the live game")]
     Test = 11015,
 
     /// <summary>Test Drone Skill, should give a lot of shields to a drone.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("TEST Drone Skill", "Eve.Character.SkillId_TestDroneSkill")]
+    
     [System.ComponentModel.DescriptionAttribute("Test Drone Skill, should give a lot of shields to a drone.")]
     TestDroneSkill = 22172,
 
     /// <summary>To active armor hardeners: 3% bonus per skill level to Armor Thermal resistance when the modules are not active
     ///To passive armor hardeners: 5% bonus per skill level to Armor Thermal resistance</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Thermic Armor Compensation", "Eve.Character.SkillId_ThermicArmorCompensation")]
+    
     [System.ComponentModel.DescriptionAttribute("To active armor hardeners: 3% bonus per skill level to Armor Thermal resistance w" +
         "hen the modules are not active\r\nTo passive armor hardeners: 5% bonus per skill l" +
         "evel to Armor Thermal resistance")]
@@ -2884,68 +2882,68 @@ Reduces duration time and capacitor need of Target Spectrum Breakers by 5% per l
 
     /// <summary>To active shield hardeners: 3% bonus per skill level to Shield Thermal resistance when the modules are not active
     ///To passive shield hardeners: 5% bonus per skill level to Shield Thermal resistance</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Thermic Shield Compensation", "Eve.Character.SkillId_ThermicShieldCompensation")]
+    
     [System.ComponentModel.DescriptionAttribute("To active shield hardeners: 3% bonus per skill level to Shield Thermal resistance" +
         " when the modules are not active\r\nTo passive shield hardeners: 5% bonus per skil" +
         "l level to Shield Thermal resistance")]
     ThermicShieldCompensation = 11566,
 
     /// <summary>Advanced understanding of the laws of thermodynamics. Allows you to deliberately overheat a ship's modules in order to push them beyond their intended limit. Also gives you the ability to frown in annoyance whenever you hear someone mention a perpetual motion unit. Reduces heat damage by 5% per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Thermodynamics", "Eve.Character.SkillId_Thermodynamics")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Advanced understanding of the laws of thermodynamics. Allows you to deliberately overheat a ship's modules in order to push them beyond their intended limit. Also gives you the ability to frown in annoyance whenever you hear someone mention a perpetual motion unit. Reduces heat damage by 5% per level.")]
     Thermodynamics = 28164,
 
     /// <summary>Specialist training in the operation of advanced siege launchers.  2% bonus per level to the rate of fire of modules requiring Torpedo Specialization.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Torpedo Specialization", "Eve.Character.SkillId_TorpedoSpecialization")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialist training in the operation of advanced siege launchers.  2% bonus per l" +
         "evel to the rate of fire of modules requiring Torpedo Specialization.")]
     TorpedoSpecialization = 20213,
 
     /// <summary>Skill at the handling and firing of torpedoes.  5% bonus to torpedo damage per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Torpedoes", "Eve.Character.SkillId_Torpedoes")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at the handling and firing of torpedoes.  5% bonus to torpedo damage per sk" +
         "ill level.")]
     Torpedoes = 3325,
 
     /// <summary>Skill at observating tournaments. +2 extra targets per skill level, up to the ship's maximum allowed number of targets locked.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Tournament Observation", "Eve.Character.SkillId_TournamentObservation")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at observating tournaments. +2 extra targets per skill level, up to the shi" +
         "p\'s maximum allowed number of targets locked.")]
     TournamentObservation = 28604,
 
     /// <summary>Knowledge of the market and skill at manipulating it. Active buy/sell order limit increased by 4 per level of skill.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Trade", "Eve.Character.SkillId_Trade")]
+    
     [System.ComponentModel.DescriptionAttribute("Knowledge of the market and skill at manipulating it. Active buy/sell order limit" +
         " increased by 4 per level of skill.")]
     Trade = 3443,
 
     /// <summary>Advanced understanding of zero-G physics. 5% bonus per skill level to weapon turret accuracy falloff.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Trajectory Analysis", "Eve.Character.SkillId_TrajectoryAnalysis")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced understanding of zero-G physics. 5% bonus per skill level to weapon turr" +
         "et accuracy falloff.")]
     TrajectoryAnalysis = 3317,
 
     /// <summary>Skill for operation of the Transport Ship class industrials. Can not be trained on Trial Accounts.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Transport Ships", "Eve.Character.SkillId_TransportShips")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill for operation of the Transport Ship class industrials. Can not be trained o" +
         "n Trial Accounts.")]
     TransportShips = 19719,
 
     /// <summary>Advanced understanding of tracking disruption technology.  5% bonus to Tracking Disruptor modules' tracking speed, optimal range and falloff disruption per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Turret Destabilization", "Eve.Character.SkillId_TurretDestabilization")]
+    
     [System.ComponentModel.DescriptionAttribute("Advanced understanding of tracking disruption technology.  5% bonus to Tracking D" +
         "isruptor modules\' tracking speed, optimal range and falloff disruption per skill" +
         " level.")]
     TurretDestabilization = 19767,
 
     /// <summary>Ability to organize and manage ultra large-scale market operations.  Each level raises the limit of active orders by 32.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Tycoon", "Eve.Character.SkillId_Tycoon")]
+    
     [System.ComponentModel.DescriptionAttribute("Ability to organize and manage ultra large-scale market operations.  Each level r" +
         "aises the limit of active orders by 32.")]
     Tycoon = 18580,
 
     /// <summary>Specialization in Veldspar processing and refining. Allows a skilled refiner to utilize substandard refining facilities at considerably greater efficiency.  5% reduction in Veldspar refining waste per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Veldspar Processing", "Eve.Character.SkillId_VeldsparProcessing")]
+    
     [System.ComponentModel.DescriptionAttribute("Specialization in Veldspar processing and refining. Allows a skilled refiner to u" +
         "tilize substandard refining facilities at considerably greater efficiency.  5% r" +
         "eduction in Veldspar refining waste per skill level.")]
@@ -2954,51 +2952,51 @@ Reduces duration time and capacitor need of Target Spectrum Breakers by 5% per l
     /// <summary>Skill at acquiring products remotely.  Each level of skill increases the range your remote buy orders are effective to from their origin station. Level 1 allows for the placing of remote buy orders with a range limited to the same solar system, Level 2 extends that range to systems within 5 jumps, and each subsequent level then doubles it. Level 5 allows for a full regional range.
     ///
     ///Note: Only remotely placed buy orders (using Procurement) require this skill to alter the range.  Any range can be set on a local buy order with no skill.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Visibility", "Eve.Character.SkillId_Visibility")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Skill at acquiring products remotely.  Each level of skill increases the range your remote buy orders are effective to from their origin station. Level 1 allows for the placing of remote buy orders with a range limited to the same solar system, Level 2 extends that range to systems within 5 jumps, and each subsequent level then doubles it. Level 5 allows for a full regional range.
 
 Note: Only remotely placed buy orders (using Procurement) require this skill to alter the range.  Any range can be set on a local buy order with no skill.")]
     Visibility = 3447,
 
     /// <summary>Improved fleet leadership.  Boosts effectiveness of all warfare link and mining foreman modules by 10% per level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Warfare Link Specialist", "Eve.Character.SkillId_WarfareLinkSpecialist")]
+    
     [System.ComponentModel.DescriptionAttribute("Improved fleet leadership.  Boosts effectiveness of all warfare link and mining f" +
         "oreman modules by 10% per level.")]
     WarfareLinkSpecialist = 3354,
 
     /// <summary>Proficiency at upgrading missile warheads with deadlier payloads.  2% bonus to all missile damage per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Warhead Upgrades", "Eve.Character.SkillId_WarheadUpgrades")]
+    
     [System.ComponentModel.DescriptionAttribute("Proficiency at upgrading missile warheads with deadlier payloads.  2% bonus to al" +
         "l missile damage per skill level.")]
     WarheadUpgrades = 20315,
 
     /// <summary>Skill at managing warp drive efficiency.  Each skill level reduces the capacitor need of initiating warp by 10%.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Warp Drive Operation", "Eve.Character.SkillId_WarpDriveOperation")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at managing warp drive efficiency.  Each skill level reduces the capacitor " +
         "need of initiating warp by 10%.")]
     WarpDriveOperation = 3455,
 
     /// <summary>Skill at using remote weapon disruptors. 5% less capacitor need for weapon disruptors per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Weapon Disruption", "Eve.Character.SkillId_WeaponDisruption")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill at using remote weapon disruptors. 5% less capacitor need for weapon disrup" +
         "tors per skill level.")]
     WeaponDisruption = 3434,
 
     /// <summary>Knowledge of gunnery computer systems, including the use of weapon upgrade modules. 5% reduction per skill level in the CPU needs of weapon turrets, launchers and smartbombs.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Weapon Upgrades", "Eve.Character.SkillId_WeaponUpgrades")]
+    
     [System.ComponentModel.DescriptionAttribute("Knowledge of gunnery computer systems, including the use of weapon upgrade module" +
         "s. 5% reduction per skill level in the CPU needs of weapon turrets, launchers an" +
         "d smartbombs.")]
     WeaponUpgrades = 3318,
 
     /// <summary>Ability to organize and manage large-scale market operations.  Each level raises the limit of active orders by 16.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Wholesale", "Eve.Character.SkillId_Wholesale")]
+    
     [System.ComponentModel.DescriptionAttribute("Ability to organize and manage large-scale market operations.  Each level raises " +
         "the limit of active orders by 16.")]
     Wholesale = 16596,
 
     /// <summary>Allows command of a Wing. Grants the Wing Commander the ability to operate a new Squadron per skill level, up to a maximum of 5 Squadrons.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Wing Command", "Eve.Character.SkillId_WingCommand")]
+    
     [System.ComponentModel.DescriptionAttribute("Allows command of a Wing. Grants the Wing Commander the ability to operate a new " +
         "Squadron per skill level, up to a maximum of 5 Squadrons.")]
     WingCommand = 11574,
@@ -3008,7 +3006,7 @@ Note: Only remotely placed buy orders (using Procurement) require this skill to 
     ///The Yan Jung nation possessed advanced gravitronic technology and force field theories.
     ///
     ///Allows the rudimentary use of Yan Jung components in the creation of advanced technology, even though the scientific theories behind them remain a mystery.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Yan Jung Technology", "Eve.Character.SkillId_YanJungTechnology")]
+    
     [System.ComponentModel.DescriptionAttribute(@"Basic understanding of interfacing with Yan Jung technology.
 
 The Yan Jung nation possessed advanced gravitronic technology and force field theories.

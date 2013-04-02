@@ -14,7 +14,7 @@ namespace Eve {
   using FreeNet;
   using FreeNet.Data.Entity;
 
-  using Eve.Entities;
+  using Eve.Data.Entities;
 
   //******************************************************************************
   /// <summary>
@@ -31,7 +31,7 @@ namespace Eve {
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    public Unit(UnitEntity entity) : base(entity) {
+    protected internal Unit(UnitEntity entity) : base(entity) {
       Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
     }
     //******************************************************************************
@@ -191,7 +191,7 @@ namespace Eve {
           break;
 
         case UnitId.TypeId:
-          result = Eve.General.DataSource.GetItemTypeById<ItemType>((int) value).Name;
+          result = Eve.General.DataSource.GetEveTypeById<EveType>((int) value).Name;
           break;
 
         default:

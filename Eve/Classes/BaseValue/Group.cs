@@ -14,7 +14,7 @@ namespace Eve {
   using FreeNet;
   using FreeNet.Data.Entity;
 
-  using Eve.Entities;
+  using Eve.Data.Entities;
 
   //******************************************************************************
   /// <summary>
@@ -26,7 +26,7 @@ namespace Eve {
     #region Instance Fields
     private Category _category;
     private Icon _icon;
-    private ReadOnlyItemTypeCollection _itemTypes;
+    private ReadOnlyTypeCollection _types;
     #endregion
 
     #region Constructors/Finalizers
@@ -38,7 +38,7 @@ namespace Eve {
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    public Group(GroupEntity entity) : base(entity) {
+    protected internal Group(GroupEntity entity) : base(entity) {
       Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
     }
     //******************************************************************************
@@ -203,35 +203,6 @@ namespace Eve {
     }
     //******************************************************************************
     /// <summary>
-    /// Gets the collection of items that belong to the current group.
-    /// </summary>
-    /// 
-    /// <value>
-    /// A <see cref="ReadOnlyItemTypeCollection" /> containing the items that
-    /// belong to the current group.
-    /// </value>
-    public ReadOnlyItemTypeCollection ItemTypes {
-      get {
-        Contract.Ensures(Contract.Result<ReadOnlyItemTypeCollection>() != null);
-
-        if (_itemTypes == null) {
-          if (Entity.ItemTypes != null) {
-
-            // Load item types from the cache if available
-            _itemTypes = new ReadOnlyItemTypeCollection(Entity.ItemTypes.Select(x => {
-              return Eve.General.Cache.GetOrAdd<ItemType>(x.Id, () => ItemType.Create(x));
-            }).OrderBy(x => x));
-
-          } else {
-            _itemTypes = new ReadOnlyItemTypeCollection(null);
-          }
-        }
-
-        return _itemTypes;
-      }
-    }
-    //******************************************************************************
-    /// <summary>
     /// Gets a value indicating whether the item is marked as published for
     /// public consumption.
     /// </summary>
@@ -243,6 +214,26 @@ namespace Eve {
     public bool Published {
       get {
         return Entity.Published;
+      }
+    }
+    //******************************************************************************
+    /// <summary>
+    /// Gets the collection of items that belong to the current group.
+    /// </summary>
+    /// 
+    /// <value>
+    /// A <see cref="ReadOnlyTypeCollection" /> containing the items that
+    /// belong to the current group.
+    /// </value>
+    public ReadOnlyTypeCollection Types {
+      get {
+        Contract.Ensures(Contract.Result<ReadOnlyTypeCollection>() != null);
+
+        if (_types == null) {
+          _types = new ReadOnlyTypeCollection(Eve.General.DataSource.GetEveTypes(x => x.GroupId == this.Id).OrderBy(x => x));
+        }
+
+        return _types;
       }
     }
     //******************************************************************************

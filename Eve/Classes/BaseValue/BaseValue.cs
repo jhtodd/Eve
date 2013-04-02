@@ -17,10 +17,11 @@ namespace Eve {
   using FreeNet;
   using FreeNet.Collections;
   using FreeNet.Data.Entity;
-  using FreeNet.Extensions;
+  using FreeNet.Utilities;
 
   using Eve.Data;
-  using Eve.Entities;
+  using Eve.Data.Entities;
+  using Eve.Meta;
 
   //******************************************************************************
   /// <summary>
@@ -49,7 +50,7 @@ namespace Eve {
   /// 
   /// <typeparam name="TDerived">
   /// The type of the concrete derived class; i.e. to declare a "Ship"
-  /// base value, you would do <c>public class Ship : BaseValue<int, ShipEntity, Ship></c>.
+  /// base value, you would do <c>public class Ship : BaseValue<TypeId, int, ShipEntity, Ship></c>.
   /// I know this sort of pseudo-circular "Curiously Recurring Template Pattern"
   /// is generally bad practice, but it allows me to write many useful methods
   /// (Equals, CompareTo, etc.) at this base class level and save myself an
@@ -60,7 +61,7 @@ namespace Eve {
   /// </typeparam>
   /// 
   /// <remarks>
-  /// For classes derived from <c>BaseValue&lt;TId, TEntity, TDerived&gt;</c>,
+  /// For classes derived from <c>BaseValue&lt;TId, TEntityId, TEntity, TDerived&gt;</c>,
   /// the values of the <see cref="Id" /> property must be unique across all
   /// instances of the derived class as well as all classes that inherit
   /// from it.
@@ -88,7 +89,7 @@ namespace Eve {
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    public BaseValue(TEntity entity) : base(entity) {
+    protected BaseValue(TEntity entity) : base(entity) {
       Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
 
       Contract.Assume(entity.Id != null);
@@ -117,7 +118,10 @@ namespace Eve {
         Contract.Ensures(Contract.Result<string>() != null);
 
         var result = Entity.Description;
-        Contract.Assume(result != null);
+
+        if (result == null) {
+          result = string.Empty;
+        }
 
         return result;
       }
@@ -150,7 +154,12 @@ namespace Eve {
         Contract.Ensures(!string.IsNullOrWhiteSpace(Contract.Result<string>()));
 
         var result = Entity.Name;
-        Contract.Assume(!string.IsNullOrWhiteSpace(result));
+
+        // A very few entries have null names.  Convert to a reasonable default.
+        // Performance is not a concern since it's literally like a dozen or so.
+        if (string.IsNullOrWhiteSpace(result)) {
+          return "[Unknown (ID " + Id.ToString() + ")]";
+        }
 
         return result;
       }
@@ -172,19 +181,7 @@ namespace Eve {
       return Equals(obj as TDerived);
     }
     //******************************************************************************
-    /// <summary>
-    /// Returns a value indicating whether the current instance is equal to the
-    /// specified object.
-    /// </summary>
-    /// 
-    /// <param name="obj">
-    /// The object to compare to the current object.
-    /// </param>
-    /// 
-    /// <returns>
-    /// <see langword="true" /> if <paramref name="obj" /> is equal to the current
-    /// instance; otherwise <see langword="false" />.
-    /// </returns>
+    /// <inheritdoc />
     public virtual bool Equals(TDerived other) {
       if (other == null) {
         return false;
@@ -195,35 +192,12 @@ namespace Eve {
     //******************************************************************************
     /// <inheritdoc />
     public override int GetHashCode() {
-      return FreeNet.Methods.GetCompoundHashCode(this.GetType().GetHashCode(), Id.GetHashCode());
+      return CompoundHashCode.Create(this.GetType().GetHashCode(), Id.GetHashCode());
     }
     //******************************************************************************
     /// <inheritdoc />
     public override string ToString() {
       return Name;
-    }
-    #endregion
-    #region Protected Properties
-    //******************************************************************************
-    /// <summary>
-    /// Gets the ID of the item within its cache region.
-    /// </summary>
-    /// 
-    /// <value>
-    /// A <see cref="Int32" /> specifying a unique ID for the item within the
-    /// cache region established for the item's type.
-    /// </value>
-    /// 
-    /// <remarks>
-    /// <para>
-    /// For all known EVE values with 32-bit or 64-bit integer IDs, the value
-    /// of <see cref="GetHashCode"/> is sufficient to serve as a cache ID.
-    /// </para>
-    /// </remarks>
-    protected virtual int CacheID {
-      get {
-        return Id.GetHashCode();
-      }
     }
     #endregion
     #region Protected Methods

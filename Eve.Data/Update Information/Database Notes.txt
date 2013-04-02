@@ -1,0 +1,55 @@
+﻿This file contains notes about the structure of the database used by this framework,
+and any modifications that have been made to it.
+
+Wherever possible, I've tried to use the "stock" EVE data export database.  However,
+this is sometimes problematic, because the structure of the stock database has some
+idiosyncrasies that aren't compatible with the Entity Framework.  For example, key 
+types are often mixed between "derived" classes (e.g. mapUniverses ties to invItems,
+but mapUniverses has a 32-bit integer key and invItems has a 64-bit integer key).
+
+As a result, there are a few changes that need to be made to the stock database
+before it can be used with this framework.  I'll try to keep this list up to date:
+
+1. All tables which tie to invItems must have the type of their related column changed
+   to a 64-bit integer, to match the type of invItems' primary key.  This includes
+   agtAgents, chrBloodlines, chrFactions, crpNPCCorporationDivisions, 
+   crpNPCCorporationResearchFields, crpNPCCorporationTrades, crpNPCCorporations, invItems,
+   invUniqueNames, mapCelestialStatistics, mapConstellationJumps,  mapConstellations,
+   mapDenormalize, mapJumps, mapLandmarks, mapLocationScenes, mapLocationWormholeClasses,
+   mapRegionJumps, mapRegions, mapSolarSystemJumps, mapSolarSystem, mapUniverse,
+   ramAssemblyLineStations, ramAssemblyLines, staStations, warCombatZoneSystems.
+
+2. Some tables containing derived types have different key names than the parent
+   table.  This confuses the Entity Framework, and currently there appears to be
+   no workaround.  So, to make TPT inheritance possible, we add a new column to
+   those tables:
+
+     - agtAgents: Add column itemID, with value copied from agentID
+     - crpNPCCorporations: Add column itemID, with value copied from corporationID
+     - invBlueprintTypes: Add column typeID, with value copied from blueprintTypeID
+     - mapConstellations: Add column itemID, with value copied from constellationID
+     - mapRegions: Add column itemID, with value copied from regionID
+     - mapSolarSystems: Add column itemID, with value copied from solarSystemID
+     - mapUniverse: Add column itemID, with value copied from universeID
+     - staStations: Add column itemID, with value copied from stationID
+     - staStationTypes: Add column typeID, with value copied from stationTypeID
+
+   The new column should also be set as the primary key, with a unique index
+   placed on the old primary key.
+
+   We add a new column rather than simply renaming the existing column so that
+   SQL queries written against the stock data export continue to work.
+
+3. CCP are, for some reason, moving data out of the SQL database and into flat YAML
+   files.  This is a very unpopular decision, and I'm in agreement with the consensus.
+   This is relational data and should be stored in a relational format.  Additionally,
+   the piecemeal way they've chosen to release the YAML files (one at a time) requires
+   a lot of unnecessary effort keeping the database schema up-to-date.  Nonetheless, since
+   this is the route they seem insistent upon, it's also necessary to modify the database
+   to re-incorporate those data that have been refactored out into YAML.
+
+I'm collecting SQL scripts to render the stock data export compatible with this framework in the
+Update Scripts directory, named by the version number of the data export.  When a new version
+is released, the most recent script is a good starting point, and may not even require
+modification.  These scripts prepare the database structure to import data from the 
+aforementioned YAML files, but do not actually import the data itself.

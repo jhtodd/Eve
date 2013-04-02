@@ -9,9 +9,11 @@ namespace Eve {
   using System.Collections.Generic;
   using System.Data.Common;
   using System.Diagnostics.Contracts;
+  using System.Linq;
 
   using FreeNet;
   using FreeNet.Configuration;
+  using FreeNet.Data.Entity;
 
   using Eve.Data;
 

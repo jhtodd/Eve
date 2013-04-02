@@ -9,260 +9,260 @@ namespace Eve {
   public enum UnitId : byte {
 
     /// <summary>Meter</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Length", "Eve.UnitId_Length")]
+    
     [System.ComponentModel.DescriptionAttribute("Meter")]
     Length = 1,
 
     /// <summary>Kilogram</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Mass", "Eve.UnitId_Mass")]
+    
     [System.ComponentModel.DescriptionAttribute("Kilogram")]
     Mass = 2,
 
     /// <summary>Second</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Time", "Eve.UnitId_Time")]
+    
     [System.ComponentModel.DescriptionAttribute("Second")]
     Time = 3,
 
     /// <summary>Ampere</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Electric Current", "Eve.UnitId_ElectricCurrent")]
+    
     [System.ComponentModel.DescriptionAttribute("Ampere")]
     ElectricCurrent = 4,
 
     /// <summary>Kelvin</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Temperature", "Eve.UnitId_Temperature")]
+    
     [System.ComponentModel.DescriptionAttribute("Kelvin")]
     Temperature = 5,
 
     /// <summary>Mole</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Amount Of Substance", "Eve.UnitId_AmountOfSubstance")]
+    
     [System.ComponentModel.DescriptionAttribute("Mole")]
     AmountOfSubstance = 6,
 
     /// <summary>Candela</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Luminous Intensity", "Eve.UnitId_LuminousIntensity")]
+    
     [System.ComponentModel.DescriptionAttribute("Candela")]
     LuminousIntensity = 7,
 
     /// <summary>Square meter</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Area", "Eve.UnitId_Area")]
+    
     [System.ComponentModel.DescriptionAttribute("Square meter")]
     Area = 8,
 
     /// <summary>Cubic meter</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Volume", "Eve.UnitId_Volume")]
+    
     [System.ComponentModel.DescriptionAttribute("Cubic meter")]
     Volume = 9,
 
     /// <summary>Meter per second</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Speed", "Eve.UnitId_Speed")]
+    
     [System.ComponentModel.DescriptionAttribute("Meter per second")]
     Speed = 10,
 
     /// <summary>Meter per second squared</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Acceleration", "Eve.UnitId_Acceleration")]
+    
     [System.ComponentModel.DescriptionAttribute("Meter per second squared")]
     Acceleration = 11,
 
     /// <summary>Reciprocal meter</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Wave Number", "Eve.UnitId_WaveNumber")]
+    
     [System.ComponentModel.DescriptionAttribute("Reciprocal meter")]
     WaveNumber = 12,
 
     /// <summary>Kilogram per cubic meter</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Mass Density", "Eve.UnitId_MassDensity")]
+    
     [System.ComponentModel.DescriptionAttribute("Kilogram per cubic meter")]
     MassDensity = 13,
 
     /// <summary>Cubic meter per kilogram</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Specific Volume", "Eve.UnitId_SpecificVolume")]
+    
     [System.ComponentModel.DescriptionAttribute("Cubic meter per kilogram")]
     SpecificVolume = 14,
 
     /// <summary>Ampere per square meter</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Current Density", "Eve.UnitId_CurrentDensity")]
+    
     [System.ComponentModel.DescriptionAttribute("Ampere per square meter")]
     CurrentDensity = 15,
 
     /// <summary>Ampere per meter</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Magnetic Field Strength", "Eve.UnitId_MagneticFieldStrength")]
+    
     [System.ComponentModel.DescriptionAttribute("Ampere per meter")]
     MagneticFieldStrength = 16,
 
     /// <summary>Mole per cubic meter</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Amount-Of-Substance Concentration", "Eve.UnitId_AmountOfSubstanceConcentration")]
+    
     [System.ComponentModel.DescriptionAttribute("Mole per cubic meter")]
     AmountOfSubstanceConcentration = 17,
 
     /// <summary>Candela per square meter</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Luminance", "Eve.UnitId_Luminance")]
+    
     [System.ComponentModel.DescriptionAttribute("Candela per square meter")]
     Luminance = 18,
 
     /// <summary>Kilogram per kilogram, which may be represented by the number 1</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Mass Fraction", "Eve.UnitId_MassFraction")]
+    
     [System.ComponentModel.DescriptionAttribute("Kilogram per kilogram, which may be represented by the number 1")]
     MassFraction = 19,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("Milliseconds", "Eve.UnitId_Milliseconds")]
+    
     Milliseconds = 101,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("Millimeters", "Eve.UnitId_Millimeters")]
+    
     Millimeters = 102,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("MegaPascals", "Eve.UnitId_MegaPascals")]
+    
     MegaPascals = 103,
 
     /// <summary>Indicates that the unit is a multiplier.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Multiplier", "Eve.UnitId_Multiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Indicates that the unit is a multiplier.")]
     Multiplier = 104,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("Percentage", "Eve.UnitId_Percentage")]
+    
     Percentage = 105,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("Teraflops", "Eve.UnitId_Teraflops")]
+    
     Teraflops = 106,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("MegaWatts", "Eve.UnitId_MegaWatts")]
+    
     MegaWatts = 107,
 
     /// <summary>Used for resistance.
     ///0.0 = 100% 1.0 = 0%
     ///</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Inverse Absolute Percent", "Eve.UnitId_InverseAbsolutePercent")]
+    
     [System.ComponentModel.DescriptionAttribute("Used for resistance.\r\n0.0 = 100% 1.0 = 0%\r\n")]
     InverseAbsolutePercent = 108,
 
     /// <summary>Used for multipliers displayed as %
     ///1.1 = +10%
     ///0.9 = -10%</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Modifier Percent", "Eve.UnitId_ModifierPercent")]
+    
     [System.ComponentModel.DescriptionAttribute("Used for multipliers displayed as %\r\n1.1 = +10%\r\n0.9 = -10%")]
     ModifierPercent = 109,
 
     /// <summary>Used to modify damage resistance. Damage resistance bonus.
     ///0.1 = 90%
     ///0.9 = 10%</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Inversed Modifier Percent", "Eve.UnitId_InversedModifierPercent")]
+    
     [System.ComponentModel.DescriptionAttribute("Used to modify damage resistance. Damage resistance bonus.\r\n0.1 = 90%\r\n0.9 = 10%")]
     InversedModifierPercent = 111,
 
     /// <summary>Rotation speed.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Radians/Second", "Eve.UnitId_RadiansSecond")]
+    
     [System.ComponentModel.DescriptionAttribute("Rotation speed.")]
     RadiansSecond = 112,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("Hitpoints", "Eve.UnitId_Hitpoints")]
+    
     Hitpoints = 113,
 
     /// <summary>Giga Joule</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("capacitor units", "Eve.UnitId_CapacitorUnits")]
+    
     [System.ComponentModel.DescriptionAttribute("Giga Joule")]
     CapacitorUnits = 114,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("groupID", "Eve.UnitId_GroupId")]
+    
     GroupId = 115,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("typeID", "Eve.UnitId_TypeId")]
+    
     TypeId = 116,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("Sizeclass", "Eve.UnitId_Sizeclass")]
+    
     Sizeclass = 117,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("Ore units", "Eve.UnitId_OreUnits")]
+    
     OreUnits = 118,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("attributeID", "Eve.UnitId_AttributeId")]
+    
     AttributeId = 119,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("attributePoints", "Eve.UnitId_AttributePoints")]
+    
     AttributePoints = 120,
 
     /// <summary>Used for real percentages, i.e. the number 5 is 5%</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("realPercent", "Eve.UnitId_RealPercent")]
+    
     [System.ComponentModel.DescriptionAttribute("Used for real percentages, i.e. the number 5 is 5%")]
     RealPercent = 121,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("Fitting slots", "Eve.UnitId_FittingSlots")]
+    
     FittingSlots = 122,
 
     /// <summary>Shows seconds directly</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("trueTime", "Eve.UnitId_TrueTime")]
+    
     [System.ComponentModel.DescriptionAttribute("Shows seconds directly")]
     TrueTime = 123,
 
     /// <summary>Used for relative percentages displayed as %</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Modifier Relative Percent", "Eve.UnitId_ModifierRelativePercent")]
+    
     [System.ComponentModel.DescriptionAttribute("Used for relative percentages displayed as %")]
     ModifierRelativePercent = 124,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("Newton", "Eve.UnitId_Newton")]
+    
     Newton = 125,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("Light Year", "Eve.UnitId_LightYear")]
+    
     LightYear = 126,
 
     /// <summary>0.0 = 0% 1.0 = 100%</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Absolute Percent", "Eve.UnitId_AbsolutePercent")]
+    
     [System.ComponentModel.DescriptionAttribute("0.0 = 0% 1.0 = 100%")]
     AbsolutePercent = 127,
 
     /// <summary>Mega bits per second</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Drone bandwidth", "Eve.UnitId_DroneBandwidth")]
+    
     [System.ComponentModel.DescriptionAttribute("Mega bits per second")]
     DroneBandwidth = 128,
 
     /// <summary>Hours</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Hours", "Eve.UnitId_Hours")]
+    
     [System.ComponentModel.DescriptionAttribute("Hours")]
     Hours = 129,
 
     /// <summary>ISK</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Money", "Eve.UnitId_Money")]
+    
     [System.ComponentModel.DescriptionAttribute("ISK")]
     Money = 133,
 
     /// <summary>Bandwidth for PI</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Logistical Capacity", "Eve.UnitId_LogisticalCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("Bandwidth for PI")]
     LogisticalCapacity = 134,
 
     /// <summary>Used to denote distance, 1AU = The distance from the Earth to the Sun.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Astronomical Unit", "Eve.UnitId_AstronomicalUnit")]
+    
     [System.ComponentModel.DescriptionAttribute("Used to denote distance, 1AU = The distance from the Earth to the Sun.")]
     AstronomicalUnit = 135,
 
     /// <summary>Slot number prefix for various purposes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Slot", "Eve.UnitId_Slot")]
+    
     [System.ComponentModel.DescriptionAttribute("Slot number prefix for various purposes")]
     Slot = 136,
 
     /// <summary>For displaying boolean flags</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Boolean", "Eve.UnitId_Boolean")]
+    
     [System.ComponentModel.DescriptionAttribute("For displaying boolean flags")]
     Boolean = 137,
 
     /// <summary>Units of something, for example fuel</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Units", "Eve.UnitId_Units")]
+    
     [System.ComponentModel.DescriptionAttribute("Units of something, for example fuel")]
     Units = 138,
 
     /// <summary>Forces a plus sign for positive values</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Bonus", "Eve.UnitId_Bonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Forces a plus sign for positive values")]
     Bonus = 139,
 
     /// <summary>For anything which is divided by levels</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Level", "Eve.UnitId_Level")]
+    
     [System.ComponentModel.DescriptionAttribute("For anything which is divided by levels")]
     Level = 140,
 
     /// <summary>For various counts to do with turret, launcher and rig hardpoints</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Hardpoints", "Eve.UnitId_Hardpoints")]
+    
     [System.ComponentModel.DescriptionAttribute("For various counts to do with turret, launcher and rig hardpoints")]
     Hardpoints = 141,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("Sex", "Eve.UnitId_Sex")]
+    
     Sex = 142,
   }
 }

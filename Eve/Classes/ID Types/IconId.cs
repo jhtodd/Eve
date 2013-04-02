@@ -92,7 +92,7 @@ namespace Eve {
     #endregion
 
     #region Instance Fields
-    int _value;
+    private int _value;
     #endregion
 
     #region Constructors/Finalizers

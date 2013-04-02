@@ -101,10 +101,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\FreeNet.Data\FreeNet.Data.csproj">
-      <Project>{4f9a7e13-951b-4bd2-8a76-60fa69195ac5}</Project>
-      <Name>FreeNet.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Eve.csproj">
       <Project>{b154b7bd-6371-4c9d-95ed-dbc770931802}</Project>
       <Name>Eve</Name>

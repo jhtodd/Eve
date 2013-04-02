@@ -12,7 +12,7 @@ namespace Eve.Universe {
 
   using FreeNet;
 
-  using Eve.Entities;
+  using Eve.Data.Entities;
 
   //******************************************************************************
   /// <summary>
@@ -34,7 +34,7 @@ namespace Eve.Universe {
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    public Race(RaceEntity entity) : base(entity) {
+    protected internal Race(RaceEntity entity) : base(entity) {
       Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
     }
     //******************************************************************************

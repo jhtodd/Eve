@@ -62,14 +62,6 @@
       <Project>{b154b7bd-6371-4c9d-95ed-dbc770931802}</Project>
       <Name>Eve</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FreeNet.Data.Entity\FreeNet.Data.Entity.csproj">
-      <Project>{f2a3ef11-344e-4bdc-9f35-5fe736da2df3}</Project>
-      <Name>FreeNet.Data.Entity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FreeNet\FreeNet.csproj">
-      <Project>{f56344b3-bb90-4be7-85b2-b4c4a4f2743d}</Project>
-      <Name>FreeNet</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Eve.pfx" />

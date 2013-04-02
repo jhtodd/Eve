@@ -1,0 +1,6 @@
+[submodule "FreeNet"]
+	path = FreeNet
+	url = git://github.com/jhtodd/FreeNet.git
+[submodule "FreeNet.Data.Entity"]
+	path = FreeNet.Data.Entity
+	url = git://github.com/jhtodd/FreeNet.Data.Entity.git

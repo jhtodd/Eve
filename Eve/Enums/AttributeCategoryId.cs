@@ -9,57 +9,57 @@ namespace Eve {
   public enum AttributeCategoryId : byte {
 
     /// <summary>Fitting capabilities of a ship</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Fitting", "Eve.AttributeCategoryId_Fitting")]
+    
     [System.ComponentModel.DescriptionAttribute("Fitting capabilities of a ship")]
     Fitting = 1,
 
     /// <summary>Shield attributes of ships</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Shield", "Eve.AttributeCategoryId_Shield")]
+    
     [System.ComponentModel.DescriptionAttribute("Shield attributes of ships")]
     Shield = 2,
 
     /// <summary>Armor attributes of ships</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Armor", "Eve.AttributeCategoryId_Armor")]
+    
     [System.ComponentModel.DescriptionAttribute("Armor attributes of ships")]
     Armor = 3,
 
     /// <summary>Structure attributes of ships</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Structure", "Eve.AttributeCategoryId_Structure")]
+    
     [System.ComponentModel.DescriptionAttribute("Structure attributes of ships")]
     Structure = 4,
 
     /// <summary>Capacitor attributes for ships</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Capacitor", "Eve.AttributeCategoryId_Capacitor")]
+    
     [System.ComponentModel.DescriptionAttribute("Capacitor attributes for ships")]
     Capacitor = 5,
 
     /// <summary>Targeting Attributes for ships</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Targeting", "Eve.AttributeCategoryId_Targeting")]
+    
     [System.ComponentModel.DescriptionAttribute("Targeting Attributes for ships")]
     Targeting = 6,
 
     /// <summary>Misc. attributes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Miscellaneous", "Eve.AttributeCategoryId_Miscellaneous")]
+    
     [System.ComponentModel.DescriptionAttribute("Misc. attributes")]
     Miscellaneous = 7,
 
     /// <summary>Skill requirements</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Required Skills", "Eve.AttributeCategoryId_RequiredSkills")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill requirements")]
     RequiredSkills = 8,
 
     /// <summary>Attributes already checked and not going into a category</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("NULL", "Eve.AttributeCategoryId_Null")]
+    
     [System.ComponentModel.DescriptionAttribute("Attributes already checked and not going into a category")]
     Null = 9,
 
     /// <summary>All you need to know about drones</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Drones", "Eve.AttributeCategoryId_Drones")]
+    
     [System.ComponentModel.DescriptionAttribute("All you need to know about drones")]
     Drones = 10,
 
     /// <summary>Attribs for the AI configuration</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("AI", "Eve.AttributeCategoryId_Ai")]
+    
     [System.ComponentModel.DescriptionAttribute("Attribs for the AI configuration")]
     Ai = 12,
   }

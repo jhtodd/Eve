@@ -16,17 +16,19 @@ namespace Eve {
   using FreeNet.Collections;
   using FreeNet.Collections.ObjectModel;
   using FreeNet.Data.Entity;
-  using FreeNet.Extensions;
+  using FreeNet.Utilities;
 
-  using Eve.Entities;
+  using Eve.Data.Entities;
+  using Eve.Meta;
 
   //******************************************************************************
   /// <summary>
   /// Contains information about the value of an EVE attribute.
   /// </summary>
   public class AttributeValue : EntityAdapter<AttributeValueEntity>,
+                                IAttribute,
                                 IComparable,
-                                IComparable<AttributeValue>,
+                                IComparable<IAttribute>,
                                 IEquatable<AttributeValue>,
                                 IHasIcon,
                                 IHasId<long>,
@@ -49,14 +51,13 @@ namespace Eve {
     /// <returns>
     /// A compound ID combining the two sub-IDs.
     /// </returns>
-    public static long CreateCompoundId(ItemTypeId itemTypeId, AttributeId attributeId) {
+    public static long CreateCompoundId(TypeId itemTypeId, AttributeId attributeId) {
       return (long) ((((ulong) (long) itemTypeId) << 32) | ((ulong) (long) attributeId));
     }
     #endregion
 
     #region Instance Fields
     private AttributeType _attributeType;
-    private ItemType _itemType;
     #endregion
 
     #region Constructors/Finalizers
@@ -88,7 +89,7 @@ namespace Eve {
     /// <value>
     /// The ID of the attribute the current value applies to.
     /// </value>
-    public AttributeId AttributeId {
+    public AttributeId Id {
       get {
         return Entity.AttributeId;
       }
@@ -101,51 +102,22 @@ namespace Eve {
     /// <value>
     /// The <see cref="AttributeType" /> to which the value applies.
     /// </value>
-    public AttributeType AttributeType {
+    public AttributeType Type {
       get {
         Contract.Ensures(Contract.Result<AttributeType>() != null);
 
         if (_attributeType == null) {
-          AttributeTypeEntity attributeTypeEntity = Entity.AttributeType;
-          Contract.Assume(attributeTypeEntity != null);
-          _attributeType = new AttributeType(attributeTypeEntity);
+
+          // Load the cached version if available
+          _attributeType = Eve.General.Cache.GetOrAdd<AttributeType>(Id, () => {
+            AttributeTypeEntity attributeTypeEntity = Entity.AttributeType;
+            Contract.Assume(attributeTypeEntity != null);
+
+            return new AttributeType(attributeTypeEntity);
+          });
         }
 
         return _attributeType;
-      }
-    }
-    //******************************************************************************
-    /// <summary>
-    /// Gets the item type the value describes.
-    /// </summary>
-    /// 
-    /// <value>
-    /// The item type the value describes.
-    /// </value>
-    public ItemType ItemType {
-      get {
-        Contract.Ensures(Contract.Result<ItemType>() != null);
-
-        if (_itemType == null) {
-          ItemTypeEntity itemTypeEntity = Entity.ItemType;
-          Contract.Assume(itemTypeEntity != null);
-          _itemType = ItemType.Create(itemTypeEntity);
-        }
-
-        return _itemType;
-      }
-    }
-    //******************************************************************************
-    /// <summary>
-    /// Gets the ID of the item type the value describes.
-    /// </summary>
-    /// 
-    /// <value>
-    /// The ID of the item type the value describes.
-    /// </value>
-    public ItemTypeId ItemTypeId {
-      get {
-        return Entity.ItemTypeId;
       }
     }
     //******************************************************************************
@@ -156,7 +128,7 @@ namespace Eve {
     /// <value>
     /// The value of the attribute before any modifiers are applied.
     /// </value>
-    public double Value {
+    public double BaseValue {
       get {
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
@@ -177,7 +149,7 @@ namespace Eve {
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
-        
+
         return result;
       }
     }
@@ -185,15 +157,15 @@ namespace Eve {
     #region Public Methods
     //******************************************************************************
     /// <inheritdoc />
-    public virtual int CompareTo(AttributeValue other) {
+    public virtual int CompareTo(IAttribute other) {
       if (other == null) {
         return 1;
       }
 
-      int result = AttributeType.CompareTo(other.AttributeType);
+      int result = Type.CompareTo(other.Type);
 
       if (result == 0) {
-        result = Value.CompareTo(other.Value);
+        result = BaseValue.CompareTo(other.BaseValue);
       }
 
       return result;
@@ -204,25 +176,13 @@ namespace Eve {
       return Equals(obj as AttributeValue);
     }
     //******************************************************************************
-    /// <summary>
-    /// Returns a value indicating whether the current instance is equal to the
-    /// specified object.
-    /// </summary>
-    /// 
-    /// <param name="obj">
-    /// The object to compare to the current object.
-    /// </param>
-    /// 
-    /// <returns>
-    /// <see langword="true" /> if <paramref name="obj" /> is equal to the current
-    /// instance; otherwise <see langword="false" />.
-    /// </returns>
+    /// <inheritdoc />
     public virtual bool Equals(AttributeValue other) {
       if (other == null) {
         return false;
       }
 
-      return AttributeId.Equals(other.AttributeId) && Value.Equals(other.Value);
+      return Id.Equals(other.Id) && BaseValue.Equals(other.BaseValue);
     }
     //******************************************************************************
     /// <summary>
@@ -254,17 +214,17 @@ namespace Eve {
     public string FormatValue(string format) {
 
       // If the attribute has a unit, use it for the formatting
-      if (AttributeType.UnitId != null && AttributeType.Unit != null) {
-        return AttributeType.Unit.FormatValue(Value, format);
+      if (Type.UnitId != null && Type.Unit != null) {
+        return Type.Unit.FormatValue(BaseValue, format);
       }
 
       // Otherwise, just format the number
-      return Value.ToString(format);
+      return BaseValue.ToString(format);
     }
     //******************************************************************************
     /// <inheritdoc />
     public override int GetHashCode() {
-      return FreeNet.Methods.GetCompoundHashCode(AttributeId, Value);
+      return CompoundHashCode.Create(Id, BaseValue);
     }
     //******************************************************************************
     /// <inheritdoc />
@@ -281,13 +241,34 @@ namespace Eve {
     /// <returns>
     /// A string containing a formatted version of the attribute value.
     /// </returns>
-    public string ToString(string format) {
+    public virtual string ToString(string format) {
+      Contract.Ensures(Contract.Result<string>() != null);
 
       // Format the value according to the attribute
-      return AttributeType.DisplayName + ": " + AttributeType.FormatValue(Value, format);
+      return Type.DisplayName + ": " + Type.FormatValue(BaseValue, format);
     }
     #endregion
 
+    #region IAttribute Members
+    //******************************************************************************
+    double IAttribute.BaseValue {
+      get {
+        return BaseValue;
+      }
+    }
+    //******************************************************************************
+    AttributeId IAttribute.Id {
+      get {
+        return Id;
+      }
+    }
+    //******************************************************************************
+    AttributeType IAttribute.Type {
+      get {
+        return Type;
+      }
+    }
+    #endregion
     #region IComparable Members
     //******************************************************************************
     int IComparable.CompareTo(object obj) {
@@ -299,13 +280,13 @@ namespace Eve {
     //******************************************************************************
     Icon IHasIcon.Icon {
       get {
-        return AttributeType.Icon;
+        return Type.Icon;
       }
     }
     //******************************************************************************
     IconId? IHasIcon.IconId {
       get {
-        return AttributeType.IconId;
+        return Type.IconId;
       }
     }
     #endregion
@@ -321,7 +302,7 @@ namespace Eve {
     //******************************************************************************
     long IHasId<long>.Id {
       get {
-        return CreateCompoundId(ItemTypeId, AttributeId);
+        return CreateCompoundId(Entity.ItemTypeId, Id);
       }
     }
     #endregion
@@ -329,7 +310,7 @@ namespace Eve {
     //******************************************************************************
     AttributeId IKeyItem<AttributeId>.Key {
       get {
-        return AttributeId;
+        return Id;
       }
     }
     #endregion
@@ -339,7 +320,8 @@ namespace Eve {
   /// <summary>
   /// A read-only collection of attributes.
   /// </summary>
-  public class ReadOnlyAttributeValueCollection : ReadOnlyKeyedCollection<AttributeId, AttributeValue> {
+  public class ReadOnlyAttributeValueCollection : ReadOnlyKeyedCollection<AttributeId, AttributeValue>,
+                                                  IAttributeCollection {
 
     #region Constructors/Finalizers
     //******************************************************************************
@@ -361,8 +343,65 @@ namespace Eve {
     #region Public Methods
     //******************************************************************************
     /// <summary>
+    /// Gets the numeric value of the specified attribute, or the default value
+    /// specified by the attribute type if a specific value for that attribute is
+    /// not present.
+    /// </summary>
+    /// 
+    /// <param name="id">
+    /// The ID of the attribute whose value to retrieve.
+    /// </param>
+    /// 
+    /// <returns>
+    /// The value of the specified attribute.
+    /// </returns>
+    public double GetAttributeValue(AttributeId id) {
+      Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
+      Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
+
+      AttributeValue attribute;
+
+      if (TryGetValue(id, out attribute)) {
+        Contract.Assume(attribute != null);
+        return attribute.BaseValue;
+      }
+
+      AttributeType type = Eve.General.DataSource.GetAttributeTypeById(id);
+      return type.DefaultValue;
+    }
+    //******************************************************************************
+    /// <summary>
+    /// Gets the numeric value of the specified attribute, or the specified
+    /// default value if that attribute is not present.
+    /// </summary>
+    /// 
+    /// <param name="id">
+    /// The ID of the attribute whose value to retrieve.
+    /// </param>
+    /// 
+    /// <param name="defaultValue">
+    /// The value to return if the specified attribute is not contained in the
+    /// collection.
+    /// </param>
+    /// 
+    /// <returns>
+    /// The value of the specified attribute.
+    /// </returns>
+    public double GetAttributeValue(AttributeId id, double defaultValue) {
+      AttributeValue attribute;
+
+      if (TryGetValue(id, out attribute)) {
+        Contract.Assume(attribute != null);
+        return attribute.BaseValue;
+      }
+
+      AttributeType type = Eve.General.DataSource.GetAttributeTypeById(id);
+      return type.DefaultValue;
+    }
+    //******************************************************************************
+    /// <summary>
     /// Gets the value of the specified attribute, or the default value specified
-    /// by the desired attribute type if a specific value for that attribute is
+    /// by the attribute type if a specific value for that attribute is
     /// not present.
     /// </summary>
     /// 
@@ -378,15 +417,8 @@ namespace Eve {
     /// The value of the specified attribute, converted to
     /// <typeparamref name="T" />.
     /// </returns>
-    public T GetValue<T>(AttributeId id) {
-      AttributeValue attribute;
-
-      if (TryGetValue(id, out attribute)) {
-        return attribute.Value.ConvertTo<T>();
-      }
-
-      AttributeType type = Eve.General.DataSource.GetAttributeTypeById(id);
-      return type.DefaultValue.ConvertTo<T>();
+    public T GetAttributeValue<T>(AttributeId id) {
+      return GetAttributeValue(id).ConvertTo<T>();
     }
     //******************************************************************************
     /// <summary>
@@ -411,14 +443,51 @@ namespace Eve {
     /// The value of the specified attribute, converted to
     /// <typeparamref name="T" />.
     /// </returns>
-    public T GetValue<T>(AttributeId id, T defaultValue) {
+    public T GetAttributeValue<T>(AttributeId id, T defaultValue) {
       AttributeValue attribute;
 
       if (TryGetValue(id, out attribute)) {
-        return attribute.Value.ConvertTo<T>();
+        Contract.Assume(attribute != null);
+        return attribute.BaseValue.ConvertTo<T>();
       }
 
       return defaultValue;
+    }
+    #endregion
+
+    #region IAttributeCollection Members
+    //******************************************************************************
+    IAttribute IAttributeCollection.this[AttributeId attributeId] {
+      get {
+        var result = this[attributeId];
+
+        Contract.Assume(result != null);
+        return result;
+      }
+    }
+    //******************************************************************************
+    bool IAttributeCollection.TryGetValue(AttributeId attributeId, out IAttribute value) {
+      AttributeValue containedValue;
+
+      bool success = TryGetValue(attributeId, out containedValue);
+      value = containedValue;
+
+      Contract.Assume(!success || value != null);
+      return success;
+    }
+    #endregion
+    #region IEnumerator<IAttribute> Members
+    //******************************************************************************
+    IEnumerator<IAttribute> IEnumerable<IAttribute>.GetEnumerator() {
+      return GetEnumerator();
+    }
+    #endregion
+    #region IReadOnlyList<IAttribute> Members
+    //******************************************************************************
+    IAttribute IReadOnlyList<IAttribute>.this[int index] {
+      get {
+        return this[index];
+      }
     }
     #endregion
   }

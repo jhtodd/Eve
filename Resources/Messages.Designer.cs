@@ -151,20 +151,20 @@ namespace Eve.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The item type cannot be null..
-        /// </summary>
-        public static string BaseValueCache_ItemTypeCannotBeNull {
-            get {
-                return ResourceManager.GetString("BaseValueCache_ItemTypeCannotBeNull", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The region cannot be null..
         /// </summary>
         public static string BaseValueCache_RegionCannotBeNull {
             get {
                 return ResourceManager.GetString("BaseValueCache_RegionCannotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The item type cannot be null..
+        /// </summary>
+        public static string BaseValueCache_TypeCannotBeNull {
+            get {
+                return ResourceManager.GetString("BaseValueCache_TypeCannotBeNull", resourceCulture);
             }
         }
         
@@ -241,6 +241,60 @@ namespace Eve.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The capacity must be a finite numeric value..
+        /// </summary>
+        public static string EveType_CapacityMustBeNumeric {
+            get {
+                return ResourceManager.GetString("EveType_CapacityMustBeNumeric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The chance of duplicating must be a finite numeric value..
+        /// </summary>
+        public static string EveType_ChanceOfDuplicatingMustBeNumeric {
+            get {
+                return ResourceManager.GetString("EveType_ChanceOfDuplicatingMustBeNumeric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The group cannot be null..
+        /// </summary>
+        public static string EveType_GroupCannotBeNull {
+            get {
+                return ResourceManager.GetString("EveType_GroupCannotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The mass must be a finite numeric value..
+        /// </summary>
+        public static string EveType_MassMustBeNumeric {
+            get {
+                return ResourceManager.GetString("EveType_MassMustBeNumeric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The character to test against the skill requirements cannot be null..
+        /// </summary>
+        public static string EveType_MeetsSkillRequirementsCharacterCannotBeNull {
+            get {
+                return ResourceManager.GetString("EveType_MeetsSkillRequirementsCharacterCannotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The volume must be a finite numeric value..
+        /// </summary>
+        public static string EveType_VolumeMustBeNumeric {
+            get {
+                return ResourceManager.GetString("EveType_VolumeMustBeNumeric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The cache cannot be null..
         /// </summary>
         public static string General_CacheCannotBeNull {
@@ -295,6 +349,15 @@ namespace Eve.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The data context cannot be null..
+        /// </summary>
+        public static string IEveDataSource_ContextCannotBeNull {
+            get {
+                return ResourceManager.GetString("IEveDataSource_ContextCannotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The filter cannot be null..
         /// </summary>
         public static string IEveDataSource_FilterCannotBeNull {
@@ -322,47 +385,38 @@ namespace Eve.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The capacity must be a finite numeric value..
+        ///   Looks up a localized string similar to The skill level must be between 0 and 5..
         /// </summary>
-        public static string ItemType_CapacityMustBeNumeric {
+        public static string ISkill_LevelMustBeValid {
             get {
-                return ResourceManager.GetString("ItemType_CapacityMustBeNumeric", resourceCulture);
+                return ResourceManager.GetString("ISkill_LevelMustBeValid", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The chance of duplicating must be a finite numeric value..
+        ///   Looks up a localized string similar to The skill rank cannot be negative..
         /// </summary>
-        public static string ItemType_ChanceOfDuplicatingMustBeNumeric {
+        public static string ISkill_RankCannotBeNegative {
             get {
-                return ResourceManager.GetString("ItemType_ChanceOfDuplicatingMustBeNumeric", resourceCulture);
+                return ResourceManager.GetString("ISkill_RankCannotBeNegative", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The group cannot be null..
+        ///   Looks up a localized string similar to The number of skill points cannot be negative..
         /// </summary>
-        public static string ItemType_GroupCannotBeNull {
+        public static string ISkill_SkillPointsCannotBeNegative {
             get {
-                return ResourceManager.GetString("ItemType_GroupCannotBeNull", resourceCulture);
+                return ResourceManager.GetString("ISkill_SkillPointsCannotBeNegative", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The mass must be a finite numeric value..
+        ///   Looks up a localized string similar to The underlying data entity must be of the correct type..
         /// </summary>
-        public static string ItemType_MassMustBeNumeric {
+        public static string Item_EntityMustBeCorrectType {
             get {
-                return ResourceManager.GetString("ItemType_MassMustBeNumeric", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The volume must be a finite numeric value..
-        /// </summary>
-        public static string ItemType_VolumeMustBeNumeric {
-            get {
-                return ResourceManager.GetString("ItemType_VolumeMustBeNumeric", resourceCulture);
+                return ResourceManager.GetString("Item_EntityMustBeCorrectType", resourceCulture);
             }
         }
         

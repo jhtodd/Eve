@@ -9,7008 +9,7008 @@ namespace Eve {
   public enum AttributeId : short {
 
     /// <summary>Boolean to store status of online effect</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("isOnline", "Eve.AttributeId_IsOnline")]
+    
     [System.ComponentModel.DescriptionAttribute("Boolean to store status of online effect")]
     IsOnline = 2,
 
     /// <summary>current damage dealt to module</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("damage", "Eve.AttributeId_Damage")]
+    
     [System.ComponentModel.DescriptionAttribute("current damage dealt to module")]
     Damage = 3,
 
     /// <summary>Integer that describes the types mass</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("mass", "Eve.AttributeId_Mass")]
+    
     [System.ComponentModel.DescriptionAttribute("Integer that describes the types mass")]
     Mass = 4,
 
     /// <summary>The amount of charge used from the capacitor for a module activation.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("capacitorNeed", "Eve.AttributeId_CapacitorNeed")]
+    
     [System.ComponentModel.DescriptionAttribute("The amount of charge used from the capacitor for a module activation.")]
     CapacitorNeed = 6,
 
     /// <summary>tbd</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("minRange", "Eve.AttributeId_MinRange")]
+    
     [System.ComponentModel.DescriptionAttribute("tbd")]
     MinRange = 8,
 
     /// <summary>The maximum hitpoints of an object.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("hp", "Eve.AttributeId_Hp")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum hitpoints of an object.")]
     Hp = 9,
 
     /// <summary>power output of power core</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("powerOutput", "Eve.AttributeId_PowerOutput")]
+    
     [System.ComponentModel.DescriptionAttribute("power output of power core")]
     PowerOutput = 11,
 
     /// <summary>The number of low power slots on the ship.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("lowSlots", "Eve.AttributeId_LowSlots")]
+    
     [System.ComponentModel.DescriptionAttribute("The number of low power slots on the ship.")]
     LowSlots = 12,
 
     /// <summary>tbd</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("medSlots", "Eve.AttributeId_MedSlots")]
+    
     [System.ComponentModel.DescriptionAttribute("tbd")]
     MedSlots = 13,
 
     /// <summary>tbd</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("hiSlots", "Eve.AttributeId_HiSlots")]
+    
     [System.ComponentModel.DescriptionAttribute("tbd")]
     HiSlots = 14,
 
     /// <summary>Current load of power core</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("powerLoad", "Eve.AttributeId_PowerLoad")]
+    
     [System.ComponentModel.DescriptionAttribute("Current load of power core")]
     PowerLoad = 15,
 
     /// <summary>charge of module</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("charge", "Eve.AttributeId_Charge")]
+    
     [System.ComponentModel.DescriptionAttribute("charge of module")]
     Charge = 18,
 
     /// <summary>tbd</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("powerToSpeed", "Eve.AttributeId_PowerToSpeed")]
+    
     [System.ComponentModel.DescriptionAttribute("tbd")]
     PowerToSpeed = 19,
 
     /// <summary>Factor by which topspeed increases.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("speedFactor", "Eve.AttributeId_SpeedFactor")]
+    
     [System.ComponentModel.DescriptionAttribute("Factor by which topspeed increases.")]
     SpeedFactor = 20,
 
     /// <summary>tbd instance param</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("warpFactor", "Eve.AttributeId_WarpFactor")]
+    
     [System.ComponentModel.DescriptionAttribute("tbd instance param")]
     WarpFactor = 21,
 
     /// <summary>tbd</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("warpInhibitor", "Eve.AttributeId_WarpInhibitor")]
+    
     [System.ComponentModel.DescriptionAttribute("tbd")]
     WarpInhibitor = 29,
 
     /// <summary>current power need</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("power", "Eve.AttributeId_Power")]
+    
     [System.ComponentModel.DescriptionAttribute("current power need")]
     Power = 30,
 
     /// <summary>The number of hit points this module can take  </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxArmor", "Eve.AttributeId_MaxArmor")]
+    
     [System.ComponentModel.DescriptionAttribute("The number of hit points this module can take  ")]
     MaxArmor = 31,
 
     /// <summary>The number of hit points when this module goes offline  </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("breakPoint", "Eve.AttributeId_BreakPoint")]
+    
     [System.ComponentModel.DescriptionAttribute("The number of hit points when this module goes offline  ")]
     BreakPoint = 32,
 
     /// <summary>Maximum velocity of ship</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxVelocity", "Eve.AttributeId_MaxVelocity")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum velocity of ship")]
     MaxVelocity = 37,
 
     /// <summary>The cargo space allowed</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("capacity", "Eve.AttributeId_Capacity")]
+    
     [System.ComponentModel.DescriptionAttribute("The cargo space allowed")]
     Capacity = 38,
 
     /// <summary>The damage this weapon deals</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("damageHP", "Eve.AttributeId_DamageHp")]
+    
     [System.ComponentModel.DescriptionAttribute("The damage this weapon deals")]
     DamageHp = 39,
 
     /// <summary>The number of slots this module requires.  Only used for launchers, bays and turrets.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("slots", "Eve.AttributeId_Slots")]
+    
     [System.ComponentModel.DescriptionAttribute("The number of slots this module requires.  Only used for launchers, bays and turr" +
         "ets.")]
     Slots = 47,
 
     /// <summary>CPU output of ship</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cpuOutput", "Eve.AttributeId_CpuOutput")]
+    
     [System.ComponentModel.DescriptionAttribute("CPU output of ship")]
     CpuOutput = 48,
 
     /// <summary>CPU load of ship</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cpuLoad", "Eve.AttributeId_CpuLoad")]
+    
     [System.ComponentModel.DescriptionAttribute("CPU load of ship")]
     CpuLoad = 49,
 
     /// <summary>CPU need of module</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cpu", "Eve.AttributeId_Cpu")]
+    
     [System.ComponentModel.DescriptionAttribute("CPU need of module")]
     Cpu = 50,
 
     /// <summary>Time in milliseconds between possible activations</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("speed", "Eve.AttributeId_Speed")]
+    
     [System.ComponentModel.DescriptionAttribute("Time in milliseconds between possible activations")]
     Speed = 51,
 
     /// <summary>Substracted before damage application.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("damageResistance", "Eve.AttributeId_DamageResistance")]
+    
     [System.ComponentModel.DescriptionAttribute("Substracted before damage application.")]
     DamageResistance = 52,
 
     /// <summary>Distance below which range does not affect the to-hit equation.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxRange", "Eve.AttributeId_MaxRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Distance below which range does not affect the to-hit equation.")]
     MaxRange = 54,
 
     /// <summary>Amount of time taken to fully recharge the capacitor.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rechargeRate", "Eve.AttributeId_RechargeRate")]
+    
     [System.ComponentModel.DescriptionAttribute("Amount of time taken to fully recharge the capacitor.")]
     RechargeRate = 55,
 
     /// <summary>Number of charges consumed per activation</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("chargeRate", "Eve.AttributeId_ChargeRate")]
+    
     [System.ComponentModel.DescriptionAttribute("Number of charges consumed per activation")]
     ChargeRate = 56,
 
     /// <summary>GroupID of module targeted by this weapon</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("targetModule", "Eve.AttributeId_TargetModule")]
+    
     [System.ComponentModel.DescriptionAttribute("GroupID of module targeted by this weapon")]
     TargetModule = 61,
 
     /// <summary>Something to do with accuracy.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("accuracyBonus", "Eve.AttributeId_AccuracyBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Something to do with accuracy.")]
     AccuracyBonus = 63,
 
     /// <summary>Damage multiplier.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("damageMultiplier", "Eve.AttributeId_DamageMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Damage multiplier.")]
     DamageMultiplier = 64,
 
     /// <summary>HP bonus to armor.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorBonus", "Eve.AttributeId_ArmorBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("HP bonus to armor.")]
     ArmorBonus = 65,
 
     /// <summary>Bonus to duration.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("durationBonus", "Eve.AttributeId_DurationBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to duration.")]
     DurationBonus = 66,
 
     /// <summary>Extra batteries to add capacitor.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("capacitorBonus", "Eve.AttributeId_CapacitorBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Extra batteries to add capacitor.")]
     CapacitorBonus = 67,
 
     /// <summary>Bonus to shield.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldBonus", "Eve.AttributeId_ShieldBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to shield.")]
     ShieldBonus = 68,
 
     /// <summary>Bonus to rate/conversion ratio.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rateBonus", "Eve.AttributeId_RateBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to rate/conversion ratio.")]
     RateBonus = 69,
 
     /// <summary>The agility of the object.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("agility", "Eve.AttributeId_Agility")]
+    
     [System.ComponentModel.DescriptionAttribute("The agility of the object.")]
     Agility = 70,
 
     /// <summary>Bonus to capacity (shield at least).</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("capacityBonus", "Eve.AttributeId_CapacityBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to capacity (shield at least).")]
     CapacityBonus = 72,
 
     /// <summary>Length of activation time.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("duration", "Eve.AttributeId_Duration")]
+    
     [System.ComponentModel.DescriptionAttribute("Length of activation time.")]
     Duration = 73,
 
     /// <summary>DO NOT MESS WITH. How many hp are in one capacity unit</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("hpToCapacity", "Eve.AttributeId_HpToCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("DO NOT MESS WITH. How many hp are in one capacity unit")]
     HpToCapacity = 75,
 
     /// <summary>Maximum range at which the scanner can lock a target.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxTargetRange", "Eve.AttributeId_MaxTargetRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum range at which the scanner can lock a target.")]
     MaxTargetRange = 76,
 
     /// <summary>How much ore gets mined</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("miningAmount", "Eve.AttributeId_MiningAmount")]
+    
     [System.ComponentModel.DescriptionAttribute("How much ore gets mined")]
     MiningAmount = 77,
 
     /// <summary>scanning speed in milliseconds</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanSpeed", "Eve.AttributeId_ScanSpeed")]
+    
     [System.ComponentModel.DescriptionAttribute("scanning speed in milliseconds")]
     ScanSpeed = 79,
 
     /// <summary>Amount to increase the maximum speed by.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("speedBonus", "Eve.AttributeId_SpeedBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Amount to increase the maximum speed by.")]
     SpeedBonus = 80,
 
     /// <summary>Factor to modify the hp by.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("hpFactor", "Eve.AttributeId_HpFactor")]
+    
     [System.ComponentModel.DescriptionAttribute("Factor to modify the hp by.")]
     HpFactor = 81,
 
     /// <summary>Modifier for the maximum structural strength.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("structureBonus", "Eve.AttributeId_StructureBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Modifier for the maximum structural strength.")]
     StructureBonus = 82,
 
     /// <summary>An amount to modify the structural damage by.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("structureDamageAmount", "Eve.AttributeId_StructureDamageAmount")]
+    
     [System.ComponentModel.DescriptionAttribute("An amount to modify the structural damage by.")]
     StructureDamageAmount = 83,
 
     /// <summary>An amount to modify the armor damage by.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorDamageAmount", "Eve.AttributeId_ArmorDamageAmount")]
+    
     [System.ComponentModel.DescriptionAttribute("An amount to modify the armor damage by.")]
     ArmorDamageAmount = 84,
 
     /// <summary>Maximum range for use of a shield transfer.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldTransferRange", "Eve.AttributeId_ShieldTransferRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum range for use of a shield transfer.")]
     ShieldTransferRange = 87,
 
     /// <summary>Amount to drain from shield.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldDrainAmount", "Eve.AttributeId_ShieldDrainAmount")]
+    
     [System.ComponentModel.DescriptionAttribute("Amount to drain from shield.")]
     ShieldDrainAmount = 88,
 
     /// <summary>Maximum range shield can be drained at.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldDrainRange", "Eve.AttributeId_ShieldDrainRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum range shield can be drained at.")]
     ShieldDrainRange = 89,
 
     /// <summary>Amount of power to transfer.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("powerTransferAmount", "Eve.AttributeId_PowerTransferAmount")]
+    
     [System.ComponentModel.DescriptionAttribute("Amount of power to transfer.")]
     PowerTransferAmount = 90,
 
     /// <summary>Maximum range to transfer power from.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("powerTransferRange", "Eve.AttributeId_PowerTransferRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum range to transfer power from.")]
     PowerTransferRange = 91,
 
     /// <summary>The strength of the kinetic dampening field.  If high may nullify projectiles.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("kineticDampeningFieldStrength", "Eve.AttributeId_KineticDampeningFieldStrength")]
+    
     [System.ComponentModel.DescriptionAttribute("The strength of the kinetic dampening field.  If high may nullify projectiles.")]
     KineticDampeningFieldStrength = 92,
 
     /// <summary>Amount to adjust a kinetic dampening field by.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("kineticDampeningFieldBonus", "Eve.AttributeId_KineticDampeningFieldBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Amount to adjust a kinetic dampening field by.")]
     KineticDampeningFieldBonus = 93,
 
     /// <summary>The strength of the energy reflection field. If high may reflect energy at shooter.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("energyReflectionStrength", "Eve.AttributeId_EnergyReflectionStrength")]
+    
     [System.ComponentModel.DescriptionAttribute("The strength of the energy reflection field. If high may reflect energy at shoote" +
         "r.")]
     EnergyReflectionStrength = 95,
 
     /// <summary>Amount to adjust a energy reflection strength by.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("energyReflectionBonus", "Eve.AttributeId_EnergyReflectionBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Amount to adjust a energy reflection strength by.")]
     EnergyReflectionBonus = 96,
 
     /// <summary>An amount to modify the power of the target by.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("energyDestabilizationAmount", "Eve.AttributeId_EnergyDestabilizationAmount")]
+    
     [System.ComponentModel.DescriptionAttribute("An amount to modify the power of the target by.")]
     EnergyDestabilizationAmount = 97,
 
     /// <summary>Range of energy destabilizer.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("energyDestabilizationRange", "Eve.AttributeId_EnergyDestabilizationRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Range of energy destabilizer.")]
     EnergyDestabilizationRange = 98,
 
     /// <summary>Range of broadcasted EMP field.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("empFieldRange", "Eve.AttributeId_EmpFieldRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Range of broadcasted EMP field.")]
     EmpFieldRange = 99,
 
     /// <summary>The number of remaining unused launcher slots.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("launcherSlotsLeft", "Eve.AttributeId_LauncherSlotsLeft")]
+    
     [System.ComponentModel.DescriptionAttribute("The number of remaining unused launcher slots.")]
     LauncherSlotsLeft = 101,
 
     /// <summary>Remaining number of unused turret slots on the ship.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("turretSlotsLeft", "Eve.AttributeId_TurretSlotsLeft")]
+    
     [System.ComponentModel.DescriptionAttribute("Remaining number of unused turret slots on the ship.")]
     TurretSlotsLeft = 102,
 
     /// <summary>Maximum range objects can be warp scrambled from.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("warpScrambleRange", "Eve.AttributeId_WarpScrambleRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum range objects can be warp scrambled from.")]
     WarpScrambleRange = 103,
 
     /// <summary>Warp ability of a ship.  If greater than zero than the ship cannot warp.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("warpScrambleStatus", "Eve.AttributeId_WarpScrambleStatus")]
+    
     [System.ComponentModel.DescriptionAttribute("Warp ability of a ship.  If greater than zero than the ship cannot warp.")]
     WarpScrambleStatus = 104,
 
     /// <summary>Amount to modify ships warp scramble status by.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("warpScrambleStrength", "Eve.AttributeId_WarpScrambleStrength")]
+    
     [System.ComponentModel.DescriptionAttribute("Amount to modify ships warp scramble status by.")]
     WarpScrambleStrength = 105,
 
     /// <summary>The remaining amount of unused drone bay slots on the ship.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("droneBaySlotsLeft", "Eve.AttributeId_DroneBaySlotsLeft")]
+    
     [System.ComponentModel.DescriptionAttribute("The remaining amount of unused drone bay slots on the ship.")]
     DroneBaySlotsLeft = 106,
 
     /// <summary>Range in meters of explosion effect area.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("explosionRange", "Eve.AttributeId_ExplosionRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Range in meters of explosion effect area.")]
     ExplosionRange = 107,
 
     /// <summary>the range in meters for an object to trigger detonation of missile. (own ship excluded)</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("detonationRange", "Eve.AttributeId_DetonationRange")]
+    
     [System.ComponentModel.DescriptionAttribute("the range in meters for an object to trigger detonation of missile. (own ship exc" +
         "luded)")]
     DetonationRange = 108,
 
     /// <summary>damage multiplier vs. kinetic damagers.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("kineticDamageResonance", "Eve.AttributeId_KineticDamageResonance")]
+    
     [System.ComponentModel.DescriptionAttribute("damage multiplier vs. kinetic damagers.")]
     KineticDamageResonance = 109,
 
     /// <summary>damage multiplier vs. thermal.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("thermalDamageResonance", "Eve.AttributeId_ThermalDamageResonance")]
+    
     [System.ComponentModel.DescriptionAttribute("damage multiplier vs. thermal.")]
     ThermalDamageResonance = 110,
 
     /// <summary>damage multiplier vs. explosive damagers.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("explosiveDamageResonance", "Eve.AttributeId_ExplosiveDamageResonance")]
+    
     [System.ComponentModel.DescriptionAttribute("damage multiplier vs. explosive damagers.")]
     ExplosiveDamageResonance = 111,
 
     /// <summary>Percentage of energy damage that is absorbed as available power.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("energyDamageAbsorptionFactor", "Eve.AttributeId_EnergyDamageAbsorptionFactor")]
+    
     [System.ComponentModel.DescriptionAttribute("Percentage of energy damage that is absorbed as available power.")]
     EnergyDamageAbsorptionFactor = 112,
 
     /// <summary>Electro magnetic damage multiplier for shield and armor. Represented as "% Resistance" in the UI.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("emDamageResonance", "Eve.AttributeId_EmDamageResonance")]
+    
     [System.ComponentModel.DescriptionAttribute("Electro magnetic damage multiplier for shield and armor. Represented as \"% Resist" +
         "ance\" in the UI.")]
     EmDamageResonance = 113,
 
     /// <summary>EM damage done.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("emDamage", "Eve.AttributeId_EmDamage")]
+    
     [System.ComponentModel.DescriptionAttribute("EM damage done.")]
     EmDamage = 114,
 
     /// <summary>Explosive damage done.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("explosiveDamage", "Eve.AttributeId_ExplosiveDamage")]
+    
     [System.ComponentModel.DescriptionAttribute("Explosive damage done.")]
     ExplosiveDamage = 116,
 
     /// <summary>Kinetic damage done.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("kineticDamage", "Eve.AttributeId_KineticDamage")]
+    
     [System.ComponentModel.DescriptionAttribute("Kinetic damage done.")]
     KineticDamage = 117,
 
     /// <summary>Thermal damage done.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("thermalDamage", "Eve.AttributeId_ThermalDamage")]
+    
     [System.ComponentModel.DescriptionAttribute("Thermal damage done.")]
     ThermalDamage = 118,
 
     /// <summary>Multiplier of range the relevant weapon.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("weaponRangeMultiplier", "Eve.AttributeId_WeaponRangeMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier of range the relevant weapon.")]
     WeaponRangeMultiplier = 120,
 
     /// <summary>Bonus to output of power core.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("powerOutputBonus", "Eve.AttributeId_PowerOutputBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to output of power core.")]
     PowerOutputBonus = 121,
 
     /// <summary>Chance of piercing the armor.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorPiercingChance", "Eve.AttributeId_ArmorPiercingChance")]
+    
     [System.ComponentModel.DescriptionAttribute("Chance of piercing the armor.")]
     ArmorPiercingChance = 122,
 
     /// <summary>Chance of piercing the shield.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldPiercingChance", "Eve.AttributeId_ShieldPiercingChance")]
+    
     [System.ComponentModel.DescriptionAttribute("Chance of piercing the shield.")]
     ShieldPiercingChance = 123,
 
     /// <summary>The main color of a ship type.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("mainColor", "Eve.AttributeId_MainColor")]
+    
     [System.ComponentModel.DescriptionAttribute("The main color of a ship type.")]
     MainColor = 124,
 
     /// <summary>Maximum range that something can be ship scanned from.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipScanRange", "Eve.AttributeId_ShipScanRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum range that something can be ship scanned from.")]
     ShipScanRange = 125,
 
     /// <summary>Maximum range the cargo of a ship can be scanned from.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cargoScanRange", "Eve.AttributeId_CargoScanRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum range the cargo of a ship can be scanned from.")]
     CargoScanRange = 126,
 
     /// <summary>A temporary attribute for projectile/hybrid weapons to indicate which charges they have loaded when created in newbie ships ala ammo.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("ammoLoaded", "Eve.AttributeId_AmmoLoaded")]
+    
     [System.ComponentModel.DescriptionAttribute("A temporary attribute for projectile/hybrid weapons to indicate which charges the" +
         "y have loaded when created in newbie ships ala ammo.")]
     AmmoLoaded = 127,
 
     /// <summary>The size of the charges that can fit in the turret/whatever.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("chargeSize", "Eve.AttributeId_ChargeSize")]
+    
     [System.ComponentModel.DescriptionAttribute("The size of the charges that can fit in the turret/whatever.")]
     ChargeSize = 128,
 
     /// <summary>Specifies the maximum numbers of passengers that the ship can have</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxPassengers", "Eve.AttributeId_MaxPassengers")]
+    
     [System.ComponentModel.DescriptionAttribute("Specifies the maximum numbers of passengers that the ship can have")]
     MaxPassengers = 129,
 
     /// <summary>Multipler to adjust the thermal damage resonance of an object.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("thermalDamageResonanceMultiplier", "Eve.AttributeId_ThermalDamageResonanceMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multipler to adjust the thermal damage resonance of an object.")]
     ThermalDamageResonanceMultiplier = 130,
 
     /// <summary>Multiplier to the kinetic damage resonance of something.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("kineticDamageResonanceMultiplier", "Eve.AttributeId_KineticDamageResonanceMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier to the kinetic damage resonance of something.")]
     KineticDamageResonanceMultiplier = 131,
 
     /// <summary>Multiplier to the explosive damage resistance of something.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("explosiveDamageResonanceMultiplier", "Eve.AttributeId_ExplosiveDamageResonanceMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier to the explosive damage resistance of something.")]
     ExplosiveDamageResonanceMultiplier = 132,
 
     /// <summary>Multiplier to the EM damage resonance of something.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("emDamageResonanceMultiplier", "Eve.AttributeId_EmDamageResonanceMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier to the EM damage resonance of something.")]
     EmDamageResonanceMultiplier = 133,
 
     /// <summary>Multiplier to a recharge rate time.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldRechargeRateMultiplier", "Eve.AttributeId_ShieldRechargeRateMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier to a recharge rate time.")]
     ShieldRechargeRateMultiplier = 134,
 
     /// <summary>The size of the module, 1 = small, 2 = medium, 3 = large.  Used for turrets and projectile weapons but will work for any module that defines it.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("moduleSize", "Eve.AttributeId_ModuleSize")]
+    
     [System.ComponentModel.DescriptionAttribute("The size of the module, 1 = small, 2 = medium, 3 = large.  Used for turrets and p" +
         "rojectile weapons but will work for any module that defines it.")]
     ModuleSize = 135,
 
     /// <summary>This number is deducted from the %chance of the seeping to armor, to slow seep of damage through shield.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("uniformity", "Eve.AttributeId_Uniformity")]
+    
     [System.ComponentModel.DescriptionAttribute("This number is deducted from the %chance of the seeping to armor, to slow seep of" +
         " damage through shield.")]
     Uniformity = 136,
 
     /// <summary>One of the groups of launcher this charge can be loaded into.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("launcherGroup", "Eve.AttributeId_LauncherGroup")]
+    
     [System.ComponentModel.DescriptionAttribute("One of the groups of launcher this charge can be loaded into.")]
     LauncherGroup = 137,
 
     /// <summary>+/- amount to the EM damage done.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("emDamageBonus", "Eve.AttributeId_EmDamageBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("+/- amount to the EM damage done.")]
     EmDamageBonus = 138,
 
     /// <summary>+/- amount to the explosive damage done.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("explosiveDamageBonus", "Eve.AttributeId_ExplosiveDamageBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("+/- amount to the explosive damage done.")]
     ExplosiveDamageBonus = 139,
 
     /// <summary>+/- amount to the kinetic damage done.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("kineticDamageBonus", "Eve.AttributeId_KineticDamageBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("+/- amount to the kinetic damage done.")]
     KineticDamageBonus = 140,
 
     /// <summary>+/- bonus to the thermal damage done.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("thermalDamageBonus", "Eve.AttributeId_ThermalDamageBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("+/- bonus to the thermal damage done.")]
     ThermalDamageBonus = 141,
 
     /// <summary>Range that an ECM burst has an effect within.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("ecmBurstRange", "Eve.AttributeId_EcmBurstRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Range that an ECM burst has an effect within.")]
     EcmBurstRange = 142,
 
     /// <summary>Range of the automated targeting systems hostile targeting area.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("targetHostileRange", "Eve.AttributeId_TargetHostileRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Range of the automated targeting systems hostile targeting area.")]
     TargetHostileRange = 143,
 
     /// <summary>Multiplier to the capacitors recharge rate.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("capacitorRechargeRateMultiplier", "Eve.AttributeId_CapacitorRechargeRateMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier to the capacitors recharge rate.")]
     CapacitorRechargeRateMultiplier = 144,
 
     /// <summary>Multipier to power core output.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("powerOutputMultiplier", "Eve.AttributeId_PowerOutputMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multipier to power core output.")]
     PowerOutputMultiplier = 145,
 
     /// <summary>Multiplier to the capacity of a shield.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldCapacityMultiplier", "Eve.AttributeId_ShieldCapacityMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier to the capacity of a shield.")]
     ShieldCapacityMultiplier = 146,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("capacitorCapacityMultiplier", "Eve.AttributeId_CapacitorCapacityMultiplier")]
+    
     CapacitorCapacityMultiplier = 147,
 
     /// <summary>Multiplier to the HP of a ships armor module.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorHPMultiplier", "Eve.AttributeId_ArmorHpMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier to the HP of a ships armor module.")]
     ArmorHpMultiplier = 148,
 
     /// <summary>Multiplier to the amount of cargo capacity for a ship.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cargoCapacityMultiplier", "Eve.AttributeId_CargoCapacityMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier to the amount of cargo capacity for a ship.")]
     CargoCapacityMultiplier = 149,
 
     /// <summary>Multiplier to the ships structural HP.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("structureHPMultiplier", "Eve.AttributeId_StructureHpMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier to the ships structural HP.")]
     StructureHpMultiplier = 150,
 
     /// <summary>Bonus to the agility for a ship.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("agilityBonus", "Eve.AttributeId_AgilityBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to the agility for a ship.")]
     AgilityBonus = 151,
 
     /// <summary>+/- a number to the max passengers.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxPassengersBonus", "Eve.AttributeId_MaxPassengersBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("+/- a number to the max passengers.")]
     MaxPassengersBonus = 152,
 
     /// <summary>The power cost to warp per one kg per AU (floats do not have the resolution for meters).</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("warpCapacitorNeed", "Eve.AttributeId_WarpCapacitorNeed")]
+    
     [System.ComponentModel.DescriptionAttribute("The power cost to warp per one kg per AU (floats do not have the resolution for m" +
         "eters).")]
     WarpCapacitorNeed = 153,
 
     /// <summary>The distance at which to react when relevant objects come within range.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("proximityRange", "Eve.AttributeId_ProximityRange")]
+    
     [System.ComponentModel.DescriptionAttribute("The distance at which to react when relevant objects come within range.")]
     ProximityRange = 154,
 
     /// <summary>The hull damage proportion at which an entity becomes incapacitated.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("incapacitationRatio", "Eve.AttributeId_IncapacitationRatio")]
+    
     [System.ComponentModel.DescriptionAttribute("The hull damage proportion at which an entity becomes incapacitated.")]
     IncapacitationRatio = 156,
 
     /// <summary>The range at which this thing does it thing.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("orbitRange", "Eve.AttributeId_OrbitRange")]
+    
     [System.ComponentModel.DescriptionAttribute("The range at which this thing does it thing.")]
     OrbitRange = 157,
 
     /// <summary>distance from maximum range at which accuracy has fallen by half</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("falloff", "Eve.AttributeId_Falloff")]
+    
     [System.ComponentModel.DescriptionAttribute("distance from maximum range at which accuracy has fallen by half")]
     Falloff = 158,
 
     /// <summary>Angular speed of turret rotation in radians/seconds</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("trackingSpeed", "Eve.AttributeId_TrackingSpeed")]
+    
     [System.ComponentModel.DescriptionAttribute("Angular speed of turret rotation in radians/seconds")]
     TrackingSpeed = 160,
 
     /// <summary>Volume of things in cubic meters</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("volume", "Eve.AttributeId_Volume")]
+    
     [System.ComponentModel.DescriptionAttribute("Volume of things in cubic meters")]
     Volume = 161,
 
     /// <summary>Radius of an object in meters</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("radius", "Eve.AttributeId_Radius")]
+    
     [System.ComponentModel.DescriptionAttribute("Radius of an object in meters")]
     Radius = 162,
 
     /// <summary>Where you want an effect to finish instantly.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("dummyDuration", "Eve.AttributeId_DummyDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("Where you want an effect to finish instantly.")]
     DummyDuration = 163,
 
     /// <summary>The charisma of a character.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("charisma", "Eve.AttributeId_Charisma")]
+    
     [System.ComponentModel.DescriptionAttribute("The charisma of a character.")]
     Charisma = 164,
 
     /// <summary>The intelligence of a character.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("intelligence", "Eve.AttributeId_Intelligence")]
+    
     [System.ComponentModel.DescriptionAttribute("The intelligence of a character.")]
     Intelligence = 165,
 
     /// <summary>The memory of a character.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("memory", "Eve.AttributeId_Memory")]
+    
     [System.ComponentModel.DescriptionAttribute("The memory of a character.")]
     Memory = 166,
 
     /// <summary>The perception of a character.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("perception", "Eve.AttributeId_Perception")]
+    
     [System.ComponentModel.DescriptionAttribute("The perception of a character.")]
     Perception = 167,
 
     /// <summary>The willpower of a character.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("willpower", "Eve.AttributeId_Willpower")]
+    
     [System.ComponentModel.DescriptionAttribute("The willpower of a character.")]
     Willpower = 168,
 
     /// <summary>Multiplier to the agility of an object.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("agilityMultiplier", "Eve.AttributeId_AgilityMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier to the agility of an object.")]
     AgilityMultiplier = 169,
 
     /// <summary>Bonus to the charisma of a character specified by the player in character creation.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("customCharismaBonus", "Eve.AttributeId_CustomCharismaBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to the charisma of a character specified by the player in character creatio" +
         "n.")]
     CustomCharismaBonus = 170,
 
     /// <summary>Bonus to the willpower of a character specified by the player in character creation.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("customWillpowerBonus", "Eve.AttributeId_CustomWillpowerBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to the willpower of a character specified by the player in character creati" +
         "on.")]
     CustomWillpowerBonus = 171,
 
     /// <summary>Bonus to the perception of a character specified by the player in character creation.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("customPerceptionBonus", "Eve.AttributeId_CustomPerceptionBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to the perception of a character specified by the player in character creat" +
         "ion.")]
     CustomPerceptionBonus = 172,
 
     /// <summary>Bonus to the memory of a character specified by the player in character creation.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("customMemoryBonus", "Eve.AttributeId_CustomMemoryBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to the memory of a character specified by the player in character creation." +
         "")]
     CustomMemoryBonus = 173,
 
     /// <summary>Bonus to the intelligence of a character specified by the player in character creation.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("customIntelligenceBonus", "Eve.AttributeId_CustomIntelligenceBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to the intelligence of a character specified by the player in character cre" +
         "ation.")]
     CustomIntelligenceBonus = 174,
 
     /// <summary>+/- bonus to the charisma of a character.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("charismaBonus", "Eve.AttributeId_CharismaBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("+/- bonus to the charisma of a character.")]
     CharismaBonus = 175,
 
     /// <summary>+/- bonus to the intelligence of a character.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("intelligenceBonus", "Eve.AttributeId_IntelligenceBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("+/- bonus to the intelligence of a character.")]
     IntelligenceBonus = 176,
 
     /// <summary>+/- bonus to the memory of a character.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("memoryBonus", "Eve.AttributeId_MemoryBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("+/- bonus to the memory of a character.")]
     MemoryBonus = 177,
 
     /// <summary>+/- bonus to the perception of a character.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("perceptionBonus", "Eve.AttributeId_PerceptionBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("+/- bonus to the perception of a character.")]
     PerceptionBonus = 178,
 
     /// <summary>+/- bonus to the willpower of a character.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("willpowerBonus", "Eve.AttributeId_WillpowerBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("+/- bonus to the willpower of a character.")]
     WillpowerBonus = 179,
 
     /// <summary>Only refers to another dogma attribute.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("primaryAttribute", "Eve.AttributeId_PrimaryAttribute")]
+    
     [System.ComponentModel.DescriptionAttribute("Only refers to another dogma attribute.")]
     PrimaryAttribute = 180,
 
     /// <summary>Only refers to another dogma attribute.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("secondaryAttribute", "Eve.AttributeId_SecondaryAttribute")]
+    
     [System.ComponentModel.DescriptionAttribute("Only refers to another dogma attribute.")]
     SecondaryAttribute = 181,
 
     /// <summary>The type ID of the skill that is required.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("requiredSkill1", "Eve.AttributeId_RequiredSkill1")]
+    
     [System.ComponentModel.DescriptionAttribute("The type ID of the skill that is required.")]
     RequiredSkill1 = 182,
 
     /// <summary>The type ID of the skill that is required.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("requiredSkill2", "Eve.AttributeId_RequiredSkill2")]
+    
     [System.ComponentModel.DescriptionAttribute("The type ID of the skill that is required.")]
     RequiredSkill2 = 183,
 
     /// <summary>The type ID of the skill that is required.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("requiredSkill3", "Eve.AttributeId_RequiredSkill3")]
+    
     [System.ComponentModel.DescriptionAttribute("The type ID of the skill that is required.")]
     RequiredSkill3 = 184,
 
     /// <summary>The number of attribute points needed to be accrued to learn this skill.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("attributePoints", "Eve.AttributeId_AttributePoints")]
+    
     [System.ComponentModel.DescriptionAttribute("The number of attribute points needed to be accrued to learn this skill.")]
     AttributePoints = 185,
 
     /// <summary>Multiplier to the warping power cost.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("warpCapacitorNeedMultiplier", "Eve.AttributeId_WarpCapacitorNeedMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier to the warping power cost.")]
     WarpCapacitorNeedMultiplier = 186,
 
     /// <summary>Multiplier to adjust the cost of repairs.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("repairCostMultiplier", "Eve.AttributeId_RepairCostMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier to adjust the cost of repairs.")]
     RepairCostMultiplier = 187,
 
     /// <summary>Chance of being able to resist a cargo scan.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cargoScanResistance", "Eve.AttributeId_CargoScanResistance")]
+    
     [System.ComponentModel.DescriptionAttribute("Chance of being able to resist a cargo scan.")]
     CargoScanResistance = 188,
 
     /// <summary>Restrict activation to this one module group.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("targetGroup", "Eve.AttributeId_TargetGroup")]
+    
     [System.ComponentModel.DescriptionAttribute("Restrict activation to this one module group.")]
     TargetGroup = 189,
 
     /// <summary>The maximum number of members that a CEO can manage within their corporation.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("corporationMemberLimit", "Eve.AttributeId_CorporationMemberLimit")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum number of members that a CEO can manage within their corporation.")]
     CorporationMemberLimit = 190,
 
     /// <summary>+/- modifier to the number of members that a CEO can manage within their corporation.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("corporationMemberBonus", "Eve.AttributeId_CorporationMemberBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("+/- modifier to the number of members that a CEO can manage within their corporat" +
         "ion.")]
     CorporationMemberBonus = 191,
 
     /// <summary>Maximum number of locked targets that the character or their ships electronics can handle at any given time.  Both have individual limits which apply separately.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxLockedTargets", "Eve.AttributeId_MaxLockedTargets")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum number of locked targets that the character or their ships electronics ca" +
         "n handle at any given time.  Both have individual limits which apply separately." +
         "")]
     MaxLockedTargets = 192,
 
     /// <summary>The maximum number of their targets that the character can attack at a given time.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxAttackTargets", "Eve.AttributeId_MaxAttackTargets")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum number of their targets that the character can attack at a given time" +
         ".")]
     MaxAttackTargets = 193,
 
     /// <summary>The resistance to target jamming.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("jammingResistance", "Eve.AttributeId_JammingResistance")]
+    
     [System.ComponentModel.DescriptionAttribute("The resistance to target jamming.")]
     JammingResistance = 194,
 
     /// <summary>The race ID of the type.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("raceID", "Eve.AttributeId_RaceId")]
+    
     [System.ComponentModel.DescriptionAttribute("The race ID of the type.")]
     RaceId = 195,
 
     /// <summary>The maximum amount of manufacture slots that can be used at a time.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("manufactureSlotLimit", "Eve.AttributeId_ManufactureSlotLimit")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum amount of manufacture slots that can be used at a time.")]
     ManufactureSlotLimit = 196,
 
     /// <summary>Distance from thing to survey.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("surveyScanRange", "Eve.AttributeId_SurveyScanRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Distance from thing to survey.")]
     SurveyScanRange = 197,
 
     /// <summary>Factor to adjust module cpu need by.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cpuMultiplier", "Eve.AttributeId_CpuMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Factor to adjust module cpu need by.")]
     CpuMultiplier = 202,
 
     /// <summary>Factor to scale mining laser durations by.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("miningDurationMultiplier", "Eve.AttributeId_MiningDurationMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Factor to scale mining laser durations by.")]
     MiningDurationMultiplier = 203,
 
     /// <summary>Typically scales the firing speed of a weapon.  Reducing speed means faster, strangely..</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("speedMultiplier", "Eve.AttributeId_SpeedMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Typically scales the firing speed of a weapon.  Reducing speed means faster, stra" +
         "ngely..")]
     SpeedMultiplier = 204,
 
     /// <summary>Scales the accuracy of some targeted weapon.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("accuracyMultiplier", "Eve.AttributeId_AccuracyMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Scales the accuracy of some targeted weapon.")]
     AccuracyMultiplier = 205,
 
     /// <summary>The factor by which the amount mined by a mining laser is scaled.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("miningAmountMultiplier", "Eve.AttributeId_MiningAmountMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("The factor by which the amount mined by a mining laser is scaled.")]
     MiningAmountMultiplier = 207,
 
     /// <summary>Radar strength.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanRadarStrength", "Eve.AttributeId_ScanRadarStrength")]
+    
     [System.ComponentModel.DescriptionAttribute("Radar strength.")]
     ScanRadarStrength = 208,
 
     /// <summary>Ladar strength.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanLadarStrength", "Eve.AttributeId_ScanLadarStrength")]
+    
     [System.ComponentModel.DescriptionAttribute("Ladar strength.")]
     ScanLadarStrength = 209,
 
     /// <summary>Magnetometric strength.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanMagnetometricStrength", "Eve.AttributeId_ScanMagnetometricStrength")]
+    
     [System.ComponentModel.DescriptionAttribute("Magnetometric strength.")]
     ScanMagnetometricStrength = 210,
 
     /// <summary>Gravimetric strength.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanGravimetricStrength", "Eve.AttributeId_ScanGravimetricStrength")]
+    
     [System.ComponentModel.DescriptionAttribute("Gravimetric strength.")]
     ScanGravimetricStrength = 211,
 
     /// <summary>The characters missile use efficiency, scales the damage missiles do.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("missileDamageMultiplier", "Eve.AttributeId_MissileDamageMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("The characters missile use efficiency, scales the damage missiles do.")]
     MissileDamageMultiplier = 212,
 
     /// <summary>Additional percentage to the characters missile damage multiplier.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("missileDamageMultiplierBonus", "Eve.AttributeId_MissileDamageMultiplierBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Additional percentage to the characters missile damage multiplier.")]
     MissileDamageMultiplierBonus = 213,
 
     /// <summary>Scales the capacitor need for fitted modules.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("capacitorNeedMultiplier", "Eve.AttributeId_CapacitorNeedMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Scales the capacitor need for fitted modules.")]
     CapacitorNeedMultiplier = 216,
 
     /// <summary>The graphicID of the propulsion system.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("propulsionGraphicID", "Eve.AttributeId_PropulsionGraphicId")]
+    
     [System.ComponentModel.DescriptionAttribute("The graphicID of the propulsion system.")]
     PropulsionGraphicId = 217,
 
     /// <summary>Scales the time it takes a character to research a blueprint.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("blueprintResearchTimeMultiplier", "Eve.AttributeId_BlueprintResearchTimeMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Scales the time it takes a character to research a blueprint.")]
     BlueprintResearchTimeMultiplier = 218,
 
     /// <summary>Scales the time it takes to manufacture something.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("manufactureTimeMultiplier", "Eve.AttributeId_ManufactureTimeMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Scales the time it takes to manufacture something.")]
     ManufactureTimeMultiplier = 219,
 
     /// <summary>Bonus or penalty to the percentage time it takes to research a blueprint.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("blueprintResearchTimeMultiplierBonus", "Eve.AttributeId_BlueprintResearchTimeMultiplierBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus or penalty to the percentage time it takes to research a blueprint.")]
     BlueprintResearchTimeMultiplierBonus = 220,
 
     /// <summary>Scales the time it takes a character to manufacture a blueprint.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("blueprintManufactureTimeMultiplier", "Eve.AttributeId_BlueprintManufactureTimeMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Scales the time it takes a character to manufacture a blueprint.")]
     BlueprintManufactureTimeMultiplier = 221,
 
     /// <summary>Bonus or penalty to the percentage time it takes to manufacture from a blueprint.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("blueprintManufactureTimeMultiplierBonus", "Eve.AttributeId_BlueprintManufactureTimeMultiplierBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus or penalty to the percentage time it takes to manufacture from a blueprint." +
         "")]
     BlueprintManufactureTimeMultiplierBonus = 222,
 
     /// <summary>Scales the time it takes to train skills with Charisma as the primary attribute.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("charismaSkillTrainingTimeMultiplier", "Eve.AttributeId_CharismaSkillTrainingTimeMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Scales the time it takes to train skills with Charisma as the primary attribute.")]
     CharismaSkillTrainingTimeMultiplier = 223,
 
     /// <summary>Scales the time it takes to train skills with Intelligence as the primary attribute. </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("intelligenceSkillTrainingTimeMultiplier", "Eve.AttributeId_IntelligenceSkillTrainingTimeMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Scales the time it takes to train skills with Intelligence as the primary attribu" +
         "te. ")]
     IntelligenceSkillTrainingTimeMultiplier = 224,
 
     /// <summary>Scales the time it takes to train skills with Memory as the primary attribute.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("memorySkillTrainingTimeMultiplier", "Eve.AttributeId_MemorySkillTrainingTimeMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Scales the time it takes to train skills with Memory as the primary attribute.")]
     MemorySkillTrainingTimeMultiplier = 225,
 
     /// <summary>Scales the time it takes to train skills with Perception as the primary attribute.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("perceptionSkillTrainingTimeMultiplier", "Eve.AttributeId_PerceptionSkillTrainingTimeMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Scales the time it takes to train skills with Perception as the primary attribute" +
         ".")]
     PerceptionSkillTrainingTimeMultiplier = 226,
 
     /// <summary>Scales the time it takes to train skills with Willpower as the primary attribute.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("willpowerSkillTrainingTimeMultiplier", "Eve.AttributeId_WillpowerSkillTrainingTimeMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Scales the time it takes to train skills with Willpower as the primary attribute." +
         "")]
     WillpowerSkillTrainingTimeMultiplier = 227,
 
     /// <summary>Bonus or penalty to the percentage time it takes to train skills with Charisma as the primary attribute.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("charismaSkillTrainingTimeMultiplierBonus", "Eve.AttributeId_CharismaSkillTrainingTimeMultiplierBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus or penalty to the percentage time it takes to train skills with Charisma as" +
         " the primary attribute.")]
     CharismaSkillTrainingTimeMultiplierBonus = 228,
 
     /// <summary>Bonus or penalty to the percentage time it takes to train skills with Intelligence as the primary attribute.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("intelligenceSkillTrainingTimeMultiplierBonus", "Eve.AttributeId_IntelligenceSkillTrainingTimeMultiplierBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus or penalty to the percentage time it takes to train skills with Intelligenc" +
         "e as the primary attribute.")]
     IntelligenceSkillTrainingTimeMultiplierBonus = 229,
 
     /// <summary>Bonus or penalty to the percentage time it takes to train skills with Memory as the primary attribute.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("memorySkillTrainingTimeMultiplierBonus", "Eve.AttributeId_MemorySkillTrainingTimeMultiplierBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus or penalty to the percentage time it takes to train skills with Memory as t" +
         "he primary attribute.")]
     MemorySkillTrainingTimeMultiplierBonus = 230,
 
     /// <summary>Bonus or penalty to the percentage time it takes to train skills with Perception as the primary attribute.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("perceptionSkillTrainingTimeMultiplierBonus", "Eve.AttributeId_PerceptionSkillTrainingTimeMultiplierBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus or penalty to the percentage time it takes to train skills with Perception " +
         "as the primary attribute.")]
     PerceptionSkillTrainingTimeMultiplierBonus = 231,
 
     /// <summary>Bonus or penalty to the percentage time it takes to train skills with Willpower as the primary attribute.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("willpowerSkillTrainingTimeMultiplierBonus", "Eve.AttributeId_WillpowerSkillTrainingTimeMultiplierBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus or penalty to the percentage time it takes to train skills with Willpower a" +
         "s the primary attribute.")]
     WillpowerSkillTrainingTimeMultiplierBonus = 232,
 
     /// <summary>Additional amount of locked targets that can be handled.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxLockedTargetsBonus", "Eve.AttributeId_MaxLockedTargetsBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Additional amount of locked targets that can be handled.")]
     MaxLockedTargetsBonus = 235,
 
     /// <summary>Additional amount of attack targets that can be handled.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxAttackTargetsBonus", "Eve.AttributeId_MaxAttackTargetsBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Additional amount of attack targets that can be handled.")]
     MaxAttackTargetsBonus = 236,
 
     /// <summary>Scales the max target range of a ships electronics.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxTargetRangeMultiplier", "Eve.AttributeId_MaxTargetRangeMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Scales the max target range of a ships electronics.")]
     MaxTargetRangeMultiplier = 237,
 
     /// <summary>+/- modifier to the gravimetric strength of an electronic system.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanGravimetricStrengthBonus", "Eve.AttributeId_ScanGravimetricStrengthBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("+/- modifier to the gravimetric strength of an electronic system.")]
     ScanGravimetricStrengthBonus = 238,
 
     /// <summary>+/- modifier to the ladar strength of an electronic system.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanLadarStrengthBonus", "Eve.AttributeId_ScanLadarStrengthBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("+/- modifier to the ladar strength of an electronic system.")]
     ScanLadarStrengthBonus = 239,
 
     /// <summary>+/- modifier to the magnetometric strength of an electronic system.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanMagnetometricStrengthBonus", "Eve.AttributeId_ScanMagnetometricStrengthBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("+/- modifier to the magnetometric strength of an electronic system.")]
     ScanMagnetometricStrengthBonus = 240,
 
     /// <summary>+/- modifier to the radar strength of an electronic system.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanRadarStrengthBonus", "Eve.AttributeId_ScanRadarStrengthBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("+/- modifier to the radar strength of an electronic system.")]
     ScanRadarStrengthBonus = 241,
 
     /// <summary>Scales the time it takes to lock a target.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanSpeedMultiplier", "Eve.AttributeId_ScanSpeedMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Scales the time it takes to lock a target.")]
     ScanSpeedMultiplier = 242,
 
     /// <summary>Scales the range at which something can reach.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxRangeMultiplier", "Eve.AttributeId_MaxRangeMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Scales the range at which something can reach.")]
     MaxRangeMultiplier = 243,
 
     /// <summary>Scale the tracking speed of a weapon.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("trackingSpeedMultiplier", "Eve.AttributeId_TrackingSpeedMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Scale the tracking speed of a weapon.")]
     TrackingSpeedMultiplier = 244,
 
     /// <summary>Graphic ID of the turrets for drone type ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("gfxTurretID", "Eve.AttributeId_GfxTurretId")]
+    
     [System.ComponentModel.DescriptionAttribute("Graphic ID of the turrets for drone type ships.")]
     GfxTurretId = 245,
 
     /// <summary>Graphic ID of the boosters for drone type ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("gfxBoosterID", "Eve.AttributeId_GfxBoosterId")]
+    
     [System.ComponentModel.DescriptionAttribute("Graphic ID of the boosters for drone type ships.")]
     GfxBoosterId = 246,
 
     /// <summary>The distance from a target an entity starts using its weapons.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityAttackRange", "Eve.AttributeId_EntityAttackRange")]
+    
     [System.ComponentModel.DescriptionAttribute("The distance from a target an entity starts using its weapons.")]
     EntityAttackRange = 247,
 
     /// <summary>The minimum value of any given unit of loot dropped by this entity.  Not the minimum value of all the loot, but of any given item dropped.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityLootValueMin", "Eve.AttributeId_EntityLootValueMin")]
+    
     [System.ComponentModel.DescriptionAttribute("The minimum value of any given unit of loot dropped by this entity.  Not the mini" +
         "mum value of all the loot, but of any given item dropped.")]
     EntityLootValueMin = 248,
 
     /// <summary>The maximum value of any loot dropped by this entity.  Thats for each unit of any given item of loot, not for the total value of all items of loot dropped.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityLootValueMax", "Eve.AttributeId_EntityLootValueMax")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum value of any loot dropped by this entity.  Thats for each unit of any" +
         " given item of loot, not for the total value of all items of loot dropped.")]
     EntityLootValueMax = 249,
 
     /// <summary>Deprecated. The minimum number of pieces of loot dropped by this entity.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityLootCountMin", "Eve.AttributeId_EntityLootCountMin")]
+    
     [System.ComponentModel.DescriptionAttribute("Deprecated. The minimum number of pieces of loot dropped by this entity.")]
     EntityLootCountMin = 250,
 
     /// <summary>The maximum number of pieces of loot dropped by this entity.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityLootCountMax", "Eve.AttributeId_EntityLootCountMax")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum number of pieces of loot dropped by this entity.")]
     EntityLootCountMax = 251,
 
     /// <summary>How much security status is modified by for killing this entity.  Depending on the entity, this may be a positive or negative amount.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entitySecurityStatusKillBonus", "Eve.AttributeId_EntitySecurityStatusKillBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("How much security status is modified by for killing this entity.  Depending on th" +
         "e entity, this may be a positive or negative amount.")]
     EntitySecurityStatusKillBonus = 252,
 
     /// <summary>The amount of security status lost of aggressing agaisnt this entity first.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entitySecurityStatusAggressionBonus", "Eve.AttributeId_EntitySecurityStatusAggressionBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("The amount of security status lost of aggressing agaisnt this entity first.")]
     EntitySecurityStatusAggressionBonus = 253,
 
     /// <summary>Minimum loot count that an entity can take from the NPC corp loot resource</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("minLootCount", "Eve.AttributeId_MinLootCount")]
+    
     [System.ComponentModel.DescriptionAttribute("Minimum loot count that an entity can take from the NPC corp loot resource")]
     MinLootCount = 254,
 
     /// <summary>Maximum loot count that an entity can take from the NPC corp loot resource</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxLootCount", "Eve.AttributeId_MaxLootCount")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum loot count that an entity can take from the NPC corp loot resource")]
     MaxLootCount = 256,
 
     /// <summary>The range in m that the entity follows it's target.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityFollowRange", "Eve.AttributeId_EntityFollowRange")]
+    
     [System.ComponentModel.DescriptionAttribute("The range in m that the entity follows it\'s target.")]
     EntityFollowRange = 257,
 
     /// <summary>Minimum value of each resource the entity is able to take as loot.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("minLootValue", "Eve.AttributeId_MinLootValue")]
+    
     [System.ComponentModel.DescriptionAttribute("Minimum value of each resource the entity is able to take as loot.")]
     MinLootValue = 258,
 
     /// <summary>Maximum value of each resource the entity is able to take as loot.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxLootValue", "Eve.AttributeId_MaxLootValue")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum value of each resource the entity is able to take as loot.")]
     MaxLootValue = 259,
 
     /// <summary>The range in m when the entity starts attacking it's target.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("attackRange", "Eve.AttributeId_AttackRange")]
+    
     [System.ComponentModel.DescriptionAttribute("The range in m when the entity starts attacking it\'s target.")]
     AttackRange = 260,
 
     /// <summary>How much the security status changes when this entity is killed.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("killStatusModifier", "Eve.AttributeId_KillStatusModifier")]
+    
     [System.ComponentModel.DescriptionAttribute("How much the security status changes when this entity is killed.")]
     KillStatusModifier = 261,
 
     /// <summary>How much the security status changes when this entity is attacked.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("attackStatusModifier", "Eve.AttributeId_AttackStatusModifier")]
+    
     [System.ComponentModel.DescriptionAttribute("How much the security status changes when this entity is attacked.")]
     AttackStatusModifier = 262,
 
     /// <summary>Amount of maximum shield HP on the item.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldCapacity", "Eve.AttributeId_ShieldCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("Amount of maximum shield HP on the item.")]
     ShieldCapacity = 263,
 
     /// <summary>DO NOT MESS WITH. Helper attribute for entities, stands in for the shield charge.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldCharge", "Eve.AttributeId_ShieldCharge")]
+    
     [System.ComponentModel.DescriptionAttribute("DO NOT MESS WITH. Helper attribute for entities, stands in for the shield charge." +
         "")]
     ShieldCharge = 264,
 
     /// <summary>The number of hit points on the entities armor.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorHP", "Eve.AttributeId_ArmorHp")]
+    
     [System.ComponentModel.DescriptionAttribute("The number of hit points on the entities armor.")]
     ArmorHp = 265,
 
     /// <summary>DO NOT MESS WITH. The amount of damage done to the entities armor hit points.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorDamage", "Eve.AttributeId_ArmorDamage")]
+    
     [System.ComponentModel.DescriptionAttribute("DO NOT MESS WITH. The amount of damage done to the entities armor hit points.")]
     ArmorDamage = 266,
 
     /// <summary>Multiplies EM damage taken by Armor. </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorEmDamageResonance", "Eve.AttributeId_ArmorEmDamageResonance")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplies EM damage taken by Armor. ")]
     ArmorEmDamageResonance = 267,
 
     /// <summary>Multiplies EXPLOSIVE damage taken by Armor. </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorExplosiveDamageResonance", "Eve.AttributeId_ArmorExplosiveDamageResonance")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplies EXPLOSIVE damage taken by Armor. ")]
     ArmorExplosiveDamageResonance = 268,
 
     /// <summary>Multiplies KINETIC damage taken by Armor. </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorKineticDamageResonance", "Eve.AttributeId_ArmorKineticDamageResonance")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplies KINETIC damage taken by Armor. ")]
     ArmorKineticDamageResonance = 269,
 
     /// <summary>Multiplies THERMAL damage taken by Armor. </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorThermalDamageResonance", "Eve.AttributeId_ArmorThermalDamageResonance")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplies THERMAL damage taken by Armor. ")]
     ArmorThermalDamageResonance = 270,
 
     /// <summary>Multiplies EM damage taken by shield</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldEmDamageResonance", "Eve.AttributeId_ShieldEmDamageResonance")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplies EM damage taken by shield")]
     ShieldEmDamageResonance = 271,
 
     /// <summary>Multiplies EXPLOSIVE damage taken by Armor. </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldExplosiveDamageResonance", "Eve.AttributeId_ShieldExplosiveDamageResonance")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplies EXPLOSIVE damage taken by Armor. ")]
     ShieldExplosiveDamageResonance = 272,
 
     /// <summary>Multiplies KINETIC damage taken by Armor. </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldKineticDamageResonance", "Eve.AttributeId_ShieldKineticDamageResonance")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplies KINETIC damage taken by Armor. ")]
     ShieldKineticDamageResonance = 273,
 
     /// <summary>Multiplies THERMAL damage taken by Shield. </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldThermalDamageResonance", "Eve.AttributeId_ShieldThermalDamageResonance")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplies THERMAL damage taken by Shield. ")]
     ShieldThermalDamageResonance = 274,
 
     /// <summary>Time constant for skill training</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("skillTimeConstant", "Eve.AttributeId_SkillTimeConstant")]
+    
     [System.ComponentModel.DescriptionAttribute("Time constant for skill training")]
     SkillTimeConstant = 275,
 
     /// <summary>Total accumulated points for skill</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("skillPoints", "Eve.AttributeId_SkillPoints")]
+    
     [System.ComponentModel.DescriptionAttribute("Total accumulated points for skill")]
     SkillPoints = 276,
 
     /// <summary>Required skill level for skill 1</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("requiredSkill1Level", "Eve.AttributeId_RequiredSkill1Level")]
+    
     [System.ComponentModel.DescriptionAttribute("Required skill level for skill 1")]
     RequiredSkill1Level = 277,
 
     /// <summary>Required skill level for skill 2</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("requiredSkill2Level", "Eve.AttributeId_RequiredSkill2Level")]
+    
     [System.ComponentModel.DescriptionAttribute("Required skill level for skill 2")]
     RequiredSkill2Level = 278,
 
     /// <summary>Required skill level for skill 3</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("requiredSkill3Level", "Eve.AttributeId_RequiredSkill3Level")]
+    
     [System.ComponentModel.DescriptionAttribute("Required skill level for skill 3")]
     RequiredSkill3Level = 279,
 
     /// <summary>Level of skill</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("skillLevel", "Eve.AttributeId_SkillLevel")]
+    
     [System.ComponentModel.DescriptionAttribute("Level of skill")]
     SkillLevel = 280,
 
     /// <summary>The amount of milliseconds before the object explodes.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("explosionDelay", "Eve.AttributeId_ExplosionDelay")]
+    
     [System.ComponentModel.DescriptionAttribute("The amount of milliseconds before the object explodes.")]
     ExplosionDelay = 281,
 
     /// <summary>Multiplier to the amount of charge storage space in a launcher.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("launcherCapacityMultiplier", "Eve.AttributeId_LauncherCapacityMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier to the amount of charge storage space in a launcher.")]
     LauncherCapacityMultiplier = 282,
 
     /// <summary>This defines the total capacity of drones allowed in the drone bay of the ship</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("droneCapacity", "Eve.AttributeId_DroneCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("This defines the total capacity of drones allowed in the drone bay of the ship")]
     DroneCapacity = 283,
 
     /// <summary>Indicates whether the modules ranged effects exlude  members of the users gang.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("excludeGangMembers", "Eve.AttributeId_ExcludeGangMembers")]
+    
     [System.ComponentModel.DescriptionAttribute("Indicates whether the modules ranged effects exlude  members of the users gang.")]
     ExcludeGangMembers = 284,
 
     /// <summary>Indicates whether the modules ranged effects exlude  members of the users corporation.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("excludeCorporationMembers", "Eve.AttributeId_ExcludeCorporationMembers")]
+    
     [System.ComponentModel.DescriptionAttribute("Indicates whether the modules ranged effects exlude  members of the users corpora" +
         "tion.")]
     ExcludeCorporationMembers = 285,
 
     /// <summary>Indicates whether the modules ranged effects exclude ships hostile to the user.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("excludeHostiles", "Eve.AttributeId_ExcludeHostiles")]
+    
     [System.ComponentModel.DescriptionAttribute("Indicates whether the modules ranged effects exclude ships hostile to the user.")]
     ExcludeHostiles = 286,
 
     /// <summary>Autogenerated skill attribute, kDmgBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("kDmgBonus", "Eve.AttributeId_KDmgBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, kDmgBonus")]
     KDmgBonus = 287,
 
     /// <summary>Autogenerated skill attribute, shipCPUBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipCPUBonus", "Eve.AttributeId_ShipCpuBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, shipCPUBonus")]
     ShipCpuBonus = 288,
 
     /// <summary>Autogenerated skill attribute, turretDamageBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("turretDamageBonus", "Eve.AttributeId_TurretDamageBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, turretDamageBonus")]
     TurretDamageBonus = 289,
 
     /// <summary>Autogenerated skill attribute, skillTurretDmgBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("skillTurretDmgBonus", "Eve.AttributeId_SkillTurretDmgBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, skillTurretDmgBonus")]
     SkillTurretDmgBonus = 290,
 
     /// <summary>Autogenerated skill attribute, CpuskillBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cpuskillBonus", "Eve.AttributeId_CpuskillBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, CpuskillBonus")]
     CpuskillBonus = 291,
 
     /// <summary>Autogenerated skill attribute, damageMultiplierBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("damageMultiplierBonus", "Eve.AttributeId_DamageMultiplierBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, damageMultiplierBonus")]
     DamageMultiplierBonus = 292,
 
     /// <summary>Autogenerated skill attribute, rofBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rofBonus", "Eve.AttributeId_RofBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, rofBonus")]
     RofBonus = 293,
 
     /// <summary>Autogenerated skill attribute, rangeSkillBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rangeSkillBonus", "Eve.AttributeId_RangeSkillBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, rangeSkillBonus")]
     RangeSkillBonus = 294,
 
     /// <summary>Autogenerated skill attribute, abPowerBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("abPowerBonus", "Eve.AttributeId_AbPowerBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, abPowerBonus")]
     AbPowerBonus = 295,
 
     /// <summary>Autogenerated skill attribute, acPowerBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("acPowerBonus", "Eve.AttributeId_AcPowerBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, acPowerBonus")]
     AcPowerBonus = 296,
 
     /// <summary>Autogenerated skill attribute, afPowerBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("afPowerBonus", "Eve.AttributeId_AfPowerBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, afPowerBonus")]
     AfPowerBonus = 297,
 
     /// <summary>Autogenerated skill attribute, atPowerBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("atPowerBonus", "Eve.AttributeId_AtPowerBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, atPowerBonus")]
     AtPowerBonus = 298,
 
     /// <summary>Autogenerated skill attribute, cbTRangeBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cbTRangeBonus", "Eve.AttributeId_CbtRangeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, cbTRangeBonus")]
     CbtRangeBonus = 299,
 
     /// <summary>Autogenerated skill attribute, ccTRangeBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("ccTRangeBonus", "Eve.AttributeId_CctRangeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, ccTRangeBonus")]
     CctRangeBonus = 300,
 
     /// <summary>Autogenerated skill attribute, cfTRangeBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cfTRangeBonus", "Eve.AttributeId_CftRangeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, cfTRangeBonus")]
     CftRangeBonus = 301,
 
     /// <summary>Autogenerated skill attribute, ciTRangeBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("ciTRangeBonus", "Eve.AttributeId_CitRangeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, ciTRangeBonus")]
     CitRangeBonus = 302,
 
     /// <summary>Autogenerated skill attribute, aiPowerBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("aiPowerBonus", "Eve.AttributeId_AiPowerBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, aiPowerBonus")]
     AiPowerBonus = 303,
 
     /// <summary>Autogenerated skill attribute, ctTRangeBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("ctTRangeBonus", "Eve.AttributeId_CttRangeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, ctTRangeBonus")]
     CttRangeBonus = 304,
 
     /// <summary>Autogenerated skill attribute, gbCpuBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("gbCpuBonus", "Eve.AttributeId_GbCpuBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, gbCpuBonus")]
     GbCpuBonus = 305,
 
     /// <summary>Autogenerated skill attribute, mMaxVelocityBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxVelocityBonus", "Eve.AttributeId_MaxVelocityBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, mMaxVelocityBonus")]
     MaxVelocityBonus = 306,
 
     /// <summary>Autogenerated skill attribute, scannerDurationBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scannerDurationBonus", "Eve.AttributeId_ScannerDurationBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, scannerDurationBonus")]
     ScannerDurationBonus = 307,
 
     /// <summary>Autogenerated skill attribute, scanspeedBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanspeedBonus", "Eve.AttributeId_ScanspeedBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, scanspeedBonus")]
     ScanspeedBonus = 308,
 
     /// <summary>Bonus to Max Targeting Range</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxTargetRangeBonus", "Eve.AttributeId_MaxTargetRangeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to Max Targeting Range")]
     MaxTargetRangeBonus = 309,
 
     /// <summary>Autogenerated skill attribute, cpuNeedBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cpuNeedBonus", "Eve.AttributeId_CpuNeedBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, cpuNeedBonus")]
     CpuNeedBonus = 310,
 
     /// <summary>Autogenerated skill attribute, maxTarget Bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxTargetBonus", "Eve.AttributeId_MaxTargetBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, maxTarget Bonus")]
     MaxTargetBonus = 311,
 
     /// <summary>Autogenerated skill attribute, DurationBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("durationSkillBonus", "Eve.AttributeId_DurationSkillBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, DurationBonus")]
     DurationSkillBonus = 312,
 
     /// <summary>Autogenerated skill attribute, PowerOutputBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("powerEngineeringOutputBonus", "Eve.AttributeId_PowerEngineeringOutputBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, PowerOutputBonus")]
     PowerEngineeringOutputBonus = 313,
 
     /// <summary>Autogenerated skill attribute, CapRechargeBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("capRechargeBonus", "Eve.AttributeId_CapRechargeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, CapRechargeBonus")]
     CapRechargeBonus = 314,
 
     /// <summary>Autogenerated skill attribute, velocityBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("velocityBonus", "Eve.AttributeId_VelocityBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, velocityBonus")]
     VelocityBonus = 315,
 
     /// <summary>Autogenerated skill attribute, corpMemberBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("corpMemberBonus", "Eve.AttributeId_CorpMemberBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, corpMemberBonus")]
     CorpMemberBonus = 316,
 
     /// <summary>Autogenerated skill attribute, capNeedBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("capNeedBonus", "Eve.AttributeId_CapNeedBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, capNeedBonus")]
     CapNeedBonus = 317,
 
     /// <summary>Autogenerated skill attribute, speedFBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("speedFBonus", "Eve.AttributeId_SpeedfBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, speedFBonus")]
     SpeedfBonus = 318,
 
     /// <summary>Autogenerated skill attribute, warpCapacitorNeedBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("warpCapacitorNeedBonus", "Eve.AttributeId_WarpCapacitorNeedBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, warpCapacitorNeedBonus")]
     WarpCapacitorNeedBonus = 319,
 
     /// <summary>Autogenerated skill attribute, powerUseBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("powerUseBonus", "Eve.AttributeId_PowerUseBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, powerUseBonus")]
     PowerUseBonus = 320,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("burstSpeed", "Eve.AttributeId_BurstSpeed")]
+    
     BurstSpeed = 321,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("burstSpeedMutator", "Eve.AttributeId_BurstSpeedMutator")]
+    
     BurstSpeedMutator = 322,
 
     /// <summary>Autogenerated skill attribute, PowerNeedBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("powerNeedBonus", "Eve.AttributeId_PowerNeedBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, PowerNeedBonus")]
     PowerNeedBonus = 323,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("barrageDmgMutator", "Eve.AttributeId_BarrageDmgMutator")]
+    
     BarrageDmgMutator = 324,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("barrageFalloffMutator", "Eve.AttributeId_BarrageFalloffMutator")]
+    
     BarrageFalloffMutator = 325,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("barrageDmgMultiplier", "Eve.AttributeId_BarrageDmgMultiplier")]
+    
     BarrageDmgMultiplier = 326,
 
     /// <summary>Autogenerated skill attribute, hullHpBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("hullHpBonus", "Eve.AttributeId_HullHpBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, hullHpBonus")]
     HullHpBonus = 327,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("barrageFalloff", "Eve.AttributeId_BarrageFalloff")]
+    
     BarrageFalloff = 328,
 
     /// <summary>Autogenerated skill attribute, GangRofBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("gangRofBonus", "Eve.AttributeId_GangRofBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, GangRofBonus")]
     GangRofBonus = 329,
 
     /// <summary>Duration of booster, after this duration the booster is destroyed</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterDuration", "Eve.AttributeId_BoosterDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("Duration of booster, after this duration the booster is destroyed")]
     BoosterDuration = 330,
 
     /// <summary>Whether an item is an implant or not</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("implantness", "Eve.AttributeId_Implantness")]
+    
     [System.ComponentModel.DescriptionAttribute("Whether an item is an implant or not")]
     Implantness = 331,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("burstDmg", "Eve.AttributeId_BurstDmg")]
+    
     BurstDmg = 332,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("burstDmgMutator", "Eve.AttributeId_BurstDmgMutator")]
+    
     BurstDmgMutator = 333,
 
     /// <summary>Autogenerated skill attribute, shipPowerBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipPowerBonus", "Eve.AttributeId_ShipPowerBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, shipPowerBonus")]
     ShipPowerBonus = 334,
 
     /// <summary>Autogenerated skill attribute, armorHpBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorHpBonus", "Eve.AttributeId_ArmorHpBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, armorHpBonus")]
     ArmorHpBonus = 335,
 
     /// <summary>Autogenerated skill attribute, uniformityBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("uniformityBonus", "Eve.AttributeId_UniformityBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, uniformityBonus")]
     UniformityBonus = 336,
 
     /// <summary>Autogenerated skill attribute, shieldCapacityBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldCapacityBonus", "Eve.AttributeId_ShieldCapacityBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, shieldCapacityBonus")]
     ShieldCapacityBonus = 337,
 
     /// <summary>Autogenerated skill attribute, rechargeratebonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rechargeratebonus", "Eve.AttributeId_Rechargeratebonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, rechargeratebonus")]
     Rechargeratebonus = 338,
 
     /// <summary>Autogenerated skill attribute, falloffBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("falloffBonus", "Eve.AttributeId_FalloffBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, falloffBonus")]
     FalloffBonus = 349,
 
     /// <summary>Autogenerated skill attribute, skillTrainingTimeBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("skillTrainingTimeBonus", "Eve.AttributeId_SkillTrainingTimeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, skillTrainingTimeBonus")]
     SkillTrainingTimeBonus = 350,
 
     /// <summary>Autogenerated skill attribute, maxRangeBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxRangeBonus", "Eve.AttributeId_MaxRangeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, maxRangeBonus")]
     MaxRangeBonus = 351,
 
     /// <summary>The maximum amount of drones that a character can control at a given time.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxActiveDrones", "Eve.AttributeId_MaxActiveDrones")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum amount of drones that a character can control at a given time.")]
     MaxActiveDrones = 352,
 
     /// <summary>Autogenerated skill attribute, maxActiveDroneBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxActiveDroneBonus", "Eve.AttributeId_MaxActiveDroneBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, maxActiveDroneBonus")]
     MaxActiveDroneBonus = 353,
 
     /// <summary>Autogenerated skill attribute, maxDroneBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxDroneBonus", "Eve.AttributeId_MaxDroneBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, maxDroneBonus")]
     MaxDroneBonus = 354,
 
     /// <summary>Percentage of pay from agent </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("negotiationPercentage", "Eve.AttributeId_NegotiationPercentage")]
+    
     [System.ComponentModel.DescriptionAttribute("Percentage of pay from agent ")]
     NegotiationPercentage = 355,
 
     /// <summary>Bonus to Effective Standing towards Hostile NPC</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("diplomacyBonus", "Eve.AttributeId_DiplomacyBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to Effective Standing towards Hostile NPC")]
     DiplomacyBonus = 356,
 
     /// <summary>a percentage multiplyer to sec status recovery</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("fastTalkPercentage", "Eve.AttributeId_FastTalkPercentage")]
+    
     [System.ComponentModel.DescriptionAttribute("a percentage multiplyer to sec status recovery")]
     FastTalkPercentage = 359,
 
     /// <summary>Bonus to standing towards Friendly npcs</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("connectionsBonus", "Eve.AttributeId_ConnectionsBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to standing towards Friendly npcs")]
     ConnectionsBonus = 360,
 
     /// <summary>a bonus to standing towards npc with negativa security status</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("criminalConnectionsBonus", "Eve.AttributeId_CriminalConnectionsBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("a bonus to standing towards npc with negativa security status")]
     CriminalConnectionsBonus = 361,
 
     /// <summary>Bonus To standing gain towards non CONCORD npcs  </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("socialBonus", "Eve.AttributeId_SocialBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus To standing gain towards non CONCORD npcs  ")]
     SocialBonus = 362,
 
     /// <summary>Production time multiplier when manufacturing amarr tech   </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("amarrTechTimePercent", "Eve.AttributeId_AmarrTechTimePercent")]
+    
     [System.ComponentModel.DescriptionAttribute("Production time multiplier when manufacturing amarr tech   ")]
     AmarrTechTimePercent = 363,
 
     /// <summary>Production time multiplier when manufacturing Minmatar tech   </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("minmatarTechTimePercent", "Eve.AttributeId_MinmatarTechTimePercent")]
+    
     [System.ComponentModel.DescriptionAttribute("Production time multiplier when manufacturing Minmatar tech   ")]
     MinmatarTechTimePercent = 364,
 
     /// <summary>Production time multiplier when manufacturing Gallente tech   </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("gallenteTechTimePercent", "Eve.AttributeId_GallenteTechTimePercent")]
+    
     [System.ComponentModel.DescriptionAttribute("Production time multiplier when manufacturing Gallente tech   ")]
     GallenteTechTimePercent = 365,
 
     /// <summary>Production time multiplier when manufacturing caldari tech   </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("caldariTechTimePercent", "Eve.AttributeId_CaldariTechTimePercent")]
+    
     [System.ComponentModel.DescriptionAttribute("Production time multiplier when manufacturing caldari tech   ")]
     CaldariTechTimePercent = 366,
 
     /// <summary>Production time percentage</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("productionTimePercent", "Eve.AttributeId_ProductionTimePercent")]
+    
     [System.ComponentModel.DescriptionAttribute("Production time percentage")]
     ProductionTimePercent = 367,
 
     /// <summary>Refining speed percentage</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("refiningTimePercentage", "Eve.AttributeId_RefiningTimePercentage")]
+    
     [System.ComponentModel.DescriptionAttribute("Refining speed percentage")]
     RefiningTimePercentage = 368,
 
     /// <summary>Manufacturing cost multiplyer</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("manufactureCostMultiplier", "Eve.AttributeId_ManufactureCostMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Manufacturing cost multiplyer")]
     ManufactureCostMultiplier = 369,
 
     /// <summary>Autogenerated skill attribute, amarrTechMutator</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("amarrTechMutator", "Eve.AttributeId_AmarrTechMutator")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, amarrTechMutator")]
     AmarrTechMutator = 370,
 
     /// <summary>Autogenerated skill attribute, caldariTechMutator</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("caldariTechMutator", "Eve.AttributeId_CaldariTechMutator")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, caldariTechMutator")]
     CaldariTechMutator = 371,
 
     /// <summary>Autogenerated skill attribute, gallenteTechMutator</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("gallenteTechMutator", "Eve.AttributeId_GallenteTechMutator")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, gallenteTechMutator")]
     GallenteTechMutator = 372,
 
     /// <summary>Autogenerated skill attribute, productionTimeMutator</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("productionTimeMutator", "Eve.AttributeId_ProductionTimeMutator")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, productionTimeMutator")]
     ProductionTimeMutator = 373,
 
     /// <summary>Autogenerated skill attribute, minmatarTechMutator</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("minmatarTechMutator", "Eve.AttributeId_MinmatarTechMutator")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, minmatarTechMutator")]
     MinmatarTechMutator = 374,
 
     /// <summary>Autogenerated skill attribute, productionCostMutator</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("productionCostMutator", "Eve.AttributeId_ProductionCostMutator")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, productionCostMutator")]
     ProductionCostMutator = 375,
 
     /// <summary>Refining time Multiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("refiningTimePercent", "Eve.AttributeId_RefiningTimePercent")]
+    
     [System.ComponentModel.DescriptionAttribute("Refining time Multiplier")]
     RefiningTimePercent = 376,
 
     /// <summary>Autogenerated skill attribute, refiningTimeMutator</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("refiningTimeMutator", "Eve.AttributeId_RefiningTimeMutator")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, refiningTimeMutator")]
     RefiningTimeMutator = 377,
 
     /// <summary>Refining yield percentage</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("refiningYieldPercentage", "Eve.AttributeId_RefiningYieldPercentage")]
+    
     [System.ComponentModel.DescriptionAttribute("Refining yield percentage")]
     RefiningYieldPercentage = 378,
 
     /// <summary>Autogenerated skill attribute, refiningYieldMutator</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("refiningYieldMutator", "Eve.AttributeId_RefiningYieldMutator")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, refiningYieldMutator")]
     RefiningYieldMutator = 379,
 
     /// <summary>Max active factories that a player can operate </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxActiveFactory", "Eve.AttributeId_MaxActiveFactory")]
+    
     [System.ComponentModel.DescriptionAttribute("Max active factories that a player can operate ")]
     MaxActiveFactory = 380,
 
     /// <summary>Max active factories</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxActiveFactories", "Eve.AttributeId_MaxActiveFactories")]
+    
     [System.ComponentModel.DescriptionAttribute("Max active factories")]
     MaxActiveFactories = 383,
 
     /// <summary>The max numbers of scientists that can work on CSO´s research project.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxResearchGangSize", "Eve.AttributeId_MaxResearchGangSize")]
+    
     [System.ComponentModel.DescriptionAttribute("The max numbers of scientists that can work on CSO´s research project.")]
     MaxResearchGangSize = 384,
 
     /// <summary>Research speed </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("manufacturingTimeResearchSpeed", "Eve.AttributeId_ManufacturingTimeResearchSpeed")]
+    
     [System.ComponentModel.DescriptionAttribute("Research speed ")]
     ManufacturingTimeResearchSpeed = 385,
 
     /// <summary>Research cost percent</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("researchCostPercent", "Eve.AttributeId_ResearchCostPercent")]
+    
     [System.ComponentModel.DescriptionAttribute("Research cost percent")]
     ResearchCostPercent = 386,
 
     /// <summary>Blueprint copying speed</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("copySpeedPercent", "Eve.AttributeId_CopySpeedPercent")]
+    
     [System.ComponentModel.DescriptionAttribute("Blueprint copying speed")]
     CopySpeedPercent = 387,
 
     /// <summary>The % of Frigate assembly cost a player has to pay to assemble a frigate</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("frigateConstructionCost", "Eve.AttributeId_FrigateConstructionCost")]
+    
     [System.ComponentModel.DescriptionAttribute("The % of Frigate assembly cost a player has to pay to assemble a frigate")]
     FrigateConstructionCost = 388,
 
     /// <summary>The % of cruiser assembly cost a player has to pay to assemble a cruiser</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cruiserConstructionCost", "Eve.AttributeId_CruiserConstructionCost")]
+    
     [System.ComponentModel.DescriptionAttribute("The % of cruiser assembly cost a player has to pay to assemble a cruiser")]
     CruiserConstructionCost = 389,
 
     /// <summary>The % of industrial assembly cost a player has to pay to assemble a industrial</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("industrialConstructionCost", "Eve.AttributeId_IndustrialConstructionCost")]
+    
     [System.ComponentModel.DescriptionAttribute("The % of industrial assembly cost a player has to pay to assemble a industrial")]
     IndustrialConstructionCost = 392,
 
     /// <summary>The % of battleship assembly cost a player has to pay to assemble a battleship</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("battleshipConstructionCost", "Eve.AttributeId_BattleshipConstructionCost")]
+    
     [System.ComponentModel.DescriptionAttribute("The % of battleship assembly cost a player has to pay to assemble a battleship")]
     BattleshipConstructionCost = 393,
 
     /// <summary>Titan construction time</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("titanConstructionTime", "Eve.AttributeId_TitanConstructionTime")]
+    
     [System.ComponentModel.DescriptionAttribute("Titan construction time")]
     TitanConstructionTime = 394,
 
     /// <summary>Station construction time</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("stationConstructionTime", "Eve.AttributeId_StationConstructionTime")]
+    
     [System.ComponentModel.DescriptionAttribute("Station construction time")]
     StationConstructionTime = 395,
 
     /// <summary>Repair cost percent</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("repairCostPercent", "Eve.AttributeId_RepairCostPercent")]
+    
     [System.ComponentModel.DescriptionAttribute("Repair cost percent")]
     RepairCostPercent = 396,
 
     /// <summary>Chance of making a research breakthrough when researching a higher tech level of a blueprint</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("reverseEngineeringChance", "Eve.AttributeId_ReverseEngineeringChance")]
+    
     [System.ComponentModel.DescriptionAttribute("Chance of making a research breakthrough when researching a higher tech level of " +
         "a blueprint")]
     ReverseEngineeringChance = 397,
 
     /// <summary>speed bonus when researching blueprint mineral need</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("mineralNeedResearchSpeed", "Eve.AttributeId_MineralNeedResearchSpeed")]
+    
     [System.ComponentModel.DescriptionAttribute("speed bonus when researching blueprint mineral need")]
     MineralNeedResearchSpeed = 398,
 
     /// <summary>Chance of upgrading a module to next tech level </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("duplicatingChance", "Eve.AttributeId_DuplicatingChance")]
+    
     [System.ComponentModel.DescriptionAttribute("Chance of upgrading a module to next tech level ")]
     DuplicatingChance = 399,
 
     /// <summary>Missiles velocity multiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("missileStandardVelocityPecent", "Eve.AttributeId_MissileStandardVelocityPecent")]
+    
     [System.ComponentModel.DescriptionAttribute("Missiles velocity multiplier")]
     MissileStandardVelocityPecent = 400,
 
     /// <summary>Damage Bonus for Cruise Missiles</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cruiseMissileVelocityPercent", "Eve.AttributeId_CruiseMissileVelocityPercent")]
+    
     [System.ComponentModel.DescriptionAttribute("Damage Bonus for Cruise Missiles")]
     CruiseMissileVelocityPercent = 401,
 
     /// <summary>Heavy missile speed percent</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("heavyMissileSpeedPercent", "Eve.AttributeId_HeavyMissileSpeedPercent")]
+    
     [System.ComponentModel.DescriptionAttribute("Heavy missile speed percent")]
     HeavyMissileSpeedPercent = 402,
 
     /// <summary>Rocket Dmg Percent</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rocketDmgPercent", "Eve.AttributeId_RocketDmgPercent")]
+    
     [System.ComponentModel.DescriptionAttribute("Rocket Dmg Percent")]
     RocketDmgPercent = 403,
 
     /// <summary>Torpedo velocity percent</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("torpedoVelocityPercent", "Eve.AttributeId_TorpedoVelocityPercent")]
+    
     [System.ComponentModel.DescriptionAttribute("Torpedo velocity percent")]
     TorpedoVelocityPercent = 404,
 
     /// <summary>Defender velocity percent</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("defenderVelocityPercent", "Eve.AttributeId_DefenderVelocityPercent")]
+    
     [System.ComponentModel.DescriptionAttribute("Defender velocity percent")]
     DefenderVelocityPercent = 405,
 
     /// <summary>Missile FOF velocity percent</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("missileFOFVelocityPercent", "Eve.AttributeId_MissileFofVelocityPercent")]
+    
     [System.ComponentModel.DescriptionAttribute("Missile FOF velocity percent")]
     MissileFofVelocityPercent = 406,
 
     /// <summary>Max research gang size bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("researchGangSizeBonus", "Eve.AttributeId_ResearchGangSizeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Max research gang size bonus")]
     ResearchGangSizeBonus = 407,
 
     /// <summary>Autogenerated skill attribute, battleshipConstructionTimeBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("battleshipConstructionTimeBonus", "Eve.AttributeId_BattleshipConstructionTimeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, battleshipConstructionTimeBonus")]
     BattleshipConstructionTimeBonus = 408,
 
     /// <summary>Autogenerated skill attribute, cruiserConstructionTimeBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cruiserConstructionTimeBonus", "Eve.AttributeId_CruiserConstructionTimeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, cruiserConstructionTimeBonus")]
     CruiserConstructionTimeBonus = 409,
 
     /// <summary>Autogenerated skill attribute, frigateConstructionTimeBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("frigateConstructionTimeBonus", "Eve.AttributeId_FrigateConstructionTimeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, frigateConstructionTimeBonus")]
     FrigateConstructionTimeBonus = 410,
 
     /// <summary>Autogenerated skill attribute, industrialConstructionTimeBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("industrialConstructionTimeBonus", "Eve.AttributeId_IndustrialConstructionTimeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, industrialConstructionTimeBonus")]
     IndustrialConstructionTimeBonus = 411,
 
     /// <summary>Autogenerated skill attribute, connectionBonusMutator</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("connectionBonusMutator", "Eve.AttributeId_ConnectionBonusMutator")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, connectionBonusMutator")]
     ConnectionBonusMutator = 412,
 
     /// <summary>Autogenerated skill attribute, criminalConnectionsMutator</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("criminalConnectionsMutator", "Eve.AttributeId_CriminalConnectionsMutator")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, criminalConnectionsMutator")]
     CriminalConnectionsMutator = 413,
 
     /// <summary>Autogenerated skill attribute, diplomacyMutator</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("diplomacyMutator", "Eve.AttributeId_DiplomacyMutator")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, diplomacyMutator")]
     DiplomacyMutator = 414,
 
     /// <summary>Autogenerated skill attribute, fastTalkMutator</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("fastTalkMutator", "Eve.AttributeId_FastTalkMutator")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, fastTalkMutator")]
     FastTalkMutator = 415,
 
     /// <summary>The distance at which the entity orbits, follows.. and more.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityFlyRange", "Eve.AttributeId_EntityFlyRange")]
+    
     [System.ComponentModel.DescriptionAttribute("The distance at which the entity orbits, follows.. and more.")]
     EntityFlyRange = 416,
 
     /// <summary>Max non  race corporationMembers</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxNonRaceCorporationMembers", "Eve.AttributeId_MaxNonRaceCorporationMembers")]
+    
     [System.ComponentModel.DescriptionAttribute("Max non  race corporationMembers")]
     MaxNonRaceCorporationMembers = 417,
 
     /// <summary>Autogenerated skill attribute, nonRaceCorporationMembersBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("nonRaceCorporationMembersBonus", "Eve.AttributeId_NonRaceCorporationMembersBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, nonRaceCorporationMembersBonus")]
     NonRaceCorporationMembersBonus = 418,
 
     /// <summary>Amount of skill points saved by clone</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("skillPointsSaved", "Eve.AttributeId_SkillPointsSaved")]
+    
     [System.ComponentModel.DescriptionAttribute("Amount of skill points saved by clone")]
     SkillPointsSaved = 419,
 
     /// <summary>Autogenerated skill attribute, trackingBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("trackingBonus", "Eve.AttributeId_TrackingBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, trackingBonus")]
     TrackingBonus = 420,
 
     /// <summary>Autogenerated skill attribute, shieldRechargerateBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldRechargerateBonus", "Eve.AttributeId_ShieldRechargerateBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, shieldRechargerateBonus")]
     ShieldRechargerateBonus = 421,
 
     /// <summary>Tech level of an item</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("techLevel", "Eve.AttributeId_TechLevel")]
+    
     [System.ComponentModel.DescriptionAttribute("Tech level of an item")]
     TechLevel = 422,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityDroneCount", "Eve.AttributeId_EntityDroneCount")]
+    
     EntityDroneCount = 423,
 
     /// <summary>Autogenerated skill attribute, cpu OutputBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cpuOutputBonus2", "Eve.AttributeId_CpuOutputBonus2")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, cpu OutputBonus")]
     CpuOutputBonus2 = 424,
 
     /// <summary>Autogenerated skill attribute, cpuOutputBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cpuOutputBonus", "Eve.AttributeId_CpuOutputBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, cpuOutputBonus")]
     CpuOutputBonus = 425,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("heavyDroneDamagePercent", "Eve.AttributeId_HeavyDroneDamagePercent")]
+    
     HeavyDroneDamagePercent = 426,
 
     /// <summary>Autogenerated skill attribute, heavyDroneDamageBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("heavyDroneDamageBonus", "Eve.AttributeId_HeavyDroneDamageBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, heavyDroneDamageBonus")]
     HeavyDroneDamageBonus = 427,
 
     /// <summary>Mining drone speed percent</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("miningDroneAmountPercent", "Eve.AttributeId_MiningDroneAmountPercent")]
+    
     [System.ComponentModel.DescriptionAttribute("Mining drone speed percent")]
     MiningDroneAmountPercent = 428,
 
     /// <summary>Autogenerated skill attribute, miningDroneSpeedBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("miningDroneSpeedBonus", "Eve.AttributeId_MiningDroneSpeedBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, miningDroneSpeedBonus")]
     MiningDroneSpeedBonus = 429,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("scoutDroneVelocityPercent", "Eve.AttributeId_ScoutDroneVelocityPercent")]
+    
     ScoutDroneVelocityPercent = 430,
 
     /// <summary>Autogenerated skill attribute, scoutDroneVelocityBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scoutDroneVelocityBonus", "Eve.AttributeId_ScoutDroneVelocityBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, scoutDroneVelocityBonus")]
     ScoutDroneVelocityBonus = 431,
 
     /// <summary>Autogenerated skill attribute, defenderVelocityBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("defenderVelocityBonus", "Eve.AttributeId_DefenderVelocityBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, defenderVelocityBonus")]
     DefenderVelocityBonus = 432,
 
     /// <summary>Autogenerated skill attribute, heavyMissileDamageBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("heavyMissileDamageBonus", "Eve.AttributeId_HeavyMissileDamageBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, heavyMissileDamageBonus")]
     HeavyMissileDamageBonus = 433,
 
     /// <summary>Autogenerated skill attribute, miningAmountBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("miningAmountBonus", "Eve.AttributeId_MiningAmountBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, miningAmountBonus")]
     MiningAmountBonus = 434,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxGangModules", "Eve.AttributeId_MaxGangModules")]
+    
     MaxGangModules = 435,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("standingIncreasePercent", "Eve.AttributeId_StandingIncreasePercent")]
+    
     StandingIncreasePercent = 436,
 
     /// <summary>Autogenerated skill attribute, NegotiationBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("negotiationBonus", "Eve.AttributeId_NegotiationBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, NegotiationBonus")]
     NegotiationBonus = 437,
 
     /// <summary>Autogenerated skill attribute, socialMutator</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("socialMutator", "Eve.AttributeId_SocialMutator")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, socialMutator")]
     SocialMutator = 438,
 
     /// <summary>Autogenerated skill attribute, targetingSpeedBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("targetingSpeedBonus", "Eve.AttributeId_TargetingSpeedBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, targetingSpeedBonus")]
     TargetingSpeedBonus = 439,
 
     /// <summary>Autogenerated skill attribute, manufacturingTimeBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("manufacturingTimeBonus", "Eve.AttributeId_ManufacturingTimeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, manufacturingTimeBonus")]
     ManufacturingTimeBonus = 440,
 
     /// <summary>Autogenerated skill attribute, TurretSpeeBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("turretSpeeBonus", "Eve.AttributeId_TurretSpeeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, TurretSpeeBonus")]
     TurretSpeeBonus = 441,
 
     /// <summary>skill discount when selling to npc corps</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("barterDiscount", "Eve.AttributeId_BarterDiscount")]
+    
     [System.ComponentModel.DescriptionAttribute("skill discount when selling to npc corps")]
     BarterDiscount = 442,
 
     /// <summary>price bonus when selling to npc corps
     ///</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("tradePremium", "Eve.AttributeId_TradePremium")]
+    
     [System.ComponentModel.DescriptionAttribute("price bonus when selling to npc corps\r\n")]
     TradePremium = 443,
 
     /// <summary>Chance of being caught selling contraband on market. </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("contrabandFencingChance", "Eve.AttributeId_ContrabandFencingChance")]
+    
     [System.ComponentModel.DescriptionAttribute("Chance of being caught selling contraband on market. ")]
     ContrabandFencingChance = 444,
 
     /// <summary>Chance of being caught Transporting contraband. </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("smugglingChance", "Eve.AttributeId_SmugglingChance")]
+    
     [System.ComponentModel.DescriptionAttribute("Chance of being caught Transporting contraband. ")]
     SmugglingChance = 445,
 
     /// <summary>Autogenerated skill attribute, tradePremiumBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("tradePremiumBonus", "Eve.AttributeId_TradePremiumBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, tradePremiumBonus")]
     TradePremiumBonus = 446,
 
     /// <summary>Autogenerated skill attribute, smugglingChanceBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("smugglingChanceBonus", "Eve.AttributeId_SmugglingChanceBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, smugglingChanceBonus")]
     SmugglingChanceBonus = 447,
 
     /// <summary>Autogenerated skill attribute, fencingChanceBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("fencingChanceBonus", "Eve.AttributeId_FencingChanceBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, fencingChanceBonus")]
     FencingChanceBonus = 448,
 
     /// <summary>Autogenerated skill attribute, BarterDiscountBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("barterDiscountBonus", "Eve.AttributeId_BarterDiscountBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, BarterDiscountBonus")]
     BarterDiscountBonus = 449,
 
     /// <summary>Autogenerated skill attribute, manufacturingSlotBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("manufacturingSlotBonus", "Eve.AttributeId_ManufacturingSlotBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, manufacturingSlotBonus")]
     ManufacturingSlotBonus = 450,
 
     /// <summary>Autogenerated skill attribute, manufactureCostBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("manufactureCostBonus", "Eve.AttributeId_ManufactureCostBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, manufactureCostBonus")]
     ManufactureCostBonus = 451,
 
     /// <summary>Autogenerated skill attribute, CopySpeedBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("copySpeedBonus", "Eve.AttributeId_CopySpeedBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, CopySpeedBonus")]
     CopySpeedBonus = 452,
 
     /// <summary>Autogenerated skill attribute, blueprintmanufactureTimeBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("blueprintmanufactureTimeBonus", "Eve.AttributeId_BlueprintmanufactureTimeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, blueprintmanufactureTimeBonus")]
     BlueprintmanufactureTimeBonus = 453,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("mutaton", "Eve.AttributeId_Mutaton")]
+    
     Mutaton = 454,
 
     /// <summary>Autogenerated skill attribute, learningBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("learningBonus", "Eve.AttributeId_LearningBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, learningBonus")]
     LearningBonus = 455,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityEquipmentMin", "Eve.AttributeId_EntityEquipmentMin")]
+    
     EntityEquipmentMin = 456,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityEquipmentMax", "Eve.AttributeId_EntityEquipmentMax")]
+    
     EntityEquipmentMax = 457,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("droneControlDistance", "Eve.AttributeId_DroneControlDistance")]
+    
     DroneControlDistance = 458,
 
     /// <summary>Autogenerated skill attribute, droneRangeBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("droneRangeBonus", "Eve.AttributeId_DroneRangeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, droneRangeBonus")]
     DroneRangeBonus = 459,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusMF", "Eve.AttributeId_ShipBonusMf")]
+    
     ShipBonusMf = 460,
 
     /// <summary>Autogenerated skill attribute, specialAbilityBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("specialAbilityBonus", "Eve.AttributeId_SpecialAbilityBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, specialAbilityBonus")]
     SpecialAbilityBonus = 461,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusGF", "Eve.AttributeId_ShipBonusGf")]
+    
     ShipBonusGf = 462,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusCF", "Eve.AttributeId_ShipBonusCf")]
+    
     ShipBonusCf = 463,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusAF", "Eve.AttributeId_ShipBonusAf")]
+    
     ShipBonusAf = 464,
 
     /// <summary>The maximum drops of same group (example: entity can only drop 1 of group: energy laser)</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityEquipmentGroupMax", "Eve.AttributeId_EntityEquipmentGroupMax")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum drops of same group (example: entity can only drop 1 of group: energy" +
         " laser)")]
     EntityEquipmentGroupMax = 465,
 
     /// <summary>The chance of an entity attacking the same person as its group members.  Scales delay in joining in on fights too.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityReactionFactor", "Eve.AttributeId_EntityReactionFactor")]
+    
     [System.ComponentModel.DescriptionAttribute("The chance of an entity attacking the same person as its group members.  Scales d" +
         "elay in joining in on fights too.")]
     EntityReactionFactor = 466,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxLaborotorySlots", "Eve.AttributeId_MaxLaborotorySlots")]
+    
     MaxLaborotorySlots = 467,
 
     /// <summary>Autogenerated skill attribute, mineralNeedResearchBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("mineralNeedResearchBonus", "Eve.AttributeId_MineralNeedResearchBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, mineralNeedResearchBonus")]
     MineralNeedResearchBonus = 468,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityBluePrintDropChance", "Eve.AttributeId_EntityBluePrintDropChance")]
+    
     EntityBluePrintDropChance = 469,
 
     /// <summary>The number of milliseconds before the container replenishes the loot inside itself.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("lootRespawnTime", "Eve.AttributeId_LootRespawnTime")]
+    
     [System.ComponentModel.DescriptionAttribute("The number of milliseconds before the container replenishes the loot inside itsel" +
         "f.")]
     LootRespawnTime = 470,
 
     /// <summary>Autogenerated skill attribute, laboratorySlotsBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("laboratorySlotsBonus", "Eve.AttributeId_LaboratorySlotsBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, laboratorySlotsBonus")]
     LaboratorySlotsBonus = 471,
 
     /// <summary>The type of station this platform can be used to build.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("stationTypeID", "Eve.AttributeId_StationTypeId")]
+    
     [System.ComponentModel.DescriptionAttribute("The type of station this platform can be used to build.")]
     StationTypeId = 472,
 
     /// <summary>Autogenerated skill attribute, prototypingBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("prototypingBonus", "Eve.AttributeId_PrototypingBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, prototypingBonus")]
     PrototypingBonus = 473,
 
     /// <summary>Autogenerated skill attribute, inventionBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("inventionBonus", "Eve.AttributeId_InventionBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, inventionBonus")]
     InventionBonus = 474,
 
     /// <summary>Minimum attack delay time for entity.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityAttackDelayMin", "Eve.AttributeId_EntityAttackDelayMin")]
+    
     [System.ComponentModel.DescriptionAttribute("Minimum attack delay time for entity.")]
     EntityAttackDelayMin = 475,
 
     /// <summary>Maximum attack delay time for entity.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityAttackDelayMax", "Eve.AttributeId_EntityAttackDelayMax")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum attack delay time for entity.")]
     EntityAttackDelayMax = 476,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusAC", "Eve.AttributeId_ShipBonusAc")]
+    
     ShipBonusAc = 478,
 
     /// <summary>Amount of time taken to fully recharge the shield.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldRechargeRate", "Eve.AttributeId_ShieldRechargeRate")]
+    
     [System.ComponentModel.DescriptionAttribute("Amount of time taken to fully recharge the shield.")]
     ShieldRechargeRate = 479,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxEffectiveRange", "Eve.AttributeId_MaxEffectiveRange")]
+    
     MaxEffectiveRange = 480,
 
     /// <summary>Reward for destroying this entity.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityKillBounty", "Eve.AttributeId_EntityKillBounty")]
+    
     [System.ComponentModel.DescriptionAttribute("Reward for destroying this entity.")]
     EntityKillBounty = 481,
 
     /// <summary>Capacitor capacity</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("capacitorCapacity", "Eve.AttributeId_CapacitorCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("Capacitor capacity")]
     CapacitorCapacity = 482,
 
     /// <summary>DO NOT MESS WITH This number is deducted from the %chance of the seeping to armor, to slow seep of damage through shield.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldUniformity", "Eve.AttributeId_ShieldUniformity")]
+    
     [System.ComponentModel.DescriptionAttribute("DO NOT MESS WITH This number is deducted from the %chance of the seeping to armor" +
         ", to slow seep of damage through shield.")]
     ShieldUniformity = 484,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonus2AF", "Eve.AttributeId_ShipBonus2Af")]
+    
     ShipBonus2Af = 485,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusGC", "Eve.AttributeId_ShipBonusGc")]
+    
     ShipBonusGc = 486,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusCC", "Eve.AttributeId_ShipBonusCc")]
+    
     ShipBonusCc = 487,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipVelocityBonusMC", "Eve.AttributeId_ShipVelocityBonusMc")]
+    
     ShipVelocityBonusMc = 488,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusMC", "Eve.AttributeId_ShipBonusMc")]
+    
     ShipBonusMc = 489,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusMB", "Eve.AttributeId_ShipBonusMb")]
+    
     ShipBonusMb = 490,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusCB", "Eve.AttributeId_ShipBonusCb")]
+    
     ShipBonusCb = 491,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusAB", "Eve.AttributeId_ShipBonusAb")]
+    
     ShipBonusAb = 492,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusMI", "Eve.AttributeId_ShipBonusMi")]
+    
     ShipBonusMi = 493,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusAI", "Eve.AttributeId_ShipBonusAi")]
+    
     ShipBonusAi = 494,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusCI", "Eve.AttributeId_ShipBonusCi")]
+    
     ShipBonusCi = 495,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusGI", "Eve.AttributeId_ShipBonusGi")]
+    
     ShipBonusGi = 496,
 
     /// <summary>% chance of entity to shoot defender at incoming missile</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityDefenderChance", "Eve.AttributeId_EntityDefenderChance")]
+    
     [System.ComponentModel.DescriptionAttribute("% chance of entity to shoot defender at incoming missile")]
     EntityDefenderChance = 497,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("droneCapacityBonus", "Eve.AttributeId_DroneCapacityBonus")]
+    
     DroneCapacityBonus = 499,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusGB", "Eve.AttributeId_ShipBonusGb")]
+    
     ShipBonusGb = 500,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonus2CB", "Eve.AttributeId_ShipBonus2Cb")]
+    
     ShipBonus2Cb = 501,
 
     /// <summary>Minimum number of drones the convoy can have for protection.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityConvoyDroneMin", "Eve.AttributeId_EntityConvoyDroneMin")]
+    
     [System.ComponentModel.DescriptionAttribute("Minimum number of drones the convoy can have for protection.")]
     EntityConvoyDroneMin = 502,
 
     /// <summary>Maximum number of convoy drones a convoy can have for proetcion.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityConvoyDroneMax", "Eve.AttributeId_EntityConvoyDroneMax")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum number of convoy drones a convoy can have for proetcion.")]
     EntityConvoyDroneMax = 503,
 
     /// <summary>Chance of entity warp scrambling it's target.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityWarpScrambleChance", "Eve.AttributeId_EntityWarpScrambleChance")]
+    
     [System.ComponentModel.DescriptionAttribute("Chance of entity warp scrambling it\'s target.")]
     EntityWarpScrambleChance = 504,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("warpScrambleDuration", "Eve.AttributeId_WarpScrambleDuration")]
+    
     WarpScrambleDuration = 505,
 
     /// <summary>Cycle time for a missile launch, in milliseconds.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("missileLaunchDuration", "Eve.AttributeId_MissileLaunchDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("Cycle time for a missile launch, in milliseconds.")]
     MissileLaunchDuration = 506,
 
     /// <summary>The type of missiles the entity launches.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityMissileTypeID", "Eve.AttributeId_EntityMissileTypeId")]
+    
     [System.ComponentModel.DescriptionAttribute("The type of missiles the entity launches.")]
     EntityMissileTypeId = 507,
 
     /// <summary>The speed that entities fly at when not chasing a target.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityCruiseSpeed", "Eve.AttributeId_EntityCruiseSpeed")]
+    
     [System.ComponentModel.DescriptionAttribute("The speed that entities fly at when not chasing a target.")]
     EntityCruiseSpeed = 508,
 
     /// <summary>Distance from maximum range at which accuracy has fallen by half.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cargoScanFalloff", "Eve.AttributeId_CargoScanFalloff")]
+    
     [System.ComponentModel.DescriptionAttribute("Distance from maximum range at which accuracy has fallen by half.")]
     CargoScanFalloff = 509,
 
     /// <summary>Distance from maximum range at which accuracy has fallen by half.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipScanFalloff", "Eve.AttributeId_ShipScanFalloff")]
+    
     [System.ComponentModel.DescriptionAttribute("Distance from maximum range at which accuracy has fallen by half.")]
     ShipScanFalloff = 510,
 
     /// <summary>Chance of being able to resist a ship scan.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipScanResistance", "Eve.AttributeId_ShipScanResistance")]
+    
     [System.ComponentModel.DescriptionAttribute("Chance of being able to resist a ship scan.")]
     ShipScanResistance = 511,
 
     /// <summary>Chance that  an entity will use a Stasis Web on a target.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("modifyTargetSpeedChance", "Eve.AttributeId_ModifyTargetSpeedChance")]
+    
     [System.ComponentModel.DescriptionAttribute("Chance that  an entity will use a Stasis Web on a target.")]
     ModifyTargetSpeedChance = 512,
 
     /// <summary>Duration of entities Stasis Web </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("modifyTargetSpeedDuration", "Eve.AttributeId_ModifyTargetSpeedDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("Duration of entities Stasis Web ")]
     ModifyTargetSpeedDuration = 513,
 
     /// <summary>Range of entities Stasis Web</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("modifyTargetSpeedRange", "Eve.AttributeId_ModifyTargetSpeedRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Range of entities Stasis Web")]
     ModifyTargetSpeedRange = 514,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("modifyTargetSpeedCapacitorNeed", "Eve.AttributeId_ModifyTargetSpeedCapacitorNeed")]
+    
     ModifyTargetSpeedCapacitorNeed = 515,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("chassisType", "Eve.AttributeId_ChassisType")]
+    
     ChassisType = 516,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("fallofMultiplier", "Eve.AttributeId_FallofMultiplier")]
+    
     FallofMultiplier = 517,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusMB2", "Eve.AttributeId_ShipBonusMb2")]
+    
     ShipBonusMb2 = 518,
 
     /// <summary>The percentage of capacitor capacity required to engage cloaking.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cloakingCapacitorNeedRatio", "Eve.AttributeId_CloakingCapacitorNeedRatio")]
+    
     [System.ComponentModel.DescriptionAttribute("The percentage of capacitor capacity required to engage cloaking.")]
     CloakingCapacitorNeedRatio = 519,
 
     /// <summary>%chance of new asteroid releasing damage cloud each mining turn.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("damageCloudChance", "Eve.AttributeId_DamageCloudChance")]
+    
     [System.ComponentModel.DescriptionAttribute("%chance of new asteroid releasing damage cloud each mining turn.")]
     DamageCloudChance = 522,
 
     /// <summary>DO NOT MESS WITH</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorUniformity", "Eve.AttributeId_ArmorUniformity")]
+    
     [System.ComponentModel.DescriptionAttribute("DO NOT MESS WITH")]
     ArmorUniformity = 524,
 
     /// <summary>DO NOT MESS WITH</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("structureUniformity", "Eve.AttributeId_StructureUniformity")]
+    
     [System.ComponentModel.DescriptionAttribute("DO NOT MESS WITH")]
     StructureUniformity = 525,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("reqResearchSkill", "Eve.AttributeId_ReqResearchSkill")]
+    
     ReqResearchSkill = 526,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("reqManufacturingSkill", "Eve.AttributeId_ReqManufacturingSkill")]
+    
     ReqManufacturingSkill = 527,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("reqManufacturingSkillLevel", "Eve.AttributeId_ReqManufacturingSkillLevel")]
+    
     ReqManufacturingSkillLevel = 528,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("reqResearchSkillLevel", "Eve.AttributeId_ReqResearchSkillLevel")]
+    
     ReqResearchSkillLevel = 529,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("reqManufacturingTool", "Eve.AttributeId_ReqManufacturingTool")]
+    
     ReqManufacturingTool = 530,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("reqResearchTool", "Eve.AttributeId_ReqResearchTool")]
+    
     ReqResearchTool = 531,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("reqResearchComponent", "Eve.AttributeId_ReqResearchComponent")]
+    
     ReqResearchComponent = 532,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("Manufacturer_ID", "Eve.AttributeId_Manufacturer_Id")]
+    
     Manufacturer_Id = 534,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("installedMod", "Eve.AttributeId_InstalledMod")]
+    
     InstalledMod = 535,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("reqResearchComponetAmount", "Eve.AttributeId_ReqResearchComponetAmount")]
+    
     ReqResearchComponetAmount = 536,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("reqManufacturingComponent1Amount", "Eve.AttributeId_ReqManufacturingComponent1Amount")]
+    
     ReqManufacturingComponent1Amount = 537,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("reqManufacturingComponent2Amount", "Eve.AttributeId_ReqManufacturingComponent2Amount")]
+    
     ReqManufacturingComponent2Amount = 538,
 
     /// <summary>A relative strength that indicates how powerful this NPC entity is in combat.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityStrength", "Eve.AttributeId_EntityStrength")]
+    
     [System.ComponentModel.DescriptionAttribute("A relative strength that indicates how powerful this NPC entity is in combat.")]
     EntityStrength = 542,
 
     /// <summary>Autogenerated skill attribute, damageCloudChanceReduction</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("damageCloudChanceReduction", "Eve.AttributeId_DamageCloudChanceReduction")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, damageCloudChanceReduction")]
     DamageCloudChanceReduction = 543,
 
     /// <summary>The amount of time before applications of the cloud's effect.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cloudEffectDelay", "Eve.AttributeId_CloudEffectDelay")]
+    
     [System.ComponentModel.DescriptionAttribute("The amount of time before applications of the cloud\'s effect.")]
     CloudEffectDelay = 544,
 
     /// <summary>Number of milliseconds a temporary cloud hangs around.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cloudDuration", "Eve.AttributeId_CloudDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("Number of milliseconds a temporary cloud hangs around.")]
     CloudDuration = 545,
 
     /// <summary>The type of damage cloud generated by the asteroid.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("damageCloudType", "Eve.AttributeId_DamageCloudType")]
+    
     [System.ComponentModel.DescriptionAttribute("The type of damage cloud generated by the asteroid.")]
     DamageCloudType = 546,
 
     /// <summary>Autogenerated skill attribute, missileVelocityBonus </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("missileVelocityBonus", "Eve.AttributeId_MissileVelocityBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, missileVelocityBonus ")]
     MissileVelocityBonus = 547,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldBoostMultiplier", "Eve.AttributeId_ShieldBoostMultiplier")]
+    
     ShieldBoostMultiplier = 548,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("powerIncrease", "Eve.AttributeId_PowerIncrease")]
+    
     PowerIncrease = 549,
 
     /// <summary>Autogenerated skill attribute, resistanceBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("resistanceBonus", "Eve.AttributeId_ResistanceBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, resistanceBonus")]
     ResistanceBonus = 550,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("rocketVelocityPercent", "Eve.AttributeId_RocketVelocityPercent")]
+    
     RocketVelocityPercent = 551,
 
     /// <summary>Signature Radius is used for turret tracking and scanning.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("signatureRadius", "Eve.AttributeId_SignatureRadius")]
+    
     [System.ComponentModel.DescriptionAttribute("Signature Radius is used for turret tracking and scanning.")]
     SignatureRadius = 552,
 
     /// <summary>Autogenerated skill attribute, maxGangSizeBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxGangSizeBonus", "Eve.AttributeId_MaxGangSizeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, maxGangSizeBonus")]
     MaxGangSizeBonus = 553,
 
     /// <summary>Autogenerated skill attribute, signatureRadiusBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("signatureRadiusBonus", "Eve.AttributeId_SignatureRadiusBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, signatureRadiusBonus")]
     SignatureRadiusBonus = 554,
 
     /// <summary>Autogenerated skill attribute, cloakVelocityBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cloakVelocityBonus", "Eve.AttributeId_CloakVelocityBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, cloakVelocityBonus")]
     CloakVelocityBonus = 555,
 
     /// <summary>How long it takes to anchor or unanchor this object.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("anchoringDelay", "Eve.AttributeId_AnchoringDelay")]
+    
     [System.ComponentModel.DescriptionAttribute("How long it takes to anchor or unanchor this object.")]
     AnchoringDelay = 556,
 
     /// <summary>Autogenerated skill attribute, max flightTimeBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxFlightTimeBonus", "Eve.AttributeId_MaxFlightTimeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, max flightTimeBonus")]
     MaxFlightTimeBonus = 557,
 
     /// <summary>Autogenerated skill attribute, explosionRangeBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("explosionRangeBonus", "Eve.AttributeId_ExplosionRangeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, explosionRangeBonus")]
     ExplosionRangeBonus = 558,
 
     /// <summary>Inertia is a basic multiplier of agility and the mass of the ship, it determines how fast the ship can accelerate and how fast it can fly when orbiting.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Inertia", "Eve.AttributeId_Inertia")]
+    
     [System.ComponentModel.DescriptionAttribute("Inertia is a basic multiplier of agility and the mass of the ship, it determines " +
         "how fast the ship can accelerate and how fast it can fly when orbiting.")]
     Inertia = 559,
 
     /// <summary>The time targeting systems take to recalibrate after cloaking.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cloakingTargetingDelay", "Eve.AttributeId_CloakingTargetingDelay")]
+    
     [System.ComponentModel.DescriptionAttribute("The time targeting systems take to recalibrate after cloaking.")]
     CloakingTargetingDelay = 560,
 
     /// <summary>skill bonus attribute2 for gallente battleship</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusGB2", "Eve.AttributeId_ShipBonusGb2")]
+    
     [System.ComponentModel.DescriptionAttribute("skill bonus attribute2 for gallente battleship")]
     ShipBonusGb2 = 561,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityFactionLoss", "Eve.AttributeId_EntityFactionLoss")]
+    
     EntityFactionLoss = 562,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("entitySecurityMaxGain", "Eve.AttributeId_EntitySecurityMaxGain")]
+    
     EntitySecurityMaxGain = 563,
 
     /// <summary>The resolution that the vessel can target other objects at.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanResolution", "Eve.AttributeId_ScanResolution")]
+    
     [System.ComponentModel.DescriptionAttribute("The resolution that the vessel can target other objects at.")]
     ScanResolution = 564,
 
     /// <summary>Improves the targeting time of ships by boosting the Scan Resolution.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanResolutionMultiplier", "Eve.AttributeId_ScanResolutionMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Improves the targeting time of ships by boosting the Scan Resolution.")]
     ScanResolutionMultiplier = 565,
 
     /// <summary>Bonus for scan resolution</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanResolutionBonus", "Eve.AttributeId_ScanResolutionBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus for scan resolution")]
     ScanResolutionBonus = 566,
 
     /// <summary>Used to divide with mass to give a factor for speed boost modules</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("speedBoostFactor", "Eve.AttributeId_SpeedBoostFactor")]
+    
     [System.ComponentModel.DescriptionAttribute("Used to divide with mass to give a factor for speed boost modules")]
     SpeedBoostFactor = 567,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusInterceptor", "Eve.AttributeId_EliteBonusInterceptor")]
+    
     EliteBonusInterceptor = 568,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusCoverOps1", "Eve.AttributeId_EliteBonusCoverOps1")]
+    
     EliteBonusCoverOps1 = 569,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusBombers", "Eve.AttributeId_EliteBonusBombers")]
+    
     EliteBonusBombers = 570,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusGunships", "Eve.AttributeId_EliteBonusGunships")]
+    
     EliteBonusGunships = 571,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusdestroyers", "Eve.AttributeId_EliteBonusdestroyers")]
+    
     EliteBonusdestroyers = 573,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusBattlecruiser", "Eve.AttributeId_EliteBonusBattlecruiser")]
+    
     EliteBonusBattlecruiser = 575,
 
     /// <summary>Hidden attribute that is used for speedBoostFactor calculation because Dogma cant handle it.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("speedBoostFactorCalc", "Eve.AttributeId_SpeedBoostFactorCalc")]
+    
     [System.ComponentModel.DescriptionAttribute("Hidden attribute that is used for speedBoostFactor calculation because Dogma cant" +
         " handle it.")]
     SpeedBoostFactorCalc = 576,
 
     /// <summary>Second hidden attribute.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("speedBoostFactorCalc2", "Eve.AttributeId_SpeedBoostFactorCalc2")]
+    
     [System.ComponentModel.DescriptionAttribute("Second hidden attribute.")]
     SpeedBoostFactorCalc2 = 578,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("testForEggert", "Eve.AttributeId_TestForEggert")]
+    
     TestForEggert = 579,
 
     /// <summary>The maximum amount of time stalled before entity chase speed kicks in.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityChaseMaxDelay", "Eve.AttributeId_EntityChaseMaxDelay")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum amount of time stalled before entity chase speed kicks in.")]
     EntityChaseMaxDelay = 580,
 
     /// <summary>Chance that the max delay is waited before chase is engaged.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityChaseMaxDelayChance", "Eve.AttributeId_EntityChaseMaxDelayChance")]
+    
     [System.ComponentModel.DescriptionAttribute("Chance that the max delay is waited before chase is engaged.")]
     EntityChaseMaxDelayChance = 581,
 
     /// <summary>The maximum amount of time chase is ever engaged for.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityChaseMaxDuration", "Eve.AttributeId_EntityChaseMaxDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum amount of time chase is ever engaged for.")]
     EntityChaseMaxDuration = 582,
 
     /// <summary>The chance of engaging chase for the maximum duration.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityChaseMaxDurationChance", "Eve.AttributeId_EntityChaseMaxDurationChance")]
+    
     [System.ComponentModel.DescriptionAttribute("The chance of engaging chase for the maximum duration.")]
     EntityChaseMaxDurationChance = 583,
 
     /// <summary>The maximum distance an entity of this type can be led from its point of placement.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityMaxWanderRange", "Eve.AttributeId_EntityMaxWanderRange")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum distance an entity of this type can be led from its point of placemen" +
         "t.")]
     EntityMaxWanderRange = 584,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusAB2", "Eve.AttributeId_ShipBonusAb2")]
+    
     ShipBonusAb2 = 585,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusGF2", "Eve.AttributeId_ShipBonusGf2")]
+    
     ShipBonusGf2 = 586,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusMF2", "Eve.AttributeId_ShipBonusMf2")]
+    
     ShipBonusMf2 = 587,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusCF2", "Eve.AttributeId_ShipBonusCf2")]
+    
     ShipBonusCf2 = 588,
 
     /// <summary>Whether a station type is player ownable.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("isPlayerOwnable", "Eve.AttributeId_IsPlayerOwnable")]
+    
     [System.ComponentModel.DescriptionAttribute("Whether a station type is player ownable.")]
     IsPlayerOwnable = 589,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("gestaltBonus1", "Eve.AttributeId_GestaltBonus1")]
+    
     GestaltBonus1 = 590,
 
     /// <summary>Increases max velocity of all drone types.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("droneMaxVelocityBonus", "Eve.AttributeId_DroneMaxVelocityBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Increases max velocity of all drone types.")]
     DroneMaxVelocityBonus = 591,
 
     /// <summary>Autogenerated skill attribute, cloakCapacitorBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cloakCapacitorBonus", "Eve.AttributeId_CloakCapacitorBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, cloakCapacitorBonus")]
     CloakCapacitorBonus = 592,
 
     /// <summary>Autogenerated skill attribute, cloakCapacitor Bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("Die", "Eve.AttributeId_Die")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, cloakCapacitor Bonus")]
     Die = 594,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("capBoostMultipler", "Eve.AttributeId_CapBoostMultipler")]
+    
     CapBoostMultipler = 595,
 
     /// <summary>Autogenerated skill attribute, explosionDelayBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("explosionDelayBonus", "Eve.AttributeId_ExplosionDelayBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, explosionDelayBonus")]
     ExplosionDelayBonus = 596,
 
     /// <summary>bonus for escort class frigates</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusEscorts", "Eve.AttributeId_EliteBonusEscorts")]
+    
     [System.ComponentModel.DescriptionAttribute("bonus for escort class frigates")]
     EliteBonusEscorts = 597,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusCB3", "Eve.AttributeId_ShipBonusCb3")]
+    
     ShipBonusCb3 = 598,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("warpSpeedMultiplier", "Eve.AttributeId_WarpSpeedMultiplier")]
+    
     WarpSpeedMultiplier = 600,
 
     /// <summary>Autogenerated skill attribute, warpSpeedBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("warpSpeedBonus", "Eve.AttributeId_WarpSpeedBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, warpSpeedBonus")]
     WarpSpeedBonus = 601,
 
     /// <summary>One of the groups of launcher this charge can be loaded into.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("launcherGroup2", "Eve.AttributeId_LauncherGroup2")]
+    
     [System.ComponentModel.DescriptionAttribute("One of the groups of launcher this charge can be loaded into.")]
     LauncherGroup2 = 602,
 
     /// <summary>One of the groups of launcher this charge can be loaded into.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("launcherGroup3", "Eve.AttributeId_LauncherGroup3")]
+    
     [System.ComponentModel.DescriptionAttribute("One of the groups of launcher this charge can be loaded into.")]
     LauncherGroup3 = 603,
 
     /// <summary>One of the groups of charge this launcher can be loaded with.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("chargeGroup1", "Eve.AttributeId_ChargeGroup1")]
+    
     [System.ComponentModel.DescriptionAttribute("One of the groups of charge this launcher can be loaded with.")]
     ChargeGroup1 = 604,
 
     /// <summary>One of the groups of charge this launcher can be loaded with.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("chargeGroup2", "Eve.AttributeId_ChargeGroup2")]
+    
     [System.ComponentModel.DescriptionAttribute("One of the groups of charge this launcher can be loaded with.")]
     ChargeGroup2 = 605,
 
     /// <summary>One of the groups of charge this launcher can be loaded with.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("chargeGroup3", "Eve.AttributeId_ChargeGroup3")]
+    
     [System.ComponentModel.DescriptionAttribute("One of the groups of charge this launcher can be loaded with.")]
     ChargeGroup3 = 606,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("powerNeedMultiplier", "Eve.AttributeId_PowerNeedMultiplier")]
+    
     PowerNeedMultiplier = 608,
 
     /// <summary>One of the groups of charge this launcher can be loaded with.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("chargeGroup4", "Eve.AttributeId_ChargeGroup4")]
+    
     [System.ComponentModel.DescriptionAttribute("One of the groups of charge this launcher can be loaded with.")]
     ChargeGroup4 = 609,
 
     /// <summary>One of the groups of charge this launcher can be loaded with.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("chargeGroup5", "Eve.AttributeId_ChargeGroup5")]
+    
     [System.ComponentModel.DescriptionAttribute("One of the groups of charge this launcher can be loaded with.")]
     ChargeGroup5 = 610,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("durationMultiplier", "Eve.AttributeId_DurationMultiplier")]
+    
     DurationMultiplier = 611,
 
     /// <summary>Just for the UI to display base damage on shield.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("baseShieldDamage", "Eve.AttributeId_BaseShieldDamage")]
+    
     [System.ComponentModel.DescriptionAttribute("Just for the UI to display base damage on shield.")]
     BaseShieldDamage = 612,
 
     /// <summary>Just for the UI to display base damage on armor.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("baseArmorDamage", "Eve.AttributeId_BaseArmorDamage")]
+    
     [System.ComponentModel.DescriptionAttribute("Just for the UI to display base damage on armor.")]
     BaseArmorDamage = 613,
 
     /// <summary>Autogenerated skill attribute, cargoCapacityBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cargoCapacityBonus", "Eve.AttributeId_CargoCapacityBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, cargoCapacityBonus")]
     CargoCapacityBonus = 614,
 
     /// <summary>Multiplier applied to the ship's maximum velocity.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterShieldBoostAmountPenalty", "Eve.AttributeId_BoosterShieldBoostAmountPenalty")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier applied to the ship\'s maximum velocity.")]
     BoosterShieldBoostAmountPenalty = 616,
 
     /// <summary>Skill bonus for cloaking targeting delay.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cloakingTargetingDelayBonus", "Eve.AttributeId_CloakingTargetingDelayBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill bonus for cloaking targeting delay.")]
     CloakingTargetingDelayBonus = 619,
 
     /// <summary>Prefered target signature. The base signature radius at which the turret's tracking speed is rated. </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("optimalSigRadius", "Eve.AttributeId_OptimalSigRadius")]
+    
     [System.ComponentModel.DescriptionAttribute("Prefered target signature. The base signature radius at which the turret\'s tracki" +
         "ng speed is rated. ")]
     OptimalSigRadius = 620,
 
     /// <summary>Rated target transverse velocity at optimal range.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("trackingSpeedAtOptimal", "Eve.AttributeId_TrackingSpeedAtOptimal")]
+    
     [System.ComponentModel.DescriptionAttribute("Rated target transverse velocity at optimal range.")]
     TrackingSpeedAtOptimal = 621,
 
     /// <summary>Determines the maximum weight of a ship that, ships that are to heavy get denied of service by this attribute</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("massLimit", "Eve.AttributeId_MassLimit")]
+    
     [System.ComponentModel.DescriptionAttribute("Determines the maximum weight of a ship that, ships that are to heavy get denied " +
         "of service by this attribute")]
     MassLimit = 622,
 
     /// <summary>hot-fix for not allowing warpable cloaking modules on anything but covert-ops frigs</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cloakingSlotsLeftSuper", "Eve.AttributeId_CloakingSlotsLeftSuper")]
+    
     [System.ComponentModel.DescriptionAttribute("hot-fix for not allowing warpable cloaking modules on anything but covert-ops fri" +
         "gs")]
     CloakingSlotsLeftSuper = 623,
 
     /// <summary>Autogenerated skill attribute, WarpSBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("WarpSBonus", "Eve.AttributeId_WarpsBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, WarpSBonus")]
     WarpsBonus = 624,
 
     /// <summary>Flat Bonus To NPC Bountys</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("bountyBonus", "Eve.AttributeId_BountyBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Flat Bonus To NPC Bountys")]
     BountyBonus = 625,
 
     /// <summary>Npc Bounty Multiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("bountyMultiplier", "Eve.AttributeId_BountyMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Npc Bounty Multiplier")]
     BountyMultiplier = 626,
 
     /// <summary>Autogenerated skill attribute, bountySkillBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("bountySkillBonus", "Eve.AttributeId_BountySkillBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, bountySkillBonus")]
     BountySkillBonus = 627,
 
     /// <summary>Autogenerated skill attribute, bountySkillMultiplyer</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("bountySkillMultiplyer", "Eve.AttributeId_BountySkillMultiplyer")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, bountySkillMultiplyer")]
     BountySkillMultiplyer = 628,
 
     /// <summary>The cargo group that can be loaded into this container</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cargoGroup", "Eve.AttributeId_CargoGroup")]
+    
     [System.ComponentModel.DescriptionAttribute("The cargo group that can be loaded into this container")]
     CargoGroup = 629,
 
     /// <summary>Duration between armor repair actions for entities.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityArmorRepairDuration", "Eve.AttributeId_EntityArmorRepairDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("Duration between armor repair actions for entities.")]
     EntityArmorRepairDuration = 630,
 
     /// <summary>Amount of armor repaired per cycle for entities.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityArmorRepairAmount", "Eve.AttributeId_EntityArmorRepairAmount")]
+    
     [System.ComponentModel.DescriptionAttribute("Amount of armor repaired per cycle for entities.")]
     EntityArmorRepairAmount = 631,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("interceptorGF", "Eve.AttributeId_InterceptorGf")]
+    
     InterceptorGf = 632,
 
     /// <summary>The ranking of the module within its tech level</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("metaLevel", "Eve.AttributeId_MetaLevel")]
+    
     [System.ComponentModel.DescriptionAttribute("The ranking of the module within its tech level")]
     MetaLevel = 633,
 
     /// <summary>Maximum "Thrust angle" for an object in Radians, 0 to pi (3.14).</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("newAgility", "Eve.AttributeId_NewAgility")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum \"Thrust angle\" for an object in Radians, 0 to pi (3.14).")]
     NewAgility = 634,
 
     /// <summary>Maximum turn angle of a ship in Radians, 0 to pi (3.14).</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("turnAngle", "Eve.AttributeId_TurnAngle")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum turn angle of a ship in Radians, 0 to pi (3.14).")]
     TurnAngle = 635,
 
     /// <summary>How long between repeats.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityShieldBoostDuration", "Eve.AttributeId_EntityShieldBoostDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("How long between repeats.")]
     EntityShieldBoostDuration = 636,
 
     /// <summary>How much the shield is boosted each duration.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityShieldBoostAmount", "Eve.AttributeId_EntityShieldBoostAmount")]
+    
     [System.ComponentModel.DescriptionAttribute("How much the shield is boosted each duration.")]
     EntityShieldBoostAmount = 637,
 
     /// <summary>Chance that an entity will delay employing armor repair.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityArmorRepairDelayChance", "Eve.AttributeId_EntityArmorRepairDelayChance")]
+    
     [System.ComponentModel.DescriptionAttribute("Chance that an entity will delay employing armor repair.")]
     EntityArmorRepairDelayChance = 638,
 
     /// <summary>The chance an entity will delay repeating use of its shield boosting effect if it has one.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityShieldBoostDelayChance", "Eve.AttributeId_EntityShieldBoostDelayChance")]
+    
     [System.ComponentModel.DescriptionAttribute("The chance an entity will delay repeating use of its shield boosting effect if it" +
         " has one.")]
     EntityShieldBoostDelayChance = 639,
 
     /// <summary>The chance an entity will respawn into his group if destroyed.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityGroupRespawnChance", "Eve.AttributeId_EntityGroupRespawnChance")]
+    
     [System.ComponentModel.DescriptionAttribute("The chance an entity will respawn into his group if destroyed.")]
     EntityGroupRespawnChance = 640,
 
     /// <summary>typeID of an implant that the character must have to use this implant. </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("prereqimplant", "Eve.AttributeId_Prereqimplant")]
+    
     [System.ComponentModel.DescriptionAttribute("typeID of an implant that the character must have to use this implant. ")]
     Prereqimplant = 641,
 
     /// <summary>Delay after launch until a missile will do damage on impact.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("armingTime", "Eve.AttributeId_ArmingTime")]
+    
     [System.ComponentModel.DescriptionAttribute("Delay after launch until a missile will do damage on impact.")]
     ArmingTime = 643,
 
     /// <summary>Determines wether a missile launches aligned with the ship (0) or directly at the target (1).</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("aimedLaunch", "Eve.AttributeId_AimedLaunch")]
+    
     [System.ComponentModel.DescriptionAttribute("Determines wether a missile launches aligned with the ship (0) or directly at the" +
         " target (1).")]
     AimedLaunch = 644,
 
     /// <summary>Multiplier for the missile's speed.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("missileEntityVelocityMultiplier", "Eve.AttributeId_MissileEntityVelocityMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier for the missile\'s speed.")]
     MissileEntityVelocityMultiplier = 645,
 
     /// <summary>Multiplier for the missile's flight time.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("missileEntityFlightTimeMultiplier", "Eve.AttributeId_MissileEntityFlightTimeMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier for the missile\'s flight time.")]
     MissileEntityFlightTimeMultiplier = 646,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("missileEntityArmingTimeMultiplier", "Eve.AttributeId_MissileEntityArmingTimeMultiplier")]
+    
     MissileEntityArmingTimeMultiplier = 647,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldTUNEBonus", "Eve.AttributeId_ShieldTuneBonus")]
+    
     ShieldTuneBonus = 648,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("cloakingCpuNeedBonus", "Eve.AttributeId_CloakingCpuNeedBonus")]
+    
     CloakingCpuNeedBonus = 649,
 
     /// <summary>The distance that structures have to be from a control tower in order to work with it.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxStructureDistance", "Eve.AttributeId_MaxStructureDistance")]
+    
     [System.ComponentModel.DescriptionAttribute("The distance that structures have to be from a control tower in order to work wit" +
         "h it.")]
     MaxStructureDistance = 650,
 
     /// <summary>Range of broadcasted decloaking field.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("decloakFieldRange", "Eve.AttributeId_DecloakFieldRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Range of broadcasted decloaking field.")]
     DecloakFieldRange = 651,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("signatureRadiusMultiplier", "Eve.AttributeId_SignatureRadiusMultiplier")]
+    
     SignatureRadiusMultiplier = 652,
 
     /// <summary>Velocity of the damage cloud created on impact.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("aoeVelocity", "Eve.AttributeId_AoeVelocity")]
+    
     [System.ComponentModel.DescriptionAttribute("Velocity of the damage cloud created on impact.")]
     AoeVelocity = 653,
 
     /// <summary>Size of the damage cloud caused by impact.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("aoeCloudSize", "Eve.AttributeId_AoeCloudSize")]
+    
     [System.ComponentModel.DescriptionAttribute("Size of the damage cloud caused by impact.")]
     AoeCloudSize = 654,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("aoeFalloff", "Eve.AttributeId_AoeFalloff")]
+    
     AoeFalloff = 655,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusAC2", "Eve.AttributeId_ShipBonusAc2")]
+    
     ShipBonusAc2 = 656,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusCC2", "Eve.AttributeId_ShipBonusCc2")]
+    
     ShipBonusCc2 = 657,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusGC2", "Eve.AttributeId_ShipBonusGc2")]
+    
     ShipBonusGc2 = 658,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusMC2", "Eve.AttributeId_ShipBonusMc2")]
+    
     ShipBonusMc2 = 659,
 
     /// <summary>The amount of kinetic damage that might be inflicted on collision.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("impactDamage", "Eve.AttributeId_ImpactDamage")]
+    
     [System.ComponentModel.DescriptionAttribute("The amount of kinetic damage that might be inflicted on collision.")]
     ImpactDamage = 660,
 
     /// <summary>Deprecated.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxDirectionalVelocity", "Eve.AttributeId_MaxDirectionalVelocity")]
+    
     [System.ComponentModel.DescriptionAttribute("Deprecated.")]
     MaxDirectionalVelocity = 661,
 
     /// <summary>Deprecated.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("minTargetVelDmgMultiplier", "Eve.AttributeId_MinTargetVelDmgMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Deprecated.")]
     MinTargetVelDmgMultiplier = 662,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("minMissileVelDmgMultiplier", "Eve.AttributeId_MinMissileVelDmgMultiplier")]
+    
     MinMissileVelDmgMultiplier = 663,
 
     /// <summary>A multiplier used for the missile impact damage calculations.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxMissileVelocity", "Eve.AttributeId_MaxMissileVelocity")]
+    
     [System.ComponentModel.DescriptionAttribute("A multiplier used for the missile impact damage calculations.")]
     MaxMissileVelocity = 664,
 
     /// <summary>The distance outside of which the entity activates their MWD equivalent.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityChaseMaxDistance", "Eve.AttributeId_EntityChaseMaxDistance")]
+    
     [System.ComponentModel.DescriptionAttribute("The distance outside of which the entity activates their MWD equivalent.")]
     EntityChaseMaxDistance = 665,
 
     /// <summary>This module only fits on specific ship groups.  This is one of them.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("moduleShipGroup2", "Eve.AttributeId_ModuleShipGroup2")]
+    
     [System.ComponentModel.DescriptionAttribute("This module only fits on specific ship groups.  This is one of them.")]
     ModuleShipGroup2 = 666,
 
     /// <summary>This module only fits on specific ship groups.  This is one of them.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("moduleShipGroup3", "Eve.AttributeId_ModuleShipGroup3")]
+    
     [System.ComponentModel.DescriptionAttribute("This module only fits on specific ship groups.  This is one of them.")]
     ModuleShipGroup3 = 667,
 
     /// <summary>This module only fits on specific ship groups.  This is one of them.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("moduleShipGroup1", "Eve.AttributeId_ModuleShipGroup1")]
+    
     [System.ComponentModel.DescriptionAttribute("This module only fits on specific ship groups.  This is one of them.")]
     ModuleShipGroup1 = 668,
 
     /// <summary>Amount of time that has to be waited after the deactivation of this module until it can be reactivated.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("moduleReactivationDelay", "Eve.AttributeId_ModuleReactivationDelay")]
+    
     [System.ComponentModel.DescriptionAttribute("Amount of time that has to be waited after the deactivation of this module until " +
         "it can be reactivated.")]
     ModuleReactivationDelay = 669,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("areaOfEffectBonus", "Eve.AttributeId_AreaOfEffectBonus")]
+    
     AreaOfEffectBonus = 670,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityCruiseSpeedMultiplier", "Eve.AttributeId_EntityCruiseSpeedMultiplier")]
+    
     EntityCruiseSpeedMultiplier = 672,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusGunship1", "Eve.AttributeId_EliteBonusGunship1")]
+    
     EliteBonusGunship1 = 673,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusGunship2", "Eve.AttributeId_EliteBonusGunship2")]
+    
     EliteBonusGunship2 = 675,
 
     /// <summary>How long it takes to unanchor this object.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("unanchoringDelay", "Eve.AttributeId_UnanchoringDelay")]
+    
     [System.ComponentModel.DescriptionAttribute("How long it takes to unanchor this object.")]
     UnanchoringDelay = 676,
 
     /// <summary>How long it takes to bring this object online.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("onliningDelay", "Eve.AttributeId_OnliningDelay")]
+    
     [System.ComponentModel.DescriptionAttribute("How long it takes to bring this object online.")]
     OnliningDelay = 677,
 
     /// <summary>first bonus for support cruisers</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusLogistics1", "Eve.AttributeId_EliteBonusLogistics1")]
+    
     [System.ComponentModel.DescriptionAttribute("first bonus for support cruisers")]
     EliteBonusLogistics1 = 678,
 
     /// <summary>second bonus for support cruisers</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusLogistics2", "Eve.AttributeId_EliteBonusLogistics2")]
+    
     [System.ComponentModel.DescriptionAttribute("second bonus for support cruisers")]
     EliteBonusLogistics2 = 679,
 
     /// <summary>Radius of the force shield that this structure generates.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldRadius", "Eve.AttributeId_ShieldRadius")]
+    
     [System.ComponentModel.DescriptionAttribute("Radius of the force shield that this structure generates.")]
     ShieldRadius = 680,
 
     /// <summary>A type allowed to be placed in this container.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("typeContainerType1", "Eve.AttributeId_TypeContainerType1")]
+    
     [System.ComponentModel.DescriptionAttribute("A type allowed to be placed in this container.")]
     TypeContainerType1 = 681,
 
     /// <summary>A type allowed to be placed in this container.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("typeContainerType2", "Eve.AttributeId_TypeContainerType2")]
+    
     [System.ComponentModel.DescriptionAttribute("A type allowed to be placed in this container.")]
     TypeContainerType2 = 682,
 
     /// <summary>A type allowed to be placed in this container.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("typeContainerType3", "Eve.AttributeId_TypeContainerType3")]
+    
     [System.ComponentModel.DescriptionAttribute("A type allowed to be placed in this container.")]
     TypeContainerType3 = 683,
 
     /// <summary>The amount of storage type 1 that can be fitted inside this structure.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("typeContainerCapacity1", "Eve.AttributeId_TypeContainerCapacity1")]
+    
     [System.ComponentModel.DescriptionAttribute("The amount of storage type 1 that can be fitted inside this structure.")]
     TypeContainerCapacity1 = 684,
 
     /// <summary>The amount of storage type 2 that can be fitted inside this structure.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("typeContainerCapacity2", "Eve.AttributeId_TypeContainerCapacity2")]
+    
     [System.ComponentModel.DescriptionAttribute("The amount of storage type 2 that can be fitted inside this structure.")]
     TypeContainerCapacity2 = 685,
 
     /// <summary>The amount of storage type 3 that can be fitted inside this structure.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("typeContainerCapacity3", "Eve.AttributeId_TypeContainerCapacity3")]
+    
     [System.ComponentModel.DescriptionAttribute("The amount of storage type 3 that can be fitted inside this structure.")]
     TypeContainerCapacity3 = 686,
 
     /// <summary>The number of units of a resource consumed per minute of operation.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("operationConsumptionRate", "Eve.AttributeId_OperationConsumptionRate")]
+    
     [System.ComponentModel.DescriptionAttribute("The number of units of a resource consumed per minute of operation.")]
     OperationConsumptionRate = 687,
 
     /// <summary>The number of units of a resource consumed per minute of reinforced mode.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("reinforcedConsumptionRate", "Eve.AttributeId_ReinforcedConsumptionRate")]
+    
     [System.ComponentModel.DescriptionAttribute("The number of units of a resource consumed per minute of reinforced mode.")]
     ReinforcedConsumptionRate = 688,
 
     /// <summary>The graphicID used for the structure when it is in package form.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("packageGraphicID", "Eve.AttributeId_PackageGraphicId")]
+    
     [System.ComponentModel.DescriptionAttribute("The graphicID used for the structure when it is in package form.")]
     PackageGraphicId = 689,
 
     /// <summary>The radius of the structure when it is in package form.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("packageRadius", "Eve.AttributeId_PackageRadius")]
+    
     [System.ComponentModel.DescriptionAttribute("The radius of the structure when it is in package form.")]
     PackageRadius = 690,
 
     /// <summary>The amount of time after attacking a target that an entity will wait before switching to a new one.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("targetSwitchDelay", "Eve.AttributeId_TargetSwitchDelay")]
+    
     [System.ComponentModel.DescriptionAttribute("The amount of time after attacking a target that an entity will wait before switc" +
         "hing to a new one.")]
     TargetSwitchDelay = 691,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusHeavyGunship1", "Eve.AttributeId_EliteBonusHeavyGunship1")]
+    
     EliteBonusHeavyGunship1 = 692,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusHeavyGunship2", "Eve.AttributeId_EliteBonusHeavyGunship2")]
+    
     EliteBonusHeavyGunship2 = 693,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("resourceReinforced1Type", "Eve.AttributeId_ResourceReinforced1Type")]
+    
     ResourceReinforced1Type = 694,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("resourceReinforced2Type", "Eve.AttributeId_ResourceReinforced2Type")]
+    
     ResourceReinforced2Type = 695,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("resourceReinforced3Type", "Eve.AttributeId_ResourceReinforced3Type")]
+    
     ResourceReinforced3Type = 696,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("resourceReinforced4Type", "Eve.AttributeId_ResourceReinforced4Type")]
+    
     ResourceReinforced4Type = 697,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("resourceReinforced5Type", "Eve.AttributeId_ResourceReinforced5Type")]
+    
     ResourceReinforced5Type = 698,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("resourceReinforced1Quantity", "Eve.AttributeId_ResourceReinforced1Quantity")]
+    
     ResourceReinforced1Quantity = 699,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("resourceReinforced2Quantity", "Eve.AttributeId_ResourceReinforced2Quantity")]
+    
     ResourceReinforced2Quantity = 700,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("resourceReinforced3Quantity", "Eve.AttributeId_ResourceReinforced3Quantity")]
+    
     ResourceReinforced3Quantity = 701,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("resourceReinforced4Quantity", "Eve.AttributeId_ResourceReinforced4Quantity")]
+    
     ResourceReinforced4Quantity = 703,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("resourceReinforced5Quantity", "Eve.AttributeId_ResourceReinforced5Quantity")]
+    
     ResourceReinforced5Quantity = 704,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("resourceOnline1Type", "Eve.AttributeId_ResourceOnline1Type")]
+    
     ResourceOnline1Type = 705,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("resourceOnline2Type", "Eve.AttributeId_ResourceOnline2Type")]
+    
     ResourceOnline2Type = 706,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("resourceOnline3Type", "Eve.AttributeId_ResourceOnline3Type")]
+    
     ResourceOnline3Type = 707,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("resourceOnline4Type", "Eve.AttributeId_ResourceOnline4Type")]
+    
     ResourceOnline4Type = 708,
 
     /// <summary>The type of material harvested.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("harvesterType", "Eve.AttributeId_HarvesterType")]
+    
     [System.ComponentModel.DescriptionAttribute("The type of material harvested.")]
     HarvesterType = 709,
 
     /// <summary>The quality of the material harvested.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("harvesterQuality", "Eve.AttributeId_HarvesterQuality")]
+    
     [System.ComponentModel.DescriptionAttribute("The quality of the material harvested.")]
     HarvesterQuality = 710,
 
     /// <summary>How many meters from the standard warp-in distance a moon can be anchored from.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("moonAnchorDistance", "Eve.AttributeId_MoonAnchorDistance")]
+    
     [System.ComponentModel.DescriptionAttribute("How many meters from the standard warp-in distance a moon can be anchored from.")]
     MoonAnchorDistance = 711,
 
     /// <summary>How much a charge used by this object is damaged each time the object operates.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("usageDamagePercent", "Eve.AttributeId_UsageDamagePercent")]
+    
     [System.ComponentModel.DescriptionAttribute("How much a charge used by this object is damaged each time the object operates.")]
     UsageDamagePercent = 712,
 
     /// <summary>The type of resource needed to be consumed for each activation cycle of this structure.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("consumptionType", "Eve.AttributeId_ConsumptionType")]
+    
     [System.ComponentModel.DescriptionAttribute("The type of resource needed to be consumed for each activation cycle of this stru" +
         "cture.")]
     ConsumptionType = 713,
 
     /// <summary>The amount of the given resource type needed to be consumed for each activation cycle of this structure.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("consumptionQuantity", "Eve.AttributeId_ConsumptionQuantity")]
+    
     [System.ComponentModel.DescriptionAttribute("The amount of the given resource type needed to be consumed for each activation c" +
         "ycle of this structure.")]
     ConsumptionQuantity = 714,
 
     /// <summary>The maximum distance at which the object can be used.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxOperationalDistance", "Eve.AttributeId_MaxOperationalDistance")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum distance at which the object can be used.")]
     MaxOperationalDistance = 715,
 
     /// <summary>The maximum number of users that can be present within the operational range of the structure for it to be capable of operation.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxOperationalUsers", "Eve.AttributeId_MaxOperationalUsers")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum number of users that can be present within the operational range of t" +
         "he structure for it to be capable of operation.")]
     MaxOperationalUsers = 716,
 
     /// <summary>The factor by which the structure modifies the using pilot's refining yield rate.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("refiningYieldMultiplier", "Eve.AttributeId_RefiningYieldMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("The factor by which the structure modifies the using pilot\'s refining yield rate." +
         "")]
     RefiningYieldMultiplier = 717,
 
     /// <summary>The amount of time that is taken to refine the ore into the end product.  The structure is busy for the length of this process.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("operationalDuration", "Eve.AttributeId_OperationalDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("The amount of time that is taken to refine the ore into the end product.  The str" +
         "ucture is busy for the length of this process.")]
     OperationalDuration = 719,
 
     /// <summary>The capacity of the refinery container.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("refineryCapacity", "Eve.AttributeId_RefineryCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("The capacity of the refinery container.")]
     RefineryCapacity = 720,
 
     /// <summary>The factor by which the character can effect the amount of time that the Refining Delay takes.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("refiningDelayMultiplier", "Eve.AttributeId_RefiningDelayMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("The factor by which the character can effect the amount of time that the Refining" +
         " Delay takes.")]
     RefiningDelayMultiplier = 721,
 
     /// <summary>The interval for fuel consumption of a control tower</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("posControlTowerPeriod", "Eve.AttributeId_PosControlTowerPeriod")]
+    
     [System.ComponentModel.DescriptionAttribute("The interval for fuel consumption of a control tower")]
     PosControlTowerPeriod = 722,
 
     /// <summary>The chance that the customs official has of detecting contraband on board a scanned vessel</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("contrabandDetectionChance", "Eve.AttributeId_ContrabandDetectionChance")]
+    
     [System.ComponentModel.DescriptionAttribute("The chance that the customs official has of detecting contraband on board a scann" +
         "ed vessel")]
     ContrabandDetectionChance = 723,
 
     /// <summary>A modifier to the chance of contraband detection success of police who scan the pilot's vessel.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("contrabandDetectionResistance", "Eve.AttributeId_ContrabandDetectionResistance")]
+    
     [System.ComponentModel.DescriptionAttribute("A modifier to the chance of contraband detection success of police who scan the p" +
         "ilot\'s vessel.")]
     ContrabandDetectionResistance = 724,
 
     /// <summary>The chance that a passer by will be chosen as a target of a scan for contraband.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("contrabandScanChance", "Eve.AttributeId_ContrabandScanChance")]
+    
     [System.ComponentModel.DescriptionAttribute("The chance that a passer by will be chosen as a target of a scan for contraband.")]
     ContrabandScanChance = 725,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("moonMiningAmount", "Eve.AttributeId_MoonMiningAmount")]
+    
     MoonMiningAmount = 726,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("destroyerROFpenality", "Eve.AttributeId_DestroyerRoFpenality")]
+    
     DestroyerRoFpenality = 727,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("controlTowerLaserDamageBonus", "Eve.AttributeId_ControlTowerLaserDamageBonus")]
+    
     ControlTowerLaserDamageBonus = 728,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusMD1", "Eve.AttributeId_ShipBonusMd1")]
+    
     ShipBonusMd1 = 729,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusD1", "Eve.AttributeId_ShipBonusD1")]
+    
     ShipBonusD1 = 732,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusD2", "Eve.AttributeId_ShipBonusD2")]
+    
     ShipBonusD2 = 733,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusCD1", "Eve.AttributeId_ShipBonusCd1")]
+    
     ShipBonusCd1 = 734,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusCD2", "Eve.AttributeId_ShipBonusCd2")]
+    
     ShipBonusCd2 = 735,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusGD1", "Eve.AttributeId_ShipBonusGd1")]
+    
     ShipBonusGd1 = 738,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusGD2", "Eve.AttributeId_ShipBonusGd2")]
+    
     ShipBonusGd2 = 739,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusMD2", "Eve.AttributeId_ShipBonusMd2")]
+    
     ShipBonusMd2 = 740,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusBC1", "Eve.AttributeId_ShipBonusBc1")]
+    
     ShipBonusBc1 = 741,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusBC2", "Eve.AttributeId_ShipBonusBc2")]
+    
     ShipBonusBc2 = 742,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusCBC1", "Eve.AttributeId_ShipBonusCbc1")]
+    
     ShipBonusCbc1 = 743,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusCBC2", "Eve.AttributeId_ShipBonusCbc2")]
+    
     ShipBonusCbc2 = 745,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusGBC2", "Eve.AttributeId_ShipBonusGbc2")]
+    
     ShipBonusGbc2 = 746,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusGBC1", "Eve.AttributeId_ShipBonusGbc1")]
+    
     ShipBonusGbc1 = 747,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusMBC1", "Eve.AttributeId_ShipBonusMbc1")]
+    
     ShipBonusMbc1 = 748,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusMBC2", "Eve.AttributeId_ShipBonusMbc2")]
+    
     ShipBonusMbc2 = 749,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("controlTowerLaserOptimalBonus", "Eve.AttributeId_ControlTowerLaserOptimalBonus")]
+    
     ControlTowerLaserOptimalBonus = 750,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("controlTowerHybridOptimalBonus", "Eve.AttributeId_ControlTowerHybridOptimalBonus")]
+    
     ControlTowerHybridOptimalBonus = 751,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("controlTowerProjectileOptimalBonus", "Eve.AttributeId_ControlTowerProjectileOptimalBonus")]
+    
     ControlTowerProjectileOptimalBonus = 752,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("controlTowerProjectileFallOffBonus", "Eve.AttributeId_ControlTowerProjectileFallOffBonus")]
+    
     ControlTowerProjectileFallOffBonus = 753,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("controlTowerProjectileROFBonus", "Eve.AttributeId_ControlTowerProjectileRofBonus")]
+    
     ControlTowerProjectileRofBonus = 754,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("controlTowerMissileROFBonus", "Eve.AttributeId_ControlTowerMissileRofBonus")]
+    
     ControlTowerMissileRofBonus = 755,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("controlTowerMoonHarvesterCPUBonus", "Eve.AttributeId_ControlTowerMoonHarvesterCpuBonus")]
+    
     ControlTowerMoonHarvesterCpuBonus = 756,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("controlTowerSiloCapacityBonus", "Eve.AttributeId_ControlTowerSiloCapacityBonus")]
+    
     ControlTowerSiloCapacityBonus = 757,
 
     /// <summary>destroyers attribute 1</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusDF1", "Eve.AttributeId_ShipBonusDf1")]
+    
     [System.ComponentModel.DescriptionAttribute("destroyers attribute 1")]
     ShipBonusDf1 = 758,
 
     /// <summary>destroyer attribute 2</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusDF2", "Eve.AttributeId_ShipBonusDf2")]
+    
     [System.ComponentModel.DescriptionAttribute("destroyer attribute 2")]
     ShipBonusDf2 = 759,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("controlTowerLaserProximityRangeBonus", "Eve.AttributeId_ControlTowerLaserProximityRangeBonus")]
+    
     ControlTowerLaserProximityRangeBonus = 760,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("controlTowerProjectileProximityRangeBonus", "Eve.AttributeId_ControlTowerProjectileProximityRangeBonus")]
+    
     ControlTowerProjectileProximityRangeBonus = 761,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("controlTowerHybridProximityRangeBonus", "Eve.AttributeId_ControlTowerHybridProximityRangeBonus")]
+    
     ControlTowerHybridProximityRangeBonus = 762,
 
     /// <summary>Maximum modules of same group that can be activated at same time, 0 = no limit, 1 = 1</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxGroupActive", "Eve.AttributeId_MaxGroupActive")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum modules of same group that can be activated at same time, 0 = no limit, 1" +
         " = 1")]
     MaxGroupActive = 763,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("controlTowerEwRofBonus", "Eve.AttributeId_ControlTowerEwRofBonus")]
+    
     ControlTowerEwRofBonus = 764,
 
     /// <summary>Effective range of scanner in multiples of AUs</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanRange", "Eve.AttributeId_ScanRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Effective range of scanner in multiples of AUs")]
     ScanRange = 765,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("controlTowerHybridDamageBonus", "Eve.AttributeId_ControlTowerHybridDamageBonus")]
+    
     ControlTowerHybridDamageBonus = 766,
 
     /// <summary>Tracking Speed Bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("trackingSpeedBonus", "Eve.AttributeId_TrackingSpeedBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Tracking Speed Bonus")]
     TrackingSpeedBonus = 767,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxRangeBonus2", "Eve.AttributeId_MaxRangeBonus2")]
+    
     MaxRangeBonus2 = 769,
 
     /// <summary>Bonus attribute to entity Target Switch Delay</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("controlTowerEwTargetSwitchDelayBonus", "Eve.AttributeId_ControlTowerEwTargetSwitchDelayBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus attribute to entity Target Switch Delay")]
     ControlTowerEwTargetSwitchDelayBonus = 770,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("ammoCapacity", "Eve.AttributeId_AmmoCapacity")]
+    
     AmmoCapacity = 771,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityFlyRangeFactor", "Eve.AttributeId_EntityFlyRangeFactor")]
+    
     EntityFlyRangeFactor = 772,
 
     /// <summary>ORE mining barge bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusORE1", "Eve.AttributeId_ShipBonusOre1")]
+    
     [System.ComponentModel.DescriptionAttribute("ORE mining barge bonus")]
     ShipBonusOre1 = 773,
 
     /// <summary>ORE Mining barge bonus 2</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusORE2", "Eve.AttributeId_ShipBonusOre2")]
+    
     [System.ComponentModel.DescriptionAttribute("ORE Mining barge bonus 2")]
     ShipBonusOre2 = 774,
 
     /// <summary>funky stuff for mining barges</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("miningCPUNeedBonus", "Eve.AttributeId_MiningCpuNeedBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("funky stuff for mining barges")]
     MiningCpuNeedBonus = 775,
 
     /// <summary>Velocity %bonus for given missile group for missile batteries.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("structureMissileVelocityBonus", "Eve.AttributeId_StructureMissileVelocityBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Velocity %bonus for given missile group for missile batteries.")]
     StructureMissileVelocityBonus = 776,
 
     /// <summary>Damage %bonus for given missile group for missile batteries.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("structureMissileDamageBonus", "Eve.AttributeId_StructureMissileDamageBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Damage %bonus for given missile group for missile batteries.")]
     StructureMissileDamageBonus = 777,
 
     /// <summary>Exploision Delay (range) bonus for missile batteries</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("structureMissileExplosionDelayBonus", "Eve.AttributeId_StructureMissileExplosionDelayBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Exploision Delay (range) bonus for missile batteries")]
     StructureMissileExplosionDelayBonus = 778,
 
     /// <summary>For charges, hidden attribute used by sentry guns to modify target pick range.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityFlyRangeMultiplier", "Eve.AttributeId_EntityFlyRangeMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("For charges, hidden attribute used by sentry guns to modify target pick range.")]
     EntityFlyRangeMultiplier = 779,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("iceHarvestCycleBonus", "Eve.AttributeId_IceHarvestCycleBonus")]
+    
     IceHarvestCycleBonus = 780,
 
     /// <summary>The group at which the mining crystal is tuned to mine.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("specialisationAsteroidGroup", "Eve.AttributeId_SpecialisationAsteroidGroup")]
+    
     [System.ComponentModel.DescriptionAttribute("The group at which the mining crystal is tuned to mine.")]
     SpecialisationAsteroidGroup = 781,
 
     /// <summary>The amount the yield is modified when mining the asteroid group this crystal is tuned for.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("specialisationAsteroidYieldMultiplier", "Eve.AttributeId_SpecialisationAsteroidYieldMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("The amount the yield is modified when mining the asteroid group this crystal is t" +
         "uned for.")]
     SpecialisationAsteroidYieldMultiplier = 782,
 
     /// <summary>The chance of damage to the crystal each time it is used.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("crystalVolatilityChance", "Eve.AttributeId_CrystalVolatilityChance")]
+    
     [System.ComponentModel.DescriptionAttribute("The chance of damage to the crystal each time it is used.")]
     CrystalVolatilityChance = 783,
 
     /// <summary>The amount of damage done if the crystal is damaged in the process of using it.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("crystalVolatilityDamage", "Eve.AttributeId_CrystalVolatilityDamage")]
+    
     [System.ComponentModel.DescriptionAttribute("The amount of damage done if the crystal is damaged in the process of using it.")]
     CrystalVolatilityDamage = 784,
 
     /// <summary>The capacitor charge required to disengage this crystal from the unit it is installed in.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("unfitCapCost", "Eve.AttributeId_UnfitCapCost")]
+    
     [System.ComponentModel.DescriptionAttribute("The capacitor charge required to disengage this crystal from the unit it is insta" +
         "lled in.")]
     UnfitCapCost = 785,
 
     /// <summary>Whether this tool causes damage to crystals with each use of them.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("crystalsGetDamaged", "Eve.AttributeId_CrystalsGetDamaged")]
+    
     [System.ComponentModel.DescriptionAttribute("Whether this tool causes damage to crystals with each use of them.")]
     CrystalsGetDamaged = 786,
 
     /// <summary>Minimum scanning error</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("minScanDeviation", "Eve.AttributeId_MinScanDeviation")]
+    
     [System.ComponentModel.DescriptionAttribute("Minimum scanning error")]
     MinScanDeviation = 787,
 
     /// <summary>Maximum scan error</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxScanDeviation", "Eve.AttributeId_MaxScanDeviation")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum scan error")]
     MaxScanDeviation = 788,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("specialtyMiningAmount", "Eve.AttributeId_SpecialtyMiningAmount")]
+    
     SpecialtyMiningAmount = 789,
 
     /// <summary>The skill required to reprocess this ore type.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("reprocessingSkillType", "Eve.AttributeId_ReprocessingSkillType")]
+    
     [System.ComponentModel.DescriptionAttribute("The skill required to reprocess this ore type.")]
     ReprocessingSkillType = 790,
 
     /// <summary>Number of probes needed for an analyzis</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanAnalyzeCount", "Eve.AttributeId_ScanAnalyzeCount")]
+    
     [System.ComponentModel.DescriptionAttribute("Number of probes needed for an analyzis")]
     ScanAnalyzeCount = 791,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("controlTowerMissileVelocityBonus", "Eve.AttributeId_ControlTowerMissileVelocityBonus")]
+    
     ControlTowerMissileVelocityBonus = 792,
 
     /// <summary>Stock Bonus on Pirate Faction Ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusPirateFaction", "Eve.AttributeId_ShipBonusPirateFaction")]
+    
     [System.ComponentModel.DescriptionAttribute("Stock Bonus on Pirate Faction Ships.")]
     ShipBonusPirateFaction = 793,
 
     /// <summary>Number of probes to analyze</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("probesInGroup", "Eve.AttributeId_ProbesInGroup")]
+    
     [System.ComponentModel.DescriptionAttribute("Number of probes to analyze")]
     ProbesInGroup = 794,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusABC1", "Eve.AttributeId_ShipBonusAbc1")]
+    
     ShipBonusAbc1 = 795,
 
     /// <summary>Attribute for adding mass to a ship via an afterburner or MWD.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("massAddition", "Eve.AttributeId_MassAddition")]
+    
     [System.ComponentModel.DescriptionAttribute("Attribute for adding mass to a ship via an afterburner or MWD.")]
     MassAddition = 796,
 
     /// <summary>The maximum possible target range.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maximumRangeCap", "Eve.AttributeId_MaximumRangeCap")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum possible target range.")]
     MaximumRangeCap = 797,
 
     /// <summary>so far: 0 = white, 1 = red</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityBracketColour", "Eve.AttributeId_EntityBracketColour")]
+    
     [System.ComponentModel.DescriptionAttribute("so far: 0 = white, 1 = red")]
     EntityBracketColour = 798,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("implantSetBloodraider", "Eve.AttributeId_ImplantSetBloodraider")]
+    
     ImplantSetBloodraider = 799,
 
     /// <summary>Autogenerated skill attribute, contrabandDetectionChanceBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("contrabandDetectionChanceBonus", "Eve.AttributeId_ContrabandDetectionChanceBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, contrabandDetectionChanceBonus")]
     ContrabandDetectionChanceBonus = 800,
 
     /// <summary>Modules with this attribute set to 1 can not be used in deadspace. Modules with this attribute set to 2 can not be used in deadspace even where "disableModuleBlocking" is selected</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("deadspaceUnsafe", "Eve.AttributeId_DeadspaceUnsafe")]
+    
     [System.ComponentModel.DescriptionAttribute("Modules with this attribute set to 1 can not be used in deadspace. Modules with t" +
         "his attribute set to 2 can not be used in deadspace even where \"disableModuleBlo" +
         "cking\" is selected")]
     DeadspaceUnsafe = 801,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("implantSetSerpentis", "Eve.AttributeId_ImplantSetSerpentis")]
+    
     ImplantSetSerpentis = 802,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("implantSetSerpentis2", "Eve.AttributeId_ImplantSetSerpentis2")]
+    
     ImplantSetSerpentis2 = 803,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusInterceptor2", "Eve.AttributeId_EliteBonusInterceptor2")]
+    
     EliteBonusInterceptor2 = 804,
 
     /// <summary>Quantity contained.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("quantity", "Eve.AttributeId_Quantity")]
+    
     [System.ComponentModel.DescriptionAttribute("Quantity contained.")]
     Quantity = 805,
 
     /// <summary>Autogenerated skill attribute, repairBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("repairBonus", "Eve.AttributeId_RepairBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, repairBonus")]
     RepairBonus = 806,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusIndustrial1", "Eve.AttributeId_EliteBonusIndustrial1")]
+    
     EliteBonusIndustrial1 = 807,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusIndustrial2", "Eve.AttributeId_EliteBonusIndustrial2")]
+    
     EliteBonusIndustrial2 = 808,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusAI2", "Eve.AttributeId_ShipBonusAi2")]
+    
     ShipBonusAi2 = 809,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusCI2", "Eve.AttributeId_ShipBonusCi2")]
+    
     ShipBonusCi2 = 811,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusGI2", "Eve.AttributeId_ShipBonusGi2")]
+    
     ShipBonusGi2 = 813,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusMI2", "Eve.AttributeId_ShipBonusMi2")]
+    
     ShipBonusMi2 = 814,
 
     /// <summary>Amarr Propulsion Attack Strength for Warp Scramblers etc.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("propulsionFusionStrengthBonus", "Eve.AttributeId_PropulsionFusionStrengthBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Amarr Propulsion Attack Strength for Warp Scramblers etc.")]
     PropulsionFusionStrengthBonus = 815,
 
     /// <summary>Caldari Propulsion Attack Strength for Warp Scramblers etc.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("propulsionIonStrengthBonus", "Eve.AttributeId_PropulsionIonStrengthBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Caldari Propulsion Attack Strength for Warp Scramblers etc.")]
     PropulsionIonStrengthBonus = 816,
 
     /// <summary>Gallente Propulsion Attack Strength for Warp Scramblers etc.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("propulsionMagpulseStrengthBonus", "Eve.AttributeId_PropulsionMagpulseStrengthBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Gallente Propulsion Attack Strength for Warp Scramblers etc.")]
     PropulsionMagpulseStrengthBonus = 817,
 
     /// <summary>Minmatar Propulsion Attack Strength for Warp Scramblers etc.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("propulsionPlasmaStrengthBonus", "Eve.AttributeId_PropulsionPlasmaStrengthBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Minmatar Propulsion Attack Strength for Warp Scramblers etc.")]
     PropulsionPlasmaStrengthBonus = 818,
 
     /// <summary>Effect for smartbombs, used to hit missiles only.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("hitsMissilesOnly", "Eve.AttributeId_HitsMissilesOnly")]
+    
     [System.ComponentModel.DescriptionAttribute("Effect for smartbombs, used to hit missiles only.")]
     HitsMissilesOnly = 823,
 
     /// <summary>Skill attribute for increasing strength of EW modules.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanSkillEwStrengthBonus", "Eve.AttributeId_ScanSkillEwStrengthBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill attribute for increasing strength of EW modules.")]
     ScanSkillEwStrengthBonus = 828,
 
     /// <summary>Skill attribute for increasing strength of Propulsion modules.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("propulsionSkillPropulsionStrengthBonus", "Eve.AttributeId_PropulsionSkillPropulsionStrengthBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill attribute for increasing strength of Propulsion modules.")]
     PropulsionSkillPropulsionStrengthBonus = 829,
 
     /// <summary>Bonus used on Unique Loot in level 10 Angel cartel Deadspace Complexes.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("bonusComplexAngel10", "Eve.AttributeId_BonusComplexAngel10")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus used on Unique Loot in level 10 Angel cartel Deadspace Complexes.")]
     BonusComplexAngel10 = 830,
 
     /// <summary>Used for target jam effects to reduce max locked targets of victem to a negative value to ensure the victem looses its targets, use extreme value</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("ewTargetJam", "Eve.AttributeId_EwTargetJam")]
+    
     [System.ComponentModel.DescriptionAttribute("Used for target jam effects to reduce max locked targets of victem to a negative " +
         "value to ensure the victem looses its targets, use extreme value")]
     EwTargetJam = 831,
 
     /// <summary>Skill attribute for increasing effectiveness on Target Painters</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanSkillTargetPaintStrengthBonus", "Eve.AttributeId_ScanSkillTargetPaintStrengthBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill attribute for increasing effectiveness on Target Painters")]
     ScanSkillTargetPaintStrengthBonus = 832,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("commandBonus", "Eve.AttributeId_CommandBonus")]
+    
     CommandBonus = 833,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("wingCommandBonus", "Eve.AttributeId_WingCommandBonus")]
+    
     WingCommandBonus = 834,
 
     /// <summary>Used for stealth bombers to decrease power need on cruise launchers.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("stealthBomberLauncherPower", "Eve.AttributeId_StealthBomberLauncherPower")]
+    
     [System.ComponentModel.DescriptionAttribute("Used for stealth bombers to decrease power need on cruise launchers.")]
     StealthBomberLauncherPower = 837,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("implantSetGuristas", "Eve.AttributeId_ImplantSetGuristas")]
+    
     ImplantSetGuristas = 838,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusCoverOps2", "Eve.AttributeId_EliteBonusCoverOps2")]
+    
     EliteBonusCoverOps2 = 839,
 
     /// <summary>agentID to use when initiating NPC communications with this type.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("agentID", "Eve.AttributeId_AgentId")]
+    
     [System.ComponentModel.DescriptionAttribute("agentID to use when initiating NPC communications with this type.")]
     AgentId = 840,
 
     /// <summary>The range of the agent's communication sphere</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("agentCommRange", "Eve.AttributeId_AgentCommRange")]
+    
     [System.ComponentModel.DescriptionAttribute("The range of the agent\'s communication sphere")]
     AgentCommRange = 841,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("reactionGroup1", "Eve.AttributeId_ReactionGroup1")]
+    
     ReactionGroup1 = 842,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("reactionGroup2", "Eve.AttributeId_ReactionGroup2")]
+    
     ReactionGroup2 = 843,
 
     /// <summary>If the player comes within this range of this agent-in-space, an automatic communication window popup will occur.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("agentAutoPopupRange", "Eve.AttributeId_AgentAutoPopupRange")]
+    
     [System.ComponentModel.DescriptionAttribute("If the player comes within this range of this agent-in-space, an automatic commun" +
         "ication window popup will occur.")]
     AgentAutoPopupRange = 844,
 
     /// <summary>Hidden Attribute for tech 2 launcher damage bonus.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("hiddenLauncherDamageBonus", "Eve.AttributeId_HiddenLauncherDamageBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Hidden Attribute for tech 2 launcher damage bonus.")]
     HiddenLauncherDamageBonus = 845,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanStrengthBonus", "Eve.AttributeId_ScanStrengthBonus")]
+    
     ScanStrengthBonus = 846,
 
     /// <summary>Increases velocity of missile explosion</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("aoeVelocityBonus", "Eve.AttributeId_AoeVelocityBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Increases velocity of missile explosion")]
     AoeVelocityBonus = 847,
 
     /// <summary>Booster attribute to explosion radius of missiles vs. signature radius.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("aoeCloudSizeBonus", "Eve.AttributeId_AoeCloudSizeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Booster attribute to explosion radius of missiles vs. signature radius.")]
     AoeCloudSizeBonus = 848,
 
     /// <summary>Can use cargo in space or not, 0 = no, 1 = yes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("canUseCargoInSpace", "Eve.AttributeId_CanUseCargoInSpace")]
+    
     [System.ComponentModel.DescriptionAttribute("Can use cargo in space or not, 0 = no, 1 = yes")]
     CanUseCargoInSpace = 849,
 
     /// <summary>Autogenerated skill attribute, relayCPUBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("squadronCommandBonus", "Eve.AttributeId_SquadronCommandBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, relayCPUBonus")]
     SquadronCommandBonus = 850,
 
     /// <summary>Bonus to capacitor need for shield boosters.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldBoostCapacitorBonus", "Eve.AttributeId_ShieldBoostCapacitorBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to capacitor need for shield boosters.")]
     ShieldBoostCapacitorBonus = 851,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("siegeModeWarpStatus", "Eve.AttributeId_SiegeModeWarpStatus")]
+    
     SiegeModeWarpStatus = 852,
 
     /// <summary>Attribute on ship to make advanced command affect only ships that we want.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("advancedAgility", "Eve.AttributeId_AdvancedAgility")]
+    
     [System.ComponentModel.DescriptionAttribute("Attribute on ship to make advanced command affect only ships that we want.")]
     AdvancedAgility = 853,
 
     /// <summary>If this module is in use and this attribute is 1, then assistance modules cannot be used on the ship.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("disallowAssistance", "Eve.AttributeId_DisallowAssistance")]
+    
     [System.ComponentModel.DescriptionAttribute("If this module is in use and this attribute is 1, then assistance modules cannot " +
         "be used on the ship.")]
     DisallowAssistance = 854,
 
     /// <summary>Activating this module results in the temporary loss of all targets currently held or being locked.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("activationTargetLoss", "Eve.AttributeId_ActivationTargetLoss")]
+    
     [System.ComponentModel.DescriptionAttribute("Activating this module results in the temporary loss of all targets currently hel" +
         "d or being locked.")]
     ActivationTargetLoss = 855,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("aoeFalloffBonus", "Eve.AttributeId_AoeFalloffBonus")]
+    
     AoeFalloffBonus = 857,
 
     /// <summary>Affects the signature radius of the target in missile impact calculations.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("missileEntityAoeCloudSizeMultiplier", "Eve.AttributeId_MissileEntityAoeCloudSizeMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Affects the signature radius of the target in missile impact calculations.")]
     MissileEntityAoeCloudSizeMultiplier = 858,
 
     /// <summary>Affects the velocity of the target in missile impact calculations.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("missileEntityAoeVelocityMultiplier", "Eve.AttributeId_MissileEntityAoeVelocityMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Affects the velocity of the target in missile impact calculations.")]
     MissileEntityAoeVelocityMultiplier = 859,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("missileEntityAoeFalloffMultiplier", "Eve.AttributeId_MissileEntityAoeFalloffMultiplier")]
+    
     MissileEntityAoeFalloffMultiplier = 860,
 
     /// <summary>1 = ship can use jump drive</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("canJump", "Eve.AttributeId_CanJump")]
+    
     [System.ComponentModel.DescriptionAttribute("1 = ship can use jump drive")]
     CanJump = 861,
 
     /// <summary>The weighting given to this type and its chance of being picked for a grouping.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("usageWeighting", "Eve.AttributeId_UsageWeighting")]
+    
     [System.ComponentModel.DescriptionAttribute("The weighting given to this type and its chance of being picked for a grouping.")]
     UsageWeighting = 862,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("implantSetAngel", "Eve.AttributeId_ImplantSetAngel")]
+    
     ImplantSetAngel = 863,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("implantSetSansha", "Eve.AttributeId_ImplantSetSansha")]
+    
     ImplantSetSansha = 864,
 
     /// <summary>How many meters from the standard warp-in distance a planet can be anchored from.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("planetAnchorDistance", "Eve.AttributeId_PlanetAnchorDistance")]
+    
     [System.ComponentModel.DescriptionAttribute("How many meters from the standard warp-in distance a planet can be anchored from." +
         "")]
     PlanetAnchorDistance = 865,
 
     /// <summary>Type that is used for consumption from cargo hold when activating jump drive operation.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("jumpDriveConsumptionType", "Eve.AttributeId_JumpDriveConsumptionType")]
+    
     [System.ComponentModel.DescriptionAttribute("Type that is used for consumption from cargo hold when activating jump drive oper" +
         "ation.")]
     JumpDriveConsumptionType = 866,
 
     /// <summary>Range in light years the ship can maximum jump to.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("jumpDriveRange", "Eve.AttributeId_JumpDriveRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Range in light years the ship can maximum jump to.")]
     JumpDriveRange = 867,
 
     /// <summary>Number of units it consumes per light year.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("jumpDriveConsumptionAmount", "Eve.AttributeId_JumpDriveConsumptionAmount")]
+    
     [System.ComponentModel.DescriptionAttribute("Number of units it consumes per light year.")]
     JumpDriveConsumptionAmount = 868,
 
     /// <summary>The amount of time before the ship actually jumps.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("jumpDriveDuration", "Eve.AttributeId_JumpDriveDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("The amount of time before the ship actually jumps.")]
     JumpDriveDuration = 869,
 
     /// <summary>Jump range bonus for jump drive operation.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("jumpDriveRangeBonus", "Eve.AttributeId_JumpDriveRangeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Jump range bonus for jump drive operation.")]
     JumpDriveRangeBonus = 870,
 
     /// <summary>Skill bonus attribute that decreases the duration before iniating a jump.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("jumpDriveDurationBonus", "Eve.AttributeId_JumpDriveDurationBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Skill bonus attribute that decreases the duration before iniating a jump.")]
     JumpDriveDurationBonus = 871,
 
     /// <summary>If this module is in use and this attribute is 1, then offensive modules cannot be used on the ship if they apply modifiers for the duration of their effect. If this is put on a ship or NPC with value of 1, then the ship or NPC are immune to offensive modifiers (target jamming, tracking disruption etc.)</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("disallowOffensiveModifiers", "Eve.AttributeId_DisallowOffensiveModifiers")]
+    
     [System.ComponentModel.DescriptionAttribute(@"If this module is in use and this attribute is 1, then offensive modules cannot be used on the ship if they apply modifiers for the duration of their effect. If this is put on a ship or NPC with value of 1, then the ship or NPC are immune to offensive modifiers (target jamming, tracking disruption etc.)")]
     DisallowOffensiveModifiers = 872,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("advancedCapitalAgility", "Eve.AttributeId_AdvancedCapitalAgility")]
+    
     AdvancedCapitalAgility = 874,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("dreadnoughtShipBonusA1", "Eve.AttributeId_DreadnoughtShipBonusA1")]
+    
     DreadnoughtShipBonusA1 = 875,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("dreadnoughtShipBonusA2", "Eve.AttributeId_DreadnoughtShipBonusA2")]
+    
     DreadnoughtShipBonusA2 = 876,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("dreadnoughtShipBonusC1", "Eve.AttributeId_DreadnoughtShipBonusC1")]
+    
     DreadnoughtShipBonusC1 = 877,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("dreadnoughtShipBonusC2", "Eve.AttributeId_DreadnoughtShipBonusC2")]
+    
     DreadnoughtShipBonusC2 = 878,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("dreadnoughtShipBonusG1", "Eve.AttributeId_DreadnoughtShipBonusG1")]
+    
     DreadnoughtShipBonusG1 = 879,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("dreadnoughtShipBonusG2", "Eve.AttributeId_DreadnoughtShipBonusG2")]
+    
     DreadnoughtShipBonusG2 = 880,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("dreadnoughtShipBonusM1", "Eve.AttributeId_DreadnoughtShipBonusM1")]
+    
     DreadnoughtShipBonusM1 = 881,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("dreadnoughtShipBonusM2", "Eve.AttributeId_DreadnoughtShipBonusM2")]
+    
     DreadnoughtShipBonusM2 = 882,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("mindlinkBonus", "Eve.AttributeId_MindlinkBonus")]
+    
     MindlinkBonus = 884,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("consumptionQuantityBonus", "Eve.AttributeId_ConsumptionQuantityBonus")]
+    
     ConsumptionQuantityBonus = 885,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("freighterBonusA1", "Eve.AttributeId_FreighterBonusA1")]
+    
     FreighterBonusA1 = 886,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("freighterBonusA2", "Eve.AttributeId_FreighterBonusA2")]
+    
     FreighterBonusA2 = 887,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("freighterBonusC1", "Eve.AttributeId_FreighterBonusC1")]
+    
     FreighterBonusC1 = 888,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("freighterBonusC2", "Eve.AttributeId_FreighterBonusC2")]
+    
     FreighterBonusC2 = 889,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("freighterBonusG2", "Eve.AttributeId_FreighterBonusG2")]
+    
     FreighterBonusG2 = 890,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("freighterBonusG1", "Eve.AttributeId_FreighterBonusG1")]
+    
     FreighterBonusG1 = 891,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("freighterBonusM1", "Eve.AttributeId_FreighterBonusM1")]
+    
     FreighterBonusM1 = 892,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("freighterBonusM2", "Eve.AttributeId_FreighterBonusM2")]
+    
     FreighterBonusM2 = 893,
 
     /// <summary>Testing for fuels for speed boosters.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("speedBoostBonus", "Eve.AttributeId_SpeedBoostBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Testing for fuels for speed boosters.")]
     SpeedBoostBonus = 894,
 
     /// <summary>Bonus attribute for armor repair amount.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorDamageAmountBonus", "Eve.AttributeId_ArmorDamageAmountBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus attribute for armor repair amount.")]
     ArmorDamageAmountBonus = 895,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorDamageDurationBonus", "Eve.AttributeId_ArmorDamageDurationBonus")]
+    
     ArmorDamageDurationBonus = 896,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldBonusDurationBonus", "Eve.AttributeId_ShieldBonusDurationBonus")]
+    
     ShieldBonusDurationBonus = 897,
 
     /// <summary>Minimum capacitor need for jump drive operation from full capacitor in modifier%.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("jumpDriveCapacitorNeed", "Eve.AttributeId_JumpDriveCapacitorNeed")]
+    
     [System.ComponentModel.DescriptionAttribute("Minimum capacitor need for jump drive operation from full capacitor in modifier%." +
         "")]
     JumpDriveCapacitorNeed = 898,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("jumpDriveCapacitorNeedBonus", "Eve.AttributeId_JumpDriveCapacitorNeedBonus")]
+    
     JumpDriveCapacitorNeedBonus = 899,
 
     /// <summary>The difficulty in opening this object.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("accessDifficulty", "Eve.AttributeId_AccessDifficulty")]
+    
     [System.ComponentModel.DescriptionAttribute("The difficulty in opening this object.")]
     AccessDifficulty = 901,
 
     /// <summary>Bonus to chance of opening a container.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("accessDifficultyBonus", "Eve.AttributeId_AccessDifficultyBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to chance of opening a container.")]
     AccessDifficultyBonus = 902,
 
     /// <summary>Whether a spawn container should refill itself when there are no guards assigned to it.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("spawnWithoutGuardsToo", "Eve.AttributeId_SpawnWithoutGuardsToo")]
+    
     [System.ComponentModel.DescriptionAttribute("Whether a spawn container should refill itself when there are no guards assigned " +
         "to it.")]
     SpawnWithoutGuardsToo = 903,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("warcruiserCPUBonus", "Eve.AttributeId_WarcruiserCpuBonus")]
+    
     WarcruiserCpuBonus = 904,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("tacklerBonus", "Eve.AttributeId_TacklerBonus")]
+    
     TacklerBonus = 905,
 
     /// <summary>Signifies that this module if activated, will prevent ejection from the ship it is fitted to and extend the log out ship removal timer.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("disallowEarlyDeactivation", "Eve.AttributeId_DisallowEarlyDeactivation")]
+    
     [System.ComponentModel.DescriptionAttribute("Signifies that this module if activated, will prevent ejection from the ship it i" +
         "s fitted to and extend the log out ship removal timer.")]
     DisallowEarlyDeactivation = 906,
 
     /// <summary>Indicates whether a ship type has a ship maintenance bay.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("hasShipMaintenanceBay", "Eve.AttributeId_HasShipMaintenanceBay")]
+    
     [System.ComponentModel.DescriptionAttribute("Indicates whether a ship type has a ship maintenance bay.")]
     HasShipMaintenanceBay = 907,
 
     /// <summary>The capacity of the hangar in a ship.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipMaintenanceBayCapacity", "Eve.AttributeId_ShipMaintenanceBayCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("The capacity of the hangar in a ship.")]
     ShipMaintenanceBayCapacity = 908,
 
     /// <summary>Which group of modules that this ship limits the number of concurrent activations of.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxShipGroupActiveID", "Eve.AttributeId_MaxShipGroupActiveId")]
+    
     [System.ComponentModel.DescriptionAttribute("Which group of modules that this ship limits the number of concurrent activations" +
         " of.")]
     MaxShipGroupActiveId = 909,
 
     /// <summary>The amount of modules belonging to the same group that can be active at the same time.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxShipGroupActive", "Eve.AttributeId_MaxShipGroupActive")]
+    
     [System.ComponentModel.DescriptionAttribute("The amount of modules belonging to the same group that can be active at the same " +
         "time.")]
     MaxShipGroupActive = 910,
 
     /// <summary>Whether this ship has corporate hangars.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("hasCorporateHangars", "Eve.AttributeId_HasCorporateHangars")]
+    
     [System.ComponentModel.DescriptionAttribute("Whether this ship has corporate hangars.")]
     HasCorporateHangars = 911,
 
     /// <summary>The capacity of each hangar.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("corporateHangarCapacity", "Eve.AttributeId_CorporateHangarCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("The capacity of each hangar.")]
     CorporateHangarCapacity = 912,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("gallenteNavyBonus", "Eve.AttributeId_GallenteNavyBonus")]
+    
     GallenteNavyBonus = 913,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("gallenteNavyBonusMultiplier", "Eve.AttributeId_GallenteNavyBonusMultiplier")]
+    
     GallenteNavyBonusMultiplier = 914,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("caldariNavyBonus", "Eve.AttributeId_CaldariNavyBonus")]
+    
     CaldariNavyBonus = 915,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("caldariNavyBonusMultiplier", "Eve.AttributeId_CaldariNavyBonusMultiplier")]
+    
     CaldariNavyBonusMultiplier = 916,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("amarrNavyBonus", "Eve.AttributeId_AmarrNavyBonus")]
+    
     AmarrNavyBonus = 917,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("amarrNavyBonusMulitplier", "Eve.AttributeId_AmarrNavyBonusMulitplier")]
+    
     AmarrNavyBonusMulitplier = 918,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("republicFleetBonus", "Eve.AttributeId_RepublicFleetBonus")]
+    
     RepublicFleetBonus = 919,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("republicFleetBonusMultiplier", "Eve.AttributeId_RepublicFleetBonusMultiplier")]
+    
     RepublicFleetBonusMultiplier = 920,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("oreCompression", "Eve.AttributeId_OreCompression")]
+    
     OreCompression = 921,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusBarge1", "Eve.AttributeId_EliteBonusBarge1")]
+    
     EliteBonusBarge1 = 924,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusBarge2", "Eve.AttributeId_EliteBonusBarge2")]
+    
     EliteBonusBarge2 = 925,
 
     /// <summary>ORE Mining Barge bonus 3</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusORE3", "Eve.AttributeId_ShipBonusOre3")]
+    
     [System.ComponentModel.DescriptionAttribute("ORE Mining Barge bonus 3")]
     ShipBonusOre3 = 926,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("miningUpgradeCPUReductionBonus", "Eve.AttributeId_MiningUpgradeCpuReductionBonus")]
+    
     MiningUpgradeCpuReductionBonus = 927,
 
     /// <summary>Target Jam multiplier on max locked targets for NPCs</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityTargetJam", "Eve.AttributeId_EntityTargetJam")]
+    
     [System.ComponentModel.DescriptionAttribute("Target Jam multiplier on max locked targets for NPCs")]
     EntityTargetJam = 928,
 
     /// <summary>Duration of NPC effect</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityTargetJamDuration", "Eve.AttributeId_EntityTargetJamDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("Duration of NPC effect")]
     EntityTargetJamDuration = 929,
 
     /// <summary>Chance of NPC effect to be activated each duration</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityTargetJamDurationChance", "Eve.AttributeId_EntityTargetJamDurationChance")]
+    
     [System.ComponentModel.DescriptionAttribute("Chance of NPC effect to be activated each duration")]
     EntityTargetJamDurationChance = 930,
 
     /// <summary>Chance of NPC effect to be activated each duration</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityCapacitorDrainDurationChance", "Eve.AttributeId_EntityCapacitorDrainDurationChance")]
+    
     [System.ComponentModel.DescriptionAttribute("Chance of NPC effect to be activated each duration")]
     EntityCapacitorDrainDurationChance = 931,
 
     /// <summary>Chance of NPC effect to be activated each duration</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entitySensorDampenDurationChance", "Eve.AttributeId_EntitySensorDampenDurationChance")]
+    
     [System.ComponentModel.DescriptionAttribute("Chance of NPC effect to be activated each duration")]
     EntitySensorDampenDurationChance = 932,
 
     /// <summary>Chance of NPC effect to be activated each duration</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityTrackingDisruptDurationChance", "Eve.AttributeId_EntityTrackingDisruptDurationChance")]
+    
     [System.ComponentModel.DescriptionAttribute("Chance of NPC effect to be activated each duration")]
     EntityTrackingDisruptDurationChance = 933,
 
     /// <summary>Chance of NPC effect to be activated each duration</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityTargetPaintDurationChance", "Eve.AttributeId_EntityTargetPaintDurationChance")]
+    
     [System.ComponentModel.DescriptionAttribute("Chance of NPC effect to be activated each duration")]
     EntityTargetPaintDurationChance = 935,
 
     /// <summary>Max Range for NPC Target Jam</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityTargetJamMaxRange", "Eve.AttributeId_EntityTargetJamMaxRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Max Range for NPC Target Jam")]
     EntityTargetJamMaxRange = 936,
 
     /// <summary>Range for NPC capacitor drain</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityCapacitorDrainMaxRange", "Eve.AttributeId_EntityCapacitorDrainMaxRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Range for NPC capacitor drain")]
     EntityCapacitorDrainMaxRange = 937,
 
     /// <summary>Range from target for when the NPC activates the effect</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entitySensorDampenMaxRange", "Eve.AttributeId_EntitySensorDampenMaxRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Range from target for when the NPC activates the effect")]
     EntitySensorDampenMaxRange = 938,
 
     /// <summary>Max range from for NPC tracking disrupt</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityTrackingDisruptMaxRange", "Eve.AttributeId_EntityTrackingDisruptMaxRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Max range from for NPC tracking disrupt")]
     EntityTrackingDisruptMaxRange = 940,
 
     /// <summary>Max Range for NPC Target Paint</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityTargetPaintMaxRange", "Eve.AttributeId_EntityTargetPaintMaxRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Max Range for NPC Target Paint")]
     EntityTargetPaintMaxRange = 941,
 
     /// <summary>Duration of NPC effect</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityCapacitorDrainDuration", "Eve.AttributeId_EntityCapacitorDrainDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("Duration of NPC effect")]
     EntityCapacitorDrainDuration = 942,
 
     /// <summary>Duration of NPC effect</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entitySensorDampenDuration", "Eve.AttributeId_EntitySensorDampenDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("Duration of NPC effect")]
     EntitySensorDampenDuration = 943,
 
     /// <summary>Duration of NPC effect</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityTrackingDisruptDuration", "Eve.AttributeId_EntityTrackingDisruptDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("Duration of NPC effect")]
     EntityTrackingDisruptDuration = 944,
 
     /// <summary>Duration of NPC effect</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityTargetPaintDuration", "Eve.AttributeId_EntityTargetPaintDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("Duration of NPC effect")]
     EntityTargetPaintDuration = 945,
 
     /// <summary>Amount of capacitor drained by NPC from target</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityCapacitorDrainAmount", "Eve.AttributeId_EntityCapacitorDrainAmount")]
+    
     [System.ComponentModel.DescriptionAttribute("Amount of capacitor drained by NPC from target")]
     EntityCapacitorDrainAmount = 946,
 
     /// <summary>Multiplier on max target range and scan resolution of target ship done by NPC</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entitySensorDampenMultiplier", "Eve.AttributeId_EntitySensorDampenMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier on max target range and scan resolution of target ship done by NPC")]
     EntitySensorDampenMultiplier = 947,
 
     /// <summary>Multiplier on tracking speed and optimal range of player turrets done by NPC</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityTrackingDisruptMultiplier", "Eve.AttributeId_EntityTrackingDisruptMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier on tracking speed and optimal range of player turrets done by NPC")]
     EntityTrackingDisruptMultiplier = 948,
 
     /// <summary>Multiplier on signature radius of player ship done by NPC</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityTargetPaintMultiplier", "Eve.AttributeId_EntityTargetPaintMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier on signature radius of player ship done by NPC")]
     EntityTargetPaintMultiplier = 949,
 
     /// <summary>Fall Off for NPC sensor dampen</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entitySensorDampenFallOff", "Eve.AttributeId_EntitySensorDampenFallOff")]
+    
     [System.ComponentModel.DescriptionAttribute("Fall Off for NPC sensor dampen")]
     EntitySensorDampenFallOff = 950,
 
     /// <summary>Fall Off for NPC Tracking Disrupt</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityTrackingDisruptFallOff", "Eve.AttributeId_EntityTrackingDisruptFallOff")]
+    
     [System.ComponentModel.DescriptionAttribute("Fall Off for NPC Tracking Disrupt")]
     EntityTrackingDisruptFallOff = 951,
 
     /// <summary>Fall Off for NPC Capacitor Drain</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityCapacitorFallOff", "Eve.AttributeId_EntityCapacitorFallOff")]
+    
     [System.ComponentModel.DescriptionAttribute("Fall Off for NPC Capacitor Drain")]
     EntityCapacitorFallOff = 952,
 
     /// <summary>Fall Off for NPC Target Jam</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityTargetJamFallOff", "Eve.AttributeId_EntityTargetJamFallOff")]
+    
     [System.ComponentModel.DescriptionAttribute("Fall Off for NPC Target Jam")]
     EntityTargetJamFallOff = 953,
 
     /// <summary>Fall Off for NPC Target Paint</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityTargetPaintFallOff", "Eve.AttributeId_EntityTargetPaintFallOff")]
+    
     [System.ComponentModel.DescriptionAttribute("Fall Off for NPC Target Paint")]
     EntityTargetPaintFallOff = 954,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("isCaldariNavy", "Eve.AttributeId_IsCaldariNavy")]
+    
     IsCaldariNavy = 955,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("damageModifierMultiplierBonus", "Eve.AttributeId_DamageModifierMultiplierBonus")]
+    
     DamageModifierMultiplierBonus = 956,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("cNavyModOncNavyShip", "Eve.AttributeId_CNavyModOncNavyShip")]
+    
     CNavyModOncNavyShip = 957,
 
     /// <summary>Autogenerated skill attribute, hardeningBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("hardeningBonus", "Eve.AttributeId_HardeningBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, hardeningBonus")]
     HardeningBonus = 958,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityShieldBoostLargeDelayChance", "Eve.AttributeId_EntityShieldBoostLargeDelayChance")]
+    
     EntityShieldBoostLargeDelayChance = 959,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("caldariNavyBonusMultiplier2", "Eve.AttributeId_CaldariNavyBonusMultiplier2")]
+    
     CaldariNavyBonusMultiplier2 = 960,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("caldarNavyBonus2", "Eve.AttributeId_CaldarNavyBonus2")]
+    
     CaldarNavyBonus2 = 961,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusReconShip1", "Eve.AttributeId_EliteBonusReconShip1")]
+    
     EliteBonusReconShip1 = 962,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusReconShip2", "Eve.AttributeId_EliteBonusReconShip2")]
+    
     EliteBonusReconShip2 = 963,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("passiveEmDamageResonanceMultiplier", "Eve.AttributeId_PassiveEmDamageResonanceMultiplier")]
+    
     PassiveEmDamageResonanceMultiplier = 964,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("passiveThermalDamageResonanceMultiplier", "Eve.AttributeId_PassiveThermalDamageResonanceMultiplier")]
+    
     PassiveThermalDamageResonanceMultiplier = 965,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("passiveKineticDamageResonanceMultiplier", "Eve.AttributeId_PassiveKineticDamageResonanceMultiplier")]
+    
     PassiveKineticDamageResonanceMultiplier = 966,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("passiveExplosiveDamageResonanceMultiplier", "Eve.AttributeId_PassiveExplosiveDamageResonanceMultiplier")]
+    
     PassiveExplosiveDamageResonanceMultiplier = 967,
 
     /// <summary>Used for Probes.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("hasStasisWeb", "Eve.AttributeId_HasStasisWeb")]
+    
     [System.ComponentModel.DescriptionAttribute("Used for Probes.")]
     HasStasisWeb = 968,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("activeEmDamageResonance", "Eve.AttributeId_ActiveEmDamageResonance")]
+    
     ActiveEmDamageResonance = 969,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("activeThermalDamageResonance", "Eve.AttributeId_ActiveThermalDamageResonance")]
+    
     ActiveThermalDamageResonance = 970,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("activeKineticDamageResonance", "Eve.AttributeId_ActiveKineticDamageResonance")]
+    
     ActiveKineticDamageResonance = 971,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("activeExplosiveDamageResonance", "Eve.AttributeId_ActiveExplosiveDamageResonance")]
+    
     ActiveExplosiveDamageResonance = 972,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("signatureRadiusBonusPercent", "Eve.AttributeId_SignatureRadiusBonusPercent")]
+    
     SignatureRadiusBonusPercent = 973,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("hullEmDamageResonance", "Eve.AttributeId_HullEmDamageResonance")]
+    
     HullEmDamageResonance = 974,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("hullExplosiveDamageResonance", "Eve.AttributeId_HullExplosiveDamageResonance")]
+    
     HullExplosiveDamageResonance = 975,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("hullKineticDamageResonance", "Eve.AttributeId_HullKineticDamageResonance")]
+    
     HullKineticDamageResonance = 976,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("hullThermalDamageResonance", "Eve.AttributeId_HullThermalDamageResonance")]
+    
     HullThermalDamageResonance = 977,
 
     /// <summary>Maximum modules of same group that can be onlined at same time, 0 = no limit, 1 = 1</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxGroupOnline", "Eve.AttributeId_MaxGroupOnline")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum modules of same group that can be onlined at same time, 0 = no limit, 1 =" +
         " 1")]
     MaxGroupOnline = 978,
 
     /// <summary>The maximum amount of jump clones that the character may have in existence or ship may have stored.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxJumpClones", "Eve.AttributeId_MaxJumpClones")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum amount of jump clones that the character may have in existence or shi" +
         "p may have stored.")]
     MaxJumpClones = 979,
 
     /// <summary>The number of clone jump slots that the ship offers.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("hasCloneJumpSlots", "Eve.AttributeId_HasCloneJumpSlots")]
+    
     [System.ComponentModel.DescriptionAttribute("The number of clone jump slots that the ship offers.")]
     HasCloneJumpSlots = 980,
 
     /// <summary>If this module is active and the ship supports it, the ship can serve as a destination for clone jumps.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("allowsCloneJumpsWhenActive", "Eve.AttributeId_AllowsCloneJumpsWhenActive")]
+    
     [System.ComponentModel.DescriptionAttribute("If this module is active and the ship supports it, the ship can serve as a destin" +
         "ation for clone jumps.")]
     AllowsCloneJumpsWhenActive = 981,
 
     /// <summary>Defines whether a ship has the functionality to allow it to receive clone jumps and host jump clones.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("canReceiveCloneJumps", "Eve.AttributeId_CanReceiveCloneJumps")]
+    
     [System.ComponentModel.DescriptionAttribute("Defines whether a ship has the functionality to allow it to receive clone jumps a" +
         "nd host jump clones.")]
     CanReceiveCloneJumps = 982,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("signatureRadiusAdd", "Eve.AttributeId_SignatureRadiusAdd")]
+    
     SignatureRadiusAdd = 983,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("emDamageResistanceBonus", "Eve.AttributeId_EmDamageResistanceBonus")]
+    
     EmDamageResistanceBonus = 984,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("explosiveDamageResistanceBonus", "Eve.AttributeId_ExplosiveDamageResistanceBonus")]
+    
     ExplosiveDamageResistanceBonus = 985,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("kineticDamageResistanceBonus", "Eve.AttributeId_KineticDamageResistanceBonus")]
+    
     KineticDamageResistanceBonus = 986,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("thermalDamageResistanceBonus", "Eve.AttributeId_ThermalDamageResistanceBonus")]
+    
     ThermalDamageResistanceBonus = 987,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("hardeningbonus2", "Eve.AttributeId_Hardeningbonus2")]
+    
     Hardeningbonus2 = 988,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("volumePostPercent", "Eve.AttributeId_VolumePostPercent")]
+    
     VolumePostPercent = 989,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("activeEmResistanceBonus", "Eve.AttributeId_ActiveEmResistanceBonus")]
+    
     ActiveEmResistanceBonus = 990,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("activeExplosiveResistanceBonus", "Eve.AttributeId_ActiveExplosiveResistanceBonus")]
+    
     ActiveExplosiveResistanceBonus = 991,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("activeThermicResistanceBonus", "Eve.AttributeId_ActiveThermicResistanceBonus")]
+    
     ActiveThermicResistanceBonus = 992,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("activeKineticResistanceBonus", "Eve.AttributeId_ActiveKineticResistanceBonus")]
+    
     ActiveKineticResistanceBonus = 993,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("passiveEmDamageResistanceBonus", "Eve.AttributeId_PassiveEmDamageResistanceBonus")]
+    
     PassiveEmDamageResistanceBonus = 994,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("passiveExplosiveDamageResistanceBonus", "Eve.AttributeId_PassiveExplosiveDamageResistanceBonus")]
+    
     PassiveExplosiveDamageResistanceBonus = 995,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("passiveKineticDamageResistanceBonus", "Eve.AttributeId_PassiveKineticDamageResistanceBonus")]
+    
     PassiveKineticDamageResistanceBonus = 996,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("passiveThermicDamageResistanceBonus", "Eve.AttributeId_PassiveThermicDamageResistanceBonus")]
+    
     PassiveThermicDamageResistanceBonus = 997,
 
     /// <summary>Can have research and manufacturing functionality</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("isRAMcompatible", "Eve.AttributeId_IsRaMcompatible")]
+    
     [System.ComponentModel.DescriptionAttribute("Can have research and manufacturing functionality")]
     IsRaMcompatible = 998,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusCommandShips2", "Eve.AttributeId_EliteBonusCommandShips2")]
+    
     EliteBonusCommandShips2 = 999,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusCommandShips1", "Eve.AttributeId_EliteBonusCommandShips1")]
+    
     EliteBonusCommandShips1 = 1000,
 
     /// <summary>Multiplier used to calculate amount of quantity used for jumping via portals based on mass of ship.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("jumpPortalConsumptionMassFactor", "Eve.AttributeId_JumpPortalConsumptionMassFactor")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier used to calculate amount of quantity used for jumping via portals base" +
         "d on mass of ship.")]
     JumpPortalConsumptionMassFactor = 1001,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("jumpPortalDuration", "Eve.AttributeId_JumpPortalDuration")]
+    
     JumpPortalDuration = 1002,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusCommandShip1DONOTUSE", "Eve.AttributeId_EliteBonusCommandShip1Donotuse")]
+    
     EliteBonusCommandShip1Donotuse = 1003,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusCommandShip2DONOTUSE", "Eve.AttributeId_EliteBonusCommandShip2Donotuse")]
+    
     EliteBonusCommandShip2Donotuse = 1004,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("jumpPortalCapacitorNeed", "Eve.AttributeId_JumpPortalCapacitorNeed")]
+    
     JumpPortalCapacitorNeed = 1005,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityShieldBoostDelayChanceSmall", "Eve.AttributeId_EntityShieldBoostDelayChanceSmall")]
+    
     EntityShieldBoostDelayChanceSmall = 1006,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityShieldBoostDelayChanceMedium", "Eve.AttributeId_EntityShieldBoostDelayChanceMedium")]
+    
     EntityShieldBoostDelayChanceMedium = 1007,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityShieldBoostDelayChanceLarge", "Eve.AttributeId_EntityShieldBoostDelayChanceLarge")]
+    
     EntityShieldBoostDelayChanceLarge = 1008,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityArmorRepairDelayChanceSmall", "Eve.AttributeId_EntityArmorRepairDelayChanceSmall")]
+    
     EntityArmorRepairDelayChanceSmall = 1009,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityArmorRepairDelayChanceMedium", "Eve.AttributeId_EntityArmorRepairDelayChanceMedium")]
+    
     EntityArmorRepairDelayChanceMedium = 1010,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityArmorRepairDelayChanceLarge", "Eve.AttributeId_EntityArmorRepairDelayChanceLarge")]
+    
     EntityArmorRepairDelayChanceLarge = 1011,
 
     /// <summary>eliteBonusInterdictors1</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusInterdictors1", "Eve.AttributeId_EliteBonusInterdictors1")]
+    
     [System.ComponentModel.DescriptionAttribute("eliteBonusInterdictors1")]
     EliteBonusInterdictors1 = 1012,
 
     /// <summary>eliteBonusInterdictors2</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusInterdictors2", "Eve.AttributeId_EliteBonusInterdictors2")]
+    
     [System.ComponentModel.DescriptionAttribute("eliteBonusInterdictors2")]
     EliteBonusInterdictors2 = 1013,
 
     /// <summary>If set, this module cannot be activated and made to autorepeat.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("disallowRepeatingActivation", "Eve.AttributeId_DisallowRepeatingActivation")]
+    
     [System.ComponentModel.DescriptionAttribute("If set, this module cannot be activated and made to autorepeat.")]
     DisallowRepeatingActivation = 1014,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityShieldBoostDelayChanceSmallMultiplier", "Eve.AttributeId_EntityShieldBoostDelayChanceSmallMultiplier")]
+    
     EntityShieldBoostDelayChanceSmallMultiplier = 1015,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityShieldBoostDelayChanceMediumMultiplier", "Eve.AttributeId_EntityShieldBoostDelayChanceMediumMultiplier")]
+    
     EntityShieldBoostDelayChanceMediumMultiplier = 1016,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityShieldBoostDelayChanceLargeMultiplier", "Eve.AttributeId_EntityShieldBoostDelayChanceLargeMultiplier")]
+    
     EntityShieldBoostDelayChanceLargeMultiplier = 1017,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityArmorRepairDelayChanceSmallMultiplier", "Eve.AttributeId_EntityArmorRepairDelayChanceSmallMultiplier")]
+    
     EntityArmorRepairDelayChanceSmallMultiplier = 1018,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityArmorRepairDelayChanceMediumMultiplier", "Eve.AttributeId_EntityArmorRepairDelayChanceMediumMultiplier")]
+    
     EntityArmorRepairDelayChanceMediumMultiplier = 1019,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityArmorRepairDelayChanceLargeMultiplier", "Eve.AttributeId_EntityArmorRepairDelayChanceLargeMultiplier")]
+    
     EntityArmorRepairDelayChanceLargeMultiplier = 1020,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("warpAccuracyMaxRange", "Eve.AttributeId_WarpAccuracyMaxRange")]
+    
     WarpAccuracyMaxRange = 1021,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("warpAccuracyFactor", "Eve.AttributeId_WarpAccuracyFactor")]
+    
     WarpAccuracyFactor = 1022,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("warpAccuracyFactorMultiplier", "Eve.AttributeId_WarpAccuracyFactorMultiplier")]
+    
     WarpAccuracyFactorMultiplier = 1023,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("warpAccuracyMaxRangeMultiplier", "Eve.AttributeId_WarpAccuracyMaxRangeMultiplier")]
+    
     WarpAccuracyMaxRangeMultiplier = 1024,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("warpAccuracyFactorPercentage", "Eve.AttributeId_WarpAccuracyFactorPercentage")]
+    
     WarpAccuracyFactorPercentage = 1025,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("warpAccuracyMaxRangePercentage", "Eve.AttributeId_WarpAccuracyMaxRangePercentage")]
+    
     WarpAccuracyMaxRangePercentage = 1026,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanGravimetricStrengthPercent", "Eve.AttributeId_ScanGravimetricStrengthPercent")]
+    
     ScanGravimetricStrengthPercent = 1027,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanLadarStrengthPercent", "Eve.AttributeId_ScanLadarStrengthPercent")]
+    
     ScanLadarStrengthPercent = 1028,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanMagnetometricStrengthPercent", "Eve.AttributeId_ScanMagnetometricStrengthPercent")]
+    
     ScanMagnetometricStrengthPercent = 1029,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanRadarStrengthPercent", "Eve.AttributeId_ScanRadarStrengthPercent")]
+    
     ScanRadarStrengthPercent = 1030,
 
     /// <summary>numeric classification for tower size
     ///</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("controlTowerSize", "Eve.AttributeId_ControlTowerSize")]
+    
     [System.ComponentModel.DescriptionAttribute("numeric classification for tower size\r\n")]
     ControlTowerSize = 1031,
 
     /// <summary>The maximum security level at which the structure can be anchored.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("anchoringSecurityLevelMax", "Eve.AttributeId_AnchoringSecurityLevelMax")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum security level at which the structure can be anchored.")]
     AnchoringSecurityLevelMax = 1032,
 
     /// <summary>Whether the structure requires the anchorers alliance to hold sovereignty in the system for it to be anchorable.  Only enforced if the security level is 0.4 or less.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("anchoringRequiresSovereignty", "Eve.AttributeId_AnchoringRequiresSovereignty")]
+    
     [System.ComponentModel.DescriptionAttribute("Whether the structure requires the anchorers alliance to hold sovereignty in the " +
         "system for it to be anchorable.  Only enforced if the security level is 0.4 or l" +
         "ess.")]
     AnchoringRequiresSovereignty = 1033,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("covertOpsAndReconOpsCloakModuleDelay", "Eve.AttributeId_CovertOpsAndReconOpsCloakModuleDelay")]
+    
     CovertOpsAndReconOpsCloakModuleDelay = 1034,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("covertOpsStealthBomberTargettingDelay", "Eve.AttributeId_CovertOpsStealthBomberTargettingDelay")]
+    
     CovertOpsStealthBomberTargettingDelay = 1035,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("titanAmarrBonus1", "Eve.AttributeId_TitanAmarrBonus1")]
+    
     TitanAmarrBonus1 = 1036,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("titanAmarrBonus2", "Eve.AttributeId_TitanAmarrBonus2")]
+    
     TitanAmarrBonus2 = 1038,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusCT1", "Eve.AttributeId_ShipBonusCt1")]
+    
     ShipBonusCt1 = 1039,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusCT2", "Eve.AttributeId_ShipBonusCt2")]
+    
     ShipBonusCt2 = 1040,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("titanGallenteBonus1", "Eve.AttributeId_TitanGallenteBonus1")]
+    
     TitanGallenteBonus1 = 1041,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("titanGallenteBonus2", "Eve.AttributeId_TitanGallenteBonus2")]
+    
     TitanGallenteBonus2 = 1042,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("titanMinmatarBonus1", "Eve.AttributeId_TitanMinmatarBonus1")]
+    
     TitanMinmatarBonus1 = 1043,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("titanMinmatarBonus2", "Eve.AttributeId_TitanMinmatarBonus2")]
+    
     TitanMinmatarBonus2 = 1044,
 
     /// <summary>The maximum speed that the tractor beam draws objects closer at.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxTractorVelocity", "Eve.AttributeId_MaxTractorVelocity")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum speed that the tractor beam draws objects closer at.")]
     MaxTractorVelocity = 1045,
 
     /// <summary>If set to 1 on a skill then this skill can not be trained on accounts that are marked as Trial.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("canNotBeTrainedOnTrial", "Eve.AttributeId_CanNotBeTrainedOnTrial")]
+    
     [System.ComponentModel.DescriptionAttribute("If set to 1 on a skill then this skill can not be trained on accounts that are ma" +
         "rked as Trial.")]
     CanNotBeTrainedOnTrial = 1047,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("disallowOffensiveModifierBonus", "Eve.AttributeId_DisallowOffensiveModifierBonus")]
+    
     DisallowOffensiveModifierBonus = 1048,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("carrierAmarrBonus1", "Eve.AttributeId_CarrierAmarrBonus1")]
+    
     CarrierAmarrBonus1 = 1049,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("carrierAmarrBonus2", "Eve.AttributeId_CarrierAmarrBonus2")]
+    
     CarrierAmarrBonus2 = 1050,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("carrierAmarrBonus3", "Eve.AttributeId_CarrierAmarrBonus3")]
+    
     CarrierAmarrBonus3 = 1051,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("carrierCaldariBonus1", "Eve.AttributeId_CarrierCaldariBonus1")]
+    
     CarrierCaldariBonus1 = 1052,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("carrierCaldariBonus2", "Eve.AttributeId_CarrierCaldariBonus2")]
+    
     CarrierCaldariBonus2 = 1053,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("carrierCaldariBonus3", "Eve.AttributeId_CarrierCaldariBonus3")]
+    
     CarrierCaldariBonus3 = 1054,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("carrierGallenteBonus1", "Eve.AttributeId_CarrierGallenteBonus1")]
+    
     CarrierGallenteBonus1 = 1055,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("carrierGallenteBonus2", "Eve.AttributeId_CarrierGallenteBonus2")]
+    
     CarrierGallenteBonus2 = 1056,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("carrierGallenteBonus3", "Eve.AttributeId_CarrierGallenteBonus3")]
+    
     CarrierGallenteBonus3 = 1057,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("carrierMinmatarBonus1", "Eve.AttributeId_CarrierMinmatarBonus1")]
+    
     CarrierMinmatarBonus1 = 1058,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("carrierMinmatarBonus2", "Eve.AttributeId_CarrierMinmatarBonus2")]
+    
     CarrierMinmatarBonus2 = 1059,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("carrierMinmatarBonus3", "Eve.AttributeId_CarrierMinmatarBonus3")]
+    
     CarrierMinmatarBonus3 = 1060,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("titanAmarrBonus3", "Eve.AttributeId_TitanAmarrBonus3")]
+    
     TitanAmarrBonus3 = 1061,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("titanAmarrBonus4", "Eve.AttributeId_TitanAmarrBonus4")]
+    
     TitanAmarrBonus4 = 1062,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("titanCaldariBonus3", "Eve.AttributeId_TitanCaldariBonus3")]
+    
     TitanCaldariBonus3 = 1063,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("titanCaldariBonus4", "Eve.AttributeId_TitanCaldariBonus4")]
+    
     TitanCaldariBonus4 = 1064,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("titanGallenteBonus3", "Eve.AttributeId_TitanGallenteBonus3")]
+    
     TitanGallenteBonus3 = 1065,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("titanGallenteBonus4", "Eve.AttributeId_TitanGallenteBonus4")]
+    
     TitanGallenteBonus4 = 1066,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("titanMinmatarBonus4", "Eve.AttributeId_TitanMinmatarBonus4")]
+    
     TitanMinmatarBonus4 = 1067,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("titanMinmatarBonus3", "Eve.AttributeId_TitanMinmatarBonus3")]
+    
     TitanMinmatarBonus3 = 1068,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("carrierAmarrBonus4", "Eve.AttributeId_CarrierAmarrBonus4")]
+    
     CarrierAmarrBonus4 = 1069,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("carrierCaldariBonus4", "Eve.AttributeId_CarrierCaldariBonus4")]
+    
     CarrierCaldariBonus4 = 1070,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("carrierGallenteBonus4", "Eve.AttributeId_CarrierGallenteBonus4")]
+    
     CarrierGallenteBonus4 = 1071,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("carrierMinmatarBonus4", "Eve.AttributeId_CarrierMinmatarBonus4")]
+    
     CarrierMinmatarBonus4 = 1072,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxJumpClonesBonus", "Eve.AttributeId_MaxJumpClonesBonus")]
+    
     MaxJumpClonesBonus = 1073,
 
     /// <summary>If set on a charge or module type, will prevent it from being activated in empire space.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("disallowInEmpireSpace", "Eve.AttributeId_DisallowInEmpireSpace")]
+    
     [System.ComponentModel.DescriptionAttribute("If set on a charge or module type, will prevent it from being activated in empire" +
         " space.")]
     DisallowInEmpireSpace = 1074,
 
     /// <summary>If present on a type which is used like a missile, signifies that it should never do damage (whether it has any to do or not).</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("missileNeverDoesDamage", "Eve.AttributeId_MissileNeverDoesDamage")]
+    
     [System.ComponentModel.DescriptionAttribute("If present on a type which is used like a missile, signifies that it should never" +
         " do damage (whether it has any to do or not).")]
     MissileNeverDoesDamage = 1075,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("implantBonusVelocity", "Eve.AttributeId_ImplantBonusVelocity")]
+    
     ImplantBonusVelocity = 1076,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxDCUModules", "Eve.AttributeId_MaxDcuModules")]
+    
     MaxDcuModules = 1077,
 
     /// <summary>Autogenerated skill attribute, CapacitorCapacityBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("capacitorCapacityBonus", "Eve.AttributeId_CapacitorCapacityBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Autogenerated skill attribute, CapacitorCapacityBonus")]
     CapacitorCapacityBonus = 1079,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("cpuPenaltySuperWeapon", "Eve.AttributeId_CpuPenaltySuperWeapon")]
+    
     CpuPenaltySuperWeapon = 1080,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("cpuBonusSuperWeapon", "Eve.AttributeId_CpuBonusSuperWeapon")]
+    
     CpuBonusSuperWeapon = 1081,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("cpuPenaltyPercent", "Eve.AttributeId_CpuPenaltyPercent")]
+    
     CpuPenaltyPercent = 1082,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorHpBonus2", "Eve.AttributeId_ArmorHpBonus2")]
+    
     ArmorHpBonus2 = 1083,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("velocityBonus2", "Eve.AttributeId_VelocityBonus2")]
+    
     VelocityBonus2 = 1084,
 
     /// <summary>Module consumption mechanic uses fuel cargo. Ships that have this with value of 1 can have fuel cargo. Need fuelCargoCapacity set as well.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("hasFuelCargo", "Eve.AttributeId_HasFuelCargo")]
+    
     [System.ComponentModel.DescriptionAttribute("Module consumption mechanic uses fuel cargo. Ships that have this with value of 1" +
         " can have fuel cargo. Need fuelCargoCapacity set as well.")]
     HasFuelCargo = 1085,
 
     /// <summary>Used for ships that are supposed to be able to use fuel.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("fuelCargoCapacity", "Eve.AttributeId_FuelCargoCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("Used for ships that are supposed to be able to use fuel.")]
     FuelCargoCapacity = 1086,
 
     /// <summary>Whether an item is a booster or not.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterness", "Eve.AttributeId_Boosterness")]
+    
     [System.ComponentModel.DescriptionAttribute("Whether an item is a booster or not.")]
     Boosterness = 1087,
 
     /// <summary>Internally set expiry time for objects which expire, so that the client knows when.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("expiryTime", "Eve.AttributeId_ExpiryTime")]
+    
     [System.ComponentModel.DescriptionAttribute("Internally set expiry time for objects which expire, so that the client knows whe" +
         "n.")]
     ExpiryTime = 1088,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterEffectChance1", "Eve.AttributeId_BoosterEffectChance1")]
+    
     BoosterEffectChance1 = 1089,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterEffectChance2", "Eve.AttributeId_BoosterEffectChance2")]
+    
     BoosterEffectChance2 = 1090,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterEffectChance3", "Eve.AttributeId_BoosterEffectChance3")]
+    
     BoosterEffectChance3 = 1091,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterEffectChance4", "Eve.AttributeId_BoosterEffectChance4")]
+    
     BoosterEffectChance4 = 1092,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterEffectChance5", "Eve.AttributeId_BoosterEffectChance5")]
+    
     BoosterEffectChance5 = 1093,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("displayCapacitorCapacityBonus", "Eve.AttributeId_DisplayCapacitorCapacityBonus")]
+    
     DisplayCapacitorCapacityBonus = 1094,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("displayShieldBoostMultiplier", "Eve.AttributeId_DisplayShieldBoostMultiplier")]
+    
     DisplayShieldBoostMultiplier = 1095,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("displayShieldCapacityBonus", "Eve.AttributeId_DisplayShieldCapacityBonus")]
+    
     DisplayShieldCapacityBonus = 1096,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("displayAoeVelocityBonus", "Eve.AttributeId_DisplayAoeVelocityBonus")]
+    
     DisplayAoeVelocityBonus = 1097,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("displayRangeSkillBonus", "Eve.AttributeId_DisplayRangeSkillBonus")]
+    
     DisplayRangeSkillBonus = 1098,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterAttribute1", "Eve.AttributeId_BoosterAttribute1")]
+    
     BoosterAttribute1 = 1099,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterAttribute2", "Eve.AttributeId_BoosterAttribute2")]
+    
     BoosterAttribute2 = 1100,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterAttribute3", "Eve.AttributeId_BoosterAttribute3")]
+    
     BoosterAttribute3 = 1101,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterAttribute4", "Eve.AttributeId_BoosterAttribute4")]
+    
     BoosterAttribute4 = 1102,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterAttribute5", "Eve.AttributeId_BoosterAttribute5")]
+    
     BoosterAttribute5 = 1103,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("displayMaxVelocityBonus", "Eve.AttributeId_DisplayMaxVelocityBonus")]
+    
     DisplayMaxVelocityBonus = 1104,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("displayArmorHpBonus", "Eve.AttributeId_DisplayArmorHpBonus")]
+    
     DisplayArmorHpBonus = 1105,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("displayMissileMaxVelocityBonus", "Eve.AttributeId_DisplayMissileMaxVelocityBonus")]
+    
     DisplayMissileMaxVelocityBonus = 1106,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("displayArmorDamageAmountBonus", "Eve.AttributeId_DisplayArmorDamageAmountBonus")]
+    
     DisplayArmorDamageAmountBonus = 1107,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("displayFalloffModifier", "Eve.AttributeId_DisplayFalloffModifier")]
+    
     DisplayFalloffModifier = 1108,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("displayTrackingSpeedModifier", "Eve.AttributeId_DisplayTrackingSpeedModifier")]
+    
     DisplayTrackingSpeedModifier = 1109,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("displayAoeCloudsizeModifier", "Eve.AttributeId_DisplayAoeCloudsizeModifier")]
+    
     DisplayAoeCloudsizeModifier = 1110,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("displayMaxRangeModifier", "Eve.AttributeId_DisplayMaxRangeModifier")]
+    
     DisplayMaxRangeModifier = 1111,
 
     /// <summary>Modifies base chance of successful reverse engineering</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("inventionPropabilityMultiplier", "Eve.AttributeId_InventionPropabilityMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Modifies base chance of successful reverse engineering")]
     InventionPropabilityMultiplier = 1112,
 
     /// <summary>Modifies the mineral efficiency of invented BPCs</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("inventionMEModifier", "Eve.AttributeId_InventionMeModifier")]
+    
     [System.ComponentModel.DescriptionAttribute("Modifies the mineral efficiency of invented BPCs")]
     InventionMeModifier = 1113,
 
     /// <summary>Modifies the production efficiency of reverse engineered BPCS</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("inventionPEModifier", "Eve.AttributeId_InventionPeModifier")]
+    
     [System.ComponentModel.DescriptionAttribute("Modifies the production efficiency of reverse engineered BPCS")]
     InventionPeModifier = 1114,
 
     /// <summary>Used to show usable decryptors when starting reverse engineering based on data interface</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("decryptorID", "Eve.AttributeId_DecryptorId")]
+    
     [System.ComponentModel.DescriptionAttribute("Used to show usable decryptors when starting reverse engineering based on data in" +
         "terface")]
     DecryptorId = 1115,
 
     /// <summary>The strength of the probe.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanProbeStrength", "Eve.AttributeId_ScanProbeStrength")]
+    
     [System.ComponentModel.DescriptionAttribute("The strength of the probe.")]
     ScanProbeStrength = 1116,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanStrengthSignatures", "Eve.AttributeId_ScanStrengthSignatures")]
+    
     ScanStrengthSignatures = 1117,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanStrengthDronesProbes", "Eve.AttributeId_ScanStrengthDronesProbes")]
+    
     ScanStrengthDronesProbes = 1118,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanStrengthScrap", "Eve.AttributeId_ScanStrengthScrap")]
+    
     ScanStrengthScrap = 1119,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanStrengthShips", "Eve.AttributeId_ScanStrengthShips")]
+    
     ScanStrengthShips = 1120,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanStrengthStructures", "Eve.AttributeId_ScanStrengthStructures")]
+    
     ScanStrengthStructures = 1121,
 
     /// <summary>Max groups that a character can scan for with probes. Default is 0 and max groups will be 5 with a single skill adding 1 per skill level.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxScanGroups", "Eve.AttributeId_MaxScanGroups")]
+    
     [System.ComponentModel.DescriptionAttribute("Max groups that a character can scan for with probes. Default is 0 and max groups" +
         " will be 5 with a single skill adding 1 per skill level.")]
     MaxScanGroups = 1122,
 
     /// <summary>How long this probe has to scan until it can obtain results.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanDuration", "Eve.AttributeId_ScanDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("How long this probe has to scan until it can obtain results.")]
     ScanDuration = 1123,
 
     /// <summary>Modifies the max runs in a blueprint created through invention</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("inventionMaxRunModifier", "Eve.AttributeId_InventionMaxRunModifier")]
+    
     [System.ComponentModel.DescriptionAttribute("Modifies the max runs in a blueprint created through invention")]
     InventionMaxRunModifier = 1124,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterChanceBonus", "Eve.AttributeId_BoosterChanceBonus")]
+    
     BoosterChanceBonus = 1125,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterAttributeModifier", "Eve.AttributeId_BoosterAttributeModifier")]
+    
     BoosterAttributeModifier = 1126,
 
     /// <summary>Links blueprints to the data interface required to reverse engineer it</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("interfaceID", "Eve.AttributeId_InterfaceId")]
+    
     [System.ComponentModel.DescriptionAttribute("Links blueprints to the data interface required to reverse engineer it")]
     InterfaceId = 1127,
 
     /// <summary>Datacore required to reverse engineer this blueprint</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("datacore1ID", "Eve.AttributeId_Datacore1Id")]
+    
     [System.ComponentModel.DescriptionAttribute("Datacore required to reverse engineer this blueprint")]
     Datacore1Id = 1128,
 
     /// <summary>Datacore required to reverse engineer this blueprint</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("datacore2ID", "Eve.AttributeId_Datacore2Id")]
+    
     [System.ComponentModel.DescriptionAttribute("Datacore required to reverse engineer this blueprint")]
     Datacore2Id = 1129,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("ecmStrengthBonusPercent", "Eve.AttributeId_EcmStrengthBonusPercent")]
+    
     EcmStrengthBonusPercent = 1130,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("massBonusPercentage", "Eve.AttributeId_MassBonusPercentage")]
+    
     MassBonusPercentage = 1131,
 
     /// <summary>Attribute on ships used for ship upgrades</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("upgradeCapacity", "Eve.AttributeId_UpgradeCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("Attribute on ships used for ship upgrades")]
     UpgradeCapacity = 1132,
 
     /// <summary>Used to increase signature radius of entity when it activates Max Velocity. Used to fake MWD sig radius increase.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityMaxVelocitySignatureRadiusMultiplier", "Eve.AttributeId_EntityMaxVelocitySignatureRadiusMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Used to increase signature radius of entity when it activates Max Velocity. Used " +
         "to fake MWD sig radius increase.")]
     EntityMaxVelocitySignatureRadiusMultiplier = 1133,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxTargetRangeMultiplierSet", "Eve.AttributeId_MaxTargetRangeMultiplierSet")]
+    
     MaxTargetRangeMultiplierSet = 1134,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanResolutionMultiplierSet", "Eve.AttributeId_ScanResolutionMultiplierSet")]
+    
     ScanResolutionMultiplierSet = 1135,
 
     /// <summary>Helper attribute for distribution dungeons.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanAllStrength", "Eve.AttributeId_ScanAllStrength")]
+    
     [System.ComponentModel.DescriptionAttribute("Helper attribute for distribution dungeons.")]
     ScanAllStrength = 1136,
 
     /// <summary>The number of rig slots on the ship.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rigSlots", "Eve.AttributeId_RigSlots")]
+    
     [System.ComponentModel.DescriptionAttribute("The number of rig slots on the ship.")]
     RigSlots = 1137,
 
     /// <summary>used on rigs</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("drawback", "Eve.AttributeId_Drawback")]
+    
     [System.ComponentModel.DescriptionAttribute("used on rigs")]
     Drawback = 1138,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("rigDrawbackBonus", "Eve.AttributeId_RigDrawbackBonus")]
+    
     RigDrawbackBonus = 1139,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterArmorHPPenalty", "Eve.AttributeId_BoosterArmorHpPenalty")]
+    
     BoosterArmorHpPenalty = 1141,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterArmorRepairAmountPenalty", "Eve.AttributeId_BoosterArmorRepairAmountPenalty")]
+    
     BoosterArmorRepairAmountPenalty = 1142,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterShieldCapacityPenalty", "Eve.AttributeId_BoosterShieldCapacityPenalty")]
+    
     BoosterShieldCapacityPenalty = 1143,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterTurretOptimalRange", "Eve.AttributeId_BoosterTurretOptimalRange")]
+    
     BoosterTurretOptimalRange = 1144,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterTurretTrackingPenalty", "Eve.AttributeId_BoosterTurretTrackingPenalty")]
+    
     BoosterTurretTrackingPenalty = 1145,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterTurretFalloffPenalty", "Eve.AttributeId_BoosterTurretFalloffPenalty")]
+    
     BoosterTurretFalloffPenalty = 1146,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterAOEVelocityPenalty", "Eve.AttributeId_BoosterAoeVelocityPenalty")]
+    
     BoosterAoeVelocityPenalty = 1147,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterMissileVelocityPenalty", "Eve.AttributeId_BoosterMissileVelocityPenalty")]
+    
     BoosterMissileVelocityPenalty = 1148,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterMissileAOECloudPenalty", "Eve.AttributeId_BoosterMissileAoeCloudPenalty")]
+    
     BoosterMissileAoeCloudPenalty = 1149,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterCapacitorCapacityPenalty", "Eve.AttributeId_BoosterCapacitorCapacityPenalty")]
+    
     BoosterCapacitorCapacityPenalty = 1150,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterMaxVelocityPenalty", "Eve.AttributeId_BoosterMaxVelocityPenalty")]
+    
     BoosterMaxVelocityPenalty = 1151,
 
     /// <summary>How much the upgrades installed on this ship are using of its upgrade capacity.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("upgradeLoad", "Eve.AttributeId_UpgradeLoad")]
+    
     [System.ComponentModel.DescriptionAttribute("How much the upgrades installed on this ship are using of its upgrade capacity.")]
     UpgradeLoad = 1152,
 
     /// <summary>How much of the upgrade capacity is used when this is fitted to a ship.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("upgradeCost", "Eve.AttributeId_UpgradeCost")]
+    
     [System.ComponentModel.DescriptionAttribute("How much of the upgrade capacity is used when this is fitted to a ship.")]
     UpgradeCost = 1153,
 
     /// <summary>How many upgrades can by fitted to this ship.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("upgradeSlotsLeft", "Eve.AttributeId_UpgradeSlotsLeft")]
+    
     [System.ComponentModel.DescriptionAttribute("How many upgrades can by fitted to this ship.")]
     UpgradeSlotsLeft = 1154,
 
     /// <summary>How much the datacore costs in RPs when being bought from research agents (not used anymore)</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("researchPointCost", "Eve.AttributeId_ResearchPointCost")]
+    
     [System.ComponentModel.DescriptionAttribute("How much the datacore costs in RPs when being bought from research agents (not us" +
         "ed anymore)")]
     ResearchPointCost = 1155,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxScanDeviationModifier", "Eve.AttributeId_MaxScanDeviationModifier")]
+    
     MaxScanDeviationModifier = 1156,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("commandBonus2", "Eve.AttributeId_CommandBonus2")]
+    
     CommandBonus2 = 1157,
 
     /// <summary>Attribute to disallow targetting.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("untargetable", "Eve.AttributeId_Untargetable")]
+    
     [System.ComponentModel.DescriptionAttribute("Attribute to disallow targetting.")]
     Untargetable = 1158,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorHPBonusAdd", "Eve.AttributeId_ArmorHpBonusAdd")]
+    
     ArmorHpBonusAdd = 1159,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("accessDifficultyBonusModifier", "Eve.AttributeId_AccessDifficultyBonusModifier")]
+    
     AccessDifficultyBonusModifier = 1160,
 
     /// <summary>Used for the scan frequency probe to give results on scan strength types instead of location. 0 = false, 1 = true</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanFrequencyResult", "Eve.AttributeId_ScanFrequencyResult")]
+    
     [System.ComponentModel.DescriptionAttribute("Used for the scan frequency probe to give results on scan strength types instead " +
         "of location. 0 = false, 1 = true")]
     ScanFrequencyResult = 1161,
 
     /// <summary>The amount of milliseconds before the wreck dissapears. Note: this only applies to NPC wrecks or empty player wrecks.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("explosionDelayWreck", "Eve.AttributeId_ExplosionDelayWreck")]
+    
     [System.ComponentModel.DescriptionAttribute("The amount of milliseconds before the wreck dissapears. Note: this only applies t" +
         "o NPC wrecks or empty player wrecks.")]
     ExplosionDelayWreck = 1162,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("canCloak", "Eve.AttributeId_CanCloak")]
+    
     CanCloak = 1163,
 
     /// <summary>Afterburner and Microwarpdrive Max Velocity Bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("speedFactorBonus", "Eve.AttributeId_SpeedFactorBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Afterburner and Microwarpdrive Max Velocity Bonus")]
     SpeedFactorBonus = 1164,
 
     /// <summary>Minimum distance where a starbase structure can be anchored at from the control tower shield extremity in meters.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("controlTowerMinimumDistance", "Eve.AttributeId_ControlTowerMinimumDistance")]
+    
     [System.ComponentModel.DescriptionAttribute("Minimum distance where a starbase structure can be anchored at from the control t" +
         "ower shield extremity in meters.")]
     ControlTowerMinimumDistance = 1165,
 
     /// <summary>If a starbase structure has this attribute = 1 then it can be controlled by owners with infrastructure tactical officer skill and corp role.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("posPlayerControlStructure", "Eve.AttributeId_PosPlayerControlStructure")]
+    
     [System.ComponentModel.DescriptionAttribute("If a starbase structure has this attribute = 1 then it can be controlled by owner" +
         "s with infrastructure tactical officer skill and corp role.")]
     PosPlayerControlStructure = 1167,
 
     /// <summary>Whether an object is incapacitated or not. Boolean.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("isIncapacitated", "Eve.AttributeId_IsIncapacitated")]
+    
     [System.ComponentModel.DescriptionAttribute("Whether an object is incapacitated or not. Boolean.")]
     IsIncapacitated = 1168,
 
     /// <summary>Sensor strength all types</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanGenericStrength", "Eve.AttributeId_ScanGenericStrength")]
+    
     [System.ComponentModel.DescriptionAttribute("Sensor strength all types")]
     ScanGenericStrength = 1169,
 
     /// <summary>Amount of armor healed by structure repair effects</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("structureArmorRepairAmount", "Eve.AttributeId_StructureArmorRepairAmount")]
+    
     [System.ComponentModel.DescriptionAttribute("Amount of armor healed by structure repair effects")]
     StructureArmorRepairAmount = 1170,
 
     /// <summary>Amount of shield healed by structure repair effects</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("structureShieldRepairAmount", "Eve.AttributeId_StructureShieldRepairAmount")]
+    
     [System.ComponentModel.DescriptionAttribute("Amount of shield healed by structure repair effects")]
     StructureShieldRepairAmount = 1171,
 
     /// <summary>Value modified by remote starbase structure repair effects (should be 0 unless the structure repairs itself)</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("structureArmorBoostValue", "Eve.AttributeId_StructureArmorBoostValue")]
+    
     [System.ComponentModel.DescriptionAttribute("Value modified by remote starbase structure repair effects (should be 0 unless th" +
         "e structure repairs itself)")]
     StructureArmorBoostValue = 1172,
 
     /// <summary>Value modified by remote starbase structure repair effects (should be 0 unless the structure repairs itself)</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("structureShieldBoostValue", "Eve.AttributeId_StructureShieldBoostValue")]
+    
     [System.ComponentModel.DescriptionAttribute("Value modified by remote starbase structure repair effects (should be 0 unless th" +
         "e structure repairs itself)")]
     StructureShieldBoostValue = 1173,
 
     /// <summary>How many starbase structures a character control.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("posStructureControlAmount", "Eve.AttributeId_PosStructureControlAmount")]
+    
     [System.ComponentModel.DescriptionAttribute("How many starbase structures a character control.")]
     PosStructureControlAmount = 1174,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("heatHi", "Eve.AttributeId_HeatHi")]
+    
     HeatHi = 1175,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("heatMed", "Eve.AttributeId_HeatMed")]
+    
     HeatMed = 1176,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("heatLow", "Eve.AttributeId_HeatLow")]
+    
     HeatLow = 1177,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("heatCapacityHi", "Eve.AttributeId_HeatCapacityHi")]
+    
     HeatCapacityHi = 1178,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("heatDissipationRateHi", "Eve.AttributeId_HeatDissipationRateHi")]
+    
     HeatDissipationRateHi = 1179,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("heatAbsorbtionRateModifier", "Eve.AttributeId_HeatAbsorbtionRateModifier")]
+    
     HeatAbsorbtionRateModifier = 1180,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("overloadDurationBonus", "Eve.AttributeId_OverloadDurationBonus")]
+    
     OverloadDurationBonus = 1181,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("heatAbsorbtionRateHi", "Eve.AttributeId_HeatAbsorbtionRateHi")]
+    
     HeatAbsorbtionRateHi = 1182,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("heatAbsorbtionRateMed", "Eve.AttributeId_HeatAbsorbtionRateMed")]
+    
     HeatAbsorbtionRateMed = 1183,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("heatAbsorbtionRateLow", "Eve.AttributeId_HeatAbsorbtionRateLow")]
+    
     HeatAbsorbtionRateLow = 1184,
 
     /// <summary>Whether the structure requires the onliner's alliance to hold sovereignty in the system for it to be onlineable.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("onliningRequiresSovereigntyLevel", "Eve.AttributeId_OnliningRequiresSovereigntyLevel")]
+    
     [System.ComponentModel.DescriptionAttribute("Whether the structure requires the onliner\'s alliance to hold sovereignty in the " +
         "system for it to be onlineable.")]
     OnliningRequiresSovereigntyLevel = 1185,
 
     /// <summary>Bonus attribute for remote armor repair amount.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("remoteArmorDamageAmountBonus", "Eve.AttributeId_RemoteArmorDamageAmountBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus attribute for remote armor repair amount.")]
     RemoteArmorDamageAmountBonus = 1186,
 
     /// <summary>Bonus attribute for remote armor repair duration.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("remoteArmorDamageDurationBonus", "Eve.AttributeId_RemoteArmorDamageDurationBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus attribute for remote armor repair duration.")]
     RemoteArmorDamageDurationBonus = 1187,
 
     /// <summary>Bonus attribute for shield transport duration.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldTransportDurationBonus", "Eve.AttributeId_ShieldTransportDurationBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus attribute for shield transport duration.")]
     ShieldTransportDurationBonus = 1188,
 
     /// <summary>Bonus attribute for shield transport amount.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldTransportAmountBonus", "Eve.AttributeId_ShieldTransportAmountBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus attribute for shield transport amount.")]
     ShieldTransportAmountBonus = 1189,
 
     /// <summary>Bonus attribute for capacitor need of EW and propulsion jamming.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("ewCapacitorNeedBonus", "Eve.AttributeId_EwCapacitorNeedBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus attribute for capacitor need of EW and propulsion jamming.")]
     EwCapacitorNeedBonus = 1190,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxDronePercentageBonus", "Eve.AttributeId_MaxDronePercentageBonus")]
+    
     MaxDronePercentageBonus = 1191,
 
     /// <summary>Bonus for CPU requirement of Triage Modules.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("triageCpuNeedBonus", "Eve.AttributeId_TriageCpuNeedBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus for CPU requirement of Triage Modules.")]
     TriageCpuNeedBonus = 1192,
 
     /// <summary>Bonus to duration of modules requiring projected ECM.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("projECMDurationBonus", "Eve.AttributeId_ProjEcmDurationBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to duration of modules requiring projected ECM.")]
     ProjEcmDurationBonus = 1193,
 
     /// <summary>Bonus for CPU requirement of projected electronic counter measures.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("projECMCpuNeedBonus", "Eve.AttributeId_ProjEcmCpuNeedBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus for CPU requirement of projected electronic counter measures.")]
     ProjEcmCpuNeedBonus = 1194,
 
     /// <summary>How many structures in this group can be anchored for the same alliance per solar system.  0 means there is no limit.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("posAnchoredPerSolarSystemAmount", "Eve.AttributeId_PosAnchoredPerSolarSystemAmount")]
+    
     [System.ComponentModel.DescriptionAttribute("How many structures in this group can be anchored for the same alliance per solar" +
         " system.  0 means there is no limit.")]
     PosAnchoredPerSolarSystemAmount = 1195,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("heatDissipationRateMed", "Eve.AttributeId_HeatDissipationRateMed")]
+    
     HeatDissipationRateMed = 1196,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("heatDissipationRateLow", "Eve.AttributeId_HeatDissipationRateLow")]
+    
     HeatDissipationRateLow = 1198,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("heatCapacityMed", "Eve.AttributeId_HeatCapacityMed")]
+    
     HeatCapacityMed = 1199,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("heatCapacityLow", "Eve.AttributeId_HeatCapacityLow")]
+    
     HeatCapacityLow = 1200,
 
     /// <summary>Bonus attribute for remote hull repair amount.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("remoteHullDamageAmountBonus", "Eve.AttributeId_RemoteHullDamageAmountBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus attribute for remote hull repair amount.")]
     RemoteHullDamageAmountBonus = 1201,
 
     /// <summary>Bonus attribute for remote hull repair duration.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("remoteHullDamageDurationBonus", "Eve.AttributeId_RemoteHullDamageDurationBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus attribute for remote hull repair duration.")]
     RemoteHullDamageDurationBonus = 1202,
 
     /// <summary>Bonus attribute for energy transfer amount.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("powerTransferAmountBonus", "Eve.AttributeId_PowerTransferAmountBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus attribute for energy transfer amount.")]
     PowerTransferAmountBonus = 1203,
 
     /// <summary>Bonus attribute for energy transfer duration.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("powerTransferDurationBonus", "Eve.AttributeId_PowerTransferDurationBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus attribute for energy transfer duration.")]
     PowerTransferDurationBonus = 1204,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("overloadRofBonus", "Eve.AttributeId_OverloadRofBonus")]
+    
     OverloadRofBonus = 1205,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("overloadSelfDurationBonus", "Eve.AttributeId_OverloadSelfDurationBonus")]
+    
     OverloadSelfDurationBonus = 1206,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("isGlobal", "Eve.AttributeId_IsGlobal")]
+    
     IsGlobal = 1207,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("overloadHardeningBonus", "Eve.AttributeId_OverloadHardeningBonus")]
+    
     OverloadHardeningBonus = 1208,
 
     /// <summary>Multiplier to CPU need of modules requireing Bomb Deployment</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("bombDeploymentCpuNeedMultiplier", "Eve.AttributeId_BombDeploymentCpuNeedMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier to CPU need of modules requireing Bomb Deployment")]
     BombDeploymentCpuNeedMultiplier = 1209,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("overloadDamageModifier", "Eve.AttributeId_OverloadDamageModifier")]
+    
     OverloadDamageModifier = 1210,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("heatDamage", "Eve.AttributeId_HeatDamage")]
+    
     HeatDamage = 1211,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("requiredThermoDynamicsSkill", "Eve.AttributeId_RequiredThermoDynamicsSkill")]
+    
     RequiredThermoDynamicsSkill = 1212,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("heatDamageBonus", "Eve.AttributeId_HeatDamageBonus")]
+    
     HeatDamageBonus = 1213,
 
     /// <summary>The maximum distance from the control tower, at which structures can be controlled.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("posStructureControlDistanceMax", "Eve.AttributeId_PosStructureControlDistanceMax")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum distance from the control tower, at which structures can be controlle" +
         "d.")]
     PosStructureControlDistanceMax = 1214,
 
     /// <summary>Reduction of CPU need of shield transporters.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldTransportCpuNeedBonus", "Eve.AttributeId_ShieldTransportCpuNeedBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Reduction of CPU need of shield transporters.")]
     ShieldTransportCpuNeedBonus = 1216,
 
     /// <summary>Reduction of power grid needs of remote armor repair systems.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("remoteArmorPowerNeedBonus", "Eve.AttributeId_RemoteArmorPowerNeedBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Reduction of power grid needs of remote armor repair systems.")]
     RemoteArmorPowerNeedBonus = 1217,
 
     /// <summary>Reduction of power grid needs of energy transfer arrays</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("powerTransferPowerNeedBonus", "Eve.AttributeId_PowerTransferPowerNeedBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Reduction of power grid needs of energy transfer arrays")]
     PowerTransferPowerNeedBonus = 1218,
 
     /// <summary>Bonus to drone armor repair amount</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("droneArmorDamageAmountBonus", "Eve.AttributeId_DroneArmorDamageAmountBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to drone armor repair amount")]
     DroneArmorDamageAmountBonus = 1219,
 
     /// <summary>Bonus to drone shield transport amount</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("droneShieldBonusBonus", "Eve.AttributeId_DroneShieldBonusBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to drone shield transport amount")]
     DroneShieldBonusBonus = 1220,
 
     /// <summary>Delay in seconds; until you can jump again.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("jumpDelayDuration", "Eve.AttributeId_JumpDelayDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("Delay in seconds; until you can jump again.")]
     JumpDelayDuration = 1221,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("overloadRangeBonus", "Eve.AttributeId_OverloadRangeBonus")]
+    
     OverloadRangeBonus = 1222,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("overloadSpeedFactorBonus", "Eve.AttributeId_OverloadSpeedFactorBonus")]
+    
     OverloadSpeedFactorBonus = 1223,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("heatGenerationMultiplier", "Eve.AttributeId_HeatGenerationMultiplier")]
+    
     HeatGenerationMultiplier = 1224,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("overloadECMStrengthBonus", "Eve.AttributeId_OverloadEcmStrengthBonus")]
+    
     OverloadEcmStrengthBonus = 1225,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("overloadECCMStrenghtBonus", "Eve.AttributeId_OverloadEccmStrenghtBonus")]
+    
     OverloadEccmStrenghtBonus = 1226,
 
     /// <summary>Bonus to signatureRadiusBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("signatureRadiusBonusBonus", "Eve.AttributeId_SignatureRadiusBonusBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to signatureRadiusBonus")]
     SignatureRadiusBonusBonus = 1227,
 
     /// <summary>Multiplier affecting signatureRadiusMultiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("signatureRadiusMultiplierMultiplier", "Eve.AttributeId_SignatureRadiusMultiplierMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier affecting signatureRadiusMultiplier")]
     SignatureRadiusMultiplierMultiplier = 1228,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("thermodynamicsHeatDamage", "Eve.AttributeId_ThermodynamicsHeatDamage")]
+    
     ThermodynamicsHeatDamage = 1229,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("overloadArmorDamageAmount", "Eve.AttributeId_OverloadArmorDamageAmount")]
+    
     OverloadArmorDamageAmount = 1230,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("overloadShieldBonus", "Eve.AttributeId_OverloadShieldBonus")]
+    
     OverloadShieldBonus = 1231,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("leechBalanceFactor", "Eve.AttributeId_LeechBalanceFactor")]
+    
     LeechBalanceFactor = 1232,
 
     /// <summary>Secondary cargo space allowed, meant to supplement capacity. This is currently used exclusively for Strontium storage on starbases.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("capacitySecondary", "Eve.AttributeId_CapacitySecondary")]
+    
     [System.ComponentModel.DescriptionAttribute("Secondary cargo space allowed, meant to supplement capacity. This is currently us" +
         "ed exclusively for Strontium storage on starbases.")]
     CapacitySecondary = 1233,
 
     /// <summary>Survey Scanner Range Bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("surveyScannerRangeBonus", "Eve.AttributeId_SurveyScannerRangeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Survey Scanner Range Bonus")]
     SurveyScannerRangeBonus = 1234,
 
     /// <summary>Cargo Scanner Range Bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cargoScannerRangeBonus", "Eve.AttributeId_CargoScannerRangeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Cargo Scanner Range Bonus")]
     CargoScannerRangeBonus = 1235,
 
     /// <summary>commandBonusEffective</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("commandBonusEffective", "Eve.AttributeId_CommandBonusEffective")]
+    
     [System.ComponentModel.DescriptionAttribute("commandBonusEffective")]
     CommandBonusEffective = 1236,
 
     /// <summary>commandBonusAdd</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("commandBonusAdd", "Eve.AttributeId_CommandBonusAdd")]
+    
     [System.ComponentModel.DescriptionAttribute("commandBonusAdd")]
     CommandBonusAdd = 1237,
 
     /// <summary>commandBonusEffectiveAdd</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("commandBonusEffectiveAdd", "Eve.AttributeId_CommandBonusEffectiveAdd")]
+    
     [System.ComponentModel.DescriptionAttribute("commandBonusEffectiveAdd")]
     CommandBonusEffectiveAdd = 1238,
 
     /// <summary>shipBonusORECapital1</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusORECapital1", "Eve.AttributeId_ShipBonusOreCapital1")]
+    
     [System.ComponentModel.DescriptionAttribute("shipBonusORECapital1")]
     ShipBonusOreCapital1 = 1239,
 
     /// <summary>shipBonusORECapital2</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusORECapital2", "Eve.AttributeId_ShipBonusOreCapital2")]
+    
     [System.ComponentModel.DescriptionAttribute("shipBonusORECapital2")]
     ShipBonusOreCapital2 = 1240,
 
     /// <summary>shipBonusORECapital3</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusORECapital3", "Eve.AttributeId_ShipBonusOreCapital3")]
+    
     [System.ComponentModel.DescriptionAttribute("shipBonusORECapital3")]
     ShipBonusOreCapital3 = 1243,
 
     /// <summary>shipBonusORECapital4</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusORECapital4", "Eve.AttributeId_ShipBonusOreCapital4")]
+    
     [System.ComponentModel.DescriptionAttribute("shipBonusORECapital4")]
     ShipBonusOreCapital4 = 1244,
 
     /// <summary>Stops the module from being activated if the ship is aligning to warp.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("disallowActivateOnWarp", "Eve.AttributeId_DisallowActivateOnWarp")]
+    
     [System.ComponentModel.DescriptionAttribute("Stops the module from being activated if the ship is aligning to warp.")]
     DisallowActivateOnWarp = 1245,
 
     /// <summary>eliteBonusHeavyInterdictors1</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusHeavyInterdictors1", "Eve.AttributeId_EliteBonusHeavyInterdictors1")]
+    
     [System.ComponentModel.DescriptionAttribute("eliteBonusHeavyInterdictors1")]
     EliteBonusHeavyInterdictors1 = 1246,
 
     /// <summary>eliteBonusHeavyInterdictors2</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusHeavyInterdictors2", "Eve.AttributeId_EliteBonusHeavyInterdictors2")]
+    
     [System.ComponentModel.DescriptionAttribute("eliteBonusHeavyInterdictors2")]
     EliteBonusHeavyInterdictors2 = 1247,
 
     /// <summary>eliteBonusElectronicAttackShip1</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusElectronicAttackShip1", "Eve.AttributeId_EliteBonusElectronicAttackShip1")]
+    
     [System.ComponentModel.DescriptionAttribute("eliteBonusElectronicAttackShip1")]
     EliteBonusElectronicAttackShip1 = 1249,
 
     /// <summary>eliteBonusElectronicAttackShip2</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusElectronicAttackShip2", "Eve.AttributeId_EliteBonusElectronicAttackShip2")]
+    
     [System.ComponentModel.DescriptionAttribute("eliteBonusElectronicAttackShip2")]
     EliteBonusElectronicAttackShip2 = 1250,
 
     /// <summary>Security Clearance Level</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("securityClearance", "Eve.AttributeId_SecurityClearance")]
+    
     [System.ComponentModel.DescriptionAttribute("Security Clearance Level")]
     SecurityClearance = 1251,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("isCovert", "Eve.AttributeId_IsCovert")]
+    
     IsCovert = 1252,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("jumpHarmonics", "Eve.AttributeId_JumpHarmonics")]
+    
     JumpHarmonics = 1253,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("canNotUseStargates", "Eve.AttributeId_CanNotUseStargates")]
+    
     CanNotUseStargates = 1254,
 
     /// <summary>droneDamageBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("droneDamageBonus", "Eve.AttributeId_DroneDamageBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("droneDamageBonus")]
     DroneDamageBonus = 1255,
 
     /// <summary>droneHPBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("droneHPBonus", "Eve.AttributeId_DroneHpBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("droneHPBonus")]
     DroneHpBonus = 1256,
 
     /// <summary>eliteBonusBlackOps1</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusBlackOps1", "Eve.AttributeId_EliteBonusBlackOps1")]
+    
     [System.ComponentModel.DescriptionAttribute("eliteBonusBlackOps1")]
     EliteBonusBlackOps1 = 1257,
 
     /// <summary>eliteBonusBlackOps2</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusBlackOps2", "Eve.AttributeId_EliteBonusBlackOps2")]
+    
     [System.ComponentModel.DescriptionAttribute("eliteBonusBlackOps2")]
     EliteBonusBlackOps2 = 1258,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("heatAttenuationHi", "Eve.AttributeId_HeatAttenuationHi")]
+    
     HeatAttenuationHi = 1259,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("heatAttenuationMed", "Eve.AttributeId_HeatAttenuationMed")]
+    
     HeatAttenuationMed = 1261,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("heatAttenuationLow", "Eve.AttributeId_HeatAttenuationLow")]
+    
     HeatAttenuationLow = 1262,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("towerHPOnlineMutator", "Eve.AttributeId_TowerHpOnlineMutator")]
+    
     TowerHpOnlineMutator = 1263,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("brokenRepairCostMultiplier", "Eve.AttributeId_BrokenRepairCostMultiplier")]
+    
     BrokenRepairCostMultiplier = 1264,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusViolators1", "Eve.AttributeId_EliteBonusViolators1")]
+    
     EliteBonusViolators1 = 1265,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusViolators2", "Eve.AttributeId_EliteBonusViolators2")]
+    
     EliteBonusViolators2 = 1266,
 
     /// <summary>dictates how many hitpoints you can repair per minute</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("moduleRepairRate", "Eve.AttributeId_ModuleRepairRate")]
+    
     [System.ComponentModel.DescriptionAttribute("dictates how many hitpoints you can repair per minute")]
     ModuleRepairRate = 1267,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusViolatorsRole1", "Eve.AttributeId_EliteBonusViolatorsRole1")]
+    
     EliteBonusViolatorsRole1 = 1268,
 
     /// <summary>eliteBonusViolatorsRole2</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusViolatorsRole2", "Eve.AttributeId_EliteBonusViolatorsRole2")]
+    
     [System.ComponentModel.DescriptionAttribute("eliteBonusViolatorsRole2")]
     EliteBonusViolatorsRole2 = 1269,
 
     /// <summary>Afterburner and Microwarpdrive Thrust Bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("speedBoostFactorBonus", "Eve.AttributeId_SpeedBoostFactorBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Afterburner and Microwarpdrive Thrust Bonus")]
     SpeedBoostFactorBonus = 1270,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("droneBandwidth", "Eve.AttributeId_DroneBandwidth")]
+    
     DroneBandwidth = 1271,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("droneBandwidthUsed", "Eve.AttributeId_DroneBandwidthUsed")]
+    
     DroneBandwidthUsed = 1272,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("droneBandwidthLoad", "Eve.AttributeId_DroneBandwidthLoad")]
+    
     DroneBandwidthLoad = 1273,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("miningTargetMultiplier", "Eve.AttributeId_MiningTargetMultiplier")]
+    
     MiningTargetMultiplier = 1274,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("droneIsAgressive", "Eve.AttributeId_DroneIsAgressive")]
+    
     DroneIsAgressive = 1275,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("nonBrokenModuleRepairCostMultiplier", "Eve.AttributeId_NonBrokenModuleRepairCostMultiplier")]
+    
     NonBrokenModuleRepairCostMultiplier = 1276,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBrokenModuleRepairCostMultiplier", "Eve.AttributeId_ShipBrokenModuleRepairCostMultiplier")]
+    
     ShipBrokenModuleRepairCostMultiplier = 1277,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("droneIsChaotic", "Eve.AttributeId_DroneIsChaotic")]
+    
     DroneIsChaotic = 1278,
 
     /// <summary>eliteBonusViolatorsRole3</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusViolatorsRole3", "Eve.AttributeId_EliteBonusViolatorsRole3")]
+    
     [System.ComponentModel.DescriptionAttribute("eliteBonusViolatorsRole3")]
     EliteBonusViolatorsRole3 = 1279,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusInterceptorRole", "Eve.AttributeId_EliteBonusInterceptorRole")]
+    
     EliteBonusInterceptorRole = 1280,
 
     /// <summary>Just for the UI to display the ship warp speed.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("baseWarpSpeed", "Eve.AttributeId_BaseWarpSpeed")]
+    
     [System.ComponentModel.DescriptionAttribute("Just for the UI to display the ship warp speed.")]
     BaseWarpSpeed = 1281,
 
     /// <summary>Nomad set bonus attribute</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("implantSetThukker", "Eve.AttributeId_ImplantSetThukker")]
+    
     [System.ComponentModel.DescriptionAttribute("Nomad set bonus attribute")]
     ImplantSetThukker = 1282,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("fightersAttackAndFollow", "Eve.AttributeId_FightersAttackAndFollow")]
+    
     FightersAttackAndFollow = 1283,
 
     /// <summary>Virtue set bonus attribute</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("implantSetSisters", "Eve.AttributeId_ImplantSetSisters")]
+    
     [System.ComponentModel.DescriptionAttribute("Virtue set bonus attribute")]
     ImplantSetSisters = 1284,
 
     /// <summary>The type ID of the skill that is required.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("requiredSkill4", "Eve.AttributeId_RequiredSkill4")]
+    
     [System.ComponentModel.DescriptionAttribute("The type ID of the skill that is required.")]
     RequiredSkill4 = 1285,
 
     /// <summary>Required skill level for skill 4</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("requiredSkill4Level", "Eve.AttributeId_RequiredSkill4Level")]
+    
     [System.ComponentModel.DescriptionAttribute("Required skill level for skill 4")]
     RequiredSkill4Level = 1286,
 
     /// <summary>Required skill level for skill 5</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("requiredSkill5Level", "Eve.AttributeId_RequiredSkill5Level")]
+    
     [System.ComponentModel.DescriptionAttribute("Required skill level for skill 5")]
     RequiredSkill5Level = 1287,
 
     /// <summary>Required skill level for skill 6</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("requiredSkill6Level", "Eve.AttributeId_RequiredSkill6Level")]
+    
     [System.ComponentModel.DescriptionAttribute("Required skill level for skill 6")]
     RequiredSkill6Level = 1288,
 
     /// <summary>The type ID of the skill that is required.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("requiredSkill5", "Eve.AttributeId_RequiredSkill5")]
+    
     [System.ComponentModel.DescriptionAttribute("The type ID of the skill that is required.")]
     RequiredSkill5 = 1289,
 
     /// <summary>The type ID of the skill that is required.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("requiredSkill6", "Eve.AttributeId_RequiredSkill6")]
+    
     [System.ComponentModel.DescriptionAttribute("The type ID of the skill that is required.")]
     RequiredSkill6 = 1290,
 
     /// <summary>Edge set bonus attribute</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("implantSetSyndicate", "Eve.AttributeId_ImplantSetSyndicate")]
+    
     [System.ComponentModel.DescriptionAttribute("Edge set bonus attribute")]
     ImplantSetSyndicate = 1291,
 
     /// <summary>Harvest set bonus attribute</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("implantSetORE", "Eve.AttributeId_ImplantSetOre")]
+    
     [System.ComponentModel.DescriptionAttribute("Harvest set bonus attribute")]
     ImplantSetOre = 1292,
 
     /// <summary>Centurion set bonus attribute</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("implantSetMordus", "Eve.AttributeId_ImplantSetMordus")]
+    
     [System.ComponentModel.DescriptionAttribute("Centurion set bonus attribute")]
     ImplantSetMordus = 1293,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBrokenRepairCostMultiplierBonus", "Eve.AttributeId_ShipBrokenRepairCostMultiplierBonus")]
+    
     ShipBrokenRepairCostMultiplierBonus = 1294,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("moduleRepairRateBonus", "Eve.AttributeId_ModuleRepairRateBonus")]
+    
     ModuleRepairRateBonus = 1295,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("consumptionQuantityBonusPercentage", "Eve.AttributeId_ConsumptionQuantityBonusPercentage")]
+    
     ConsumptionQuantityBonusPercentage = 1296,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("droneFocusFire", "Eve.AttributeId_DroneFocusFire")]
+    
     DroneFocusFire = 1297,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("canFitShipGroup1", "Eve.AttributeId_CanFitShipGroup1")]
+    
     CanFitShipGroup1 = 1298,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("canFitShipGroup2", "Eve.AttributeId_CanFitShipGroup2")]
+    
     CanFitShipGroup2 = 1299,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("canFitShipGroup3", "Eve.AttributeId_CanFitShipGroup3")]
+    
     CanFitShipGroup3 = 1300,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("canFitShipGroup4", "Eve.AttributeId_CanFitShipGroup4")]
+    
     CanFitShipGroup4 = 1301,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("canFitShipType1", "Eve.AttributeId_CanFitShipType1")]
+    
     CanFitShipType1 = 1302,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("canFitShipType2", "Eve.AttributeId_CanFitShipType2")]
+    
     CanFitShipType2 = 1303,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("canFitShipType3", "Eve.AttributeId_CanFitShipType3")]
+    
     CanFitShipType3 = 1304,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("canFitShipType4", "Eve.AttributeId_CanFitShipType4")]
+    
     CanFitShipType4 = 1305,
 
     /// <summary>Additive bonus to maxRangeMultiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxRangeMultiplierBonusAdditive", "Eve.AttributeId_MaxRangeMultiplierBonusAdditive")]
+    
     [System.ComponentModel.DescriptionAttribute("Additive bonus to maxRangeMultiplier")]
     MaxRangeMultiplierBonusAdditive = 1306,
 
     /// <summary>Additive bonus to trackingSpeedMultiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("trackingSpeedMultiplierBonusAdditive", "Eve.AttributeId_TrackingSpeedMultiplierBonusAdditive")]
+    
     [System.ComponentModel.DescriptionAttribute("Additive bonus to trackingSpeedMultiplier")]
     TrackingSpeedMultiplierBonusAdditive = 1307,
 
     /// <summary>Additive bonus to maxTargetRangeMultiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxTargetRangeMultiplierBonusAdditive", "Eve.AttributeId_MaxTargetRangeMultiplierBonusAdditive")]
+    
     [System.ComponentModel.DescriptionAttribute("Additive bonus to maxTargetRangeMultiplier")]
     MaxTargetRangeMultiplierBonusAdditive = 1308,
 
     /// <summary>Additive bonus to scanResolutionMultiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanResolutionMultiplierBonusAdditive", "Eve.AttributeId_ScanResolutionMultiplierBonusAdditive")]
+    
     [System.ComponentModel.DescriptionAttribute("Additive bonus to scanResolutionMultiplier")]
     ScanResolutionMultiplierBonusAdditive = 1309,
 
     /// <summary>commandBonusHidden</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("commandBonusHidden", "Eve.AttributeId_CommandBonusHidden")]
+    
     [System.ComponentModel.DescriptionAttribute("commandBonusHidden")]
     CommandBonusHidden = 1310,
 
     /// <summary>eliteBonusJumpFreighter1</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusJumpFreighter1", "Eve.AttributeId_EliteBonusJumpFreighter1")]
+    
     [System.ComponentModel.DescriptionAttribute("eliteBonusJumpFreighter1")]
     EliteBonusJumpFreighter1 = 1311,
 
     /// <summary>eliteBonusJumpFreighter2</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusJumpFreighter2", "Eve.AttributeId_EliteBonusJumpFreighter2")]
+    
     [System.ComponentModel.DescriptionAttribute("eliteBonusJumpFreighter2")]
     EliteBonusJumpFreighter2 = 1312,
 
     /// <summary>Bonus to maxTargetRangeBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxTargetRangeBonusBonus", "Eve.AttributeId_MaxTargetRangeBonusBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to maxTargetRangeBonus")]
     MaxTargetRangeBonusBonus = 1313,
 
     /// <summary>Bonus to scanResolutionBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanResolutionBonusBonus", "Eve.AttributeId_ScanResolutionBonusBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to scanResolutionBonus")]
     ScanResolutionBonusBonus = 1314,
 
     /// <summary>Bonus to maxRangeBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxRangeBonusBonus", "Eve.AttributeId_MaxRangeBonusBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to maxRangeBonus")]
     MaxRangeBonusBonus = 1315,
 
     /// <summary>Bonus to trackingSpeedBonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("trackingSpeedBonusBonus", "Eve.AttributeId_TrackingSpeedBonusBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to trackingSpeedBonus")]
     TrackingSpeedBonusBonus = 1316,
 
     /// <summary>maxRangeHidden</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxRangeHidden", "Eve.AttributeId_MaxRangeHidden")]
+    
     [System.ComponentModel.DescriptionAttribute("maxRangeHidden")]
     MaxRangeHidden = 1317,
 
     /// <summary>warpScrambleStrengthHidden</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("warpScrambleStrengthHidden", "Eve.AttributeId_WarpScrambleStrengthHidden")]
+    
     [System.ComponentModel.DescriptionAttribute("warpScrambleStrengthHidden")]
     WarpScrambleStrengthHidden = 1318,
 
     /// <summary>capacitorNeedHidden</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("capacitorNeedHidden", "Eve.AttributeId_CapacitorNeedHidden")]
+    
     [System.ComponentModel.DescriptionAttribute("capacitorNeedHidden")]
     CapacitorNeedHidden = 1319,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("commandBonusECM", "Eve.AttributeId_CommandBonusEcm")]
+    
     CommandBonusEcm = 1320,
 
     /// <summary>Remote Sensor Dampening Command Bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("commandBonusRSD", "Eve.AttributeId_CommandBonusRsd")]
+    
     [System.ComponentModel.DescriptionAttribute("Remote Sensor Dampening Command Bonus")]
     CommandBonusRsd = 1321,
 
     /// <summary>Tracking Disruption Command Bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("commandBonusTD", "Eve.AttributeId_CommandBonusTd")]
+    
     [System.ComponentModel.DescriptionAttribute("Tracking Disruption Command Bonus")]
     CommandBonusTd = 1322,
 
     /// <summary>Target Painting Command Bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("commandBonusTP", "Eve.AttributeId_CommandBonusTp")]
+    
     [System.ComponentModel.DescriptionAttribute("Target Painting Command Bonus")]
     CommandBonusTp = 1323,
 
     /// <summary>Bonus to massBonusPercentage</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("massBonusPercentageBonus", "Eve.AttributeId_MassBonusPercentageBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to massBonusPercentage")]
     MassBonusPercentageBonus = 1324,
 
     /// <summary>Modification of Afterburner and Microwarpdrive Thrust Bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("speedBoostFactorBonusBonus", "Eve.AttributeId_SpeedBoostFactorBonusBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Modification of Afterburner and Microwarpdrive Thrust Bonus")]
     SpeedBoostFactorBonusBonus = 1325,
 
     /// <summary>Modification of Afterburner and Microwarpdrive Max Velocity Bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("speedFactorBonusBonus", "Eve.AttributeId_SpeedFactorBonusBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Modification of Afterburner and Microwarpdrive Max Velocity Bonus")]
     SpeedFactorBonusBonus = 1326,
 
     /// <summary>Warp Scramble Range Bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("warpScrambleRangeBonus", "Eve.AttributeId_WarpScrambleRangeBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Warp Scramble Range Bonus")]
     WarpScrambleRangeBonus = 1327,
 
     /// <summary>Multiplier on droneBandwidth. The default value should be 0 to ensure that CONCORD NPCs can set the bandwidth of a target ship to 0.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("droneBandwidthMultiplier", "Eve.AttributeId_DroneBandwidthMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier on droneBandwidth. The default value should be 0 to ensure that CONCOR" +
         "D NPCs can set the bandwidth of a target ship to 0.")]
     DroneBandwidthMultiplier = 1328,
 
     /// <summary>Drone Bandwidth Bonus (additive)</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("droneBandwidthBonusAdd", "Eve.AttributeId_DroneBandwidthBonusAdd")]
+    
     [System.ComponentModel.DescriptionAttribute("Drone Bandwidth Bonus (additive)")]
     DroneBandwidthBonusAdd = 1329,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("isHacking", "Eve.AttributeId_IsHacking")]
+    
     IsHacking = 1330,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("isArcheology", "Eve.AttributeId_IsArcheology")]
+    
     IsArcheology = 1331,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("falloffBonusBonus", "Eve.AttributeId_FalloffBonusBonus")]
+    
     FalloffBonusBonus = 1332,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxVelocityLimited", "Eve.AttributeId_MaxVelocityLimited")]
+    
     MaxVelocityLimited = 1333,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxVelocityActivationLimit", "Eve.AttributeId_MaxVelocityActivationLimit")]
+    
     MaxVelocityActivationLimit = 1334,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("defenderRaceID", "Eve.AttributeId_DefenderRaceId")]
+    
     DefenderRaceId = 1335,
 
     /// <summary>The remaining number of unused clone vats on the ship that are available for installation of jump clones.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("jumpClonesLeft", "Eve.AttributeId_JumpClonesLeft")]
+    
     [System.ComponentModel.DescriptionAttribute("The remaining number of unused clone vats on the ship that are available for inst" +
         "allation of jump clones.")]
     JumpClonesLeft = 1336,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("captureProximityRange", "Eve.AttributeId_CaptureProximityRange")]
+    
     CaptureProximityRange = 1337,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("factionDefenderID", "Eve.AttributeId_FactionDefenderId")]
+    
     FactionDefenderId = 1339,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("factionOffenderID", "Eve.AttributeId_FactionOffenderId")]
+    
     FactionOffenderId = 1340,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("factionID", "Eve.AttributeId_FactionId")]
+    
     FactionId = 1341,
 
     /// <summary>Used for blocking activation of modules</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("activationBlocked", "Eve.AttributeId_ActivationBlocked")]
+    
     [System.ComponentModel.DescriptionAttribute("Used for blocking activation of modules")]
     ActivationBlocked = 1349,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("activationBlockedStrenght", "Eve.AttributeId_ActivationBlockedStrenght")]
+    
     ActivationBlockedStrenght = 1350,
 
     /// <summary>cargo typeID allowed in structures</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("posCargobayAcceptType", "Eve.AttributeId_PosCargobayAcceptType")]
+    
     [System.ComponentModel.DescriptionAttribute("cargo typeID allowed in structures")]
     PosCargobayAcceptType = 1351,
 
     /// <summary>cargo bay container group ID</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("posCargobayAcceptGroup", "Eve.AttributeId_PosCargobayAcceptGroup")]
+    
     [System.ComponentModel.DescriptionAttribute("cargo bay container group ID")]
     PosCargobayAcceptGroup = 1352,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("aoeDamageReductionFactor", "Eve.AttributeId_AoeDamageReductionFactor")]
+    
     AoeDamageReductionFactor = 1353,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("aoeDamageReductionSensitivity", "Eve.AttributeId_AoeDamageReductionSensitivity")]
+    
     AoeDamageReductionSensitivity = 1354,
 
     /// <summary>bonus to range of tractor beams</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipOrcaTractorBeamRangeBonus1", "Eve.AttributeId_ShipOrcaTractorBeamRangeBonus1")]
+    
     [System.ComponentModel.DescriptionAttribute("bonus to range of tractor beams")]
     ShipOrcaTractorBeamRangeBonus1 = 1355,
 
     /// <summary>bonus to ship cargo capacity</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipOrcaCargoBonusOrca1", "Eve.AttributeId_ShipOrcaCargoBonusOrca1")]
+    
     [System.ComponentModel.DescriptionAttribute("bonus to ship cargo capacity")]
     ShipOrcaCargoBonusOrca1 = 1356,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipOrcaTractorBeamVelocityBonus2", "Eve.AttributeId_ShipOrcaTractorBeamVelocityBonus2")]
+    
     ShipOrcaTractorBeamVelocityBonus2 = 1357,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipOrcaForemanBonus", "Eve.AttributeId_ShipOrcaForemanBonus")]
+    
     ShipOrcaForemanBonus = 1358,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipOrcaSurveyScannerBonus", "Eve.AttributeId_ShipOrcaSurveyScannerBonus")]
+    
     ShipOrcaSurveyScannerBonus = 1359,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusHPExtender1", "Eve.AttributeId_ShipBonusHpExtender1")]
+    
     ShipBonusHpExtender1 = 1360,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteIndustrialCovertCloakBonus", "Eve.AttributeId_EliteIndustrialCovertCloakBonus")]
+    
     EliteIndustrialCovertCloakBonus = 1361,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subSystemSlot", "Eve.AttributeId_SubSystemSlot")]
+    
     SubSystemSlot = 1366,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxSubSystems", "Eve.AttributeId_MaxSubSystems")]
+    
     MaxSubSystems = 1367,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("turretHardPointModifier", "Eve.AttributeId_TurretHardPointModifier")]
+    
     TurretHardPointModifier = 1368,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("launcherHardPointModifier", "Eve.AttributeId_LauncherHardPointModifier")]
+    
     LauncherHardPointModifier = 1369,
 
     /// <summary>This is the lowest scan range value in AUs for probes under the revised probing system</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("baseScanRange", "Eve.AttributeId_BaseScanRange")]
+    
     [System.ComponentModel.DescriptionAttribute("This is the lowest scan range value in AUs for probes under the revised probing s" +
         "ystem")]
     BaseScanRange = 1370,
 
     /// <summary>This is the highest sensor strength in points for probes under the revised probing system</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("baseSensorStrength", "Eve.AttributeId_BaseSensorStrength")]
+    
     [System.ComponentModel.DescriptionAttribute("This is the highest sensor strength in points for probes under the revised probin" +
         "g system")]
     BaseSensorStrength = 1371,
 
     /// <summary>This is the lowest maximum scan deviation in AU for probes under the revised probing system</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("baseMaxScanDeviation", "Eve.AttributeId_BaseMaxScanDeviation")]
+    
     [System.ComponentModel.DescriptionAttribute("This is the lowest maximum scan deviation in AU for probes under the revised prob" +
         "ing system")]
     BaseMaxScanDeviation = 1372,
 
     /// <summary>This is the multiplier/divisor for probe range increases and associated values under the revised probing system</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rangeFactor", "Eve.AttributeId_RangeFactor")]
+    
     [System.ComponentModel.DescriptionAttribute("This is the multiplier/divisor for probe range increases and associated values un" +
         "der the revised probing system")]
     RangeFactor = 1373,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("hiSlotModifier", "Eve.AttributeId_HiSlotModifier")]
+    
     HiSlotModifier = 1374,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("medSlotModifier", "Eve.AttributeId_MedSlotModifier")]
+    
     MedSlotModifier = 1375,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("lowSlotModifier", "Eve.AttributeId_LowSlotModifier")]
+    
     LowSlotModifier = 1376,
 
     /// <summary>CPU output of ship</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cpuOutputAdd", "Eve.AttributeId_CpuOutputAdd")]
+    
     [System.ComponentModel.DescriptionAttribute("CPU output of ship")]
     CpuOutputAdd = 1377,
 
     /// <summary>power output of power core</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("powerOutputAdd", "Eve.AttributeId_PowerOutputAdd")]
+    
     [System.ComponentModel.DescriptionAttribute("power output of power core")]
     PowerOutputAdd = 1378,
 
     /// <summary>Maximum velocity of ship</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxVelocityAdd", "Eve.AttributeId_MaxVelocityAdd")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum velocity of ship")]
     MaxVelocityAdd = 1379,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("fitsToShipType", "Eve.AttributeId_FitsToShipType")]
+    
     FitsToShipType = 1380,
 
     /// <summary>Target System Class for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetSystemClass", "Eve.AttributeId_WormholeTargetSystemClass")]
+    
     [System.ComponentModel.DescriptionAttribute("Target System Class for wormholes")]
     WormholeTargetSystemClass = 1381,
 
     /// <summary>The maximum amount of time a wormhole will stay open</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeMaxStableTime", "Eve.AttributeId_WormholeMaxStableTime")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum amount of time a wormhole will stay open")]
     WormholeMaxStableTime = 1382,
 
     /// <summary>The maximum amount of mass a wormhole can transit before collapsing</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeMaxStableMass", "Eve.AttributeId_WormholeMaxStableMass")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum amount of mass a wormhole can transit before collapsing")]
     WormholeMaxStableMass = 1383,
 
     /// <summary>The amount of mass a wormhole regenerates per cycle</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeMassRegeneration", "Eve.AttributeId_WormholeMassRegeneration")]
+    
     [System.ComponentModel.DescriptionAttribute("The amount of mass a wormhole regenerates per cycle")]
     WormholeMassRegeneration = 1384,
 
     /// <summary>The maximum amount of mass that can transit a wormhole in one go</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeMaxJumpMass", "Eve.AttributeId_WormholeMaxJumpMass")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum amount of mass that can transit a wormhole in one go")]
     WormholeMaxJumpMass = 1385,
 
     /// <summary>Specific target region 1 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetRegion1", "Eve.AttributeId_WormholeTargetRegion1")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target region 1 for wormholes")]
     WormholeTargetRegion1 = 1386,
 
     /// <summary>Specific target region 2 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetRegion2", "Eve.AttributeId_WormholeTargetRegion2")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target region 2 for wormholes")]
     WormholeTargetRegion2 = 1387,
 
     /// <summary>Specific target region 3 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetRegion3", "Eve.AttributeId_WormholeTargetRegion3")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target region 3 for wormholes")]
     WormholeTargetRegion3 = 1388,
 
     /// <summary>Specific target region 4 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetRegion4", "Eve.AttributeId_WormholeTargetRegion4")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target region 4 for wormholes")]
     WormholeTargetRegion4 = 1389,
 
     /// <summary>Specific target region 5 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetRegion5", "Eve.AttributeId_WormholeTargetRegion5")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target region 5 for wormholes")]
     WormholeTargetRegion5 = 1390,
 
     /// <summary>Specific target region 6 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetRegion6", "Eve.AttributeId_WormholeTargetRegion6")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target region 6 for wormholes")]
     WormholeTargetRegion6 = 1391,
 
     /// <summary>Specific target region 7 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetRegion7", "Eve.AttributeId_WormholeTargetRegion7")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target region 7 for wormholes")]
     WormholeTargetRegion7 = 1392,
 
     /// <summary>Specific target region 8 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetRegion8", "Eve.AttributeId_WormholeTargetRegion8")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target region 8 for wormholes")]
     WormholeTargetRegion8 = 1393,
 
     /// <summary>Specific target region 9 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetRegion9", "Eve.AttributeId_WormholeTargetRegion9")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target region 9 for wormholes")]
     WormholeTargetRegion9 = 1394,
 
     /// <summary>Specific target constellation 1 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetConstellation1", "Eve.AttributeId_WormholeTargetConstellation1")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target constellation 1 for wormholes")]
     WormholeTargetConstellation1 = 1395,
 
     /// <summary>Specific target constellation 2 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetConstellation2", "Eve.AttributeId_WormholeTargetConstellation2")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target constellation 2 for wormholes")]
     WormholeTargetConstellation2 = 1396,
 
     /// <summary>Specific target constellation 3 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetConstellation3", "Eve.AttributeId_WormholeTargetConstellation3")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target constellation 3 for wormholes")]
     WormholeTargetConstellation3 = 1397,
 
     /// <summary>Specific target constellation 4 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetConstellation4", "Eve.AttributeId_WormholeTargetConstellation4")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target constellation 4 for wormholes")]
     WormholeTargetConstellation4 = 1398,
 
     /// <summary>Specific target constellation 5 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetConstellation5", "Eve.AttributeId_WormholeTargetConstellation5")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target constellation 5 for wormholes")]
     WormholeTargetConstellation5 = 1399,
 
     /// <summary>Specific target constellation 6 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetConstellation6", "Eve.AttributeId_WormholeTargetConstellation6")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target constellation 6 for wormholes")]
     WormholeTargetConstellation6 = 1400,
 
     /// <summary>Specific target constellation 7 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetConstellation7", "Eve.AttributeId_WormholeTargetConstellation7")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target constellation 7 for wormholes")]
     WormholeTargetConstellation7 = 1401,
 
     /// <summary>Specific target constellation 8 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetConstellation8", "Eve.AttributeId_WormholeTargetConstellation8")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target constellation 8 for wormholes")]
     WormholeTargetConstellation8 = 1402,
 
     /// <summary>Specific target constellation 9 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetConstellation9", "Eve.AttributeId_WormholeTargetConstellation9")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target constellation 9 for wormholes")]
     WormholeTargetConstellation9 = 1403,
 
     /// <summary>Specific target system 1 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetSystem1", "Eve.AttributeId_WormholeTargetSystem1")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target system 1 for wormholes")]
     WormholeTargetSystem1 = 1404,
 
     /// <summary>Specific target system 2 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetSystem2", "Eve.AttributeId_WormholeTargetSystem2")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target system 2 for wormholes")]
     WormholeTargetSystem2 = 1405,
 
     /// <summary>Specific target system 3 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetSystem3", "Eve.AttributeId_WormholeTargetSystem3")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target system 3 for wormholes")]
     WormholeTargetSystem3 = 1406,
 
     /// <summary>Specific target system 4 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetSystem4", "Eve.AttributeId_WormholeTargetSystem4")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target system 4 for wormholes")]
     WormholeTargetSystem4 = 1407,
 
     /// <summary>Specific target system 5 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetSystem5", "Eve.AttributeId_WormholeTargetSystem5")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target system 5 for wormholes")]
     WormholeTargetSystem5 = 1408,
 
     /// <summary>Specific target system 6 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetSystem6", "Eve.AttributeId_WormholeTargetSystem6")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target system 6 for wormholes")]
     WormholeTargetSystem6 = 1409,
 
     /// <summary>Specific target system 7 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetSystem7", "Eve.AttributeId_WormholeTargetSystem7")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target system 7 for wormholes")]
     WormholeTargetSystem7 = 1410,
 
     /// <summary>Specific target system 8 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetSystem8", "Eve.AttributeId_WormholeTargetSystem8")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target system 8 for wormholes")]
     WormholeTargetSystem8 = 1411,
 
     /// <summary>Specific target system 9 for wormholes</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetSystem9", "Eve.AttributeId_WormholeTargetSystem9")]
+    
     [System.ComponentModel.DescriptionAttribute("Specific target system 9 for wormholes")]
     WormholeTargetSystem9 = 1412,
 
     /// <summary>If this is 1 then the probe can scan for ships, otherwise it can't.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("probeCanScanShips", "Eve.AttributeId_ProbeCanScanShips")]
+    
     [System.ComponentModel.DescriptionAttribute("If this is 1 then the probe can scan for ships, otherwise it can\'t.")]
     ProbeCanScanShips = 1413,
 
     /// <summary>The evasive maneuver level of the type. this will control what types of evasive maneuvers a NPC ship will use.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("AI_ShouldUseEvasiveManeuver", "Eve.AttributeId_Ai_ShouldUseEvasiveManeuver")]
+    
     [System.ComponentModel.DescriptionAttribute("The evasive maneuver level of the type. this will control what types of evasive m" +
         "aneuvers a NPC ship will use.")]
     Ai_ShouldUseEvasiveManeuver = 1414,
 
     /// <summary>This controls the time that must pass between one target switch and another!</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("AI_TargetSwitchTimer", "Eve.AttributeId_Ai_TargetSwitchTimer")]
+    
     [System.ComponentModel.DescriptionAttribute("This controls the time that must pass between one target switch and another!")]
     Ai_TargetSwitchTimer = 1416,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("color", "Eve.AttributeId_Color")]
+    
     Color = 1417,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("passiveArmorEmDamageResonance", "Eve.AttributeId_PassiveArmorEmDamageResonance")]
+    
     PassiveArmorEmDamageResonance = 1418,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("passiveArmorThermalDamageResonance", "Eve.AttributeId_PassiveArmorThermalDamageResonance")]
+    
     PassiveArmorThermalDamageResonance = 1419,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("passiveArmorKineticDamageResonance", "Eve.AttributeId_PassiveArmorKineticDamageResonance")]
+    
     PassiveArmorKineticDamageResonance = 1420,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("passiveArmorExplosiveDamageResonance", "Eve.AttributeId_PassiveArmorExplosiveDamageResonance")]
+    
     PassiveArmorExplosiveDamageResonance = 1421,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("passiveShieldExplosiveDamageResonance", "Eve.AttributeId_PassiveShieldExplosiveDamageResonance")]
+    
     PassiveShieldExplosiveDamageResonance = 1422,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("passiveShieldEmDamageResonance", "Eve.AttributeId_PassiveShieldEmDamageResonance")]
+    
     PassiveShieldEmDamageResonance = 1423,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("passiveShieldKineticDamageResonance", "Eve.AttributeId_PassiveShieldKineticDamageResonance")]
+    
     PassiveShieldKineticDamageResonance = 1424,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("passiveShieldThermalDamageResonance", "Eve.AttributeId_PassiveShieldThermalDamageResonance")]
+    
     PassiveShieldThermalDamageResonance = 1425,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("passiveHullEmDamageResonance", "Eve.AttributeId_PassiveHullEmDamageResonance")]
+    
     PassiveHullEmDamageResonance = 1426,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("passiveHullExplosiveDamageResonance", "Eve.AttributeId_PassiveHullExplosiveDamageResonance")]
+    
     PassiveHullExplosiveDamageResonance = 1427,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("passiveHullKineticDamageResonance", "Eve.AttributeId_PassiveHullKineticDamageResonance")]
+    
     PassiveHullKineticDamageResonance = 1428,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("passiveHullThermalDamageResonance", "Eve.AttributeId_PassiveHullThermalDamageResonance")]
+    
     PassiveHullThermalDamageResonance = 1429,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("lightColor", "Eve.AttributeId_LightColor")]
+    
     LightColor = 1430,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusAmarrEngineering", "Eve.AttributeId_SubsystemBonusAmarrEngineering")]
+    
     SubsystemBonusAmarrEngineering = 1431,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusAmarrElectronic", "Eve.AttributeId_SubsystemBonusAmarrElectronic")]
+    
     SubsystemBonusAmarrElectronic = 1432,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusAmarrDefensive", "Eve.AttributeId_SubsystemBonusAmarrDefensive")]
+    
     SubsystemBonusAmarrDefensive = 1433,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusAmarrOffensive", "Eve.AttributeId_SubsystemBonusAmarrOffensive")]
+    
     SubsystemBonusAmarrOffensive = 1434,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusAmarrPropulsion", "Eve.AttributeId_SubsystemBonusAmarrPropulsion")]
+    
     SubsystemBonusAmarrPropulsion = 1435,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusGallenteEngineering", "Eve.AttributeId_SubsystemBonusGallenteEngineering")]
+    
     SubsystemBonusGallenteEngineering = 1436,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusGallenteElectronic", "Eve.AttributeId_SubsystemBonusGallenteElectronic")]
+    
     SubsystemBonusGallenteElectronic = 1437,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusGallenteDefensive", "Eve.AttributeId_SubsystemBonusGallenteDefensive")]
+    
     SubsystemBonusGallenteDefensive = 1438,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusGallenteOffensive", "Eve.AttributeId_SubsystemBonusGallenteOffensive")]
+    
     SubsystemBonusGallenteOffensive = 1439,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusGallentePropulsion", "Eve.AttributeId_SubsystemBonusGallentePropulsion")]
+    
     SubsystemBonusGallentePropulsion = 1440,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusCaldariEngineering", "Eve.AttributeId_SubsystemBonusCaldariEngineering")]
+    
     SubsystemBonusCaldariEngineering = 1441,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusCaldariElectronic", "Eve.AttributeId_SubsystemBonusCaldariElectronic")]
+    
     SubsystemBonusCaldariElectronic = 1442,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusCaldariDefensive", "Eve.AttributeId_SubsystemBonusCaldariDefensive")]
+    
     SubsystemBonusCaldariDefensive = 1443,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusCaldariOffensive", "Eve.AttributeId_SubsystemBonusCaldariOffensive")]
+    
     SubsystemBonusCaldariOffensive = 1444,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusCaldariPropulsion", "Eve.AttributeId_SubsystemBonusCaldariPropulsion")]
+    
     SubsystemBonusCaldariPropulsion = 1445,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusMinmatarEngineering", "Eve.AttributeId_SubsystemBonusMinmatarEngineering")]
+    
     SubsystemBonusMinmatarEngineering = 1446,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusMinmatarElectronic", "Eve.AttributeId_SubsystemBonusMinmatarElectronic")]
+    
     SubsystemBonusMinmatarElectronic = 1447,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusMinmatarDefensive", "Eve.AttributeId_SubsystemBonusMinmatarDefensive")]
+    
     SubsystemBonusMinmatarDefensive = 1448,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusMinmatarOffensive", "Eve.AttributeId_SubsystemBonusMinmatarOffensive")]
+    
     SubsystemBonusMinmatarOffensive = 1449,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusMinmatarPropulsion", "Eve.AttributeId_SubsystemBonusMinmatarPropulsion")]
+    
     SubsystemBonusMinmatarPropulsion = 1450,
 
     /// <summary>This tis the priority for assisting this npc, higher the number the mor priority this npc has to be repaired and boosted.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("npcAssistanceProirity", "Eve.AttributeId_NpcAssistanceProirity")]
+    
     [System.ComponentModel.DescriptionAttribute("This tis the priority for assisting this npc, higher the number the mor priority " +
         "this npc has to be repaired and boosted.")]
     NpcAssistanceProirity = 1451,
 
     /// <summary>the chance of the NPC remote reapiring it's comrads.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("npcRemoteArmorRepairChance", "Eve.AttributeId_NpcRemoteArmorRepairChance")]
+    
     [System.ComponentModel.DescriptionAttribute("the chance of the NPC remote reapiring it\'s comrads.")]
     NpcRemoteArmorRepairChance = 1453,
 
     /// <summary>How long NPC take to remote repair ther comerad in MS.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("npcRemoteArmorRepairDuration", "Eve.AttributeId_NpcRemoteArmorRepairDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("How long NPC take to remote repair ther comerad in MS.")]
     NpcRemoteArmorRepairDuration = 1454,
 
     /// <summary>the amount of armor that is repaired per cycle to each target</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("npcRemoteArmorRepairAmount", "Eve.AttributeId_NpcRemoteArmorRepairAmount")]
+    
     [System.ComponentModel.DescriptionAttribute("the amount of armor that is repaired per cycle to each target")]
     NpcRemoteArmorRepairAmount = 1455,
 
     /// <summary>the amount of damage tot he total armor HPO that has been done before they begin remote repairing that target.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("npcRemoteArmorRepairThreshold", "Eve.AttributeId_NpcRemoteArmorRepairThreshold")]
+    
     [System.ComponentModel.DescriptionAttribute("the amount of damage tot he total armor HPO that has been done before they begin " +
         "remote repairing that target.")]
     NpcRemoteArmorRepairThreshold = 1456,
 
     /// <summary>This is the distribution ID of the target wormhole distribution</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("wormholeTargetDistribution", "Eve.AttributeId_WormholeTargetDistribution")]
+    
     [System.ComponentModel.DescriptionAttribute("This is the distribution ID of the target wormhole distribution")]
     WormholeTargetDistribution = 1457,
 
     /// <summary>Duration of shield boost effect</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("npcRemoteShieldBoostDuration", "Eve.AttributeId_NpcRemoteShieldBoostDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("Duration of shield boost effect")]
     NpcRemoteShieldBoostDuration = 1458,
 
     /// <summary>Chance of the remote shield boosting effect being used</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("npcRemoteShieldBoostChance", "Eve.AttributeId_NpcRemoteShieldBoostChance")]
+    
     [System.ComponentModel.DescriptionAttribute("Chance of the remote shield boosting effect being used")]
     NpcRemoteShieldBoostChance = 1459,
 
     /// <summary>How many shields points does the activation of the effect bestow upon the target</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("npcRemoteShieldBoostAmount", "Eve.AttributeId_NpcRemoteShieldBoostAmount")]
+    
     [System.ComponentModel.DescriptionAttribute("How many shields points does the activation of the effect bestow upon the target")]
     NpcRemoteShieldBoostAmount = 1460,
 
     /// <summary>How damaged does a teammates shield need to be before it'll be repaired</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("npcRemoteShieldBoostThreshold", "Eve.AttributeId_NpcRemoteShieldBoostThreshold")]
+    
     [System.ComponentModel.DescriptionAttribute("How damaged does a teammates shield need to be before it\'ll be repaired")]
     NpcRemoteShieldBoostThreshold = 1462,
 
     /// <summary>Maximum distance to a friendly NPC so that remote repairs may be performed on it.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("npcAssistanceRange", "Eve.AttributeId_NpcAssistanceRange")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum distance to a friendly NPC so that remote repairs may be performed on it." +
         "")]
     NpcAssistanceRange = 1464,
 
     /// <summary>EM damage resistance bonus for armor</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorEmDamageResistanceBonus", "Eve.AttributeId_ArmorEmDamageResistanceBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("EM damage resistance bonus for armor")]
     ArmorEmDamageResistanceBonus = 1465,
 
     /// <summary>Kinetic damage resistance bonus for armor</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorKineticDamageResistanceBonus", "Eve.AttributeId_ArmorKineticDamageResistanceBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Kinetic damage resistance bonus for armor")]
     ArmorKineticDamageResistanceBonus = 1466,
 
     /// <summary>Thermal damage resistance bonus for armor</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorThermalDamageResistanceBonus", "Eve.AttributeId_ArmorThermalDamageResistanceBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Thermal damage resistance bonus for armor")]
     ArmorThermalDamageResistanceBonus = 1467,
 
     /// <summary>Explosive damage resistance bonus for armor</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorExplosiveDamageResistanceBonus", "Eve.AttributeId_ArmorExplosiveDamageResistanceBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Explosive damage resistance bonus for armor")]
     ArmorExplosiveDamageResistanceBonus = 1468,
 
     /// <summary>Velocity multiplier for missiles</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("missileVelocityMultiplier", "Eve.AttributeId_MissileVelocityMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Velocity multiplier for missiles")]
     MissileVelocityMultiplier = 1469,
 
     /// <summary>Maximum velocity multiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxVelocityMultiplier", "Eve.AttributeId_MaxVelocityMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum velocity multiplier")]
     MaxVelocityMultiplier = 1470,
 
     /// <summary>Mass multiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("massMultiplier", "Eve.AttributeId_MassMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Mass multiplier")]
     MassMultiplier = 1471,
 
     /// <summary>Drone control range multiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("droneRangeMultiplier", "Eve.AttributeId_DroneRangeMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Drone control range multiplier")]
     DroneRangeMultiplier = 1472,
 
     /// <summary>Grav ECM strength multiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanGravimetricStrengthMultiplier", "Eve.AttributeId_ScanGravimetricStrengthMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Grav ECM strength multiplier")]
     ScanGravimetricStrengthMultiplier = 1473,
 
     /// <summary>Ladar ECM strength multiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanLadarStrengthMultiplier", "Eve.AttributeId_ScanLadarStrengthMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Ladar ECM strength multiplier")]
     ScanLadarStrengthMultiplier = 1474,
 
     /// <summary>Magnetometric ECM strength multiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanMagnetometricStrengthMultiplier", "Eve.AttributeId_ScanMagnetometricStrengthMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Magnetometric ECM strength multiplier")]
     ScanMagnetometricStrengthMultiplier = 1475,
 
     /// <summary>Radar ECM strength multiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanRadarStrengthMultiplier", "Eve.AttributeId_ScanRadarStrengthMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Radar ECM strength multiplier")]
     ScanRadarStrengthMultiplier = 1476,
 
     /// <summary>Target painter effectiveness multiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("signatureRadiusBonusMultiplier", "Eve.AttributeId_SignatureRadiusBonusMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Target painter effectiveness multiplier")]
     SignatureRadiusBonusMultiplier = 1477,
 
     /// <summary>Sensor dampener range reduction multiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxTargetRangeBonusMultiplier", "Eve.AttributeId_MaxTargetRangeBonusMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Sensor dampener range reduction multiplier")]
     MaxTargetRangeBonusMultiplier = 1478,
 
     /// <summary>Sensor dampener scan resolution amount multiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanResolutionBonusMultiplier", "Eve.AttributeId_ScanResolutionBonusMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Sensor dampener scan resolution amount multiplier")]
     ScanResolutionBonusMultiplier = 1479,
 
     /// <summary>Tracking disruptor tracking amount multiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("trackingSpeedBonusMultiplier", "Eve.AttributeId_TrackingSpeedBonusMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Tracking disruptor tracking amount multiplier")]
     TrackingSpeedBonusMultiplier = 1480,
 
     /// <summary>Tracking disruptor optimal range penalty multiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxRangeBonusMultiplier", "Eve.AttributeId_MaxRangeBonusMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Tracking disruptor optimal range penalty multiplier")]
     MaxRangeBonusMultiplier = 1481,
 
     /// <summary>Multiplys the damage multiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("damageMultiplierMultiplier", "Eve.AttributeId_DamageMultiplierMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplys the damage multiplier")]
     DamageMultiplierMultiplier = 1482,
 
     /// <summary>Multiplier to missiles ability to hit fast targets</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("aoeVelocityMultiplier", "Eve.AttributeId_AoeVelocityMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier to missiles ability to hit fast targets")]
     AoeVelocityMultiplier = 1483,
 
     /// <summary>Maximum drone velocity multiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxDroneVelocityMultiplier", "Eve.AttributeId_MaxDroneVelocityMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum drone velocity multiplier")]
     MaxDroneVelocityMultiplier = 1484,
 
     /// <summary>Damage multiplier for heat</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("heatDamageMultiplier", "Eve.AttributeId_HeatDamageMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Damage multiplier for heat")]
     HeatDamageMultiplier = 1485,
 
     /// <summary>Multiplier to all overload bonuses</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("overloadBonusMultiplier", "Eve.AttributeId_OverloadBonusMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Multiplier to all overload bonuses")]
     OverloadBonusMultiplier = 1486,
 
     /// <summary>Smart bomb range multiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("empFieldRangeMultiplier", "Eve.AttributeId_EmpFieldRangeMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Smart bomb range multiplier")]
     EmpFieldRangeMultiplier = 1487,
 
     /// <summary>Damage multiplier for smart bombs</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("smartbombDamageMultiplier", "Eve.AttributeId_SmartbombDamageMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Damage multiplier for smart bombs")]
     SmartbombDamageMultiplier = 1488,
 
     /// <summary>EM resistance bonus for shields</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldEmDamageResistanceBonus", "Eve.AttributeId_ShieldEmDamageResistanceBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("EM resistance bonus for shields")]
     ShieldEmDamageResistanceBonus = 1489,
 
     /// <summary>Explosive resistance bonus for shields</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldExplosiveDamageResistanceBonus", "Eve.AttributeId_ShieldExplosiveDamageResistanceBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Explosive resistance bonus for shields")]
     ShieldExplosiveDamageResistanceBonus = 1490,
 
     /// <summary>Kinetic resistance bonus for shields</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldKineticDamageResistanceBonus", "Eve.AttributeId_ShieldKineticDamageResistanceBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Kinetic resistance bonus for shields")]
     ShieldKineticDamageResistanceBonus = 1491,
 
     /// <summary>Thermal resistance bonus for shields</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldThermalDamageResistanceBonus", "Eve.AttributeId_ShieldThermalDamageResistanceBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Thermal resistance bonus for shields")]
     ShieldThermalDamageResistanceBonus = 1492,
 
     /// <summary>Damage multiplier for small weapons</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("smallWeaponDamageMultiplier", "Eve.AttributeId_SmallWeaponDamageMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Damage multiplier for small weapons")]
     SmallWeaponDamageMultiplier = 1493,
 
     /// <summary>Damage multiplier for medium weapons</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("mediumWeaponDamageMultiplier", "Eve.AttributeId_MediumWeaponDamageMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Damage multiplier for medium weapons")]
     MediumWeaponDamageMultiplier = 1494,
 
     /// <summary>Armor repair amount multiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorDamageAmountMultiplier", "Eve.AttributeId_ArmorDamageAmountMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Armor repair amount multiplier")]
     ArmorDamageAmountMultiplier = 1495,
 
     /// <summary>Shield transfer amount multiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldBonusMultiplier", "Eve.AttributeId_ShieldBonusMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Shield transfer amount multiplier")]
     ShieldBonusMultiplier = 1496,
 
     /// <summary>Shield repair multiplier for remote repair</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldBonusMultiplierRemote", "Eve.AttributeId_ShieldBonusMultiplierRemote")]
+    
     [System.ComponentModel.DescriptionAttribute("Shield repair multiplier for remote repair")]
     ShieldBonusMultiplierRemote = 1497,
 
     /// <summary>Repair amount multiplier for remote repairers</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorDamageAmountMultiplierRemote", "Eve.AttributeId_ArmorDamageAmountMultiplierRemote")]
+    
     [System.ComponentModel.DescriptionAttribute("Repair amount multiplier for remote repairers")]
     ArmorDamageAmountMultiplierRemote = 1498,
 
     /// <summary>Capacitor capacity multiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("capacitorCapacityMultiplierSystem", "Eve.AttributeId_CapacitorCapacityMultiplierSystem")]
+    
     [System.ComponentModel.DescriptionAttribute("Capacitor capacity multiplier")]
     CapacitorCapacityMultiplierSystem = 1499,
 
     /// <summary>Capacitor recharge rate multiplier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rechargeRateMultiplier", "Eve.AttributeId_RechargeRateMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Capacitor recharge rate multiplier")]
     RechargeRateMultiplier = 1500,
 
     /// <summary>The maximum number of targets that can be repaired at once.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("npcRemoteArmorRepairMaxTargets", "Eve.AttributeId_NpcRemoteArmorRepairMaxTargets")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum number of targets that can be repaired at once.")]
     NpcRemoteArmorRepairMaxTargets = 1501,
 
     /// <summary>The maximum number of targets that can be shield boosted at once</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("npcRemoteShieldBoostMaxTargets", "Eve.AttributeId_NpcRemoteShieldBoostMaxTargets")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum number of targets that can be shield boosted at once")]
     NpcRemoteShieldBoostMaxTargets = 1502,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusStrategicCruiserAmarr", "Eve.AttributeId_ShipBonusStrategicCruiserAmarr")]
+    
     ShipBonusStrategicCruiserAmarr = 1503,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusStrategicCruiserCaldari", "Eve.AttributeId_ShipBonusStrategicCruiserCaldari")]
+    
     ShipBonusStrategicCruiserCaldari = 1504,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusStrategicCruiserGallente", "Eve.AttributeId_ShipBonusStrategicCruiserGallente")]
+    
     ShipBonusStrategicCruiserGallente = 1505,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusStrategicCruiserMinmatar", "Eve.AttributeId_ShipBonusStrategicCruiserMinmatar")]
+    
     ShipBonusStrategicCruiserMinmatar = 1506,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusAmarrDefensive2", "Eve.AttributeId_SubsystemBonusAmarrDefensive2")]
+    
     SubsystemBonusAmarrDefensive2 = 1507,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusAmarrElectronic2", "Eve.AttributeId_SubsystemBonusAmarrElectronic2")]
+    
     SubsystemBonusAmarrElectronic2 = 1508,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusAmarrEngineering2", "Eve.AttributeId_SubsystemBonusAmarrEngineering2")]
+    
     SubsystemBonusAmarrEngineering2 = 1509,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusCaldariOffensive2", "Eve.AttributeId_SubsystemBonusCaldariOffensive2")]
+    
     SubsystemBonusCaldariOffensive2 = 1510,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusAmarrOffensive2", "Eve.AttributeId_SubsystemBonusAmarrOffensive2")]
+    
     SubsystemBonusAmarrOffensive2 = 1511,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusAmarrPropulsion2", "Eve.AttributeId_SubsystemBonusAmarrPropulsion2")]
+    
     SubsystemBonusAmarrPropulsion2 = 1512,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusCaldariPropulsion2", "Eve.AttributeId_SubsystemBonusCaldariPropulsion2")]
+    
     SubsystemBonusCaldariPropulsion2 = 1513,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusCaldariElectronic2", "Eve.AttributeId_SubsystemBonusCaldariElectronic2")]
+    
     SubsystemBonusCaldariElectronic2 = 1514,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusCaldariEngineering2", "Eve.AttributeId_SubsystemBonusCaldariEngineering2")]
+    
     SubsystemBonusCaldariEngineering2 = 1515,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusCaldariDefensive2", "Eve.AttributeId_SubsystemBonusCaldariDefensive2")]
+    
     SubsystemBonusCaldariDefensive2 = 1516,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusGallenteDefensive2", "Eve.AttributeId_SubsystemBonusGallenteDefensive2")]
+    
     SubsystemBonusGallenteDefensive2 = 1517,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusGallenteElectronic2", "Eve.AttributeId_SubsystemBonusGallenteElectronic2")]
+    
     SubsystemBonusGallenteElectronic2 = 1518,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusGallenteEngineering2", "Eve.AttributeId_SubsystemBonusGallenteEngineering2")]
+    
     SubsystemBonusGallenteEngineering2 = 1519,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusGallentePropulsion2", "Eve.AttributeId_SubsystemBonusGallentePropulsion2")]
+    
     SubsystemBonusGallentePropulsion2 = 1520,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusGallenteOffensive2", "Eve.AttributeId_SubsystemBonusGallenteOffensive2")]
+    
     SubsystemBonusGallenteOffensive2 = 1521,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusMinmatarOffensive2", "Eve.AttributeId_SubsystemBonusMinmatarOffensive2")]
+    
     SubsystemBonusMinmatarOffensive2 = 1522,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusMinmatarPropulsion2", "Eve.AttributeId_SubsystemBonusMinmatarPropulsion2")]
+    
     SubsystemBonusMinmatarPropulsion2 = 1523,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusMinmatarElectronic2", "Eve.AttributeId_SubsystemBonusMinmatarElectronic2")]
+    
     SubsystemBonusMinmatarElectronic2 = 1524,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusMinmatarEngineering2", "Eve.AttributeId_SubsystemBonusMinmatarEngineering2")]
+    
     SubsystemBonusMinmatarEngineering2 = 1525,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusMinmatarDefensive2", "Eve.AttributeId_SubsystemBonusMinmatarDefensive2")]
+    
     SubsystemBonusMinmatarDefensive2 = 1526,
 
     /// <summary>Maximum value for armor resonances. Default = 1.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("armorMaxDamageResonance", "Eve.AttributeId_ArmorMaxDamageResonance")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum value for armor resonances. Default = 1.")]
     ArmorMaxDamageResonance = 1527,
 
     /// <summary>Maximum value for shield resonances. Default = 1.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shieldMaxDamageResonance", "Eve.AttributeId_ShieldMaxDamageResonance")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum value for shield resonances. Default = 1.")]
     ShieldMaxDamageResonance = 1528,
 
     /// <summary>Maximum value for hull resonances. Default = 1.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("hullMaxDamageResonance", "Eve.AttributeId_HullMaxDamageResonance")]
+    
     [System.ComponentModel.DescriptionAttribute("Maximum value for hull resonances. Default = 1.")]
     HullMaxDamageResonance = 1529,
 
     /// <summary>This was created by accident and should be ignored</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("hullMaxDamageResonanceOld", "Eve.AttributeId_HullMaxDamageResonanceOld")]
+    
     [System.ComponentModel.DescriptionAttribute("This was created by accident and should be ignored")]
     HullMaxDamageResonanceOld = 1530,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusAmarrOffensive3", "Eve.AttributeId_SubsystemBonusAmarrOffensive3")]
+    
     SubsystemBonusAmarrOffensive3 = 1531,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusGallenteOffensive3", "Eve.AttributeId_SubsystemBonusGallenteOffensive3")]
+    
     SubsystemBonusGallenteOffensive3 = 1532,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusCaldariOffensive3", "Eve.AttributeId_SubsystemBonusCaldariOffensive3")]
+    
     SubsystemBonusCaldariOffensive3 = 1533,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("subsystemBonusMinmatarOffensive3", "Eve.AttributeId_SubsystemBonusMinmatarOffensive3")]
+    
     SubsystemBonusMinmatarOffensive3 = 1534,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusCR3", "Eve.AttributeId_ShipBonusCr3")]
+    
     ShipBonusCr3 = 1535,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("ecmRangeBonus", "Eve.AttributeId_EcmRangeBonus")]
+    
     EcmRangeBonus = 1536,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusReconShips3", "Eve.AttributeId_EliteBonusReconShips3")]
+    
     EliteBonusReconShips3 = 1537,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("warpBubbleImmune", "Eve.AttributeId_WarpBubbleImmune")]
+    
     WarpBubbleImmune = 1538,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("warpBubbleImmuneModifier", "Eve.AttributeId_WarpBubbleImmuneModifier")]
+    
     WarpBubbleImmuneModifier = 1539,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("stealthBomberLauncherPower2", "Eve.AttributeId_StealthBomberLauncherPower2")]
+    
     StealthBomberLauncherPower2 = 1540,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("jumpHarmonicsModifier", "Eve.AttributeId_JumpHarmonicsModifier")]
+    
     JumpHarmonicsModifier = 1541,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxGroupFitted", "Eve.AttributeId_MaxGroupFitted")]
+    
     MaxGroupFitted = 1544,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("dreadnoughtShipBonusM3", "Eve.AttributeId_DreadnoughtShipBonusM3")]
+    
     DreadnoughtShipBonusM3 = 1545,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("rigSize", "Eve.AttributeId_RigSize")]
+    
     RigSize = 1547,
 
     /// <summary>special fuel bay capacity</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("specialFuelBayCapacity", "Eve.AttributeId_SpecialFuelBayCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("special fuel bay capacity")]
     SpecialFuelBayCapacity = 1549,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("implantSetImperialNavy", "Eve.AttributeId_ImplantSetImperialNavy")]
+    
     ImplantSetImperialNavy = 1550,
 
     /// <summary>Number of days that this PLEX adds to your account</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("numDays", "Eve.AttributeId_NumDays")]
+    
     [System.ComponentModel.DescriptionAttribute("Number of days that this PLEX adds to your account")]
     NumDays = 1551,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("implantSetCaldariNavy", "Eve.AttributeId_ImplantSetCaldariNavy")]
+    
     ImplantSetCaldariNavy = 1552,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("implantSetFederationNavy", "Eve.AttributeId_ImplantSetFederationNavy")]
+    
     ImplantSetFederationNavy = 1553,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("implantSetRepublicFleet", "Eve.AttributeId_ImplantSetRepublicFleet")]
+    
     ImplantSetRepublicFleet = 1554,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("fwLpKill", "Eve.AttributeId_FwLpKill")]
+    
     FwLpKill = 1555,
 
     /// <summary>Capacity of ore-only hold</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("specialOreHoldCapacity", "Eve.AttributeId_SpecialOreHoldCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("Capacity of ore-only hold")]
     SpecialOreHoldCapacity = 1556,
 
     /// <summary>Capacity of gas-only hold</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("specialGasHoldCapacity", "Eve.AttributeId_SpecialGasHoldCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("Capacity of gas-only hold")]
     SpecialGasHoldCapacity = 1557,
 
     /// <summary>Capacity of mineral-only hold</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("specialMineralHoldCapacity", "Eve.AttributeId_SpecialMineralHoldCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("Capacity of mineral-only hold")]
     SpecialMineralHoldCapacity = 1558,
 
     /// <summary>Capacity of special salvage-only hold</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("specialSalvageHoldCapacity", "Eve.AttributeId_SpecialSalvageHoldCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("Capacity of special salvage-only hold")]
     SpecialSalvageHoldCapacity = 1559,
 
     /// <summary>Capacity of ship-only hold</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("specialShipHoldCapacity", "Eve.AttributeId_SpecialShipHoldCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("Capacity of ship-only hold")]
     SpecialShipHoldCapacity = 1560,
 
     /// <summary>Capacity of frigate/destroyer hold</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("specialSmallShipHoldCapacity", "Eve.AttributeId_SpecialSmallShipHoldCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("Capacity of frigate/destroyer hold")]
     SpecialSmallShipHoldCapacity = 1561,
 
     /// <summary>Capacity of cruiser/battlecruiser ship hold</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("specialMediumShipHoldCapacity", "Eve.AttributeId_SpecialMediumShipHoldCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("Capacity of cruiser/battlecruiser ship hold")]
     SpecialMediumShipHoldCapacity = 1562,
 
     /// <summary>Capacity of battleship hold</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("specialLargeShipHoldCapacity", "Eve.AttributeId_SpecialLargeShipHoldCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("Capacity of battleship hold")]
     SpecialLargeShipHoldCapacity = 1563,
 
     /// <summary>Capacity of industrial ship hold</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("specialIndustrialShipHoldCapacity", "Eve.AttributeId_SpecialIndustrialShipHoldCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("Capacity of industrial ship hold")]
     SpecialIndustrialShipHoldCapacity = 1564,
 
     /// <summary>+ / - modifier to a ship radar strength</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanRadarStrengthModifier", "Eve.AttributeId_ScanRadarStrengthModifier")]
+    
     [System.ComponentModel.DescriptionAttribute("+ / - modifier to a ship radar strength")]
     ScanRadarStrengthModifier = 1565,
 
     /// <summary>+ / - modifier to a ship ladar strength</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanLadarStrengthModifier", "Eve.AttributeId_ScanLadarStrengthModifier")]
+    
     [System.ComponentModel.DescriptionAttribute("+ / - modifier to a ship ladar strength")]
     ScanLadarStrengthModifier = 1566,
 
     /// <summary>+ / - modifier to a ship gravimetric strength</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanGravimetricStrengthModifier", "Eve.AttributeId_ScanGravimetricStrengthModifier")]
+    
     [System.ComponentModel.DescriptionAttribute("+ / - modifier to a ship gravimetric strength")]
     ScanGravimetricStrengthModifier = 1567,
 
     /// <summary>+ / - modifier to a ship magnetometric strength</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("scanMagnetometricStrengthModifier", "Eve.AttributeId_ScanMagnetometricStrengthModifier")]
+    
     [System.ComponentModel.DescriptionAttribute("+ / - modifier to a ship magnetometric strength")]
     ScanMagnetometricStrengthModifier = 1568,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("implantSetLGImperialNavy", "Eve.AttributeId_ImplantSetLgImperialNavy")]
+    
     ImplantSetLgImperialNavy = 1569,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("implantSetLGFederationNavy", "Eve.AttributeId_ImplantSetLgFederationNavy")]
+    
     ImplantSetLgFederationNavy = 1570,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("implantSetLGCaldariNavy", "Eve.AttributeId_ImplantSetLgCaldariNavy")]
+    
     ImplantSetLgCaldariNavy = 1571,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("implantSetLGRepublicFleet", "Eve.AttributeId_ImplantSetLgRepublicFleet")]
+    
     ImplantSetLgRepublicFleet = 1572,
 
     /// <summary>special ammo hold capacity</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("specialAmmoHoldCapacity", "Eve.AttributeId_SpecialAmmoHoldCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("special ammo hold capacity")]
     SpecialAmmoHoldCapacity = 1573,
 
     /// <summary>Alliance Tournament Ship Bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusATC1", "Eve.AttributeId_ShipBonusAtc1")]
+    
     [System.ComponentModel.DescriptionAttribute("Alliance Tournament Ship Bonus")]
     ShipBonusAtc1 = 1574,
 
     /// <summary>Alliance Tournament Ship Bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusATC2", "Eve.AttributeId_ShipBonusAtc2")]
+    
     [System.ComponentModel.DescriptionAttribute("Alliance Tournament Ship Bonus")]
     ShipBonusAtc2 = 1575,
 
     /// <summary>Alliance Tournament Frigate Bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusATF1", "Eve.AttributeId_ShipBonusAtf1")]
+    
     [System.ComponentModel.DescriptionAttribute("Alliance Tournament Frigate Bonus")]
     ShipBonusAtf1 = 1576,
 
     /// <summary>Alliance Tournament Frigate Bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusATF2", "Eve.AttributeId_ShipBonusAtf2")]
+    
     [System.ComponentModel.DescriptionAttribute("Alliance Tournament Frigate Bonus")]
     ShipBonusAtf2 = 1577,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusCoverOps3", "Eve.AttributeId_EliteBonusCoverOps3")]
+    
     EliteBonusCoverOps3 = 1578,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("effectDeactivationDelay", "Eve.AttributeId_EffectDeactivationDelay")]
+    
     EffectDeactivationDelay = 1579,
 
     /// <summary>The maximum number of defense bunkers this infrastructure Hub can support.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("maxDefenseBunkers", "Eve.AttributeId_MaxDefenseBunkers")]
+    
     [System.ComponentModel.DescriptionAttribute("The maximum number of defense bunkers this infrastructure Hub can support.")]
     MaxDefenseBunkers = 1580,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("eliteBonusAssaultShips1", "Eve.AttributeId_EliteBonusAssaultShips1")]
+    
     EliteBonusAssaultShips1 = 1581,
 
     /// <summary>The number of milliseconds before the container replenishes the loot inside itself. This special tutorial attribute will allow re-spawning of items in distribution dungeons bypassing restrictions present. 10 second minimum (10000 ms).</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("specialTutorialLootRespawnTime", "Eve.AttributeId_SpecialTutorialLootRespawnTime")]
+    
     [System.ComponentModel.DescriptionAttribute("The number of milliseconds before the container replenishes the loot inside itsel" +
         "f. This special tutorial attribute will allow re-spawning of items in distributi" +
         "on dungeons bypassing restrictions present. 10 second minimum (10000 ms).")]
     SpecialTutorialLootRespawnTime = 1582,
 
     /// <summary>The required minimum military development index level</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("devIndexMilitary", "Eve.AttributeId_DevIndexMilitary")]
+    
     [System.ComponentModel.DescriptionAttribute("The required minimum military development index level")]
     DevIndexMilitary = 1583,
 
     /// <summary>The minimum required industrial development index level</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("devIndexIndustrial", "Eve.AttributeId_DevIndexIndustrial")]
+    
     [System.ComponentModel.DescriptionAttribute("The minimum required industrial development index level")]
     DevIndexIndustrial = 1584,
 
     /// <summary>The required ISK to be present in the Economics development index.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("devIndexEconomic", "Eve.AttributeId_DevIndexEconomic")]
+    
     [System.ComponentModel.DescriptionAttribute("The required ISK to be present in the Economics development index.")]
     DevIndexEconomic = 1585,
 
     /// <summary>The required ISK to be present in the research and development
     ///development index.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("devIndexResearchDevelopment", "Eve.AttributeId_DevIndexResearchDevelopment")]
+    
     [System.ComponentModel.DescriptionAttribute("The required ISK to be present in the research and development\r\ndevelopment index" +
         ".")]
     DevIndexResearchDevelopment = 1586,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("siegeModeGallenteDreadnoughtBonus2", "Eve.AttributeId_SiegeModeGallenteDreadnoughtBonus2")]
+    
     SiegeModeGallenteDreadnoughtBonus2 = 1589,
 
     /// <summary>The minimum distance the object can be anchored, "from what" depends on the object.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("anchorDistanceMin", "Eve.AttributeId_AnchorDistanceMin")]
+    
     [System.ComponentModel.DescriptionAttribute("The minimum distance the object can be anchored, \"from what\" depends on the objec" +
         "t.")]
     AnchorDistanceMin = 1590,
 
     /// <summary>the maximum distance it can be anchored at, "from what" depends on the object in question</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("anchorDistanceMax", "Eve.AttributeId_AnchorDistanceMax")]
+    
     [System.ComponentModel.DescriptionAttribute("the maximum distance it can be anchored at, \"from what\" depends on the object in " +
         "question")]
     AnchorDistanceMax = 1591,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("titanAmarrBonus5", "Eve.AttributeId_TitanAmarrBonus5")]
+    
     TitanAmarrBonus5 = 1592,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("titanGallenteBonus5", "Eve.AttributeId_TitanGallenteBonus5")]
+    
     TitanGallenteBonus5 = 1593,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("titanMinmatarBonus5", "Eve.AttributeId_TitanMinmatarBonus5")]
+    
     TitanMinmatarBonus5 = 1594,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("anchoringRequiresSovUpgrade1", "Eve.AttributeId_AnchoringRequiresSovUpgrade1")]
+    
     AnchoringRequiresSovUpgrade1 = 1595,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("titanCaldariBonus5", "Eve.AttributeId_TitanCaldariBonus5")]
+    
     TitanCaldariBonus5 = 1596,
 
     /// <summary>The number of seconds that sovereignty has to have been claimed for to Install this upgrade</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("sovUpgradeSovereigntyHeldFor", "Eve.AttributeId_SovUpgradeSovereigntyHeldFor")]
+    
     [System.ComponentModel.DescriptionAttribute("The number of seconds that sovereignty has to have been claimed for to Install th" +
         "is upgrade")]
     SovUpgradeSovereigntyHeldFor = 1597,
 
     /// <summary>The typeID of the upgrade that prevents this type from being installed.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("sovUpgradeBlockingUpgradeID", "Eve.AttributeId_SovUpgradeBlockingUpgradeId")]
+    
     [System.ComponentModel.DescriptionAttribute("The typeID of the upgrade that prevents this type from being installed.")]
     SovUpgradeBlockingUpgradeId = 1598,
 
     /// <summary>The typeID of the upgrade that is required for this upgrade to be installed. </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("sovUpgradeRequiredUpgradeID", "Eve.AttributeId_SovUpgradeRequiredUpgradeId")]
+    
     [System.ComponentModel.DescriptionAttribute("The typeID of the upgrade that is required for this upgrade to be installed. ")]
     SovUpgradeRequiredUpgradeId = 1599,
 
     /// <summary>The required level of outpost upgrade required to install this upgrade</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("sovUpgradeRequiredOutpostUpgradeLevel", "Eve.AttributeId_SovUpgradeRequiredOutpostUpgradeLevel")]
+    
     [System.ComponentModel.DescriptionAttribute("The required level of outpost upgrade required to install this upgrade")]
     SovUpgradeRequiredOutpostUpgradeLevel = 1600,
 
     /// <summary>This attribute specifies a typeID which must be active in an IH for the given structure to be onlined</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("onliningRequiresSovUpgrade1", "Eve.AttributeId_OnliningRequiresSovUpgrade1")]
+    
     [System.ComponentModel.DescriptionAttribute("This attribute specifies a typeID which must be active in an IH for the given str" +
         "ucture to be onlined")]
     OnliningRequiresSovUpgrade1 = 1601,
 
     /// <summary>The sum of this attribute on the claim markers, Infrastructure hub, and each upgrade is the systems base cost. </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("sovBillSystemCost", "Eve.AttributeId_SovBillSystemCost")]
+    
     [System.ComponentModel.DescriptionAttribute("The sum of this attribute on the claim markers, Infrastructure hub, and each upgr" +
         "ade is the systems base cost. ")]
     SovBillSystemCost = 1603,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("dreadnoughtShipBonusC3", "Eve.AttributeId_DreadnoughtShipBonusC3")]
+    
     DreadnoughtShipBonusC3 = 1605,
 
     /// <summary>Obsolete attribute</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionID_blood", "Eve.AttributeId_DistributionId_blood")]
+    
     [System.ComponentModel.DescriptionAttribute("Obsolete attribute")]
     DistributionId_blood = 1606,
 
     /// <summary>Obsolete attribute</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionID_angel", "Eve.AttributeId_DistributionId_angel")]
+    
     [System.ComponentModel.DescriptionAttribute("Obsolete attribute")]
     DistributionId_angel = 1607,
 
     /// <summary>Obsolete attribute</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionID_guristas", "Eve.AttributeId_DistributionId_guristas")]
+    
     [System.ComponentModel.DescriptionAttribute("Obsolete attribute")]
     DistributionId_guristas = 1608,
 
     /// <summary>Obsolete attribute</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionID_serpentis", "Eve.AttributeId_DistributionId_serpentis")]
+    
     [System.ComponentModel.DescriptionAttribute("Obsolete attribute")]
     DistributionId_serpentis = 1609,
 
     /// <summary>Obsolete attribute</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionID_drones", "Eve.AttributeId_DistributionId_drones")]
+    
     [System.ComponentModel.DescriptionAttribute("Obsolete attribute")]
     DistributionId_drones = 1610,
 
     /// <summary>Obsolete attribute</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionID_sanshas", "Eve.AttributeId_DistributionId_sanshas")]
+    
     [System.ComponentModel.DescriptionAttribute("Obsolete attribute")]
     DistributionId_sanshas = 1611,
 
     /// <summary>The number of seconds that the structure will be in reinforcement time</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("reinforcementDuration", "Eve.AttributeId_ReinforcementDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("The number of seconds that the structure will be in reinforcement time")]
     ReinforcementDuration = 1612,
 
     /// <summary>The number of seconds that the reinforcement exit time will be adjusted by. exitTime +- attribute</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("reinforcementVariance", "Eve.AttributeId_ReinforcementVariance")]
+    
     [System.ComponentModel.DescriptionAttribute("The number of seconds that the reinforcement exit time will be adjusted by. exitT" +
         "ime +- attribute")]
     ReinforcementVariance = 1613,
 
     /// <summary>Obsolete attribute</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionID_mordus", "Eve.AttributeId_DistributionId_mordus")]
+    
     [System.ComponentModel.DescriptionAttribute("Obsolete attribute")]
     DistributionId_mordus = 1614,
 
     /// <summary>The minimum required sovereignty index level</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("devIndexSovereignty", "Eve.AttributeId_DevIndexSovereignty")]
+    
     [System.ComponentModel.DescriptionAttribute("The minimum required sovereignty index level")]
     DevIndexSovereignty = 1615,
 
     /// <summary>Obsolete attribute</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionID", "Eve.AttributeId_DistributionId")]
+    
     [System.ComponentModel.DescriptionAttribute("Obsolete attribute")]
     DistributionId = 1616,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("webSpeedFactorBonus", "Eve.AttributeId_WebSpeedFactorBonus")]
+    
     WebSpeedFactorBonus = 1619,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonus3AF", "Eve.AttributeId_ShipBonus3Af")]
+    
     ShipBonus3Af = 1623,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonus3CF", "Eve.AttributeId_ShipBonus3Cf")]
+    
     ShipBonus3Cf = 1624,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonus3GF", "Eve.AttributeId_ShipBonus3Gf")]
+    
     ShipBonus3Gf = 1625,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonus3MF", "Eve.AttributeId_ShipBonus3Mf")]
+    
     ShipBonus3Mf = 1626,
 
     /// <summary>Transport capacity (bandwidth) in m3 per hour.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("logisticalCapacity", "Eve.AttributeId_LogisticalCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("Transport capacity (bandwidth) in m3 per hour.")]
     LogisticalCapacity = 1631,
 
     /// <summary>This type can only be found/used/created on a planet matching this type ID.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("planetRestriction", "Eve.AttributeId_PlanetRestriction")]
+    
     [System.ComponentModel.DescriptionAttribute("This type can only be found/used/created on a planet matching this type ID.")]
     PlanetRestriction = 1632,
 
     /// <summary>Megawatts per kilometer</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("powerLoadPerKm", "Eve.AttributeId_PowerLoadPerKm")]
+    
     [System.ComponentModel.DescriptionAttribute("Megawatts per kilometer")]
     PowerLoadPerKm = 1633,
 
     /// <summary>CPU Usage per kilometer</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cpuLoadPerKm", "Eve.AttributeId_CpuLoadPerKm")]
+    
     [System.ComponentModel.DescriptionAttribute("CPU Usage per kilometer")]
     CpuLoadPerKm = 1634,
 
     /// <summary>Used to calculate cpu load multiplier for PI links</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("cpuLoadLevelModifier", "Eve.AttributeId_CpuLoadLevelModifier")]
+    
     [System.ComponentModel.DescriptionAttribute("Used to calculate cpu load multiplier for PI links")]
     CpuLoadLevelModifier = 1635,
 
     /// <summary>Power load multiplier for PI link levels</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("powerLoadLevelModifier", "Eve.AttributeId_PowerLoadLevelModifier")]
+    
     [System.ComponentModel.DescriptionAttribute("Power load multiplier for PI link levels")]
     PowerLoadLevelModifier = 1636,
 
     /// <summary>Base importation tax (ISK per m3 of volume) for commodities imported to pin.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("importTax", "Eve.AttributeId_ImportTax")]
+    
     [System.ComponentModel.DescriptionAttribute("Base importation tax (ISK per m3 of volume) for commodities imported to pin.")]
     ImportTax = 1638,
 
     /// <summary>Base export tax (ISK per m3 of volume) on commodities exported from a planet via this pin.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("exportTax", "Eve.AttributeId_ExportTax")]
+    
     [System.ComponentModel.DescriptionAttribute("Base export tax (ISK per m3 of volume) on commodities exported from a planet via " +
         "this pin.")]
     ExportTax = 1639,
 
     /// <summary>Cost multiplier per m3 volume of this commodity when importing to a planet</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("importTaxMultiplier", "Eve.AttributeId_ImportTaxMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Cost multiplier per m3 volume of this commodity when importing to a planet")]
     ImportTaxMultiplier = 1640,
 
     /// <summary>Export tax multiplier when exporting this commodity off a planet.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("exportTaxMultiplier", "Eve.AttributeId_ExportTaxMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Export tax multiplier when exporting this commodity off a planet.")]
     ExportTaxMultiplier = 1641,
 
     /// <summary>Base amount (in units) of commodities extracted by an extractor pin.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("pinExtractionQuantity", "Eve.AttributeId_PinExtractionQuantity")]
+    
     [System.ComponentModel.DescriptionAttribute("Base amount (in units) of commodities extracted by an extractor pin.")]
     PinExtractionQuantity = 1642,
 
     /// <summary>Base cycle time (in seconds) of an extractor pin.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("pinCycleTime", "Eve.AttributeId_PinCycleTime")]
+    
     [System.ComponentModel.DescriptionAttribute("Base cycle time (in seconds) of an extractor pin.")]
     PinCycleTime = 1643,
 
     /// <summary>This is the radius that the depletion at this pin effects</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("extractorDepletionRange", "Eve.AttributeId_ExtractorDepletionRange")]
+    
     [System.ComponentModel.DescriptionAttribute("This is the radius that the depletion at this pin effects")]
     ExtractorDepletionRange = 1644,
 
     /// <summary>This is the amount that is added to the depletion of a resource on a planet</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("extractorDepletionRate", "Eve.AttributeId_ExtractorDepletionRate")]
+    
     [System.ComponentModel.DescriptionAttribute("This is the amount that is added to the depletion of a resource on a planet")]
     ExtractorDepletionRate = 1645,
 
     /// <summary>Capacity of CC-only hold</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("specialCommandCenterHoldCapacity", "Eve.AttributeId_SpecialCommandCenterHoldCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("Capacity of CC-only hold")]
     SpecialCommandCenterHoldCapacity = 1646,
 
     /// <summary>This attribute deactivates the booster after the character's age reaches a certain amount</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("boosterMaxCharAgeHours", "Eve.AttributeId_BoosterMaxCharAgeHours")]
+    
     [System.ComponentModel.DescriptionAttribute("This attribute deactivates the booster after the character\'s age reaches a certai" +
         "n amount")]
     BoosterMaxCharAgeHours = 1647,
 
     /// <summary>This controls how L1 AI target switches
     ///When disabled AI_ChanceToNotTargetSwitch, AI_ShouldUseEffectMultiplier, and AI_ShouldUseSignatureRadius are disabled also.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("AI_ShouldUseTargetSwitching", "Eve.AttributeId_Ai_ShouldUseTargetSwitching")]
+    
     [System.ComponentModel.DescriptionAttribute("This controls how L1 AI target switches\r\nWhen disabled AI_ChanceToNotTargetSwitch" +
         ", AI_ShouldUseEffectMultiplier, and AI_ShouldUseSignatureRadius are disabled als" +
         "o.")]
     Ai_ShouldUseTargetSwitching = 1648,
 
     /// <summary>Should use secondary effect on other targets?</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("AI_ShouldUseSecondaryTarget", "Eve.AttributeId_Ai_ShouldUseSecondaryTarget")]
+    
     [System.ComponentModel.DescriptionAttribute("Should use secondary effect on other targets?")]
     Ai_ShouldUseSecondaryTarget = 1649,
 
     /// <summary>Should this type use signature radius</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("AI_ShouldUseSignatureRadius", "Eve.AttributeId_Ai_ShouldUseSignatureRadius")]
+    
     [System.ComponentModel.DescriptionAttribute("Should this type use signature radius")]
     Ai_ShouldUseSignatureRadius = 1650,
 
     /// <summary>A percentage chance to not change targets 0.0 - 1.0. 1.0 they will never change targets 0.0 they will always change targets</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("AI_ChanceToNotTargetSwitch", "Eve.AttributeId_Ai_ChanceToNotTargetSwitch")]
+    
     [System.ComponentModel.DescriptionAttribute("A percentage chance to not change targets 0.0 - 1.0. 1.0 they will never change t" +
         "argets 0.0 they will always change targets")]
     Ai_ChanceToNotTargetSwitch = 1651,
 
     /// <summary>Should the entity watch for effects when choosing targets</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("AI_ShouldUseEffectMultiplier", "Eve.AttributeId_Ai_ShouldUseEffectMultiplier")]
+    
     [System.ComponentModel.DescriptionAttribute("Should the entity watch for effects when choosing targets")]
     Ai_ShouldUseEffectMultiplier = 1652,
 
     /// <summary>Capacity of Planetary Commodities hold</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("specialPlanetaryCommoditiesHoldCapacity", "Eve.AttributeId_SpecialPlanetaryCommoditiesHoldCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("Capacity of Planetary Commodities hold")]
     SpecialPlanetaryCommoditiesHoldCapacity = 1653,
 
     /// <summary>Can not be attacked by doomsday devices</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("AI_ImmuneToSuperWeapon", "Eve.AttributeId_Ai_ImmuneToSuperWeapon")]
+    
     [System.ComponentModel.DescriptionAttribute("Can not be attacked by doomsday devices")]
     Ai_ImmuneToSuperWeapon = 1654,
 
     /// <summary>The Preferred signature radius for attack. If it is 0 or below it uses the ships signature radius instead.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("AI_PreferredSignatureRadius", "Eve.AttributeId_Ai_PreferredSignatureRadius")]
+    
     [System.ComponentModel.DescriptionAttribute("The Preferred signature radius for attack. If it is 0 or below it uses the ships " +
         "signature radius instead.")]
     Ai_PreferredSignatureRadius = 1655,
 
     /// <summary>Tanking modifier applied to drones. 1.0 is no modifier</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("AI_TankingModifierDrone", "Eve.AttributeId_Ai_TankingModifierDrone")]
+    
     [System.ComponentModel.DescriptionAttribute("Tanking modifier applied to drones. 1.0 is no modifier")]
     Ai_TankingModifierDrone = 1656,
 
     /// <summary>Tanking modifier applied to ships. 1.0 is no modifier.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("AI_TankingModifier", "Eve.AttributeId_Ai_TankingModifier")]
+    
     [System.ComponentModel.DescriptionAttribute("Tanking modifier applied to ships. 1.0 is no modifier.")]
     Ai_TankingModifier = 1657,
 
     /// <summary>The current duration for the remote ECM ( this is recalculated each time it is activated )</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityRemoteECMDuration", "Eve.AttributeId_EntityRemoteEcmDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("The current duration for the remote ECM ( this is recalculated each time it is ac" +
         "tivated )")]
     EntityRemoteEcmDuration = 1658,
 
     /// <summary>Lower cap, so even if more players are added to the bubble remote ECM duration will not go below this value</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityRemoteECMMinDuration", "Eve.AttributeId_EntityRemoteEcmMinDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("Lower cap, so even if more players are added to the bubble remote ECM duration wi" +
         "ll not go below this value")]
     EntityRemoteEcmMinDuration = 1659,
 
     /// <summary>The scaling factor used for the NPC remote ECM</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityRemoteECMDurationScale", "Eve.AttributeId_EntityRemoteEcmDurationScale")]
+    
     [System.ComponentModel.DescriptionAttribute("The scaling factor used for the NPC remote ECM")]
     EntityRemoteEcmDurationScale = 1660,
 
     /// <summary>The base time between ECM bursts</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityRemoteECMBaseDuration", "Eve.AttributeId_EntityRemoteEcmBaseDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("The base time between ECM bursts")]
     EntityRemoteEcmBaseDuration = 1661,
 
     /// <summary>The number of players in each step of scaling of remote ECM</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityRemoteECMExtraPlayerScale", "Eve.AttributeId_EntityRemoteEcmExtraPlayerScale")]
+    
     [System.ComponentModel.DescriptionAttribute("The number of players in each step of scaling of remote ECM")]
     EntityRemoteEcmExtraPlayerScale = 1662,
 
     /// <summary>The base number of players, where the scaling of the remote ECM should start</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityRemoteECMIntendedNumPlayers", "Eve.AttributeId_EntityRemoteEcmIntendedNumPlayers")]
+    
     [System.ComponentModel.DescriptionAttribute("The base number of players, where the scaling of the remote ECM should start")]
     EntityRemoteEcmIntendedNumPlayers = 1663,
 
     /// <summary>Chance that the NPC remote ECM fires</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityRemoteECMChanceOfActivation", "Eve.AttributeId_EntityRemoteEcmChanceOfActivation")]
+    
     [System.ComponentModel.DescriptionAttribute("Chance that the NPC remote ECM fires")]
     EntityRemoteEcmChanceOfActivation = 1664,
 
     /// <summary>Bonus 1 for ORE Industrials</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusOreIndustrial1", "Eve.AttributeId_ShipBonusOreIndustrial1")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus 1 for ORE Industrials")]
     ShipBonusOreIndustrial1 = 1669,
 
     /// <summary>Bonus 2 for ORE Industrials</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusOreIndustrial2", "Eve.AttributeId_ShipBonusOreIndustrial2")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus 2 for ORE Industrials")]
     ShipBonusOreIndustrial2 = 1670,
 
     /// <summary>Bonus applied to all NPCs in the same group. Used by the NPCGroupShieldAssist effect. Negative values is a bonus so e.g. -20 is a 20% bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityGroupShieldResistanceBonus", "Eve.AttributeId_EntityGroupShieldResistanceBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus applied to all NPCs in the same group. Used by the NPCGroupShieldAssist eff" +
         "ect. Negative values is a bonus so e.g. -20 is a 20% bonus")]
     EntityGroupShieldResistanceBonus = 1671,
 
     /// <summary>Duration for the NPCGroupShieldAssist effect</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityGroupShieldResistanceDuration", "Eve.AttributeId_EntityGroupShieldResistanceDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("Duration for the NPCGroupShieldAssist effect")]
     EntityGroupShieldResistanceDuration = 1672,
 
     /// <summary>Activation chance of the NPCGroupShieldAssist effect</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityGroupShieldResistanceActivationChance", "Eve.AttributeId_EntityGroupShieldResistanceActivationChance")]
+    
     [System.ComponentModel.DescriptionAttribute("Activation chance of the NPCGroupShieldAssist effect")]
     EntityGroupShieldResistanceActivationChance = 1673,
 
     /// <summary>amount of speed increase by NPCGroupSpeedAssist effect. Negative values is a bonus so e.g. -20 is a 20% bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityGroupSpeedBonus", "Eve.AttributeId_EntityGroupSpeedBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("amount of speed increase by NPCGroupSpeedAssist effect. Negative values is a bonu" +
         "s so e.g. -20 is a 20% bonus")]
     EntityGroupSpeedBonus = 1674,
 
     /// <summary>Amount of propulsion jamming assist. Used by NPCGroupPropJamAssist. Negative values is a bonus so e.g. -20 is a 20% bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityGroupPropJamBonus", "Eve.AttributeId_EntityGroupPropJamBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Amount of propulsion jamming assist. Used by NPCGroupPropJamAssist. Negative valu" +
         "es is a bonus so e.g. -20 is a 20% bonus")]
     EntityGroupPropJamBonus = 1675,
 
     /// <summary>Amount of armor resistance bonus. Used by NPCGroupArmorAssist. Negative values is a bonus so e.g. -20 is a 20% bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityGroupArmorResistanceBonus", "Eve.AttributeId_EntityGroupArmorResistanceBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Amount of armor resistance bonus. Used by NPCGroupArmorAssist. Negative values is" +
         " a bonus so e.g. -20 is a 20% bonus")]
     EntityGroupArmorResistanceBonus = 1676,
 
     /// <summary>Duration of NPCGroupArmorAssist effect.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityGroupSpeedDuration", "Eve.AttributeId_EntityGroupSpeedDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("Duration of NPCGroupArmorAssist effect.")]
     EntityGroupSpeedDuration = 1677,
 
     /// <summary>Activation chance for NPCGroupSpeedAssist effect.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityGroupSpeedActivationChance", "Eve.AttributeId_EntityGroupSpeedActivationChance")]
+    
     [System.ComponentModel.DescriptionAttribute("Activation chance for NPCGroupSpeedAssist effect.")]
     EntityGroupSpeedActivationChance = 1678,
 
     /// <summary>Duration of NPCGroupPropJamAssist effect.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityGroupPropJamDuration", "Eve.AttributeId_EntityGroupPropJamDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("Duration of NPCGroupPropJamAssist effect.")]
     EntityGroupPropJamDuration = 1679,
 
     /// <summary>Activation chance of NPCGroupPropJamAssist effect.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityGroupPropJamActivationChance", "Eve.AttributeId_EntityGroupPropJamActivationChance")]
+    
     [System.ComponentModel.DescriptionAttribute("Activation chance of NPCGroupPropJamAssist effect.")]
     EntityGroupPropJamActivationChance = 1680,
 
     /// <summary>Duration of NPCGroupArmorAssist effect.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityGroupArmorResistanceDuration", "Eve.AttributeId_EntityGroupArmorResistanceDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("Duration of NPCGroupArmorAssist effect.")]
     EntityGroupArmorResistanceDuration = 1681,
 
     /// <summary>Activation chance for NPCGroupArmorAssist effect.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityGroupArmorResistanceActivationChance", "Eve.AttributeId_EntityGroupArmorResistanceActivationChance")]
+    
     [System.ComponentModel.DescriptionAttribute("Activation chance for NPCGroupArmorAssist effect.")]
     EntityGroupArmorResistanceActivationChance = 1682,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("ecuDecayFactor", "Eve.AttributeId_EcuDecayFactor")]
+    
     EcuDecayFactor = 1683,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("ecuMaxVolume", "Eve.AttributeId_EcuMaxVolume")]
+    
     EcuMaxVolume = 1684,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("ecuOverlapFactor", "Eve.AttributeId_EcuOverlapFactor")]
+    
     EcuOverlapFactor = 1685,
 
     /// <summary>Damage reduction for system effects</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("systemEffectDamageReduction", "Eve.AttributeId_SystemEffectDamageReduction")]
+    
     [System.ComponentModel.DescriptionAttribute("Damage reduction for system effects")]
     SystemEffectDamageReduction = 1686,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("ecuNoiseFactor", "Eve.AttributeId_EcuNoiseFactor")]
+    
     EcuNoiseFactor = 1687,
 
     /// <summary>Second Stock Bonus on Pirate Faction Ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusPirateFaction2", "Eve.AttributeId_ShipBonusPirateFaction2")]
+    
     [System.ComponentModel.DescriptionAttribute("Second Stock Bonus on Pirate Faction Ships.")]
     ShipBonusPirateFaction2 = 1688,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("ecuAreaOfInfluence", "Eve.AttributeId_EcuAreaOfInfluence")]
+    
     EcuAreaOfInfluence = 1689,
 
     /// <summary>CPU cost of extractor head</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("ecuExtractorHeadCPU", "Eve.AttributeId_EcuExtractorHeadCpu")]
+    
     [System.ComponentModel.DescriptionAttribute("CPU cost of extractor head")]
     EcuExtractorHeadCpu = 1690,
 
     /// <summary>Power cost for a extractor head</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("ecuExtractorHeadPower", "Eve.AttributeId_EcuExtractorHeadPower")]
+    
     [System.ComponentModel.DescriptionAttribute("Power cost for a extractor head")]
     EcuExtractorHeadPower = 1691,
 
     /// <summary>meta group of type</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("metaGroupID", "Eve.AttributeId_MetaGroupId")]
+    
     [System.ComponentModel.DescriptionAttribute("meta group of type")]
     MetaGroupId = 1692,
 
     /// <summary>Distribution ID for sov upgrades in Angel space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDAngel01", "Eve.AttributeId_DistributionIdAngel01")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Angel space")]
     DistributionIdAngel01 = 1695,
 
     /// <summary>Distribution ID for sov upgrades in Angel space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDAngel02", "Eve.AttributeId_DistributionIdAngel02")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Angel space")]
     DistributionIdAngel02 = 1696,
 
     /// <summary>Distribution ID for sov upgrades in Angel space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDAngel03", "Eve.AttributeId_DistributionIdAngel03")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Angel space")]
     DistributionIdAngel03 = 1697,
 
     /// <summary>Distribution ID for sov upgrades in Angel space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDAngel04", "Eve.AttributeId_DistributionIdAngel04")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Angel space")]
     DistributionIdAngel04 = 1698,
 
     /// <summary>Distribution ID for sov upgrades in Angel space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDAngel05", "Eve.AttributeId_DistributionIdAngel05")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Angel space")]
     DistributionIdAngel05 = 1699,
 
     /// <summary>Distribution ID for sov upgrades in Angel space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDAngel06", "Eve.AttributeId_DistributionIdAngel06")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Angel space")]
     DistributionIdAngel06 = 1700,
 
     /// <summary>Distribution ID for sov upgrades in Angel space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDAngel07", "Eve.AttributeId_DistributionIdAngel07")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Angel space")]
     DistributionIdAngel07 = 1701,
 
     /// <summary>Distribution ID for sov upgrades in Angel space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDAngel08", "Eve.AttributeId_DistributionIdAngel08")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Angel space")]
     DistributionIdAngel08 = 1702,
 
     /// <summary>Distribution ID for sov upgrades in Angel space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDAngel09", "Eve.AttributeId_DistributionIdAngel09")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Angel space")]
     DistributionIdAngel09 = 1703,
 
     /// <summary>Distribution ID for sov upgrades in Angel space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDAngel10", "Eve.AttributeId_DistributionIdAngel10")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Angel space")]
     DistributionIdAngel10 = 1704,
 
     /// <summary>Distribution ID for sov upgrades in Blood Raider space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDBlood01", "Eve.AttributeId_DistributionIdBlood01")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Blood Raider space")]
     DistributionIdBlood01 = 1705,
 
     /// <summary>Distribution ID for sov upgrades in Blood Raider space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDBlood02", "Eve.AttributeId_DistributionIdBlood02")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Blood Raider space")]
     DistributionIdBlood02 = 1706,
 
     /// <summary>Distribution ID for sov upgrades in Blood Raider space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDBlood03", "Eve.AttributeId_DistributionIdBlood03")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Blood Raider space")]
     DistributionIdBlood03 = 1707,
 
     /// <summary>Distribution ID for sov upgrades in Blood Raider space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDBlood04", "Eve.AttributeId_DistributionIdBlood04")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Blood Raider space")]
     DistributionIdBlood04 = 1708,
 
     /// <summary>Distribution ID for sov upgrades in Blood Raider space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDBlood05", "Eve.AttributeId_DistributionIdBlood05")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Blood Raider space")]
     DistributionIdBlood05 = 1709,
 
     /// <summary>Distribution ID for sov upgrades in Blood Raider space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDBlood06", "Eve.AttributeId_DistributionIdBlood06")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Blood Raider space")]
     DistributionIdBlood06 = 1710,
 
     /// <summary>Distribution ID for sov upgrades in Blood Raider space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDBlood07", "Eve.AttributeId_DistributionIdBlood07")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Blood Raider space")]
     DistributionIdBlood07 = 1711,
 
     /// <summary>Distribution ID for sov upgrades in Blood Raider space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDBlood08", "Eve.AttributeId_DistributionIdBlood08")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Blood Raider space")]
     DistributionIdBlood08 = 1712,
 
     /// <summary>Distribution ID for sov upgrades in Blood Raider space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDBlood09", "Eve.AttributeId_DistributionIdBlood09")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Blood Raider space")]
     DistributionIdBlood09 = 1713,
 
     /// <summary>Distribution ID for sov upgrades in Blood Raider space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDBlood10", "Eve.AttributeId_DistributionIdBlood10")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Blood Raider space")]
     DistributionIdBlood10 = 1714,
 
     /// <summary>Distribution ID for sov upgrades in Guristas space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDGurista01", "Eve.AttributeId_DistributionIdGurista01")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Guristas space")]
     DistributionIdGurista01 = 1715,
 
     /// <summary>Distribution ID for sov upgrades in Guristas space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDGurista02", "Eve.AttributeId_DistributionIdGurista02")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Guristas space")]
     DistributionIdGurista02 = 1716,
 
     /// <summary>Distribution ID for sov upgrades in Guristas space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDGurista03", "Eve.AttributeId_DistributionIdGurista03")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Guristas space")]
     DistributionIdGurista03 = 1717,
 
     /// <summary>Distribution ID for sov upgrades in Guristas space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDGurista04", "Eve.AttributeId_DistributionIdGurista04")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Guristas space")]
     DistributionIdGurista04 = 1718,
 
     /// <summary>Distribution ID for sov upgrades in Guristas space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDGurista05", "Eve.AttributeId_DistributionIdGurista05")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Guristas space")]
     DistributionIdGurista05 = 1719,
 
     /// <summary>Distribution ID for sov upgrades in Guristas space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDGurista06", "Eve.AttributeId_DistributionIdGurista06")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Guristas space")]
     DistributionIdGurista06 = 1720,
 
     /// <summary>Distribution ID for sov upgrades in Guristas space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDGurista07", "Eve.AttributeId_DistributionIdGurista07")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Guristas space")]
     DistributionIdGurista07 = 1721,
 
     /// <summary>Distribution ID for sov upgrades in Guristas space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDGurista08", "Eve.AttributeId_DistributionIdGurista08")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Guristas space")]
     DistributionIdGurista08 = 1722,
 
     /// <summary>Distribution ID for sov upgrades in Guristas space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDGurista09", "Eve.AttributeId_DistributionIdGurista09")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Guristas space")]
     DistributionIdGurista09 = 1723,
 
     /// <summary>Distribution ID for sov upgrades in Guristas space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDGurista10", "Eve.AttributeId_DistributionIdGurista10")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Guristas space")]
     DistributionIdGurista10 = 1724,
 
     /// <summary>Distribution ID for sov upgrades in Rogue Drone space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDRogueDrone01", "Eve.AttributeId_DistributionIdRogueDrone01")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Rogue Drone space")]
     DistributionIdRogueDrone01 = 1725,
 
     /// <summary>Distribution ID for sov upgrades in Rogue Drone space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDRogueDrone02", "Eve.AttributeId_DistributionIdRogueDrone02")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Rogue Drone space")]
     DistributionIdRogueDrone02 = 1726,
 
     /// <summary>Distribution ID for sov upgrades in Rogue Drone space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDRogueDrone03", "Eve.AttributeId_DistributionIdRogueDrone03")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Rogue Drone space")]
     DistributionIdRogueDrone03 = 1727,
 
     /// <summary>Distribution ID for sov upgrades in Rogue Drone space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDRogueDrone04", "Eve.AttributeId_DistributionIdRogueDrone04")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Rogue Drone space")]
     DistributionIdRogueDrone04 = 1728,
 
     /// <summary>Distribution ID for sov upgrades in Rogue Drone space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDRogueDrone05", "Eve.AttributeId_DistributionIdRogueDrone05")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Rogue Drone space")]
     DistributionIdRogueDrone05 = 1729,
 
     /// <summary>Distribution ID for sov upgrades in Rogue Drone space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDRogueDrone06", "Eve.AttributeId_DistributionIdRogueDrone06")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Rogue Drone space")]
     DistributionIdRogueDrone06 = 1730,
 
     /// <summary>Distribution ID for sov upgrades in Rogue Drone space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDRogueDrone07", "Eve.AttributeId_DistributionIdRogueDrone07")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Rogue Drone space")]
     DistributionIdRogueDrone07 = 1731,
 
     /// <summary>Distribution ID for sov upgrades in Rogue Drone space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDRogueDrone08", "Eve.AttributeId_DistributionIdRogueDrone08")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Rogue Drone space")]
     DistributionIdRogueDrone08 = 1732,
 
     /// <summary>Distribution ID for sov upgrades in Rogue Drone space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDRogueDrone09", "Eve.AttributeId_DistributionIdRogueDrone09")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Rogue Drone space")]
     DistributionIdRogueDrone09 = 1733,
 
     /// <summary>Distribution ID for sov upgrades in Rogue Drone space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDRogueDrone10", "Eve.AttributeId_DistributionIdRogueDrone10")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Rogue Drone space")]
     DistributionIdRogueDrone10 = 1734,
 
     /// <summary>Distribution ID for sov upgrades in Sansha space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDSansha01", "Eve.AttributeId_DistributionIdSansha01")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Sansha space")]
     DistributionIdSansha01 = 1735,
 
     /// <summary>Distribution ID for sov upgrades in Sansha space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDSansha02", "Eve.AttributeId_DistributionIdSansha02")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Sansha space")]
     DistributionIdSansha02 = 1736,
 
     /// <summary>Distribution ID for sov upgrades in Sansha space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDSansha03", "Eve.AttributeId_DistributionIdSansha03")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Sansha space")]
     DistributionIdSansha03 = 1737,
 
     /// <summary>Distribution ID for sov upgrades in Sansha space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDSansha04", "Eve.AttributeId_DistributionIdSansha04")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Sansha space")]
     DistributionIdSansha04 = 1738,
 
     /// <summary>Distribution ID for sov upgrades in Sansha space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDSansha05", "Eve.AttributeId_DistributionIdSansha05")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Sansha space")]
     DistributionIdSansha05 = 1739,
 
     /// <summary>Distribution ID for sov upgrades in Sansha space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDSansha06", "Eve.AttributeId_DistributionIdSansha06")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Sansha space")]
     DistributionIdSansha06 = 1740,
 
     /// <summary>Distribution ID for sov upgrades in Sansha space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDSansha07", "Eve.AttributeId_DistributionIdSansha07")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Sansha space")]
     DistributionIdSansha07 = 1741,
 
     /// <summary>Distribution ID for sov upgrades in Sansha space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDSansha08", "Eve.AttributeId_DistributionIdSansha08")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Sansha space")]
     DistributionIdSansha08 = 1742,
 
     /// <summary>Distribution ID for sov upgrades in Sansha space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDSansha09", "Eve.AttributeId_DistributionIdSansha09")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Sansha space")]
     DistributionIdSansha09 = 1743,
 
     /// <summary>Distribution ID for sov upgrades in Sansha space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDSansha10", "Eve.AttributeId_DistributionIdSansha10")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Sansha space")]
     DistributionIdSansha10 = 1744,
 
     /// <summary>Distribution ID for sov upgrades in Serpentis space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDSerpentis01", "Eve.AttributeId_DistributionIdSerpentis01")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Serpentis space")]
     DistributionIdSerpentis01 = 1745,
 
     /// <summary>Distribution ID for sov upgrades in Serpentis space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDSerpentis02", "Eve.AttributeId_DistributionIdSerpentis02")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Serpentis space")]
     DistributionIdSerpentis02 = 1746,
 
     /// <summary>Distribution ID for sov upgrades in Serpentis space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDSerpentis03", "Eve.AttributeId_DistributionIdSerpentis03")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Serpentis space")]
     DistributionIdSerpentis03 = 1747,
 
     /// <summary>Distribution ID for sov upgrades in Serpentis space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDSerpentis04", "Eve.AttributeId_DistributionIdSerpentis04")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Serpentis space")]
     DistributionIdSerpentis04 = 1748,
 
     /// <summary>Distribution ID for sov upgrades in Serpentis space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDSerpentis05", "Eve.AttributeId_DistributionIdSerpentis05")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Serpentis space")]
     DistributionIdSerpentis05 = 1749,
 
     /// <summary>Distribution ID for sov upgrades in Serpentis space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDSerpentis06", "Eve.AttributeId_DistributionIdSerpentis06")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Serpentis space")]
     DistributionIdSerpentis06 = 1750,
 
     /// <summary>Distribution ID for sov upgrades in Serpentis space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDSerpentis07", "Eve.AttributeId_DistributionIdSerpentis07")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Serpentis space")]
     DistributionIdSerpentis07 = 1751,
 
     /// <summary>Distribution ID for sov upgrades in Serpentis space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDSerpentis08", "Eve.AttributeId_DistributionIdSerpentis08")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Serpentis space")]
     DistributionIdSerpentis08 = 1752,
 
     /// <summary>Distribution ID for sov upgrades in Serpentis space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDSerpentis09", "Eve.AttributeId_DistributionIdSerpentis09")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Serpentis space")]
     DistributionIdSerpentis09 = 1753,
 
     /// <summary>Distribution ID for sov upgrades in Serpentis space</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionIDSerpentis10", "Eve.AttributeId_DistributionIdSerpentis10")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for sov upgrades in Serpentis space")]
     DistributionIdSerpentis10 = 1754,
 
     /// <summary>Distribution ID for global sov upgrades</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionID01", "Eve.AttributeId_DistributionId01")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for global sov upgrades")]
     DistributionId01 = 1755,
 
     /// <summary>Distribution ID for global sov upgrades</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionID02", "Eve.AttributeId_DistributionId02")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for global sov upgrades")]
     DistributionId02 = 1756,
 
     /// <summary>Distribution ID for global sov upgrades</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionID03", "Eve.AttributeId_DistributionId03")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for global sov upgrades")]
     DistributionId03 = 1757,
 
     /// <summary>Distribution ID for global sov upgrades</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionID04", "Eve.AttributeId_DistributionId04")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for global sov upgrades")]
     DistributionId04 = 1758,
 
     /// <summary>Distribution ID for global sov upgrades</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionID05", "Eve.AttributeId_DistributionId05")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for global sov upgrades")]
     DistributionId05 = 1759,
 
     /// <summary>Distribution ID for global sov upgrades</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionID06", "Eve.AttributeId_DistributionId06")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for global sov upgrades")]
     DistributionId06 = 1760,
 
     /// <summary>Distribution ID for global sov upgrades</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionID07", "Eve.AttributeId_DistributionId07")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for global sov upgrades")]
     DistributionId07 = 1761,
 
     /// <summary>Distribution ID for global sov upgrades</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionID08", "Eve.AttributeId_DistributionId08")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for global sov upgrades")]
     DistributionId08 = 1762,
 
     /// <summary>Distribution ID for global sov upgrades</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionID09", "Eve.AttributeId_DistributionId09")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for global sov upgrades")]
     DistributionId09 = 1763,
 
     /// <summary>Distribution ID for global sov upgrades</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("distributionID10", "Eve.AttributeId_DistributionId10")]
+    
     [System.ComponentModel.DescriptionAttribute("Distribution ID for global sov upgrades")]
     DistributionId10 = 1764,
 
     /// <summary>This attribute is used on entities to link them to a player ship group. This is then used to determine which overview icon they should get, among other things</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("entityOverviewShipGroupId", "Eve.AttributeId_EntityOverviewShipGroupId")]
+    
     [System.ComponentModel.DescriptionAttribute("This attribute is used on entities to link them to a player ship group. This is t" +
         "hen used to determine which overview icon they should get, among other things")]
     EntityOverviewShipGroupId = 1766,
 
     /// <summary>The value of this attribute is a graphicsID which controls the color scheme of this type. It is used to apply said color scheme to items of other types whose gfx representation is tied in with the attribute holder. Example: Turrets on ships.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("typeColorScheme", "Eve.AttributeId_TypeColorScheme")]
+    
     [System.ComponentModel.DescriptionAttribute("The value of this attribute is a graphicsID which controls the color scheme of th" +
         "is type. It is used to apply said color scheme to items of other types whose gfx" +
         " representation is tied in with the attribute holder. Example: Turrets on ships." +
@@ -7018,251 +7018,251 @@ namespace Eve {
     TypeColorScheme = 1768,
 
     /// <summary>Capacity of material bay</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("specialMaterialBayCapacity", "Eve.AttributeId_SpecialMaterialBayCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("Capacity of material bay")]
     SpecialMaterialBayCapacity = 1770,
 
     /// <summary>Type of object which this object transforms into.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("constructionType", "Eve.AttributeId_ConstructionType")]
+    
     [System.ComponentModel.DescriptionAttribute("Type of object which this object transforms into.")]
     ConstructionType = 1771,
 
     /// <summary>Bonus to chance of opening a container (for skills).</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("accessDifficultyBonusAbsolutePercent", "Eve.AttributeId_AccessDifficultyBonusAbsolutePercent")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to chance of opening a container (for skills).")]
     AccessDifficultyBonusAbsolutePercent = 1772,
 
     /// <summary>Used to describe what sex a given item is meant for. </summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("gender", "Eve.AttributeId_Gender")]
+    
     [System.ComponentModel.DescriptionAttribute("Used to describe what sex a given item is meant for. ")]
     Gender = 1773,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("consumptionQuantityBonusPercent", "Eve.AttributeId_ConsumptionQuantityBonusPercent")]
+    
     ConsumptionQuantityBonusPercent = 1775,
 
     /// <summary>This is a fake attribute for show info purposes.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("manufactureCostBonusShowInfo", "Eve.AttributeId_ManufactureCostBonusShowInfo")]
+    
     [System.ComponentModel.DescriptionAttribute("This is a fake attribute for show info purposes.")]
     ManufactureCostBonusShowInfo = 1778,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("npcCustomsOfficeTaxRate", "Eve.AttributeId_NpcCustomsOfficeTaxRate")]
+    
     NpcCustomsOfficeTaxRate = 1780,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("defaultCustomsOfficeTaxRate", "Eve.AttributeId_DefaultCustomsOfficeTaxRate")]
+    
     DefaultCustomsOfficeTaxRate = 1781,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("allowedDroneGroup1", "Eve.AttributeId_AllowedDroneGroup1")]
+    
     AllowedDroneGroup1 = 1782,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("allowedDroneGroup2", "Eve.AttributeId_AllowedDroneGroup2")]
+    
     AllowedDroneGroup2 = 1783,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("isCapitalSize", "Eve.AttributeId_IsCapitalSize")]
+    
     IsCapitalSize = 1785,
 
     /// <summary>Used by Battlecruisers for large turret powergrid reduction</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("bcLargeTurretPower", "Eve.AttributeId_BcLargeTurretPower")]
+    
     [System.ComponentModel.DescriptionAttribute("Used by Battlecruisers for large turret powergrid reduction")]
     BcLargeTurretPower = 1786,
 
     /// <summary>Used by Battlecruisers for large turret CPU reduction</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("bcLargeTurretCPU", "Eve.AttributeId_BcLargeTurretCpu")]
+    
     [System.ComponentModel.DescriptionAttribute("Used by Battlecruisers for large turret CPU reduction")]
     BcLargeTurretCpu = 1787,
 
     /// <summary>Used by Battlecruisers for large turret capacitor reduction</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("bcLargeTurretCap", "Eve.AttributeId_BcLargeTurretCap")]
+    
     [System.ComponentModel.DescriptionAttribute("Used by Battlecruisers for large turret capacitor reduction")]
     BcLargeTurretCap = 1788,
 
     /// <summary>Used by Battlecruisers for Siege Missile CPU reduction</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("bcSiegeMissileCPU", "Eve.AttributeId_BcSiegeMissileCpu")]
+    
     [System.ComponentModel.DescriptionAttribute("Used by Battlecruisers for Siege Missile CPU reduction")]
     BcSiegeMissileCpu = 1790,
 
     /// <summary>Used by Battlecruisers for siege missile powergrid reduction</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("bcSiegeMissilePower", "Eve.AttributeId_BcSiegeMissilePower")]
+    
     [System.ComponentModel.DescriptionAttribute("Used by Battlecruisers for siege missile powergrid reduction")]
     BcSiegeMissilePower = 1791,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusBC3", "Eve.AttributeId_ShipBonusBc3")]
+    
     ShipBonusBc3 = 1792,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("shipBonusBC4", "Eve.AttributeId_ShipBonusBc4")]
+    
     ShipBonusBc4 = 1793,
 
     /// <summary>Bonus to booster effect.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("skillBonusBooster", "Eve.AttributeId_SkillBonusBooster")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to booster effect.")]
     SkillBonusBooster = 1794,
 
     /// <summary>reload time (ms)</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("reloadTime", "Eve.AttributeId_ReloadTime")]
+    
     [System.ComponentModel.DescriptionAttribute("reload time (ms)")]
     ReloadTime = 1795,
 
     /// <summary>This item of clothing covers multiple areas of the body, so the category of clothes specified by this attribute is no longer mandatory</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("clothingAlsoCoversCategory", "Eve.AttributeId_ClothingAlsoCoversCategory")]
+    
     [System.ComponentModel.DescriptionAttribute("This item of clothing covers multiple areas of the body, so the category of cloth" +
         "es specified by this attribute is no longer mandatory")]
     ClothingAlsoCoversCategory = 1797,
 
     /// <summary>When set to non-zero on a module with an assistance effect, the module cannot be activated against a target that has a positive disallowOffensiveModifiers attribute</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("disallowAgainstEwImmuneTarget", "Eve.AttributeId_DisallowAgainstEwImmuneTarget")]
+    
     [System.ComponentModel.DescriptionAttribute("When set to non-zero on a module with an assistance effect, the module cannot be " +
         "activated against a target that has a positive disallowOffensiveModifiers attrib" +
         "ute")]
     DisallowAgainstEwImmuneTarget = 1798,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("implantSetChristmas", "Eve.AttributeId_ImplantSetChristmas")]
+    
     ImplantSetChristmas = 1799,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("triageRemoteModuleCapNeed", "Eve.AttributeId_TriageRemoteModuleCapNeed")]
+    
     TriageRemoteModuleCapNeed = 1802,
 
     /// <summary>reduction in MicroWarp Drive signature</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("MWDSignatureRadiusBonus", "Eve.AttributeId_MwdSignatureRadiusBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("reduction in MicroWarp Drive signature")]
     MwdSignatureRadiusBonus = 1803,
 
     /// <summary>Capacity of Quafe hold</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("specialQuafeHoldCapacity", "Eve.AttributeId_SpecialQuafeHoldCapacity")]
+    
     [System.ComponentModel.DescriptionAttribute("Capacity of Quafe hold")]
     SpecialQuafeHoldCapacity = 1804,
 
     /// <summary>This is a display-only attribute for showinfo</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("requiresSovereigntyDisplayOnly", "Eve.AttributeId_RequiresSovereigntyDisplayOnly")]
+    
     [System.ComponentModel.DescriptionAttribute("This is a display-only attribute for showinfo")]
     RequiresSovereigntyDisplayOnly = 1806,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("nosReflector", "Eve.AttributeId_NosReflector")]
+    
     NosReflector = 1808,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("neutReflector", "Eve.AttributeId_NeutReflector")]
+    
     NeutReflector = 1809,
 
     /// <summary>Chance of reflecting NOS/neut effect back on attacker</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("capAttackReflector", "Eve.AttributeId_CapAttackReflector")]
+    
     [System.ComponentModel.DescriptionAttribute("Chance of reflecting NOS/neut effect back on attacker")]
     CapAttackReflector = 1811,
 
     /// <summary>Turret damage is reduced when shooting at targets with a sig radius below this value.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("turretDamageScalingRadius", "Eve.AttributeId_TurretDamageScalingRadius")]
+    
     [System.ComponentModel.DescriptionAttribute("Turret damage is reduced when shooting at targets with a sig radius below this va" +
         "lue.")]
     TurretDamageScalingRadius = 1812,
 
     /// <summary>This attribute is used by the effect which sets titans' turrets to reduce damage below a certain target signature radius.</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("titanBonusScalingRadius", "Eve.AttributeId_TitanBonusScalingRadius")]
+    
     [System.ComponentModel.DescriptionAttribute("This attribute is used by the effect which sets titans\' turrets to reduce damage " +
         "below a certain target signature radius.")]
     TitanBonusScalingRadius = 1813,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("nosReflectAmount", "Eve.AttributeId_NosReflectAmount")]
+    
     NosReflectAmount = 1814,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("neutReflectAmount", "Eve.AttributeId_NeutReflectAmount")]
+    
     NeutReflectAmount = 1815,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("neutReflectAmountBonus", "Eve.AttributeId_NeutReflectAmountBonus")]
+    
     NeutReflectAmountBonus = 1816,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("nosReflectAmountBonus", "Eve.AttributeId_NosReflectAmountBonus")]
+    
     NosReflectAmountBonus = 1817,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("aurumConversionRate", "Eve.AttributeId_AurumConversionRate")]
+    
     AurumConversionRate = 1818,
 
     /// <summary>The base cost of hiring an ally into a war</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("baseDefenderAllyCost", "Eve.AttributeId_BaseDefenderAllyCost")]
+    
     [System.ComponentModel.DescriptionAttribute("The base cost of hiring an ally into a war")]
     BaseDefenderAllyCost = 1820,
 
-    [FreeNet.Globalization.LocalizedLabelAttribute("skillAllyCostModifierBonus", "Eve.AttributeId_SkillAllyCostModifierBonus")]
+    
     SkillAllyCostModifierBonus = 1821,
 
     /// <summary>Reduction in energy turret capacitor use</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rookieSETCapBonus", "Eve.AttributeId_RookieSetCapBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Reduction in energy turret capacitor use")]
     RookieSetCapBonus = 1822,
 
     /// <summary>Energy turret damage bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rookieSETDamageBonus", "Eve.AttributeId_RookieSetDamageBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Energy turret damage bonus")]
     RookieSetDamageBonus = 1823,
 
     /// <summary>Bonus to tracking disruptor effectiveness</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rookieWeaponDisruptionBonus", "Eve.AttributeId_RookieWeaponDisruptionBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to tracking disruptor effectiveness")]
     RookieWeaponDisruptionBonus = 1824,
 
     /// <summary>Bonus to armor resistances</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rookieArmorResistanceBonus", "Eve.AttributeId_RookieArmorResistanceBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to armor resistances")]
     RookieArmorResistanceBonus = 1825,
 
     /// <summary>Small Hybrid Turret optimal range bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rookieSHTOptimalBonus", "Eve.AttributeId_RookieShtOptimalBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Small Hybrid Turret optimal range bonus")]
     RookieShtOptimalBonus = 1826,
 
     /// <summary>Bonus to kinetic missile damage</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rookieMissileKinDamageBonus", "Eve.AttributeId_RookieMissileKinDamageBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to kinetic missile damage")]
     RookieMissileKinDamageBonus = 1827,
 
     /// <summary>ECM Strength Bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rookieECMStrengthBonus", "Eve.AttributeId_RookieEcmStrengthBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("ECM Strength Bonus")]
     RookieEcmStrengthBonus = 1828,
 
     /// <summary>Shield resistance bonus</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rookieShieldResistBonus", "Eve.AttributeId_RookieShieldResistBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Shield resistance bonus")]
     RookieShieldResistBonus = 1829,
 
     /// <summary>Bonus to Small Hybrid Turret damage</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rookieSHTDamageBonus", "Eve.AttributeId_RookieShtDamageBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to Small Hybrid Turret damage")]
     RookieShtDamageBonus = 1830,
 
     /// <summary>Bonus to drone damage, HP and mining yield</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rookieDroneBonus", "Eve.AttributeId_RookieDroneBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to drone damage, HP and mining yield")]
     RookieDroneBonus = 1831,
 
     /// <summary>Bonus to sensor damper effectiveness</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rookieDampStrengthBonus", "Eve.AttributeId_RookieDampStrengthBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to sensor damper effectiveness")]
     RookieDampStrengthBonus = 1832,
 
     /// <summary>Bonus to armor repair amount</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rookieArmorRepBonus", "Eve.AttributeId_RookieArmorRepBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to armor repair amount")]
     RookieArmorRepBonus = 1833,
 
     /// <summary>Bonus to target painter effectiveness</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rookieTargetPainterStrengthBonus", "Eve.AttributeId_RookieTargetPainterStrengthBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to target painter effectiveness")]
     RookieTargetPainterStrengthBonus = 1834,
 
     /// <summary>Bonus to ship velocity</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rookieShipVelocityBonus", "Eve.AttributeId_RookieShipVelocityBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to ship velocity")]
     RookieShipVelocityBonus = 1835,
 
     /// <summary>Bonus to Small Projectile Turret damage</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rookieSPTDamageBonus", "Eve.AttributeId_RookieSptDamageBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to Small Projectile Turret damage")]
     RookieSptDamageBonus = 1836,
 
     /// <summary>Bonus to shield booster repair amount</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("rookieShieldBoostBonus", "Eve.AttributeId_RookieShieldBoostBonus")]
+    
     [System.ComponentModel.DescriptionAttribute("Bonus to shield booster repair amount")]
     RookieShieldBoostBonus = 1837,
 
     /// <summary>The delay in ms until the damage is done to the target. (Allows some FX to be played)</summary>
-    [FreeNet.Globalization.LocalizedLabelAttribute("damageDelayDuration", "Eve.AttributeId_DamageDelayDuration")]
+    
     [System.ComponentModel.DescriptionAttribute("The delay in ms until the damage is done to the target. (Allows some FX to be pla" +
         "yed)")]
     DamageDelayDuration = 1839,

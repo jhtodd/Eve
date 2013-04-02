@@ -12,13 +12,13 @@ namespace Eve.Universe {
 
   using FreeNet;
 
-  using Eve.Entities;
+  using Eve.Data.Entities;
 
   //******************************************************************************
   /// <summary>
   /// Contains information about the type of an agent.
   /// </summary>
-  public sealed class AgentType : BaseValue<AgentTypeId, AgentTypeId, AgentTypeEntity, AgentType> {
+  public class AgentType : BaseValue<AgentTypeId, AgentTypeId, AgentTypeEntity, AgentType> {
 
     #region Constructors/Finalizers
     //******************************************************************************
@@ -29,7 +29,7 @@ namespace Eve.Universe {
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    public AgentType(AgentTypeEntity entity) : base(entity) {
+    protected internal AgentType(AgentTypeEntity entity) : base(entity) {
       Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
     }
     //******************************************************************************

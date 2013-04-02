@@ -20,12 +20,15 @@ using Microsoft.CSharp;
 
 using FreeNet.Data;
 using FreeNet.Data.Entity;
-using FreeNet.Data.Entity.Extensions;
+using FreeNet.Data.Entity.Utilities;
 
 using Eve;
+using Eve.Character;
 using Eve.Data;
+using Eve.Data.Entities;
 using Eve.Meta;
 using Eve.Universe;
+using System.Reflection;
 
 namespace Eve.Sandbox {
   /// <summary>
@@ -37,42 +40,10 @@ namespace Eve.Sandbox {
     }
 
     private void Button_Click_1(object sender, RoutedEventArgs e) {
-      //IDbConnection connection = Eve.Data.EveDbContext.Default.Database.Connection;
-      //connection.Open();
-      //textBox1.AppendText(Eve.Meta.EveCodeGenerator.Default.GenerateEnumSkillId(connection, null, null));
-      //return;
 
-      DbConnection connection = (DbConnection) Eve.Data.EveDbContext.Default.Database.Connection;
-      connection.Open();
+      //var s = Eve.General.DataSource.GetEveTypes(x => x.MarketGroupId == MarketGroupId.ShipEquipment_DeployableEquipment_WarpDisruptionFields);
+      //textBox1.AppendText(s.Count.ToString());
 
-      Schema s = new Schema(connection, true);
-      textBox1.AppendText(s.Name + Environment.NewLine);
-
-      foreach (SchemaTable table in s.Tables) {
-        textBox1.AppendText("  " + table.Name + Environment.NewLine);
-
-        foreach (SchemaColumn column in table.Columns) {
-          textBox1.AppendText("    " + column.Description + Environment.NewLine);
-        }
-      }
-
-      return;
-
-      Group group = Eve.General.DataSource.GetGroupById(GroupId.EnergyDestabilizer);
-
-      foreach (ItemType item in group.ItemTypes) {
-        textBox1.AppendText(item.ToString());
-      }
-
-
-      //AttributeValue value = Eve.General.DataSource.Get<AttributeValue>(x => ((x.ItemTypeId == 18) && (x.AttributeId == (AttributeId) 182))).First();
-      //textBox1.AppendText(value.ToString());
-
-      //IList<Race> races = Eve.General.DataSource.GetAll<Race>();
-
-      //foreach (Race race in races) {
-      //  textBox1.AppendText(race.Id.ToString() + ", " + race.Name + " , " + race.Description + " , " + race.ShortDescription + Environment.NewLine);
-      //}
     }
 
     private void Button_Click_2(object sender, RoutedEventArgs e) {

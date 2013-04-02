@@ -14,13 +14,16 @@ namespace Eve {
   using FreeNet;
   using FreeNet.Data.Entity;
 
-  using Eve.Entities;
+  using Eve.Data.Entities;
 
   //******************************************************************************
   /// <summary>
   /// Contains information about an attribute of an EVE item.
   /// </summary>
   public class AttributeType : BaseValue<AttributeId, AttributeId, AttributeTypeEntity, AttributeType>,
+                               IAttribute,
+                               IComparable,
+                               IComparable<IAttribute>,
                                IHasIcon {
 
     // Check EveDbContext.OnModelCreating() for customization of this type's
@@ -41,7 +44,7 @@ namespace Eve {
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    public AttributeType(AttributeTypeEntity entity) : base(entity) {
+    protected internal AttributeType(AttributeTypeEntity entity) : base(entity) {
       Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
     }
     //******************************************************************************
@@ -266,6 +269,15 @@ namespace Eve {
       return DisplayName.CompareTo(other.DisplayName);
     }
     //******************************************************************************
+    /// <inheritdoc />
+    public virtual int CompareTo(IAttribute other) {
+      if (other == null) {
+        return 1;
+      }
+
+      return DisplayName.CompareTo(other.Type.DisplayName);
+    }
+    //******************************************************************************
     /// <summary>
     /// Formats a numeric value according to the current attribute.
     /// </summary>
@@ -305,6 +317,38 @@ namespace Eve {
 
       // Otherwise, just format the number
       return value.ToString(numericFormat);
+    }
+    //******************************************************************************
+    /// <inheritdoc />
+    public override string ToString() {
+      return DisplayName;
+    }
+    #endregion
+
+    #region IAttribute Members
+    //******************************************************************************
+    double IAttribute.BaseValue {
+      get {
+        return DefaultValue;
+      }
+    }
+    //******************************************************************************
+    AttributeId IAttribute.Id {
+      get {
+        return Id;
+      }
+    }
+    //******************************************************************************
+    AttributeType IAttribute.Type {
+      get {
+        return this;
+      }
+    }
+    #endregion
+    #region IComparable Members
+    //******************************************************************************
+    int IComparable.CompareTo(object obj) {
+      return CompareTo(obj as IAttribute);
     }
     #endregion
   }

@@ -123,7 +123,7 @@
   <data name="BaseValueCache_ItemCannotBeNull" xml:space="preserve">
     <value>The item cannot be null.</value>
   </data>
-  <data name="BaseValueCache_ItemTypeCannotBeNull" xml:space="preserve">
+  <data name="BaseValueCache_TypeCannotBeNull" xml:space="preserve">
     <value>The item type cannot be null.</value>
   </data>
   <data name="BaseValueCache_ValueCannotBeNull" xml:space="preserve">
@@ -174,19 +174,19 @@
   <data name="AttributeValue_ValueMustBeNumeric" xml:space="preserve">
     <value>The value must be a finite numeric value.</value>
   </data>
-  <data name="ItemType_CapacityMustBeNumeric" xml:space="preserve">
+  <data name="EveType_CapacityMustBeNumeric" xml:space="preserve">
     <value>The capacity must be a finite numeric value.</value>
   </data>
-  <data name="ItemType_ChanceOfDuplicatingMustBeNumeric" xml:space="preserve">
+  <data name="EveType_ChanceOfDuplicatingMustBeNumeric" xml:space="preserve">
     <value>The chance of duplicating must be a finite numeric value.</value>
   </data>
-  <data name="ItemType_GroupCannotBeNull" xml:space="preserve">
+  <data name="EveType_GroupCannotBeNull" xml:space="preserve">
     <value>The group cannot be null.</value>
   </data>
-  <data name="ItemType_MassMustBeNumeric" xml:space="preserve">
+  <data name="EveType_MassMustBeNumeric" xml:space="preserve">
     <value>The mass must be a finite numeric value.</value>
   </data>
-  <data name="ItemType_VolumeMustBeNumeric" xml:space="preserve">
+  <data name="EveType_VolumeMustBeNumeric" xml:space="preserve">
     <value>The volume must be a finite numeric value.</value>
   </data>
   <data name="AttributeValue_ItemTypeCannotBeNull" xml:space="preserve">
@@ -221,5 +221,23 @@
   </data>
   <data name="BaseValueCache_RegionCannotBeNull" xml:space="preserve">
     <value>The region cannot be null.</value>
+  </data>
+  <data name="ISkill_LevelMustBeValid" xml:space="preserve">
+    <value>The skill level must be between 0 and 5.</value>
+  </data>
+  <data name="ISkill_RankCannotBeNegative" xml:space="preserve">
+    <value>The skill rank cannot be negative.</value>
+  </data>
+  <data name="ISkill_SkillPointsCannotBeNegative" xml:space="preserve">
+    <value>The number of skill points cannot be negative.</value>
+  </data>
+  <data name="EveType_MeetsSkillRequirementsCharacterCannotBeNull" xml:space="preserve">
+    <value>The character to test against the skill requirements cannot be null.</value>
+  </data>
+  <data name="Item_EntityMustBeCorrectType" xml:space="preserve">
+    <value>The underlying data entity must be of the correct type.</value>
+  </data>
+  <data name="IEveDataSource_ContextCannotBeNull" xml:space="preserve">
+    <value>The data context cannot be null.</value>
   </data>
 </root>

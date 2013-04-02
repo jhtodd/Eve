@@ -16,6 +16,7 @@ namespace Eve.Data {
 
   using FreeNet;
 
+  using Eve.Character;
   using Eve.Universe;
 
   //******************************************************************************
@@ -37,8 +38,8 @@ namespace Eve.Data {
     /// but rely on the domain defined by a parent type.  For example, ID values
     /// for <see cref="BlueprintType" /> aren't just unique among blueprints,
     /// but among all items.  So, we define a mapping between
-    /// <see cref="BlueprintType" /> and <see cref="ItemType" /> to let the
-    /// cache know that <see cref="ItemType" /> actually defines the ID domain
+    /// <see cref="BlueprintType" /> and <see cref="EveType" /> to let the
+    /// cache know that <see cref="EveType" /> actually defines the ID domain
     /// for blueprints.
     /// </para>
     /// </remarks>
@@ -122,6 +123,7 @@ namespace Eve.Data {
       /// </exception>
       public string GetRegion(Type type) {
         Contract.Requires(type != null, "The type cannot be null.");
+        Contract.Ensures(Contract.Result<string>() != null);
 
         Type baseType;
         string region = null;
@@ -132,6 +134,7 @@ namespace Eve.Data {
 
           // First check to see if the current type is already assigned to a region
           if (InnerRegionMap.TryGetValue(type, out region)) {
+            Contract.Assume(region != null);
             return region;
           }
 
@@ -500,11 +503,27 @@ namespace Eve.Data {
       typeMap.RegisterType(typeof(AttributeValue), typeof(AttributeValue).Name);
       typeMap.RegisterType(typeof(AgentType), typeof(AgentType).Name);
       typeMap.RegisterType(typeof(Category), typeof(Category).Name);
+      typeMap.RegisterType(typeof(CharacterAttributeType), typeof(CharacterAttributeType).Name);
+      typeMap.RegisterType(typeof(ConstellationJump), typeof(ConstellationJump).Name);
+      typeMap.RegisterType(typeof(CorporateActivity), typeof(CorporateActivity).Name);
+      typeMap.RegisterType(typeof(Division), typeof(Division).Name);
+      typeMap.RegisterType(typeof(EffectType), typeof(EffectType).Name);
+      typeMap.RegisterType(typeof(Effect), typeof(Effect).Name);
+      typeMap.RegisterType(typeof(Faction), typeof(Faction).Name);
+      typeMap.RegisterType(typeof(Flag), typeof(Flag).Name);
       typeMap.RegisterType(typeof(Group), typeof(Group).Name);
       typeMap.RegisterType(typeof(Icon), typeof(Icon).Name);
-      typeMap.RegisterType(typeof(ItemType), typeof(ItemType).Name);
+      typeMap.RegisterType(typeof(Item), typeof(Item).Name);
+      typeMap.RegisterType(typeof(EveType), typeof(EveType).Name);
       typeMap.RegisterType(typeof(MarketGroup), typeof(MarketGroup).Name);
+      typeMap.RegisterType(typeof(MetaGroup), typeof(MetaGroup).Name);
+      typeMap.RegisterType(typeof(MetaType), typeof(MetaType).Name);
+      typeMap.RegisterType(typeof(NpcCorporationDivision), typeof(NpcCorporationDivision).Name);
       typeMap.RegisterType(typeof(Race), typeof(Race).Name);
+      typeMap.RegisterType(typeof(RegionJump), typeof(RegionJump).Name);
+      typeMap.RegisterType(typeof(SolarSystemJump), typeof(SolarSystemJump).Name);
+      typeMap.RegisterType(typeof(StationOperation), typeof(StationOperation).Name);
+      typeMap.RegisterType(typeof(StationService), typeof(StationService).Name);
       typeMap.RegisterType(typeof(Unit), typeof(Unit).Name);
 
       return typeMap;
@@ -685,6 +704,12 @@ namespace Eve.Data {
 
       } finally {
         ExitReadLock(region);
+
+        // TODO: These should be unnecessary.  Bug in static checker?  Check with future version.
+        Contract.Assume(_innerCache != null);
+        Contract.Assume(_masterLock != null);
+        Contract.Assume(_regionLocks != null);
+        Contract.Assume(_statistics != null);
       }
     }
     //******************************************************************************
@@ -779,7 +804,12 @@ namespace Eve.Data {
         ExitReadLock(region);
       }
 
-      // Otherwise, write to the cache
+      // Otherwise, get our value to be added.  Do this outside of a lock in 
+      // case valueFactory() itself wants to read from or add something to the
+      // cache.
+      T value = valueFactory();
+
+      // Write to the cache
       EnterWriteLock(region);
 
       try {
@@ -792,9 +822,6 @@ namespace Eve.Data {
           Contract.Assume(result != null);
           return (T) result;
         }
-
-        // Otherwise, add it to the cache
-        T value = valueFactory();
 
         Statistics.Misses++;
         Statistics.Writes++;
@@ -1074,6 +1101,7 @@ namespace Eve.Data {
 
       if (region != null) {
         ReaderWriterLockSlim regionLock = RegionLocks.GetOrAdd(region, s => new ReaderWriterLockSlim());
+        Contract.Assume(regionLock != null);
         regionLock.EnterReadLock();
       }
     }
@@ -1095,6 +1123,7 @@ namespace Eve.Data {
       // Otherwise lock the region lock
       } else {
         ReaderWriterLockSlim regionLock = RegionLocks.GetOrAdd(region, s => new ReaderWriterLockSlim());
+        Contract.Assume(regionLock != null);
         regionLock.EnterWriteLock();
 
         // Put a read lock on the master lock so that master writes can't take place
@@ -1115,6 +1144,7 @@ namespace Eve.Data {
 
       if (region != null) {
         ReaderWriterLockSlim regionLock = RegionLocks.GetOrAdd(region, s => new ReaderWriterLockSlim());
+        Contract.Assume(regionLock != null);
         regionLock.ExitReadLock();
       }
     }
@@ -1136,6 +1166,7 @@ namespace Eve.Data {
         // Otherwise lock the region lock
       } else {
         ReaderWriterLockSlim regionLock = RegionLocks.GetOrAdd(region, s => new ReaderWriterLockSlim());
+        Contract.Assume(regionLock != null);
         regionLock.ExitWriteLock();
 
         // We put a read lock on the master lock so that master writes can't take place

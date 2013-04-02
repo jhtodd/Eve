@@ -13,13 +13,13 @@ namespace Eve {
   using FreeNet;
   using FreeNet.Data.Entity;
 
-  using Eve.Entities;
+  using Eve.Data.Entities;
 
   //******************************************************************************
   /// <summary>
   /// Contains information about the category of an attribute.
   /// </summary>
-  public sealed class AttributeCategory : BaseValue<AttributeCategoryId, AttributeCategoryId, AttributeCategoryEntity, AttributeCategory> {
+  public class AttributeCategory : BaseValue<AttributeCategoryId, AttributeCategoryId, AttributeCategoryEntity, AttributeCategory> {
 
     #region Constructors/Finalizers
     //******************************************************************************
@@ -30,7 +30,7 @@ namespace Eve {
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    public AttributeCategory(AttributeCategoryEntity entity) : base(entity) {
+    protected internal AttributeCategory(AttributeCategoryEntity entity) : base(entity) {
       Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
     }
     //******************************************************************************

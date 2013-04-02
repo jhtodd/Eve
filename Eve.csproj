@@ -122,23 +122,79 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Classes\BaseValueEntity.cs" />
-    <Compile Include="Entities\Classes\AttributeCategoryEntity.cs" />
-    <Compile Include="Entities\Classes\CategoryEntity.cs" />
-    <Compile Include="Entities\Classes\AttributeTypeEntity.cs" />
-    <Compile Include="Entities\Classes\AttributeValueEntity.cs" />
-    <Compile Include="Entities\Classes\AgentTypeEntity.cs" />
-    <Compile Include="Entities\Classes\ItemTypeEntity\ItemTypeEntity.cs" />
-    <Compile Include="Entities\Classes\RaceEntity.cs" />
-    <Compile Include="Entities\Classes\MarketGroupEntity.cs" />
-    <Compile Include="Entities\Classes\GroupEntity.cs" />
-    <Compile Include="Entities\Classes\IconEntity.cs" />
-    <Compile Include="Entities\Classes\UnitEntity.cs" />
+    <Compile Include="Eve.Character\Classes\BaseValue\CharacterAttributeType.cs" />
+    <Compile Include="Eve.Character\Classes\SkillLevel.cs" />
+    <Compile Include="Eve.Character\Enums\BloodlineId.cs" />
+    <Compile Include="Eve.Character\Enums\CharacterAttributeModifiers.cs" />
+    <Compile Include="Eve.Character\Enums\CharacterAttributeId.cs" />
+    <Compile Include="Eve.Character\Interfaces\ICharacterAttributeCollection.cs" />
+    <Compile Include="Eve.Character\Interfaces\ISkillCollection.cs" />
+    <Compile Include="Eve.Character\Interfaces\ICharacterAttribute.cs" />
+    <Compile Include="Eve.Character\Interfaces\IHasCharacterAttributes.cs" />
+    <Compile Include="Eve.Character\Interfaces\IHasSkills.cs" />
+    <Compile Include="Eve.Character\Interfaces\ISkill.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\BaseValueEntity\BaseValueEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\BaseValueEntity\AttributeCategoryEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\BaseValueEntity\CategoryEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\BaseValueEntity\AttributeTypeEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\AttributeValueEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\BaseValueEntity\AgentTypeEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\BaseValueEntity\CharacterAttributeTypeEntity.cs" />
+    <None Include="Eve.Data\Eve.Data.Entities\Classes\BaseValueEntity\BloodlineEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\BaseValueEntity\EveTypeEntity\StationTypeEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\BaseValueEntity\StationOperationEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\BaseValueEntity\CorporateActivityEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\BaseValueEntity\StationServiceEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\BaseValueEntity\DivisionEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\BaseValueEntity\FactionEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\ConstellationJumpEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\ItemEntity\AgentEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\ItemEntity\StationEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\NpcCorporationDivisionEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\SolarSystemJumpEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\RegionJumpEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\ItemNameEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\ItemEntity\ConstellationEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\ItemEntity\UniverseEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\ItemEntity\RegionEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\ItemEntity\SolarSystemEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\ItemEntity\NpcCorporationEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\BaseValueEntity\FlagEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\ItemEntity\ItemEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\MetaTypeEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\BaseValueEntity\MetaGroupEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\EffectEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\BaseValueEntity\EffectTypeEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\EveEntityBase.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\BaseValueEntity\EveTypeEntity\EveTypeEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\BaseValueEntity\RaceEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\BaseValueEntity\MarketGroupEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\BaseValueEntity\GroupEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\BaseValueEntity\IconEntity.cs" />
+    <Compile Include="Eve.Data\Eve.Data.Entities\Classes\BaseValueEntity\UnitEntity.cs" />
     <Compile Include="Eve.Character\Classes\BaseValue\ItemType\SkillType.cs" />
     <Compile Include="Eve.Character\Enums\SkillId.cs" />
     <Compile Include="Eve.Data\Classes\EveCache.cs" />
-    <Compile Include="Eve.Meta\Classes\Attribute\EnumGeneratorAttribute.cs" />
+    <Compile Include="Eve.Data\Interfaces\IDbContext\IEveDbContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Eve.Meta\Classes\Attribute\EveQueryMethodAttribute.cs" />
+    <Compile Include="Eve.Meta\Classes\Attribute\EveEnumGeneratorAttribute.cs" />
     <Compile Include="Eve.Meta\Classes\EnumEntry.cs" />
+    <Compile Include="Eve.Meta\Classes\EveCodeGenerator\GenerateEnumStationOperationId.cs" />
+    <Compile Include="Eve.Meta\Classes\EveCodeGenerator\GenerateEnumCorporateActivityId.cs" />
+    <Compile Include="Eve.Meta\Classes\EveCodeGenerator\GenerateEnumStationServiceId.cs" />
+    <Compile Include="Eve.Meta\Classes\EveCodeGenerator\GenerateEnumNpcCorporationId.cs" />
+    <Compile Include="Eve.Meta\Classes\EveCodeGenerator\GenerateEnumUniverseId.cs" />
+    <Compile Include="Eve.Meta\Classes\EveCodeGenerator\CreateValidIdentifierForPlaceName.cs" />
+    <Compile Include="Eve.Meta\Classes\EveCodeGenerator\GenerateEnumRegionId.cs" />
+    <Compile Include="Eve.Meta\Classes\EveCodeGenerator\GenerateEnumDivisionId.cs" />
+    <Compile Include="Eve.Meta\Classes\EveCodeGenerator\GenerateEnumFactionId.cs" />
+    <Compile Include="Eve.Meta\Classes\EveCodeGenerator\GenerateEnumFlagId.cs" />
+    <Compile Include="Eve.Meta\Classes\EveCodeGenerator\GenerateEnumBloodlineId.cs" />
+    <Compile Include="Eve.Meta\Classes\EveCodeGenerator\GenerateEnumMetaGroupId.cs" />
+    <Compile Include="Eve.Meta\Classes\EveCodeGenerator\GenerateEnumEffectId.cs" />
+    <Compile Include="Eve.Meta\Classes\EveCodeGenerator\GenerateEnumCharacterAttributeId.cs" />
     <Compile Include="Eve.Meta\Classes\EveCodeGenerator\CreateValidIdentifier.cs" />
     <Compile Include="Eve.Meta\Classes\EveCodeGenerator\EveCodeGenerator.cs" />
     <Compile Include="Eve.Meta\Classes\EveCodeGenerator\GenerateEnum.cs" />
@@ -151,33 +207,85 @@
     <Compile Include="Eve.Meta\Classes\EveCodeGenerator\GenerateEnumRaceId.cs" />
     <Compile Include="Eve.Meta\Classes\EveCodeGenerator\GenerateEnumSkillId.cs" />
     <Compile Include="Eve.Meta\Classes\EveCodeGenerator\GenerateEnumUnitId.cs" />
+    <Compile Include="Eve.Universe\Classes\BaseValue\EveType\StationType.cs" />
+    <Compile Include="Eve.Universe\Classes\BaseValue\StationOperation.cs" />
+    <Compile Include="Eve.Universe\Classes\BaseValue\CorporateActivity.cs" />
+    <Compile Include="Eve.Universe\Classes\BaseValue\StationService.cs" />
+    <Compile Include="Eve.Universe\Classes\BaseValue\Division.cs" />
+    <Compile Include="Eve.Universe\Classes\BaseValue\Faction.cs" />
+    <Compile Include="Eve.Universe\Classes\ConstellationJump.cs" />
+    <Compile Include="Eve.Universe\Classes\Item\Agent.cs" />
+    <Compile Include="Eve.Universe\Classes\Item\Station.cs" />
+    <Compile Include="Eve.Universe\Classes\NpcCorporationDivision.cs" />
+    <Compile Include="Eve.Universe\Classes\SolarSystemJump.cs" />
+    <Compile Include="Eve.Universe\Classes\NpcCorporationInvestor.cs" />
+    <Compile Include="Eve.Universe\Classes\Item\Constellation.cs" />
+    <Compile Include="Eve.Universe\Classes\Item\SolarSystem.cs" />
+    <Compile Include="Eve.Universe\Classes\Item\Region.cs" />
+    <Compile Include="Eve.Universe\Classes\Item\NpcCorporation.cs" />
+    <Compile Include="Eve.Universe\Classes\RegionJump.cs" />
+    <Compile Include="Eve.Universe\Enums\CorporateActivityId.cs" />
+    <Compile Include="Eve.Universe\Enums\DivisionId.cs" />
+    <Compile Include="Eve.Universe\Enums\NpcCorporationExtent.cs" />
+    <Compile Include="Eve.Universe\Enums\NpcCorporationSize.cs" />
+    <Compile Include="Eve.Universe\Enums\StationOperationId.cs" />
+    <Compile Include="Eve.Universe\Enums\StationServiceId.cs" />
+    <Compile Include="Eve.Universe\Interfaces\ILocation.cs" />
     <Compile Include="Eve\Classes\AttributeValue.cs" />
     <Compile Include="Eve\Classes\BaseValue\AttributeCategory.cs" />
     <Compile Include="Eve\Classes\BaseValue\AttributeType.cs" />
     <Compile Include="Eve\Classes\BaseValue\Category.cs" />
-    <Compile Include="Eve\Classes\BaseValue\ItemType\GenericItemType.cs" />
-    <Compile Include="Eve\Classes\BaseValue\ItemType\ItemType.cs" />
+    <Compile Include="Eve\Classes\BaseValue\Flag.cs" />
+    <Compile Include="Eve\Classes\BaseValue\MetaGroup.cs" />
+    <Compile Include="Eve\Classes\BaseValue\EffectType.cs" />
+    <Compile Include="Eve\Classes\BaseValue\EveType\GenericType.cs" />
+    <Compile Include="Eve\Classes\BaseValue\EveType\EveType.cs" />
     <Compile Include="Eve\Classes\BaseValue\MarketGroup.cs" />
     <Compile Include="Eve\Classes\BaseValue\Group.cs" />
     <Compile Include="Eve\Classes\BaseValue\Unit.cs" />
+    <Compile Include="Eve\Classes\ID Types\ItemID Types\ConstellationId.cs" />
+    <Compile Include="Eve\Classes\ID Types\ItemID Types\AgentId.cs" />
+    <Compile Include="Eve\Classes\ID Types\ItemID Types\UniverseId.cs" />
+    <Compile Include="Eve\Classes\ID Types\ItemID Types\NpcCorporationId.cs" />
+    <Compile Include="Eve\Classes\ID Types\ItemID Types\RegionId.cs" />
+    <Compile Include="Eve\Classes\ID Types\ItemID Types\StationId.cs" />
+    <Compile Include="Eve\Classes\ID Types\ItemID Types\SolarSystemId.cs" />
+    <Compile Include="Eve\Classes\ID Types\ItemID Types\ItemId.cs" />
+    <Compile Include="Eve.Universe\Classes\Item\Universe.cs" />
+    <Compile Include="Eve\Classes\Item\GenericItem.cs" />
+    <Compile Include="Eve\Classes\Item\Item.cs" />
+    <Compile Include="Eve\Classes\MetaType.cs" />
+    <Compile Include="Eve\Classes\Effect.cs" />
     <Compile Include="Eve\Classes\EveSettings.cs" />
     <Compile Include="Eve\Classes\General.cs" />
     <Compile Include="Eve.Data\Classes\DbContext\EveDbContext.cs" />
     <Compile Include="Eve.Data\Classes\EveDataSource\EveDataSource.cs" />
-    <Compile Include="Eve.Data\Interfaces\IDbContext\IEveDbContext.cs" />
     <Compile Include="Eve\Classes\BaseValue\Icon.cs" />
     <Compile Include="Eve.Data\Interfaces\IEveDataSource.cs" />
     <None Include="Eve\Classes\ID Types\_ID_TEMPLATE.cs" />
-    <Compile Include="Eve\Classes\ID Types\ItemTypeId.cs" />
+    <Compile Include="Eve\Classes\ID Types\EffectCategoryId.cs" />
+    <Compile Include="Eve\Classes\ID Types\TypeId.cs" />
     <Compile Include="Eve\Classes\ID Types\IconId.cs" />
     <Compile Include="Eve\Enums\AttributeCategoryId.cs" />
     <Compile Include="Eve\Enums\AttributeId.cs" />
+    <Compile Include="Eve\Enums\AttributeModifiers.cs" />
     <Compile Include="Eve\Enums\CategoryId.cs" />
+    <Compile Include="Eve.Universe\Enums\FactionId.cs" />
+    <Compile Include="Eve\Enums\FlagId.cs" />
+    <Compile Include="Eve\Enums\EffectId.cs" />
     <Compile Include="Eve\Enums\GroupId.cs" />
     <Compile Include="Eve\Enums\MarketGroupId.cs" />
+    <Compile Include="Eve\Enums\MetaGroupId.cs" />
     <Compile Include="Eve\Enums\UnitId.cs" />
+    <Compile Include="Eve\Interfaces\IEffectCollection.cs" />
+    <Compile Include="Eve\Interfaces\IAttributeCollection.cs" />
+    <Compile Include="Eve\Interfaces\IEveTypeInstance.cs" />
+    <Compile Include="Eve\Interfaces\IHasEffects.cs" />
+    <Compile Include="Eve\Interfaces\IEffect.cs" />
     <Compile Include="Eve\Interfaces\IHasIcon.cs" />
     <Compile Include="Eve\Interfaces\IHasId.cs" />
+    <Compile Include="Eve\Interfaces\IAttribute.cs" />
+    <Compile Include="Eve\Interfaces\IHasAttributes.cs" />
     <Compile Include="Resources\Messages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -192,16 +300,6 @@
     <Compile Include="Eve.Universe\Interfaces\IHasRaces.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="FreeNet.Data.Entity\FreeNet.Data.Entity.csproj">
-      <Project>{f2a3ef11-344e-4bdc-9f35-5fe736da2df3}</Project>
-      <Name>FreeNet.Data.Entity</Name>
-    </ProjectReference>
-    <ProjectReference Include="FreeNet\FreeNet.csproj">
-      <Project>{f56344b3-bb90-4be7-85b2-b4c4a4f2743d}</Project>
-      <Name>FreeNet</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="Eve.pfx" />
     <None Include="packages.config" />
@@ -210,10 +308,25 @@
     <EmbeddedResource Include="Resources\Messages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Eve.Data\Classes\QueryModifiers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Eve.Data\Update Information\Database Notes.txt" />
+    <Content Include="Eve.Data\Update Information\Update Scripts\84566.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="FreeNet.Data.Entity\FreeNet.Data.Entity.csproj">
+      <Project>{f2a3ef11-344e-4bdc-9f35-5fe736da2df3}</Project>
+      <Name>FreeNet.Data.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="FreeNet\FreeNet.csproj">
+      <Project>{f56344b3-bb90-4be7-85b2-b4c4a4f2743d}</Project>
+      <Name>FreeNet</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -19,7 +19,7 @@ namespace Eve {
 
   //******************************************************************************
   /// <summary>
-  /// Represents an ID value for the <see cref="Icon" /> class.
+  /// Represents an ID value for the <see cref="TYPE_NAME" /> class.
   /// </summary>
   public struct ID_NAME : IEquatable<ID_NAME> {
 
@@ -97,7 +97,7 @@ namespace Eve {
     #endregion
 
     #region Instance Fields
-    ID_TYPE _value;
+    private ID_TYPE _value;
     #endregion
 
     #region Constructors/Finalizers
