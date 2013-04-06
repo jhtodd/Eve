@@ -3,7 +3,8 @@
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Eve {
+namespace Eve
+{
   using System;
   using System.Collections;
   using System.Collections.Generic;
@@ -11,101 +12,84 @@ namespace Eve {
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Data.Entities;
+
   using FreeNet;
   using FreeNet.Data.Entity;
 
-  using Eve.Data.Entities;
-
-  //******************************************************************************
   /// <summary>
   /// Contains information about an attribute of an EVE item.
   /// </summary>
-  public class AttributeType : BaseValue<AttributeId, AttributeId, AttributeTypeEntity, AttributeType>,
-                               IAttribute,
-                               IComparable,
-                               IComparable<IAttribute>,
-                               IHasIcon {
-
+  public sealed partial class AttributeType 
+    : BaseValue<AttributeId, AttributeId, AttributeTypeEntity, AttributeType>,
+      IAttribute,
+      IComparable,
+      IComparable<IAttribute>,
+      IHasIcon
+  {
     // Check EveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
+    private AttributeCategory category;
+    private Icon icon;
+    private Unit unit;
 
-    #region Instance Fields
-    private AttributeCategory _category;
-    private Icon _icon;
-    private Unit _unit;
-    #endregion
+    /* Constructors */
 
-    #region Constructors/Finalizers
-    //******************************************************************************
     /// <summary>
     /// Initializes a new instance of the AttributeType class.
     /// </summary>
-    /// 
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    protected internal AttributeType(AttributeTypeEntity entity) : base(entity) {
+    internal AttributeType(AttributeTypeEntity entity) : base(entity)
+    {
       Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
     }
-    //******************************************************************************
-    /// <summary>
-    /// Establishes object invariants of the class.
-    /// </summary>
-    [ContractInvariantMethod]
-    private void ObjectInvariant() {
-    }
-    #endregion
-    #region Public Properties
-    //******************************************************************************
+
+    /* Properties */
+    
     /// <summary>
     /// Gets the category to which the attribute belongs.
     /// </summary>
-    /// 
     /// <value>
     /// The category to which the attribute belongs.
     /// </value>
-    public virtual AttributeCategory Category {
-      get {
-        if (_category == null) {
-          if (CategoryId != null) {
-
-            // Load the cached version if available
-            _category = Eve.General.Cache.GetOrAdd<AttributeCategory>(CategoryId, () => {
-              AttributeCategoryEntity categoryEntity = Entity.Category;
-              Contract.Assume(categoryEntity != null);
-
-              return new AttributeCategory(categoryEntity);
-            });
-          }
+    public AttributeCategory Category
+    {
+      get
+      {
+        if (this.CategoryId == null)
+        {
+          return null;
         }
 
-        return _category;
+        // If not already set, load from the cache, or else create an instance from the base entity
+        return this.category ?? (this.category = Eve.General.Cache.GetOrAdd<AttributeCategory>(this.CategoryId, () => (AttributeCategory)this.Entity.Category.ToAdapter()));
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets the ID of the category to which the attribute belongs.
     /// </summary>
-    /// 
     /// <value>
     /// An <see cref="AttributeCategoryId" /> value specifying the category to
     /// which the attribute belongs.
     /// </value>
-    public AttributeCategoryId? CategoryId {
-      get {
-        return Entity.CategoryId;
-      }
+    public AttributeCategoryId? CategoryId
+    {
+      get { return Entity.CategoryId; }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets the default value of the attribute.
     /// </summary>
-    /// 
     /// <value>
     /// The default value of the attribute.
     /// </value>
-    public double DefaultValue {
-      get {
+    public double DefaultValue
+    {
+      get
+      {
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
 
@@ -115,241 +99,229 @@ namespace Eve {
         return result;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets the display name of the attribute.
     /// </summary>
-    /// 
     /// <value>
     /// The human-readable display name of the attribute.
     /// </value>
-    public string DisplayName {
-      get {
+    public string DisplayName
+    {
+      get
+      {
         Contract.Ensures(!string.IsNullOrWhiteSpace(Contract.Result<string>()));
-
-        return (string.IsNullOrWhiteSpace(Entity.DisplayName) ? Name : Entity.DisplayName);
+        return string.IsNullOrWhiteSpace(this.Entity.DisplayName) ? this.Name : this.Entity.DisplayName;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets a value indicating whether a high value for the attribute is considered
     /// good.
     /// </summary>
-    /// 
     /// <value>
     /// <see langword="true" /> if a high value is good; otherwise
     /// <see langword="false" />.
     /// </value>
-    public bool HighIsGood {
-      get {
-        return Entity.HighIsGood;
-      }
+    public bool HighIsGood
+    {
+      get { return Entity.HighIsGood; }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets the icon associated with the item, if any.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="Icon" /> associated with the item, or
     /// <see langword="null" /> if no such icon exists.
     /// </value>
-    public Icon Icon {
-      get {
-        if (_icon == null) {
-          if (IconId != null) {
-
-            // Load the cached version if available
-            _icon = Eve.General.Cache.GetOrAdd<Icon>(IconId, () => {
-              IconEntity iconEntity = Entity.Icon;
-              Contract.Assume(iconEntity != null);
-
-              return new Icon(iconEntity);
-            });
-          }
+    public Icon Icon
+    {
+      get
+      {
+        if (this.IconId == null)
+        {
+          return null;
         }
 
-        return _icon;
+        // If not already set, load from the cache, or else create an instance from the base entity
+        return this.icon ?? (this.icon = Eve.General.Cache.GetOrAdd<Icon>(this.IconId, () => (Icon)this.Entity.Icon.ToAdapter()));
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets the ID of the icon associated with the attribute, if any.
     /// </summary>
-    /// 
     /// <value>
     /// The ID of the icon associated with the attribute, or
     /// <see langword="null" /> if no such icon exists.
     /// </value>
-    public IconId? IconId {
-      get {
-        return Entity.IconId;
-      }
+    public IconId? IconId
+    {
+      get { return Entity.IconId; }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets a value indicating whether the attribute is marked as published for
     /// public consumption.
     /// </summary>
-    /// 
     /// <value>
     /// <see langword="true" /> if the attribute is marked as published;
     /// otherwise <see langword="false" />.
     /// </value>
-    public bool Published {
-      get {
-        return Entity.Published;
-      }
+    public bool Published
+    {
+      get { return Entity.Published; }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets a value indicating whether the attribute can be stacked without
     /// penalty.
     /// </summary>
-    /// 
     /// <value>
     /// <see langword="true" /> if the attribute can be stacked with penalty;
     /// otherwise <see langword="false" />.
     /// </value>
-    public bool Stackable {
-      get {
-        return Entity.Stackable;
-      }
+    public bool Stackable
+    {
+      get { return Entity.Stackable; }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets the unit associated with the attribute, if any.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="Unit" /> associated with the attribute, or
     /// <see langword="null" /> if no such unit exists.
     /// </value>
-    public virtual Unit Unit {
-      get {
-        if (_unit == null) {
-          if (UnitId != null) {
-
-            // Load the cached version if available
-            _unit = Eve.General.Cache.GetOrAdd<Unit>(UnitId, () => {
-              UnitEntity unitEntity = Entity.Unit;
-              Contract.Assume(unitEntity != null);
-
-              return new Unit(unitEntity);
-            });
-          }
+    public Unit Unit
+    {
+      get
+      {
+        if (this.UnitId == null)
+        {
+          return null;
         }
 
-        return _unit;
+        // If not already set, load from the cache, or else create an instance from the base entity
+        return this.unit ?? (this.unit = Eve.General.Cache.GetOrAdd<Unit>(this.UnitId, () => (Unit)this.Entity.Unit.ToAdapter()));
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets the ID of the unit associated with the attribute, if any.
     /// </summary>
-    /// 
     /// <value>
     /// The ID of the unit associated with the attribute, or
     /// <see langword="null" /> if no such unit exists.
     /// </value>
-    public UnitId? UnitId {
-      get {
-        return Entity.UnitId;
-      }
+    public UnitId? UnitId
+    {
+      get { return Entity.UnitId; }
     }
-    #endregion
-    #region Public Methods
-    //******************************************************************************
+
+    /* Methods */
+
     /// <inheritdoc />
-    public override int CompareTo(AttributeType other) {
-      if (other == null) {
+    public override int CompareTo(AttributeType other)
+    {
+      if (other == null)
+      {
         return 1;
       }
 
-      return DisplayName.CompareTo(other.DisplayName);
+      return this.DisplayName.CompareTo(other.DisplayName);
     }
-    //******************************************************************************
+
     /// <inheritdoc />
-    public virtual int CompareTo(IAttribute other) {
-      if (other == null) {
+    public int CompareTo(IAttribute other)
+    {
+      if (other == null)
+      {
         return 1;
       }
 
-      return DisplayName.CompareTo(other.Type.DisplayName);
+      return this.DisplayName.CompareTo(other.Type.DisplayName);
     }
-    //******************************************************************************
+
     /// <summary>
     /// Formats a numeric value according to the current attribute.
     /// </summary>
-    /// 
     /// <param name="value">
     /// The value to format.
     /// </param>
-    /// 
     /// <returns>
     /// A string containing a formatted version of the specified value.
     /// </returns>
-    public string FormatValue(double value) {
-      return FormatValue(value, string.Empty);
+    public string FormatValue(double value)
+    {
+      return this.FormatValue(value, string.Empty);
     }
-    //******************************************************************************
+
     /// <summary>
     /// Formats a numeric value according to the current attribute.
     /// </summary>
-    /// 
     /// <param name="value">
     /// The value to format.
     /// </param>
-    /// 
     /// <param name="numericFormat">
     /// The format string used to format the numeric portion of the result.
     /// </param>
-    /// 
     /// <returns>
     /// A string containing a formatted version of the specified value.
     /// </returns>
-    public string FormatValue(double value, string numericFormat) {
-
+    public string FormatValue(double value, string numericFormat)
+    {
       // If the attribute has a unit, use it for the formatting
-      if (UnitId != null && Unit != null) {
-        return Unit.FormatValue(value, numericFormat);
+      if (this.UnitId != null && this.Unit != null)
+      {
+        return this.Unit.FormatValue(value, numericFormat);
       }
 
       // Otherwise, just format the number
       return value.ToString(numericFormat);
     }
-    //******************************************************************************
-    /// <inheritdoc />
-    public override string ToString() {
-      return DisplayName;
-    }
-    #endregion
 
-    #region IAttribute Members
-    //******************************************************************************
-    double IAttribute.BaseValue {
-      get {
-        return DefaultValue;
-      }
+    /// <inheritdoc />
+    public override string ToString()
+    {
+      return this.DisplayName;
     }
-    //******************************************************************************
-    AttributeId IAttribute.Id {
-      get {
-        return Id;
-      }
-    }
-    //******************************************************************************
-    AttributeType IAttribute.Type {
-      get {
-        return this;
-      }
-    }
-    #endregion
-    #region IComparable Members
-    //******************************************************************************
-    int IComparable.CompareTo(object obj) {
-      return CompareTo(obj as IAttribute);
-    }
-    #endregion
   }
+
+  #region IAttribute Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IAttribute" /> interface.
+  /// </content>
+  public partial class AttributeType : IAttribute
+  {
+    double IAttribute.BaseValue
+    {
+      get { return this.DefaultValue; }
+    }
+
+    AttributeId IAttribute.Id
+    {
+      get { return this.Id; }
+    }
+
+    AttributeType IAttribute.Type
+    {
+      get { return this; }
+    }
+  }
+  #endregion
+
+  #region IComparable Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IComparable" /> interface.
+  /// </content>
+  public partial class AttributeType : IComparable
+  {
+    int IComparable.CompareTo(object obj)
+    {
+      return this.CompareTo(obj as IAttribute);
+    }
+  }
+  #endregion
 }

@@ -3,7 +3,8 @@
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Eve.Universe {
+namespace Eve.Universe
+{
   using System;
   using System.Collections;
   using System.Collections.Generic;
@@ -15,11 +16,11 @@ namespace Eve.Universe {
   using FreeNet;
   using FreeNet.Data.Entity;
 
-  //******************************************************************************
   /// <summary>
   /// The base interface for classes which are associated a location in the EVE
   /// universe.
   /// </summary>
-  public interface ILocation {
+  public interface ILocation
+  {
   }
 }

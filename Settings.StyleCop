@@ -1,4 +1,14 @@
 <StyleCopSettings Version="105">
+  <GlobalSettings>
+    <CollectionProperty Name="RecognizedWords">
+      <Value>Amarr</Value>
+      <Value>Amarrian</Value>
+      <Value>Caldari</Value>
+      <Value>Gallente</Value>
+      <Value>Gallentean</Value>
+      <Value>Minmatar</Value>
+    </CollectionProperty>
+  </GlobalSettings>
   <Analyzers>
     <Analyzer AnalyzerId="StyleCop.CSharp.DocumentationRules">
       <Rules>

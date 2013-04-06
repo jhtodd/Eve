@@ -3,44 +3,36 @@
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Eve {
+namespace Eve
+{
   using System;
   using System.Collections;
   using System.Collections.Generic;
   using System.Diagnostics.Contracts;
   using System.Linq;
 
-  using FreeNet;
-  using FreeNet.Collections.ObjectModel;
-
   using Eve.Data.Entities;
   using Eve.Universe;
 
-  //******************************************************************************
+  using FreeNet;
+  using FreeNet.Collections.ObjectModel;
+
   /// <summary>
   /// An EVE item which doesn't fall into any particular category.
   /// </summary>
-  public class GenericItem : Item {
+  public sealed class GenericItem : Item
+  {
+    /* Constructors */
 
-    #region Constructors/Finalizers
-    //******************************************************************************
     /// <summary>
     /// Initializes a new instance of the GenericItem class.
     /// </summary>
-    /// 
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    protected internal GenericItem(ItemEntity entity) : base(entity) {
+    internal GenericItem(ItemEntity entity) : base(entity)
+    {
       Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
     }
-    //******************************************************************************
-    /// <summary>
-    /// Establishes object invariants of the class.
-    /// </summary>
-    [ContractInvariantMethod]
-    private void ObjectInvariant() {
-    }
-    #endregion
   }
 }

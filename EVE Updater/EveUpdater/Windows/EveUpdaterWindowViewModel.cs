@@ -1445,7 +1445,7 @@ namespace EveUpdater {
         Type queryType = null;
 
         foreach (CustomAttributeData attribute in SelectedQuery.CustomAttributes) {
-          if (attribute.AttributeType == typeof(Eve.Meta.EveQueryMethodAttribute)) {
+          if (attribute.AttributeType == typeof(Eve.Data.EveQueryMethodAttribute)) {
             queryType = (Type) attribute.ConstructorArguments[0].Value;
             break;
           }
@@ -1591,7 +1591,7 @@ namespace EveUpdater {
 
       List<ListEntry<MethodInfo, string>> generatorMethods = new List<ListEntry<MethodInfo, string>>();
 
-      Type[] eveTypes = typeof(Eve.General).Assembly.GetTypes();
+      Type[] eveTypes = typeof(Eve.Meta.EnumCodeGenerator).Assembly.GetTypes();
 
       foreach (Type eveType in eveTypes) {
         MethodInfo[] methods = eveType.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
@@ -1649,7 +1649,8 @@ namespace EveUpdater {
           foreach (CustomAttributeData attribute in method.CustomAttributes) {
             Contract.Assume(attribute != null);
 
-            if (attribute.AttributeType == typeof(Eve.Meta.EveQueryMethodAttribute)) {
+            if (attribute.AttributeType == typeof(Eve.Data.EveQueryMethodAttribute))
+            {
               Contract.Assume(attribute.ConstructorArguments != null);
               Contract.Assume(0 < attribute.ConstructorArguments.Count);
 

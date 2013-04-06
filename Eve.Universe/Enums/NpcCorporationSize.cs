@@ -1,9 +1,10 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="CorporationSize.cs" company="Jeremy H. Todd">
+// <copyright file="NpcCorporationSize.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Eve.Universe {
+namespace Eve.Universe
+{
   using System;
   using System.Collections;
   using System.Collections.Generic;
@@ -19,8 +20,8 @@ namespace Eve.Universe {
   /// <summary>
   /// Describes the size of an NPC corporation.
   /// </summary>
-  public enum NpcCorporationSize : byte {
-
+  public enum NpcCorporationSize : byte
+  {
     /// <summary>
     /// The corporation is tiny.
     /// </summary>

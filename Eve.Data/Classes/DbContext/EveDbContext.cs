@@ -3,7 +3,8 @@
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Eve.Data {
+namespace Eve.Data
+{
   using System;
   using System.Collections;
   using System.Collections.Generic;
@@ -15,870 +16,952 @@ namespace Eve.Data {
   using System.Diagnostics.Contracts;
   using System.Linq;
 
-  using FreeNet;
-  using FreeNet.Configuration;
-  using FreeNet.Data.Entity;
-
   using Eve;
   using Eve.Data.Entities;
   using Eve.Universe;
 
-  //******************************************************************************
+  using FreeNet;
+  using FreeNet.Configuration;
+  using FreeNet.Data.Entity;
+
   /// <summary>
   /// A <see cref="DbContext" /> that provides data access to the EVE database.
   /// This access is read-only.
   /// </summary>
-  public class EveDbContext : DbContext {
+  public class EveDbContext : DbContext
+  {
+    private static readonly EveDbContext DefaultInstance = new EveDbContext();
 
-    #region Static Fields
-    private static readonly EveDbContext _default = new EveDbContext();
-    #endregion
+    private IDbSet<AgentEntity> agents;
+    private IDbSet<AgentTypeEntity> agentTypes;
+    private IDbSet<AttributeCategoryEntity> attributeCategories;
+    private IDbSet<AttributeTypeEntity> attributeTypes;
+    private IDbSet<AttributeValueEntity> attributeValues;
+    private IDbSet<CategoryEntity> categories;
+    private IDbSet<CharacterAttributeTypeEntity> characterAttributeTypes;
+    private IDbSet<ConstellationEntity> constellations;
+    private IDbSet<ConstellationJumpEntity> constellationJumps;
+    private IDbSet<CorporateActivityEntity> corporateActivities;
+    private IDbSet<DivisionEntity> divisions;
+    private IDbSet<EffectEntity> effects;
+    private IDbSet<EffectTypeEntity> effectTypes;
+    private IDbSet<EveTypeEntity> eveTypes;
+    private IDbSet<FlagEntity> flags;
+    private IDbSet<GroupEntity> groups;
+    private IDbSet<IconEntity> icons;
+    private IDbSet<ItemEntity> items;
+    private IDbSet<MarketGroupEntity> marketGroups;
+    private IDbSet<MetaGroupEntity> metaGroups;
+    private IDbSet<MetaTypeEntity> metaTypes;
+    private IDbSet<NpcCorporationEntity> npcCorporations;
+    private IDbSet<NpcCorporationDivisionEntity> npcCorporationDivisions;
+    private IDbSet<RaceEntity> races;
+    private IDbSet<RegionEntity> regions;
+    private IDbSet<RegionJumpEntity> regionJumps;
+    private IDbSet<SolarSystemEntity> solarSystems;
+    private IDbSet<SolarSystemJumpEntity> solarSystemJumps;
+    private IDbSet<StationOperationEntity> stationOperations;
+    private IDbSet<StationServiceEntity> stationServices;
+    private IDbSet<StationTypeEntity> stationTypes;
+    private IDbSet<UnitEntity> units;
+    private IDbSet<UniverseEntity> universes;
 
-    #region Static Constructor
-    //******************************************************************************
+    /* Constructors */
+
     /// <summary>
-    /// Initializes static members of the EveDbContext class.
+    /// Initializes static members of the <see cref="EveDbContext" /> class.
     /// </summary>
-    static EveDbContext() {
+    static EveDbContext()
+    {
       Database.SetInitializer<EveDbContext>(null);
     }
-    #endregion
-    #region Static Properties
-    //******************************************************************************
-    /// <summary>
-    /// Gets the default data context.  This should be used in most circumstances.
-    /// </summary>
-    /// 
-    /// <value>
-    /// The default <see cref="EveDbContext" />.
-    /// </value>
-    public static EveDbContext Default {
-      get {
-        Contract.Ensures(Contract.Result<EveDbContext>() != null);
-        return _default;
-      }
-    }
-    #endregion
 
-    #region Instance Fields
-    private IDbSet<AgentEntity> _agents;
-    private IDbSet<AgentTypeEntity> _agentTypes;
-    private IDbSet<AttributeCategoryEntity> _attributeCategories;
-    private IDbSet<AttributeTypeEntity> _attributeTypes;
-    private IDbSet<AttributeValueEntity> _attributeValues;
-    private IDbSet<CategoryEntity> _categories;
-    private IDbSet<CharacterAttributeTypeEntity> _characterAttributeTypes;
-    private IDbSet<ConstellationEntity> _constellations;
-    private IDbSet<ConstellationJumpEntity> _constellationJumps;
-    private IDbSet<CorporateActivityEntity> _corporateActivities;
-    private IDbSet<DivisionEntity> _divisions;
-    private IDbSet<EffectTypeEntity> _effectTypes;
-    private IDbSet<EffectEntity> _effects;
-    private IDbSet<EveTypeEntity> _eveTypes;
-    private IDbSet<FlagEntity> _flags;
-    private IDbSet<GroupEntity> _groups;
-    private IDbSet<IconEntity> _icons;
-    private IDbSet<ItemEntity> _items;
-    private IDbSet<MarketGroupEntity> _marketGroups;
-    private IDbSet<MetaGroupEntity> _metaGroups;
-    private IDbSet<MetaTypeEntity> _metaTypes;
-    private IDbSet<NpcCorporationEntity> _npcCorporations;
-    private IDbSet<NpcCorporationDivisionEntity> _npcCorporationDivisions;
-    private IDbSet<RaceEntity> _races;
-    private IDbSet<RegionEntity> _regions;
-    private IDbSet<RegionJumpEntity> _regionJumps;
-    private IDbSet<SolarSystemEntity> _solarSystems;
-    private IDbSet<SolarSystemJumpEntity> _solarSystemJumps;
-    private IDbSet<StationOperationEntity> _stationOperations;
-    private IDbSet<StationServiceEntity> _stationServices;
-    private IDbSet<StationTypeEntity> _stationTypes;
-    private IDbSet<UnitEntity> _units;
-    private IDbSet<UniverseEntity> _universes;
-    #endregion
-
-    #region Constructors/Finalizers
-    //******************************************************************************
     /// <summary>
-    /// Initializes a new instance of the EveDbContext class using conventions to
-    /// create the name of the database to which a connection will be made. By
-    /// convention the name is the full name (namespace + class name) of the
-    /// derived context class.  For more information on how this is used to create
-    /// a connection, see the remarks section for <see cref="DbContext" />.
+    /// Initializes a new instance of the <see cref="EveDbContext" /> class using
+    /// conventions to create the name of the database to which a connection will
+    /// be made. By convention the name is the full name (namespace + class name)
+    /// of the derived context class.  For more information on how this is used
+    /// to create a connection, see the remarks section for <see cref="DbContext" />.
     /// </summary>
-    public EveDbContext() : base() {
+    public EveDbContext() : base()
+    {
     }
-    //******************************************************************************
+
     /// <summary>
-    /// Initializes a new instance of the EveDbContext class using the given string
-    /// as the name or connection string for the database to which a connection
-    /// will be made.  For more information on how this is used to create a
-    /// connection, see the remarks section for <see cref="DbContext" />.
+    /// Initializes a new instance of the <see cref="EveDbContext" /> class using
+    /// the given string as the name or connection string for the database to which
+    /// a connection will be made.  For more information on how this is used to
+    /// create a connection, see the remarks section for <see cref="DbContext" />.
     /// </summary>
-    /// 
     /// <param name="nameOrConnectionString">
     /// Either the database name or a connection string.
     /// </param>
-    public EveDbContext(string nameOrConnectionString) : base(nameOrConnectionString) {
+    public EveDbContext(string nameOrConnectionString) : base(nameOrConnectionString)
+    {
     }
-    //******************************************************************************
+
     /// <summary>
-    /// Initializes a new instance of the EveDbContext class using the existing
-    /// connection to connect to a database. The connection will not be disposed
-    /// when the context is disposed.
+    /// Initializes a new instance of the <see cref="EveDbContext" /> class using
+    /// the existing connection to connect to a database. The connection will not be
+    /// disposed when the context is disposed.
     /// </summary>
-    /// 
     /// <param name="existingConnection">
     /// An existing connection to use for the new context.
     /// </param>
-    /// 
     /// <param name="contextOwnsConnection">
     /// If set to true the connection is disposed when the context is disposed,
     /// otherwise the caller must dispose the connection.
     /// </param>
-    public EveDbContext(DbConnection existingConnection, bool contextOwnsConnection)
-      : base(existingConnection, contextOwnsConnection) {
+    public EveDbContext(DbConnection existingConnection, bool contextOwnsConnection) : base(existingConnection, contextOwnsConnection)
+    {
     }
-    //******************************************************************************
+
+    /* Properties */
+
     /// <summary>
-    /// Establishes object invariants of the class.
+    /// Gets the default data context.  This should be used in most circumstances.
     /// </summary>
-    [ContractInvariantMethod]
-    private void ObjectInvariant() {
+    /// <value>
+    /// The default <see cref="EveDbContext" />.
+    /// </value>
+    public static EveDbContext Default
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<EveDbContext>() != null);
+        return DefaultInstance;
+      }
     }
-    #endregion
-    #region Public Properties
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for agents.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for agents.
     /// </value>
-    public IDbSet<AgentEntity> Agents {
-      get {
+    public IDbSet<AgentEntity> Agents
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<AgentEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_agents != null);
-        return _agents;
+        Contract.Assume(this.agents != null);
+        return this.agents;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _agents = value;
+        this.agents = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for agent types.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for agent types.
     /// </value>
-    public IDbSet<AgentTypeEntity> AgentTypes {
-      get {
+    public IDbSet<AgentTypeEntity> AgentTypes
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<AgentTypeEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_agentTypes != null);
-        return _agentTypes;
+        Contract.Assume(this.agentTypes != null);
+        return this.agentTypes;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _agentTypes = value;
+        this.agentTypes = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for attribute categories.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for attribute categories.
     /// </value>
-    public IDbSet<AttributeCategoryEntity> AttributeCategories {
-      get {
+    public IDbSet<AttributeCategoryEntity> AttributeCategories
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<AttributeCategoryEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_attributeCategories != null);
-        return _attributeCategories;
+        Contract.Assume(this.attributeCategories != null);
+        return this.attributeCategories;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _attributeCategories = value;
+        this.attributeCategories = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for attribute types.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for attribute types.
     /// </value>
-    public IDbSet<AttributeTypeEntity> AttributeTypes {
-      get {
+    public IDbSet<AttributeTypeEntity> AttributeTypes
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<AttributeTypeEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_attributeTypes != null);
-        return _attributeTypes;
+        Contract.Assume(this.attributeTypes != null);
+        return this.attributeTypes;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _attributeTypes = value;
+        this.attributeTypes = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for attribute values.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for attribute values.
     /// </value>
-    public IDbSet<AttributeValueEntity> AttributeValues {
-      get {
+    public IDbSet<AttributeValueEntity> AttributeValues
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<AttributeValueEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_attributeValues != null);
-        return _attributeValues;
+        Contract.Assume(this.attributeValues != null);
+        return this.attributeValues;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _attributeValues = value;
+        this.attributeValues = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for categories.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for categories.
     /// </value>
-    public IDbSet<CategoryEntity> Categories {
-      get {
+    public IDbSet<CategoryEntity> Categories
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<CategoryEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_categories != null);
-        return _categories;
+        Contract.Assume(this.categories != null);
+        return this.categories;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _categories = value;
+        this.categories = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for character attribute types.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for character attribute types.
     /// </value>
-    public IDbSet<CharacterAttributeTypeEntity> CharacterAttributeTypes {
-      get {
+    public IDbSet<CharacterAttributeTypeEntity> CharacterAttributeTypes
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<CharacterAttributeTypeEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_characterAttributeTypes != null);
-        return _characterAttributeTypes;
+        Contract.Assume(this.characterAttributeTypes != null);
+        return this.characterAttributeTypes;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _characterAttributeTypes = value;
+        this.characterAttributeTypes = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for constellations.
     /// </summary>
-    /// 
     /// <value>
-    /// The <see cref="DbSet{T}" /> for constellations
+    /// The <see cref="DbSet{T}" /> for constellations.
     /// </value>
-    public IDbSet<ConstellationEntity> Constellations {
-      get {
+    public IDbSet<ConstellationEntity> Constellations
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<ConstellationEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_constellations != null);
-        return _constellations;
+        Contract.Assume(this.constellations != null);
+        return this.constellations;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _constellations = value;
+        this.constellations = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for constellation jumps.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for constellation jumps.
     /// </value>
-    public IDbSet<ConstellationJumpEntity> ConstellationJumps {
-      get {
+    public IDbSet<ConstellationJumpEntity> ConstellationJumps
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<ConstellationJumpEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_constellationJumps != null);
-        return _constellationJumps;
+        Contract.Assume(this.constellationJumps != null);
+        return this.constellationJumps;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _constellationJumps = value;
+        this.constellationJumps = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for corporate activities.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for corporate activities.
     /// </value>
-    public IDbSet<CorporateActivityEntity> CorporateActivities {
-      get {
+    public IDbSet<CorporateActivityEntity> CorporateActivities
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<CorporateActivityEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_corporateActivities != null);
-        return _corporateActivities;
+        Contract.Assume(this.corporateActivities != null);
+        return this.corporateActivities;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _corporateActivities = value;
+        this.corporateActivities = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for divisions.
     /// </summary>
-    /// 
     /// <value>
-    /// The <see cref="DbSet{T}" /> for divisions
+    /// The <see cref="DbSet{T}" /> for divisions.
     /// </value>
-    public IDbSet<DivisionEntity> Divisions {
-      get {
+    public IDbSet<DivisionEntity> Divisions
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<DivisionEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_divisions != null);
-        return _divisions;
+        Contract.Assume(this.divisions != null);
+        return this.divisions;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _divisions = value;
+        this.divisions = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for effect types.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for effect types.
     /// </value>
-    public IDbSet<EffectTypeEntity> EffectTypes {
-      get {
+    public IDbSet<EffectTypeEntity> EffectTypes
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<EffectTypeEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_effectTypes != null);
-        return _effectTypes;
+        Contract.Assume(this.effectTypes != null);
+        return this.effectTypes;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _effectTypes = value;
+        this.effectTypes = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for effect values.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for effect values.
     /// </value>
-    public IDbSet<EffectEntity> Effects {
-      get {
+    public IDbSet<EffectEntity> Effects
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<EffectEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_effects != null);
-        return _effects;
+        Contract.Assume(this.effects != null);
+        return this.effects;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _effects = value;
+        this.effects = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for item types.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for item types.
     /// </value>
-    public IDbSet<EveTypeEntity> EveTypes {
-      get {
+    public IDbSet<EveTypeEntity> EveTypes
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<EveTypeEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_eveTypes != null);
-        return _eveTypes;
+        Contract.Assume(this.eveTypes != null);
+        return this.eveTypes;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _eveTypes = value;
+        this.eveTypes = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for flag types.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for flag types.
     /// </value>
-    public IDbSet<FlagEntity> Flags {
-      get {
+    public IDbSet<FlagEntity> Flags
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<FlagEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_flags != null);
-        return _flags;
+        Contract.Assume(this.flags != null);
+        return this.flags;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _flags = value;
+        this.flags = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for groups.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for groups.
     /// </value>
-    public IDbSet<GroupEntity> Groups {
-      get {
+    public IDbSet<GroupEntity> Groups
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<GroupEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_groups != null);
-        return _groups;
+        Contract.Assume(this.groups != null);
+        return this.groups;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _groups = value;
+        this.groups = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for icons.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for icons.
     /// </value>
-    public IDbSet<IconEntity> Icons {
-      get {
+    public IDbSet<IconEntity> Icons
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<IconEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_icons != null);
-        return _icons;
+        Contract.Assume(this.icons != null);
+        return this.icons;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _icons = value;
+        this.icons = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for general items.
     /// </summary>
-    /// 
     /// <value>
-    /// The <see cref="DbSet{T}" /> for general items
+    /// The <see cref="DbSet{T}" /> for general items.
     /// </value>
-    public IDbSet<ItemEntity> Items {
-      get {
+    public IDbSet<ItemEntity> Items
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<ItemEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_items != null);
-        return _items;
+        Contract.Assume(this.items != null);
+        return this.items;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _items = value;
+        this.items = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for market groups.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for market groups.
     /// </value>
-    public IDbSet<MarketGroupEntity> MarketGroups {
-      get {
+    public IDbSet<MarketGroupEntity> MarketGroups
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<MarketGroupEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_marketGroups != null);
-        return _marketGroups;
+        Contract.Assume(this.marketGroups != null);
+        return this.marketGroups;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _marketGroups = value;
+        this.marketGroups = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for meta groups.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for meta groups.
     /// </value>
-    public IDbSet<MetaGroupEntity> MetaGroups {
-      get {
+    public IDbSet<MetaGroupEntity> MetaGroups
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<MetaGroupEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_metaGroups != null);
-        return _metaGroups;
+        Contract.Assume(this.metaGroups != null);
+        return this.metaGroups;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _metaGroups = value;
+        this.metaGroups = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for meta types.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for meta types.
     /// </value>
-    public IDbSet<MetaTypeEntity> MetaTypes {
-      get {
+    public IDbSet<MetaTypeEntity> MetaTypes
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<MetaTypeEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_metaTypes != null);
-        return _metaTypes;
+        Contract.Assume(this.metaTypes != null);
+        return this.metaTypes;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _metaTypes = value;
+        this.metaTypes = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for NPC corporations.
     /// </summary>
-    /// 
     /// <value>
-    /// The <see cref="DbSet{T}" /> for NPC corporations
+    /// The <see cref="DbSet{T}" /> for NPC corporations.
     /// </value>
-    public IDbSet<NpcCorporationEntity> NpcCorporations {
-      get {
+    public IDbSet<NpcCorporationEntity> NpcCorporations
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<NpcCorporationEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_npcCorporations != null);
-        return _npcCorporations;
+        Contract.Assume(this.npcCorporations != null);
+        return this.npcCorporations;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _npcCorporations = value;
+        this.npcCorporations = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for divisions of NPC corporations.
     /// </summary>
-    /// 
     /// <value>
-    /// The <see cref="DbSet{T}" /> for divisions of NPC corporations
+    /// The <see cref="DbSet{T}" /> for divisions of NPC corporations.
     /// </value>
-    public IDbSet<NpcCorporationDivisionEntity> NpcCorporationDivisions {
-      get {
+    public IDbSet<NpcCorporationDivisionEntity> NpcCorporationDivisions
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<NpcCorporationDivisionEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_npcCorporationDivisions != null);
-        return _npcCorporationDivisions;
+        Contract.Assume(this.npcCorporationDivisions != null);
+        return this.npcCorporationDivisions;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _npcCorporationDivisions = value;
+        this.npcCorporationDivisions = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
-    /// Returns the <see cref="ObjectContext" /> underlying the current
+    /// Gets the <see cref="ObjectContext" /> underlying the current
     /// <see cref="DbContext" />.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="ObjectContext" /> underlying the current
     /// <see cref="DbContext" />.
     /// </value>
-    public ObjectContext ObjectContext {
-      get {
+    public ObjectContext ObjectContext
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<ObjectContext>() != null);
 
-        var result = ((System.Data.Entity.Infrastructure.IObjectContextAdapter) this).ObjectContext;
+        var result = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)this).ObjectContext;
         Contract.Assume(result != null);
         return result;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for races.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for races.
     /// </value>
-    public IDbSet<RaceEntity> Races {
-      get {
+    public IDbSet<RaceEntity> Races
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<RaceEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_races != null);
-        return _races;
+        Contract.Assume(this.races != null);
+        return this.races;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _races = value;
+        this.races = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for regions.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for regions.
     /// </value>
-    public IDbSet<RegionEntity> Regions {
-      get {
+    public IDbSet<RegionEntity> Regions
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<RegionEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_regions != null);
-        return _regions;
+        Contract.Assume(this.regions != null);
+        return this.regions;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _regions = value;
+        this.regions = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for region jumps.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for region jumps.
     /// </value>
-    public IDbSet<RegionJumpEntity> RegionJumps {
-      get {
+    public IDbSet<RegionJumpEntity> RegionJumps
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<RegionJumpEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_regionJumps != null);
-        return _regionJumps;
+        Contract.Assume(this.regionJumps != null);
+        return this.regionJumps;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _regionJumps = value;
+        this.regionJumps = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for solar systems.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for solar Systems.
     /// </value>
-    public IDbSet<SolarSystemEntity> SolarSystems {
-      get {
+    public IDbSet<SolarSystemEntity> SolarSystems
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<SolarSystemEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_solarSystems != null);
-        return _solarSystems;
+        Contract.Assume(this.solarSystems != null);
+        return this.solarSystems;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _solarSystems = value;
+        this.solarSystems = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for solar system jumps.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for solar system jumps.
     /// </value>
-    public IDbSet<SolarSystemJumpEntity> SolarSystemJumps {
-      get {
+    public IDbSet<SolarSystemJumpEntity> SolarSystemJumps
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<SolarSystemJumpEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_solarSystemJumps != null);
-        return _solarSystemJumps;
+        Contract.Assume(this.solarSystemJumps != null);
+        return this.solarSystemJumps;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _solarSystemJumps = value;
+        this.solarSystemJumps = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for station operations.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for station operations.
     /// </value>
-    public IDbSet<StationOperationEntity> StationOperations {
-      get {
+    public IDbSet<StationOperationEntity> StationOperations
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<StationOperationEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_stationOperations != null);
-        return _stationOperations;
+        Contract.Assume(this.stationOperations != null);
+        return this.stationOperations;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _stationOperations = value;
+        this.stationOperations = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for station services.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for station services.
     /// </value>
-    public IDbSet<StationServiceEntity> StationServices {
-      get {
+    public IDbSet<StationServiceEntity> StationServices
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<StationServiceEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_stationServices != null);
-        return _stationServices;
+        Contract.Assume(this.stationServices != null);
+        return this.stationServices;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _stationServices = value;
+        this.stationServices = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for station types.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for station types.
     /// </value>
-    public IDbSet<StationTypeEntity> StationTypes {
-      get {
+    public IDbSet<StationTypeEntity> StationTypes
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<StationTypeEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_stationTypes != null);
-        return _stationTypes;
+        Contract.Assume(this.stationTypes != null);
+        return this.stationTypes;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _stationTypes = value;
+        this.stationTypes = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for units.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for units.
     /// </value>
-    public IDbSet<UnitEntity> Units {
-      get {
+    public IDbSet<UnitEntity> Units
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<UnitEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_units != null);
-        return _units;
+        Contract.Assume(this.units != null);
+        return this.units;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _units = value;
+        this.units = value;
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets or sets the <see cref="DbSet{T}" /> for universes.
     /// </summary>
-    /// 
     /// <value>
     /// The <see cref="DbSet{T}" /> for universes.
     /// </value>
-    public IDbSet<UniverseEntity> Universes {
-      get {
+    public IDbSet<UniverseEntity> Universes
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<IDbSet<UniverseEntity>>() != null);
 
         // The field will be non-null by the time the property is accessed.
-        Contract.Assume(_universes != null);
-        return _universes;
+        Contract.Assume(this.universes != null);
+        return this.universes;
       }
-      set {
+
+      set
+      {
         Contract.Requires(value != null, "The DbSet cannot be null.");
-        _universes = value;
+        this.universes = value;
       }
     }
-    #endregion
-    #region Public Methods
-    //******************************************************************************
+
+    /* Methods */
+
     /// <inheritdoc />
-    public override int SaveChanges() {
+    public override int SaveChanges()
+    {
       return 0;
     }
-    //******************************************************************************
+
     /// <summary>
     /// Returns an <see cref="IDbSet{TEntity}" /> for the specified entity type.
     /// </summary>
-    /// 
     /// <typeparam name="TEntity">
     /// The type of entity for which to return a <see cref="IDbSet{TEntity}" />.
     /// </typeparam>
-    /// 
     /// <returns>
     /// An <see cref="IDbSet{TEntity}" /> for the specified entity type.
     /// </returns>
-    /// 
     /// <remarks>
     /// <para>
     /// This method simply returns the value of the base class's
@@ -887,18 +970,18 @@ namespace Eve.Data {
     /// object, for ease of testing and mocking.
     /// </para>
     /// </remarks>
-    public new virtual IDbSet<TEntity> Set<TEntity>() where TEntity : class {
+    public new virtual IDbSet<TEntity> Set<TEntity>() where TEntity : class
+    {
       return base.Set<TEntity>();
     }
-    #endregion
-    #region Protected Methods
-    //******************************************************************************
+
     /// <inheritdoc />
     [ContractVerification(false)]
-    protected override void OnModelCreating(DbModelBuilder modelBuilder) {
+    protected override void OnModelCreating(DbModelBuilder modelBuilder)
+    {
       base.OnModelCreating(modelBuilder);
 
-      #region AgentEntity Mappings
+      /* AgentEntity Mappings *******************************************************/
       var agent = modelBuilder.Entity<AgentEntity>();
 
       // Map the ResearchFields collection
@@ -907,9 +990,8 @@ namespace Eve.Data {
            .Map(x => x.ToTable("agtResearchAgents")
                       .MapLeftKey("agentID")
                       .MapRightKey("typeID"));
-      #endregion
 
-      #region AgentTypeEntity Mappings
+      /* AgentTypeEntity Mappings ***************************************************/
       var agentType = modelBuilder.Entity<AgentTypeEntity>();
 
       // Map properties inherited from BaseValueEntity<>
@@ -918,9 +1000,8 @@ namespace Eve.Data {
       agentType.Ignore(x => x.Description);
       agentType.Property(x => x.Id).HasColumnName("agentTypeID");
       agentType.Property(x => x.Name).HasColumnName("agentType");
-      #endregion
 
-      #region AttributeTypeEntity Mappings
+      /* AttributeTypeEntity Mappings ***********************************************/
       var attributeType = modelBuilder.Entity<AttributeTypeEntity>();
 
       // Map properties inherited from BaseValueEntity<>
@@ -929,13 +1010,12 @@ namespace Eve.Data {
       attributeType.Property(x => x.Description).HasColumnName("description");
       attributeType.Property(x => x.Id).HasColumnName("attributeID");
       attributeType.Property(x => x.Name).HasColumnName("attributeName");
-      #endregion
 
-      #region AttributeValueEntity Mappings
+      /* AttributeValueEntity Mappings **********************************************/
+
       // All mappings defined by Data Annotations
-      #endregion
 
-      #region AttributeCategoryEntity Mappings
+      /* AttributeCategoryEntity Mappings *******************************************/
       var attributeCategory = modelBuilder.Entity<AttributeCategoryEntity>();
 
       // Map properties inherited from BaseValueEntity<>
@@ -944,9 +1024,8 @@ namespace Eve.Data {
       attributeCategory.Property(x => x.Description).HasColumnName("categoryDescription");
       attributeCategory.Property(x => x.Id).HasColumnName("categoryID");
       attributeCategory.Property(x => x.Name).HasColumnName("categoryName");
-      #endregion
 
-      #region CategoryEntity Mappings
+      /* AttributeCategoryEntity Mappings *******************************************/
       var category = modelBuilder.Entity<CategoryEntity>();
 
       // Map properties inherited from BaseValueEntity<>
@@ -955,9 +1034,8 @@ namespace Eve.Data {
       category.Property(x => x.Description).HasColumnName("description");
       category.Property(x => x.Id).HasColumnName("categoryID");
       category.Property(x => x.Name).HasColumnName("categoryName");
-      #endregion
 
-      #region CharacterAttributeTypeEntity Mappings
+      /* CharacterAttributeTypeEntity Mappings **************************************/
       var characterAttributeType = modelBuilder.Entity<CharacterAttributeTypeEntity>();
 
       // Map properties inherited from BaseValueEntity<>
@@ -966,20 +1044,18 @@ namespace Eve.Data {
       characterAttributeType.Property(x => x.Description).HasColumnName("description");
       characterAttributeType.Property(x => x.Id).HasColumnName("attributeID");
       characterAttributeType.Property(x => x.Name).HasColumnName("attributeName");
-      #endregion
 
-      #region ConstellationEntity Mappings
+      /* ConstellationEntity Mappings ***********************************************/
       var constellation = modelBuilder.Entity<ConstellationEntity>();
 
       // Map the Jumps collection
       constellation.HasMany(x => x.Jumps).WithRequired(x => x.FromConstellation).HasForeignKey(x => x.FromConstellationId);
-      #endregion
 
-      #region ConstellationJumpEntity Mappings
+      /* ConstellationJumpEntity Mappings *******************************************/
+
       // All mappings defined by Data Annotations
-      #endregion
 
-      #region CorporateActivityEntity Mappings
+      /* CorporateActivityEntity Mappings *******************************************/
       var corporateActivity = modelBuilder.Entity<CorporateActivityEntity>();
 
       // Map properties inherited from BaseValueEntity<>
@@ -988,9 +1064,8 @@ namespace Eve.Data {
       corporateActivity.Property(x => x.Description).HasColumnName("description");
       corporateActivity.Property(x => x.Id).HasColumnName("activityID");
       corporateActivity.Property(x => x.Name).HasColumnName("activityName");
-      #endregion
 
-      #region DivisionEntity Mappings
+      /* DivisionEntity Mappings ****************************************************/
       var division = modelBuilder.Entity<DivisionEntity>();
 
       // Map properties inherited from BaseValueEntity<>
@@ -999,13 +1074,12 @@ namespace Eve.Data {
       division.Property(x => x.Description).HasColumnName("description");
       division.Property(x => x.Id).HasColumnName("divisionID");
       division.Property(x => x.Name).HasColumnName("divisionName");
-      #endregion
 
-      #region EffectEntity Mappings
+      /* EffectEntity Mappings ******************************************************/
+
       // All mappings defined by Data Annotations
-      #endregion
 
-      #region EffectTypeEntity Mappings
+      /* EffectTypeEntity Mappings **************************************************/
       var effectType = modelBuilder.Entity<EffectTypeEntity>();
 
       // Map properties inherited from BaseValueEntity<>
@@ -1014,9 +1088,8 @@ namespace Eve.Data {
       effectType.Property(x => x.Description).HasColumnName("description");
       effectType.Property(x => x.Id).HasColumnName("effectID");
       effectType.Property(x => x.Name).HasColumnName("effectName");
-      #endregion
 
-      #region EveTypeEntity Mappings
+      /* EveTypeEntity Mappings *****************************************************/
       var type = modelBuilder.Entity<EveTypeEntity>();
 
       // Map properties inherited from BaseValueEntity<>
@@ -1037,9 +1110,8 @@ namespace Eve.Data {
 
       // Map the VariantMetaTypes collection
       type.HasMany(x => x.ChildMetaTypes).WithRequired().HasForeignKey(x => x.ParentTypeId);
-      #endregion
 
-      #region FactionEntity Mappings
+      /* FactionEntity Mappings *****************************************************/
       var faction = modelBuilder.Entity<FactionEntity>();
 
       // Map properties inherited from BaseValueEntity<>
@@ -1050,9 +1122,8 @@ namespace Eve.Data {
       faction.Property(x => x.Name).HasColumnName("factionName");
 
       faction.HasRequired(x => x.SolarSystem).WithMany().HasForeignKey(x => x.SolarSystemId);
-      #endregion
 
-      #region FlagEntity Mappings
+      /* FlagEntity Mappings ********************************************************/
       var flag = modelBuilder.Entity<FlagEntity>();
 
       // Map properties inherited from BaseValueEntity<>
@@ -1061,9 +1132,8 @@ namespace Eve.Data {
       flag.Property(x => x.Description).HasColumnName("flagText");
       flag.Property(x => x.Id).HasColumnName("flagID");
       flag.Property(x => x.Name).HasColumnName("flagName");
-      #endregion
 
-      #region GroupEntity Mappings
+      /* GroupEntity Mappings *******************************************************/
       var group = modelBuilder.Entity<GroupEntity>();
 
       // Map properties inherited from BaseValueEntity<>
@@ -1075,9 +1145,8 @@ namespace Eve.Data {
 
       // Map the Types collection
       group.HasMany(x => x.Types).WithRequired(x => x.Group).HasForeignKey(x => x.GroupId);
-      #endregion
 
-      #region IconEntity Mappings
+      /* IconEntity Mappings ********************************************************/
       var icon = modelBuilder.Entity<IconEntity>();
 
       // Map properties inherited from BaseValueEntity<>
@@ -1086,16 +1155,14 @@ namespace Eve.Data {
       icon.Property(x => x.Description).HasColumnName("description");
       icon.Property(x => x.Id).HasColumnName("iconID");
       icon.Property(x => x.Name).HasColumnName("iconFile");
-      #endregion
 
-      #region ItemEntity Mappings
+      /* ItemEntity Mappings ********************************************************/
       var item = modelBuilder.Entity<ItemEntity>();
 
       item.HasRequired(x => x.Location).WithMany();
       item.HasRequired(x => x.Owner).WithMany();
-      #endregion
 
-      #region MarketGroupEntity Mappings
+      /* MarketGroupEntity Mappings *************************************************/
       var marketGroup = modelBuilder.Entity<MarketGroupEntity>();
 
       // Map properties inherited from BaseValueEntity<>
@@ -1110,9 +1177,8 @@ namespace Eve.Data {
 
       // Map the Types collection
       marketGroup.HasMany(x => x.Types).WithRequired(x => x.MarketGroup).HasForeignKey(x => x.MarketGroupId);
-      #endregion
 
-      #region MetaGroupEntity Mappings
+      /* MetaGroupEntity Mappings ***************************************************/
       var metaGroup = modelBuilder.Entity<MetaGroupEntity>();
 
       // Map properties inherited from BaseValueEntity<>
@@ -1121,13 +1187,12 @@ namespace Eve.Data {
       metaGroup.Property(x => x.Description).HasColumnName("description");
       metaGroup.Property(x => x.Id).HasColumnName("metaGroupID");
       metaGroup.Property(x => x.Name).HasColumnName("metaGroupName");
-      #endregion
 
-      #region MetaTypeEntity Mappings
+      /* MetaTypeEntity Mappings ****************************************************/
+
       // All mappings defined by Data Annotations
-      #endregion
 
-      #region NpcCorporationEntity Mappings
+      /* NpcCorporationEntity Mappings **********************************************/
       var corporation = modelBuilder.Entity<NpcCorporationEntity>();
 
       // Map the Agents collection
@@ -1146,18 +1211,16 @@ namespace Eve.Data {
                  .WithMany().Map(x => x.ToTable("crpNPCCorporationResearchFields")
                  .MapLeftKey("corporationID")
                  .MapRightKey("skillID"));
-      #endregion
 
-      #region NpcCorporationDivisionEntity Mappings
+      /* NpcCorporationDivisionEntity Mappings **************************************/
       var corporationDivision = modelBuilder.Entity<NpcCorporationDivisionEntity>();
 
       // Map the Agents collection
       corporationDivision.HasMany(x => x.Agents)
                          .WithRequired()
                          .HasForeignKey(x => new { x.CorporationId, x.DivisionId });
-      #endregion
 
-      #region RaceEntity Mappings
+      /* RaceEntity Mappings ********************************************************/
       var race = modelBuilder.Entity<RaceEntity>();
 
       // Map properties inherited from BaseValueEntity<>
@@ -1166,34 +1229,31 @@ namespace Eve.Data {
       race.Property(x => x.Description).HasColumnName("description");
       race.Property(x => x.Id).HasColumnName("raceID");
       race.Property(x => x.Name).HasColumnName("raceName");
-      #endregion
 
-      #region RegionEntity Mappings
+      /* RegionEntity Mappings ******************************************************/
       var region = modelBuilder.Entity<RegionEntity>();
 
       // Map the Jumps collection
       region.HasMany(x => x.Jumps).WithRequired(x => x.FromRegion).HasForeignKey(x => x.FromRegionId);
-      #endregion
 
-      #region RegionJumpEntity Mappings
+      /* RegionJumpEntity Mappings **************************************************/
+
       // All mappings defined by Data Annotations
-      #endregion
 
-      #region SolarSystemEntity Mappings
+      /* SolarSystemEntity Mappings *************************************************/
       var solarSystem = modelBuilder.Entity<SolarSystemEntity>();
 
       solarSystem.HasRequired(x => x.Constellation).WithMany().HasForeignKey(x => x.ConstellationId);
       solarSystem.HasOptional(x => x.Faction).WithMany().HasForeignKey(x => x.FactionId);
-      
+
       // Map the Jumps collection
       solarSystem.HasMany(x => x.Jumps).WithRequired(x => x.FromSolarSystem).HasForeignKey(x => x.FromSolarSystemId);
-      #endregion
 
-      #region SolarSystemJumpEntity Mappings
+      /* SolarSystemJumpEntity Mappings *********************************************/
+
       // All mappings defined by Data Annotations
-      #endregion
 
-      #region StationOperationEntity Mappings
+      /* StationOperationEntity Mappings ********************************************/
       var stationOperation = modelBuilder.Entity<StationOperationEntity>();
 
       // Map properties inherited from BaseValueEntity<>
@@ -1207,9 +1267,8 @@ namespace Eve.Data {
       stationOperation.HasMany(x => x.Services).WithMany().Map(x => x.ToTable("staOperationServices")
                                                                      .MapLeftKey("operationID")
                                                                      .MapRightKey("serviceID"));
-      #endregion
 
-      #region StationServiceEntity Mappings
+      /* StationServiceEntity Mappings **********************************************/
       var stationService = modelBuilder.Entity<StationServiceEntity>();
 
       // Map properties inherited from BaseValueEntity<>
@@ -1218,13 +1277,12 @@ namespace Eve.Data {
       stationService.Property(x => x.Description).HasColumnName("description");
       stationService.Property(x => x.Id).HasColumnName("serviceID");
       stationService.Property(x => x.Name).HasColumnName("serviceName");
-      #endregion
 
-      #region StationTypeEntity Mappings
+      /* StationTypeEntity Mappings *************************************************/
+
       // All mappings defined by Data Annotations
-      #endregion
 
-      #region UnitEntity Mappings
+      /* UnitEntity Mappings ********************************************************/
       var unit = modelBuilder.Entity<UnitEntity>();
 
       // Map properties inherited from BaseValueEntity<>
@@ -1233,12 +1291,9 @@ namespace Eve.Data {
       unit.Property(x => x.Description).HasColumnName("description");
       unit.Property(x => x.Id).HasColumnName("unitID");
       unit.Property(x => x.Name).HasColumnName("unitName");
-      #endregion
 
-      #region UniverseEntity Mappings
+      /* UniverseEntity Mappings ****************************************************/
       var universe = modelBuilder.Entity<UniverseEntity>();
-      #endregion
     }
-    #endregion
   }
 }

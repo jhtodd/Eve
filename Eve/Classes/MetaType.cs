@@ -3,7 +3,8 @@
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Eve {
+namespace Eve
+{
   using System;
   using System.Collections;
   using System.Collections.Generic;
@@ -12,289 +13,239 @@ namespace Eve {
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Data.Entities;
+
   using FreeNet;
   using FreeNet.Collections;
   using FreeNet.Collections.ObjectModel;
   using FreeNet.Data.Entity;
   using FreeNet.Utilities;
 
-  using Eve.Data.Entities;
-  using Eve.Meta;
-
-  //******************************************************************************
   /// <summary>
   /// Contains meta-information about an EVE item type.
   /// </summary>
-  public class MetaType : EntityAdapter<MetaTypeEntity>,
-                          IComparable,
-                          IComparable<MetaType>,
-                          IEquatable<MetaType>,
-                          IHasIcon,
-                          IHasId<TypeId>,
-                          IKeyItem<TypeId> {
+  public sealed partial class MetaType
+    : EveEntityAdapter<MetaTypeEntity>,
+      IComparable,
+      IComparable<MetaType>,
+      IEquatable<MetaType>,
+      IEveCacheable,
+      IHasIcon,
+      IKeyItem<TypeId>
+  {
+    private MetaGroup metaGroup;
+    private EveType parentType;
+    private EveType type;
 
-    #region Instance Fields
-    private MetaGroup _metaGroup;
-    private EveType _parentType;
-    private EveType _type;
-    #endregion
+    /* Constructors */
 
-    #region Constructors/Finalizers
-    //******************************************************************************
     /// <summary>
     /// Initializes a new instance of the MetaType class.
     /// </summary>
-    /// 
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    protected internal MetaType(MetaTypeEntity entity) : base(entity) {
+    internal MetaType(MetaTypeEntity entity) : base(entity)
+    {
       Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
     }
-    //******************************************************************************
-    /// <summary>
-    /// Establishes object invariants of the class.
-    /// </summary>
-    [ContractInvariantMethod]
-    private void ObjectInvariant() {
-    }
-    #endregion
-    #region Public Properties
-    //******************************************************************************
+
+    /* Properties */
+
     /// <summary>
     /// Gets the meta group of the item.
     /// </summary>
-    /// 
     /// <value>
     /// The meta group of the item.
     /// </value>
-    public MetaGroup MetaGroup {
-      get {
+    public MetaGroup MetaGroup
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<MetaGroup>() != null);
 
-        if (_metaGroup == null) {
-
-          // Load the cached version if available
-          _metaGroup = Eve.General.Cache.GetOrAdd<MetaGroup>(MetaGroupId, () => {
-            MetaGroupEntity metaGroupEntity = Entity.MetaGroup;
-            Contract.Assume(metaGroupEntity != null);
-
-            return new MetaGroup(metaGroupEntity);
-          });
-        }
-
-        return _metaGroup;
+        // If not already set, load from the cache, or else create an instance from the base entity
+        return this.metaGroup ?? (this.metaGroup = Eve.General.Cache.GetOrAdd<MetaGroup>(this.MetaGroupId, () => (MetaGroup)this.Entity.MetaGroup.ToAdapter()));
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets the ID of the meta group of the item.
     /// </summary>
-    /// 
     /// <value>
     /// The ID of the meta group of the item.
     /// </value>
-    public MetaGroupId MetaGroupId {
-      get {
-        return Entity.MetaGroupId;
-      }
+    public MetaGroupId MetaGroupId
+    {
+      get { return Entity.MetaGroupId; }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets the parent type.
     /// </summary>
-    /// 
     /// <value>
     /// The parent type.
     /// </value>
-    public EveType ParentType {
-      get {
+    public EveType ParentType
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<EveType>() != null);
 
-        if (_parentType == null) {
-
-          // Load the cached version if available
-          _parentType = Eve.General.Cache.GetOrAdd<EveType>(ParentTypeId, () => {
-            EveTypeEntity typeEntity = Entity.ParentType;
-            Contract.Assume(typeEntity != null);
-
-            return EveType.Create(typeEntity);
-          });
-        }
-
-        return _parentType;
+        // If not already set, load from the cache, or else create an instance from the base entity
+        return this.parentType ?? (this.parentType = Eve.General.Cache.GetOrAdd<EveType>(this.ParentTypeId, () => EveType.Create(Entity.ParentType)));
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets the ID of the parent type.
     /// </summary>
-    /// 
     /// <value>
     /// The ID of the parent type.
     /// </value>
-    public TypeId ParentTypeId {
-      get {
-        return Entity.ParentTypeId;
+    public TypeId ParentTypeId
+    {
+      get { return Entity.ParentTypeId; }
+    }
+
+    /// <summary>
+    /// Gets the item type the value describes.
+    /// </summary>
+    /// <value>
+    /// The item type the value describes.
+    /// </value>
+    private EveType Type
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<EveType>() != null);
+
+        // If not already set, load from the cache, or else create an instance from the base entity
+        return this.type ?? (this.type = Eve.General.Cache.GetOrAdd<EveType>(this.TypeId, () => EveType.Create(Entity.Type)));
       }
     }
-    #endregion
-    #region Public Methods
-    //******************************************************************************
+
+    /// <summary>
+    /// Gets the ID of the item type the value describes.
+    /// </summary>
+    /// <value>
+    /// The ID of the item type the value describes.
+    /// </value>
+    private TypeId TypeId
+    {
+      get { return Entity.TypeId; }
+    }
+
+    /* Methods */
+
     /// <inheritdoc />
-    public virtual int CompareTo(MetaType other) {
-      if (other == null) {
+    public int CompareTo(MetaType other)
+    {
+      if (other == null)
+      {
         return 1;
       }
 
-      int result = MetaGroupId.CompareTo(other.MetaGroupId);
+      int result = this.MetaGroupId.CompareTo(other.MetaGroupId);
 
-      if (result == 0) {
-        result = Type.MetaLevel.CompareTo(other.Type.MetaLevel);
+      if (result == 0)
+      {
+        result = this.Type.MetaLevel.CompareTo(other.Type.MetaLevel);
       }
 
-      if (result == 0) {
-        result = Type.CompareTo(other.Type);
+      if (result == 0)
+      {
+        result = this.Type.CompareTo(other.Type);
       }
 
       return result;
     }
-    //******************************************************************************
+
     /// <inheritdoc />
-    public override bool Equals(object obj) {
-      return Equals(obj as MetaType);
+    public override bool Equals(object obj)
+    {
+      return this.Equals(obj as MetaType);
     }
-    //******************************************************************************
+
     /// <inheritdoc />
-    public virtual bool Equals(MetaType other) {
-      if (other == null) {
+    public bool Equals(MetaType other)
+    {
+      if (other == null)
+      {
         return false;
       }
 
-      return TypeId == other.TypeId && ParentTypeId == other.ParentTypeId && MetaGroupId == other.MetaGroupId;
+      return this.TypeId == other.TypeId && this.ParentTypeId == other.ParentTypeId && this.MetaGroupId == other.MetaGroupId;
     }
-    //******************************************************************************
+
     /// <inheritdoc />
-    public override int GetHashCode() {
-      return TypeId.GetHashCode();
+    public override int GetHashCode()
+    {
+      return this.TypeId.GetHashCode();
     }
-    //******************************************************************************
+
     /// <inheritdoc />
-    public override string ToString() {
-      return Type.Name + " (" + MetaGroup.Name + ")";
+    public override string ToString()
+    {
+      return this.Type.Name + " (" + this.MetaGroup.Name + ")";
     }
-    #endregion
-    #region Protected Properties
-    //******************************************************************************
-    /// <summary>
-    /// Gets the item type the value describes.
-    /// </summary>
-    /// 
-    /// <value>
-    /// The item type the value describes.
-    /// </value>
-    protected EveType Type {
-      get {
-        Contract.Ensures(Contract.Result<EveType>() != null);
+  }
 
-        if (_type == null) {
-
-          // Load the cached version if available
-          _type = Eve.General.Cache.GetOrAdd<EveType>(TypeId, () => {
-            EveTypeEntity typeEntity = Entity.Type;
-            Contract.Assume(typeEntity != null);
-
-            return EveType.Create(typeEntity);
-          });
-        }
-
-        return _type;
-      }
-    }
-    //******************************************************************************
-    /// <summary>
-    /// Gets the ID of the item type the value describes.
-    /// </summary>
-    /// 
-    /// <value>
-    /// The ID of the item type the value describes.
-    /// </value>
-    protected TypeId TypeId {
-      get {
-        return Entity.TypeId;
-      }
-    }
-    #endregion
-
-    #region IComparable Members
-    //******************************************************************************
-    int IComparable.CompareTo(object obj) {
+  #region IComparable Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IComparable" /> interface.
+  /// </content>
+  public partial class MetaType : IComparable
+  {
+    int IComparable.CompareTo(object obj)
+    {
       MetaType other = obj as MetaType;
-      return CompareTo(other);
+      return this.CompareTo(other);
     }
-    #endregion
-    #region IHasIcon Members
-    //******************************************************************************
-    Icon IHasIcon.Icon {
-      get {
-        return Type.Icon;
-      }
-    }
-    //******************************************************************************
-    IconId? IHasIcon.IconId {
-      get {
-        return Type.IconId;
-      }
-    }
-    #endregion
-    #region IHasId Members
-    //******************************************************************************
-    object IHasId.Id {
-      get {
-        return TypeId;
-      }
-    }
-    #endregion
-    #region IHasId<TypeId> Members
-    //******************************************************************************
-    TypeId IHasId<TypeId>.Id {
-      get {
-        return TypeId;
-      }
-    }
-    #endregion
-    #region IKeyItem<TypeId> Members
-    //******************************************************************************
-    TypeId IKeyItem<TypeId>.Key {
-      get {
-        return TypeId;
-      }
-    }
-    #endregion
   }
+  #endregion
 
-  //******************************************************************************
-  /// <summary>
-  /// A read-only collection of meta types.
-  /// </summary>
-  public class ReadOnlyMetaTypeCollection : ReadOnlyCollection<MetaType> {
-
-    #region Constructors/Finalizers
-    //******************************************************************************
-    /// <summary>
-    /// Initializes a new instance of the ReadOnlyMetaTypeCollection class.
-    /// </summary>
-    /// 
-    /// <param name="contents">
-    /// The contents of the collection.
-    /// </param>
-    public ReadOnlyMetaTypeCollection(IEnumerable<MetaType> contents) : base() {
-      if (contents != null) {
-        foreach (MetaType metaType in contents) {
-          Items.AddWithoutCallback(metaType);
-        }
-      }
+  #region IEveCacheable Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IEveCacheable" /> interface.
+  /// </content>
+  public partial class MetaType : IEveCacheable
+  {
+    object IEveCacheable.CacheKey
+    {
+      get { return this.TypeId; }
     }
-    #endregion
   }
+  #endregion
+
+  #region IHasIcon Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IHasIcon" /> interface.
+  /// </content>
+  public partial class MetaType : IHasIcon
+  {
+    Icon IHasIcon.Icon
+    {
+      get { return this.Type.Icon; }
+    }
+
+    IconId? IHasIcon.IconId
+    {
+      get { return this.Type.IconId; }
+    }
+  }
+  #endregion
+
+  #region IKeyItem<TypeId> Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.
+  /// </content>
+  public partial class MetaType : IKeyItem<TypeId>
+  {
+    TypeId IKeyItem<TypeId>.Key
+    {
+      get { return this.TypeId; }
+    }
+  }
+  #endregion
 }

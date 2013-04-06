@@ -3,7 +3,8 @@
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Eve.Universe {
+namespace Eve.Universe
+{
   using System;
   using System.Collections;
   using System.Collections.Generic;
@@ -12,164 +13,153 @@ namespace Eve.Universe {
 
   using FreeNet;
 
-  //******************************************************************************
   /// <summary>
   /// Represents an ID value for the <see cref="SolarSystem" /> class.
   /// </summary>
-  public struct SolarSystemId : IEquatable<SolarSystemId> {
+  public struct SolarSystemId : IEquatable<SolarSystemId>
+  {
+    private readonly long value;
 
-    #region Operators
-    //******************************************************************************
+    /* Constructors */
+
+    /// <summary>
+    /// Initializes a new instance of the SolarSystemId structure.
+    /// </summary>
+    /// <param name="value">
+    /// The value of the structure.
+    /// </param>
+    public SolarSystemId(long value)
+    {
+      this.value = value;
+    }
+
+    /* Properties */
+
+    /// <summary>
+    /// Gets the ID value.
+    /// </summary>
+    /// <value>
+    /// The ID value.
+    /// </value>
+    public long Value
+    {
+      get { return this.value; }
+    }
+
+    /* Methods */
+
     /// <summary>
     /// The equality operator.
     /// </summary>
-    /// 
     /// <param name="left">
     /// The first value to compare.
     /// </param>
-    /// 
     /// <param name="right">
     /// The second value to compare.
     /// </param>
-    /// 
     /// <returns>
     /// <see langword="true" /> if the two values are equal; otherwise
     /// <see langword="false" />.
     /// </returns>
-    public static bool operator ==(SolarSystemId left, SolarSystemId right) {
+    public static bool operator ==(SolarSystemId left, SolarSystemId right)
+    {
       return left.Value.Equals(right.Value);
     }
-    //******************************************************************************
+
     /// <summary>
     /// The inequality operator.
     /// </summary>
-    /// 
     /// <param name="left">
     /// The first value to compare.
     /// </param>
-    /// 
     /// <param name="right">
     /// The second value to compare.
     /// </param>
-    /// 
     /// <returns>
     /// <see langword="true" /> if the two values are unequal; otherwise
     /// <see langword="false" />.
     /// </returns>
-    public static bool operator !=(SolarSystemId left, SolarSystemId right) {
+    public static bool operator !=(SolarSystemId left, SolarSystemId right)
+    {
       return !left.Value.Equals(right.Value);
     }
-    //******************************************************************************
+
     /// <summary>
     /// Implicit conversion from another type.
     /// </summary>
-    /// 
     /// <param name="value">
     /// The value to convert.
     /// </param>
-    /// 
     /// <returns>
     /// The converted value.
     /// </returns>
-    public static implicit operator SolarSystemId(long value) {
+    public static implicit operator SolarSystemId(long value)
+    {
       return new SolarSystemId(value);
     }
-    //******************************************************************************
+
     /// <summary>
     /// Implicit conversion to another type.
     /// </summary>
-    /// 
     /// <param name="value">
     /// The value to convert.
     /// </param>
-    /// 
     /// <returns>
     /// The converted value.
     /// </returns>
-    public static implicit operator long(SolarSystemId value) {
+    public static implicit operator long(SolarSystemId value)
+    {
       return value.Value;
     }
-    //******************************************************************************
+
     /// <summary>
     /// Implicit conversion from another type.
     /// </summary>
-    /// 
     /// <param name="value">
     /// The value to convert.
     /// </param>
-    /// 
     /// <returns>
     /// The converted value.
     /// </returns>
-    public static implicit operator ItemId(SolarSystemId value) {
-
+    public static implicit operator ItemId(SolarSystemId value)
+    {
       // SolarSystemId "derives" from ItemId and can always be converted to it
       // (but not vice versa).
       return new ItemId(value.Value);
     }
-    #endregion
 
-    #region Instance Fields
-    private long _value;
-    #endregion
-
-    #region Constructors/Finalizers
-    //******************************************************************************
-    /// <summary>
-    /// Initializes a new instance of the SolarSystemId structure.
-    /// </summary>
-    /// 
-    /// <param name="value">
-    /// The value of the structure.
-    /// </param>
-    public SolarSystemId(long value) {
-      _value = value;
-    }
-    #endregion
-    #region Public Properties
-    //******************************************************************************
-    /// <summary>
-    /// Gets the ID value.
-    /// </summary>
-    /// 
-    /// <value>
-    /// The ID value.
-    /// </value>
-    public long Value {
-      get {
-        return _value;
-      }
-    }
-    #endregion
-    #region Public Methods
-    //******************************************************************************
     /// <inheritdoc />
-    public override bool Equals(object obj) {
-      if (obj == null) {
+    public override bool Equals(object obj)
+    {
+      if (obj == null)
+      {
         return false;
       }
 
-      if (!typeof(SolarSystemId).IsAssignableFrom(obj.GetType())) {
+      if (!typeof(SolarSystemId).IsAssignableFrom(obj.GetType()))
+      {
         return false;
       }
 
-      return Equals((SolarSystemId) obj);
+      return this.Equals((SolarSystemId)obj);
     }
-    //******************************************************************************
+
     /// <inheritdoc />
-    public bool Equals(SolarSystemId other) {
-      return Value.Equals(other.Value);
+    public bool Equals(SolarSystemId other)
+    {
+      return this.Value.Equals(other.Value);
     }
-    //******************************************************************************
+
     /// <inheritdoc />
-    public override int GetHashCode() {
-      return Value.GetHashCode();
+    public override int GetHashCode()
+    {
+      return this.Value.GetHashCode();
     }
-    //******************************************************************************
+
     /// <inheritdoc />
-    public override string ToString() {
-      return Value.ToString();
+    public override string ToString()
+    {
+      return this.Value.ToString();
     }
-    #endregion
   }
 }

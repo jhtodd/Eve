@@ -3,7 +3,8 @@
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Eve {
+namespace Eve
+{
   using System;
   using System.Collections;
   using System.Collections.Generic;
@@ -14,85 +15,277 @@ namespace Eve {
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Data;
+  using Eve.Data.Entities;
+  using Eve.Universe;
+
   using FreeNet;
   using FreeNet.Collections;
   using FreeNet.Data.Entity;
   using FreeNet.Utilities;
 
-  using Eve.Data;
-  using Eve.Data.Entities;
-  using Eve.Meta;
-  using Eve.Universe;
-
-  //******************************************************************************
   /// <summary>
   /// The base class for specific, concrete items within the EVE universe, such
   /// as solar systems, stations, agents, corporations, and so on.
   /// </summary>
-  public abstract class Item : EntityAdapter<ItemEntity>,
-                               IComparable,
-                               IComparable<Item>,
-                               IEquatable<Item>,
-                               IHasId<ItemId>, 
-                               IKeyItem<ItemId> {
+  [EveCacheDomain(typeof(Item))]
+  public abstract partial class Item 
+    : EveEntityAdapter<ItemEntity>,
+      IComparable,
+      IComparable<Item>,
+      IEveCacheable,
+      IEquatable<Item>,
+      IKeyItem<ItemId>
+  {
+    private Flag flag;
+    private ItemId id;
+    private EveType itemType;
+    private Item location;
+    private Item owner;
 
-    #region Static Methods
-    //******************************************************************************
+    /* Constructors */
+
+    /// <summary>
+    /// Initializes a new instance of the Item class.
+    /// </summary>
+    /// <param name="entity">
+    /// The data entity that forms the basis of the adapter.
+    /// </param>
+    protected Item(ItemEntity entity) : base(entity)
+    {
+      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+
+      this.id = entity.Id;
+    }
+
+    /* Properties */
+
+    /// <summary>
+    /// Gets the <see cref="Flag" /> value associated with the item.
+    /// </summary>
+    /// <value>
+    /// The <see cref="Flag" /> value associated with the item.
+    /// </value>
+    public Flag Flag
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<Flag>() != null);
+
+        // If not already set, load from the cache, or else create an instance from the base entity
+        return this.flag ?? (this.flag = Eve.General.Cache.GetOrAdd<Flag>(this.FlagId, () => (Flag)this.Entity.Flag.ToAdapter()));
+      }
+    }
+
+    /// <summary>
+    /// Gets the ID of the <see cref="Flag" /> value associated with the item.
+    /// </summary>
+    /// <value>
+    /// The ID of the <see cref="Flag" /> value associated with the item.
+    /// </value>
+    public FlagId FlagId
+    {
+      get { return Entity.FlagId; }
+    }
+
+    /// <summary>
+    /// Gets the ID of the item.
+    /// </summary>
+    /// <value>
+    /// The unique value which identifies the item.
+    /// </value>
+    public ItemId Id
+    {
+      get { return this.id; }
+    }
+
+    /// <summary>
+    /// Gets the type of the item.
+    /// </summary>
+    /// <value>
+    /// An <see cref="EveType" /> specifying the type of the item.
+    /// </value>
+    public EveType ItemType
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<EveType>() != null);
+
+        // If not already set, load from the cache, or else create an instance from the base entity
+        return this.itemType ?? (this.itemType = Eve.General.Cache.GetOrAdd<EveType>(this.ItemTypeId, () => (EveType)this.Entity.ItemType.ToAdapter()));
+      }
+    }
+
+    /// <summary>
+    /// Gets the ID of the type of the item.
+    /// </summary>
+    /// <value>
+    /// The ID of the <see cref="EveType" /> specifying the type of the item.
+    /// </value>
+    public TypeId ItemTypeId
+    {
+      get { return Entity.ItemTypeId; }
+    }
+
+    /// <summary>
+    /// Gets the object that describes the location of the item.
+    /// </summary>
+    /// <value>
+    /// An <see cref="Item" /> specifying the location of the item.
+    /// </value>
+    public Item Location
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<Item>() != null);
+
+        // If not already set, load from the cache, or else create an instance from the base entity
+        return this.location ?? (this.location = Eve.General.Cache.GetOrAdd<Item>(this.LocationId, () => Item.Create(this.Entity.Location)));
+      }
+    }
+
+    /// <summary>
+    /// Gets the ID of the object that describes the item's location.
+    /// </summary>
+    /// <value>
+    /// The ID of the object which describes the item's location.
+    /// </value>
+    public ItemId LocationId
+    {
+      get { return Entity.LocationId; }
+    }
+
+    /// <summary>
+    /// Gets the name of the item.
+    /// </summary>
+    /// <value>
+    /// A <see cref="string" /> that provides the name of the item.  This value is
+    /// not necessarily unique.
+    /// </value>
+    public string Name
+    {
+      get
+      {
+        Contract.Ensures(!string.IsNullOrWhiteSpace(Contract.Result<string>()));
+
+        Contract.Assume(Entity.Name != null);
+        return !string.IsNullOrWhiteSpace(Entity.Name.Name) ? Entity.Name.Name : "Unknown";
+      }
+    }
+
+    /// <summary>
+    /// Gets the item that owns the current item.
+    /// </summary>
+    /// <value>
+    /// The <see cref="Item" /> that owns the current item.
+    /// </value>
+    public Item Owner
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<Item>() != null);
+
+        // If not already set, load from the cache, or else create an instance from the base entity
+        return this.owner ?? (this.owner = Eve.General.Cache.GetOrAdd<Item>(this.OwnerId, () => Item.Create(this.Entity.Owner)));
+      }
+    }
+
+    /// <summary>
+    /// Gets the ID of the item that owns the current item.
+    /// </summary>
+    /// <value>
+    /// The ID of the <see cref="Item" /> that owns the current item.
+    /// </value>
+    public ItemId OwnerId
+    {
+      get { return Entity.OwnerId; }
+    }
+
+    /// <summary>
+    /// Gets the quantity of the item.
+    /// </summary>
+    /// <value>
+    /// The quantity of the item.
+    /// </value>
+    public int Quantity
+    {
+      get { return Entity.Quantity; }
+    }
+
+    /// <summary>
+    /// Gets the key used to cache the current item.
+    /// </summary>
+    /// <value>
+    /// The key used to cache the current item.
+    /// </value>
+    protected virtual object CacheKey
+    {
+      get { return this.Id; }
+    }
+
+    /* Methods */
+
     /// <summary>
     /// Creates an appropriate item for the specified entity.
     /// </summary>
-    /// 
     /// <param name="entity">
     /// The data entity.
     /// </param>
-    /// 
     /// <returns>
     /// An <see cref="Item" /> of the appropriate derived type, based on the
     /// contents of <paramref name="entity" />.
     /// </returns>
-    public static Item Create(ItemEntity entity) {
+    public static Item Create(ItemEntity entity)
+    {
       Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
       Contract.Ensures(Contract.Result<Item>() != null);
 
       // Universes
       UniverseEntity universeEntity = entity as UniverseEntity;
-      if (universeEntity != null) {
+      if (universeEntity != null)
+      {
         return new Universe.Universe(universeEntity);
       }
 
       // Regions
       RegionEntity regionEntity = entity as RegionEntity;
-      if (regionEntity != null) {
+      if (regionEntity != null)
+      {
         return new Region(regionEntity);
       }
 
       // Constellations
       ConstellationEntity constellationEntity = entity as ConstellationEntity;
-      if (constellationEntity != null) {
+      if (constellationEntity != null)
+      {
         return new Constellation(constellationEntity);
       }
 
       // Solar Systems
       SolarSystemEntity solarSystemEntity = entity as SolarSystemEntity;
-      if (solarSystemEntity != null) {
+      if (solarSystemEntity != null)
+      {
         return new SolarSystem(solarSystemEntity);
       }
 
       // Corporations
       NpcCorporationEntity corporationEntity = entity as NpcCorporationEntity;
-      if (corporationEntity != null) {
+      if (corporationEntity != null)
+      {
         return new NpcCorporation(corporationEntity);
       }
 
-      //// Stations
-      //StationEntity stationEntity = entity as StationEntity;
-      //if (stationEntity != null) {
-      //  return new Station(stationEntity);
-      //}
+      // Stations
+      StationEntity stationEntity = entity as StationEntity;
+      if (stationEntity != null)
+      {
+        return new Station(stationEntity);
+      }
 
       // Agents
       AgentEntity agentEntity = entity as AgentEntity;
-      if (agentEntity != null) {
+      if (agentEntity != null)
+      {
         return new Agent(agentEntity);
       }
 
@@ -100,316 +293,86 @@ namespace Eve {
       // generic item.
       return new GenericItem(entity);
     }
-    #endregion
 
-    #region Instance Fields
-    private Flag _flag;
-    private ItemId _id;
-    private EveType _itemType;
-    private Item _location;
-    private Item _owner;
-    #endregion
-
-    #region Constructors/Finalizers
-    //******************************************************************************
-    /// <summary>
-    /// Initializes a new instance of the Item class.
-    /// </summary>
-    /// 
-    /// <param name="entity">
-    /// The data entity that forms the basis of the adapter.
-    /// </param>
-    protected Item(ItemEntity entity) : base(entity) {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
-
-      _id = entity.Id;
-    }
-    //******************************************************************************
-    /// <summary>
-    /// Establishes object invariants of the class.
-    /// </summary>
-    [ContractInvariantMethod]
-    private void ObjectInvariant() {
-    }
-    #endregion
-    #region Public Properties
-    //******************************************************************************
-    /// <summary>
-    /// Gets the <see cref="Flag" /> value associated with the item.
-    /// </summary>
-    /// 
-    /// <value>
-    /// The <see cref="Flag" /> value associated with the item.
-    /// </value>
-    public Flag Flag {
-      get {
-        Contract.Ensures(Contract.Result<Flag>() != null);
-
-        if (_flag == null) {
-
-          // Load the cached version if available
-          _flag = Eve.General.Cache.GetOrAdd<Flag>(FlagId, () => {
-            FlagEntity flagEntity = Entity.Flag;
-            Contract.Assume(flagEntity != null);
-
-            return new Flag(flagEntity);
-          });
-        }
-
-        return _flag;
-      }
-    }
-    //******************************************************************************
-    /// <summary>
-    /// Gets the ID of the <see cref="Flag" /> value associated with the item.
-    /// </summary>
-    /// 
-    /// <value>
-    /// The ID of the <see cref="Flag" /> value associated with the item.
-    public FlagId FlagId {
-      get {
-        return Entity.FlagId;
-      }
-    }
-    //******************************************************************************
-    /// <summary>
-    /// Gets the ID of the item.
-    /// </summary>
-    /// 
-    /// <value>
-    /// The unique value which identifies the item.
-    /// </value>
-    public ItemId Id {
-      get {
-        return _id;
-      }
-    }
-    //******************************************************************************
-    /// <summary>
-    /// Gets the type of the item.
-    /// </summary>
-    /// 
-    /// <value>
-    /// An <see cref="EveType" /> specifying the type of the item.
-    /// </value>
-    public EveType ItemType {
-      get {
-        Contract.Ensures(Contract.Result<EveType>() != null);
-
-        if (_itemType == null) {
-
-          // Load the cached version if available
-          _itemType = Eve.General.Cache.GetOrAdd<EveType>(ItemTypeId, () => {
-            EveTypeEntity typeEntity = Entity.ItemType;
-            Contract.Assume(typeEntity != null);
-
-            return EveType.Create(typeEntity);
-          });
-        }
-
-        return _itemType;
-      }
-    }
-    //******************************************************************************
-    /// <summary>
-    /// Gets the ID of the type of the item.
-    /// </summary>
-    /// 
-    /// <value>
-    /// The ID of the <see cref="EveType" /> specifying the type of the item.
-    /// </value>
-    public TypeId ItemTypeId {
-      get {
-        return Entity.ItemTypeId;
-      }
-    }
-    //******************************************************************************
-    /// <summary>
-    /// Gets the object that describes the location of the item.
-    /// </summary>
-    /// 
-    /// <value>
-    /// An <see cref="Item" /> specifying the location of the item.
-    /// </value>
-    public Item Location {
-      get {
-        Contract.Ensures(Contract.Result<Item>() != null);
-
-        if (_location == null) {
-
-          // Load the cached version if available
-          _location = Eve.General.Cache.GetOrAdd<Item>(LocationId, () => {
-            ItemEntity itemEntity = Entity.Location;
-            Contract.Assume(itemEntity != null);
-
-            return Item.Create(itemEntity);
-          });
-        }
-
-        return _location;
-      }
-    }
-    //******************************************************************************
-    /// <summary>
-    /// Gets the ID of the object that describes the item's location.
-    /// </summary>
-    /// 
-    /// <value>
-    /// The ID of the object which describes the item's location.
-    /// </value>
-    public ItemId LocationId {
-      get {
-        return Entity.LocationId;
-      }
-    }
-    //******************************************************************************
-    /// <summary>
-    /// Gets the name of the item.
-    /// </summary>
-    /// 
-    /// <value>
-    /// A <see cref="string" /> that provides the name of the item.  This value is
-    /// not necessarily unique.
-    /// </value>
-    public string Name {
-      get {
-        Contract.Ensures(!string.IsNullOrWhiteSpace(Contract.Result<string>()));
-
-        Contract.Assume(Entity.Name != null);
-        return !string.IsNullOrWhiteSpace(Entity.Name.Name) ? Entity.Name.Name : "Unknown";
-      }
-    }
-    //******************************************************************************
-    /// <summary>
-    /// Gets the item that owns the current item.
-    /// </summary>
-    /// 
-    /// <value>
-    /// The <see cref="Item" /> that owns the current item.
-    /// </value>
-    public Item Owner {
-      get {
-        Contract.Ensures(Contract.Result<Item>() != null);
-
-        if (_owner == null) {
-
-          // Load the cached version if available
-          _owner = Eve.General.Cache.GetOrAdd<Item>(OwnerId, () => {
-            ItemEntity itemEntity = Entity.Owner;
-            Contract.Assume(itemEntity != null);
-
-            return Item.Create(itemEntity);
-          });
-        }
-
-        return _owner;
-        
-      }
-    }
-    //******************************************************************************
-    /// <summary>
-    /// Gets the ID of the item that owns the current item.
-    /// </summary>
-    /// 
-    /// <value>
-    /// The ID of the <see cref="Item" /> that owns the current item.
-    /// </value>
-    public ItemId OwnerId {
-      get {
-        return Entity.OwnerId;
-      }
-    }
-    //******************************************************************************
-    /// <summary>
-    /// Gets the quantity of the item.
-    /// </summary>
-    /// 
-    /// <value>
-    /// The quantity of the item.
-    /// </value>
-    public int Quantity {
-      get {
-        return Entity.Quantity;
-      }
-    }
-    #endregion
-    #region Public Methods
-    //******************************************************************************
     /// <inheritdoc />
-    public virtual int CompareTo(Item other) {
-      if (other == null) {
+    public virtual int CompareTo(Item other)
+    {
+      if (other == null)
+      {
         return 1;
       }
 
-      return Name.CompareTo(other.Name);
+      return this.Name.CompareTo(other.Name);
     }
-    //******************************************************************************
+
     /// <inheritdoc />
-    public override bool Equals(object obj) {
-      return Equals(obj as Item);
+    public override bool Equals(object obj)
+    {
+      return this.Equals(obj as Item);
     }
-    //******************************************************************************
+
     /// <inheritdoc />
-    public virtual bool Equals(Item other) {
-      if (other == null) {
+    public virtual bool Equals(Item other)
+    {
+      if (other == null)
+      {
         return false;
       }
 
-      return Id.Equals(other.Id);
+      return this.Id.Equals(other.Id);
     }
-    //******************************************************************************
-    /// <inheritdoc />
-    public override int GetHashCode() {
-      return Id.GetHashCode();
-    }
-    //******************************************************************************
-    /// <inheritdoc />
-    public override string ToString() {
-      return Name;
-    }
-    #endregion
-    #region Protected Properties
-    //******************************************************************************
-    /// <summary>
-    /// Gets the ID of the item within its cache region.
-    /// </summary>
-    /// 
-    /// <value>
-    /// A <see cref="Int32" /> specifying a unique ID for the item within the
-    /// cache region established for the item's type.
-    /// </value>
-    /// 
-    /// <remarks>
-    /// <para>
-    /// For all known EVE values with 32-bit or 64-bit integer IDs, the value
-    /// of <see cref="GetHashCode"/> is sufficient to serve as a cache ID.
-    /// </para>
-    /// </remarks>
-    protected virtual int CacheID {
-      get {
-        return Id.GetHashCode();
-      }
-    }
-    #endregion
 
-    #region IComparable Members
-    //******************************************************************************
-    int IComparable.CompareTo(object obj) {
-      Item other = obj as Item;
-      return CompareTo(other);
+    /// <inheritdoc />
+    public override int GetHashCode()
+    {
+      return this.Id.GetHashCode();
     }
-    #endregion
-    #region IHasId Members
-    //******************************************************************************
-    object IHasId.Id {
-      get { return Id; }
-    }
-    #endregion
-    #region IKeyItem<ItemId> Members
-    //******************************************************************************
-    ItemId IKeyItem<ItemId>.Key {
-      get { return Id; }
-    }
-    #endregion
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+      return this.Name;
+    }       
   }
+
+  #region IComparable Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IComparable" /> interface.
+  /// </content>
+  public abstract partial class Item : IComparable
+  {
+    int IComparable.CompareTo(object obj)
+    {
+      Item other = obj as Item;
+      return this.CompareTo(other);
+    }
+  }
+  #endregion
+
+  #region IEveCacheable Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IEveCacheable" /> interface.
+  /// </content>
+  public abstract partial class Item : IEveCacheable
+  {
+    object IEveCacheable.CacheKey
+    {
+      get { return this.CacheKey; }
+    }
+  }
+  #endregion
+
+  #region IKeyItem<ItemId> Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.
+  /// </content>
+  public abstract partial class Item : IKeyItem<ItemId>
+  {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Value is accessible via the Id property.")]
+    ItemId IKeyItem<ItemId>.Key
+    {
+      get { return this.Id; }
+    }
+  }
+  #endregion
 }

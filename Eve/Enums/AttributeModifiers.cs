@@ -3,7 +3,8 @@
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Eve {
+namespace Eve
+{
   using System;
   using System.Collections;
   using System.Collections.Generic;
@@ -12,13 +13,12 @@ namespace Eve {
   using System.Diagnostics.Contracts;
   using System.Linq;
 
-  //******************************************************************************
   /// <summary>
   /// The modifiers which can affect the adjusted value of an EVE attribute.
   /// </summary>
   [Flags]
-  public enum AttributeModifiers {
-
+  public enum AttributeModifiers
+  {
     /// <summary>
     /// No modifiers should be applied and the base value should be returned.
     /// </summary>

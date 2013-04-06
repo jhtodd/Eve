@@ -322,7 +322,27 @@
                     </DockPanel>
                     </DockPanel>
             </TabItem>
-            
+
+            <!-- Database tab -->
+            <TabItem Header="Database">
+                <Grid Margin="0" MinWidth="200" MinHeight="100">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" MinWidth="150" />
+                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <DockPanel LastChildFill="True" Margin="0,0,3,0">
+                        <Button Content="Generate SQL" Command="{Binding GenerateDatabaseCodeCommand}" VerticalAlignment="Top" DockPanel.Dock="Bottom" Margin="0,6,0,0" TabIndex="200"/>
+                        <ListBox Margin="0" ItemsSource="{Binding DatabaseCodeGenerators,Mode=OneTime}" SelectedValue="{Binding SelectedDatabaseCodeGenerator}" SelectedValuePath="Value" DisplayMemberPath="DisplayValue" TabIndex="100" />
+                    </DockPanel>
+                    <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="5" IsTabStop="False"/>
+                    <TextBox Grid.Column="2" Margin="3,0,0,0" Text="{Binding GeneratedDatabaseCode}" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" FontFamily="Consolas" IsReadOnly="True" TabIndex="300"/>
+                </Grid>
+            </TabItem>
+
             <!-- Enumerations tab -->
             <TabItem Header="Enumerations">
                 <Grid Margin="0" MinWidth="200" MinHeight="100">

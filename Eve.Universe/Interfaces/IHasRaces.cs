@@ -3,7 +3,8 @@
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Eve.Universe {
+namespace Eve.Universe
+{
   using System;
   using System.Collections;
   using System.Collections.Generic;
@@ -15,12 +16,10 @@ namespace Eve.Universe {
   using FreeNet;
   using FreeNet.Data.Entity;
 
-  //******************************************************************************
   /// <summary>
   /// The base interface for classes which are associated with one or more
   /// EVE races.
   /// </summary>
-  /// 
   /// <remarks>
   /// <para>
   /// Classes that implement this interface simply have a data field supporting
@@ -28,20 +27,18 @@ namespace Eve.Universe {
   /// could be null.
   /// </para>
   /// </remarks>
-  public interface IHasRaces {
+  public interface IHasRaces
+  {
+    /* Properties */
 
-    #region Interface Properties
-    //******************************************************************************
     /// <summary>
     /// Gets the ID(s) of the race(s) associated with the item, if any.
     /// </summary>
-    /// 
     /// <value>
     /// A combination of <see cref="RaceId" /> enumeration values indicating which
     /// races the current item is associated with, or <see cref="null" /> if the
     /// item is not associated with any races.
     /// </value>
     RaceId? RaceId { get; }
-    #endregion
   }
 }

@@ -35,7 +35,7 @@ namespace Eve.Tests {
     /// <summary>
     /// A class for testing cache storage functions.
     /// </summary>
-    public class TestItem : IHasId<int> {
+    public class TestItem : IEveCacheable {
 
       #region Constructors/Finalizers
       //******************************************************************************
@@ -61,9 +61,10 @@ namespace Eve.Tests {
       /// </value>
       public int Id { get; set; }
       #endregion
-      #region IHasId Members
+      #region IEveCacheable Members
       //******************************************************************************
-      object IHasId.Id {
+      object IEveCacheable.CacheKey
+      {
         get { return Id; }
       }
       #endregion
@@ -93,7 +94,7 @@ namespace Eve.Tests {
     /// <summary>
     /// Another class for testing cache storage functions with string IDs.
     /// </summary>
-    public class TestStringItem : IHasId<string> {
+    public class TestStringItem : IEveCacheable {
 
       #region Constructors/Finalizers
       //******************************************************************************
@@ -119,9 +120,10 @@ namespace Eve.Tests {
       /// </value>
       public string Id { get; set; }
       #endregion
-      #region IHasId Members
+      #region IEveCacheable Members
       //******************************************************************************
-      object IHasId.Id {
+      object IEveCacheable.CacheKey
+      {
         get { return Id; }
       }
       #endregion
@@ -138,8 +140,6 @@ namespace Eve.Tests {
 
       // Create the cache and register our test types
       EveCache cache = new EveCache(new MemoryCache("Eve.Tests"));
-      EveCache.RegionMap.RegisterType(typeof(TestItem), "Test");
-      EveCache.RegionMap.RegisterType(typeof(TestStringItem), "StringTest");
 
       // Verify the cache is initially empty
       Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 0);
@@ -179,8 +179,6 @@ namespace Eve.Tests {
 
       // Create the cache and register our test types
       EveCache cache = new EveCache(new MemoryCache("Eve.Tests"));
-      EveCache.RegionMap.RegisterType(typeof(TestItem), "Test");
-      EveCache.RegionMap.RegisterType(typeof(TestStringItem), "StringTest");
 
       TestItem[] items = new TestItem[10];
       TestChildItem[] childItems = new TestChildItem[10];
@@ -216,8 +214,6 @@ namespace Eve.Tests {
 
       // Create the cache and register our test types
       EveCache cache = new EveCache(new MemoryCache("Eve.Tests"));
-      EveCache.RegionMap.RegisterType(typeof(TestItem), "Test");
-      EveCache.RegionMap.RegisterType(typeof(TestStringItem), "StringTest");
 
       TestItem[] items = new TestItem[10];
       TestChildItem[] childItems = new TestChildItem[10];
@@ -236,8 +232,8 @@ namespace Eve.Tests {
       Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 30);
       Assert.AreEqual(cache.Statistics.Writes, 30);
 
-      cache.InnerCache.Add("NON-PREFIX-1", "Test1", new CacheItemPolicy());
-      cache.InnerCache.Add("NON-PREFIX-2", "Test2", new CacheItemPolicy());
+      cache.InnerCache.Add("NON-EveCacheRegionPrefix-1", "Test1", new CacheItemPolicy());
+      cache.InnerCache.Add("NON-EveCacheRegionPrefix-2", "Test2", new CacheItemPolicy());
 
       Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 32);
 
@@ -248,8 +244,8 @@ namespace Eve.Tests {
 
       // Verify that the objects with the EVE prefix were removed but the others were not affected
       Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 2);
-      Assert.That(cache.InnerCache.Contains("NON-PREFIX-1"));
-      Assert.That(cache.InnerCache.Contains("NON-PREFIX-2"));
+      Assert.That(cache.InnerCache.Contains("NON-EveCacheRegionPrefix-1"));
+      Assert.That(cache.InnerCache.Contains("NON-EveCacheRegionPrefix-2"));
     }
     //******************************************************************************
     /// <summary>
@@ -260,8 +256,6 @@ namespace Eve.Tests {
 
       // Create the cache and register our test types
       EveCache cache = new EveCache(new MemoryCache("Eve.Tests"));
-      EveCache.RegionMap.RegisterType(typeof(TestItem), "Test");
-      EveCache.RegionMap.RegisterType(typeof(TestStringItem), "StringTest");
 
       TestItem[] items = new TestItem[10];
       TestChildItem[] childItems = new TestChildItem[10];
@@ -280,15 +274,15 @@ namespace Eve.Tests {
       Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 30);
       Assert.AreEqual(cache.Statistics.Writes, 30);
 
-      cache.InnerCache.Add("NON-PREFIX-1", "Test1", new CacheItemPolicy());
-      cache.InnerCache.Add("NON-PREFIX-2", "Test2", new CacheItemPolicy());
+      cache.InnerCache.Add("NON-EveCacheRegionPrefix-1", "Test1", new CacheItemPolicy());
+      cache.InnerCache.Add("NON-EveCacheRegionPrefix-2", "Test2", new CacheItemPolicy());
 
       // Enumerate through the cache
       var enumItems = ((IEnumerable<KeyValuePair<string, object>>) cache).ToArray();
 
       // Verify that the correct objects were returns
       Assert.AreEqual(enumItems.Length, 30);
-      Assert.That(enumItems.All(x => x.Key.StartsWith(EveCache.PREFIX)));
+      Assert.That(enumItems.All(x => x.Key.StartsWith(EveCache.EveCacheRegionPrefix)));
     }
     //******************************************************************************
     /// <summary>
@@ -299,8 +293,6 @@ namespace Eve.Tests {
 
       // Create the cache and register our test types
       EveCache cache = new EveCache(new MemoryCache("Eve.Tests"));
-      EveCache.RegionMap.RegisterType(typeof(TestItem), "Test");
-      EveCache.RegionMap.RegisterType(typeof(TestStringItem), "StringTest");
 
       // Verify the cache is initially empty
       Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 0);
@@ -341,8 +333,6 @@ namespace Eve.Tests {
 
       // Create the cache and register our test types
       EveCache cache = new EveCache(new MemoryCache("Eve.Tests"));
-      EveCache.RegionMap.RegisterType(typeof(TestItem), "Test");
-      EveCache.RegionMap.RegisterType(typeof(TestStringItem), "StringTest");
 
       // Verify the cache is initially empty
       Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 0);
@@ -382,8 +372,6 @@ namespace Eve.Tests {
 
       // Create the cache and register our test types
       EveCache cache = new EveCache(new MemoryCache("Eve.Tests"));
-      EveCache.RegionMap.RegisterType(typeof(TestItem), "Test");
-      EveCache.RegionMap.RegisterType(typeof(TestStringItem), "StringTest");
 
       TestItem[] items = new TestItem[10];
       TestChildItem[] childItems = new TestChildItem[10];
@@ -448,8 +436,6 @@ namespace Eve.Tests {
 
       // Create the cache and register our test types
       EveCache cache = new EveCache(new MemoryCache("Eve.Tests"));
-      EveCache.RegionMap.RegisterType(typeof(TestItem), "Test");
-      EveCache.RegionMap.RegisterType(typeof(TestStringItem), "StringTest");
 
       // Verify the cache is initially empty
       Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 0);

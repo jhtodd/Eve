@@ -26,7 +26,6 @@ using Eve;
 using Eve.Character;
 using Eve.Data;
 using Eve.Data.Entities;
-using Eve.Meta;
 using Eve.Universe;
 using System.Reflection;
 

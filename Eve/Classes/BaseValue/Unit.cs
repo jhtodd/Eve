@@ -3,7 +3,8 @@
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Eve {
+namespace Eve
+{
   using System;
   using System.Collections;
   using System.Collections.Generic;
@@ -11,207 +12,211 @@ namespace Eve {
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Data.Entities;
+
   using FreeNet;
   using FreeNet.Data.Entity;
 
-  using Eve.Data.Entities;
-
-  //******************************************************************************
   /// <summary>
   /// Contains information about a unit used to format numeric values.
   /// </summary>
-  public class Unit : BaseValue<UnitId, UnitId, UnitEntity, Unit> {
+  public sealed class Unit : BaseValue<UnitId, UnitId, UnitEntity, Unit>
+  {
+    /* Constructors */
 
-    #region Constructors/Finalizers
-    //******************************************************************************
     /// <summary>
     /// Initializes a new instance of the Unit class.
     /// </summary>
-    /// 
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    protected internal Unit(UnitEntity entity) : base(entity) {
+    internal Unit(UnitEntity entity) : base(entity)
+    {
       Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
     }
-    //******************************************************************************
-    /// <summary>
-    /// Establishes object invariants of the class.
-    /// </summary>
-    [ContractInvariantMethod]
-    private void ObjectInvariant() {
-    }
-    #endregion
-    #region Public Properties
-    //******************************************************************************
+
+    /* Properties */
+    
     /// <summary>
     /// Gets the display name of the unit.
     /// </summary>
-    /// 
     /// <value>
     /// The display name of the unit.
     /// </value>
-    /// 
     /// <remarks>
     /// <para>
     /// This is the suffix used to format numeric values according to the unit.
     /// </para>
     /// </remarks>
-    public string DisplayName {
-      get {
+    public string DisplayName
+    {
+      get
+      {
         Contract.Ensures(!string.IsNullOrWhiteSpace(Contract.Result<string>()));
 
-        return (string.IsNullOrWhiteSpace(Entity.DisplayName) ? Name : Entity.DisplayName);
+        return string.IsNullOrWhiteSpace(this.Entity.DisplayName) ? this.Name : this.Entity.DisplayName;
       }
     }
-    #endregion
-    #region Public Methods
-    //******************************************************************************
+
+    /* Methods */
+    
     /// <summary>
     /// Formats a numeric value according to the current unit.
     /// </summary>
-    /// 
     /// <param name="value">
     /// The value to format.
     /// </param>
-    /// 
     /// <returns>
     /// A string containing a formatted version of the specified value.
     /// </returns>
-    public string FormatValue(double value) {
-      return FormatValue(value, string.Empty);
+    public string FormatValue(double value)
+    {
+      return this.FormatValue(value, string.Empty);
     }
-    //******************************************************************************
+
     /// <summary>
     /// Formats a numeric value according to the current unit.
     /// </summary>
-    /// 
     /// <param name="value">
     /// The value to format.
     /// </param>
-    /// 
     /// <param name="numericFormat">
     /// The format string used to format the numeric portion of the result.
     /// </param>
-    /// 
     /// <returns>
     /// A string containing a formatted version of the specified value.
     /// </returns>
-    public string FormatValue(double value, string numericFormat) {
+    public string FormatValue(double value, string numericFormat)
+    {
       Contract.Ensures(Contract.Result<string>() != null);
 
-      if (numericFormat == null) {
+      if (numericFormat == null)
+      {
         numericFormat = string.Empty;
       }
 
       string result;
 
       // Some unit types aren't formatted numerically
-      switch (Id) {
+      switch (this.Id)
+      {
         case UnitId.AbsolutePercent:
           result = (value * 100.0D).ToString(numericFormat);
-          result = ApplyDisplayName(result);
+          result = this.ApplyDisplayName(result);
           break;
 
         case UnitId.AttributeId:
-          result = Eve.General.DataSource.GetAttributeTypeById((AttributeId) (int) value).DisplayName;
+          result = Eve.General.DataSource.GetAttributeTypeById((AttributeId)(int)value).DisplayName;
           break;
 
         case UnitId.Boolean:
-          result = ((double) value == (double) 0.0D) ? "False" : "True";
+          result = ((double)value == (double)0.0D) ? "False" : "True";
           break;
 
         case UnitId.GroupId:
-          result = Eve.General.DataSource.GetGroupById((GroupId) (int) value).Name;
+          GroupId groupId = (GroupId)(int)value;
+          Contract.Assume(Enum.IsDefined(typeof(GroupId), groupId));
+          result = Eve.General.DataSource.GetGroupById(groupId).Name;
           break;
 
         case UnitId.InverseAbsolutePercent:
           result = ((1.0D - value) * 100.0D).ToString(numericFormat);
-          result = ApplyDisplayName(result);
+          result = this.ApplyDisplayName(result);
           break;
 
         case UnitId.InversedModifierPercent:
           result = ((1.0D - value) * 100.0D).ToString(numericFormat);
-          result = ApplyDisplayName(result);
+          result = this.ApplyDisplayName(result);
           break;
 
         case UnitId.ModifierPercent:
           result = ((value - 1.0D) * 100.0D).ToString(numericFormat);
-          result = ApplyDisplayName(result);
+          result = this.ApplyDisplayName(result);
 
           // Include the positive/negative sign only if the format didn't already include one
-          if (result.Length > 0 && result[0] != '+' && result[0] != '-') {
+          if (result.Length > 0 && result[0] != '+' && result[0] != '-')
+          {
             result = (((value - 1.0D) < 0.0D) ? "-" : "+") + result;
           }
+
           break;
 
         case UnitId.ModifierRelativePercent:
           // Is this right?
           result = value.ToString(numericFormat);
-          result = ApplyDisplayName(result);
+          result = this.ApplyDisplayName(result);
           break;
 
         case UnitId.Sex:
-          if (value < 0.5D) {
-            result = "Unknown";
+          switch ((int)value)
+          {
+            case 1:
+              result = "Male";
+              break;
 
-          } else if (value < 1.5D) {
-            result = "Male";
+            case 2:
+              result = "Unisex";
+              break;
 
-          } else if (value < 2.5D) {
-            result = "Unisex";
+            case 3:
+              result = "Female";
+              break;
 
-          } else if (value < 3.5D) {
-            result = "Female";
-
-          } else {
-            result = "Unknown";
+            default: 
+              result = "Unknown";
+              break;
           }
+
           break;
 
         case UnitId.Sizeclass:
-          if (value < 0.5D) {
-            result = "Unknown";
+          switch ((int)value) 
+          {
+            case 1:
+              result = "Small";
+              break;
 
-          } else if (value < 1.5D) {
-            result = "Small";
+            case 2:
+              result = "Medium";
+              break;
 
-          } else if (value < 2.5D) {
-            result = "Medium";
+            case 3:
+              result = "Large";
+              break;
 
-          } else if (value < 3.5D) {
-            result = "Large";
+            case 4:
+              result = "X-Large";
+              break;
 
-          } else if (value < 4.5D) {
-            result = "X-Large";
-          
-          } else {
-            result = "Unknown";
+            default:
+              result = "Unknown";
+              break;
           }
+
           break;
 
         case UnitId.TypeId:
-          result = Eve.General.DataSource.GetEveTypeById<EveType>((int) value).Name;
+          result = Eve.General.DataSource.GetEveTypeById<EveType>((int)value).Name;
           break;
 
         default:
           result = value.ToString(numericFormat);
-          result = ApplyDisplayName(result);
+          result = this.ApplyDisplayName(result);
           break;
       }
 
       return result;
     }
-    #endregion
-    #region Private Methods
-    //******************************************************************************
-    private string ApplyDisplayName(string numericPortion) {
+
+    private string ApplyDisplayName(string numericPortion)
+    {
       Contract.Requires(numericPortion != null, Resources.Messages.Unit_NumericPortionCannotBeNull);
 
       string result = numericPortion;
 
       // Some unit types require special processing
-      switch (Id) {
+      switch (this.Id)
+      {
         case UnitId.AbsolutePercent:
         case UnitId.InverseAbsolutePercent:
         case UnitId.InversedModifierPercent:
@@ -328,12 +333,11 @@ namespace Eve {
           break;
 
         default:
-          result += " " + DisplayName;
+          result += " " + this.DisplayName;
           break;
       }
 
       return result;
     }
-    #endregion
   }
 }

@@ -120,6 +120,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="YamlDotNet.Core">
+      <HintPath>..\packages\YamlDotNet.Core.1.2.1\lib\YamlDotNet.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -185,6 +188,10 @@
     <ProjectReference Include="..\Eve.csproj">
       <Project>{b154b7bd-6371-4c9d-95ed-dbc770931802}</Project>
       <Name>Eve</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Eve.Meta\Eve.Meta.csproj">
+      <Project>{f059364b-9035-48a5-a74e-7f801a89b67c}</Project>
+      <Name>Eve.Meta</Name>
     </ProjectReference>
     <ProjectReference Include="..\FreeNet.Data.Entity\FreeNet.Data.Entity.csproj">
       <Project>{f2a3ef11-344e-4bdc-9f35-5fe736da2df3}</Project>

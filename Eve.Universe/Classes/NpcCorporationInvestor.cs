@@ -3,7 +3,8 @@
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Eve.Universe {
+namespace Eve.Universe
+{
   using System;
   using System.Collections;
   using System.Collections.Generic;
@@ -17,185 +18,164 @@ namespace Eve.Universe {
   using FreeNet.Collections.ObjectModel;
   using FreeNet.Data.Entity;
 
-  //******************************************************************************
   /// <summary>
   /// Contains information about an investor in a corporation.
   /// </summary>
-  public class NpcCorporationInvestor : IComparable,
-                                        IComparable<NpcCorporationInvestor>,
-                                        IEquatable<NpcCorporationInvestor>,
-                                        IHasId<NpcCorporationId>,
-                                        IKeyItem<NpcCorporationId> {
+  public sealed partial class NpcCorporationInvestor 
+    : IComparable,
+      IComparable<NpcCorporationInvestor>,
+      IEquatable<NpcCorporationInvestor>,
+      IEveCacheable,
+      IKeyItem<NpcCorporationId>
+  {
+    private NpcCorporation investor;
+    private NpcCorporationId investorId;
+    private byte shares;
 
-    #region Instance Fields
-    private NpcCorporation _investor;
-    private NpcCorporationId _investorId;
-    private byte _shares;
-    #endregion
+    /* Constructors */
 
-    #region Constructors/Finalizers
-    //******************************************************************************
     /// <summary>
-    /// Initializes a new instance of the NpcCorporationInvestor class.
+    /// Initializes a new instance of the <see cref="NpcCorporationInvestor" /> class.
     /// </summary>
-    /// 
     /// <param name="investorId">
     /// The ID of the investing corporation.
     /// </param>
-    /// 
     /// <param name="shares">
     /// The percentage of shares owned by the investing corporation.
     /// </param>
-    public NpcCorporationInvestor(NpcCorporationId investorId, byte shares) {
-      _investorId = investorId;
-      _shares = shares;
+    public NpcCorporationInvestor(NpcCorporationId investorId, byte shares)
+    {
+      this.investorId = investorId;
+      this.shares = shares;
     }
-    //******************************************************************************
-    /// <summary>
-    /// Establishes object invariants of the class.
-    /// </summary>
-    [ContractInvariantMethod]
-    private void ObjectInvariant() {
-    }
-    #endregion
-    #region Public Properties
-    //******************************************************************************
+
+    /* Properties */
+
     /// <summary>
     /// Gets the investing corporation.
     /// </summary>
-    /// 
     /// <value>
     /// The investing corporation.
     /// </value>
-    public NpcCorporation Investor {
-      get {
+    public NpcCorporation Investor
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<NpcCorporation>() != null);
 
-        if (_investor == null) {
-          _investor = Eve.General.DataSource.GetNpcCorporationById(InvestorId);
-        }
-
-        return _investor;
+        return this.investor ?? (this.investor = Eve.General.DataSource.GetNpcCorporationById(this.InvestorId));
       }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets the ID of the investing corporation.
     /// </summary>
-    /// 
     /// <value>
     /// The ID of the investing corporation.
     /// </value>
-    public NpcCorporationId InvestorId {
-      get {
-        return _investorId;
-      }
+    public NpcCorporationId InvestorId
+    {
+      get { return this.investorId; }
     }
-    //******************************************************************************
+
     /// <summary>
     /// Gets the number of shares invested.
     /// </summary>
-    /// 
     /// <value>
     /// The number of shares invested.
     /// </value>
-    public byte Shares {
-      get {
-        return _shares;
-      }
+    public byte Shares
+    {
+      get { return this.shares; }
     }
-    #endregion
-    #region Public Methods
-    //******************************************************************************
+
+    /* Methods */
+
     /// <inheritdoc />
-    public virtual int CompareTo(NpcCorporationInvestor other) {
-      if (other == null) {
+    public int CompareTo(NpcCorporationInvestor other)
+    {
+      if (other == null)
+      {
         return 1;
       }
 
-      int result = other.Shares.CompareTo(Shares);
+      int result = this.Shares.CompareTo(other.Shares);
 
-      if (result == 0) {
-        result = Investor.CompareTo(other.Investor);
+      if (result == 0)
+      {
+        result = this.Investor.CompareTo(other.Investor);
       }
 
       return result;
     }
-    //******************************************************************************
+
     /// <inheritdoc />
-    public override bool Equals(object obj) {
-      return Equals(obj as Item);
+    public override bool Equals(object obj)
+    {
+      return this.Equals(obj as Item);
     }
-    //******************************************************************************
+
     /// <inheritdoc />
-    public virtual bool Equals(NpcCorporationInvestor other) {
-      if (other == null) {
+    public bool Equals(NpcCorporationInvestor other)
+    {
+      if (other == null)
+      {
         return false;
       }
 
-      return InvestorId.Equals(other.InvestorId);
+      return this.InvestorId.Equals(other.InvestorId);
     }
-    //******************************************************************************
-    /// <inheritdoc />
-    public override int GetHashCode() {
-      return InvestorId.GetHashCode();
-    }
-    //******************************************************************************
-    /// <inheritdoc />
-    public override string ToString() {
-      return Investor.Name + " (" + Shares.ToString() + " shares)";
-    }
-    #endregion
 
-    #region IComparable Members
-    //******************************************************************************
-    int IComparable.CompareTo(object obj) {
+    /// <inheritdoc />
+    public override int GetHashCode()
+    {
+      return this.InvestorId.GetHashCode();
+    }
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+      return this.Investor.Name + " (" + this.Shares.ToString() + " shares)";
+    }
+  }
+
+  #region IComparable Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IComparable" /> interface.
+  /// </content>
+  public partial class NpcCorporationInvestor : IComparable
+  {
+    int IComparable.CompareTo(object obj)
+    {
       NpcCorporationInvestor other = obj as NpcCorporationInvestor;
-      return CompareTo(other);
+      return this.CompareTo(other);
     }
-    #endregion
-    #region IHasId Members
-    //******************************************************************************
-    object IHasId.Id {
-      get { return InvestorId; }
-    }
-    #endregion
-    #region IHasId<NpcCorporationId> Members
-    //******************************************************************************
-    NpcCorporationId IHasId<NpcCorporationId>.Id {
-      get { return InvestorId; }
-    }
-    #endregion
-    #region IKeyItem<NpcCorporationId> Members
-    //******************************************************************************
-    NpcCorporationId IKeyItem<NpcCorporationId>.Key {
-      get { return InvestorId; }
-    }
-    #endregion
   }
+  #endregion
 
-  //******************************************************************************
-  /// <summary>
-  /// A read-only collection of corporate investors.
-  /// </summary>
-  public class ReadOnlyNpcCorporationInvestorCollection : ReadOnlyCollection<NpcCorporationInvestor> {
-
-    #region Constructors/Finalizers
-    //******************************************************************************
-    /// <summary>
-    /// Initializes a new instance of the ReadOnlyNpcCorporationInvestorCollection class.
-    /// </summary>
-    /// 
-    /// <param name="contents">
-    /// The contents of the collection.
-    /// </param>
-    public ReadOnlyNpcCorporationInvestorCollection(IEnumerable<NpcCorporationInvestor> contents) : base() {
-      if (contents != null) {
-        foreach (NpcCorporationInvestor investor in contents) {
-          Items.AddWithoutCallback(investor);
-        }
-      }
+  #region IEveCacheable Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IEveCacheable" /> interface.
+  /// </content>
+  public sealed partial class NpcCorporationInvestor : IEveCacheable
+  {
+    object IEveCacheable.CacheKey
+    {
+      get { return this.InvestorId; }
     }
-    #endregion
   }
+  #endregion
+
+  #region IKeyItem<NpcCorporationId> Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.
+  /// </content>
+  public partial class NpcCorporationInvestor : IKeyItem<NpcCorporationId>
+  {
+    NpcCorporationId IKeyItem<NpcCorporationId>.Key
+    {
+      get { return this.InvestorId; }
+    }
+  }
+  #endregion
 }

@@ -3,70 +3,71 @@
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Eve {
+namespace Eve
+{
   using System;
   using System.ComponentModel;
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Data.Entities;
+
   using FreeNet;
   using FreeNet.Data.Entity;
 
-  using Eve.Data.Entities;
-
-  //******************************************************************************
   /// <summary>
   /// Contains information about an icon associated with an EVE item.
   /// </summary>
-  public class Icon : BaseValue<IconId, int, IconEntity, Icon>,
-                      IHasIcon {
+  public sealed partial class Icon
+    : BaseValue<IconId, int, IconEntity, Icon>,
+      IHasIcon
+  {
+    /* Constructors */
 
-    #region Constructors/Finalizers
-    //******************************************************************************
     /// <summary>
     /// Initializes a new instance of the Icon class.
     /// </summary>
-    /// 
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    protected internal Icon(IconEntity entity) : base(entity) {
+    internal Icon(IconEntity entity) : base(entity)
+    {
       Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
     }
-    //******************************************************************************
-    /// <summary>
-    /// Establishes object invariants of the class.
-    /// </summary>
-    [ContractInvariantMethod]
-    private void ObjectInvariant() {
-    }
-    #endregion
-    #region Public Properties
-    //******************************************************************************
+
+    /* Properties */
+
     /// <summary>
     /// Gets the filename of the icon.
     /// </summary>
-    /// 
     /// <value>
     /// A <see cref="string" /> that provides the filename of the item.
     /// </value>
-    public string IconFile {
-      get {
+    public string IconFile
+    {
+      get
+      {
         Contract.Ensures(!string.IsNullOrWhiteSpace(Contract.Result<string>()));
-        return Name;
+        return this.Name;
       }
     }
-    #endregion
+  }
 
-    #region IHasIcon Members
-    //******************************************************************************
-    Icon IHasIcon.Icon {
+  #region IHasIcon Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IHasIcon" /> interface.
+  /// </content>
+  public partial class Icon : IHasIcon
+  {
+    Icon IHasIcon.Icon
+    {
       get { return this; }
     }
-    //******************************************************************************
-    IconId? IHasIcon.IconId {
+
+    IconId? IHasIcon.IconId
+    {
       get { return Id; }
     }
-    #endregion
   }
+  #endregion
 }

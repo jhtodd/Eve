@@ -3,6 +3,7 @@
 // Any changes you make may be overwritten the next time the contents are generated.
 namespace Eve.Universe
 {
+  using System;
   using System.CodeDom.Compiler;
   using System.ComponentModel;
   using FreeNet;
