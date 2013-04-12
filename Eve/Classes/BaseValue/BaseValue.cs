@@ -68,7 +68,7 @@ namespace Eve
       IEveCacheable,
       IKeyItem<TId>
     where TId : new()
-    where TEntity : BaseValueEntity<TEntityId>
+    where TEntity : BaseValueEntity<TEntityId, TDerived>
     where TDerived : BaseValue<TId, TEntityId, TEntity, TDerived>
   {
     private TId id;

@@ -189,7 +189,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Item>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.location ?? (this.location = Eve.General.Cache.GetOrAdd<Item>(this.LocationId, () => Item.Create(this.Entity.Location)));
+        return this.location ?? (this.location = Eve.General.Cache.GetOrAdd<Item>(this.LocationId, () => Item.Create(this.Entity.AgentLocation)));
       }
     }
 

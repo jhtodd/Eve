@@ -632,7 +632,7 @@ namespace Eve.Data
     /// The expression that will filter the results of the query.
     /// </param>
     /// <returns>
-    /// The results of the query.  Only items of type <typeparam name="TEveType" />
+    /// The results of the query.  Only items of type <typeparamref name="TEveType" />
     /// will be returned.
     /// </returns>
     IReadOnlyList<TEveType> GetEveTypes<TEveType>(Expression<Func<EveTypeEntity, bool>> filter) where TEveType : EveType;
@@ -647,7 +647,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.  Only items of type <typeparam name="TEveType" />
+    /// The results of the query.  Only items of type <typeparamref name="TEveType" />
     /// will be returned.
     /// </returns>
     IReadOnlyList<TEveType> GetEveTypes<TEveType>(params IQueryModifier<EveTypeEntity>[] modifiers) where TEveType : EveType;
@@ -689,6 +689,44 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<Faction> GetFactions(params IQueryModifier<FactionEntity>[] modifiers);
+    #endregion
+
+    #region Graphic Methods
+    /// <summary>
+    /// Returns the <see cref="Graphic" /> object with the specified ID.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <returns>
+    /// The item with the specified key.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    Graphic GetGraphicById(GraphicId id);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="Graphic" /> objects.
+    /// </summary>
+    /// <param name="filter">
+    /// The expression that will filter the results of the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<Graphic> GetGraphics(Expression<Func<GraphicEntity, bool>> filter);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="Graphic" /> objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<Graphic> GetGraphics(params IQueryModifier<GraphicEntity>[] modifiers);
     #endregion
 
     #region Group Methods
@@ -819,7 +857,7 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
-    /// <exception cref="InvalidCastOperation">
+    /// <exception cref="InvalidCastException">
     /// Thrown if the item with the specified ID was not of the desired type.
     /// </exception>
     TItem GetItemById<TItem>(ItemId id) where TItem : Item;
@@ -834,7 +872,7 @@ namespace Eve.Data
     /// The expression that will filter the results of the query.
     /// </param>
     /// <returns>
-    /// The results of the query.  Only items of type <typeparam name="TItem" />
+    /// The results of the query.  Only items of type <typeparamref name="TItem" />
     /// will be returned.
     /// </returns>
     IReadOnlyList<TItem> GetItems<TItem>(Expression<Func<ItemEntity, bool>> filter) where TItem : Item;
@@ -849,7 +887,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.  Only items of type <typeparam name="TItem" />
+    /// The results of the query.  Only items of type <typeparamref name="TItem" />
     /// will be returned.
     /// </returns>
     IReadOnlyList<TItem> GetItems<TItem>(params IQueryModifier<ItemEntity>[] modifiers) where TItem : Item;
@@ -1347,7 +1385,7 @@ namespace Eve.Data
     /// <returns>
     /// The item with the specified key.
     /// </returns>
-    /// <exception cref="InvalidTypeException">
+    /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
     StationType GetStationTypeById(TypeId id);
@@ -1425,10 +1463,6 @@ namespace Eve.Data
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
-    /// </exception>
-    /// <exception cref="InvalidCastException">
-    /// Thrown if the item with the specified ID was not of type
-    /// <typeparamref name="TItem" />.
     /// </exception>
     Universe GetUniverseById(UniverseId id);
 

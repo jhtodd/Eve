@@ -113,6 +113,12 @@
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="YamlDotNet.Core">
+      <HintPath>..\packages\YamlDotNet.Core.1.2.1\lib\YamlDotNet.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="YamlDotNet.RepresentationModel">
+      <HintPath>..\packages\YamlDotNet.RepresentationModel.1.2.1\lib\YamlDotNet.RepresentationModel.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Eve.Meta\Classes\Attribute\EveTableGeneratorAttribute.cs" />
@@ -145,6 +151,10 @@
     <Compile Include="Eve.Meta\Classes\EnumCodeGenerator\GenerateEnumUnitId.cs" />
     <Compile Include="Eve.Meta\Classes\EnumCodeGenerator\GenerateEnumUniverseId.cs" />
     <Compile Include="Eve.Meta\Classes\EnumCodeGenerator\ReadEnumEntries.cs" />
+    <Compile Include="Eve.Meta\Classes\TableCodeGenerator\GenerateTypeTable.cs" />
+    <Compile Include="Eve.Meta\Classes\TableCodeGenerator\GenerateGraphicTable.cs" />
+    <Compile Include="Eve.Meta\Classes\TableCodeGenerator\GenerateIconTable.cs" />
+    <Compile Include="Eve.Meta\Classes\TableCodeGenerator\TableCodeGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -156,6 +166,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

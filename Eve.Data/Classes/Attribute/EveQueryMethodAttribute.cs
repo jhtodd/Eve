@@ -6,6 +6,7 @@
 namespace Eve.Data
 {
   using System;
+  using System.Collections;
   using System.Collections.Generic;
   using System.Diagnostics;
   using System.Diagnostics.Contracts;
@@ -18,6 +19,12 @@ namespace Eve.Data
   /// <summary>
   /// Indicates that the target method can be used to retrieve data of a specified type.
   /// </summary>
+  /// <remarks>
+  /// <para>
+  /// Methods decorated with this attribute must allow no parameters and return an
+  /// <see cref="IEnumerable" /> containing the results of the query.
+  /// </para>
+  /// </remarks>
   [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
   public class EveQueryMethodAttribute : Attribute
   {

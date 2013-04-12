@@ -3,13 +3,14 @@
 // Any changes you make may be overwritten the next time the contents are generated.
 namespace Eve
 {
+  using System;
   using System.CodeDom.Compiler;
   using System.ComponentModel;
   using FreeNet;
 
 
   /// <summary>Contains the ID values associated with the MarketGroup class.</summary>
-  [GeneratedCode("Eve", "1.76.447.20946")]
+  [GeneratedCode("Eve.Meta", "1.0.0.0")]
   [Description("Contains the ID values associated with the MarketGroup class.")]
   public enum MarketGroupId : int
   {
@@ -974,7 +975,7 @@ namespace Eve
     [LongDescription("Blueprints of Outpost Construction Platforms.")]
     Blueprints_ManufactureAndResearch_Components_OutpostConstructionPlatforms = 798,
 
-    /// <summary>Research & Invention</summary>
+    /// <summary>Research &amp; Invention</summary>
     [Description("Research & Invention")]
     [LongDescription("Research & Invention")]
     Blueprints_ManufactureAndResearch_Components_ResearchAndInvention = 1524,
@@ -1458,7 +1459,7 @@ namespace Eve
     [LongDescription("Daring captains can modify the performance of their ship by jury rigging it.")]
     Blueprints_ShipModifications = 943,
 
-    /// <summary>Permanent modification of a ship's armor facilities.</summary>
+    /// <summary>Permanent modification of a ship&#39;s armor facilities.</summary>
     [Description("Armor Rigs")]
     [LongDescription("Permanent modification of a ship\'s armor facilities.")]
     Blueprints_ShipModifications_ArmorRigs = 944,
@@ -1478,7 +1479,7 @@ namespace Eve
     [LongDescription("Blueprints of Small Armor Rigs.")]
     Blueprints_ShipModifications_ArmorRigs_SmallArmorRigs = 1203,
 
-    /// <summary>Permanent modification of a ship's astronautic facilities.</summary>
+    /// <summary>Permanent modification of a ship&#39;s astronautic facilities.</summary>
     [Description("Astronautic Rigs")]
     [LongDescription("Permanent modification of a ship\'s astronautic facilities.")]
     Blueprints_ShipModifications_AstronauticRigs = 945,
@@ -1498,7 +1499,7 @@ namespace Eve
     [LongDescription("Blueprints of Small Astronautic Rigs.")]
     Blueprints_ShipModifications_AstronauticRigs_SmallAstronauticRigs = 1240,
 
-    /// <summary>Permanent modification of a ship's drone facilities.</summary>
+    /// <summary>Permanent modification of a ship&#39;s drone facilities.</summary>
     [Description("Drone Rigs")]
     [LongDescription("Permanent modification of a ship\'s drone facilities.")]
     Blueprints_ShipModifications_DroneRigs = 946,
@@ -1518,7 +1519,7 @@ namespace Eve
     [LongDescription("Blueprints of Small Drone Rigs.")]
     Blueprints_ShipModifications_DroneRigs_SmallDroneRigs = 1243,
 
-    /// <summary>Permanent modification of a ship's electronics facilities.</summary>
+    /// <summary>Permanent modification of a ship&#39;s electronics facilities.</summary>
     [Description("Electronics Rigs")]
     [LongDescription("Permanent modification of a ship\'s electronics facilities.")]
     Blueprints_ShipModifications_ElectronicsRigs = 947,
@@ -1538,7 +1539,7 @@ namespace Eve
     [LongDescription("Blueprints of Small Electronics Rigs.")]
     Blueprints_ShipModifications_ElectronicsRigs_SmallElectronicsRigs = 1246,
 
-    /// <summary>Permanent modification of a ship's electronics superiority facilities.</summary>
+    /// <summary>Permanent modification of a ship&#39;s electronics superiority facilities.</summary>
     [Description("Electronics Superiority Rigs")]
     [LongDescription("Permanent modification of a ship\'s electronics superiority facilities.")]
     Blueprints_ShipModifications_ElectronicsSuperiorityRigs = 948,
@@ -1558,7 +1559,7 @@ namespace Eve
     [LongDescription("Blueprints of Small Electronics Superiority Rigs.")]
     Blueprints_ShipModifications_ElectronicsSuperiorityRigs_SmallElectronicsSuperiorityRigs = 1249,
 
-    /// <summary>Permanent modification of a ship's energy grid facilities.</summary>
+    /// <summary>Permanent modification of a ship&#39;s energy grid facilities.</summary>
     [Description("Energy Grid Rigs")]
     [LongDescription("Permanent modification of a ship\'s energy grid facilities.")]
     Blueprints_ShipModifications_EnergyGridRigs = 949,
@@ -1578,7 +1579,7 @@ namespace Eve
     [LongDescription("Blueprints of Small Energy Grid Rigs.")]
     Blueprints_ShipModifications_EnergyGridRigs_SmallEnergyGridRigs = 1252,
 
-    /// <summary>Permanent modification of a ship's energy weapon facilities.</summary>
+    /// <summary>Permanent modification of a ship&#39;s energy weapon facilities.</summary>
     [Description("Energy Weapon Rigs")]
     [LongDescription("Permanent modification of a ship\'s energy weapon facilities.")]
     Blueprints_ShipModifications_EnergyWeaponRigs = 950,
@@ -1598,7 +1599,7 @@ namespace Eve
     [LongDescription("Blueprints of Small Energy Weapon Rigs.")]
     Blueprints_ShipModifications_EnergyWeaponRigs_SmallEnergyWeaponRigs = 1255,
 
-    /// <summary>Permanent modification of a ship's hybrid weapon facilities.</summary>
+    /// <summary>Permanent modification of a ship&#39;s hybrid weapon facilities.</summary>
     [Description("Hybrid Weapon Rigs")]
     [LongDescription("Permanent modification of a ship\'s hybrid weapon facilities.")]
     Blueprints_ShipModifications_HybridWeaponRigs = 951,
@@ -1618,7 +1619,7 @@ namespace Eve
     [LongDescription("Blueprints of Small Hybrid Weapon Rigs.")]
     Blueprints_ShipModifications_HybridWeaponRigs_SmallHybridWeaponRigs = 1258,
 
-    /// <summary>Permanent modification of a ship's missile launcher facilities.</summary>
+    /// <summary>Permanent modification of a ship&#39;s missile launcher facilities.</summary>
     [Description("Missile Launcher Rigs")]
     [LongDescription("Permanent modification of a ship\'s missile launcher facilities.")]
     Blueprints_ShipModifications_MissileLauncherRigs = 952,
@@ -1638,7 +1639,7 @@ namespace Eve
     [LongDescription("Blueprints of Small Missile Launcher Rigs.")]
     Blueprints_ShipModifications_MissileLauncherRigs_SmallMissileLauncherRigs = 1261,
 
-    /// <summary>Permanent modification of a ship's projectile weapon facilities.</summary>
+    /// <summary>Permanent modification of a ship&#39;s projectile weapon facilities.</summary>
     [Description("Projectile Weapon Rigs")]
     [LongDescription("Permanent modification of a ship\'s projectile weapon facilities.")]
     Blueprints_ShipModifications_ProjectileWeaponRigs = 953,
@@ -1658,7 +1659,7 @@ namespace Eve
     [LongDescription("Blueprints of Small Projectile Weapon Rigs.")]
     Blueprints_ShipModifications_ProjectileWeaponRigs_SmallProjectileWeaponRigs = 1264,
 
-    /// <summary>Permanent modification of a ship's shield facilities.</summary>
+    /// <summary>Permanent modification of a ship&#39;s shield facilities.</summary>
     [Description("Shield Rigs")]
     [LongDescription("Permanent modification of a ship\'s shield facilities.")]
     Blueprints_ShipModifications_ShieldRigs = 954,
@@ -2388,7 +2389,7 @@ namespace Eve
     [LongDescription("Logistic Drones")]
     Drones_LogisticDrones = 842,
 
-    /// <summary>The miner's little helpers.</summary>
+    /// <summary>The miner&#39;s little helpers.</summary>
     [Description("Mining Drones")]
     [LongDescription("The miner\'s little helpers.")]
     Drones_MiningDrones = 158,
@@ -2414,7 +2415,7 @@ namespace Eve
     [LongDescription("Microchips, hard-wired to the brainstem.")]
     ImplantsAndBoosters_Implants = 27,
 
-    /// <summary>Implants designed to augment specific aspects of the pilot's mental make-up.</summary>
+    /// <summary>Implants designed to augment specific aspects of the pilot&#39;s mental make-up.</summary>
     [Description("Attribute Enhancers")]
     [LongDescription("Implants designed to augment specific aspects of the pilot\'s mental make-up.")]
     ImplantsAndBoosters_Implants_AttributeEnhancers = 532,
@@ -2444,7 +2445,7 @@ namespace Eve
     [LongDescription("Implants intended for Subcervical Processing Slot 5.")]
     ImplantsAndBoosters_Implants_AttributeEnhancers_ImplantSlot05 = 622,
 
-    /// <summary>Implants designed to increase a pilot's aptitude in a specialized area.</summary>
+    /// <summary>Implants designed to increase a pilot&#39;s aptitude in a specialized area.</summary>
     [Description("Skill Hardwiring")]
     [LongDescription("Implants designed to increase a pilot\'s aptitude in a specialized area.")]
     ImplantsAndBoosters_Implants_SkillHardwiring = 531,
@@ -3027,7 +3028,7 @@ namespace Eve
     [Description("Weapons")]
     InfantryGear_MilitiaGear_Weapons = 355462,
 
-    /// <summary>Weapons & Grenades</summary>
+    /// <summary>Weapons &amp; Grenades</summary>
     [Description("Weapons & Grenades")]
     InfantryGear_MilitiaGear_Weapons_WeaponsAndGrenades = 355463,
 
@@ -4050,7 +4051,7 @@ namespace Eve
     [LongDescription("Voluminous clouds of various gases that can be found in space.")]
     ManufactureAndResearch_Materials_GasCloudsAndBoosters_GasClouds = 983,
 
-    /// <summary>Ice asteroids and the material & isotopes harvested from them.</summary>
+    /// <summary>Ice asteroids and the material &amp; isotopes harvested from them.</summary>
     [Description("Ice & Ice Products")]
     [LongDescription("Ice asteroids and the material & isotopes harvested from them.")]
     ManufactureAndResearch_Materials_IceAndIceProducts = 1033,
@@ -4336,27 +4337,27 @@ namespace Eve
     [LongDescription("Auxiliary systems giving a boost to sensor strength for a short time.")]
     ShipEquipment_ElectronicWarfare_Eccm = 685,
 
-    /// <summary>Boost a ship's gravimetric sensor strength for a short duration.</summary>
+    /// <summary>Boost a ship&#39;s gravimetric sensor strength for a short duration.</summary>
     [Description("Gravimetric Sensors")]
     [LongDescription("Boost a ship\'s gravimetric sensor strength for a short duration.")]
     ShipEquipment_ElectronicWarfare_Eccm_GravimetricSensors = 725,
 
-    /// <summary>Boost a ship's ladar sensor strength for a short duration.</summary>
+    /// <summary>Boost a ship&#39;s ladar sensor strength for a short duration.</summary>
     [Description("Ladar Sensors")]
     [LongDescription("Boost a ship\'s ladar sensor strength for a short duration.")]
     ShipEquipment_ElectronicWarfare_Eccm_LadarSensors = 726,
 
-    /// <summary>Boost a ship's magnetometric sensor strength for a short duration.</summary>
+    /// <summary>Boost a ship&#39;s magnetometric sensor strength for a short duration.</summary>
     [Description("Magnetometric Sensors")]
     [LongDescription("Boost a ship\'s magnetometric sensor strength for a short duration.")]
     ShipEquipment_ElectronicWarfare_Eccm_MagnetometricSensors = 727,
 
-    /// <summary>Boost a ship's sensors across the spectrum for a short duration.</summary>
+    /// <summary>Boost a ship&#39;s sensors across the spectrum for a short duration.</summary>
     [Description("Multi-Spectrum Sensors")]
     [LongDescription("Boost a ship\'s sensors across the spectrum for a short duration.")]
     ShipEquipment_ElectronicWarfare_Eccm_MultiSpectrumSensors = 728,
 
-    /// <summary>Boost a ship's radar sensor strength for a short duration.</summary>
+    /// <summary>Boost a ship&#39;s radar sensor strength for a short duration.</summary>
     [Description("Radar Sensors")]
     [LongDescription("Boost a ship\'s radar sensor strength for a short duration.")]
     ShipEquipment_ElectronicWarfare_Eccm_RadarSensors = 729,
@@ -4366,7 +4367,7 @@ namespace Eve
     [LongDescription("Targeting jammers emitting multi-frequency disruptive signals.")]
     ShipEquipment_ElectronicWarfare_EcmBursts = 678,
 
-    /// <summary>Designed to disrupt and lock down enemy ships' sensor arrays.</summary>
+    /// <summary>Designed to disrupt and lock down enemy ships&#39; sensor arrays.</summary>
     [Description("Electronic Counter Measures")]
     [LongDescription("Designed to disrupt and lock down enemy ships\' sensor arrays.")]
     ShipEquipment_ElectronicWarfare_ElectronicCounterMeasures = 677,
@@ -4402,7 +4403,7 @@ namespace Eve
         "easure systems.")]
     ShipEquipment_ElectronicWarfare_ElectronicCounterMeasures_SignalDistortionAmplifier = 967,
 
-    /// <summary>Boost a target ship's sensor strength for a short time.</summary>
+    /// <summary>Boost a target ship&#39;s sensor strength for a short time.</summary>
     [Description("Projected ECCM")]
     [LongDescription("Boost a target ship\'s sensor strength for a short time.")]
     ShipEquipment_ElectronicWarfare_ProjectedEccm = 686,
@@ -4417,27 +4418,27 @@ namespace Eve
     [LongDescription("Beef up your sensor strength to resist target jamming.")]
     ShipEquipment_ElectronicWarfare_SensorBackupArrays = 681,
 
-    /// <summary>Reduces the sensors' vulnerability to gravimetric jamming.</summary>
+    /// <summary>Reduces the sensors&#39; vulnerability to gravimetric jamming.</summary>
     [Description("Gravimetric Backup Arrays")]
     [LongDescription("Reduces the sensors\' vulnerability to gravimetric jamming.")]
     ShipEquipment_ElectronicWarfare_SensorBackupArrays_GravimetricBackupArrays = 720,
 
-    /// <summary>Reduces the sensors' vulnerability to Ladar jamming.</summary>
+    /// <summary>Reduces the sensors&#39; vulnerability to Ladar jamming.</summary>
     [Description("Ladar Backup Arrays")]
     [LongDescription("Reduces the sensors\' vulnerability to Ladar jamming.")]
     ShipEquipment_ElectronicWarfare_SensorBackupArrays_LadarBackupArrays = 721,
 
-    /// <summary>Reduces the sensors' vulnerability to magnetometric jamming.</summary>
+    /// <summary>Reduces the sensors&#39; vulnerability to magnetometric jamming.</summary>
     [Description("Magnetometric Backup Arrays")]
     [LongDescription("Reduces the sensors\' vulnerability to magnetometric jamming.")]
     ShipEquipment_ElectronicWarfare_SensorBackupArrays_MagnetometricBackupArrays = 723,
 
-    /// <summary>Reduces the sensors' vulnerability to multiple forms of jamming.</summary>
+    /// <summary>Reduces the sensors&#39; vulnerability to multiple forms of jamming.</summary>
     [Description("Multi-Frequency Backup Arrays")]
     [LongDescription("Reduces the sensors\' vulnerability to multiple forms of jamming.")]
     ShipEquipment_ElectronicWarfare_SensorBackupArrays_MultiFrequencyBackupArrays = 724,
 
-    /// <summary>Reduces the sensors' vulnerability to Radar jamming.</summary>
+    /// <summary>Reduces the sensors&#39; vulnerability to Radar jamming.</summary>
     [Description("Radar Backup Arrays")]
     [LongDescription("Reduces the sensors\' vulnerability to Radar jamming.")]
     ShipEquipment_ElectronicWarfare_SensorBackupArrays_RadarBackupArrays = 722,
@@ -4468,7 +4469,7 @@ namespace Eve
         "l.")]
     ShipEquipment_ElectronicWarfare_WarpDisruptionFieldGenerators = 1085,
 
-    /// <summary>Your foes aren't going anywhere.</summary>
+    /// <summary>Your foes aren&#39;t going anywhere.</summary>
     [Description("Warp Jammers")]
     [LongDescription("Your foes aren\'t going anywhere.")]
     ShipEquipment_ElectronicWarfare_WarpJammers = 682,
@@ -4483,7 +4484,7 @@ namespace Eve
     [LongDescription("For automated targeting of hostiles.")]
     ShipEquipment_ElectronicsAndSensorUpgrades_AutomatedTargetingSystems = 670,
 
-    /// <summary>Provide an increase in the ship's CPU output.</summary>
+    /// <summary>Provide an increase in the ship&#39;s CPU output.</summary>
     [Description("CPU Upgrades")]
     [LongDescription("Provide an increase in the ship\'s CPU output.")]
     ShipEquipment_ElectronicsAndSensorUpgrades_CpuUpgrades = 676,
@@ -4498,7 +4499,7 @@ namespace Eve
     [LongDescription("Allow for surreptitious targeting of hostiles.")]
     ShipEquipment_ElectronicsAndSensorUpgrades_PassiveTargetingSystems = 672,
 
-    /// <summary>Augment target ship's targeting range and target acquisition time.</summary>
+    /// <summary>Augment target ship&#39;s targeting range and target acquisition time.</summary>
     [Description("Remote Sensor Boosters")]
     [LongDescription("Augment target ship\'s targeting range and target acquisition time.")]
     ShipEquipment_ElectronicsAndSensorUpgrades_RemoteSensorBoosters = 673,
@@ -4508,7 +4509,7 @@ namespace Eve
     [LongDescription("Auxiliary scanner modules.  Information is power.")]
     ShipEquipment_ElectronicsAndSensorUpgrades_Scanners = 674,
 
-    /// <summary>For remote scanning of a target ship's cargo hold.</summary>
+    /// <summary>For remote scanning of a target ship&#39;s cargo hold.</summary>
     [Description("Cargo Scanners")]
     [LongDescription("For remote scanning of a target ship\'s cargo hold.")]
     ShipEquipment_ElectronicsAndSensorUpgrades_Scanners_CargoScanners = 711,
@@ -4518,17 +4519,17 @@ namespace Eve
     [LongDescription("For analysis of the composition of materials.")]
     ShipEquipment_ElectronicsAndSensorUpgrades_Scanners_DataAndCompositionScanners = 714,
 
-    /// <summary>Provide tactical analysis of a target ship's capabilities.</summary>
+    /// <summary>Provide tactical analysis of a target ship&#39;s capabilities.</summary>
     [Description("Ship Scanners")]
     [LongDescription("Provide tactical analysis of a target ship\'s capabilities.")]
     ShipEquipment_ElectronicsAndSensorUpgrades_Scanners_ShipScanners = 713,
 
-    /// <summary>Provide a boost to a ship's targeting range and target acquisition time.</summary>
+    /// <summary>Provide a boost to a ship&#39;s targeting range and target acquisition time.</summary>
     [Description("Sensor Boosters")]
     [LongDescription("Provide a boost to a ship\'s targeting range and target acquisition time.")]
     ShipEquipment_ElectronicsAndSensorUpgrades_SensorBoosters = 671,
 
-    /// <summary>Augment a ship's targeting range and target acquisition time.</summary>
+    /// <summary>Augment a ship&#39;s targeting range and target acquisition time.</summary>
     [Description("Signal Amplifiers")]
     [LongDescription("Augment a ship\'s targeting range and target acquisition time.")]
     ShipEquipment_ElectronicsAndSensorUpgrades_SignalAmplifiers = 669,
@@ -4608,12 +4609,12 @@ namespace Eve
     [LongDescription("Increase capacitor recharge rate at the expense of shield boosting capability.")]
     ShipEquipment_EngineeringEquipment_CapacitorPowerRelays = 667,
 
-    /// <summary>Provide a boost to the capacitor's recharge rate.</summary>
+    /// <summary>Provide a boost to the capacitor&#39;s recharge rate.</summary>
     [Description("Capacitor Rechargers")]
     [LongDescription("Provide a boost to the capacitor\'s recharge rate.")]
     ShipEquipment_EngineeringEquipment_CapacitorRechargers = 665,
 
-    /// <summary>Neutralize a portion of the target ship's capacitor energy.</summary>
+    /// <summary>Neutralize a portion of the target ship&#39;s capacitor energy.</summary>
     [Description("Energy Destabilizers")]
     [LongDescription("Neutralize a portion of the target ship\'s capacitor energy.")]
     ShipEquipment_EngineeringEquipment_EnergyDestabilizers = 661,
@@ -4658,7 +4659,7 @@ namespace Eve
     [LongDescription("Frigate-sized energy transfer arrays.")]
     ShipEquipment_EngineeringEquipment_EnergyTransferArrays_Small = 695,
 
-    /// <summary>Steal the other guy's thunder.</summary>
+    /// <summary>Steal the other guy&#39;s thunder.</summary>
     [Description("Energy Vampires")]
     [LongDescription("Steal the other guy\'s thunder.")]
     ShipEquipment_EngineeringEquipment_EnergyVampires = 662,
@@ -4904,13 +4905,13 @@ namespace Eve
         "more room to store cargo.")]
     ShipEquipment_HullAndArmor_HullUpgrades_ExpandedCargoholds = 1197,
 
-    /// <summary>Lightweight materials that provide a boost in speed by weakening a starship's internal structure.</summary>
+    /// <summary>Lightweight materials that provide a boost in speed by weakening a starship&#39;s internal structure.</summary>
     [Description("Nanofiber Internal Structures")]
     [LongDescription("Lightweight materials that provide a boost in speed by weakening a starship\'s int" +
         "ernal structure.")]
     ShipEquipment_HullAndArmor_HullUpgrades_NanofiberInternalStructures = 1196,
 
-    /// <summary>Struts and braces that help improve a starship's structural integrity.</summary>
+    /// <summary>Struts and braces that help improve a starship&#39;s structural integrity.</summary>
     [Description("Reinforced Bulkheads")]
     [LongDescription("Struts and braces that help improve a starship\'s structural integrity.")]
     ShipEquipment_HullAndArmor_HullUpgrades_ReinforcedBulkheads = 1195,
@@ -5011,7 +5012,7 @@ namespace Eve
     [LongDescription("When the need for speed overwhelms, look no further.")]
     ShipEquipment_Propulsion = 52,
 
-    /// <summary>Provide additional thrust to the ship's engines.</summary>
+    /// <summary>Provide additional thrust to the ship&#39;s engines.</summary>
     [Description("Afterburners")]
     [LongDescription("Provide additional thrust to the ship\'s engines.")]
     ShipEquipment_Propulsion_Afterburners = 542,
@@ -5027,7 +5028,7 @@ namespace Eve
     [LongDescription("Ultra-advanced propulsion subsystems giving a massive speed boost.")]
     ShipEquipment_Propulsion_Microwarpdrives = 131,
 
-    /// <summary>Hull modifications designed to increase a ship's speed.</summary>
+    /// <summary>Hull modifications designed to increase a ship&#39;s speed.</summary>
     [Description("Propulsion Upgrades")]
     [LongDescription("Hull modifications designed to increase a ship\'s speed.")]
     ShipEquipment_Propulsion_PropulsionUpgrades = 132,
@@ -5037,7 +5038,7 @@ namespace Eve
     [LongDescription("Ship systems that stabilize the ship and allow for more graceful maneuvers.")]
     ShipEquipment_Propulsion_PropulsionUpgrades_InertiaStabilizers = 1086,
 
-    /// <summary>Ship systems that add more raw power to the ship's engines.</summary>
+    /// <summary>Ship systems that add more raw power to the ship&#39;s engines.</summary>
     [Description("Overdrives")]
     [LongDescription("Ship systems that add more raw power to the ship\'s engines.")]
     ShipEquipment_Propulsion_PropulsionUpgrades_Overdrives = 1087,
@@ -5052,7 +5053,7 @@ namespace Eve
     [LongDescription("Strengthen your barriers.")]
     ShipEquipment_Shield = 554,
 
-    /// <summary>Convert energy from the ship's core into additional shield power.</summary>
+    /// <summary>Convert energy from the ship&#39;s core into additional shield power.</summary>
     [Description("Shield Boosters")]
     [LongDescription("Convert energy from the ship\'s core into additional shield power.")]
     ShipEquipment_Shield_ShieldBoosters = 552,
@@ -5087,7 +5088,7 @@ namespace Eve
     [LongDescription("Frigate-class shield boosters.")]
     ShipEquipment_Shield_ShieldBoosters_Small = 609,
 
-    /// <summary>Boost the maximum strength of the ship's shield system.</summary>
+    /// <summary>Boost the maximum strength of the ship&#39;s shield system.</summary>
     [Description("Shield Extenders")]
     [LongDescription("Boost the maximum strength of the ship\'s shield system.")]
     ShipEquipment_Shield_ShieldExtenders = 551,
@@ -5147,17 +5148,17 @@ namespace Eve
     [LongDescription("Thermal Shield Hardeners")]
     ShipEquipment_Shield_ShieldHardeners_ThermalShieldHardeners = 1692,
 
-    /// <summary>Divert power from ship's core to shields, increasing shield recharge rate.</summary>
+    /// <summary>Divert power from ship&#39;s core to shields, increasing shield recharge rate.</summary>
     [Description("Shield Power Relays")]
     [LongDescription("Divert power from ship\'s core to shields, increasing shield recharge rate.")]
     ShipEquipment_Shield_ShieldPowerRelays = 688,
 
-    /// <summary>Provide an increase to the shield's recharge rate.</summary>
+    /// <summary>Provide an increase to the shield&#39;s recharge rate.</summary>
     [Description("Shield Rechargers")]
     [LongDescription("Provide an increase to the shield\'s recharge rate.")]
     ShipEquipment_Shield_ShieldRechargers = 126,
 
-    /// <summary>Strengthen various aspects of the shields' subatomic containment fields.</summary>
+    /// <summary>Strengthen various aspects of the shields&#39; subatomic containment fields.</summary>
     [Description("Shield Resistance Amplifiers")]
     [LongDescription("Strengthen various aspects of the shields\' subatomic containment fields.")]
     ShipEquipment_Shield_ShieldResistanceAmplifiers = 550,
@@ -5212,7 +5213,7 @@ namespace Eve
     [LongDescription("Frigate-sized shield transport units.")]
     ShipEquipment_Shield_ShieldTransporters_Small = 603,
 
-    /// <summary>Omnidirectional energy blasts.  The loner's best friend in hostile territory.</summary>
+    /// <summary>Omnidirectional energy blasts.  The loner&#39;s best friend in hostile territory.</summary>
     [Description("Smartbombs")]
     [LongDescription("Omnidirectional energy blasts.  The loner\'s best friend in hostile territory.")]
     ShipEquipment_Smartbombs = 141,
@@ -5247,7 +5248,7 @@ namespace Eve
     [LongDescription("Large launchers, designed for stealth bombers for bomb deployment.")]
     ShipEquipment_TurretsAndBays_BombLaunchers = 1014,
 
-    /// <summary>The titan's fist.</summary>
+    /// <summary>The titan&#39;s fist.</summary>
     [Description("Doomsday Devices")]
     [LongDescription("The titan\'s fist.")]
     ShipEquipment_TurretsAndBays_DoomsdayDevices = 912,
@@ -5523,7 +5524,7 @@ namespace Eve
     [LongDescription("Systems designed to improve hybrid weapon efficiency.")]
     ShipEquipment_TurretsAndBays_WeaponUpgrades_MagneticFieldStabilizers = 648,
 
-    /// <summary>Modules designed to augment and enhance a capital ship's siege warfare abilities.</summary>
+    /// <summary>Modules designed to augment and enhance a capital ship&#39;s siege warfare abilities.</summary>
     [Description("Siege Modules")]
     [LongDescription("Modules designed to augment and enhance a capital ship\'s siege warfare abilities." +
         "")]
@@ -5539,12 +5540,12 @@ namespace Eve
     [LongDescription("Hardwired systems designed to improve turret tracking.")]
     ShipEquipment_TurretsAndBays_WeaponUpgrades_TrackingEnhancers = 707,
 
-    /// <summary>Designed to give a boost to another ship's tracking speed.</summary>
+    /// <summary>Designed to give a boost to another ship&#39;s tracking speed.</summary>
     [Description("Tracking Links")]
     [LongDescription("Designed to give a boost to another ship\'s tracking speed.")]
     ShipEquipment_TurretsAndBays_WeaponUpgrades_TrackingLinks = 708,
 
-    /// <summary>Rigs and subsystems that alter a starship's attributes in such a way as to make it more effective in a focused role.</summary>
+    /// <summary>Rigs and subsystems that alter a starship&#39;s attributes in such a way as to make it more effective in a focused role.</summary>
     [Description("Ship Modifications")]
     [LongDescription("Rigs and subsystems that alter a starship\'s attributes in such a way as to make i" +
         "t more effective in a focused role.")]
@@ -5556,222 +5557,222 @@ namespace Eve
         "them.")]
     ShipModifications_Rigs = 1111,
 
-    /// <summary>Permanent modification of a ship's armor facilities.</summary>
+    /// <summary>Permanent modification of a ship&#39;s armor facilities.</summary>
     [Description("Armor Rigs")]
     [LongDescription("Permanent modification of a ship\'s armor facilities.")]
     ShipModifications_Rigs_ArmorRigs = 956,
 
-    /// <summary>Modifications that affect a large starship's armor.</summary>
+    /// <summary>Modifications that affect a large starship&#39;s armor.</summary>
     [Description("Large Armor Rigs")]
     [LongDescription("Modifications that affect a large starship\'s armor.")]
     ShipModifications_Rigs_ArmorRigs_LargeArmorRigs = 1208,
 
-    /// <summary>Modifications that affect a medium starship's armor.</summary>
+    /// <summary>Modifications that affect a medium starship&#39;s armor.</summary>
     [Description("Medium Armor Rigs")]
     [LongDescription("Modifications that affect a medium starship\'s armor.")]
     ShipModifications_Rigs_ArmorRigs_MediumArmorRigs = 1207,
 
-    /// <summary>Modifications that affect a small starship's armor.</summary>
+    /// <summary>Modifications that affect a small starship&#39;s armor.</summary>
     [Description("Small Armor Rigs")]
     [LongDescription("Modifications that affect a small starship\'s armor.")]
     ShipModifications_Rigs_ArmorRigs_SmallArmorRigs = 1206,
 
-    /// <summary>Permanent modification of a ship's astronautic facilities.</summary>
+    /// <summary>Permanent modification of a ship&#39;s astronautic facilities.</summary>
     [Description("Astronautic Rigs")]
     [LongDescription("Permanent modification of a ship\'s astronautic facilities.")]
     ShipModifications_Rigs_AstronauticRigs = 957,
 
-    /// <summary>Modifications that affect a large starship's astronautics.</summary>
+    /// <summary>Modifications that affect a large starship&#39;s astronautics.</summary>
     [Description("Large Astronautic Rigs")]
     [LongDescription("Modifications that affect a large starship\'s astronautics.")]
     ShipModifications_Rigs_AstronauticRigs_LargeAstronauticRigs = 1212,
 
-    /// <summary>Modifications that affect a medium starship's astronautics.</summary>
+    /// <summary>Modifications that affect a medium starship&#39;s astronautics.</summary>
     [Description("Medium Astronautic Rigs")]
     [LongDescription("Modifications that affect a medium starship\'s astronautics.")]
     ShipModifications_Rigs_AstronauticRigs_MediumAstronauticRigs = 1211,
 
-    /// <summary>Modifications that affect a small starship's astronautics.</summary>
+    /// <summary>Modifications that affect a small starship&#39;s astronautics.</summary>
     [Description("Small Astronautic Rigs")]
     [LongDescription("Modifications that affect a small starship\'s astronautics.")]
     ShipModifications_Rigs_AstronauticRigs_SmallAstronauticRigs = 1210,
 
-    /// <summary>Permanent modification of a ship's drone facilities.</summary>
+    /// <summary>Permanent modification of a ship&#39;s drone facilities.</summary>
     [Description("Drone Rigs")]
     [LongDescription("Permanent modification of a ship\'s drone facilities.")]
     ShipModifications_Rigs_DroneRigs = 958,
 
-    /// <summary>Modifications that affect a large starship's drones.</summary>
+    /// <summary>Modifications that affect a large starship&#39;s drones.</summary>
     [Description("Large Drone Rigs")]
     [LongDescription("Modifications that affect a large starship\'s drones.")]
     ShipModifications_Rigs_DroneRigs_LargeDroneRigs = 1215,
 
-    /// <summary>Modifications that affect a medium starship's drones.</summary>
+    /// <summary>Modifications that affect a medium starship&#39;s drones.</summary>
     [Description("Medium Drone Rigs")]
     [LongDescription("Modifications that affect a medium starship\'s drones.")]
     ShipModifications_Rigs_DroneRigs_MediumDroneRigs = 1214,
 
-    /// <summary>Modifications that affect a small starship's drones.</summary>
+    /// <summary>Modifications that affect a small starship&#39;s drones.</summary>
     [Description("Small Drone Rigs")]
     [LongDescription("Modifications that affect a small starship\'s drones.")]
     ShipModifications_Rigs_DroneRigs_SmallDroneRigs = 1213,
 
-    /// <summary>Permanent modification of a ship's electronics facilities.</summary>
+    /// <summary>Permanent modification of a ship&#39;s electronics facilities.</summary>
     [Description("Electronics Rigs")]
     [LongDescription("Permanent modification of a ship\'s electronics facilities.")]
     ShipModifications_Rigs_ElectronicsRigs = 959,
 
-    /// <summary>Modifications that affect a large starship's electronics.</summary>
+    /// <summary>Modifications that affect a large starship&#39;s electronics.</summary>
     [Description("Large Electronics Rigs")]
     [LongDescription("Modifications that affect a large starship\'s electronics.")]
     ShipModifications_Rigs_ElectronicsRigs_LargeElectronicsRigs = 1218,
 
-    /// <summary>Modifications that affect a medium starship's electronics.</summary>
+    /// <summary>Modifications that affect a medium starship&#39;s electronics.</summary>
     [Description("Medium Electronics Rigs")]
     [LongDescription("Modifications that affect a medium starship\'s electronics.")]
     ShipModifications_Rigs_ElectronicsRigs_MediumElectronicsRigs = 1217,
 
-    /// <summary>Modifications that affect a small starship's electronics.</summary>
+    /// <summary>Modifications that affect a small starship&#39;s electronics.</summary>
     [Description("Small Electronics Rigs")]
     [LongDescription("Modifications that affect a small starship\'s electronics.")]
     ShipModifications_Rigs_ElectronicsRigs_SmallElectronicsRigs = 1216,
 
-    /// <summary>Permanent modification of a ship's electronics superiority facilities.</summary>
+    /// <summary>Permanent modification of a ship&#39;s electronics superiority facilities.</summary>
     [Description("Electronics Superiority Rigs")]
     [LongDescription("Permanent modification of a ship\'s electronics superiority facilities.")]
     ShipModifications_Rigs_ElectronicsSuperiorityRigs = 960,
 
-    /// <summary>Modifications that affect a large starship's electronic warfare capabilities.</summary>
+    /// <summary>Modifications that affect a large starship&#39;s electronic warfare capabilities.</summary>
     [Description("Large Electronics Superiority Rigs")]
     [LongDescription("Modifications that affect a large starship\'s electronic warfare capabilities.")]
     ShipModifications_Rigs_ElectronicsSuperiorityRigs_LargeElectronicsSuperiorityRigs = 1221,
 
-    /// <summary>Modifications that affect a medium starship's electronic warfare capabilities.</summary>
+    /// <summary>Modifications that affect a medium starship&#39;s electronic warfare capabilities.</summary>
     [Description("Medium Electronics Superiority Rigs")]
     [LongDescription("Modifications that affect a medium starship\'s electronic warfare capabilities.")]
     ShipModifications_Rigs_ElectronicsSuperiorityRigs_MediumElectronicsSuperiorityRigs = 1220,
 
-    /// <summary>Modifications that affect a small starship's electronic warfare capabilities.</summary>
+    /// <summary>Modifications that affect a small starship&#39;s electronic warfare capabilities.</summary>
     [Description("Small Electronics Superiority Rigs")]
     [LongDescription("Modifications that affect a small starship\'s electronic warfare capabilities.")]
     ShipModifications_Rigs_ElectronicsSuperiorityRigs_SmallElectronicsSuperiorityRigs = 1219,
 
-    /// <summary>Permanent modification of a ship's energy grid facilities.</summary>
+    /// <summary>Permanent modification of a ship&#39;s energy grid facilities.</summary>
     [Description("Energy Grid Rigs")]
     [LongDescription("Permanent modification of a ship\'s energy grid facilities.")]
     ShipModifications_Rigs_EnergyGridRigs = 961,
 
-    /// <summary>Modifications that affect a large starship's energy grid.</summary>
+    /// <summary>Modifications that affect a large starship&#39;s energy grid.</summary>
     [Description("Large Energy Grid Rigs")]
     [LongDescription("Modifications that affect a large starship\'s energy grid.")]
     ShipModifications_Rigs_EnergyGridRigs_LargeEnergyGridRigs = 1224,
 
-    /// <summary>Modifications that affect a medium starship's energy grid.</summary>
+    /// <summary>Modifications that affect a medium starship&#39;s energy grid.</summary>
     [Description("Medium Energy Grid Rigs")]
     [LongDescription("Modifications that affect a medium starship\'s energy grid.")]
     ShipModifications_Rigs_EnergyGridRigs_MediumEnergyGridRigs = 1223,
 
-    /// <summary>Modifications that affect a small starship's energy grid.</summary>
+    /// <summary>Modifications that affect a small starship&#39;s energy grid.</summary>
     [Description("Small Energy Grid Rigs")]
     [LongDescription("Modifications that affect a small starship\'s energy grid.")]
     ShipModifications_Rigs_EnergyGridRigs_SmallEnergyGridRigs = 1222,
 
-    /// <summary>Permanent modification of a ship's energy weapon facilities.</summary>
+    /// <summary>Permanent modification of a ship&#39;s energy weapon facilities.</summary>
     [Description("Energy Weapon Rigs")]
     [LongDescription("Permanent modification of a ship\'s energy weapon facilities.")]
     ShipModifications_Rigs_EnergyWeaponRigs = 962,
 
-    /// <summary>Modifications that affect a large starship's energy weapons.</summary>
+    /// <summary>Modifications that affect a large starship&#39;s energy weapons.</summary>
     [Description("Large Energy Weapon Rigs")]
     [LongDescription("Modifications that affect a large starship\'s energy weapons.")]
     ShipModifications_Rigs_EnergyWeaponRigs_LargeEnergyWeaponRigs = 1227,
 
-    /// <summary>Modifications that affect a medium starship's energy weapons.</summary>
+    /// <summary>Modifications that affect a medium starship&#39;s energy weapons.</summary>
     [Description("Medium Energy Weapon Rigs")]
     [LongDescription("Modifications that affect a medium starship\'s energy weapons.")]
     ShipModifications_Rigs_EnergyWeaponRigs_MediumEnergyWeaponRigs = 1226,
 
-    /// <summary>Modifications that affect a small starship's energy weapons.</summary>
+    /// <summary>Modifications that affect a small starship&#39;s energy weapons.</summary>
     [Description("Small Energy Weapon Rigs")]
     [LongDescription("Modifications that affect a small starship\'s energy weapons.")]
     ShipModifications_Rigs_EnergyWeaponRigs_SmallEnergyWeaponRigs = 1225,
 
-    /// <summary>Permanent modification of a ship's hybrid weapon facilities.</summary>
+    /// <summary>Permanent modification of a ship&#39;s hybrid weapon facilities.</summary>
     [Description("Hybrid Weapon Rigs")]
     [LongDescription("Permanent modification of a ship\'s hybrid weapon facilities.")]
     ShipModifications_Rigs_HybridWeaponRigs = 963,
 
-    /// <summary>Modifications that affect a large starship's hybrid weapons.</summary>
+    /// <summary>Modifications that affect a large starship&#39;s hybrid weapons.</summary>
     [Description("Large Hybrid Weapon Rigs")]
     [LongDescription("Modifications that affect a large starship\'s hybrid weapons.")]
     ShipModifications_Rigs_HybridWeaponRigs_LargeHybridWeaponRigs = 1230,
 
-    /// <summary>Modifications that affect a medium starship's hybrid weapons.</summary>
+    /// <summary>Modifications that affect a medium starship&#39;s hybrid weapons.</summary>
     [Description("Medium Hybrid Weapon Rigs")]
     [LongDescription("Modifications that affect a medium starship\'s hybrid weapons.")]
     ShipModifications_Rigs_HybridWeaponRigs_MediumHybridWeaponRigs = 1229,
 
-    /// <summary>Modifications that affect a small starship's hybrid weapons.</summary>
+    /// <summary>Modifications that affect a small starship&#39;s hybrid weapons.</summary>
     [Description("Small Hybrid Weapon Rigs")]
     [LongDescription("Modifications that affect a small starship\'s hybrid weapons.")]
     ShipModifications_Rigs_HybridWeaponRigs_SmallHybridWeaponRigs = 1228,
 
-    /// <summary>Permanent modification of a ship's missile launcher facilities.</summary>
+    /// <summary>Permanent modification of a ship&#39;s missile launcher facilities.</summary>
     [Description("Missile Launcher Rigs")]
     [LongDescription("Permanent modification of a ship\'s missile launcher facilities.")]
     ShipModifications_Rigs_MissileLauncherRigs = 964,
 
-    /// <summary>Modifications that affect a large starship's missile launchers.</summary>
+    /// <summary>Modifications that affect a large starship&#39;s missile launchers.</summary>
     [Description("Large Missile Launcher Rigs")]
     [LongDescription("Modifications that affect a large starship\'s missile launchers.")]
     ShipModifications_Rigs_MissileLauncherRigs_LargeMissileLauncherRigs = 1233,
 
-    /// <summary>Modifications that affect a medium starship's missile launchers.</summary>
+    /// <summary>Modifications that affect a medium starship&#39;s missile launchers.</summary>
     [Description("Medium Missile Launcher Rigs")]
     [LongDescription("Modifications that affect a medium starship\'s missile launchers.")]
     ShipModifications_Rigs_MissileLauncherRigs_MediumMissileLauncherRigs = 1232,
 
-    /// <summary>Modifications that affect a small starship's missile launchers.</summary>
+    /// <summary>Modifications that affect a small starship&#39;s missile launchers.</summary>
     [Description("Small Missile Launcher Rigs")]
     [LongDescription("Modifications that affect a small starship\'s missile launchers.")]
     ShipModifications_Rigs_MissileLauncherRigs_SmallMissileLauncherRigs = 1231,
 
-    /// <summary>Permanent modification of a ship's projectile weapon facilities.</summary>
+    /// <summary>Permanent modification of a ship&#39;s projectile weapon facilities.</summary>
     [Description("Projectile Weapon Rigs")]
     [LongDescription("Permanent modification of a ship\'s projectile weapon facilities.")]
     ShipModifications_Rigs_ProjectileWeaponRigs = 979,
 
-    /// <summary>Modifications that affect a large starship's projectile weapons.</summary>
+    /// <summary>Modifications that affect a large starship&#39;s projectile weapons.</summary>
     [Description("Large Projectile Weapon Rigs")]
     [LongDescription("Modifications that affect a large starship\'s projectile weapons.")]
     ShipModifications_Rigs_ProjectileWeaponRigs_LargeProjectileWeaponRigs = 1239,
 
-    /// <summary>Modifications that affect a medium starship's projectile weapons.</summary>
+    /// <summary>Modifications that affect a medium starship&#39;s projectile weapons.</summary>
     [Description("Medium Projectile Weapon Rigs")]
     [LongDescription("Modifications that affect a medium starship\'s projectile weapons.")]
     ShipModifications_Rigs_ProjectileWeaponRigs_MediumProjectileWeaponRigs = 1238,
 
-    /// <summary>Modifications that affect a small starship's projectile weapons.</summary>
+    /// <summary>Modifications that affect a small starship&#39;s projectile weapons.</summary>
     [Description("Small Projectile Weapon Rigs")]
     [LongDescription("Modifications that affect a small starship\'s projectile weapons.")]
     ShipModifications_Rigs_ProjectileWeaponRigs_SmallProjectileWeaponRigs = 1237,
 
-    /// <summary>Permanent modification of a ship's shield facilities.</summary>
+    /// <summary>Permanent modification of a ship&#39;s shield facilities.</summary>
     [Description("Shield Rigs")]
     [LongDescription("Permanent modification of a ship\'s shield facilities.")]
     ShipModifications_Rigs_ShieldRigs = 965,
 
-    /// <summary>Modifications that affect a large starship's shields.</summary>
+    /// <summary>Modifications that affect a large starship&#39;s shields.</summary>
     [Description("Large Shield Rigs")]
     [LongDescription("Modifications that affect a large starship\'s shields.")]
     ShipModifications_Rigs_ShieldRigs_LargeShieldRigs = 1236,
 
-    /// <summary>Modifications that affect a medium starship's shields.</summary>
+    /// <summary>Modifications that affect a medium starship&#39;s shields.</summary>
     [Description("Medium Shield Rigs")]
     [LongDescription("Modifications that affect a medium starship\'s shields.")]
     ShipModifications_Rigs_ShieldRigs_MediumShieldRigs = 1235,
 
-    /// <summary>Modifications that affect a small starship's shields.</summary>
+    /// <summary>Modifications that affect a small starship&#39;s shields.</summary>
     [Description("Small Shield Rigs")]
     [LongDescription("Modifications that affect a small starship\'s shields.")]
     ShipModifications_Rigs_ShieldRigs_SmallShieldRigs = 1234,
@@ -6674,7 +6675,7 @@ namespace Eve
     [LongDescription("ORE industrial designs.")]
     Ships_IndustrialShips_StandardIndustrialShips_Ore = 1390,
 
-    /// <summary>Reducing New Eden's natural beauty to empty husks one asteroid at a time.</summary>
+    /// <summary>Reducing New Eden&#39;s natural beauty to empty husks one asteroid at a time.</summary>
     [Description("Mining Barges")]
     [LongDescription("Reducing New Eden\'s natural beauty to empty husks one asteroid at a time.")]
     Ships_MiningBarges = 1384,
@@ -6796,12 +6797,12 @@ namespace Eve
     [LongDescription("Skills pertaining to the efficient operation of drones.")]
     Skills_Drones = 366,
 
-    /// <summary>Skills pertaining to management of a starfaring vessel's electronic systems.</summary>
+    /// <summary>Skills pertaining to management of a starfaring vessel&#39;s electronic systems.</summary>
     [Description("Electronics")]
     [LongDescription("Skills pertaining to management of a starfaring vessel\'s electronic systems.")]
     Skills_Electronics = 367,
 
-    /// <summary>Skills pertaining to management of a starfaring vessel's hardwired onboard systems.</summary>
+    /// <summary>Skills pertaining to management of a starfaring vessel&#39;s hardwired onboard systems.</summary>
     [Description("Engineering")]
     [LongDescription("Skills pertaining to management of a starfaring vessel\'s hardwired onboard system" +
         "s.")]
@@ -6824,7 +6825,7 @@ namespace Eve
         "")]
     Skills_Leadership = 370,
 
-    /// <summary>Skills pertaining to the building and management of a starfaring vessel's mechanical systems.</summary>
+    /// <summary>Skills pertaining to the building and management of a starfaring vessel&#39;s mechanical systems.</summary>
     [Description("Mechanic")]
     [LongDescription("Skills pertaining to the building and management of a starfaring vessel\'s mechani" +
         "cal systems.")]
@@ -6956,7 +6957,7 @@ namespace Eve
     [LongDescription("Structures which house manufacturing facilities.")]
     StarbaseAndSovereigntyStructures_StarbaseStructures_AssemblyArrays = 932,
 
-    /// <summary>The starbase's backbone.</summary>
+    /// <summary>The starbase&#39;s backbone.</summary>
     [Description("Control Towers")]
     [LongDescription("The starbase\'s backbone.")]
     StarbaseAndSovereigntyStructures_StarbaseStructures_ControlTowers = 478,
@@ -6972,7 +6973,7 @@ namespace Eve
         "ips.")]
     StarbaseAndSovereigntyStructures_StarbaseStructures_CynosuralGeneratorArray = 1013,
 
-    /// <summary>The lock and key to a system's highway of cynosural passage.</summary>
+    /// <summary>The lock and key to a system&#39;s highway of cynosural passage.</summary>
     [Description("Cynosural System Jammer")]
     [LongDescription("The lock and key to a system\'s highway of cynosural passage.")]
     StarbaseAndSovereigntyStructures_StarbaseStructures_CynosuralSystemJammer = 1012,
@@ -7002,7 +7003,7 @@ namespace Eve
     [LongDescription("Anchorable refinery structures.")]
     StarbaseAndSovereigntyStructures_StarbaseStructures_RefiningArrays = 482,
 
-    /// <summary>Anchorable structures for the boosting of a control tower's shield resistances.</summary>
+    /// <summary>Anchorable structures for the boosting of a control tower&#39;s shield resistances.</summary>
     [Description("Shield Hardening Arrays")]
     [LongDescription("Anchorable structures for the boosting of a control tower\'s shield resistances.")]
     StarbaseAndSovereigntyStructures_StarbaseStructures_ShieldHardeningArrays = 485,
@@ -7075,7 +7076,7 @@ namespace Eve
     [LongDescription("Grease the wheels of the capitalistic machine.")]
     TradeGoods_ConsumerProducts = 492,
 
-    /// <summary>Criminal organizations' identification tags.</summary>
+    /// <summary>Criminal organizations&#39; identification tags.</summary>
     [Description("Criminal Dog Tags")]
     [LongDescription("Criminal organizations\' identification tags.")]
     TradeGoods_CriminalDogTags = 739,
@@ -7090,7 +7091,7 @@ namespace Eve
     [LongDescription("Blood Raider identification tags.")]
     TradeGoods_CriminalDogTags_BloodRaiders = 741,
 
-    /// <summary>The identification tags of CONCORD's most wanted.</summary>
+    /// <summary>The identification tags of CONCORD&#39;s most wanted.</summary>
     [Description("Commanders")]
     [LongDescription("The identification tags of CONCORD\'s most wanted.")]
     TradeGoods_CriminalDogTags_Commanders = 750,
@@ -7115,7 +7116,7 @@ namespace Eve
     [LongDescription("Guristas identification tags.")]
     TradeGoods_CriminalDogTags_Guristas = 745,
 
-    /// <summary>Sansha's Nation identification tags.</summary>
+    /// <summary>Sansha&#39;s Nation identification tags.</summary>
     [Description("Sansha")]
     [LongDescription("Sansha\'s Nation identification tags.")]
     TradeGoods_CriminalDogTags_Sansha = 746,
@@ -7135,17 +7136,17 @@ namespace Eve
     [LongDescription("True Sansha identification tags.")]
     TradeGoods_CriminalDogTags_TrueSansha = 749,
 
-    /// <summary>Proof positive of a bounty hunter's job well done.</summary>
+    /// <summary>Proof positive of a bounty hunter&#39;s job well done.</summary>
     [Description("Criminal Evidence")]
     [LongDescription("Proof positive of a bounty hunter\'s job well done.")]
     TradeGoods_CriminalEvidence = 614,
 
-    /// <summary>Physical proof of a dastardly villain's demise.</summary>
+    /// <summary>Physical proof of a dastardly villain&#39;s demise.</summary>
     [Description("Criminal DNA Patterns")]
     [LongDescription("Physical proof of a dastardly villain\'s demise.")]
     TradeGoods_CriminalEvidence_CriminalDnaPatterns = 752,
 
-    /// <summary>Proof that there's one less evil bastard in the world.</summary>
+    /// <summary>Proof that there&#39;s one less evil bastard in the world.</summary>
     [Description("Overseer\'s Personal Effects")]
     [LongDescription("Proof that there\'s one less evil bastard in the world.")]
     TradeGoods_CriminalEvidence_OverseersPersonalEffects = 751,
@@ -7221,7 +7222,7 @@ namespace Eve
         "oting contracts.")]
     TradeGoods_PilotsLicenseExtensionsPlex = 1108,
 
-    /// <summary>Political propaganda & those that engage in it.</summary>
+    /// <summary>Political propaganda &amp; those that engage in it.</summary>
     [Description("Political Paraphernalia")]
     [LongDescription("Political propaganda & those that engage in it.")]
     TradeGoods_PoliticalParaphernalia = 754,

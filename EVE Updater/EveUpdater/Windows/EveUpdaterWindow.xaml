@@ -324,7 +324,7 @@
             </TabItem>
 
             <!-- Database tab -->
-            <TabItem Header="Database">
+            <TabItem Header="Database Tables">
                 <Grid Margin="0" MinWidth="200" MinHeight="100">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" MinWidth="150" />
@@ -335,11 +335,11 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <DockPanel LastChildFill="True" Margin="0,0,3,0">
-                        <Button Content="Generate SQL" Command="{Binding GenerateDatabaseCodeCommand}" VerticalAlignment="Top" DockPanel.Dock="Bottom" Margin="0,6,0,0" TabIndex="200"/>
-                        <ListBox Margin="0" ItemsSource="{Binding DatabaseCodeGenerators,Mode=OneTime}" SelectedValue="{Binding SelectedDatabaseCodeGenerator}" SelectedValuePath="Value" DisplayMemberPath="DisplayValue" TabIndex="100" />
+                        <Button Content="Generate SQL" Command="{Binding GenerateTableCodeCommand}" VerticalAlignment="Top" DockPanel.Dock="Bottom" Margin="0,6,0,0" TabIndex="200"/>
+                        <ListBox Margin="0" ItemsSource="{Binding TableCodeGenerators,Mode=OneTime}" SelectedValue="{Binding SelectedTableCodeGenerator}" SelectedValuePath="Value" DisplayMemberPath="DisplayValue" TabIndex="100" />
                     </DockPanel>
                     <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="5" IsTabStop="False"/>
-                    <TextBox Grid.Column="2" Margin="3,0,0,0" Text="{Binding GeneratedDatabaseCode}" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" FontFamily="Consolas" IsReadOnly="True" TabIndex="300"/>
+                    <TextBox Grid.Column="2" Margin="3,0,0,0" Text="{Binding GeneratedTableCode}" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" FontFamily="Consolas" IsReadOnly="True" TabIndex="300"/>
                 </Grid>
             </TabItem>
 

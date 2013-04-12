@@ -168,8 +168,9 @@ namespace Eve
       {
         Contract.Ensures(!string.IsNullOrWhiteSpace(Contract.Result<string>()));
 
-        Contract.Assume(Entity.Name != null);
-        return !string.IsNullOrWhiteSpace(Entity.Name.Name) ? Entity.Name.Name : "Unknown";
+        var result = Entity.Name;
+        Contract.Assert(!string.IsNullOrWhiteSpace(result));
+        return result;
       }
     }
 

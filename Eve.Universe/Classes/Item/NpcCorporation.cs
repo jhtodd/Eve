@@ -568,7 +568,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.Entity.SizeFactor;
+        double result = this.Entity.SizeFactor.HasValue ? this.Entity.SizeFactor.Value : 0.0D;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -618,7 +618,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<short>() >= 0);
 
-        var result = this.Entity.StationCount;
+        short result = this.Entity.StationCount.HasValue ? this.Entity.StationCount.Value : (short)0;
 
         Contract.Assume(result >= 0);
 
@@ -640,7 +640,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<short>() >= 0);
 
-        var result = this.Entity.StationSystemCount;
+        var result = this.Entity.StationSystemCount.HasValue ? this.Entity.StationSystemCount.Value : (short)0;
 
         Contract.Assume(result >= 0);
 

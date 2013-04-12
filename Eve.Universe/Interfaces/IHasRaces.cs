@@ -36,7 +36,7 @@ namespace Eve.Universe
     /// </summary>
     /// <value>
     /// A combination of <see cref="RaceId" /> enumeration values indicating which
-    /// races the current item is associated with, or <see cref="null" /> if the
+    /// races the current item is associated with, or <see langword="null" /> if the
     /// item is not associated with any races.
     /// </value>
     RaceId? RaceId { get; }

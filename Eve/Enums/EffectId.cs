@@ -3,13 +3,14 @@
 // Any changes you make may be overwritten the next time the contents are generated.
 namespace Eve
 {
+  using System;
   using System.CodeDom.Compiler;
   using System.ComponentModel;
   using FreeNet;
 
 
   /// <summary>Contains the ID values associated with the EffectType class.</summary>
-  [GeneratedCode("Eve", "1.76.447.20946")]
+  [GeneratedCode("Eve.Meta", "1.0.0.0")]
   [Description("Contains the ID values associated with the EffectType class.")]
   public enum EffectId : short
   {
@@ -121,7 +122,7 @@ namespace Eve
     [Description("launcherFitted")]
     LauncherFitted = 40,
 
-    /// <summary>This is just a test. Ehmm. If your'e reading this in an error message, your ship probably doesn't have any turret slot left.</summary>
+    /// <summary>This is just a test. Ehmm. If your&#39;e reading this in an error message, your ship probably doesn&#39;t have any turret slot left.</summary>
     [Description("turretFitted")]
     [LongDescription("This is just a test. Ehmm. If your\'e reading this in an error message, your ship " +
         "probably doesn\'t have any turret slot left.")]
@@ -1984,13 +1985,13 @@ namespace Eve
     [LongDescription("Automatically generated effect")]
     AmmoInfluenceShipVelocity = 838,
 
-    /// <summary>Applies the cloaking skill's reduction bonus to cloakingTargetingDelay time.</summary>
+    /// <summary>Applies the cloaking skill&#39;s reduction bonus to cloakingTargetingDelay time.</summary>
     [Description("cloakingTargetingDelayBonusPostPercentCloakingTargetingDelayBonusForShipModulesRe" +
         "quiringCloaking")]
     [LongDescription("Applies the cloaking skill\'s reduction bonus to cloakingTargetingDelay time.")]
     CloakingTargetingDelayBonusPostPercentCloakingTargetingDelayBonusForShipModulesRequiringCloaking = 848,
 
-    /// <summary>Applies cloaking skill's level to cloakingTargetingDelayBonus.</summary>
+    /// <summary>Applies cloaking skill&#39;s level to cloakingTargetingDelayBonus.</summary>
     [Description("cloakingSkillBoostCloakingTargetingDelayBonus")]
     [LongDescription("Applies cloaking skill\'s level to cloakingTargetingDelayBonus.")]
     CloakingSkillBoostCloakingTargetingDelayBonus = 850,
@@ -2798,7 +2799,7 @@ namespace Eve
     [LongDescription("Automatically generated effect")]
     AmmoInfluenceEntityFlyRange = 1173,
 
-    /// <summary>accerationControlSkillAb&MwdSpeedBoost</summary>
+    /// <summary>accerationControlSkillAb&amp;MwdSpeedBoost</summary>
     [Description("accerationControlSkillAb&MwdSpeedBoost")]
     AccerationControlSkillAbAndMwdSpeedBoost = 1176,
 
@@ -5181,7 +5182,7 @@ namespace Eve
     [LongDescription("Automatically generated effect")]
     CapitalRemoteEnergyTransferCapNeedBonusSkill = 2356,
 
-    /// <summary>carrierMinmatarArmor&ShieldTransferDuration2</summary>
+    /// <summary>carrierMinmatarArmor&amp;ShieldTransferDuration2</summary>
     [Description("carrierMinmatarArmor&ShieldTransferDuration2")]
     CarrierMinmatarArmorAndShieldTransferDuration2 = 2359,
 
@@ -5218,19 +5219,19 @@ namespace Eve
     [Description("carrierCaldariShieldResist2")]
     CarrierCaldariShieldResist2 = 2378,
 
-    /// <summary>carrierAmarrArmor&EnergyTransferRange3</summary>
+    /// <summary>carrierAmarrArmor&amp;EnergyTransferRange3</summary>
     [Description("carrierAmarrArmor&EnergyTransferRange3")]
     CarrierAmarrArmorAndEnergyTransferRange3 = 2381,
 
-    /// <summary>carrierCaldariShield&EnergyTransferRange3</summary>
+    /// <summary>carrierCaldariShield&amp;EnergyTransferRange3</summary>
     [Description("carrierCaldariShield&EnergyTransferRange3")]
     CarrierCaldariShieldAndEnergyTransferRange3 = 2384,
 
-    /// <summary>carrierGallenteArmor&ShieldTransferRange3</summary>
+    /// <summary>carrierGallenteArmor&amp;ShieldTransferRange3</summary>
     [Description("carrierGallenteArmor&ShieldTransferRange3")]
     CarrierGallenteArmorAndShieldTransferRange3 = 2387,
 
-    /// <summary>carrierMinmatarArmor&ShieldTransferRange3</summary>
+    /// <summary>carrierMinmatarArmor&amp;ShieldTransferRange3</summary>
     [Description("carrierMinmatarArmor&ShieldTransferRange3")]
     CarrierMinmatarArmorAndShieldTransferRange3 = 2390,
 
@@ -7217,7 +7218,7 @@ namespace Eve
     [Description("structureHPMultiplyPassive")]
     StructureHpMultiplyPassive = 3047,
 
-    /// <summary>carrierMinmatarArmor&ShieldAmount</summary>
+    /// <summary>carrierMinmatarArmor&amp;ShieldAmount</summary>
     [Description("carrierMinmatarArmor&ShieldAmount")]
     CarrierMinmatarArmorAndShieldAmount = 3050,
 
@@ -7503,99 +7504,99 @@ namespace Eve
     [LongDescription("Automatically generated effect")]
     ControlTowerGenericHullEmResistanceBonusScrambler = 3111,
 
-    /// <summary>controlTowerGenericHullE&EResistanceBonusCynoGenerator</summary>
+    /// <summary>controlTowerGenericHullE&amp;EResistanceBonusCynoGenerator</summary>
     [Description("controlTowerGenericHullE&EResistanceBonusCynoGenerator")]
     ControlTowerGenericHullEAndEResistanceBonusCynoGenerator = 3112,
 
-    /// <summary>controlTowerGenericHullE&EResistanceBonusCynoJammer</summary>
+    /// <summary>controlTowerGenericHullE&amp;EResistanceBonusCynoJammer</summary>
     [Description("controlTowerGenericHullE&EResistanceBonusCynoJammer")]
     ControlTowerGenericHullEAndEResistanceBonusCynoJammer = 3113,
 
-    /// <summary>controlTowerGenericHullE&EResistanceBonusEcm</summary>
+    /// <summary>controlTowerGenericHullE&amp;EResistanceBonusEcm</summary>
     [Description("controlTowerGenericHullE&EResistanceBonusEcm")]
     ControlTowerGenericHullEAndEResistanceBonusEcm = 3114,
 
-    /// <summary>controlTowerGenericHullE&EResistanceBonusEnergyNeutralizer</summary>
+    /// <summary>controlTowerGenericHullE&amp;EResistanceBonusEnergyNeutralizer</summary>
     [Description("controlTowerGenericHullE&EResistanceBonusEnergyNeutralizer")]
     ControlTowerGenericHullEAndEResistanceBonusEnergyNeutralizer = 3115,
 
-    /// <summary>controlTowerGenericHullE&EResistanceBonusHybrid</summary>
+    /// <summary>controlTowerGenericHullE&amp;EResistanceBonusHybrid</summary>
     [Description("controlTowerGenericHullE&EResistanceBonusHybrid")]
     ControlTowerGenericHullEAndEResistanceBonusHybrid = 3116,
 
-    /// <summary>controlTowerGenericHullE&EResistanceBonusJumpPortal</summary>
+    /// <summary>controlTowerGenericHullE&amp;EResistanceBonusJumpPortal</summary>
     [Description("controlTowerGenericHullE&EResistanceBonusJumpPortal")]
     ControlTowerGenericHullEAndEResistanceBonusJumpPortal = 3117,
 
-    /// <summary>controlTowerGenericHullE&EResistanceBonusLaser</summary>
+    /// <summary>controlTowerGenericHullE&amp;EResistanceBonusLaser</summary>
     [Description("controlTowerGenericHullE&EResistanceBonusLaser")]
     ControlTowerGenericHullEAndEResistanceBonusLaser = 3118,
 
-    /// <summary>controlTowerGenericHullE&EResistanceBonusMissile</summary>
+    /// <summary>controlTowerGenericHullE&amp;EResistanceBonusMissile</summary>
     [Description("controlTowerGenericHullE&EResistanceBonusMissile")]
     ControlTowerGenericHullEAndEResistanceBonusMissile = 3119,
 
-    /// <summary>controlTowerGenericHullE&EResistanceBonusProjectile</summary>
+    /// <summary>controlTowerGenericHullE&amp;EResistanceBonusProjectile</summary>
     [Description("controlTowerGenericHullE&EResistanceBonusProjectile")]
     ControlTowerGenericHullEAndEResistanceBonusProjectile = 3120,
 
-    /// <summary>controlTowerGenericHullE&EResistanceBonusScrambler</summary>
+    /// <summary>controlTowerGenericHullE&amp;EResistanceBonusScrambler</summary>
     [Description("controlTowerGenericHullE&EResistanceBonusScrambler")]
     ControlTowerGenericHullEAndEResistanceBonusScrambler = 3121,
 
-    /// <summary>controlTowerGenericHullE&EResistanceBonusSensorDampener</summary>
+    /// <summary>controlTowerGenericHullE&amp;EResistanceBonusSensorDampener</summary>
     [Description("controlTowerGenericHullE&EResistanceBonusSensorDampener")]
     ControlTowerGenericHullEAndEResistanceBonusSensorDampener = 3122,
 
-    /// <summary>controlTowerGenericHullE&EResistanceBonusStasis</summary>
+    /// <summary>controlTowerGenericHullE&amp;EResistanceBonusStasis</summary>
     [Description("controlTowerGenericHullE&EResistanceBonusStasis")]
     ControlTowerGenericHullEAndEResistanceBonusStasis = 3123,
 
-    /// <summary>controlTowerGenericHullK&TResistanceBonusCynoGenerator</summary>
+    /// <summary>controlTowerGenericHullK&amp;TResistanceBonusCynoGenerator</summary>
     [Description("controlTowerGenericHullK&TResistanceBonusCynoGenerator")]
     ControlTowerGenericHullKAndTResistanceBonusCynoGenerator = 3124,
 
-    /// <summary>controlTowerGenericHullK&TResistanceBonusCynoJammer</summary>
+    /// <summary>controlTowerGenericHullK&amp;TResistanceBonusCynoJammer</summary>
     [Description("controlTowerGenericHullK&TResistanceBonusCynoJammer")]
     ControlTowerGenericHullKAndTResistanceBonusCynoJammer = 3125,
 
-    /// <summary>controlTowerGenericHullK&TResistanceBonusEcm</summary>
+    /// <summary>controlTowerGenericHullK&amp;TResistanceBonusEcm</summary>
     [Description("controlTowerGenericHullK&TResistanceBonusEcm")]
     ControlTowerGenericHullKAndTResistanceBonusEcm = 3126,
 
-    /// <summary>controlTowerGenericHullK&TResistanceBonusEnergyNeutralizer</summary>
+    /// <summary>controlTowerGenericHullK&amp;TResistanceBonusEnergyNeutralizer</summary>
     [Description("controlTowerGenericHullK&TResistanceBonusEnergyNeutralizer")]
     ControlTowerGenericHullKAndTResistanceBonusEnergyNeutralizer = 3127,
 
-    /// <summary>controlTowerGenericHullK&TResistanceBonusHybrd</summary>
+    /// <summary>controlTowerGenericHullK&amp;TResistanceBonusHybrd</summary>
     [Description("controlTowerGenericHullK&TResistanceBonusHybrd")]
     ControlTowerGenericHullKAndTResistanceBonusHybrd = 3128,
 
-    /// <summary>controlTowerGenericHullK&TResistanceBonusJump</summary>
+    /// <summary>controlTowerGenericHullK&amp;TResistanceBonusJump</summary>
     [Description("controlTowerGenericHullK&TResistanceBonusJump")]
     ControlTowerGenericHullKAndTResistanceBonusJump = 3129,
 
-    /// <summary>controlTowerGenericHullK&TResistanceBonusLaser</summary>
+    /// <summary>controlTowerGenericHullK&amp;TResistanceBonusLaser</summary>
     [Description("controlTowerGenericHullK&TResistanceBonusLaser")]
     ControlTowerGenericHullKAndTResistanceBonusLaser = 3130,
 
-    /// <summary>controlTowerGenericHullK&TResistanceBonusMissile</summary>
+    /// <summary>controlTowerGenericHullK&amp;TResistanceBonusMissile</summary>
     [Description("controlTowerGenericHullK&TResistanceBonusMissile")]
     ControlTowerGenericHullKAndTResistanceBonusMissile = 3131,
 
-    /// <summary>controlTowerGenericHullK&TResistanceBonusProjectile</summary>
+    /// <summary>controlTowerGenericHullK&amp;TResistanceBonusProjectile</summary>
     [Description("controlTowerGenericHullK&TResistanceBonusProjectile")]
     ControlTowerGenericHullKAndTResistanceBonusProjectile = 3133,
 
-    /// <summary>controlTowerGenericHullK&TResistanceBonusScrambler</summary>
+    /// <summary>controlTowerGenericHullK&amp;TResistanceBonusScrambler</summary>
     [Description("controlTowerGenericHullK&TResistanceBonusScrambler")]
     ControlTowerGenericHullKAndTResistanceBonusScrambler = 3134,
 
-    /// <summary>controlTowerGenericHullK&TResistanceBonusSenDamp</summary>
+    /// <summary>controlTowerGenericHullK&amp;TResistanceBonusSenDamp</summary>
     [Description("controlTowerGenericHullK&TResistanceBonusSenDamp")]
     ControlTowerGenericHullKAndTResistanceBonusSenDamp = 3135,
 
-    /// <summary>controlTowerGenericHullK&TResistanceBonusStasis</summary>
+    /// <summary>controlTowerGenericHullK&amp;TResistanceBonusStasis</summary>
     [Description("controlTowerGenericHullK&TResistanceBonusStasis")]
     ControlTowerGenericHullKAndTResistanceBonusStasis = 3136,
 
@@ -7647,43 +7648,43 @@ namespace Eve
     [Description("controlTowerGenericHullResistanceBonusStasis")]
     ControlTowerGenericHullResistanceBonusStasis = 3149,
 
-    /// <summary>controlTowerGenericHullResistanceBonusCG&CGJ</summary>
+    /// <summary>controlTowerGenericHullResistanceBonusCG&amp;CGJ</summary>
     [Description("controlTowerGenericHullResistanceBonusCG&CGJ")]
     ControlTowerGenericHullResistanceBonusCgAndCgj = 3150,
 
-    /// <summary>controlTowerGenericHullResistanceBonusCG&CGJ&ECM</summary>
+    /// <summary>controlTowerGenericHullResistanceBonusCG&amp;CGJ&amp;ECM</summary>
     [Description("controlTowerGenericHullResistanceBonusCG&CGJ&ECM")]
     ControlTowerGenericHullResistanceBonusCgAndCgjAndEcm = 3151,
 
-    /// <summary>controlTowerGenericHullResistanceBonusCG&CGJ&ECM&EN</summary>
+    /// <summary>controlTowerGenericHullResistanceBonusCG&amp;CGJ&amp;ECM&amp;EN</summary>
     [Description("controlTowerGenericHullResistanceBonusCG&CGJ&ECM&EN")]
     ControlTowerGenericHullResistanceBonusCgAndCgjAndEcmAndEn = 3152,
 
-    /// <summary>controlTowerGenericHullResistanceBonusCG&CGJ&ECM&EN&H</summary>
+    /// <summary>controlTowerGenericHullResistanceBonusCG&amp;CGJ&amp;ECM&amp;EN&amp;H</summary>
     [Description("controlTowerGenericHullResistanceBonusCG&CGJ&ECM&EN&H")]
     ControlTowerGenericHullResistanceBonusCgAndCgjAndEcmAndEnAndH = 3153,
 
-    /// <summary>controlTowerGenericHullResistanceBonusCG&CGJ&ECM&EN&H&JP</summary>
+    /// <summary>controlTowerGenericHullResistanceBonusCG&amp;CGJ&amp;ECM&amp;EN&amp;H&amp;JP</summary>
     [Description("controlTowerGenericHullResistanceBonusCG&CGJ&ECM&EN&H&JP")]
     ControlTowerGenericHullResistanceBonusCgAndCgjAndEcmAndEnAndHAndJp = 3154,
 
-    /// <summary>controlTowerGenericHullResistanceBonusCG&CGJ&ECM&EN&H&JP&L</summary>
+    /// <summary>controlTowerGenericHullResistanceBonusCG&amp;CGJ&amp;ECM&amp;EN&amp;H&amp;JP&amp;L</summary>
     [Description("controlTowerGenericHullResistanceBonusCG&CGJ&ECM&EN&H&JP&L")]
     ControlTowerGenericHullResistanceBonusCgAndCgjAndEcmAndEnAndHAndJpAndL = 3155,
 
-    /// <summary>controlTowerGenericHullResistanceBonusCG&CGJ&ECM&EN&H&JP&L&M</summary>
+    /// <summary>controlTowerGenericHullResistanceBonusCG&amp;CGJ&amp;ECM&amp;EN&amp;H&amp;JP&amp;L&amp;M</summary>
     [Description("controlTowerGenericHullResistanceBonusCG&CGJ&ECM&EN&H&JP&L&M")]
     ControlTowerGenericHullResistanceBonusCgAndCgjAndEcmAndEnAndHAndJpAndLAndM = 3156,
 
-    /// <summary>controlTowerGenericHullResistanceBonusCG&CGJ&ECM&EN&H&JP&L&M&P</summary>
+    /// <summary>controlTowerGenericHullResistanceBonusCG&amp;CGJ&amp;ECM&amp;EN&amp;H&amp;JP&amp;L&amp;M&amp;P</summary>
     [Description("controlTowerGenericHullResistanceBonusCG&CGJ&ECM&EN&H&JP&L&M&P")]
     ControlTowerGenericHullResistanceBonusCgAndCgjAndEcmAndEnAndHAndJpAndLAndMAndP = 3157,
 
-    /// <summary>controlTowerGenericHullResistanceBonusCG&CGJ&ECM&EN&H&JP&L&M&P&SC</summary>
+    /// <summary>controlTowerGenericHullResistanceBonusCG&amp;CGJ&amp;ECM&amp;EN&amp;H&amp;JP&amp;L&amp;M&amp;P&amp;SC</summary>
     [Description("controlTowerGenericHullResistanceBonusCG&CGJ&ECM&EN&H&JP&L&M&P&SC")]
     ControlTowerGenericHullResistanceBonusCgAndCgjAndEcmAndEnAndHAndJpAndLAndMAndPAndSc = 3158,
 
-    /// <summary>controlTowerGenericHullResistanceBonusCG&CGJ&ECM&EN&H&JP&L&M&P&SC&SD</summary>
+    /// <summary>controlTowerGenericHullResistanceBonusCG&amp;CGJ&amp;ECM&amp;EN&amp;H&amp;JP&amp;L&amp;M&amp;P&amp;SC&amp;SD</summary>
     [Description("controlTowerGenericHullResistanceBonusCG&CGJ&ECM&EN&H&JP&L&M&P&SC&SD")]
     ControlTowerGenericHullResistanceBonusCgAndCgjAndEcmAndEnAndHAndJpAndLAndMAndPAndScAndSd = 3159,
 
@@ -10075,7 +10076,7 @@ namespace Eve
     [LongDescription("Automatically generated effect")]
     SubsystemSkillLevelMinmatarPropulsion = 3851,
 
-    /// <summary>This will repair friendly NPC within the NPC's group. </summary>
+    /// <summary>This will repair friendly NPC within the NPC&#39;s group. </summary>
     [Description("NPCRemoteArmorRepair")]
     [LongDescription("This will repair friendly NPC within the NPC\'s group. ")]
     NpcRemoteArmorRepair = 3852,
@@ -10085,7 +10086,7 @@ namespace Eve
     [LongDescription("Automatically generated effect")]
     RechargeRateAddPassive = 3853,
 
-    /// <summary>This will repair friendly NPC within the NPC's group. </summary>
+    /// <summary>This will repair friendly NPC within the NPC&#39;s group. </summary>
     [Description("NPCRemoteShieldBoost")]
     [LongDescription("This will repair friendly NPC within the NPC\'s group. ")]
     NpcRemoteShieldBoost = 3855,

@@ -30,7 +30,8 @@ namespace Eve.Data
   /// </summary>
   public class EveDbContext : DbContext
   {
-    private static readonly EveDbContext DefaultInstance = new EveDbContext();
+    [ThreadStatic]
+    private static EveDbContext defaultInstance;
 
     private IDbSet<AgentEntity> agents;
     private IDbSet<AgentTypeEntity> agentTypes;
@@ -47,6 +48,7 @@ namespace Eve.Data
     private IDbSet<EffectTypeEntity> effectTypes;
     private IDbSet<EveTypeEntity> eveTypes;
     private IDbSet<FlagEntity> flags;
+    private IDbSet<GraphicEntity> graphics;
     private IDbSet<GroupEntity> groups;
     private IDbSet<IconEntity> icons;
     private IDbSet<ItemEntity> items;
@@ -124,12 +126,21 @@ namespace Eve.Data
     /// <value>
     /// The default <see cref="EveDbContext" />.
     /// </value>
+    /// <remarks>
+    /// <para>
+    /// A different instance will be returned for each thread.  Since the
+    /// <see cref="EveDbContext" /> class is read-only and does not cache any
+    /// entities, it is safe to use a single instance per thread for the
+    /// lifetime of the application.
+    /// </para>
+    /// </remarks>
     public static EveDbContext Default
     {
       get
       {
         Contract.Ensures(Contract.Result<EveDbContext>() != null);
-        return DefaultInstance;
+
+        return defaultInstance ?? (defaultInstance = new EveDbContext());
       }
     }
 
@@ -490,6 +501,30 @@ namespace Eve.Data
       {
         Contract.Requires(value != null, "The DbSet cannot be null.");
         this.flags = value;
+      }
+    }
+
+    /// <summary>
+    /// Gets or sets the <see cref="DbSet{T}" /> for graphics.
+    /// </summary>
+    /// <value>
+    /// The <see cref="DbSet{T}" /> for graphics.
+    /// </value>
+    public IDbSet<GraphicEntity> Graphics
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IDbSet<GraphicEntity>>() != null);
+
+        // The field will be non-null by the time the property is accessed.
+        Contract.Assume(this.graphics != null);
+        return this.graphics;
+      }
+
+      set
+      {
+        Contract.Requires(value != null, "The DbSet cannot be null.");
+        this.graphics = value;
       }
     }
 
@@ -1133,6 +1168,10 @@ namespace Eve.Data
       flag.Property(x => x.Id).HasColumnName("flagID");
       flag.Property(x => x.Name).HasColumnName("flagName");
 
+      /* GraphicEntity Mappings ********************************************************/
+
+      // All mappings defined by Data Annotations
+
       /* GroupEntity Mappings *******************************************************/
       var group = modelBuilder.Entity<GroupEntity>();
 
@@ -1159,8 +1198,30 @@ namespace Eve.Data
       /* ItemEntity Mappings ********************************************************/
       var item = modelBuilder.Entity<ItemEntity>();
 
-      item.HasRequired(x => x.Location).WithMany();
-      item.HasRequired(x => x.Owner).WithMany();
+      item.HasRequired(x => x.Location).WithMany().HasForeignKey(x => x.LocationId);
+      item.HasRequired(x => x.Owner).WithMany().HasForeignKey(x => x.OwnerId);
+      
+      // Map the Name property to the invNames table
+      item.Map(m => 
+      {
+        m.Properties(x => x.Name);
+        m.ToTable("invNames");
+      });
+
+      // Map all other properties to the invTypes table
+      item.Map(m =>
+      {
+        m.Properties(x => new 
+        {
+          x.FlagId,
+          x.ItemTypeId,
+          x.LocationId,
+          x.OwnerId,
+          x.Quantity
+        });
+
+        m.ToTable("invItems");
+      });
 
       /* MarketGroupEntity Mappings *************************************************/
       var marketGroup = modelBuilder.Entity<MarketGroupEntity>();

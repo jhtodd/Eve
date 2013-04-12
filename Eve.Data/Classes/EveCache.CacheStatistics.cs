@@ -32,6 +32,7 @@ namespace Eve.Data
     {
       private long hits;
       private long misses;
+      private ReaderWriterLockSlim padlock;
       private long writes;
 
       /* Constructors */
@@ -43,6 +44,7 @@ namespace Eve.Data
       {
         this.hits = 0L;
         this.misses = 0L;
+        this.padlock = new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
         this.writes = 0L;
       }
 
@@ -60,13 +62,33 @@ namespace Eve.Data
         get
         {
           Contract.Ensures(Contract.Result<long>() >= 0L);
-          return this.hits;
+
+          this.Padlock.EnterReadLock();
+
+          try
+          {
+            return this.hits;
+          }
+          finally
+          {
+            this.Padlock.ExitReadLock();
+          }
         }
 
         internal set
         {
           Contract.Requires(value >= 0L, "The number of cache hits cannot be less than zero.");
-          this.hits = value;
+
+          this.Padlock.EnterWriteLock();
+
+          try
+          {
+            this.hits = value;
+          }
+          finally
+          {
+            this.Padlock.ExitWriteLock();
+          }
         }
       }
 
@@ -81,13 +103,33 @@ namespace Eve.Data
         get
         {
           Contract.Ensures(Contract.Result<long>() >= 0L);
-          return this.misses;
+
+          this.Padlock.EnterReadLock();
+
+          try
+          {
+            return this.misses;
+          }
+          finally
+          {
+            this.Padlock.ExitReadLock();
+          }
         }
 
         internal set
         {
           Contract.Requires(value >= 0L, "The number of cache misses cannot be less than zero.");
-          this.misses = value;
+
+          this.Padlock.EnterWriteLock();
+
+          try
+          {
+            this.misses = value;
+          }
+          finally
+          {
+            this.Padlock.ExitWriteLock();
+          }
         }
       }
 
@@ -102,7 +144,17 @@ namespace Eve.Data
         get
         {
           Contract.Ensures(Contract.Result<long>() >= 0L);
-          return this.Hits + this.Misses;
+
+          this.Padlock.EnterReadLock();
+
+          try
+          {
+            return this.Hits + this.Misses;
+          }
+          finally
+          {
+            this.Padlock.ExitReadLock();
+          }
         }
       }
 
@@ -117,13 +169,50 @@ namespace Eve.Data
         get
         {
           Contract.Ensures(Contract.Result<long>() >= 0L);
-          return this.writes;
+
+          this.Padlock.EnterReadLock();
+
+          try
+          {
+            return this.writes;
+          }
+          finally
+          {
+            this.Padlock.ExitReadLock();
+          }
         }
 
         internal set
         {
           Contract.Requires(value >= 0L, "The number of writes cannot be less than zero.");
-          this.writes = value;
+
+          this.Padlock.EnterWriteLock();
+
+          try
+          {
+            this.writes = value;
+          }
+          finally
+          {
+            this.Padlock.ExitWriteLock();
+          }
+        }
+      }
+
+      /// <summary>
+      /// Gets the object used to enforce concurrency for statistics
+      /// operations.
+      /// </summary>
+      /// <value>
+      /// A <see cref="ReaderWriterLockSlim" /> object used to
+      /// enforce concurrency for statistics operations.
+      /// </value>
+      protected ReaderWriterLockSlim Padlock
+      {
+        get
+        {
+          Contract.Ensures(Contract.Result<ReaderWriterLockSlim>() != null);
+          return this.padlock;
         }
       }
 
@@ -134,9 +223,18 @@ namespace Eve.Data
       /// </summary>
       public void Reset()
       {
-        this.Hits = 0L;
-        this.Misses = 0L;
-        this.Writes = 0L;
+        this.Padlock.EnterWriteLock();
+
+        try
+        {
+          this.Hits = 0L;
+          this.Misses = 0L;
+          this.Writes = 0L;
+        }
+        finally
+        {
+          this.Padlock.ExitWriteLock();
+        }
       }
 
       /// <inheritdoc />
@@ -156,6 +254,7 @@ namespace Eve.Data
       {
         Contract.Invariant(this.hits >= 0L);
         Contract.Invariant(this.misses >= 0L);
+        Contract.Invariant(this.padlock != null);
         Contract.Invariant(this.writes >= 0L);
       }
     }

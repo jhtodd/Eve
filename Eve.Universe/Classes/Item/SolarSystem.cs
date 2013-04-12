@@ -119,16 +119,25 @@ namespace Eve.Universe
     {
       get
       {
-        if (this.FactionId == null && this.Constellation.FactionId == null && this.Region.FactionId == null)
+        if (this.FactionId == null)
+        {
+          return null;
+        }
+
+        if (this.faction != null)
+        {
+          return this.faction;
+        }
+
+        FactionEntity factionEntity = this.Entity.Faction ?? this.Entity.Constellation.Faction ?? this.Entity.Region.Faction;
+
+        if (factionEntity == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.faction ??
-               (this.faction = Eve.General.Cache.GetOrAdd<Faction>(this.FactionId, () => (Faction)this.Entity.Faction.ToAdapter())) ??
-               (this.faction = Eve.General.Cache.GetOrAdd<Faction>(this.Constellation.FactionId, () => (Faction)this.Entity.Constellation.Faction.ToAdapter())) ??
-               (this.faction = Eve.General.Cache.GetOrAdd<Faction>(this.Region.FactionId, () => (Faction)this.Entity.Region.Faction.ToAdapter()));
+        return this.faction = Eve.General.Cache.GetOrAdd<Faction>(factionEntity.Id, () => (Faction)factionEntity.ToAdapter());
       }
     }
 

@@ -27,21 +27,21 @@ namespace Eve.Data
   public partial class EveCache
   {
     /// <summary>
-    /// Defines a mapping between cacheable types and the types that define the
-    /// domain of the ID values.
+    /// Defines a mapping between cacheable types and the region strings that
+    /// define the domain of their ID values.
     /// </summary>
     /// <remarks>
     /// <para>
     /// Some cacheable types don't define a domain for their ID values directly,
     /// but rely on the domain defined by a parent type.  For example, ID values
     /// for <see cref="BlueprintType" /> aren't just unique among blueprints,
-    /// but among all items.  So, we define a mapping between
+    /// but among all EVE types.  So, we define a mapping between
     /// <see cref="BlueprintType" /> and <see cref="EveType" /> to let the
     /// cache know that <see cref="EveType" /> actually defines the ID domain
     /// for blueprints.
     /// </para>
     /// </remarks>
-    public class CacheRegionMap : IDisposable
+    internal class CacheRegionMap : IDisposable
     {
       private readonly Dictionary<Type, string> innerRegionMap;
       private readonly ReaderWriterLockSlim padlock;
@@ -70,7 +70,7 @@ namespace Eve.Data
       {
         get
         {
-          Contract.Ensures(Contract.Result<Dictionary<Type, int>>() != null);
+          Contract.Ensures(Contract.Result<Dictionary<Type, string>>() != null);
           return this.innerRegionMap;
         }
       }

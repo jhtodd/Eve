@@ -3,13 +3,14 @@
 // Any changes you make may be overwritten the next time the contents are generated.
 namespace Eve.Universe
 {
+  using System;
   using System.CodeDom.Compiler;
   using System.ComponentModel;
   using FreeNet;
 
 
   /// <summary>Contains the ID values associated with the Division class.</summary>
-  [GeneratedCode("Eve", "1.76.447.20946")]
+  [GeneratedCode("Eve.Meta", "1.0.0.0")]
   [Description("Contains the ID values associated with the Division class.")]
   public enum DivisionId : byte
   {
@@ -82,7 +83,7 @@ namespace Eve.Universe
     [Description("Public Relations")]
     PublicRelations = 17,
 
-    /// <summary>R&D</summary>
+    /// <summary>R&amp;D</summary>
     [Description("R&D")]
     RAndD = 18,
 

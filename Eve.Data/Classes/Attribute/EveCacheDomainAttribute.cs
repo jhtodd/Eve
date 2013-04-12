@@ -15,6 +15,8 @@ namespace Eve.Data
   using System.Text.RegularExpressions;
   using System.Threading.Tasks;
 
+  using Eve.Universe;
+
   /// <summary>
   /// Indicates that the target class has a cache domain other than the
   /// class itself.  This also applies to all derived classes as well,
@@ -25,7 +27,7 @@ namespace Eve.Data
   /// A cache domain is the domain in which a cache key is unique.  For
   /// example, the <see cref="EveType" /> class has several derived
   /// classes: <see cref="SkillType" />, <see cref="StationType" />,
-  /// and so on.  However, the value of each type's <see cref="Id" />
+  /// and so on.  However, the value of each type's <c>Id</c>
   /// property is unique across all types derived from <see cref="EveType" />,
   /// and so the cache domain for all of those types should be set to
   /// <see cref="EveType" />.  This simplifies the cache retrieval process.

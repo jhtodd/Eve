@@ -147,7 +147,7 @@ namespace EveUpdater {
 
     //******************************************************************************
     /// <summary>
-    /// The command to test data source settings.
+    /// The command to generate enumeration code.
     /// </summary>
     public class GenerateEnumCodeSimpleCommand : ViewModelSimpleCommand<EveUpdaterWindowViewModel> {
 
@@ -195,6 +195,65 @@ namespace EveUpdater {
         }
 
         await ViewModel.GenerateEnumCode();
+      }
+      #endregion
+    }
+
+    //******************************************************************************
+    /// <summary>
+    /// The command to generate database table code.
+    /// </summary>
+    public class GenerateTableCodeSimpleCommand : ViewModelSimpleCommand<EveUpdaterWindowViewModel>
+    {
+
+      #region Constructors/Finalizers
+      //******************************************************************************
+      /// <summary>
+      /// Initializes a new instance of the GenerateTableCodeSimpleCommand class.
+      /// </summary>
+      /// 
+      /// <param name="viewModel">
+      /// The view model associated with the command.
+      /// </param>
+      public GenerateTableCodeSimpleCommand(EveUpdaterWindowViewModel viewModel) : base(viewModel)
+      {
+        Contract.Requires(viewModel != null, "The view model cannot be null.");
+      }
+      #endregion
+      #region Public Methods
+      //******************************************************************************
+      /// <summary>
+      /// Returns a boolean value specifying whether the command can be executed.
+      /// </summary>
+      /// 
+      /// <param name="parameter">
+      /// A parameter value passed to the command.
+      /// </param>
+      /// 
+      /// <returns>
+      /// <see langword="true" /> if the command can be executed; otherwise
+      /// <see langword="false" />.
+      /// </returns>
+      public override bool CanExecute(object parameter)
+      {
+        return ViewModel.CanGenerateTableCode;
+      }
+      //******************************************************************************
+      /// <summary>
+      /// Executes the command.
+      /// </summary>
+      /// 
+      /// <param name="parameter">
+      /// A parameter value passed to the command.
+      /// </param>
+      public async override void Execute(object parameter)
+      {
+        if (!ViewModel.CanGenerateTableCode)
+        {
+          return;
+        }
+
+        await ViewModel.GenerateTableCode();
       }
       #endregion
     }
@@ -389,13 +448,17 @@ namespace EveUpdater {
     private int _findAttributesMinimumNumber;
     private bool _findAttributesPublishedItemsOnly;
     private string _generatedEnumCode;
+    private string _generatedTableCode;
     private ICommand _generateEnumCodeCommand;
+    private ICommand _generateTableCodeCommand;
     private ICommand _loadCategoriesCommand;
     private MethodInfo _selectedEnumCodeGenerator;
     private object _selectedAttributeCategory;
     private string _selectedQueryTestResults;
     private MethodInfo _selectedQuery;
+    private MethodInfo _selectedTableCodeGenerator;
     private string _statusText;
+    private IEnumerable<ListEntry<MethodInfo, string>> _tableCodeGenerators;
     private ICommand _testDataSourceCommand;
     private ICommand _testSelectedEntityCommand;
     #endregion
@@ -426,7 +489,9 @@ namespace EveUpdater {
       _findAttributesMinimumNumber = 1;
       _findAttributesPublishedItemsOnly = true;
       _generatedEnumCode = string.Empty;
+      _generatedTableCode = string.Empty;
       _generateEnumCodeCommand = new GenerateEnumCodeSimpleCommand(this);
+      _generateTableCodeCommand = new GenerateTableCodeSimpleCommand(this);
       _loadCategoriesCommand = new LoadCategoriesSimpleCommand(this);
       _selectedQueryTestResults = string.Empty;
       _statusText = string.Empty;
@@ -436,6 +501,7 @@ namespace EveUpdater {
       _dataProviders = GetDataProviders();
       _enumCodeGenerators = GetEnumCodeGenerators();
       _eveQueryMethods = GetEveQueryMethods();
+      _tableCodeGenerators = GetTableCodeGenerators();
     }
     //******************************************************************************
     /// <summary>
@@ -454,10 +520,13 @@ namespace EveUpdater {
       Contract.Invariant(_findAttributesForSelectedCategoryCommand != null);
       Contract.Invariant(_findAttributesMinimumNumber >= 1);
       Contract.Invariant(_generatedEnumCode != null);
+      Contract.Invariant(_generatedTableCode != null);
       Contract.Invariant(_generateEnumCodeCommand != null);
+      Contract.Invariant(_generateTableCodeCommand != null);
       Contract.Invariant(_loadCategoriesCommand != null);
       Contract.Invariant(_selectedQueryTestResults != null);
       Contract.Invariant(_statusText != null);
+      Contract.Invariant(_tableCodeGenerators != null);
       Contract.Invariant(_testDataSourceCommand != null);
       Contract.Invariant(_testSelectedEntityCommand != null);
     }
@@ -499,6 +568,22 @@ namespace EveUpdater {
     public bool CanGenerateEnumCode {
       get {
         return SelectedEnumCodeGenerator != null;
+      }
+    }
+    //******************************************************************************
+    /// <summary>
+    /// Gets a value indicating whether the database table code can be generated.
+    /// </summary>
+    /// 
+    /// <value>
+    /// <see langword="true" /> if the window is in a state where database table
+    /// code can be generated; otherwise <see langword="false" />.
+    /// </value>
+    public bool CanGenerateTableCode
+    {
+      get
+      {
+        return SelectedTableCodeGenerator != null;
       }
     }
     //******************************************************************************
@@ -844,17 +929,66 @@ namespace EveUpdater {
     }
     //******************************************************************************
     /// <summary>
-    /// Gets the command to test a data source.
+    /// Gets or sets the generated database table code.
     /// </summary>
     /// 
     /// <value>
-    /// The <see cref="ICommand" /> which triggers the action of testing a data
-    /// source.
+    /// The generated database table code.
+    /// </value>
+    public string GeneratedTableCode
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<string>() != null);
+        return _generatedTableCode;
+      }
+      set
+      {
+        if (value == _generatedTableCode)
+        {
+          return;
+        }
+
+        if (value == null)
+        {
+          value = string.Empty;
+        }
+
+        string oldValue = _generatedTableCode;
+        _generatedTableCode = value;
+        OnGeneratedTableCodeChanged(oldValue, value);
+      }
+    }
+    //******************************************************************************
+    /// <summary>
+    /// Gets the command to generate enumeration code.
+    /// </summary>
+    /// 
+    /// <value>
+    /// The <see cref="ICommand" /> which triggers the action of generating
+    /// enumeration code.
     /// </value>
     public ICommand GenerateEnumCodeCommand {
       get {
         Contract.Ensures(Contract.Result<ICommand>() != null);
         return _generateEnumCodeCommand;
+      }
+    }
+    //******************************************************************************
+    /// <summary>
+    /// Gets the command to generate database table code.
+    /// </summary>
+    /// 
+    /// <value>
+    /// The <see cref="ICommand" /> which triggers the action of generating
+    /// database table code.
+    /// </value>
+    public ICommand GenerateTableCodeCommand
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<ICommand>() != null);
+        return _generateTableCodeCommand;
       }
     }
     //******************************************************************************
@@ -965,6 +1099,32 @@ namespace EveUpdater {
     }
     //******************************************************************************
     /// <summary>
+    /// Gets or sets the selected database table code generator method.
+    /// </summary>
+    /// 
+    /// <value>
+    /// The selected database table code generator method.
+    /// </value>
+    public MethodInfo SelectedTableCodeGenerator
+    {
+      get
+      {
+        return _selectedTableCodeGenerator;
+      }
+      set
+      {
+        if (value == _selectedTableCodeGenerator)
+        {
+          return;
+        }
+
+        var oldValue = _selectedTableCodeGenerator;
+        _selectedTableCodeGenerator = value;
+        OnSelectedTableCodeGeneratorChanged(oldValue, value);
+      }
+    }
+    //******************************************************************************
+    /// <summary>
     /// Gets or sets the text displayed in the status bar.
     /// </summary>
     /// 
@@ -988,6 +1148,22 @@ namespace EveUpdater {
         string oldValue = _statusText;
         _statusText = value;
         OnStatusTextChanged(oldValue, value);
+      }
+    }
+    //******************************************************************************
+    /// <summary>
+    /// Gets the collection of methods that generate database table code.
+    /// </summary>
+    /// 
+    /// <value>
+    /// The collection of methods that generate database table code.
+    /// </value>
+    public IEnumerable<ListEntry<MethodInfo, string>> TableCodeGenerators
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IEnumerable<ListEntry<MethodInfo, string>>>() != null);
+        return _tableCodeGenerators;
       }
     }
     //******************************************************************************
@@ -1308,6 +1484,50 @@ namespace EveUpdater {
     }
     //******************************************************************************
     /// <summary>
+    /// Generates the code for the selected database table.
+    /// </summary>
+    /// 
+    /// <returns>
+    /// A <see cref="Task" /> which can be used to interact with the method.
+    /// </returns>
+    public async Task GenerateTableCode()
+    {
+      // Define main task to be performed asynchronously
+      Action operation = () => {
+        StatusText = "Loading data file...";
+
+        string filename = this.Service.PromptOpenFile("Select Data File", "YAML files|*.yaml|All Files|*.*");
+        
+        if (filename == null)
+        {
+          return;
+        }
+
+        StatusText = "Generating database table code...";
+
+        MethodInfo generatorMethod = SelectedTableCodeGenerator;
+
+        if (generatorMethod.IsStatic)
+        {
+          GeneratedTableCode = (string)generatorMethod.Invoke(null, new object[] { filename });
+        }
+        else
+        {
+          object instance = Activator.CreateInstance(generatorMethod.DeclaringType);
+          GeneratedTableCode = (string)generatorMethod.Invoke(instance, new object[] { filename });
+        }
+      };
+
+      // Define the operation to perform after the main task has completed or been canceled
+      Action onCleanup = () => {
+        StatusText = string.Empty;
+      };
+
+      // Perform the action
+      await BeginAsyncOperation(operation, onCleanup);
+    }
+    //******************************************************************************
+    /// <summary>
     /// Compares the current and comparison data sources and displays the results.
     /// </summary>
     /// 
@@ -1474,7 +1694,7 @@ namespace EveUpdater {
           }
 
           EveDbContext context = new EveDbContext(connection, true);
-          dataSource = new EveDataSource(context);
+          dataSource = new EveDataSource(() => context);
 
         } catch (Exception ex) {
           MessageBox.Show("The data context could not be established:\n\n" + ex.Message, "Test Entities", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -1598,25 +1818,19 @@ namespace EveUpdater {
 
         foreach (MethodInfo method in methods) {
           Contract.Assume(method != null);
-          Contract.Assume(method.CustomAttributes != null);
 
-          foreach (CustomAttributeData attribute in method.CustomAttributes) {
-            Contract.Assume(attribute != null);
+          var attribute = method.GetCustomAttribute<Eve.Meta.EveEnumGeneratorAttribute>();
+          if (attribute != null)
+          {
+            string enumName = (string)attribute.EnumName;
 
-            if (attribute.AttributeType == typeof(Eve.Meta.EveEnumGeneratorAttribute)) {
-              Contract.Assume(attribute.ConstructorArguments != null);
-              Contract.Assume(0 < attribute.ConstructorArguments.Count);
-
-              string enumName = (string) attribute.ConstructorArguments[0].Value;
-              
-              // If no enum name assigned in the attribute, use the method name
-              if (string.IsNullOrWhiteSpace(enumName)) {
-                enumName = method.Name;
-              }
-
-              generatorMethods.Add(new ListEntry<MethodInfo, string>(method, enumName));
-              break;
+            // If no enum name assigned in the attribute, use the method name
+            if (string.IsNullOrWhiteSpace(enumName))
+            {
+              enumName = method.Name;
             }
+
+            generatorMethods.Add(new ListEntry<MethodInfo, string>(method, enumName));
           }
         }
       }
@@ -1644,28 +1858,62 @@ namespace EveUpdater {
 
         foreach (MethodInfo method in methods) {
           Contract.Assume(method != null);
-          Contract.Assume(method.CustomAttributes != null);
 
-          foreach (CustomAttributeData attribute in method.CustomAttributes) {
-            Contract.Assume(attribute != null);
+          var attribute = method.GetCustomAttribute<Eve.Data.EveQueryMethodAttribute>();
 
-            if (attribute.AttributeType == typeof(Eve.Data.EveQueryMethodAttribute))
-            {
-              Contract.Assume(attribute.ConstructorArguments != null);
-              Contract.Assume(0 < attribute.ConstructorArguments.Count);
-
-              Type queryType = (Type) attribute.ConstructorArguments[0].Value;
-              Contract.Assume(queryType != null);
-
-              queryMethods.Add(new ListEntry<MethodInfo, string>(method, queryType.Name + " (" + queryType.Namespace + ")"));
-              break;
-            }
+          if (attribute != null) 
+          {
+            Type queryType = attribute.QueryType;
+            queryMethods.Add(new ListEntry<MethodInfo, string>(method, queryType.Name + " (" + queryType.Namespace + ")"));
           }
         }
       }
 
       queryMethods.Sort((x, y) => x.Value.Name.CompareTo(y.Value.Name));
       return queryMethods.AsReadOnly();
+    }
+    //******************************************************************************
+    /// <summary>
+    /// Returns the collection of database table code generator methods.
+    /// </summary>
+    /// 
+    /// <returns>
+    /// The collection of database table code generator methods.
+    /// </returns>
+    protected IEnumerable<ListEntry<MethodInfo, string>> GetTableCodeGenerators()
+    {
+      Contract.Ensures(Contract.Result<IEnumerable<ListEntry<MethodInfo, string>>>() != null);
+
+      List<ListEntry<MethodInfo, string>> generatorMethods = new List<ListEntry<MethodInfo, string>>();
+
+      Type[] eveTypes = typeof(Eve.Meta.TableCodeGenerator).Assembly.GetTypes();
+
+      foreach (Type eveType in eveTypes)
+      {
+        MethodInfo[] methods = eveType.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+
+        foreach (MethodInfo method in methods)
+        {
+          Contract.Assume(method != null);
+
+          var attribute = method.GetCustomAttribute<Eve.Meta.EveTableGeneratorAttribute>();
+          if (attribute != null)
+          {
+            string tableName = (string)attribute.TableName;
+
+            // If no enum name assigned in the attribute, use the method name
+            if (string.IsNullOrWhiteSpace(tableName))
+            {
+              tableName = method.Name;
+            }
+
+            generatorMethods.Add(new ListEntry<MethodInfo, string>(method, tableName));
+          }
+        }
+      }
+
+      generatorMethods.Sort((x, y) => x.Value.Name.CompareTo(y.Value.Name));
+      return generatorMethods.AsReadOnly();
     }
     //******************************************************************************
     /// <summary>
@@ -1856,6 +2104,23 @@ namespace EveUpdater {
     }
     //******************************************************************************
     /// <summary>
+    /// Occurs when the value of the <see cref="GeneratedTableCode" /> property has
+    /// changed.
+    /// </summary>
+    /// 
+    /// <param name="oldValue">
+    /// The value of the property before it changed.
+    /// </param>
+    /// 
+    /// <param name="newValue">
+    /// The current value of the property.
+    /// </param>
+    protected virtual void OnGeneratedTableCodeChanged(string oldValue, string newValue)
+    {
+      OnPropertyChanged(new PropertyChangedEventArgs("GeneratedTableCode"));
+    }
+    //******************************************************************************
+    /// <summary>
     /// Occurs when the value of the <see cref="SelectedAttributeCategory" /> property has
     /// changed.
     /// </summary>
@@ -1917,6 +2182,23 @@ namespace EveUpdater {
     /// </param>
     protected virtual void OnSelectedQueryTestResultsChanged(string oldValue, string newValue) {
       OnPropertyChanged(new PropertyChangedEventArgs("SelectedQueryTestResults"));
+    }
+    //******************************************************************************
+    /// <summary>
+    /// Occurs when the value of the <see cref="SelectedTableCodeGenerator" /> property has
+    /// changed.
+    /// </summary>
+    /// 
+    /// <param name="oldValue">
+    /// The value of the property before it changed.
+    /// </param>
+    /// 
+    /// <param name="newValue">
+    /// The current value of the property.
+    /// </param>
+    protected virtual void OnSelectedTableCodeGeneratorChanged(MethodInfo oldValue, MethodInfo newValue)
+    {
+      OnPropertyChanged(new PropertyChangedEventArgs("SelectedTableCodeGenerator"));
     }
     //******************************************************************************
     /// <summary>

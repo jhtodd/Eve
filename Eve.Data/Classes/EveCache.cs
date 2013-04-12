@@ -109,7 +109,7 @@ namespace Eve.Data
     /// The <see cref="CacheRegionMap" /> used to define cache regions for different
     /// types of cacheable objects.
     /// </value>
-    protected internal static CacheRegionMap RegionMap
+    internal static CacheRegionMap RegionMap
     {
       get
       {
@@ -400,6 +400,16 @@ namespace Eve.Data
       T value = valueFactory();
       Contract.Assume(value != null);
 
+      // Check to make sure the value being added actually has the same key as
+      // the value we were passed -- otherwise the cache could be put into an
+      // inconsistent state.
+      string verifyKey = EveCache.GetCacheKey(region, value.CacheKey);
+
+      if (!object.Equals(key, verifyKey))
+      {
+        throw new InvalidOperationException("The key of the item being added to the cache must be the same as the key being requested.");
+      }
+
       // Write to the cache
       this.EnterWriteLock(region);
 
@@ -439,9 +449,9 @@ namespace Eve.Data
     /// be found in the cache.
     /// </param>
     /// <returns>
-    /// The item of the desired type and with the specified key, if a matching
-    /// item is contained in the cache.  Otherwise, the result of executing
-    /// <paramref name="valueFactory" />.
+    /// The cached item with the same key as <paramref name="value" />, if
+    /// such an item exists.  Otherwise, <paramref name="value" /> will be
+    /// added to the cache and then returned.
     /// </returns>
     public T GetOrAdd<T>(T value) where T : IEveCacheable
     {
@@ -468,9 +478,9 @@ namespace Eve.Data
     /// automatically evicted.
     /// </param>
     /// <returns>
-    /// The item of the desired type and with the specified key, if a matching
-    /// item is contained in the cache.  Otherwise, the result of executing
-    /// <paramref name="valueFactory" />.
+    /// The cached item with the same key as <paramref name="value" />, if
+    /// such an item exists.  Otherwise, <paramref name="value" /> will be
+    /// added to the cache and then returned.
     /// </returns>
     /// <remarks>
     /// <para>

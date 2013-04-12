@@ -114,8 +114,8 @@ namespace Eve
           break;
 
         case UnitId.GroupId:
+          Contract.Assume(Enum.IsDefined(typeof(GroupId), (GroupId)(int)value));
           GroupId groupId = (GroupId)(int)value;
-          Contract.Assume(Enum.IsDefined(typeof(GroupId), groupId));
           result = Eve.General.DataSource.GetGroupById(groupId).Name;
           break;
 

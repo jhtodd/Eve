@@ -384,6 +384,28 @@ namespace Eve.Data
     }
     #endregion
 
+    #region Graphic Methods
+    Graphic IEveDataSource.GetGraphicById(GraphicId id)
+    {
+      Contract.Ensures(Contract.Result<Graphic>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<Graphic> IEveDataSource.GetGraphics(Expression<Func<GraphicEntity, bool>> filter)
+    {
+      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<Graphic>>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<Graphic> IEveDataSource.GetGraphics(params IQueryModifier<GraphicEntity>[] modifiers)
+    {
+      Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<Graphic>>() != null);
+      throw new NotImplementedException();
+    }
+    #endregion
+
     #region Group Methods
     Group IEveDataSource.GetGroupById(GroupId id)
     {

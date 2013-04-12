@@ -145,7 +145,7 @@ namespace Eve.Universe
     /// </summary>
     /// <value>
     /// A combination of <see cref="RaceId" /> enumeration values indicating which
-    /// races the current faction is associated with, or <see cref="null" /> if the
+    /// races the current faction is associated with, or <see langword="null" /> if the
     /// faction is not associated with any races.
     /// </value>
     public RaceId RaceId

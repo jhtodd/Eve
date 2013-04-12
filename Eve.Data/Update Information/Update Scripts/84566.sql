@@ -264,6 +264,14 @@
   CREATE INDEX ramAssemblyLines_IX_owner ON ramAssemblyLines (ownerID)
   CREATE INDEX ramAssemblyLines_IX_container ON ramAssemblyLines (containerID)
 
+  -- TABLE staStationTypes
+  ALTER TABLE staStationTypes DROP CONSTRAINT stationTypes_PK
+  ALTER TABLE staStationTypes ADD typeID INT DEFAULT 0 NOT NULL
+  GO
+  UPDATE staStationTypes SET typeID = stationTypeID
+  ALTER TABLE staStationTypes ADD CONSTRAINT stationTypes_PK PRIMARY KEY (typeID)
+  ALTER TABLE staStationTypes ADD CONSTRAINT staStations_IX_stationTypeID UNIQUE(stationTypeID)
+
   -- TABLE staStations
   ALTER TABLE staStations DROP CONSTRAINT staStations_PK
   ALTER TABLE staStations ALTER COLUMN stationID BIGINT NOT NULL

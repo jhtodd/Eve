@@ -13,6 +13,8 @@ namespace Eve.Universe
   using System.Linq;
   using System.Linq.Expressions;
 
+  using Eve.Data;
+
   using FreeNet;
   using FreeNet.Collections;
   using FreeNet.Collections.ObjectModel;

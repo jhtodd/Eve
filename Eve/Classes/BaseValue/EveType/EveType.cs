@@ -46,6 +46,7 @@ namespace Eve
   {
     private ReadOnlyAttributeValueCollection attributes;
     private ReadOnlyEffectCollection effects;
+    private Graphic graphic;
     private Group group;
     private Icon icon;
     private MarketGroup marketGroup;
@@ -187,6 +188,37 @@ namespace Eve
         return this.effects ??
                (this.effects = new ReadOnlyEffectCollection(Eve.General.DataSource.GetEffects(x => x.ItemTypeId == this.Id.Value).OrderBy(x => x)));
       }
+    }
+
+    /// <summary>
+    /// Gets the graphic for the the item.
+    /// </summary>
+    /// <value>
+    /// The <see cref="Graphic" /> for the item.
+    /// </value>
+    public Graphic Graphic
+    {
+      get
+      {
+        if (this.IconId == null)
+        {
+          return null;
+        }
+
+        // If not already set, load from the cache, or else create an instance from the base entity
+        return this.graphic ?? (this.graphic = Eve.General.Cache.GetOrAdd<Graphic>(this.GraphicId, () => (Graphic)this.Entity.Graphic.ToAdapter()));
+      }
+    }
+
+    /// <summary>
+    /// Gets the ID of the graphic for the item.
+    /// </summary>
+    /// <value>
+    /// The ID of the <see cref="Graphic" /> for the item.
+    /// </value>
+    public GraphicId? GraphicId
+    {
+      get { return Entity.GraphicId; }
     }
 
     /// <summary>
@@ -364,19 +396,6 @@ namespace Eve
     }
 
     /// <summary>
-    /// Gets the ID(s) of the race(s) associated with the item, if any.
-    /// </summary>
-    /// <value>
-    /// A combination of <see cref="RaceId" /> enumeration values indicating which
-    /// races the current item is associated with, or <see cref="null" /> if the
-    /// item is not associated with any races.
-    /// </value>
-    public RaceId? RaceId
-    {
-      get { return Entity.RaceId; }
-    }
-
-    /// <summary>
     /// Gets the number of items which constitute one "lot."  A lot is the number of
     /// items produced in a manufacturing job, or that must be stacked in order to
     /// be reprocessed.
@@ -400,6 +419,40 @@ namespace Eve
     public bool Published
     {
       get { return Entity.Published; }
+    }
+
+    /// <summary>
+    /// Gets the ID(s) of the race(s) associated with the item, if any.
+    /// </summary>
+    /// <value>
+    /// A combination of <see cref="RaceId" /> enumeration values indicating which
+    /// races the current item is associated with, or <see langword="null" /> if the
+    /// item is not associated with any races.
+    /// </value>
+    public RaceId? RaceId
+    {
+      get { return Entity.RaceId; }
+    }
+
+    /// <summary>
+    /// Gets the radius of the item.
+    /// </summary>
+    /// <value>
+    /// The radius of the item.
+    /// </value>
+    public double Radius
+    {
+      get
+      {
+        Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
+        Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
+
+        var result = Entity.Radius;
+        Contract.Assume(!double.IsInfinity(result));
+        Contract.Assume(!double.IsNaN(result));
+
+        return result;
+      }
     }
 
     /// <summary>
@@ -464,6 +517,19 @@ namespace Eve
     }
 
     /// <summary>
+    /// Gets the ID of the sound associated with the item, if any.
+    /// </summary>
+    /// <value>
+    /// The ID of the sound associated with the item, or
+    /// <see langword="null" /> if no such icon exists.  The meaning of
+    /// this property is unknown.
+    /// </value>
+    public SoundId? SoundId
+    {
+      get { return Entity.SoundId; }
+    }
+
+    /// <summary>
     /// Gets the collection of variations of the item.
     /// </summary>
     /// <value>
@@ -495,8 +561,8 @@ namespace Eve
               variations.Add(type);
             }
 
-            // If the meta type is null, then the current item is the parent --
-            // load its children
+          // If the meta type is null, then the current item is the parent --
+          // load its children
           }
           else
           {

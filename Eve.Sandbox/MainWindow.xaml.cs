@@ -28,6 +28,8 @@ using Eve.Data;
 using Eve.Data.Entities;
 using Eve.Universe;
 using System.Reflection;
+using YamlDotNet.RepresentationModel;
+using System.IO;
 
 namespace Eve.Sandbox {
   /// <summary>
@@ -40,9 +42,10 @@ namespace Eve.Sandbox {
 
     private void Button_Click_1(object sender, RoutedEventArgs e) {
 
-      //var s = Eve.General.DataSource.GetEveTypes(x => x.MarketGroupId == MarketGroupId.ShipEquipment_DeployableEquipment_WarpDisruptionFields);
-      //textBox1.AppendText(s.Count.ToString());
+      IEveEntityAdapter<ItemEntity> s = Eve.General.DataSource.GetNpcCorporations(x => x.Name == "Arkombine").Single();
+      ItemEntity n = s.Entity;
 
+      textBox1.AppendText(n.Name.ToString());
     }
 
     private void Button_Click_2(object sender, RoutedEventArgs e) {
