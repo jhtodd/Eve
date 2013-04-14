@@ -41,15 +41,16 @@ namespace Eve.Sandbox {
     }
 
     private void Button_Click_1(object sender, RoutedEventArgs e) {
+      IEveDbContext context = new ReadOnlyEveDbContext();
+      IEveRepository ds = new EveRepository(context, null);
 
-      IEveEntityAdapter<ItemEntity> s = Eve.General.DataSource.GetNpcCorporations(x => x.Name == "Arkombine").Single();
-      ItemEntity n = s.Entity;
+      NpcCorporation corp = ds.GetNpcCorporations(x => x.Name == "Lai Dai Corporation").Single();
 
-      textBox1.AppendText(n.Name.ToString());
-    }
+      textBox1.AppendText(corp.Name + Environment.NewLine);
 
-    private void Button_Click_2(object sender, RoutedEventArgs e) {
-      Eve.General.Cache.Clear();
+      context.Dispose();
+
+      textBox1.AppendText(corp.SolarSystem.Name + Environment.NewLine);
     }
   }
 }

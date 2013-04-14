@@ -11,6 +11,7 @@ namespace Eve.Character
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Data;
   using Eve.Data.Entities;
 
   using FreeNet;
@@ -30,12 +31,16 @@ namespace Eve.Character
     /// <summary>
     /// Initializes a new instance of the CharacterAttributeType class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal CharacterAttributeType(CharacterAttributeTypeEntity entity) : base(entity)
+    internal CharacterAttributeType(IEveRepository container, CharacterAttributeTypeEntity entity) : base(container, entity)
     {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
     /* Properties */
@@ -54,7 +59,7 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<Icon>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = Eve.General.Cache.GetOrAdd<Icon>(this.IconId, () => (Icon)this.Entity.Icon.ToAdapter()));
+        return this.icon ?? (this.icon = this.Container.Cache.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
       }
     }
 

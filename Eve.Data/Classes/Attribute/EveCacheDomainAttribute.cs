@@ -15,6 +15,7 @@ namespace Eve.Data
   using System.Text.RegularExpressions;
   using System.Threading.Tasks;
 
+  using Eve.Character;
   using Eve.Universe;
 
   /// <summary>

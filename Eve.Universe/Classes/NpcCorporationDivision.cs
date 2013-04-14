@@ -41,12 +41,16 @@ namespace Eve.Universe
     /// <summary>
     /// Initializes a new instance of the <see cref="NpcCorporationDivision" /> class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal NpcCorporationDivision(NpcCorporationDivisionEntity entity) : base(entity)
+    internal NpcCorporationDivision(IEveRepository container, NpcCorporationDivisionEntity entity) : base(container, entity)
     {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
     /* Properties */
@@ -63,7 +67,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyAgentCollection>() != null);
 
-        return this.agents ?? (this.agents = new ReadOnlyAgentCollection(Eve.General.DataSource.GetAgents(x => x.CorporationId == this.CorporationId.Value && x.DivisionId == this.DivisionId).OrderBy(x => x)));
+        return this.agents ?? (this.agents = new ReadOnlyAgentCollection(this.Container.GetAgents(x => x.CorporationId == this.CorporationId.Value && x.DivisionId == this.DivisionId).OrderBy(x => x)));
       }
     }
 
@@ -91,7 +95,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Division>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.division ?? (this.division = Eve.General.Cache.GetOrAdd<Division>(this.DivisionId, () => (Division)this.Entity.Division.ToAdapter()));
+        return this.division ?? (this.division = this.Container.Cache.GetOrAdd<Division>(this.DivisionId, () => this.Entity.Division.ToAdapter(this.Container)));
       }
     }
 
@@ -199,7 +203,7 @@ namespace Eve.Universe
   /// </content>
   public sealed partial class NpcCorporationDivision : IEveCacheable
   {
-    object IEveCacheable.CacheKey
+    IConvertible IEveCacheable.CacheKey
     {
       get { return CreateCompoundId(this.CorporationId, this.DivisionId); }
     }

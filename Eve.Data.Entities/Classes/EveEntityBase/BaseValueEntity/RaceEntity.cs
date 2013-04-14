@@ -72,9 +72,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override Race ToAdapter()
+    public override Race ToAdapter(IEveRepository container)
     {
-      return new Race(this);
+      return new Race(container, this);
     }
   }
 }

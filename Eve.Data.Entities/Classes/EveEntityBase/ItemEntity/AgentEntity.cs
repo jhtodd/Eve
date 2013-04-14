@@ -151,9 +151,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public new Agent ToAdapter()
+    public new Agent ToAdapter(IEveRepository container)
     {
-      return (Agent)base.ToAdapter();
+      return (Agent)base.ToAdapter(container);
     }
   }
 }

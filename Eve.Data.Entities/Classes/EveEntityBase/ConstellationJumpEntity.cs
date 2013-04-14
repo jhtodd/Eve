@@ -118,9 +118,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override ConstellationJump ToAdapter()
+    public override ConstellationJump ToAdapter(IEveRepository container)
     {
-      return new ConstellationJump(this);
+      return new ConstellationJump(container, this);
     }
   }
 }

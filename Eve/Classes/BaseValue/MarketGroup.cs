@@ -12,6 +12,7 @@ namespace Eve
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Data;
   using Eve.Data.Entities;
 
   using FreeNet;
@@ -36,12 +37,16 @@ namespace Eve
     /// <summary>
     /// Initializes a new instance of the MarketGroup class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal MarketGroup(MarketGroupEntity entity) : base(entity)
+    internal MarketGroup(IEveRepository container, MarketGroupEntity entity) : base(container, entity)
     {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
     /* Properties */
@@ -59,7 +64,7 @@ namespace Eve
       {
         Contract.Ensures(Contract.Result<ReadOnlyMarketGroupCollection>() != null);
 
-        return this.childGroups ?? (this.childGroups = new ReadOnlyMarketGroupCollection(Eve.General.DataSource.GetMarketGroups(x => x.ParentGroupId == this.Id).OrderBy(x => x)));
+        return this.childGroups ?? (this.childGroups = new ReadOnlyMarketGroupCollection(this.Container.GetMarketGroups(x => x.ParentGroupId == this.Id).OrderBy(x => x)));
       }
     }
 
@@ -93,7 +98,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = Eve.General.Cache.GetOrAdd<Icon>(this.IconId, () => (Icon)this.Entity.Icon.ToAdapter()));
+        return this.icon ?? (this.icon = this.Container.Cache.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
       }
     }
 
@@ -126,7 +131,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.parentGroup ?? (this.parentGroup = Eve.General.Cache.GetOrAdd<MarketGroup>(this.ParentGroupId, () => (MarketGroup)this.Entity.ParentGroup.ToAdapter()));
+        return this.parentGroup ?? (this.parentGroup = this.Container.Cache.GetOrAdd<MarketGroup>(this.ParentGroupId, () => this.Entity.ParentGroup.ToAdapter(this.Container)));
       }
     }
 
@@ -155,7 +160,7 @@ namespace Eve
       {
         Contract.Ensures(Contract.Result<ReadOnlyTypeCollection>() != null);
 
-        return this.types ?? (this.types = new ReadOnlyTypeCollection(Eve.General.DataSource.GetEveTypes(x => x.MarketGroupId == this.Id).OrderBy(x => x)));
+        return this.types ?? (this.types = new ReadOnlyTypeCollection(this.Container.GetEveTypes(x => x.MarketGroupId == this.Id).OrderBy(x => x)));
       }
     }
 

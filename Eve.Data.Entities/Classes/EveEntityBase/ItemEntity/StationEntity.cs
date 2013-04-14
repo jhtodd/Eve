@@ -66,7 +66,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("CorporationId")]
-    public NpcCorporationEntity Corporation { get; internal set; }
+    public virtual NpcCorporationEntity Corporation { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -111,7 +111,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("OperationId")]
-    public StationOperationEntity Operation { get; internal set; }
+    public virtual StationOperationEntity Operation { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -183,7 +183,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("SolarSystemId")]
-    public SolarSystemEntity SolarSystem { get; internal set; }
+    public virtual SolarSystemEntity SolarSystem { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -210,7 +210,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("StationTypeId")]
-    public StationTypeEntity StationType { get; internal set; }
+    public virtual StationTypeEntity StationType { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -251,9 +251,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public new Station ToAdapter()
+    public new Station ToAdapter(IEveRepository container)
     {
-      return (Station)base.ToAdapter();
+      return (Station)base.ToAdapter(container);
     }
   }
 }

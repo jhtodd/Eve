@@ -60,12 +60,16 @@ namespace Eve
     /// <summary>
     /// Initializes a new instance of the EveType class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    protected EveType(EveTypeEntity entity) : base(entity)
+    protected EveType(IEveRepository container, EveTypeEntity entity) : base(container, entity)
     {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
     /* Properties */
@@ -84,7 +88,7 @@ namespace Eve
 
         // If not already set, construct a collection of this type's attribute values.
         return this.attributes ??
-               (this.attributes = new ReadOnlyAttributeValueCollection(Eve.General.DataSource.GetAttributeValues(x => x.ItemTypeId == this.Id.Value).OrderBy(x => x)));
+               (this.attributes = new ReadOnlyAttributeValueCollection(this.Container, this.Container.GetAttributeValues(x => x.ItemTypeId == this.Id.Value).OrderBy(x => x)));
       }
     }
 
@@ -186,7 +190,7 @@ namespace Eve
 
         // If not already set, construct a collection of this type's effects.
         return this.effects ??
-               (this.effects = new ReadOnlyEffectCollection(Eve.General.DataSource.GetEffects(x => x.ItemTypeId == this.Id.Value).OrderBy(x => x)));
+               (this.effects = new ReadOnlyEffectCollection(this.Container.GetEffects(x => x.ItemTypeId == this.Id.Value).OrderBy(x => x)));
       }
     }
 
@@ -200,13 +204,13 @@ namespace Eve
     {
       get
       {
-        if (this.IconId == null)
+        if (this.GraphicId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.graphic ?? (this.graphic = Eve.General.Cache.GetOrAdd<Graphic>(this.GraphicId, () => (Graphic)this.Entity.Graphic.ToAdapter()));
+        return this.graphic ?? (this.graphic = this.Container.Cache.GetOrAdd<Graphic>(this.GraphicId, () => this.Entity.Graphic.ToAdapter(this.Container)));
       }
     }
 
@@ -234,7 +238,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<Group>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.group ?? (this.group = Eve.General.Cache.GetOrAdd<Group>(this.GroupId, () => (Group)this.Entity.Group.ToAdapter()));
+        return this.group ?? (this.group = this.Container.Cache.GetOrAdd<Group>(this.GroupId, () => (Group)this.Entity.Group.ToAdapter(this.Container)));
       }
     }
 
@@ -266,7 +270,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = Eve.General.Cache.GetOrAdd<Icon>(this.IconId, () => (Icon)this.Entity.Icon.ToAdapter()));
+        return this.icon ?? (this.icon = this.Container.Cache.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
       }
     }
 
@@ -298,7 +302,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.marketGroup ?? (this.marketGroup = Eve.General.Cache.GetOrAdd<MarketGroup>(this.MarketGroupId, () => (MarketGroup)this.Entity.MarketGroup.ToAdapter()));
+        return this.marketGroup ?? (this.marketGroup = this.Container.Cache.GetOrAdd<MarketGroup>(this.MarketGroupId, () => this.Entity.MarketGroup.ToAdapter(this.Container)));
       }
     }
 
@@ -347,7 +351,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<MetaGroup>() != null);
 
         // Default to Tech I if no meta type information is available
-        return this.metaGroup ?? (this.metaGroup = (MetaType != null) ? MetaType.MetaGroup : Eve.General.DataSource.GetMetaGroupById(MetaGroupId.TechI));
+        return this.metaGroup ?? (this.metaGroup = (MetaType != null) ? MetaType.MetaGroup : this.Container.GetMetaGroupById(MetaGroupId.TechI));
       }
     }
 
@@ -391,7 +395,7 @@ namespace Eve
     {
       get
       {
-        return this.metaType ?? (this.metaType = (Entity.MetaType != null) ? new MetaType(Entity.MetaType) : null);
+        return this.metaType ?? (this.metaType = (Entity.MetaType != null) ? Entity.MetaType.ToAdapter(this.Container) : null);
       }
     }
 
@@ -504,7 +508,7 @@ namespace Eve
               // Some items have duplicate skills
               if (!skills.Any(x => x.SkillId == skillId))
               {
-                skills.Add(new SkillLevel(skillId, skillLevel));
+                skills.Add(new SkillLevel(this.Container, skillId, skillLevel));
               }
             }
           }
@@ -556,7 +560,7 @@ namespace Eve
           {
             variations.Add(MetaType.ParentType);
 
-            foreach (EveType type in Eve.General.DataSource.GetEveTypes(x => x.MetaType.ParentTypeId == MetaType.ParentTypeId.Value))
+            foreach (EveType type in this.Container.GetEveTypes(x => x.MetaType.ParentTypeId == MetaType.ParentTypeId.Value))
             {
               variations.Add(type);
             }
@@ -568,7 +572,7 @@ namespace Eve
           {
             variations.Add(this);
 
-            foreach (EveType type in Eve.General.DataSource.GetEveTypes(x => x.MetaType.ParentTypeId == this.Id.Value))
+            foreach (EveType type in this.Container.GetEveTypes(x => x.MetaType.ParentTypeId == this.Id.Value))
             {
               variations.Add(type);
             }
@@ -619,6 +623,9 @@ namespace Eve
     /// <summary>
     /// Creates an appropriate type for the specified entity.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="entity">
     /// The data entity.
     /// </param>
@@ -626,9 +633,10 @@ namespace Eve
     /// An <see cref="EveType" /> of the appropriate derived type, based on the
     /// contents of <paramref name="entity" />.
     /// </returns>
-    public static EveType Create(EveTypeEntity entity)
+    public static EveType Create(IEveRepository container, EveTypeEntity entity)
     {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(entity != null, "The entity cannot be null.");
       Contract.Ensures(Contract.Result<EveType>() != null);
 
       // First, check for derived entity types.  These are entities that
@@ -638,25 +646,25 @@ namespace Eve
       StationTypeEntity stationTypeEntity = entity as StationTypeEntity;
       if (stationTypeEntity != null)
       {
-        return new StationType(stationTypeEntity);
+        return new StationType(container, stationTypeEntity);
       }
 
       // For the remainder, the actual entity is the same type, and we need to
       // determine the EVE type based on its property values.
 
       // Use the item's group and category to determine the correct derived type
-      Group group = Eve.General.DataSource.GetGroupById(entity.GroupId);
+      Group group = container.GetGroupById(entity.GroupId);
 
       switch (group.CategoryId)
       {
         // All items under category Skill map to SkillType
         case CategoryId.Skill:
-          return new SkillType(entity);
+          return new SkillType(container, entity);
       }
 
       // If we don't have a specific derived type for the provided entity, 
       // fall back on a GenericType wrapper.
-      return new GenericType(entity);
+      return new GenericType(container, entity);
     }
 
     /// <inheritdoc />

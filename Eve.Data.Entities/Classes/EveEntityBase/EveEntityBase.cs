@@ -41,11 +41,14 @@ namespace Eve.Data.Entities
     /// <summary>
     /// Returns an instance of an adapter wrapping the current entity.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which will host the adapter.
+    /// </param>
     /// <returns>
     /// A class implementing the <see cref="IEveEntityAdapter{TEntity}" />
     /// interface that encapsulates the current entity, or
     /// <see langword="null" /> if no matching adapter can be created.
     /// </returns>
-    public abstract TAdapter ToAdapter();
+    public abstract TAdapter ToAdapter(IEveRepository container);
   }
 }

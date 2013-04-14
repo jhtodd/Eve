@@ -82,9 +82,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override CharacterAttributeType ToAdapter()
+    public override CharacterAttributeType ToAdapter(IEveRepository container)
     {
-      return new CharacterAttributeType(this);
+      return new CharacterAttributeType(container, this);
     }
   }
 }

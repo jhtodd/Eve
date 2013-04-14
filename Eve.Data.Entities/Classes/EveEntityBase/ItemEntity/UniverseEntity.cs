@@ -143,9 +143,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public new Universe ToAdapter()
+    public new Universe ToAdapter(IEveRepository container)
     {
-      return (Universe)base.ToAdapter();
+      return (Universe)base.ToAdapter(container);
     }
   }
 }

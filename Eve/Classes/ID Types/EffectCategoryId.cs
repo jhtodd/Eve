@@ -16,7 +16,9 @@ namespace Eve
   /// <summary>
   /// Represents an ID value for effect categories class.
   /// </summary>
-  public struct EffectCategoryId : IEquatable<EffectCategoryId>
+  public partial struct EffectCategoryId 
+    : IConvertible,
+      IEquatable<EffectCategoryId>
   {
     private readonly short value;
 
@@ -146,4 +148,97 @@ namespace Eve
       return this.Value.ToString();
     }
   }
+
+  #region IConvertible Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IConvertible" /> interface.
+  /// </content>
+  public partial struct EffectCategoryId : IConvertible
+  {
+    TypeCode IConvertible.GetTypeCode()
+    {
+      return this.Value.GetTypeCode();
+    }
+
+    bool IConvertible.ToBoolean(IFormatProvider provider)
+    {
+      return ((IConvertible)this.Value).ToBoolean(provider);
+    }
+
+    byte IConvertible.ToByte(IFormatProvider provider)
+    {
+      return ((IConvertible)this.Value).ToByte(provider);
+    }
+
+    char IConvertible.ToChar(IFormatProvider provider)
+    {
+      return ((IConvertible)this.Value).ToChar(provider);
+    }
+
+    DateTime IConvertible.ToDateTime(IFormatProvider provider)
+    {
+      return ((IConvertible)this.Value).ToDateTime(provider);
+    }
+
+    decimal IConvertible.ToDecimal(IFormatProvider provider)
+    {
+      return ((IConvertible)this.Value).ToDecimal(provider);
+    }
+
+    double IConvertible.ToDouble(IFormatProvider provider)
+    {
+      return ((IConvertible)this.Value).ToDouble(provider);
+    }
+
+    short IConvertible.ToInt16(IFormatProvider provider)
+    {
+      return ((IConvertible)this.Value).ToInt16(provider);
+    }
+
+    int IConvertible.ToInt32(IFormatProvider provider)
+    {
+      return ((IConvertible)this.Value).ToInt32(provider);
+    }
+
+    long IConvertible.ToInt64(IFormatProvider provider)
+    {
+      return ((IConvertible)this.Value).ToInt64(provider);
+    }
+
+    sbyte IConvertible.ToSByte(IFormatProvider provider)
+    {
+      return ((IConvertible)this.Value).ToSByte(provider);
+    }
+
+    float IConvertible.ToSingle(IFormatProvider provider)
+    {
+      return ((IConvertible)this.Value).ToSingle(provider);
+    }
+
+    string IConvertible.ToString(IFormatProvider provider)
+    {
+      return ((IConvertible)this.Value).ToString(provider);
+    }
+
+    object IConvertible.ToType(Type conversionType, IFormatProvider provider)
+    {
+      return ((IConvertible)this.Value).ToType(conversionType, provider);
+    }
+
+    ushort IConvertible.ToUInt16(IFormatProvider provider)
+    {
+      return ((IConvertible)this.Value).ToUInt16(provider);
+    }
+
+    uint IConvertible.ToUInt32(IFormatProvider provider)
+    {
+      return ((IConvertible)this.Value).ToUInt32(provider);
+    }
+
+    ulong IConvertible.ToUInt64(IFormatProvider provider)
+    {
+      return ((IConvertible)this.Value).ToUInt64(provider);
+    }
+  }
+  #endregion
 }

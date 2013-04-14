@@ -59,9 +59,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override MetaGroup ToAdapter()
+    public override MetaGroup ToAdapter(IEveRepository container)
     {
-      return new MetaGroup(this);
+      return new MetaGroup(container, this);
     }
   }
 }

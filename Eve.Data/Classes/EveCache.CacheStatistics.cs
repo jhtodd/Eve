@@ -28,7 +28,7 @@ namespace Eve.Data
     /// <summary>
     /// Contains statistics about cache usage.
     /// </summary>
-    public class CacheStatistics
+    public class CacheStatistics : IDisposable
     {
       private long hits;
       private long misses;
@@ -218,6 +218,12 @@ namespace Eve.Data
 
       /* Methods */
 
+      /// <inheritdoc />
+      public void Dispose()
+      {
+        this.Dispose(true);
+      }
+
       /// <summary>
       /// Resets all statistics to zero.
       /// </summary>
@@ -244,6 +250,20 @@ namespace Eve.Data
                ", Hits: " + this.Hits.ToString() +
                ", Misses: " + this.Misses.ToString() +
                ", Total Requests: " + this.TotalRequests.ToString();
+      }
+
+      /// <summary>
+      /// Disposes the current object.
+      /// </summary>
+      /// <param name="disposing">
+      /// Indicates whether to dispose managed resources.
+      /// </param>
+      protected virtual void Dispose(bool disposing)
+      {
+        if (disposing)
+        {
+          this.padlock.Dispose();
+        }
       }
 
       /// <summary>

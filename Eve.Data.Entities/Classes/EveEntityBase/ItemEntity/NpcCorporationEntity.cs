@@ -392,9 +392,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public new NpcCorporation ToAdapter()
+    public new NpcCorporation ToAdapter(IEveRepository container)
     {
-      return (NpcCorporation)base.ToAdapter();
+      return (NpcCorporation)base.ToAdapter(container);
     }
   }
 }

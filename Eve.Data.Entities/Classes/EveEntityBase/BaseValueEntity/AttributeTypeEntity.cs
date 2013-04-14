@@ -141,9 +141,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override AttributeType ToAdapter()
+    public override AttributeType ToAdapter(IEveRepository container)
     {
-      return new AttributeType(this);
+      return new AttributeType(container, this);
     }
   }
 }

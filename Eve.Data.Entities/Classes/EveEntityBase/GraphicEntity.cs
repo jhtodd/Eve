@@ -140,9 +140,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override Graphic ToAdapter()
+    public override Graphic ToAdapter(IEveRepository container)
     {
-      return new Graphic(this);
+      return new Graphic(container, this);
     }
   }
 }

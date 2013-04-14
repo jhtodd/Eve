@@ -67,7 +67,7 @@ namespace Eve
       IEquatable<TDerived>,
       IEveCacheable,
       IKeyItem<TId>
-    where TId : new()
+    where TId : IConvertible, new()
     where TEntity : BaseValueEntity<TEntityId, TDerived>
     where TDerived : BaseValue<TId, TEntityId, TEntity, TDerived>
   {
@@ -78,12 +78,16 @@ namespace Eve
     /// <summary>
     /// Initializes a new instance of the BaseValue class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    protected BaseValue(TEntity entity) : base(entity)
+    protected BaseValue(IEveRepository container, TEntity entity) : base(container, entity)
     {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(entity != null, "The entity cannot be null.");
 
       Contract.Assume(entity.Id != null);
       this.id = this.ConvertEntityId(entity.Id);
@@ -154,7 +158,7 @@ namespace Eve
     /// <value>
     /// The key used to cache the current item.
     /// </value>
-    protected virtual object CacheKey
+    protected virtual IConvertible CacheKey
     {
       get { return this.Id; }
     }
@@ -252,7 +256,7 @@ namespace Eve
   /// </content>
   public abstract partial class BaseValue<TId, TEntityId, TEntity, TDerived> : IEveCacheable
   {
-    object IEveCacheable.CacheKey
+    IConvertible IEveCacheable.CacheKey
     {
       get { return this.CacheKey; }
     }

@@ -339,9 +339,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override EffectType ToAdapter()
+    public override EffectType ToAdapter(IEveRepository container)
     {
-      return new EffectType(this);
+      return new EffectType(container, this);
     }
   }
 }

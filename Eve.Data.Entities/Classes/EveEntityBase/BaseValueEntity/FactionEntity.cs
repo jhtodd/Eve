@@ -154,9 +154,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override Faction ToAdapter()
+    public override Faction ToAdapter(IEveRepository container)
     {
-      return new Faction(this);
+      return new Faction(container, this);
     }
   }
 }

@@ -11,6 +11,8 @@ namespace Eve
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Character;
+  using Eve.Data;
   using Eve.Data.Entities;
   using Eve.Universe;
 
@@ -35,12 +37,16 @@ namespace Eve
     /// <summary>
     /// Initializes a new instance of the GenericType class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal GenericType(EveTypeEntity entity) : base(entity)
+    internal GenericType(IEveRepository container, EveTypeEntity entity) : base(container, entity)
     {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(entity != null, "The entity cannot be null.");
     }
   }
 }

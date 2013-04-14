@@ -43,12 +43,16 @@ namespace Eve
     /// <summary>
     /// Initializes a new instance of the MetaType class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal MetaType(MetaTypeEntity entity) : base(entity)
+    internal MetaType(IEveRepository container, MetaTypeEntity entity) : base(container, entity)
     {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
     /* Properties */
@@ -66,7 +70,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<MetaGroup>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.metaGroup ?? (this.metaGroup = Eve.General.Cache.GetOrAdd<MetaGroup>(this.MetaGroupId, () => (MetaGroup)this.Entity.MetaGroup.ToAdapter()));
+        return this.metaGroup ?? (this.metaGroup = this.Container.Cache.GetOrAdd<MetaGroup>(this.MetaGroupId, () => this.Entity.MetaGroup.ToAdapter(this.Container)));
       }
     }
 
@@ -94,7 +98,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<EveType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.parentType ?? (this.parentType = Eve.General.Cache.GetOrAdd<EveType>(this.ParentTypeId, () => EveType.Create(Entity.ParentType)));
+        return this.parentType ?? (this.parentType = this.Container.Cache.GetOrAdd<EveType>(this.ParentTypeId, () => Entity.ParentType.ToAdapter(this.Container)));
       }
     }
 
@@ -122,7 +126,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<EveType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.type ?? (this.type = Eve.General.Cache.GetOrAdd<EveType>(this.TypeId, () => EveType.Create(Entity.Type)));
+        return this.type ?? (this.type = this.Container.Cache.GetOrAdd<EveType>(this.TypeId, () => Entity.Type.ToAdapter(this.Container)));
       }
     }
 
@@ -212,7 +216,7 @@ namespace Eve
   /// </content>
   public partial class MetaType : IEveCacheable
   {
-    object IEveCacheable.CacheKey
+    IConvertible IEveCacheable.CacheKey
     {
       get { return this.TypeId; }
     }

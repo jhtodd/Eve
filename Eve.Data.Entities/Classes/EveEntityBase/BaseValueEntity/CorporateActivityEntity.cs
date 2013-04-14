@@ -41,9 +41,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override CorporateActivity ToAdapter()
+    public override CorporateActivity ToAdapter(IEveRepository container)
     {
-      return new CorporateActivity(this);
+      return new CorporateActivity(container, this);
     }
   }
 }

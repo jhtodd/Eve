@@ -43,12 +43,16 @@ namespace Eve.Universe
     /// <summary>
     /// Initializes a new instance of the ConstellationJump class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal ConstellationJump(ConstellationJumpEntity entity) : base(entity)
+    internal ConstellationJump(IEveRepository container, ConstellationJumpEntity entity) : base(container, entity)
     {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
     /* Properties */
@@ -66,7 +70,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Constellation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.fromConstellation ?? (this.fromConstellation = Eve.General.Cache.GetOrAdd<Constellation>(this.FromConstellationId, () => (Constellation)this.Entity.FromConstellation.ToAdapter()));
+        return this.fromConstellation ?? (this.fromConstellation = this.Container.Cache.GetOrAdd<Constellation>(this.FromConstellationId, () => this.Entity.FromConstellation.ToAdapter(this.Container)));
       }
     }
 
@@ -94,7 +98,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.fromRegion ?? (this.fromRegion = Eve.General.Cache.GetOrAdd<Region>(this.FromRegionId, () => (Region)this.Entity.FromRegion.ToAdapter()));
+        return this.fromRegion ?? (this.fromRegion = this.Container.Cache.GetOrAdd<Region>(this.FromRegionId, () => this.Entity.FromRegion.ToAdapter(this.Container)));
       }
     }
 
@@ -122,7 +126,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Constellation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.toConstellation ?? (this.toConstellation = Eve.General.Cache.GetOrAdd<Constellation>(this.ToConstellationId, () => (Constellation)this.Entity.ToConstellation.ToAdapter()));
+        return this.toConstellation ?? (this.toConstellation = this.Container.Cache.GetOrAdd<Constellation>(this.ToConstellationId, () => this.Entity.ToConstellation.ToAdapter(this.Container)));
       }
     }
 
@@ -150,7 +154,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.toRegion ?? (this.toRegion = Eve.General.Cache.GetOrAdd<Region>(this.ToRegionId, () => (Region)this.Entity.ToRegion.ToAdapter()));
+        return this.toRegion ?? (this.toRegion = this.Container.Cache.GetOrAdd<Region>(this.ToRegionId, () => this.Entity.ToRegion.ToAdapter(this.Container)));
       }
     }
 
@@ -252,7 +256,7 @@ namespace Eve.Universe
   /// </content>
   public sealed partial class ConstellationJump : IEveCacheable
   {
-    object IEveCacheable.CacheKey
+    IConvertible IEveCacheable.CacheKey
     {
       get { return CreateCompoundId(this.FromConstellationId, this.ToConstellationId); }
     }

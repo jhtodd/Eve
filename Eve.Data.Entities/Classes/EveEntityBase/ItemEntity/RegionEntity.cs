@@ -178,9 +178,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public new Region ToAdapter()
+    public new Region ToAdapter(IEveRepository container)
     {
-      return (Region)base.ToAdapter();
+      return (Region)base.ToAdapter(container);
     }
   }
 }

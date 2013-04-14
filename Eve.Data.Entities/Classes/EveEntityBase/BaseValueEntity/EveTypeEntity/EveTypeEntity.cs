@@ -237,9 +237,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override EveType ToAdapter()
+    public override EveType ToAdapter(IEveRepository container)
     {
-      return EveType.Create(this);
+      return EveType.Create(container, this);
     }
   }
 }

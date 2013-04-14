@@ -34,12 +34,16 @@ namespace Eve
     /// <summary>
     /// Initializes a new instance of the Graphic class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal Graphic(GraphicEntity entity) : base(entity)
+    internal Graphic(IEveRepository container, GraphicEntity entity) : base(container, entity)
     {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
     /* Properties */
@@ -221,17 +225,6 @@ namespace Eve
       }
     }
 
-    /// <summary>
-    /// Gets the key used to cache the current item.
-    /// </summary>
-    /// <value>
-    /// The key used to cache the current item.
-    /// </value>
-    private object CacheKey
-    {
-      get { return this.Id; }
-    }
-
     /* Methods */
 
     /// <inheritdoc />
@@ -295,9 +288,9 @@ namespace Eve
   /// </content>
   public sealed partial class Graphic : IEveCacheable
   {
-    object IEveCacheable.CacheKey
+    IConvertible IEveCacheable.CacheKey
     {
-      get { return this.CacheKey; }
+      get { return this.Id; }
     }
   }
   #endregion

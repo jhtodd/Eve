@@ -82,9 +82,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override RegionJump ToAdapter()
+    public override RegionJump ToAdapter(IEveRepository container)
     {
-      return new RegionJump(this);
+      return new RegionJump(container, this);
     }
   }
 }

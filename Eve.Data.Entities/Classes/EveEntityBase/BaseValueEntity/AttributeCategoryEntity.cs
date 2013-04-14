@@ -40,9 +40,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override AttributeCategory ToAdapter()
+    public override AttributeCategory ToAdapter(IEveRepository container)
     {
-      return new AttributeCategory(this);
+      return new AttributeCategory(container, this);
     }
   }
 }

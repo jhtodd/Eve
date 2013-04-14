@@ -12,6 +12,7 @@ namespace Eve
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Data;
   using Eve.Data.Entities;
 
   using FreeNet;
@@ -44,12 +45,16 @@ namespace Eve
     /// <summary>
     /// Initializes a new instance of the EffectType class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal EffectType(EffectTypeEntity entity) : base(entity)
+    internal EffectType(IEveRepository container, EffectTypeEntity entity) : base(container, entity)
     {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
     /* Properties */
@@ -85,7 +90,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.dischargeAttribute ?? (this.dischargeAttribute = Eve.General.Cache.GetOrAdd<AttributeType>(this.DischargeAttributeId, () => (AttributeType)this.Entity.DischargeAttribute.ToAdapter()));
+        return this.dischargeAttribute ?? (this.dischargeAttribute = this.Container.Cache.GetOrAdd<AttributeType>(this.DischargeAttributeId, () => this.Entity.DischargeAttribute.ToAdapter(this.Container)));
       }
     }
 
@@ -147,7 +152,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.durationAttribute ?? (this.durationAttribute = Eve.General.Cache.GetOrAdd<AttributeType>(this.DurationAttributeId, () => (AttributeType)this.Entity.DurationAttribute.ToAdapter()));
+        return this.durationAttribute ?? (this.durationAttribute = this.Container.Cache.GetOrAdd<AttributeType>(this.DurationAttributeId, () => this.Entity.DurationAttribute.ToAdapter(this.Container)));
       }
     }
 
@@ -207,7 +212,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.falloffAttribute ?? (this.falloffAttribute = Eve.General.Cache.GetOrAdd<AttributeType>(this.FalloffAttributeId, () => (AttributeType)this.Entity.FalloffAttribute.ToAdapter()));
+        return this.falloffAttribute ?? (this.falloffAttribute = this.Container.Cache.GetOrAdd<AttributeType>(this.FalloffAttributeId, () => this.Entity.FalloffAttribute.ToAdapter(this.Container)));
       }
     }
 
@@ -244,7 +249,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.fittingUsageChanceAttribute ?? (this.fittingUsageChanceAttribute = Eve.General.Cache.GetOrAdd<AttributeType>(this.FittingUsageChanceAttributeId, () => (AttributeType)this.Entity.FittingUsageChanceAttribute.ToAdapter()));
+        return this.fittingUsageChanceAttribute ?? (this.fittingUsageChanceAttribute = this.Container.Cache.GetOrAdd<AttributeType>(this.FittingUsageChanceAttributeId, () => this.Entity.FittingUsageChanceAttribute.ToAdapter(this.Container)));
       }
     }
 
@@ -295,7 +300,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = Eve.General.Cache.GetOrAdd<Icon>(this.IconId, () => (Icon)this.Entity.Icon.ToAdapter()));
+        return this.icon ?? (this.icon = this.Container.Cache.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
       }
     }
 
@@ -368,7 +373,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.npcActivationChanceAttribute ?? (this.npcActivationChanceAttribute = Eve.General.Cache.GetOrAdd<AttributeType>(this.NpcActivationChanceAttributeId, () => (AttributeType)this.Entity.NpcActivationChanceAttribute.ToAdapter()));
+        return this.npcActivationChanceAttribute ?? (this.npcActivationChanceAttribute = this.Container.Cache.GetOrAdd<AttributeType>(this.NpcActivationChanceAttributeId, () => this.Entity.NpcActivationChanceAttribute.ToAdapter(this.Container)));
       }
     }
 
@@ -405,7 +410,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.npcUsageChanceAttribute ?? (this.npcUsageChanceAttribute = Eve.General.Cache.GetOrAdd<AttributeType>(this.NpcUsageChanceAttributeId, () => (AttributeType)this.Entity.NpcUsageChanceAttribute.ToAdapter()));
+        return this.npcUsageChanceAttribute ?? (this.npcUsageChanceAttribute = this.Container.Cache.GetOrAdd<AttributeType>(this.NpcUsageChanceAttributeId, () => this.Entity.NpcUsageChanceAttribute.ToAdapter(this.Container)));
       }
     }
 
@@ -491,7 +496,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.rangeAttribute ?? (this.rangeAttribute = Eve.General.Cache.GetOrAdd<AttributeType>(this.RangeAttributeId, () => (AttributeType)this.Entity.RangeAttribute.ToAdapter()));
+        return this.rangeAttribute ?? (this.rangeAttribute = this.Container.Cache.GetOrAdd<AttributeType>(this.RangeAttributeId, () => this.Entity.RangeAttribute.ToAdapter(this.Container)));
       }
     }
 
@@ -555,7 +560,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.trackingSpeedAttribute ?? (this.trackingSpeedAttribute = Eve.General.Cache.GetOrAdd<AttributeType>(this.TrackingSpeedAttributeId, () => (AttributeType)this.Entity.TrackingSpeedAttribute.ToAdapter()));
+        return this.trackingSpeedAttribute ?? (this.trackingSpeedAttribute = this.Container.Cache.GetOrAdd<AttributeType>(this.TrackingSpeedAttributeId, () => this.Entity.TrackingSpeedAttribute.ToAdapter(this.Container)));
       }
     }
 

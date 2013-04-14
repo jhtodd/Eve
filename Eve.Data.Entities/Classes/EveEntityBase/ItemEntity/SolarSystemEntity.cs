@@ -313,9 +313,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public new SolarSystem ToAdapter()
+    public new SolarSystem ToAdapter(IEveRepository container)
     {
-      return (SolarSystem)base.ToAdapter();
+      return (SolarSystem)base.ToAdapter(container);
     }
   }
 }

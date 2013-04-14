@@ -51,9 +51,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override Flag ToAdapter()
+    public override Flag ToAdapter(IEveRepository container)
     {
-      return new Flag(this);
+      return new Flag(container, this);
     }
   }
 }

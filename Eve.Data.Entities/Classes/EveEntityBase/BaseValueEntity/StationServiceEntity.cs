@@ -41,9 +41,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override StationService ToAdapter()
+    public override StationService ToAdapter(IEveRepository container)
     {
-      return new StationService(this);
+      return new StationService(container, this);
     }
   }
 }

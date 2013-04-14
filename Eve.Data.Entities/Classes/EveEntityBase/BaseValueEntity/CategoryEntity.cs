@@ -70,9 +70,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override Category ToAdapter()
+    public override Category ToAdapter(IEveRepository container)
     {
-      return new Category(this);
+      return new Category(container, this);
     }
   }
 }

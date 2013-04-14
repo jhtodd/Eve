@@ -11,6 +11,7 @@ namespace Eve.Character
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Data;
   using Eve.Data.Entities;
   using Eve.Universe;
 
@@ -40,12 +41,16 @@ namespace Eve.Character
     /// <summary>
     /// Initializes a new instance of the SkillType class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal SkillType(EveTypeEntity entity) : base(entity)
+    internal SkillType(IEveRepository container, EveTypeEntity entity) : base(container, entity)
     {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
     /* Properties */
@@ -92,7 +97,7 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<CharacterAttributeType>() != null);
 
         // If not already set, load from the data source
-        return this.primaryAttribute ?? (this.primaryAttribute = Eve.General.DataSource.GetCharacterAttributeTypeById(this.PrimaryAttributeId));
+        return this.primaryAttribute ?? (this.primaryAttribute = this.Container.GetCharacterAttributeTypeById(this.PrimaryAttributeId));
       }
     }
 
@@ -144,7 +149,7 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<CharacterAttributeType>() != null);
 
         // If not already set, load from the data source
-        return this.secondaryAttribute ?? (this.secondaryAttribute = Eve.General.DataSource.GetCharacterAttributeTypeById(this.SecondaryAttributeId));
+        return this.secondaryAttribute ?? (this.secondaryAttribute = this.Container.GetCharacterAttributeTypeById(this.SecondaryAttributeId));
       }
     }
 

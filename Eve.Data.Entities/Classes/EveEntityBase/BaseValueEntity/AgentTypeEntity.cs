@@ -41,9 +41,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override AgentType ToAdapter()
+    public override AgentType ToAdapter(IEveRepository container)
     {
-      return new AgentType(this);
+      return new AgentType(container, this);
     }
   }
 }

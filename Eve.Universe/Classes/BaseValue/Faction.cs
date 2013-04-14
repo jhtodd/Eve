@@ -11,6 +11,7 @@ namespace Eve.Universe
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Data;
   using Eve.Data.Entities;
 
   using FreeNet;
@@ -33,12 +34,16 @@ namespace Eve.Universe
     /// <summary>
     /// Initializes a new instance of the Faction class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal Faction(FactionEntity entity) : base(entity)
+    internal Faction(IEveRepository container, FactionEntity entity) : base(container, entity)
     {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
     /* Properties */
@@ -59,7 +64,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.corporation ?? (this.corporation = Eve.General.Cache.GetOrAdd<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.Entity.Corporation.ToAdapter()));
+        return this.corporation ?? (this.corporation = this.Container.Cache.GetOrAdd<NpcCorporation>(this.CorporationId, () => this.Entity.Corporation.ToAdapter(this.Container)));
       }
     }
 
@@ -91,7 +96,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = Eve.General.Cache.GetOrAdd<Icon>(this.IconId, () => (Icon)this.Entity.Icon.ToAdapter()));
+        return this.icon ?? (this.icon = this.Container.Cache.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
       }
     }
 
@@ -124,7 +129,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.militiaCorporation ?? (this.militiaCorporation = Eve.General.Cache.GetOrAdd<NpcCorporation>(this.MilitiaCorporationId, () => (NpcCorporation)this.Entity.MilitiaCorporation.ToAdapter()));
+        return this.militiaCorporation ?? (this.militiaCorporation = this.Container.Cache.GetOrAdd<NpcCorporation>(this.MilitiaCorporationId, () => this.Entity.MilitiaCorporation.ToAdapter(this.Container)));
       }
     }
 
@@ -191,7 +196,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<SolarSystem>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.solarSystem ?? (this.solarSystem = Eve.General.Cache.GetOrAdd<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.Entity.SolarSystem.ToAdapter()));
+        return this.solarSystem ?? (this.solarSystem = this.Container.Cache.GetOrAdd<SolarSystem>(this.SolarSystemId, () => this.Entity.SolarSystem.ToAdapter(this.Container)));
       }
     }
 

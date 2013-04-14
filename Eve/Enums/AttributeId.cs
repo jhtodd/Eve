@@ -3069,7 +3069,7 @@ namespace Eve
 
     /// <summary>The amount of the given resource type needed to be consumed for each activation cycle of this structure.</summary>
     [Description("consumptionQuantity")]
-    [LongDescription("The amount of the given resource type needed to be consumed for each activation c" +
+    [LongDescription("The amount of the given resource type needed to be consumed for each activation chars" +
         "ycle of this structure.")]
     ConsumptionQuantity = 714,
 

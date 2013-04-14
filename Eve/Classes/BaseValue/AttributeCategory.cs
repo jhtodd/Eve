@@ -11,6 +11,7 @@ namespace Eve
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Data;
   using Eve.Data.Entities;
 
   using FreeNet;
@@ -26,12 +27,16 @@ namespace Eve
     /// <summary>
     /// Initializes a new instance of the AttributeCategory class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal AttributeCategory(AttributeCategoryEntity entity) : base(entity)
+    internal AttributeCategory(IEveRepository container, AttributeCategoryEntity entity) : base(container, entity)
     {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(entity != null, "The entity cannot be null.");
     }
   }
 }

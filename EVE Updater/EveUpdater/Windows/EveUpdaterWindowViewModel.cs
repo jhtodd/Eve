@@ -836,7 +836,7 @@ namespace EveUpdater {
     /// Gets the minimum number of items in the selected category that must 
     /// possess an attribute before it is included in the results, if
     /// <see cref="FindAttributesDiscoveryMethod" /> is
-    /// <c>PossessedByMinimumNumber</c>.
+    /// <chars>PossessedByMinimumNumber</chars>.
     /// </summary>
     /// 
     /// <value>
@@ -1675,7 +1675,7 @@ namespace EveUpdater {
         SelectedQueryTestResults += "Loading items..." + Environment.NewLine;
         
         DbConnection connection = null;
-        EveDataSource dataSource;
+        EveRepository dataSource;
 
         try {
           connection = (DbConnection) GetCurrentDataSourceConnection();
@@ -1693,8 +1693,8 @@ namespace EveUpdater {
             connection.Close();
           }
 
-          EveDbContext context = new EveDbContext(connection, true);
-          dataSource = new EveDataSource(() => context);
+          IEveDbContext context = new ReadOnlyEveDbContext(connection, true);
+          dataSource = new EveRepository(context, null);
 
         } catch (Exception ex) {
           MessageBox.Show("The data context could not be established:\n\n" + ex.Message, "Test Entities", MessageBoxButton.OK, MessageBoxImage.Error);

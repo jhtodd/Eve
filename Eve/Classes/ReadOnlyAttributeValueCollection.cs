@@ -13,6 +13,7 @@ namespace Eve
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Data;
   using Eve.Data.Entities;
 
   using FreeNet;
@@ -27,24 +28,51 @@ namespace Eve
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
   public partial class ReadOnlyAttributeValueCollection 
     : ReadOnlyKeyedCollection<AttributeId, AttributeValue>,
-      IAttributeCollection
+      IAttributeCollection,
+      IEveRepositoryItem
   {
+    private readonly IEveRepository container;
+
     /* Constructors */
 
     /// <summary>
     /// Initializes a new instance of the ReadOnlyAttributeValueCollection class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="contents">
     /// The contents of the collection.
     /// </param>
-    public ReadOnlyAttributeValueCollection(IEnumerable<AttributeValue> contents) : base()
+    public ReadOnlyAttributeValueCollection(IEveRepository container, IEnumerable<AttributeValue> contents) : base()
     {
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      this.container = container;
+
       if (contents != null)
       {
         foreach (AttributeValue attribute in contents)
         {
           Items.AddWithoutCallback(attribute);
         }
+      }
+    }
+
+    /* Properties */
+
+    /// <summary>
+    /// Gets the <see cref="IEveRepository" /> the item is associated
+    /// with.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IEveRepository" /> the item is associated with.
+    /// </value>
+    protected IEveRepository Container
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IEveRepository>() != null);
+        return this.container;
       }
     }
 
@@ -74,7 +102,7 @@ namespace Eve
         return attribute.BaseValue;
       }
 
-      AttributeType type = Eve.General.DataSource.GetAttributeTypeById(id);
+      AttributeType type = this.Container.GetAttributeTypeById(id);
       return type.DefaultValue;
     }
 
@@ -102,7 +130,7 @@ namespace Eve
         return attribute.BaseValue;
       }
 
-      AttributeType type = Eve.General.DataSource.GetAttributeTypeById(id);
+      AttributeType type = this.Container.GetAttributeTypeById(id);
       return type.DefaultValue;
     }
 
@@ -197,6 +225,19 @@ namespace Eve
     IEnumerator<IAttribute> IEnumerable<IAttribute>.GetEnumerator()
     {
       return GetEnumerator();
+    }
+  }
+  #endregion
+
+  #region IEveRepositoryItem Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IEveRepositoryItem" /> interface.
+  /// </content>
+  public partial class ReadOnlyAttributeValueCollection : IEveRepositoryItem
+  {
+    IEveRepository IEveRepositoryItem.Container
+    {
+      get { return this.Container; }
     }
   }
   #endregion

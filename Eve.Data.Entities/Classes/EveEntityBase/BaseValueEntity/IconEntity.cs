@@ -39,9 +39,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override Icon ToAdapter()
+    public override Icon ToAdapter(IEveRepository container)
     {
-      return new Icon(this);
+      return new Icon(container, this);
     }
   }
 }

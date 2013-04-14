@@ -142,9 +142,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override Item ToAdapter()
+    public override Item ToAdapter(IEveRepository container)
     {
-      return Item.Create(this);
+      return Item.Create(container, this);
     }
   }
 }

@@ -12,6 +12,7 @@ namespace Eve
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Data;
   using Eve.Data.Entities;
 
   using FreeNet;
@@ -38,12 +39,16 @@ namespace Eve
     /// <summary>
     /// Initializes a new instance of the AttributeType class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal AttributeType(AttributeTypeEntity entity) : base(entity)
+    internal AttributeType(IEveRepository container, AttributeTypeEntity entity) : base(container, entity)
     {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
     /* Properties */
@@ -64,7 +69,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.category ?? (this.category = Eve.General.Cache.GetOrAdd<AttributeCategory>(this.CategoryId, () => (AttributeCategory)this.Entity.Category.ToAdapter()));
+        return this.category ?? (this.category = this.Container.Cache.GetOrAdd<AttributeCategory>(this.CategoryId, () => this.Entity.Category.ToAdapter(this.Container)));
       }
     }
 
@@ -145,7 +150,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = Eve.General.Cache.GetOrAdd<Icon>(this.IconId, () => (Icon)this.Entity.Icon.ToAdapter()));
+        return this.icon ?? (this.icon = this.Container.Cache.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
       }
     }
 
@@ -204,7 +209,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.unit ?? (this.unit = Eve.General.Cache.GetOrAdd<Unit>(this.UnitId, () => (Unit)this.Entity.Unit.ToAdapter()));
+        return this.unit ?? (this.unit = this.Container.Cache.GetOrAdd<Unit>(this.UnitId, () => this.Entity.Unit.ToAdapter(this.Container)));
       }
     }
 

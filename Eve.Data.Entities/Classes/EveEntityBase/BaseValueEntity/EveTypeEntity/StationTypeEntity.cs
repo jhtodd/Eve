@@ -144,9 +144,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public new StationType ToAdapter()
+    public new StationType ToAdapter(IEveRepository container)
     {
-      return (StationType)base.ToAdapter();
+      return (StationType)base.ToAdapter(container);
     }
   }
 }

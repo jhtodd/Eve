@@ -28,25 +28,33 @@ namespace Eve.Universe
       IComparable<NpcCorporationInvestor>,
       IEquatable<NpcCorporationInvestor>,
       IEveCacheable,
+      IEveRepositoryItem,
       IKeyItem<NpcCorporationId>
   {
+    private readonly IEveRepository container;
+    private readonly NpcCorporationId investorId;
+    private readonly byte shares;
     private NpcCorporation investor;
-    private NpcCorporationId investorId;
-    private byte shares;
 
     /* Constructors */
 
     /// <summary>
     /// Initializes a new instance of the <see cref="NpcCorporationInvestor" /> class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="investorId">
     /// The ID of the investing corporation.
     /// </param>
     /// <param name="shares">
     /// The percentage of shares owned by the investing corporation.
     /// </param>
-    public NpcCorporationInvestor(NpcCorporationId investorId, byte shares)
+    internal NpcCorporationInvestor(IEveRepository container, NpcCorporationId investorId, byte shares)
     {
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      
+      this.container = container;
       this.investorId = investorId;
       this.shares = shares;
     }
@@ -65,7 +73,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<NpcCorporation>() != null);
 
-        return this.investor ?? (this.investor = Eve.General.DataSource.GetNpcCorporationById(this.InvestorId));
+        return this.investor ?? (this.investor = this.Container.GetNpcCorporationById(this.InvestorId));
       }
     }
 
@@ -89,6 +97,23 @@ namespace Eve.Universe
     public byte Shares
     {
       get { return this.shares; }
+    }
+
+    /// <summary>
+    /// Gets the <see cref="IEveRepository" /> which contains the current
+    /// entity adapter.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IEveRepository" /> which contains the current
+    /// entity adapter.
+    /// </value>
+    private IEveRepository Container
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IEveRepository>() != null);
+        return this.container;
+      }
     }
 
     /* Methods */
@@ -139,6 +164,12 @@ namespace Eve.Universe
     {
       return this.Investor.Name + " (" + this.Shares.ToString() + " shares)";
     }
+
+    [ContractInvariantMethod]
+    private void ObjectInvariant()
+    {
+      Contract.Invariant(this.container != null);
+    }
   }
 
   #region IComparable Implementation
@@ -161,9 +192,22 @@ namespace Eve.Universe
   /// </content>
   public sealed partial class NpcCorporationInvestor : IEveCacheable
   {
-    object IEveCacheable.CacheKey
+    IConvertible IEveCacheable.CacheKey
     {
       get { return this.InvestorId; }
+    }
+  }
+  #endregion
+
+  #region IEveRepositoryItem Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IEveRepositoryItem" /> interface.
+  /// </content>
+  public sealed partial class NpcCorporationInvestor : IEveRepositoryItem
+  {
+    IEveRepository IEveRepositoryItem.Container
+    {
+      get { return this.Container; }
     }
   }
   #endregion

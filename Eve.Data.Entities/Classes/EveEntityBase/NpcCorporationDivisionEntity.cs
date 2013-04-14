@@ -100,9 +100,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override NpcCorporationDivision ToAdapter()
+    public override NpcCorporationDivision ToAdapter(IEveRepository container)
     {
-      return new NpcCorporationDivision(this);
+      return new NpcCorporationDivision(container, this);
     }
   }
 }

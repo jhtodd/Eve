@@ -19,7 +19,9 @@ namespace Eve.Data.Entities
   /// <typeparam name="TEntity">
   /// The type of entity wrapped by the adapter.
   /// </typeparam>
-  public interface IEveEntityAdapter<out TEntity> : IEntityAdapter<TEntity>
+  public interface IEveEntityAdapter<out TEntity> 
+    : IEntityAdapter<TEntity>,
+      IEveRepositoryItem
     where TEntity : Entity
   {
   }

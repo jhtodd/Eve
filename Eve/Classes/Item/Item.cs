@@ -48,12 +48,16 @@ namespace Eve
     /// <summary>
     /// Initializes a new instance of the Item class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    protected Item(ItemEntity entity) : base(entity)
+    protected Item(IEveRepository container, ItemEntity entity) : base(container, entity)
     {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(entity != null, "The entity cannot be null.");
 
       this.id = entity.Id;
     }
@@ -73,7 +77,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<Flag>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.flag ?? (this.flag = Eve.General.Cache.GetOrAdd<Flag>(this.FlagId, () => (Flag)this.Entity.Flag.ToAdapter()));
+        return this.flag ?? (this.flag = this.Container.Cache.GetOrAdd<Flag>(this.FlagId, () => this.Entity.Flag.ToAdapter(this.Container)));
       }
     }
 
@@ -112,7 +116,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<EveType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.itemType ?? (this.itemType = Eve.General.Cache.GetOrAdd<EveType>(this.ItemTypeId, () => (EveType)this.Entity.ItemType.ToAdapter()));
+        return this.itemType ?? (this.itemType = this.Container.Cache.GetOrAdd<EveType>(this.ItemTypeId, () => this.Entity.ItemType.ToAdapter(this.Container)));
       }
     }
 
@@ -140,7 +144,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<Item>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.location ?? (this.location = Eve.General.Cache.GetOrAdd<Item>(this.LocationId, () => Item.Create(this.Entity.Location)));
+        return this.location ?? (this.location = this.Container.Cache.GetOrAdd<Item>(this.LocationId, () => this.Entity.Location.ToAdapter(this.Container)));
       }
     }
 
@@ -184,10 +188,16 @@ namespace Eve
     {
       get
       {
-        Contract.Ensures(Contract.Result<Item>() != null);
+        // This property can sometimes be null even with a FactionId value,
+        // because a small number of records have an invalid OwnerId.  Return 
+        // null in that case.
+        if (this.Entity.Owner == null)
+        {
+          return null;
+        }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.owner ?? (this.owner = Eve.General.Cache.GetOrAdd<Item>(this.OwnerId, () => Item.Create(this.Entity.Owner)));
+        return this.owner ?? (this.owner = this.Container.Cache.GetOrAdd<Item>(this.OwnerId, () => this.Entity.Owner.ToAdapter(this.Container)));
       }
     }
 
@@ -219,7 +229,7 @@ namespace Eve
     /// <value>
     /// The key used to cache the current item.
     /// </value>
-    protected virtual object CacheKey
+    protected virtual IConvertible CacheKey
     {
       get { return this.Id; }
     }
@@ -229,6 +239,9 @@ namespace Eve
     /// <summary>
     /// Creates an appropriate item for the specified entity.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="entity">
     /// The data entity.
     /// </param>
@@ -236,63 +249,64 @@ namespace Eve
     /// An <see cref="Item" /> of the appropriate derived type, based on the
     /// contents of <paramref name="entity" />.
     /// </returns>
-    public static Item Create(ItemEntity entity)
+    public static Item Create(IEveRepository container, ItemEntity entity)
     {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(entity != null, "The entity cannot be null.");
       Contract.Ensures(Contract.Result<Item>() != null);
 
       // Universes
       UniverseEntity universeEntity = entity as UniverseEntity;
       if (universeEntity != null)
       {
-        return new Universe.Universe(universeEntity);
+        return new Universe.Universe(container, universeEntity);
       }
 
       // Regions
       RegionEntity regionEntity = entity as RegionEntity;
       if (regionEntity != null)
       {
-        return new Region(regionEntity);
+        return new Region(container, regionEntity);
       }
 
       // Constellations
       ConstellationEntity constellationEntity = entity as ConstellationEntity;
       if (constellationEntity != null)
       {
-        return new Constellation(constellationEntity);
+        return new Constellation(container, constellationEntity);
       }
 
       // Solar Systems
       SolarSystemEntity solarSystemEntity = entity as SolarSystemEntity;
       if (solarSystemEntity != null)
       {
-        return new SolarSystem(solarSystemEntity);
+        return new SolarSystem(container, solarSystemEntity);
       }
 
       // Corporations
       NpcCorporationEntity corporationEntity = entity as NpcCorporationEntity;
       if (corporationEntity != null)
       {
-        return new NpcCorporation(corporationEntity);
+        return new NpcCorporation(container, corporationEntity);
       }
 
       // Stations
       StationEntity stationEntity = entity as StationEntity;
       if (stationEntity != null)
       {
-        return new Station(stationEntity);
+        return new Station(container, stationEntity);
       }
 
       // Agents
       AgentEntity agentEntity = entity as AgentEntity;
       if (agentEntity != null)
       {
-        return new Agent(agentEntity);
+        return new Agent(container, agentEntity);
       }
 
       // If we've failed to identify the specified item type, fall back on a 
       // generic item.
-      return new GenericItem(entity);
+      return new GenericItem(container, entity);
     }
 
     /// <inheritdoc />
@@ -356,7 +370,7 @@ namespace Eve
   /// </content>
   public abstract partial class Item : IEveCacheable
   {
-    object IEveCacheable.CacheKey
+    IConvertible IEveCacheable.CacheKey
     {
       get { return this.CacheKey; }
     }

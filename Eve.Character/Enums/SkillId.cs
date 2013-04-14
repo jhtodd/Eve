@@ -648,7 +648,7 @@ Can not be trained on Trial Accounts")]
 
     /// <summary>Allows better control over the capacitor use of weapon turrets. 5% reduction in capacitor need of weapon turrets per skill level.</summary>
     [Description("Controlled Bursts")]
-    [LongDescription("Allows better control over the capacitor use of weapon turrets. 5% reduction in c" +
+    [LongDescription("Allows better control over the capacitor use of weapon turrets. 5% reduction in chars" +
         "apacitor need of weapon turrets per skill level.")]
     ControlledBursts = 3316,
 
@@ -722,7 +722,7 @@ Corporations have a hard limit of 500 outstanding public contracts.")]
 
     /// <summary>The science of interfacing biological and machine components. Allows the use of cybernetic implants.</summary>
     [Description("Cybernetics")]
-    [LongDescription("The science of interfacing biological and machine components. Allows the use of c" +
+    [LongDescription("The science of interfacing biological and machine components. Allows the use of chars" +
         "ybernetic implants.")]
     Cybernetics = 3411,
 
@@ -792,7 +792,7 @@ Corporations have a hard limit of 500 outstanding public contracts.")]
     ///</summary>
     [Description("Distribution Connections")]
     [LongDescription("Understanding of the way trade is conducted at the corporate level.\r\n\r\nImproves l" +
-        "oyalty point gain by 10% per level when working for agents in the Distribution c" +
+        "oyalty point gain by 10% per level when working for agents in the Distribution chars" +
         "orporation division.\r\n")]
     DistributionConnections = 3894,
 
@@ -1224,7 +1224,7 @@ Can not be trained on Trial Accounts")]
     [Description("Gravimetric Sensor Compensation")]
     [LongDescription("Skill at hardening Gravimetric Sensors against hostile Electronic Counter Measure" +
         " modules. 4% improved Gravimetric Sensor Strength per skill level.\r\n\r\nGravimetri" +
-        "c Sensors are primarily found on Caldari and Guristas ships.")]
+        "chars Sensors are primarily found on Caldari and Guristas ships.")]
     GravimetricSensorCompensation = 33000,
 
     /// <summary>Skill and knowledge of Graviton physics and its use in the development of advanced technology. 

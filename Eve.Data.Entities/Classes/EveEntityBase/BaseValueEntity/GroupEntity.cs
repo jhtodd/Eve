@@ -148,9 +148,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override Group ToAdapter()
+    public override Group ToAdapter(IEveRepository container)
     {
-      return new Group(this);
+      return new Group(container, this);
     }
   }
 }

@@ -144,6 +144,7 @@
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\NpcCorporationDivisionEntity.cs" />
     <Compile Include="Eve.Data\Classes\Attribute\EveCacheDomainAttribute.cs" />
     <Compile Include="Eve.Data\Classes\Attribute\EveQueryMethodAttribute.cs" />
+    <Compile Include="Eve.Data\Classes\DbContext\ReadOnlyEveDbContext.cs" />
     <Compile Include="Eve.Data\Classes\EveCache.CacheStatistics.cs" />
     <Compile Include="Eve.Data\Classes\EveCache.CacheRegionMap.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\BaseValueEntity\BaseValueEntity.cs" />
@@ -188,7 +189,9 @@
     <Compile Include="Eve.Character\Enums\SkillId.cs" />
     <Compile Include="Eve.Data\Classes\EveCache.cs" />
     <Compile Include="Eve.Data.Entities\Interfaces\IEveEntityAdapter.cs" />
-    <Compile Include="Eve.Data\Interfaces\IEveDataSourceContracts.cs" />
+    <Compile Include="Eve.Data\Interfaces\IEveRepositoryItemContracts.cs" />
+    <Compile Include="Eve.Data\Interfaces\IEveRepositoryItem.cs" />
+    <Compile Include="Eve.Data\Interfaces\IEveRepositoryContracts.cs" />
     <Compile Include="Eve.Data\Interfaces\IDbContext\IEveDbContextContracts.cs" />
     <Compile Include="Eve.Data\Interfaces\IDbContext\IEveDbContext.cs">
       <SubType>Code</SubType>
@@ -265,9 +268,9 @@
     <Compile Include="Eve\Classes\EveSettings.cs" />
     <Compile Include="Eve\Classes\General.cs" />
     <Compile Include="Eve.Data\Classes\DbContext\EveDbContext.cs" />
-    <Compile Include="Eve.Data\Classes\EveDataSource\EveDataSource.cs" />
+    <Compile Include="Eve.Data\Classes\EveRepository\EveRepository.cs" />
     <Compile Include="Eve\Classes\BaseValue\Icon.cs" />
-    <Compile Include="Eve.Data\Interfaces\IEveDataSource.cs" />
+    <Compile Include="Eve.Data\Interfaces\IEveRepository.cs" />
     <None Include="Eve\Classes\ID Types\_ID_TEMPLATE.cs" />
     <Compile Include="Eve\Classes\ID Types\EffectCategoryId.cs" />
     <Compile Include="Eve\Classes\ID Types\TypeId.cs" />
@@ -325,9 +328,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Eve.Data\Classes\QueryModifiers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Eve.Data\Update Information\Database Notes.txt" />
     <Content Include="Eve.Data\Update Information\Update Scripts\84566.sql" />

@@ -11,6 +11,7 @@ namespace Eve.Character
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Data;
   using Eve.Data.Entities;
   using Eve.Universe;
 
@@ -30,35 +31,40 @@ namespace Eve.Character
   /// class.
   /// </para>
   /// </remarks>
-  [Serializable]
   public sealed partial class SkillLevel
     : IComparable,
       IComparable<ISkill>,
       IEquatable<SkillLevel>,
+      IEveRepositoryItem,
       IHasIcon,
       IKeyItem<SkillId>,
       ISkill
   {
+    private readonly IEveRepository container;
     private readonly byte level;
     private readonly SkillId skillId;
-
-    [NonSerialized] private SkillType skillType;
+    private SkillType skillType;
 
     /* Constructors */
 
     /// <summary>
     /// Initializes a new instance of the SkillLevel class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="skillId">
     /// The ID of the skill.
     /// </param>
     /// <param name="level">
     /// The level of the skill.
     /// </param>
-    public SkillLevel(SkillId skillId, byte level)
+    public SkillLevel(IEveRepository container, SkillId skillId, byte level)
     {
+      Contract.Requires(container != null, "The containing repository cannot be null.");
       Contract.Requires(level <= SkillType.MaxSkillLevel, Resources.Messages.ISkill_LevelMustBeValid);
 
+      this.container = container;
       this.level = level;
       this.skillId = skillId;
     }
@@ -90,7 +96,23 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<SkillType>() != null);
 
         // If not already set, load from the data source
-        return this.skillType ?? (this.skillType = Eve.General.DataSource.GetEveTypeById<SkillType>((TypeId)(int)SkillId));
+        return this.skillType ?? (this.skillType = this.Container.GetEveTypeById<SkillType>((TypeId)(int)SkillId));
+      }
+    }
+
+    /// <summary>
+    /// Gets the <see cref="IEveRepository" /> the item is associated
+    /// with.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IEveRepository" /> the item is associated with.
+    /// </value>
+    private IEveRepository Container
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IEveRepository>() != null);
+        return this.container;
       }
     }
 
@@ -159,6 +181,7 @@ namespace Eve.Character
     [ContractInvariantMethod]
     private void ObjectInvariant()
     {
+      Contract.Invariant(this.container != null);
       Contract.Invariant(this.level >= 0);
       Contract.Invariant(this.level <= 5);
     }
@@ -192,6 +215,19 @@ namespace Eve.Character
     IconId? IHasIcon.IconId
     {
       get { return SkillType.IconId; }
+    }
+  }
+  #endregion
+
+  #region IEveRepositoryItem Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IEveRepositoryItem" /> interface.
+  /// </content>
+  public sealed partial class SkillLevel : IEveRepositoryItem
+  {
+    IEveRepository IEveRepositoryItem.Container
+    {
+      get { return this.Container; }
     }
   }
   #endregion

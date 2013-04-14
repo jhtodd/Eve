@@ -5,7 +5,7 @@
     <Grid>
         <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
         <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="247.048" TextWrapping="Wrap" VerticalAlignment="Top" Width="439.723" Margin="50.865,46.021,0,0" VerticalScrollBarVisibility="Auto"/>
-        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" RenderTransformOrigin="1.813,0.545" Margin="94,0,0,0" Click="Button_Click_2"/>
+        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" RenderTransformOrigin="1.813,0.545" Margin="94,0,0,0" />
 
     </Grid>
 </Window>

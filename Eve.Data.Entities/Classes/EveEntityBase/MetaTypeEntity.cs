@@ -97,9 +97,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override MetaType ToAdapter()
+    public override MetaType ToAdapter(IEveRepository container)
     {
-      return new MetaType(this);
+      return new MetaType(container, this);
     }
   }
 }

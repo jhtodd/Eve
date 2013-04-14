@@ -204,9 +204,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override StationOperation ToAdapter()
+    public override StationOperation ToAdapter(IEveRepository container)
     {
-      return new StationOperation(this);
+      return new StationOperation(container, this);
     }
   }
 }

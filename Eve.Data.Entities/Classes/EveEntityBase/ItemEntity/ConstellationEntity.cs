@@ -196,9 +196,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public new Constellation ToAdapter()
+    public new Constellation ToAdapter(IEveRepository container)
     {
-      return (Constellation)base.ToAdapter();
+      return (Constellation)base.ToAdapter(container);
     }
   }
 }

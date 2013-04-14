@@ -583,7 +583,7 @@ namespace Eve
 
     /// <summary>Eyewear is almost exclusively used for vanity purposes given advances in modern cyberware that renders externally mounted hardware obsolete.  </summary>
     [Description("Eyewear")]
-    [LongDescription("Eyewear is almost exclusively used for vanity purposes given advances in modern c" +
+    [LongDescription("Eyewear is almost exclusively used for vanity purposes given advances in modern chars" +
         "yberware that renders externally mounted hardware obsolete.  ")]
     Apparel_Accessories_Eyewear = 1408,
 

@@ -154,9 +154,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override SolarSystemJump ToAdapter()
+    public override SolarSystemJump ToAdapter(IEveRepository container)
     {
-      return new SolarSystemJump(this);
+      return new SolarSystemJump(container, this);
     }
   }
 }

@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="EveDataSource.cs" company="Jeremy H. Todd">
+// <copyright file="EveRepository.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
@@ -25,109 +25,135 @@ namespace Eve.Data
   using FreeNet.Utilities;
 
   /// <summary>
-  /// An EveDataSource that uses an automatically-generated
+  /// An EveRepository that uses an automatically-generated
   /// <see cref="EveDbContext" /> object to query the database.
   /// </summary>
-  public class EveDataSource : IEveDataSource
+  public class EveRepository : IEveRepository
   {
-    private static readonly EveDataSource DefaultInstance = new EveDataSource();
-
-    private Func<EveDbContext> contextFactory;
+    private EveCache cache;
+    private IEveDbContext context;
+    private object queryLock;
 
     /* Constructors */
 
     /// <summary>
-    /// Initializes a new instance of the EveDataSource class, using the default
+    /// Initializes a new instance of the EveRepository class, using the default
     /// <see cref="EveDbContext" /> to provide access to the database.
     /// </summary>
-    public EveDataSource() : this(() => EveDbContext.Default)
+    public EveRepository() : this(null, null)
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the EveDataSource class, using the specified
-    /// <see cref="EveDbContext" /> factory method to provide access to the database.
+    /// Initializes a new instance of the EveRepository class, using the specified
+    /// <see cref="EveDbContext" /> to provide access to the database, and the
+    /// specified <see cref="EveCache"/> to store local data.
     /// </summary>
-    /// <param name="contextFactory">
-    /// A function for creating an <see cref="EveDbContext" /> which the data source 
-    /// can use to provide access to the database.  A new instance can be returned
-    /// each time the function is invoked, or the function can return a single
-    /// instance repeatedly, although it should ensure that the same instance is
-    /// never provided to multiple threads.
+    /// <param name="context">
+    /// The <see cref="EveDbContext" /> used to provide access to the database,
+    /// or <see langword="null" /> to use the default context.
     /// </param>
-    public EveDataSource(Func<EveDbContext> contextFactory)
+    /// <param name="cache">
+    /// The <see cref="EveCache" /> used to store data locally, or 
+    /// <see langword="null" /> to use a newly-created cache with default
+    /// settings.
+    /// </param>
+    public EveRepository(IEveDbContext context, EveCache cache)
     {
-      Contract.Requires(contextFactory != null, "The context factory cannot be null.");
-      this.contextFactory = contextFactory;
+      if (context == null)
+      {
+        context = EveDbContext.Default;
+      }
+
+      if (cache == null)
+      {
+        cache = new EveCache();
+      }
+
+      this.cache = cache;
+      this.context = context;
+      this.queryLock = new object();
+
+      this.PrepopulateCache();
     }
 
     /* Properties */
 
     /// <summary>
-    /// Gets the default EVE data source.
+    /// Gets the <see cref="EveDbContext" /> used to provide
+    /// access to the database.
     /// </summary>
     /// <value>
-    /// A default <see cref="EveDataSource" /> that uses the connection settings
-    /// specified in the application configuration file.
+    /// An <see cref="EveDbContext" /> that can be used to provide
+    /// access to the database.
     /// </value>
-    public static EveDataSource Default
+    public IEveDbContext Context
     {
       get
       {
-        Contract.Ensures(Contract.Result<EveDataSource>() != null);
-        return DefaultInstance;
+        Contract.Ensures(Contract.Result<IEveDbContext>() != null);
+        return this.context;
       }
     }
 
-    /// <summary>
-    /// Gets or sets a factory method which returns a <see cref="EveDbContext" />
-    /// that can be used to provide access to the database.
-    /// </summary>
-    /// <value>
-    /// A method returning an <see cref="EveDbContext" /> that can be used to
-    /// provide access to the database.
-    /// </value>
-    protected Func<EveDbContext> ContextFactory
+    /// <inheritdoc />
+    public EveCache Cache
     {
       get
       {
-        Contract.Ensures(Contract.Result<Func<EveDbContext>>() != null);
-        return this.contextFactory;
-      }
-
-      set
-      {
-        Contract.Requires(value != null, "The context factory cannot be null.");
-        this.contextFactory = value;
+        Contract.Ensures(Contract.Result<EveCache>() != null);
+        return this.cache;
       }
     }
 
     /* Methods */
 
     /// <inheritdoc />
-    public virtual void PrepopulateCache(EveCache cache)
+    public void Dispose()
     {
-      var context = this.ContextFactory();
+      this.Dispose(true);
+    }
 
+    /// <summary>
+    /// Disposes the current object.
+    /// </summary>
+    /// <param name="disposing">
+    /// Indicates whether to dispose managed resources.
+    /// </param>
+    protected virtual void Dispose(bool disposing)
+    {
+      if (disposing)
+      {
+        this.cache.Dispose();
+        this.context.Dispose();
+      }
+    }
+
+    /// <summary>
+    /// Loads and caches the set of data that is necessary for future queries
+    /// to be performed.
+    /// </summary>
+    private void PrepopulateCache()
+    {
       // Permanently add all published Categories
-      foreach (Category category in context.Categories.Where(x => x.Published == true).ToList().Select(x => x.ToAdapter()))
+      foreach (Category category in this.Context.Categories.Where(x => x.Published == true).ToList().Select(x => x.ToAdapter(this)))
       {
         Contract.Assume(category != null);
-        cache.AddOrReplace<Category>(category, true);
+        this.Cache.AddOrReplace<Category>(category, true);
       }
 
       // Permanently add all Groups -- necessary for EveType.Create() to load successfully
-      foreach (Group group in context.Groups.Where(x => x.Published == true).ToList().Select(x => x.ToAdapter()))
+      foreach (Group group in this.Context.Groups.Where(x => x.Published == true).ToList().Select(x => x.ToAdapter(this)))
       {
         Contract.Assume(group != null);
-        cache.AddOrReplace<Group>(group, true);
+        this.Cache.AddOrReplace<Group>(group, true);
       }
 
       // Permanently add all units
-      foreach (Unit unit in context.Units.ToList().Select(x => x.ToAdapter()))
+      foreach (Unit unit in this.Context.Units.ToList().Select(x => x.ToAdapter(this)))
       {
         Contract.Assume(unit != null);
-        cache.AddOrReplace<Unit>(unit, true);
+        this.Cache.AddOrReplace<Unit>(unit, true);
       }
     }
 
@@ -136,7 +162,7 @@ namespace Eve.Data
     public Agent GetAgentById(AgentId id)
     {
       Agent result;
-      if (Eve.General.Cache.TryGetValue<Agent>(id, out result))
+      if (this.Cache.TryGetValue<Agent>(id, out result))
       {
         return result;
       }
@@ -155,7 +181,7 @@ namespace Eve.Data
     public IReadOnlyList<Agent> GetAgents(params IQueryModifier<AgentEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<Agent>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<Agent>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -165,7 +191,7 @@ namespace Eve.Data
     public AgentType GetAgentTypeById(AgentTypeId id)
     {
       AgentType result;
-      if (Eve.General.Cache.TryGetValue<AgentType>(id, out result))
+      if (this.Cache.TryGetValue<AgentType>(id, out result))
       {
         return result;
       }
@@ -184,7 +210,7 @@ namespace Eve.Data
     public IReadOnlyList<AgentType> GetAgentTypes(params IQueryModifier<AgentTypeEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<AgentType>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<AgentType>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -194,7 +220,7 @@ namespace Eve.Data
     public AttributeCategory GetAttributeCategoryById(AttributeCategoryId id)
     {
       AttributeCategory result;
-      if (Eve.General.Cache.TryGetValue<AttributeCategory>(id, out result))
+      if (this.Cache.TryGetValue<AttributeCategory>(id, out result))
       {
         return result;
       }
@@ -213,7 +239,7 @@ namespace Eve.Data
     public IReadOnlyList<AttributeCategory> GetAttributeCategories(params IQueryModifier<AttributeCategoryEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<AttributeCategory>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<AttributeCategory>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -223,7 +249,7 @@ namespace Eve.Data
     public AttributeType GetAttributeTypeById(AttributeId id)
     {
       AttributeType result;
-      if (Eve.General.Cache.TryGetValue<AttributeType>(id, out result))
+      if (this.Cache.TryGetValue<AttributeType>(id, out result))
       {
         return result;
       }
@@ -242,7 +268,7 @@ namespace Eve.Data
     public IReadOnlyList<AttributeType> GetAttributeTypes(params IQueryModifier<AttributeTypeEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<AttributeType>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<AttributeType>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -252,7 +278,7 @@ namespace Eve.Data
     public AttributeValue GetAttributeValueById(TypeId itemTypeId, AttributeId id)
     {
       AttributeValue result;
-      if (Eve.General.Cache.TryGetValue<AttributeValue>(id, out result))
+      if (this.Cache.TryGetValue<AttributeValue>(id, out result))
       {
         return result;
       }
@@ -273,7 +299,7 @@ namespace Eve.Data
       // AttributeValues are a special case -- don't cache, because they only have
       // relevance to a particular EveType, and that entire EveType will be 
       // cached anyway
-      return GetList(modifiers).Select(x => x.ToAdapter()).ToArray();
+      return GetList(modifiers).Select(x => x.ToAdapter(this)).ToArray();
     }
     #endregion
 
@@ -282,7 +308,7 @@ namespace Eve.Data
     public Category GetCategoryById(CategoryId id)
     {
       Category result;
-      if (Eve.General.Cache.TryGetValue<Category>(id, out result))
+      if (this.Cache.TryGetValue<Category>(id, out result))
       {
         return result;
       }
@@ -301,7 +327,7 @@ namespace Eve.Data
     public IReadOnlyList<Category> GetCategories(params IQueryModifier<CategoryEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<Category>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<Category>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -311,7 +337,7 @@ namespace Eve.Data
     public CharacterAttributeType GetCharacterAttributeTypeById(CharacterAttributeId id)
     {
       CharacterAttributeType result;
-      if (Eve.General.Cache.TryGetValue<CharacterAttributeType>(id, out result))
+      if (this.Cache.TryGetValue<CharacterAttributeType>(id, out result))
       {
         return result;
       }
@@ -330,7 +356,7 @@ namespace Eve.Data
     public IReadOnlyList<CharacterAttributeType> GetCharacterAttributeTypes(params IQueryModifier<CharacterAttributeTypeEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<CharacterAttributeType>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<CharacterAttributeType>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -340,7 +366,7 @@ namespace Eve.Data
     public Constellation GetConstellationById(ConstellationId id)
     {
       Constellation result;
-      if (Eve.General.Cache.TryGetValue<Constellation>(id, out result))
+      if (this.Cache.TryGetValue<Constellation>(id, out result))
       {
         return result;
       }
@@ -359,7 +385,7 @@ namespace Eve.Data
     public IReadOnlyList<Constellation> GetConstellations(params IQueryModifier<ConstellationEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<Constellation>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<Constellation>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -369,7 +395,7 @@ namespace Eve.Data
     public ConstellationJump GetConstellationJumpById(ConstellationId fromConstellationId, ConstellationId toConstellationId)
     {
       ConstellationJump result;
-      if (Eve.General.Cache.TryGetValue<ConstellationJump>(ConstellationJump.CreateCompoundId(fromConstellationId, toConstellationId), out result))
+      if (this.Cache.TryGetValue<ConstellationJump>(ConstellationJump.CreateCompoundId(fromConstellationId, toConstellationId), out result))
       {
         return result;
       }
@@ -391,7 +417,7 @@ namespace Eve.Data
       return GetList(modifiers).Select<ConstellationJumpEntity, ConstellationJump>(x =>
       {
         var cacheId = ConstellationJump.CreateCompoundId(x.FromConstellationId, x.ToConstellationId);
-        return Eve.General.Cache.GetOrAdd<ConstellationJump>(cacheId, () => x.ToAdapter());
+        return this.Cache.GetOrAdd<ConstellationJump>(cacheId, () => x.ToAdapter(this));
       }).ToArray();
     }
     #endregion
@@ -401,7 +427,7 @@ namespace Eve.Data
     public CorporateActivity GetCorporateActivityById(CorporateActivityId id)
     {
       CorporateActivity result;
-      if (Eve.General.Cache.TryGetValue<CorporateActivity>(id, out result))
+      if (this.Cache.TryGetValue<CorporateActivity>(id, out result))
       {
         return result;
       }
@@ -420,7 +446,7 @@ namespace Eve.Data
     public IReadOnlyList<CorporateActivity> GetCorporateActivities(params IQueryModifier<CorporateActivityEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<CorporateActivity>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<CorporateActivity>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -430,7 +456,7 @@ namespace Eve.Data
     public Division GetDivisionById(DivisionId id)
     {
       Division result;
-      if (Eve.General.Cache.TryGetValue<Division>(id, out result))
+      if (this.Cache.TryGetValue<Division>(id, out result))
       {
         return result;
       }
@@ -449,7 +475,7 @@ namespace Eve.Data
     public IReadOnlyList<Division> GetDivisions(params IQueryModifier<DivisionEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<Division>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<Division>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -459,7 +485,7 @@ namespace Eve.Data
     public Effect GetEffectById(TypeId itemTypeId, EffectId id)
     {
       Effect result;
-      if (Eve.General.Cache.TryGetValue<Effect>(id, out result))
+      if (this.Cache.TryGetValue<Effect>(id, out result))
       {
         return result;
       }
@@ -480,7 +506,7 @@ namespace Eve.Data
       // Effects are a special case -- don't cache, because they only have
       // relevance to a particular EveType, and that entire EveType will be 
       // cached anyway
-      return GetList(modifiers).Select(x => x.ToAdapter()).ToArray();
+      return GetList(modifiers).Select(x => x.ToAdapter(this)).ToArray();
     }
     #endregion
 
@@ -489,7 +515,7 @@ namespace Eve.Data
     public EffectType GetEffectTypeById(EffectId id)
     {
       EffectType result;
-      if (Eve.General.Cache.TryGetValue<EffectType>(id, out result))
+      if (this.Cache.TryGetValue<EffectType>(id, out result))
       {
         return result;
       }
@@ -508,7 +534,7 @@ namespace Eve.Data
     public IReadOnlyList<EffectType> GetEffectTypes(params IQueryModifier<EffectTypeEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<EffectType>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<EffectType>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -519,7 +545,7 @@ namespace Eve.Data
     {
       EveType result;
 
-      if (Eve.General.Cache.TryGetValue<EveType>(id, out result))
+      if (this.Cache.TryGetValue<EveType>(id, out result))
       {
         return result;
       }
@@ -534,10 +560,11 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
+    [EveQueryMethod(typeof(EveType))]
     public IReadOnlyList<EveType> GetEveTypes(params IQueryModifier<EveTypeEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<EveType>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<EveType>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
 
@@ -545,7 +572,7 @@ namespace Eve.Data
     public TEveType GetEveTypeById<TEveType>(TypeId id) where TEveType : EveType
     {
       TEveType result;
-      if (Eve.General.Cache.TryGetValue<TEveType>(id, out result))
+      if (this.Cache.TryGetValue<TEveType>(id, out result))
       {
         return result;
       }
@@ -563,7 +590,7 @@ namespace Eve.Data
     public IReadOnlyList<TEveType> GetEveTypes<TEveType>(params IQueryModifier<EveTypeEntity>[] modifiers) where TEveType : EveType
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<EveType>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<EveType>(x.Id, () => x.ToAdapter(this)))
                                .OfType<TEveType>()
                                .ToArray();
     }
@@ -574,7 +601,7 @@ namespace Eve.Data
     public Faction GetFactionById(FactionId id)
     {
       Faction result;
-      if (Eve.General.Cache.TryGetValue<Faction>(id, out result))
+      if (this.Cache.TryGetValue<Faction>(id, out result))
       {
         return result;
       }
@@ -593,7 +620,7 @@ namespace Eve.Data
     public IReadOnlyList<Faction> GetFactions(params IQueryModifier<FactionEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<Faction>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<Faction>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -603,7 +630,7 @@ namespace Eve.Data
     public Graphic GetGraphicById(GraphicId id)
     {
       Graphic result;
-      if (Eve.General.Cache.TryGetValue<Graphic>(id, out result))
+      if (this.Cache.TryGetValue<Graphic>(id, out result))
       {
         return result;
       }
@@ -622,7 +649,7 @@ namespace Eve.Data
     public IReadOnlyList<Graphic> GetGraphics(params IQueryModifier<GraphicEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<Graphic>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<Graphic>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -632,7 +659,7 @@ namespace Eve.Data
     public Group GetGroupById(GroupId id)
     {
       Group result;
-      if (Eve.General.Cache.TryGetValue<Group>(id, out result))
+      if (this.Cache.TryGetValue<Group>(id, out result))
       {
         return result;
       }
@@ -660,7 +687,7 @@ namespace Eve.Data
     public IReadOnlyList<Group> GetGroups(params IQueryModifier<GroupEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<Group>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<Group>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -670,7 +697,7 @@ namespace Eve.Data
     public Icon GetIconById(IconId id)
     {
       Icon result;
-      if (Eve.General.Cache.TryGetValue<Icon>(id, out result))
+      if (this.Cache.TryGetValue<Icon>(id, out result))
       {
         return result;
       }
@@ -689,7 +716,7 @@ namespace Eve.Data
     public IReadOnlyList<Icon> GetIcons(params IQueryModifier<IconEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<Icon>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<Icon>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -699,7 +726,7 @@ namespace Eve.Data
     public Item GetItemById(ItemId id)
     {
       Item result;
-      if (Eve.General.Cache.TryGetValue<Item>(id, out result))
+      if (this.Cache.TryGetValue<Item>(id, out result))
       {
         return result;
       }
@@ -714,10 +741,11 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
+    [EveQueryMethod(typeof(Item))]
     public IReadOnlyList<Item> GetItems(params IQueryModifier<ItemEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<Item>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<Item>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
 
@@ -740,7 +768,7 @@ namespace Eve.Data
     public IReadOnlyList<TItem> GetItems<TItem>(params IQueryModifier<ItemEntity>[] modifiers) where TItem : Item
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<Item>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<Item>(x.Id, () => x.ToAdapter(this)))
                                .OfType<TItem>()
                                .ToArray();
     }
@@ -751,7 +779,7 @@ namespace Eve.Data
     public MarketGroup GetMarketGroupById(MarketGroupId id)
     {
       MarketGroup result;
-      if (Eve.General.Cache.TryGetValue<MarketGroup>(id, out result))
+      if (this.Cache.TryGetValue<MarketGroup>(id, out result))
       {
         return result;
       }
@@ -770,7 +798,7 @@ namespace Eve.Data
     public IReadOnlyList<MarketGroup> GetMarketGroups(params IQueryModifier<MarketGroupEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<MarketGroup>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<MarketGroup>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -780,7 +808,7 @@ namespace Eve.Data
     public MetaGroup GetMetaGroupById(MetaGroupId id)
     {
       MetaGroup result;
-      if (Eve.General.Cache.TryGetValue<MetaGroup>(id, out result))
+      if (this.Cache.TryGetValue<MetaGroup>(id, out result))
       {
         return result;
       }
@@ -808,7 +836,7 @@ namespace Eve.Data
     public IReadOnlyList<MetaGroup> GetMetaGroups(params IQueryModifier<MetaGroupEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<MetaGroup>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<MetaGroup>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -818,7 +846,7 @@ namespace Eve.Data
     public MetaType GetMetaTypeById(TypeId id)
     {
       MetaType result;
-      if (Eve.General.Cache.TryGetValue<MetaType>(id, out result))
+      if (this.Cache.TryGetValue<MetaType>(id, out result))
       {
         return result;
       }
@@ -846,7 +874,7 @@ namespace Eve.Data
     public IReadOnlyList<MetaType> GetMetaTypes(params IQueryModifier<MetaTypeEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<MetaType>(x.TypeId, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<MetaType>(x.TypeId, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -856,7 +884,7 @@ namespace Eve.Data
     public NpcCorporation GetNpcCorporationById(NpcCorporationId id)
     {
       NpcCorporation result;
-      if (Eve.General.Cache.TryGetValue<NpcCorporation>(id, out result))
+      if (this.Cache.TryGetValue<NpcCorporation>(id, out result))
       {
         return result;
       }
@@ -875,7 +903,7 @@ namespace Eve.Data
     public IReadOnlyList<NpcCorporation> GetNpcCorporations(params IQueryModifier<NpcCorporationEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<NpcCorporation>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<NpcCorporation>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -885,7 +913,7 @@ namespace Eve.Data
     public NpcCorporationDivision GetNpcCorporationDivisionById(NpcCorporationId corporationId, DivisionId divisionId)
     {
       NpcCorporationDivision result;
-      if (Eve.General.Cache.TryGetValue<NpcCorporationDivision>(NpcCorporationDivision.CreateCompoundId(corporationId, divisionId), out result))
+      if (this.Cache.TryGetValue<NpcCorporationDivision>(NpcCorporationDivision.CreateCompoundId(corporationId, divisionId), out result))
       {
         return result;
       }
@@ -907,7 +935,7 @@ namespace Eve.Data
       return GetList(modifiers).Select<NpcCorporationDivisionEntity, NpcCorporationDivision>(x =>
       {
         var cacheId = NpcCorporationDivision.CreateCompoundId(x.CorporationId, x.DivisionId);
-        return Eve.General.Cache.GetOrAdd<NpcCorporationDivision>(cacheId, () => x.ToAdapter());
+        return this.Cache.GetOrAdd<NpcCorporationDivision>(cacheId, () => x.ToAdapter(this));
       }).ToArray();
     }
     #endregion
@@ -917,7 +945,7 @@ namespace Eve.Data
     public Race GetRaceById(RaceId id)
     {
       Race result;
-      if (Eve.General.Cache.TryGetValue<Race>(id, out result))
+      if (this.Cache.TryGetValue<Race>(id, out result))
       {
         return result;
       }
@@ -936,7 +964,7 @@ namespace Eve.Data
     public IReadOnlyList<Race> GetRaces(params IQueryModifier<RaceEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<Race>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<Race>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -946,7 +974,7 @@ namespace Eve.Data
     public Region GetRegionById(RegionId id)
     {
       Region result;
-      if (Eve.General.Cache.TryGetValue<Region>(id, out result))
+      if (this.Cache.TryGetValue<Region>(id, out result))
       {
         return result;
       }
@@ -965,7 +993,7 @@ namespace Eve.Data
     public IReadOnlyList<Region> GetRegions(params IQueryModifier<RegionEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<Region>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<Region>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -975,7 +1003,7 @@ namespace Eve.Data
     public RegionJump GetRegionJumpById(RegionId fromRegionId, RegionId toRegionId)
     {
       RegionJump result;
-      if (Eve.General.Cache.TryGetValue<RegionJump>(RegionJump.CreateCompoundId(fromRegionId, toRegionId), out result))
+      if (this.Cache.TryGetValue<RegionJump>(RegionJump.CreateCompoundId(fromRegionId, toRegionId), out result))
       {
         return result;
       }
@@ -997,7 +1025,7 @@ namespace Eve.Data
       return GetList(modifiers).Select<RegionJumpEntity, RegionJump>(x =>
       {
         var cacheId = RegionJump.CreateCompoundId(x.FromRegionId, x.ToRegionId);
-        return Eve.General.Cache.GetOrAdd<RegionJump>(cacheId, () => x.ToAdapter());
+        return this.Cache.GetOrAdd<RegionJump>(cacheId, () => x.ToAdapter(this));
       }).ToArray();
     }
     #endregion
@@ -1007,7 +1035,7 @@ namespace Eve.Data
     public SolarSystem GetSolarSystemById(SolarSystemId id)
     {
       SolarSystem result;
-      if (Eve.General.Cache.TryGetValue<SolarSystem>(id, out result))
+      if (this.Cache.TryGetValue<SolarSystem>(id, out result))
       {
         return result;
       }
@@ -1026,7 +1054,7 @@ namespace Eve.Data
     public IReadOnlyList<SolarSystem> GetSolarSystems(params IQueryModifier<SolarSystemEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<SolarSystem>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<SolarSystem>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -1036,7 +1064,7 @@ namespace Eve.Data
     public SolarSystemJump GetSolarSystemJumpById(SolarSystemId fromSolarSystemId, SolarSystemId toSolarSystemId)
     {
       SolarSystemJump result;
-      if (Eve.General.Cache.TryGetValue<SolarSystemJump>(SolarSystemJump.CreateCompoundId(fromSolarSystemId, toSolarSystemId), out result))
+      if (this.Cache.TryGetValue<SolarSystemJump>(SolarSystemJump.CreateCompoundId(fromSolarSystemId, toSolarSystemId), out result))
       {
         return result;
       }
@@ -1058,8 +1086,37 @@ namespace Eve.Data
       return GetList(modifiers).Select<SolarSystemJumpEntity, SolarSystemJump>(x =>
       {
         var cacheId = SolarSystemJump.CreateCompoundId(x.FromSolarSystemId, x.ToSolarSystemId);
-        return Eve.General.Cache.GetOrAdd<SolarSystemJump>(cacheId, () => x.ToAdapter());
+        return this.Cache.GetOrAdd<SolarSystemJump>(cacheId, () => x.ToAdapter(this));
       }).ToArray();
+    }
+    #endregion
+
+    #region Station Methods
+    /// <inheritdoc />
+    public Station GetStationById(StationId id)
+    {
+      Station result;
+      if (this.Cache.TryGetValue<Station>(id, out result))
+      {
+        return result;
+      }
+
+      return this.GetStations(x => x.Id == id).Single();
+    }
+
+    /// <inheritdoc />
+    public IReadOnlyList<Station> GetStations(Expression<Func<StationEntity, bool>> filter)
+    {
+      return this.GetStations(new QuerySpecification<StationEntity>(filter));
+    }
+
+    /// <inheritdoc />
+    [EveQueryMethod(typeof(Station))]
+    public IReadOnlyList<Station> GetStations(params IQueryModifier<StationEntity>[] modifiers)
+    {
+      // Construct the result set, filtering items through the global cache along the way
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<Station>(x.Id, () => x.ToAdapter(this)))
+                               .ToArray();
     }
     #endregion
 
@@ -1068,7 +1125,7 @@ namespace Eve.Data
     public StationOperation GetStationOperationById(StationOperationId id)
     {
       StationOperation result;
-      if (Eve.General.Cache.TryGetValue<StationOperation>(id, out result))
+      if (this.Cache.TryGetValue<StationOperation>(id, out result))
       {
         return result;
       }
@@ -1087,7 +1144,7 @@ namespace Eve.Data
     public IReadOnlyList<StationOperation> GetStationOperations(params IQueryModifier<StationOperationEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<StationOperation>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<StationOperation>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -1097,7 +1154,7 @@ namespace Eve.Data
     public StationService GetStationServiceById(StationServiceId id)
     {
       StationService result;
-      if (Eve.General.Cache.TryGetValue<StationService>(id, out result))
+      if (this.Cache.TryGetValue<StationService>(id, out result))
       {
         return result;
       }
@@ -1116,7 +1173,7 @@ namespace Eve.Data
     public IReadOnlyList<StationService> GetStationServices(params IQueryModifier<StationServiceEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<StationService>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<StationService>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -1126,7 +1183,7 @@ namespace Eve.Data
     public StationType GetStationTypeById(TypeId id)
     {
       StationType result;
-      if (Eve.General.Cache.TryGetValue<StationType>(id, out result))
+      if (this.Cache.TryGetValue<StationType>(id, out result))
       {
         return result;
       }
@@ -1145,7 +1202,7 @@ namespace Eve.Data
     public IReadOnlyList<StationType> GetStationTypes(params IQueryModifier<StationTypeEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<StationType>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<StationType>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -1155,7 +1212,7 @@ namespace Eve.Data
     public Unit GetUnitById(UnitId id)
     {
       Unit result;
-      if (Eve.General.Cache.TryGetValue<Unit>(id, out result))
+      if (this.Cache.TryGetValue<Unit>(id, out result))
       {
         return result;
       }
@@ -1174,7 +1231,7 @@ namespace Eve.Data
     public IReadOnlyList<Unit> GetUnits(params IQueryModifier<UnitEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<Unit>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<Unit>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -1184,7 +1241,7 @@ namespace Eve.Data
     public Universe GetUniverseById(UniverseId id)
     {
       Universe result;
-      if (Eve.General.Cache.TryGetValue<Universe>(id, out result))
+      if (this.Cache.TryGetValue<Universe>(id, out result))
       {
         return result;
       }
@@ -1203,7 +1260,7 @@ namespace Eve.Data
     public IReadOnlyList<Universe> GetUniverses(params IQueryModifier<UniverseEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return GetList(modifiers).Select(x => Eve.General.Cache.GetOrAdd<Universe>(x.Id, () => x.ToAdapter()))
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<Universe>(x.Id, () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -1222,22 +1279,24 @@ namespace Eve.Data
     /// An <see cref="IQueryable{T}" /> for the given entity type, with the
     /// specified modifiers applied.
     /// </returns>
-    internal IQueryable<TEntity> GetQuery<TEntity>(params IQueryModifier<TEntity>[] modifiers)
-      where TEntity : Entity
+    internal IQueryable<TEntity> GetQuery<TEntity>(params IQueryModifier<TEntity>[] modifiers) where TEntity : Entity
     {
-      var context = this.ContextFactory();
+      Contract.Requires(modifiers != null, "The array of query modifiers cannot be null.");
+      Contract.Ensures(Contract.Result<IQueryable<TEntity>>() != null);
 
-      var query = context.Set<TEntity>().AsNoTracking();
-      Contract.Assume(query != null);
-
-      // Apply the modifiers
-      foreach (IQueryModifier<TEntity> modifier in modifiers)
+      lock (this.queryLock)
       {
-        Contract.Assume(modifier != null);
-        query = modifier.GetResults(query);
-      }
+        var query = this.Context.Query<TEntity>();
 
-      return query;
+        // Apply the modifiers
+        foreach (IQueryModifier<TEntity> modifier in modifiers)
+        {
+          Contract.Assume(modifier != null);
+          query = modifier.GetResults(query);
+        }
+
+        return query;
+      }
     }
 
     /// <summary>
@@ -1254,21 +1313,24 @@ namespace Eve.Data
     /// An <see cref="IReadOnlyList{T}" /> containing the results of
     /// the query.
     /// </returns>
-    internal IReadOnlyList<TEntity> GetList<TEntity>(params IQueryModifier<TEntity>[] modifiers)
-      where TEntity : Entity
+    internal IReadOnlyList<TEntity> GetList<TEntity>(params IQueryModifier<TEntity>[] modifiers) where TEntity : Entity
     {
-      var context = this.ContextFactory();
-      var query = context.Set<TEntity>().AsNoTracking();
-      Contract.Assume(query != null);
+      Contract.Requires(modifiers != null, "The array of query modifiers cannot be null.");
+      Contract.Ensures(Contract.Result<IReadOnlyList<TEntity>>() != null);
 
-      // Apply the modifiers
-      foreach (IQueryModifier<TEntity> modifier in modifiers)
+      lock (this.queryLock)
       {
-        Contract.Assume(modifier != null);
-        query = modifier.GetResults(query);
-      }
+        var query = this.Context.Query<TEntity>();
 
-      return query.ToList();
+        // Apply the modifiers
+        foreach (IQueryModifier<TEntity> modifier in modifiers)
+        {
+          Contract.Assume(modifier != null);
+          query = modifier.GetResults(query);
+        }
+
+        return query.ToList();
+      }
     }
 
     /// <summary>
@@ -1277,7 +1339,8 @@ namespace Eve.Data
     [ContractInvariantMethod]
     private void ObjectInvariant()
     {
-      Contract.Invariant(this.contextFactory != null);
+      Contract.Invariant(this.cache != null);
+      Contract.Invariant(this.context != null);
     }
   }
 }

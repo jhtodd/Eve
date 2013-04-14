@@ -12,6 +12,7 @@ namespace Eve.Universe
   using System.Linq;
 
   using Eve.Character;
+  using Eve.Data;
   using Eve.Data.Entities;
   using Eve.Universe;
 
@@ -37,12 +38,16 @@ namespace Eve.Universe
     /// <summary>
     /// Initializes a new instance of the Agent class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal Agent(AgentEntity entity) : base(entity)
+    internal Agent(IEveRepository container, AgentEntity entity) : base(container, entity)
     {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
     /* Properties */
@@ -60,7 +65,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<AgentType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.agentType ?? (this.agentType = Eve.General.Cache.GetOrAdd<AgentType>(this.AgentTypeId, () => (AgentType)this.Entity.AgentType.ToAdapter()));
+        return this.agentType ?? (this.agentType = this.Container.Cache.GetOrAdd<AgentType>(this.AgentTypeId, () => this.Entity.AgentType.ToAdapter(this.Container)));
       }
     }
 
@@ -88,7 +93,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<NpcCorporation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.corporation ?? (this.corporation = Eve.General.Cache.GetOrAdd<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.Entity.Corporation.ToAdapter()));
+        return this.corporation ?? (this.corporation = this.Container.Cache.GetOrAdd<NpcCorporation>(this.CorporationId, () => this.Entity.Corporation.ToAdapter(this.Container)));
       }
     }
 
@@ -116,7 +121,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Division>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.division ?? (this.division = Eve.General.Cache.GetOrAdd<Division>(this.DivisionId, () => (Division)this.Entity.Division.ToAdapter()));
+        return this.division ?? (this.division = this.Container.Cache.GetOrAdd<Division>(this.DivisionId, () => this.Entity.Division.ToAdapter(this.Container)));
       }
     }
 
@@ -189,7 +194,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Item>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.location ?? (this.location = Eve.General.Cache.GetOrAdd<Item>(this.LocationId, () => Item.Create(this.Entity.AgentLocation)));
+        return this.location ?? (this.location = this.Container.Cache.GetOrAdd<Item>(this.LocationId, () => this.Entity.AgentLocation.ToAdapter(this.Container)));
       }
     }
 
@@ -238,7 +243,7 @@ namespace Eve.Universe
           {
             // Filter through the cache
             this.researchFields = new ReadOnlySkillTypeCollection(
-              this.Entity.ResearchFields.Select(x => Eve.General.Cache.GetOrAdd<SkillType>(x.Id, () => (SkillType)EveType.Create(x)))
+              this.Entity.ResearchFields.Select(x => this.Container.Cache.GetOrAdd<SkillType>(x.Id, () => (SkillType)x.ToAdapter(this.Container)))
                                         .OrderBy(x => x));
           }
         }

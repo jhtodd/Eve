@@ -43,6 +43,11 @@ namespace Eve.Data
     /// </remarks>
     internal class CacheRegionMap : IDisposable
     {
+      // Used to generate the shortest possible region string for a type.
+      // Incremented every time a new type is registered.  The resulting
+      // numeric value is then used to generate the region string.
+      private static long currentKeyIndex = 0L;
+
       private readonly Dictionary<Type, string> innerRegionMap;
       private readonly ReaderWriterLockSlim padlock;
 
@@ -174,13 +179,38 @@ namespace Eve.Data
         }
       }
 
+      /// <summary>
+      /// Given a type, constructs a string to represent the cache region key
+      /// for that type.
+      /// </summary>
+      /// <param name="type">
+      /// The type for which to generate a cache region key.
+      /// </param>
+      /// <returns>
+      /// A <see cref="String" /> containing a generated cache region key for
+      /// <paramref name="type" />.
+      /// </returns>
+      /// <remarks>
+      /// <para>
+      /// The method is not guaranteed to return the same value for repeated
+      /// calls with the same type.  The returned value is cached after the
+      /// first call for a given type, and the method is never called again
+      /// for that type.
+      /// </para>
+      /// </remarks>
       private string ConstructRegionForType(Type type)
       {
         Contract.Requires(type != null, "The type cannot be null.");
         Contract.Ensures(Contract.Result<string>() != null);
 
-        // TODO: replace with something shorter
-        return type.FullName;
+        byte[] bytes = BitConverter.GetBytes(Interlocked.Increment(ref currentKeyIndex));
+
+        if (BitConverter.IsLittleEndian) 
+        {
+          Array.Reverse(bytes);
+        }
+
+        return EveCache.ByteArrayToShortString(bytes);
       }
 
       /// <summary>

@@ -11,6 +11,7 @@ namespace Eve.Universe
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Data;
   using Eve.Data.Entities;
   using Eve.Universe;
 
@@ -32,12 +33,16 @@ namespace Eve.Universe
     /// <summary>
     /// Initializes a new instance of the Constellation class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal Constellation(ConstellationEntity entity) : base(entity)
+    internal Constellation(IEveRepository container, ConstellationEntity entity) : base(container, entity)
     {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
     /* Properties */
@@ -71,7 +76,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.faction = Eve.General.Cache.GetOrAdd<Faction>(factionEntity.Id, () => (Faction)factionEntity.ToAdapter());
+        return this.faction = this.Container.Cache.GetOrAdd<Faction>(factionEntity.Id, () => factionEntity.ToAdapter(this.Container));
       }
     }
 
@@ -114,7 +119,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyConstellationJumpCollection>() != null);
 
-        return this.jumps ?? (this.jumps = new ReadOnlyConstellationJumpCollection(Eve.General.DataSource.GetConstellationJumps(x => x.FromConstellationId == this.Id.Value).OrderBy(x => x)));
+        return this.jumps ?? (this.jumps = new ReadOnlyConstellationJumpCollection(this.Container.GetConstellationJumps(x => x.FromConstellationId == this.Id.Value).OrderBy(x => x)));
       }
     }
 
@@ -155,7 +160,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.region ?? (this.region = Eve.General.Cache.GetOrAdd<Region>(this.RegionId, () => (Region)this.Entity.Region.ToAdapter()));
+        return this.region ?? (this.region = this.Container.Cache.GetOrAdd<Region>(this.RegionId, () => this.Entity.Region.ToAdapter(this.Container)));
       }
     }
 
@@ -182,7 +187,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlySolarSystemCollection>() != null);
 
-        return this.solarSystems ?? (this.solarSystems = new ReadOnlySolarSystemCollection(Eve.General.DataSource.GetSolarSystems(x => x.ConstellationId == this.Id.Value).OrderBy(x => x)));
+        return this.solarSystems ?? (this.solarSystems = new ReadOnlySolarSystemCollection(this.Container.GetSolarSystems(x => x.ConstellationId == this.Id.Value).OrderBy(x => x)));
       }
     }
 

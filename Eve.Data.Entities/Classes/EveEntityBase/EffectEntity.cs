@@ -89,9 +89,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override Effect ToAdapter()
+    public override Effect ToAdapter(IEveRepository container)
     {
-      return new Effect(this);
+      return new Effect(container, this);
     }
   }
 }

@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="IEveDataSource.cs" company="Jeremy H. Todd">
+// <copyright file="IEveRepository.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
@@ -24,18 +24,20 @@ namespace Eve.Data
   /// The base interface for a data source which provides access to the EVE
   /// database.
   /// </summary>
-  [ContractClass(typeof(IEveDataSourceContracts))]
-  public interface IEveDataSource
+  [ContractClass(typeof(IEveRepositoryContracts))]
+  public interface IEveRepository : IDisposable
   {
-    /* Methods */
+    /* Properties */
 
     /// <summary>
-    /// Populates the cache with certain commonly-used items.
+    /// Gets the <see cref="EveCache" /> used to store data locally.
     /// </summary>
-    /// <param name="cache">
-    /// The cache to populate.
-    /// </param>
-    void PrepopulateCache(EveCache cache);
+    /// <value>
+    /// An <see cref="EveCache" /> used to store data locally.
+    /// </value>
+    EveCache Cache { get; }
+
+    /* Methods */
 
     #region Agent Methods
     /// <summary>
@@ -1297,6 +1299,44 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<SolarSystemJump> GetSolarSystemJumps(params IQueryModifier<SolarSystemJumpEntity>[] modifiers);
+    #endregion
+
+    #region Station Methods
+    /// <summary>
+    /// Returns the <see cref="Station" /> object with the specified ID.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <returns>
+    /// The item with the specified key.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    Station GetStationById(StationId id);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="Station" /> objects.
+    /// </summary>
+    /// <param name="filter">
+    /// The expression that will filter the results of the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<Station> GetStations(Expression<Func<StationEntity, bool>> filter);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="Station" /> objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<Station> GetStations(params IQueryModifier<StationEntity>[] modifiers);
     #endregion
 
     #region StationOperation Methods

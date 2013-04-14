@@ -11,6 +11,7 @@ namespace Eve.Universe
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Data;
   using Eve.Data.Entities;
   using Eve.Universe;
 
@@ -34,12 +35,16 @@ namespace Eve.Universe
     /// <summary>
     /// Initializes a new instance of the Station class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal Station(StationEntity entity) : base(entity)
+    internal Station(IEveRepository container, StationEntity entity) : base(container, entity)
     {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
     /* Properties */
@@ -57,7 +62,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Constellation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.constellation ?? (this.constellation = Eve.General.Cache.GetOrAdd<Constellation>(this.ConstellationId, () => (Constellation)this.Entity.Constellation.ToAdapter()));
+        return this.constellation ?? (this.constellation = this.Container.Cache.GetOrAdd<Constellation>(this.ConstellationId, () => this.Entity.Constellation.ToAdapter(this.Container)));
       }
     }
 
@@ -85,7 +90,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<NpcCorporation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.corporation ?? (this.corporation = Eve.General.Cache.GetOrAdd<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.Entity.Corporation.ToAdapter()));
+        return this.corporation ?? (this.corporation = this.Container.Cache.GetOrAdd<NpcCorporation>(this.CorporationId, () => this.Entity.Corporation.ToAdapter(this.Container)));
       }
     }
 
@@ -194,7 +199,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<StationOperation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.operation ?? (this.operation = Eve.General.Cache.GetOrAdd<StationOperation>(this.OperationId, () => (StationOperation)this.Entity.Operation.ToAdapter()));
+        return this.operation ?? (this.operation = this.Container.Cache.GetOrAdd<StationOperation>(this.OperationId, () => this.Entity.Operation.ToAdapter(this.Container)));
       }
     }
 
@@ -222,7 +227,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.region ?? (this.region = Eve.General.Cache.GetOrAdd<Region>(this.RegionId, () => (Region)this.Entity.Region.ToAdapter()));
+        return this.region ?? (this.region = this.Container.Cache.GetOrAdd<Region>(this.RegionId, () => this.Entity.Region.ToAdapter(this.Container)));
       }
     }
 
@@ -327,7 +332,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<SolarSystem>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.solarSystem ?? (this.solarSystem = Eve.General.Cache.GetOrAdd<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.Entity.SolarSystem.ToAdapter()));
+        return this.solarSystem ?? (this.solarSystem = this.Container.Cache.GetOrAdd<SolarSystem>(this.SolarSystemId, () => this.Entity.SolarSystem.ToAdapter(this.Container)));
       }
     }
 
@@ -355,7 +360,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<StationType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.stationType ?? (this.stationType = Eve.General.Cache.GetOrAdd<StationType>(this.StationTypeId, () => (StationType)EveType.Create(this.Entity.StationType)));
+        return this.stationType ?? (this.stationType = this.Container.Cache.GetOrAdd<StationType>(this.StationTypeId, () => (StationType)this.Entity.StationType.ToAdapter(this.Container)));
       }
     }
 

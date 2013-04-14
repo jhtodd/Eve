@@ -25,8 +25,9 @@ namespace Eve.Data
   /// <remarks>
   /// <para>
   /// In order to be stored in the EVE cache, an object must expose a
-  /// <em>cache key</em>.  This is an ID value which is unique across
-  /// the object's entire <em>cache domain</em>.
+  /// <em>cache key</em> that implements the <see cref="IConvertible" />
+  /// interface.  This is an ID value which is unique across the object's
+  /// entire <em>cache domain</em>.
   /// </para>
   /// <para>
   /// A cache domain is a collection of types that share a range of unique
@@ -80,6 +81,6 @@ namespace Eve.Data
     /// their own separate domain.
     /// </para>
     /// </remarks>
-    object CacheKey { get; }
+    IConvertible CacheKey { get; }
   }
 }

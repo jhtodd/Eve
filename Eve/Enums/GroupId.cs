@@ -3197,7 +3197,7 @@ namespace Eve
     /// <summary>Containers that can be deployed in dungeons and accept items to be placed into them. Can have triggers that check if specific item is placed in it (for mission completion for instance).</summary>
     [Description("Mission Container")]
     [LongDescription("Containers that can be deployed in dungeons and accept items to be placed into th" +
-        "em. Can have triggers that check if specific item is placed in it (for mission c" +
+        "em. Can have triggers that check if specific item is placed in it (for mission chars" +
         "ompletion for instance).")]
     MissionContainer = 952,
 

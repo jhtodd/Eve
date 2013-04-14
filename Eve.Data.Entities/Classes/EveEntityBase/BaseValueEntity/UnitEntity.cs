@@ -52,9 +52,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override Unit ToAdapter()
+    public override Unit ToAdapter(IEveRepository container)
     {
-      return new Unit(this);
+      return new Unit(container, this);
     }
   }
 }

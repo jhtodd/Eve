@@ -42,12 +42,16 @@ namespace Eve
     /// <summary>
     /// Initializes a new instance of the Effect class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    public Effect(EffectEntity entity) : base(entity)
+    public Effect(IEveRepository container, EffectEntity entity) : base(container, entity)
     {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
     /* Properties */
@@ -76,7 +80,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<EffectType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.effectType ?? (this.effectType = Eve.General.Cache.GetOrAdd<EffectType>(this.Id, () => (EffectType)this.Entity.EffectType.ToAdapter()));
+        return this.effectType ?? (this.effectType = this.Container.Cache.GetOrAdd<EffectType>(this.Id, () => this.Entity.EffectType.ToAdapter(this.Container)));
       }
     }
 
@@ -218,7 +222,7 @@ namespace Eve
   /// </content>
   public sealed partial class Effect : IEveCacheable
   {
-    object IEveCacheable.CacheKey
+    IConvertible IEveCacheable.CacheKey
     {
       get { return CreateCompoundId(this.Entity.ItemTypeId, this.Id); }
     }

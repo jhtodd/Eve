@@ -104,9 +104,9 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override MarketGroup ToAdapter()
+    public override MarketGroup ToAdapter(IEveRepository container)
     {
-      return new MarketGroup(this);
+      return new MarketGroup(container, this);
     }
   }
 }

@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="IEveCacheableContracts.cs" company="Jeremy H. Todd">
+// <copyright file="IEveRepositoryItemContracts.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
@@ -17,17 +17,17 @@ namespace Eve.Data
   using FreeNet.Data.Entity;
 
   /// <summary>
-  /// Contract class for the <see cref="IEveCacheable" /> interface.
+  /// Contract class for the <see cref="IEveRepositoryItem" /> interface.
   /// </summary>
-  [ContractClassFor(typeof(IEveCacheable))]
-  internal abstract class IEveCacheableContracts : IEveCacheable
+  [ContractClassFor(typeof(IEveRepositoryItem))]
+  internal abstract class IEveRepositoryItemContracts : IEveRepositoryItem
   {
-    IConvertible IEveCacheable.CacheKey
+    IEveRepository IEveRepositoryItem.Container
     {
-      get
+      get 
       {
-        Contract.Ensures(Contract.Result<IConvertible>() != null);
-        throw new NotImplementedException();
+        Contract.Ensures(Contract.Result<IEveRepository>() != null);
+        throw new NotImplementedException(); 
       }
     }
   }

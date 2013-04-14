@@ -208,7 +208,7 @@ namespace Eve.Data
       Contract.Requires(value != null, Resources.Messages.EveCache_ValueCannotBeNull);
 
       string region = RegionMap.GetRegion(typeof(T));
-      string key = EveCache.GetCacheKey(region, value.CacheKey);
+      string key = EveCache.CreateCacheKey(region, value.CacheKey);
 
       this.EnterWriteLock(region);
 
@@ -268,12 +268,12 @@ namespace Eve.Data
     /// <see langword="true" /> if an item with the specified ID is contained
     /// in the cache; otherwise <see langword="false" />.
     /// </returns>
-    public bool Contains<T>(object id)
+    public bool Contains<T>(IConvertible id)
     {
       Contract.Requires(id != null, Resources.Messages.EveCache_IdCannotBeNull);
 
       string region = RegionMap.GetRegion(typeof(T));
-      string key = EveCache.GetCacheKey(region, id);
+      string key = EveCache.CreateCacheKey(region, id);
 
       this.EnterReadLock(region);
 
@@ -327,7 +327,7 @@ namespace Eve.Data
     /// item is contained in the cache.  Otherwise, the result of executing
     /// <paramref name="valueFactory" />.
     /// </returns>
-    public T GetOrAdd<T>(object id, Func<T> valueFactory) where T : IEveCacheable
+    public T GetOrAdd<T>(IConvertible id, Func<T> valueFactory) where T : IEveCacheable
     {
       Contract.Requires(id != null, Resources.Messages.EveCache_IdCannotBeNull);
       Contract.Requires(valueFactory != null, Resources.Messages.EveCache_ValueFactoryCannotBeNull);
@@ -367,14 +367,14 @@ namespace Eve.Data
     /// still be removed or overwritten manually.
     /// </para>
     /// </remarks>
-    public T GetOrAdd<T>(object id, Func<T> valueFactory, bool permanent) where T : IEveCacheable
+    public T GetOrAdd<T>(IConvertible id, Func<T> valueFactory, bool permanent) where T : IEveCacheable
     {
       Contract.Requires(id != null, Resources.Messages.EveCache_IdCannotBeNull);
       Contract.Requires(valueFactory != null, Resources.Messages.EveCache_ValueFactoryCannotBeNull);
       Contract.Ensures(Contract.Result<T>() != null);
 
       string region = RegionMap.GetRegion(typeof(T));
-      string key = EveCache.GetCacheKey(region, id);
+      string key = EveCache.CreateCacheKey(region, id);
 
       this.EnterReadLock(region);
 
@@ -403,7 +403,7 @@ namespace Eve.Data
       // Check to make sure the value being added actually has the same key as
       // the value we were passed -- otherwise the cache could be put into an
       // inconsistent state.
-      string verifyKey = EveCache.GetCacheKey(region, value.CacheKey);
+      string verifyKey = EveCache.CreateCacheKey(region, value.CacheKey);
 
       if (!object.Equals(key, verifyKey))
       {
@@ -494,8 +494,8 @@ namespace Eve.Data
       Contract.Requires(value != null, Resources.Messages.EveCache_ValueCannotBeNull);
       Contract.Ensures(Contract.Result<T>() != null);
 
-      string region = RegionMap.GetRegion(typeof(T));
-      string key = EveCache.GetCacheKey(region, value.CacheKey);
+      string region = RegionMap.GetRegion(value.GetType());
+      string key = EveCache.CreateCacheKey(region, value.CacheKey);
 
       this.EnterReadLock(region);
 
@@ -554,12 +554,12 @@ namespace Eve.Data
     /// <returns>
     /// The removed item, or the default value if no matching item was found.
     /// </returns>
-    public T Remove<T>(object id)
+    public T Remove<T>(IConvertible id)
     {
       Contract.Requires(id != null, Resources.Messages.EveCache_IdCannotBeNull);
 
       string region = RegionMap.GetRegion(typeof(T));
-      string key = EveCache.GetCacheKey(region, id);
+      string key = EveCache.CreateCacheKey(region, id);
 
       this.EnterWriteLock(region);
 
@@ -598,12 +598,12 @@ namespace Eve.Data
     /// <see langword="true" /> if a matching item was successfully retrieved;
     /// otherwise <see langword="false" />.
     /// </returns>
-    public bool TryGetValue<T>(object id, out T value)
+    public bool TryGetValue<T>(IConvertible id, out T value)
     {
       Contract.Requires(id != null, Resources.Messages.EveCache_IdCannotBeNull);
 
       string region = RegionMap.GetRegion(typeof(T));
-      string key = EveCache.GetCacheKey(region, id);
+      string key = EveCache.CreateCacheKey(region, id);
 
       this.EnterReadLock(region);
 
@@ -626,6 +626,48 @@ namespace Eve.Data
       this.Statistics.Misses++;
       value = default(T);
       return false;
+    }
+
+    /// <summary>
+    /// Converts an array of bytes to a short string value.
+    /// </summary>
+    /// <param name="data">
+    /// The byte array for which to return a string.
+    /// </param>
+    /// <returns>
+    /// A short string generated from the byte array.
+    /// </returns>
+    internal static string ByteArrayToShortString(byte[] data)
+    {
+      Contract.Requires(data != null, "The data to encode cannot be null.");
+
+      // Skip past leading zeroes
+      int offset = 0;
+      for (offset = 0; offset < data.Length - 1; offset++)
+      {
+        if (data[offset] != 0)
+        {
+          break;
+        }
+      }
+
+      int length = data.Length - offset;
+
+      // Format as a hex string -- bitwise version by CodesInChaos
+      // http://stackoverflow.com/a/14333437/627282
+      char[] chars = new char[length * 2];
+      int byteValue;
+
+      for (int i = 0; i < length; i++)
+      {
+        byteValue = data[offset + i] >> 4;
+        chars[i * 2] = (char)(55 + byteValue + (((byteValue - 10) >> 31) & -7));
+        byteValue = data[offset + i] & 0xF;
+        chars[(i * 2) + 1] = (char)(55 + byteValue + (((byteValue - 10) >> 31) & -7));
+      }
+
+      // Remove the leading zero, if any
+      return chars[0] == '0' ? new string(chars, 1, chars.Length - 1) : new string(chars);
     }
 
     /// <summary>
@@ -744,26 +786,6 @@ namespace Eve.Data
     }
 
     /// <summary>
-    /// Gets the cache key for an item with the specified type and ID value.
-    /// </summary>
-    /// <typeparam name="T">
-    /// The type of item.
-    /// </typeparam>
-    /// <param name="id">
-    /// The ID for which to generate a cache key.
-    /// </param>
-    /// <returns>
-    /// The cache key for an item with the specified type and ID.
-    /// </returns>
-    protected static string GetCacheKey<T>(object id)
-    {
-      Contract.Requires(id != null, Resources.Messages.BaseValueCache_IdCannotBeNull);
-      Contract.Ensures(Contract.Result<string>() != null);
-
-      return GetCacheKey(RegionMap.GetRegion(typeof(T)), id);
-    }
-
-    /// <summary>
     /// Gets the cache key for an item with the specified type, region, and ID
     /// value.
     /// </summary>
@@ -776,15 +798,113 @@ namespace Eve.Data
     /// <returns>
     /// The cache key for an item with the specified type and ID.
     /// </returns>
-    protected static string GetCacheKey(string region, object id)
+    protected static string CreateCacheKey(string region, IConvertible id)
     {
       Contract.Requires(id != null, Resources.Messages.BaseValueCache_IdCannotBeNull);
       Contract.Requires(region != null, Resources.Messages.BaseValueCache_RegionCannotBeNull);
       Contract.Ensures(Contract.Result<string>() != null);
 
-      Type idType = id.GetType();
+      string idKey;
+      byte[] bytes;
 
-      return EveCacheRegionPrefix + region + (idType.IsEnum ? Enum.Format(idType, id, "d") : id.ToString());
+      switch (id.GetTypeCode())
+      {
+        case TypeCode.Boolean:
+          idKey = id.ToBoolean(null) ? "1" : "0";
+          break;
+
+        case TypeCode.Byte:
+          idKey = ByteArrayToShortString(new byte[] { id.ToByte(null) });
+          break;
+
+        case TypeCode.Double:
+          idKey = ByteArrayToShortString(BitConverter.GetBytes(id.ToDouble(null)));
+          break;
+
+        case TypeCode.Int16:
+          bytes = BitConverter.GetBytes(id.ToInt16(null));
+
+          if (BitConverter.IsLittleEndian)
+          {
+            Array.Reverse(bytes);
+          }
+
+          idKey = ByteArrayToShortString(bytes);
+          break;
+
+        case TypeCode.Int32:
+          bytes = BitConverter.GetBytes(id.ToInt32(null));
+
+          if (BitConverter.IsLittleEndian)
+          {
+            Array.Reverse(bytes);
+          }
+
+          idKey = ByteArrayToShortString(bytes);
+          break;
+
+        case TypeCode.Int64:
+          bytes = BitConverter.GetBytes(id.ToInt64(null));
+
+          if (BitConverter.IsLittleEndian)
+          {
+            Array.Reverse(bytes);
+          }
+
+          idKey = ByteArrayToShortString(bytes);
+          break;
+
+        case TypeCode.SByte:
+          unchecked
+          {
+            idKey = ByteArrayToShortString(new byte[] { (byte)id.ToSByte(null) });
+          }
+
+          break;
+
+        case TypeCode.Single:
+          idKey = ByteArrayToShortString(BitConverter.GetBytes(id.ToSingle(null)));
+          break;
+
+        case TypeCode.UInt16:
+          bytes = BitConverter.GetBytes(id.ToUInt16(null));
+
+          if (BitConverter.IsLittleEndian)
+          {
+            Array.Reverse(bytes);
+          }
+
+          idKey = ByteArrayToShortString(bytes);
+          break;
+
+        case TypeCode.UInt32:
+          bytes = BitConverter.GetBytes(id.ToUInt32(null));
+
+          if (BitConverter.IsLittleEndian)
+          {
+            Array.Reverse(bytes);
+          }
+
+          idKey = ByteArrayToShortString(bytes);
+          break;
+
+        case TypeCode.UInt64:
+          bytes = BitConverter.GetBytes(id.ToUInt64(null));
+
+          if (BitConverter.IsLittleEndian)
+          {
+            Array.Reverse(bytes);
+          }
+
+          idKey = ByteArrayToShortString(bytes);
+          break;
+
+        default:
+          idKey = id.ToString();
+          break;
+      }
+
+      return region + "_" + idKey;
     }
 
     /// <summary>
@@ -796,6 +916,7 @@ namespace Eve.Data
       if (disposing)
       {
         this.masterLock.Dispose();
+        this.statistics.Dispose();
       }
     }
 

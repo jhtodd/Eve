@@ -11,6 +11,7 @@ namespace Eve.Universe
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Data;
   using Eve.Data.Entities;
   using Eve.Universe;
 
@@ -31,12 +32,16 @@ namespace Eve.Universe
     /// <summary>
     /// Initializes a new instance of the Region class.
     /// </summary>
+    /// <param name="container">
+    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal Region(RegionEntity entity) : base(entity)
+    internal Region(IEveRepository container, RegionEntity entity) : base(container, entity)
     {
-      Contract.Requires(entity != null, Resources.Messages.EntityAdapter_EntityCannotBeNull);
+      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
     /* Properties */
@@ -53,7 +58,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyConstellationCollection>() != null);
 
-        return this.constellations ?? (this.constellations = new ReadOnlyConstellationCollection(Eve.General.DataSource.GetConstellations(x => x.RegionId == this.Id.Value).OrderBy(x => x)));
+        return this.constellations ?? (this.constellations = new ReadOnlyConstellationCollection(this.Container.GetConstellations(x => x.RegionId == this.Id.Value).OrderBy(x => x)));
       }
     }
 
@@ -74,7 +79,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.faction ?? (this.faction = Eve.General.Cache.GetOrAdd<Faction>(this.FactionId, () => (Faction)this.Entity.Faction.ToAdapter()));
+        return this.faction ?? (this.faction = this.Container.Cache.GetOrAdd<Faction>(this.FactionId, () => this.Entity.Faction.ToAdapter(this.Container)));
       }
     }
 
@@ -113,7 +118,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyRegionJumpCollection>() != null);
 
-        return this.jumps ?? (this.jumps = new ReadOnlyRegionJumpCollection(Eve.General.DataSource.GetRegionJumps(x => x.FromRegionId == this.Id.Value).OrderBy(x => x)));
+        return this.jumps ?? (this.jumps = new ReadOnlyRegionJumpCollection(this.Container.GetRegionJumps(x => x.FromRegionId == this.Id.Value).OrderBy(x => x)));
       }
     }
 

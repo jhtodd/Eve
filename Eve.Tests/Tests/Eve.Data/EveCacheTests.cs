@@ -63,7 +63,7 @@ namespace Eve.Tests {
       #endregion
       #region IEveCacheable Members
       //******************************************************************************
-      object IEveCacheable.CacheKey
+      IConvertible IEveCacheable.CacheKey
       {
         get { return Id; }
       }
@@ -122,7 +122,7 @@ namespace Eve.Tests {
       #endregion
       #region IEveCacheable Members
       //******************************************************************************
-      object IEveCacheable.CacheKey
+      IConvertible IEveCacheable.CacheKey
       {
         get { return Id; }
       }
