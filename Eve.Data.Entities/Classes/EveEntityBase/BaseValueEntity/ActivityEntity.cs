@@ -28,7 +28,7 @@ namespace Eve.Data.Entities
   [Table("ramActivities")]
   public class ActivityEntity : BaseValueEntity<ActivityId, Activity>
   {
-    // Check EveDbContext.OnModelCreating() for customization of this type's
+    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */
@@ -40,7 +40,7 @@ namespace Eve.Data.Entities
     {
     }
 
-    /* Constructors */
+    /* Properties */
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.

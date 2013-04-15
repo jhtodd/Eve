@@ -25,7 +25,7 @@ namespace Eve.Data.Entities
   [Table("eveIcons")]
   public class IconEntity : BaseValueEntity<int, Icon>
   {
-    // Check EveDbContext.OnModelCreating() for customization of this type's
+    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

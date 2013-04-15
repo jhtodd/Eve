@@ -80,7 +80,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.faction ?? (this.faction = this.Container.Cache.GetOrAdd<Faction>(this.FactionId, () => this.Entity.Faction.ToAdapter(this.Container)));
+        return this.faction ?? (this.faction = this.Container.Load<Faction>(this.FactionId, () => this.Entity.Faction.ToAdapter(this.Container)));
       }
     }
 

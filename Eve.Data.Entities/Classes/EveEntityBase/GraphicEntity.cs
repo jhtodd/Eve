@@ -25,7 +25,7 @@ namespace Eve.Data.Entities
   [Table("eveGraphics")]
   public class GraphicEntity : EveEntityBase<Graphic>
   {
-    // Check EveDbContext.OnModelCreating() for customization of this type's
+    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

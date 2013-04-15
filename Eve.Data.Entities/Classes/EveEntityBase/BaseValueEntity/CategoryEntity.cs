@@ -26,7 +26,7 @@ namespace Eve.Data.Entities
   [Table("invCategories")]
   public class CategoryEntity : BaseValueEntity<CategoryId, Category>
   {
-    // Check EveDbContext.OnModelCreating() for customization of this type's
+    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

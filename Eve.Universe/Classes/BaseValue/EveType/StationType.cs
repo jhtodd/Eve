@@ -221,7 +221,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.operation ?? (this.operation = this.Container.Cache.GetOrAdd<StationOperation>(this.OperationId, () => this.Entity.Operation.ToAdapter(this.Container)));
+        return this.operation ?? (this.operation = this.Container.Load<StationOperation>(this.OperationId, () => this.Entity.Operation.ToAdapter(this.Container)));
       }
     }
 

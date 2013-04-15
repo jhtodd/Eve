@@ -109,7 +109,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<Category>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.category ?? (this.category = this.Container.Cache.GetOrAdd<Category>(this.CategoryId, () => this.Entity.Category.ToAdapter(this.Container)));
+        return this.category ?? (this.category = this.Container.Load<Category>(this.CategoryId, () => this.Entity.Category.ToAdapter(this.Container)));
       }
     }
 
@@ -154,7 +154,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.Cache.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+        return this.icon ?? (this.icon = this.Container.Load<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
       }
     }
 

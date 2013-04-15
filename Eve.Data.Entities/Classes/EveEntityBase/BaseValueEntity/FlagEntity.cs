@@ -26,7 +26,7 @@ namespace Eve.Data.Entities
   [Table("invFlags")]
   public class FlagEntity : BaseValueEntity<FlagId, Flag>
   {
-    // Check EveDbContext.OnModelCreating() for customization of this type's
+    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

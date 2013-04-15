@@ -28,7 +28,7 @@ namespace Eve.Data.Entities
   [Table("chrRaces")]
   public class RaceEntity : BaseValueEntity<RaceId, Race>
   {
-    // Check EveDbContext.OnModelCreating() for customization of this type's
+    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

@@ -29,7 +29,7 @@ namespace Eve.Data.Entities
   [Table("chrAttributes")]
   public class CharacterAttributeTypeEntity : BaseValueEntity<CharacterAttributeId, CharacterAttributeType>
   {
-    // Check EveDbContext.OnModelCreating() for customization of this type's
+    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

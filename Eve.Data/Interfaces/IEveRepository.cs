@@ -28,17 +28,29 @@ namespace Eve.Data
   [ContractClass(typeof(IEveRepositoryContracts))]
   public interface IEveRepository : IDisposable
   {
-    /* Properties */
-
-    /// <summary>
-    /// Gets the <see cref="EveCache" /> used to store data locally.
-    /// </summary>
-    /// <value>
-    /// An <see cref="EveCache" /> used to store data locally.
-    /// </value>
-    EveCache Cache { get; }
-
     /* Methods */
+   
+    /// <summary>
+    /// Retrieves and returns any previously loaded entity with the specified type
+    /// and ID, or loads a value using the given delegate if no previously loaded
+    /// version exists.
+    /// </summary>
+    /// <typeparam name="T">
+    /// The type of object to retrieve or load.
+    /// </typeparam>
+    /// <param name="id">
+    /// The ID of the object to retrieve.
+    /// </param>
+    /// <param name="valueFactory">
+    /// A delegate which can be used to load the value if no previously
+    /// loaded version exists.  This is only invoked if no previously loaded
+    /// version can be found.
+    /// </param>
+    /// <returns>
+    /// An object of the desired type, either retrieved from a previously-loaded
+    /// version, or loaded on demand.
+    /// </returns>
+    T Load<T>(IConvertible id, Func<T> valueFactory) where T : IEveCacheable;
 
     #region Activity Methods
     /// <summary>
@@ -197,6 +209,132 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<Ancestry> GetAncestries(params IQueryModifier<AncestryEntity>[] modifiers);
+    #endregion
+
+    #region AssemblyLineType Methods
+    /// <summary>
+    /// Returns the <see cref="AssemblyLineType" /> object with the specified ID.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <returns>
+    /// The item with the specified key.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    AssemblyLineType GetAssemblyLineTypeById(AssemblyLineTypeId id);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="AssemblyLineType" />
+    /// objects.
+    /// </summary>
+    /// <param name="filter">
+    /// The expression that will filter the results of the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<AssemblyLineType> GetAssemblyLineTypes(Expression<Func<AssemblyLineTypeEntity, bool>> filter);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="AssemblyLineType" />
+    /// objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<AssemblyLineType> GetAssemblyLineTypes(params IQueryModifier<AssemblyLineTypeEntity>[] modifiers);
+    #endregion
+
+    #region AssemblyLineTypeCategoryDetail Methods
+    /// <summary>
+    /// Returns the <see cref="AssemblyLineTypeCategoryDetail" /> object with the specified ID.
+    /// </summary>
+    /// <param name="assemblyLineTypeId">
+    /// The ID of the assembly line type.
+    /// </param>
+    /// <param name="categoryId">
+    /// The ID of the category.
+    /// </param>
+    /// <returns>
+    /// The item with the specified key values.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    AssemblyLineTypeCategoryDetail GetAssemblyLineTypeCategoryDetailById(AssemblyLineTypeId assemblyLineTypeId, CategoryId categoryId);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="AssemblyLineTypeCategoryDetail" />
+    /// objects.
+    /// </summary>
+    /// <param name="filter">
+    /// The expression that will filter the results of the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<AssemblyLineTypeCategoryDetail> GetAssemblyLineTypeCategoryDetails(Expression<Func<AssemblyLineTypeCategoryDetailEntity, bool>> filter);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="AssemblyLineTypeCategoryDetail" />
+    /// objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<AssemblyLineTypeCategoryDetail> GetAssemblyLineTypeCategoryDetails(params IQueryModifier<AssemblyLineTypeCategoryDetailEntity>[] modifiers);
+    #endregion
+
+    #region AssemblyLineTypeGroupDetail Methods
+    /// <summary>
+    /// Returns the <see cref="AssemblyLineTypeGroupDetail" /> object with the specified ID.
+    /// </summary>
+    /// <param name="assemblyLineTypeId">
+    /// The ID of the assembly line type.
+    /// </param>
+    /// <param name="groupId">
+    /// The ID of the group.
+    /// </param>
+    /// <returns>
+    /// The item with the specified key values.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    AssemblyLineTypeGroupDetail GetAssemblyLineTypeGroupDetailById(AssemblyLineTypeId assemblyLineTypeId, GroupId groupId);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="AssemblyLineTypeGroupDetail" />
+    /// objects.
+    /// </summary>
+    /// <param name="filter">
+    /// The expression that will filter the results of the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<AssemblyLineTypeGroupDetail> GetAssemblyLineTypeGroupDetails(Expression<Func<AssemblyLineTypeGroupDetailEntity, bool>> filter);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="AssemblyLineTypeGroupDetail" />
+    /// objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<AssemblyLineTypeGroupDetail> GetAssemblyLineTypeGroupDetails(params IQueryModifier<AssemblyLineTypeGroupDetailEntity>[] modifiers);
     #endregion
 
     #region AttributeCategory Methods
@@ -1014,6 +1152,44 @@ namespace Eve.Data
     /// will be returned.
     /// </returns>
     IReadOnlyList<TItem> GetItems<TItem>(params IQueryModifier<ItemEntity>[] modifiers) where TItem : Item;
+    #endregion
+
+    #region ItemPosition Methods
+    /// <summary>
+    /// Returns the <see cref="ItemPosition" /> object with the specified ID.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <returns>
+    /// The item with the specified key.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    ItemPosition GetItemPositionById(ItemId id);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="ItemPosition" /> objects.
+    /// </summary>
+    /// <param name="filter">
+    /// The expression that will filter the results of the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<ItemPosition> GetItemPositions(Expression<Func<ItemPositionEntity, bool>> filter);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="ItemPosition" /> objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<ItemPosition> GetItemPositions(params IQueryModifier<ItemPositionEntity>[] modifiers);
     #endregion
 
     #region MarketGroup Methods

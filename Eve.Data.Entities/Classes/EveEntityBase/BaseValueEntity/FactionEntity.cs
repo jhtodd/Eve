@@ -29,7 +29,7 @@ namespace Eve.Data.Entities
   [Table("chrFactions")]
   public class FactionEntity : BaseValueEntity<FactionId, Faction>
   {
-    // Check EveDbContext.OnModelCreating() for customization of this type's
+    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

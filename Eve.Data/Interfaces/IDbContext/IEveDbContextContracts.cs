@@ -59,6 +59,33 @@ namespace Eve.Data
       }
     }
 
+    IQueryable<AssemblyLineTypeEntity> IEveDbContext.AssemblyLineTypes
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IQueryable<AssemblyLineTypeEntity>>() != null);
+        throw new NotImplementedException();
+      }
+    }
+
+    IQueryable<AssemblyLineTypeCategoryDetailEntity> IEveDbContext.AssemblyLineTypeCategoryDetails
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IQueryable<AssemblyLineTypeCategoryDetailEntity>>() != null);
+        throw new NotImplementedException();
+      }
+    }
+
+    IQueryable<AssemblyLineTypeGroupDetailEntity> IEveDbContext.AssemblyLineTypeGroupDetails
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IQueryable<AssemblyLineTypeGroupDetailEntity>>() != null);
+        throw new NotImplementedException();
+      }
+    }
+
     IQueryable<AttributeCategoryEntity> IEveDbContext.AttributeCategories
     {
       get
@@ -217,6 +244,15 @@ namespace Eve.Data
       get
       {
         Contract.Ensures(Contract.Result<IQueryable<ItemEntity>>() != null);
+        throw new NotImplementedException();
+      }
+    }
+
+    IQueryable<ItemPositionEntity> IEveDbContext.ItemPositions
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IQueryable<ItemPositionEntity>>() != null);
         throw new NotImplementedException();
       }
     }

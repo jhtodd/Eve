@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="NpcCorporationDivisionEntity.cs" company="Jeremy H. Todd">
+// <copyright file="AssemblyLineTypeGroupDetailEntity.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
@@ -16,17 +16,18 @@ namespace Eve.Data.Entities
   using System.Diagnostics.Contracts;
   using System.Linq;
 
-  using Eve.Universe;
+  using Eve.Industry;
 
   using FreeNet;
+  using FreeNet.Configuration;
   using FreeNet.Data.Entity;
 
   /// <summary>
-  /// The data entity for the <see cref="NpcCorporationDivision" /> class.
+  /// The data entity for the <see cref="AssemblyLineTypeGroupDetail" /> class.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("crpNPCCorporationDivisions")]
-  public class NpcCorporationDivisionEntity : EveEntityBase<NpcCorporationDivision>
+  [Table("ramAssemblyLineTypeDetailPerGroup")]
+  public class AssemblyLineTypeGroupDetailEntity : EveEntityBase<AssemblyLineTypeGroupDetail>
   {
     // Check InnerEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
@@ -34,10 +35,9 @@ namespace Eve.Data.Entities
     /* Constructors */
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="NpcCorporationDivisionEntity" /> class.
+    /// Initializes a new instance of the AssemblyLineTypeGroupDetailEntity class.
     /// </summary>
-    public NpcCorporationDivisionEntity()
-      : base()
+    public AssemblyLineTypeGroupDetailEntity() : base()
     {
     }
 
@@ -48,63 +48,64 @@ namespace Eve.Data.Entities
     /// </summary>
     /// <value>
     /// The underlying database value of the corresponding adapter property.
-    /// </value>
-    public virtual ICollection<AgentEntity> Agents { get; internal set; }
+    /// </value>    
+    [ForeignKey("AssemblyLineTypeId")]
+    public virtual AssemblyLineTypeEntity AssemblyLineType { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
     /// </summary>
     /// <value>
     /// The underlying database value of the corresponding adapter property.
-    /// </value>
-    [ForeignKey("CorporationId")]
-    public virtual NpcCorporationEntity Corporation { get; internal set; }
-
-    /// <summary>
-    /// Gets the underlying database value of the corresponding adapter property.
-    /// </summary>
-    /// <value>
-    /// The underlying database value of the corresponding adapter property.
-    /// </value>
-    [Column("corporationID", Order = 1)]
+    /// </value>    
+    [Column("assemblyLineTypeID", Order = 1)]
     [Key]
-    public long CorporationId { get; internal set; }
+    public byte AssemblyLineTypeId { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
     /// </summary>
     /// <value>
     /// The underlying database value of the corresponding adapter property.
-    /// </value>
-    [ForeignKey("DivisionId")]
-    public virtual DivisionEntity Division { get; internal set; }
+    /// </value>    
+    [ForeignKey("GroupId")]
+    public virtual GroupEntity Group { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
     /// </summary>
     /// <value>
     /// The underlying database value of the corresponding adapter property.
-    /// </value>
-    [Column("divisionID", Order = 2)]
+    /// </value>    
+    [Column("groupID", Order = 2)]
     [Key]
-    public DivisionId DivisionId { get; internal set; }
+    public GroupId GroupId { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
     /// </summary>
     /// <value>
     /// The underlying database value of the corresponding adapter property.
-    /// </value>
-    [Column("size")]
-    public byte Size { get; internal set; }
+    /// </value>    
+    [Column("materialMultiplier")]
+    public double MaterialMultiplier { get; internal set; }
+
+    /// <summary>
+    /// Gets the underlying database value of the corresponding adapter property.
+    /// </summary>
+    /// <value>
+    /// The underlying database value of the corresponding adapter property.
+    /// </value>    
+    [Column("timeMultiplier")]
+    public double TimeMultiplier { get; internal set; }
 
     /* Methods */
 
     /// <inheritdoc />
-    public override NpcCorporationDivision ToAdapter(IEveRepository container)
+    public override AssemblyLineTypeGroupDetail ToAdapter(IEveRepository container)
     {
       Contract.Assume(container != null); // TODO: Should not be necessary due to base class requires -- check in future version of static checker
-      return new NpcCorporationDivision(container, this);
+      return new AssemblyLineTypeGroupDetail(container, this);
     }
   }
 }

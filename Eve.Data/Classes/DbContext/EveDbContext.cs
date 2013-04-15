@@ -26,24 +26,13 @@ namespace Eve.Data
 
   /// <summary>
   /// A <see cref="DbContext" /> that provides data access to the EVE database.
-  /// This class serves primarily to define the entity model and provide
-  /// access to the database.  For most purposes, you should use the
-  /// <see cref="ReadOnlyEveDbContext" /> class instead.
+  /// This access is read-only.
   /// </summary>
-  public class EveDbContext : DbContext
+  public class EveDbContext : IEveDbContext
   {
-    [ThreadStatic]
-    private static ReadOnlyEveDbContext defaultInstance;
+    private InnerEveDbContext innerContext;
 
     /* Constructors */
-
-    /// <summary>
-    /// Initializes static members of the <see cref="EveDbContext" /> class.
-    /// </summary>
-    static EveDbContext()
-    {
-      Database.SetInitializer<EveDbContext>(null);
-    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="EveDbContext" /> class using
@@ -52,7 +41,7 @@ namespace Eve.Data
     /// of the derived context class.  For more information on how this is used
     /// to create a connection, see the remarks section for <see cref="DbContext" />.
     /// </summary>
-    internal EveDbContext() : base()
+    public EveDbContext() : this(typeof(EveDbContext).FullName)
     {
     }
 
@@ -65,7 +54,7 @@ namespace Eve.Data
     /// <param name="nameOrConnectionString">
     /// Either the database name or a connection string.
     /// </param>
-    internal EveDbContext(string nameOrConnectionString) : base(nameOrConnectionString)
+    public EveDbContext(string nameOrConnectionString) : this(new InnerEveDbContext(nameOrConnectionString))
     {
     }
 
@@ -81,455 +70,327 @@ namespace Eve.Data
     /// If set to true the connection is disposed when the context is disposed,
     /// otherwise the caller must dispose the connection.
     /// </param>
-    internal EveDbContext(DbConnection existingConnection, bool contextOwnsConnection) : base(existingConnection, contextOwnsConnection)
+    public EveDbContext(DbConnection existingConnection, bool contextOwnsConnection) : this(new InnerEveDbContext(existingConnection, contextOwnsConnection))
     {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="EveDbContext" /> class,
+    /// using the specified <see cref="InnerEveDbContext" /> to provide access to the database.
+    /// </summary>
+    /// <param name="innerContext">
+    /// The <see cref="InnerEveDbContext" /> which will be used to provide access to the database.
+    /// </param>
+    private EveDbContext(InnerEveDbContext innerContext)
+    {
+      Contract.Requires(innerContext != null, "The inner InnerEveDbContext cannot be null.");
+      this.innerContext = innerContext;
     }
 
     /* Properties */
 
+    /// <inheritdoc />
+    public IQueryable<ActivityEntity> Activities
+    {
+      get { return this.Query<ActivityEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<AgentEntity> Agents
+    {
+      get { return this.Query<AgentEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<AgentTypeEntity> AgentTypes
+    {
+      get { return this.Query<AgentTypeEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<AncestryEntity> Ancestries
+    {
+      get { return this.Query<AncestryEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<AssemblyLineTypeEntity> AssemblyLineTypes
+    {
+      get { return this.Query<AssemblyLineTypeEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<AssemblyLineTypeCategoryDetailEntity> AssemblyLineTypeCategoryDetails
+    {
+      get { return this.Query<AssemblyLineTypeCategoryDetailEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<AssemblyLineTypeGroupDetailEntity> AssemblyLineTypeGroupDetails
+    {
+      get { return this.Query<AssemblyLineTypeGroupDetailEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<AttributeCategoryEntity> AttributeCategories
+    {
+      get { return this.Query<AttributeCategoryEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<AttributeTypeEntity> AttributeTypes
+    {
+      get { return this.Query<AttributeTypeEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<AttributeValueEntity> AttributeValues
+    {
+      get { return this.Query<AttributeValueEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<BloodlineEntity> Bloodlines
+    {
+      get { return this.Query<BloodlineEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<CategoryEntity> Categories
+    {
+      get { return this.Query<CategoryEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<CharacterAttributeTypeEntity> CharacterAttributeTypes
+    {
+      get { return this.Query<CharacterAttributeTypeEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<ConstellationEntity> Constellations
+    {
+      get { return this.Query<ConstellationEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<ConstellationJumpEntity> ConstellationJumps
+    {
+      get { return this.Query<ConstellationJumpEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<CorporateActivityEntity> CorporateActivities
+    {
+      get { return this.Query<CorporateActivityEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<DivisionEntity> Divisions
+    {
+      get { return this.Query<DivisionEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<EffectTypeEntity> EffectTypes
+    {
+      get { return this.Query<EffectTypeEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<EffectEntity> Effects
+    {
+      get { return this.Query<EffectEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<EveTypeEntity> EveTypes
+    {
+      get { return this.Query<EveTypeEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<FlagEntity> Flags
+    {
+      get { return this.Query<FlagEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<GraphicEntity> Graphics
+    {
+      get { return this.Query<GraphicEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<GroupEntity> Groups
+    {
+      get { return this.Query<GroupEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<IconEntity> Icons
+    {
+      get { return this.Query<IconEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<ItemEntity> Items
+    {
+      get { return this.Query<ItemEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<ItemPositionEntity> ItemPositions
+    {
+      get { return this.Query<ItemPositionEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<MarketGroupEntity> MarketGroups
+    {
+      get { return this.Query<MarketGroupEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<MetaGroupEntity> MetaGroups
+    {
+      get { return this.Query<MetaGroupEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<MetaTypeEntity> MetaTypes
+    {
+      get { return this.Query<MetaTypeEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<NpcCorporationEntity> NpcCorporations
+    {
+      get { return this.Query<NpcCorporationEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<NpcCorporationDivisionEntity> NpcCorporationDivisions
+    {
+      get { return this.Query<NpcCorporationDivisionEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<RaceEntity> Races
+    {
+      get { return this.Query<RaceEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<RegionEntity> Regions
+    {
+      get { return this.Query<RegionEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<RegionJumpEntity> RegionJumps
+    {
+      get { return this.Query<RegionJumpEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<SolarSystemEntity> SolarSystems
+    {
+      get { return this.Query<SolarSystemEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<SolarSystemJumpEntity> SolarSystemJumps
+    {
+      get { return this.Query<SolarSystemJumpEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<StationEntity> Stations
+    {
+      get { return this.Query<StationEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<StationOperationEntity> StationOperations
+    {
+      get { return this.Query<StationOperationEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<StationServiceEntity> StationServices
+    {
+      get { return this.Query<StationServiceEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<StationTypeEntity> StationTypes
+    {
+      get { return this.Query<StationTypeEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<UnitEntity> Units
+    {
+      get { return this.Query<UnitEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<UniverseEntity> Universes
+    {
+      get { return this.Query<UniverseEntity>(); }
+    }
+
     /// <summary>
-    /// Gets the default data context.  This should be used in most circumstances.
+    /// Gets the inner context.
     /// </summary>
     /// <value>
-    /// The default <see cref="EveDbContext" />.
+    /// The <see cref="InnerEveDbContext" /> wrapped by the current instance.
     /// </value>
-    /// <remarks>
-    /// <para>
-    /// A different instance will be returned for each thread.  Since the
-    /// <see cref="EveDbContext" /> class is read-only and does not cache any
-    /// entities, it is safe to use a single instance per thread for the
-    /// lifetime of the application.
-    /// </para>
-    /// </remarks>
-    public static ReadOnlyEveDbContext Default
+    private InnerEveDbContext InnerContext
     {
       get
       {
-        Contract.Ensures(Contract.Result<ReadOnlyEveDbContext>() != null);
-
-        return defaultInstance ?? (defaultInstance = new ReadOnlyEveDbContext());
+        Contract.Ensures(Contract.Result<InnerEveDbContext>() != null);
+        return this.innerContext;
       }
     }
 
     /* Methods */
 
     /// <inheritdoc />
-    /// <remarks>
-    /// <para>
-    /// Because the context is read-only and does not track changes, the
-    /// <c>SaveChanges</c> method performs no actions and exists merely
-    /// for compatibility.
-    /// </para>
-    /// </remarks>
-    public override int SaveChanges()
+    public void Dispose()
     {
-      return 0;
+      this.Dispose(true);
     }
 
-    /// <summary>
-    /// Returns an <see cref="IDbSet{TEntity}" /> for the specified entity type.
-    /// </summary>
-    /// <typeparam name="TEntity">
-    /// The type of entity for which to return a <see cref="IDbSet{TEntity}" />.
-    /// </typeparam>
-    /// <returns>
-    /// An <see cref="IDbSet{TEntity}" /> for the specified entity type.
-    /// </returns>
-    /// <remarks>
-    /// <para>
-    /// This method simply returns the value of the base class's
-    /// <see cref="DbContext.Set{TEntity}()" /> method as an
-    /// <see cref="IDbSet{TEntity}" /> instead of a <see cref="DbSet{TEntity}" />
-    /// object, for ease of testing and mocking.
-    /// </para>
-    /// </remarks>
-    public new virtual IDbSet<TEntity> Set<TEntity>() where TEntity : class
+    /// <inheritdoc />
+    public IQueryable<TEntity> Query<TEntity>() where TEntity : Entity
     {
-      Contract.Ensures(Contract.Result<IDbSet<TEntity>>() != null);
-
-      var result = base.Set<TEntity>();
+      var result = this.InnerContext.Set<TEntity>().AsNoTracking();
 
       Contract.Assume(result != null);
       return result;
     }
 
-    /// <inheritdoc />
-    [ContractVerification(false)]
-    protected override void OnModelCreating(DbModelBuilder modelBuilder)
+    /// <summary>
+    /// Disposes the current object.
+    /// </summary>
+    /// <param name="disposing">
+    /// Indicates whether to dispose managed resources.
+    /// </param>
+    protected virtual void Dispose(bool disposing)
     {
-      base.OnModelCreating(modelBuilder);
-
-      /* ActivityEntity Mappings *******************************************/
-      var activity = modelBuilder.Entity<ActivityEntity>();
-
-      // Map properties inherited from BaseValueEntity<>
-      activity.Map(x => x.MapInheritedProperties());
-      activity.HasKey(x => x.Id);
-      activity.Property(x => x.Description).HasColumnName("description");
-      activity.Property(x => x.Id).HasColumnName("activityID");
-      activity.Property(x => x.Name).HasColumnName("activityName");
-
-      /* AgentEntity Mappings *******************************************************/
-      var agent = modelBuilder.Entity<AgentEntity>();
-
-      // Map the ResearchFields collection
-      agent.HasMany<EveTypeEntity>(x => x.ResearchFields)
-           .WithMany()
-           .Map(x => x.ToTable("agtResearchAgents")
-                      .MapLeftKey("agentID")
-                      .MapRightKey("typeID"));
-
-      /* AgentTypeEntity Mappings ***************************************************/
-      var agentType = modelBuilder.Entity<AgentTypeEntity>();
-
-      // Map properties inherited from BaseValueEntity<>
-      agentType.Map(x => x.MapInheritedProperties());
-      agentType.HasKey(x => x.Id);
-      agentType.Ignore(x => x.Description);
-      agentType.Property(x => x.Id).HasColumnName("agentTypeID");
-      agentType.Property(x => x.Name).HasColumnName("agentType");
-
-      /* AncestryEntity Mappings *******************************************/
-      var ancestry = modelBuilder.Entity<AncestryEntity>();
-
-      // Map properties inherited from BaseValueEntity<>
-      ancestry.Map(x => x.MapInheritedProperties());
-      ancestry.HasKey(x => x.Id);
-      ancestry.Property(x => x.Description).HasColumnName("description");
-      ancestry.Property(x => x.Id).HasColumnName("ancestryID");
-      ancestry.Property(x => x.Name).HasColumnName("ancestryName");
-
-      /* AttributeTypeEntity Mappings ***********************************************/
-      var attributeType = modelBuilder.Entity<AttributeTypeEntity>();
-
-      // Map properties inherited from BaseValueEntity<>
-      attributeType.Map(x => x.MapInheritedProperties());
-      attributeType.HasKey(x => x.Id);
-      attributeType.Property(x => x.Description).HasColumnName("description");
-      attributeType.Property(x => x.Id).HasColumnName("attributeID");
-      attributeType.Property(x => x.Name).HasColumnName("attributeName");
-
-      /* AttributeValueEntity Mappings **********************************************/
-
-      // All mappings defined by Data Annotations
-
-      /* AttributeCategoryEntity Mappings *******************************************/
-      var attributeCategory = modelBuilder.Entity<AttributeCategoryEntity>();
-
-      // Map properties inherited from BaseValueEntity<>
-      attributeCategory.Map(x => x.MapInheritedProperties());
-      attributeCategory.HasKey(x => x.Id);
-      attributeCategory.Property(x => x.Description).HasColumnName("categoryDescription");
-      attributeCategory.Property(x => x.Id).HasColumnName("categoryID");
-      attributeCategory.Property(x => x.Name).HasColumnName("categoryName");
-
-      /* BloodlineEntity Mappings *******************************************/
-      var bloodline = modelBuilder.Entity<BloodlineEntity>();
-
-      // Map properties inherited from BaseValueEntity<>
-      bloodline.Map(x => x.MapInheritedProperties());
-      bloodline.HasKey(x => x.Id);
-      bloodline.Property(x => x.Description).HasColumnName("description");
-      bloodline.Property(x => x.Id).HasColumnName("bloodlineID");
-      bloodline.Property(x => x.Name).HasColumnName("bloodlineName");
-
-      /* CategoryEntity Mappings *******************************************/
-      var category = modelBuilder.Entity<CategoryEntity>();
-
-      // Map properties inherited from BaseValueEntity<>
-      category.Map(x => x.MapInheritedProperties());
-      category.HasKey(x => x.Id);
-      category.Property(x => x.Description).HasColumnName("description");
-      category.Property(x => x.Id).HasColumnName("categoryID");
-      category.Property(x => x.Name).HasColumnName("categoryName");
-
-      /* CharacterAttributeTypeEntity Mappings **************************************/
-      var characterAttributeType = modelBuilder.Entity<CharacterAttributeTypeEntity>();
-
-      // Map properties inherited from BaseValueEntity<>
-      characterAttributeType.Map(x => x.MapInheritedProperties());
-      characterAttributeType.HasKey(x => x.Id);
-      characterAttributeType.Property(x => x.Description).HasColumnName("description");
-      characterAttributeType.Property(x => x.Id).HasColumnName("attributeID");
-      characterAttributeType.Property(x => x.Name).HasColumnName("attributeName");
-
-      /* ConstellationEntity Mappings ***********************************************/
-      var constellation = modelBuilder.Entity<ConstellationEntity>();
-
-      // Map the Jumps collection
-      constellation.HasMany(x => x.Jumps).WithRequired(x => x.FromConstellation).HasForeignKey(x => x.FromConstellationId);
-
-      /* ConstellationJumpEntity Mappings *******************************************/
-
-      // All mappings defined by Data Annotations
-
-      /* CorporateActivityEntity Mappings *******************************************/
-      var corporateActivity = modelBuilder.Entity<CorporateActivityEntity>();
-
-      // Map properties inherited from BaseValueEntity<>
-      corporateActivity.Map(x => x.MapInheritedProperties());
-      corporateActivity.HasKey(x => x.Id);
-      corporateActivity.Property(x => x.Description).HasColumnName("description");
-      corporateActivity.Property(x => x.Id).HasColumnName("activityID");
-      corporateActivity.Property(x => x.Name).HasColumnName("activityName");
-
-      /* DivisionEntity Mappings ****************************************************/
-      var division = modelBuilder.Entity<DivisionEntity>();
-
-      // Map properties inherited from BaseValueEntity<>
-      division.Map(x => x.MapInheritedProperties());
-      division.HasKey(x => x.Id);
-      division.Property(x => x.Description).HasColumnName("description");
-      division.Property(x => x.Id).HasColumnName("divisionID");
-      division.Property(x => x.Name).HasColumnName("divisionName");
-
-      /* EffectEntity Mappings ******************************************************/
-
-      // All mappings defined by Data Annotations
-
-      /* EffectTypeEntity Mappings **************************************************/
-      var effectType = modelBuilder.Entity<EffectTypeEntity>();
-
-      // Map properties inherited from BaseValueEntity<>
-      effectType.Map(x => x.MapInheritedProperties());
-      effectType.HasKey(x => x.Id);
-      effectType.Property(x => x.Description).HasColumnName("description");
-      effectType.Property(x => x.Id).HasColumnName("effectID");
-      effectType.Property(x => x.Name).HasColumnName("effectName");
-
-      /* EveTypeEntity Mappings *****************************************************/
-      var type = modelBuilder.Entity<EveTypeEntity>();
-
-      // Map properties inherited from BaseValueEntity<>
-      type.Map(x => x.MapInheritedProperties());
-      type.HasKey(x => x.Id);
-      type.Property(x => x.Description).HasColumnName("description");
-      type.Property(x => x.Id).HasColumnName("typeID");
-      type.Property(x => x.Name).HasColumnName("typeName");
-
-      // Map the Attributes collection
-      type.HasMany(x => x.Attributes).WithRequired().HasForeignKey(x => x.ItemTypeId);
-
-      // Map the Effects collection
-      type.HasMany(x => x.Effects).WithRequired().HasForeignKey(x => x.ItemTypeId);
-
-      // Map the MetaType property
-      type.HasOptional(x => x.MetaType).WithRequired(x => x.Type);
-
-      // Map the VariantMetaTypes collection
-      type.HasMany(x => x.ChildMetaTypes).WithRequired().HasForeignKey(x => x.ParentTypeId);
-
-      /* FactionEntity Mappings *****************************************************/
-      var faction = modelBuilder.Entity<FactionEntity>();
-
-      // Map properties inherited from BaseValueEntity<>
-      faction.Map(x => x.MapInheritedProperties());
-      faction.HasKey(x => x.Id);
-      faction.Property(x => x.Description).HasColumnName("description");
-      faction.Property(x => x.Id).HasColumnName("factionID");
-      faction.Property(x => x.Name).HasColumnName("factionName");
-
-      faction.HasRequired(x => x.SolarSystem).WithMany().HasForeignKey(x => x.SolarSystemId);
-
-      /* FlagEntity Mappings ********************************************************/
-      var flag = modelBuilder.Entity<FlagEntity>();
-
-      // Map properties inherited from BaseValueEntity<>
-      flag.Map(x => x.MapInheritedProperties());
-      flag.HasKey(x => x.Id);
-      flag.Property(x => x.Description).HasColumnName("flagText");
-      flag.Property(x => x.Id).HasColumnName("flagID");
-      flag.Property(x => x.Name).HasColumnName("flagName");
-
-      /* GraphicEntity Mappings ********************************************************/
-
-      // All mappings defined by Data Annotations
-
-      /* GroupEntity Mappings *******************************************************/
-      var group = modelBuilder.Entity<GroupEntity>();
-
-      // Map properties inherited from BaseValueEntity<>
-      group.Map(x => x.MapInheritedProperties());
-      group.HasKey(x => x.Id);
-      group.Property(x => x.Description).HasColumnName("description");
-      group.Property(x => x.Id).HasColumnName("groupID");
-      group.Property(x => x.Name).HasColumnName("groupName");
-
-      // Map the Types collection
-      group.HasMany(x => x.Types).WithRequired(x => x.Group).HasForeignKey(x => x.GroupId);
-
-      /* IconEntity Mappings ********************************************************/
-      var icon = modelBuilder.Entity<IconEntity>();
-
-      // Map properties inherited from BaseValueEntity<>
-      icon.Map(x => x.MapInheritedProperties());
-      icon.HasKey(x => x.Id);
-      icon.Property(x => x.Description).HasColumnName("description");
-      icon.Property(x => x.Id).HasColumnName("iconID");
-      icon.Property(x => x.Name).HasColumnName("iconFile");
-
-      /* ItemEntity Mappings ********************************************************/
-      var item = modelBuilder.Entity<ItemEntity>();
-
-      item.HasRequired(x => x.Location).WithMany().HasForeignKey(x => x.LocationId);
-      item.HasRequired(x => x.Owner).WithMany().HasForeignKey(x => x.OwnerId);
-      
-      // Map the Name property to the invNames table
-      item.Map(m => 
+      if (disposing)
       {
-        m.Properties(x => x.Name);
-        m.ToTable("invNames");
-      });
+        this.innerContext.Dispose();
+      }
+    }
 
-      // Map all other properties to the invTypes table
-      item.Map(m =>
-      {
-        m.Properties(x => new 
-        {
-          x.FlagId,
-          x.ItemTypeId,
-          x.LocationId,
-          x.OwnerId,
-          x.Quantity
-        });
-
-        m.ToTable("invItems");
-      });
-
-      /* MarketGroupEntity Mappings *************************************************/
-      var marketGroup = modelBuilder.Entity<MarketGroupEntity>();
-
-      // Map properties inherited from BaseValueEntity<>
-      marketGroup.Map(x => x.MapInheritedProperties());
-      marketGroup.HasKey(x => x.Id);
-      marketGroup.Property(x => x.Description).HasColumnName("description");
-      marketGroup.Property(x => x.Id).HasColumnName("marketGroupID");
-      marketGroup.Property(x => x.Name).HasColumnName("marketGroupName");
-
-      // Map the ChildGroups collection
-      marketGroup.HasMany(x => x.ChildGroups).WithOptional(x => x.ParentGroup).HasForeignKey(x => x.ParentGroupId);
-
-      // Map the Types collection
-      marketGroup.HasMany(x => x.Types).WithRequired(x => x.MarketGroup).HasForeignKey(x => x.MarketGroupId);
-
-      /* MetaGroupEntity Mappings ***************************************************/
-      var metaGroup = modelBuilder.Entity<MetaGroupEntity>();
-
-      // Map properties inherited from BaseValueEntity<>
-      metaGroup.Map(x => x.MapInheritedProperties());
-      metaGroup.HasKey(x => x.Id);
-      metaGroup.Property(x => x.Description).HasColumnName("description");
-      metaGroup.Property(x => x.Id).HasColumnName("metaGroupID");
-      metaGroup.Property(x => x.Name).HasColumnName("metaGroupName");
-
-      /* MetaTypeEntity Mappings ****************************************************/
-
-      // All mappings defined by Data Annotations
-
-      /* NpcCorporationEntity Mappings **********************************************/
-      var corporation = modelBuilder.Entity<NpcCorporationEntity>();
-
-      // Map the Agents collection
-      corporation.HasMany(x => x.Agents)
-                 .WithRequired(x => x.Corporation)
-                 .HasForeignKey(x => x.CorporationId);
-
-      // Map the TradeGoods collection
-      corporation.HasMany<EveTypeEntity>(x => x.TradeGoods)
-                 .WithMany().Map(x => x.ToTable("crpNPCCorporationTrades")
-                            .MapLeftKey("corporationID")
-                            .MapRightKey("typeID"));
-
-      // Map the ResearchFields collection
-      corporation.HasMany<EveTypeEntity>(x => x.ResearchFields)
-                 .WithMany().Map(x => x.ToTable("crpNPCCorporationResearchFields")
-                 .MapLeftKey("corporationID")
-                 .MapRightKey("skillID"));
-
-      /* NpcCorporationDivisionEntity Mappings **************************************/
-      var corporationDivision = modelBuilder.Entity<NpcCorporationDivisionEntity>();
-
-      // Map the Agents collection
-      corporationDivision.HasMany(x => x.Agents)
-                         .WithRequired()
-                         .HasForeignKey(x => new { x.CorporationId, x.DivisionId });
-
-      /* RaceEntity Mappings ********************************************************/
-      var race = modelBuilder.Entity<RaceEntity>();
-
-      // Map properties inherited from BaseValueEntity<>
-      race.Map(x => x.MapInheritedProperties());
-      race.HasKey(x => x.Id);
-      race.Property(x => x.Description).HasColumnName("description");
-      race.Property(x => x.Id).HasColumnName("raceID");
-      race.Property(x => x.Name).HasColumnName("raceName");
-
-      /* RegionEntity Mappings ******************************************************/
-      var region = modelBuilder.Entity<RegionEntity>();
-
-      // Map the Jumps collection
-      region.HasMany(x => x.Jumps).WithRequired(x => x.FromRegion).HasForeignKey(x => x.FromRegionId);
-
-      /* RegionJumpEntity Mappings **************************************************/
-
-      // All mappings defined by Data Annotations
-
-      /* SolarSystemEntity Mappings *************************************************/
-      var solarSystem = modelBuilder.Entity<SolarSystemEntity>();
-
-      solarSystem.HasRequired(x => x.Constellation).WithMany().HasForeignKey(x => x.ConstellationId);
-      solarSystem.HasOptional(x => x.Faction).WithMany().HasForeignKey(x => x.FactionId);
-
-      // Map the Jumps collection
-      solarSystem.HasMany(x => x.Jumps).WithRequired(x => x.FromSolarSystem).HasForeignKey(x => x.FromSolarSystemId);
-
-      /* SolarSystemJumpEntity Mappings *********************************************/
-
-      // All mappings defined by Data Annotations
-
-      /* StationOperationEntity Mappings ********************************************/
-      var stationOperation = modelBuilder.Entity<StationOperationEntity>();
-
-      // Map properties inherited from BaseValueEntity<>
-      stationOperation.Map(x => x.MapInheritedProperties());
-      stationOperation.HasKey(x => x.Id);
-      stationOperation.Property(x => x.Description).HasColumnName("description");
-      stationOperation.Property(x => x.Id).HasColumnName("operationID");
-      stationOperation.Property(x => x.Name).HasColumnName("operationName");
-
-      // Map the Services collection
-      stationOperation.HasMany(x => x.Services).WithMany().Map(x => x.ToTable("staOperationServices")
-                                                                     .MapLeftKey("operationID")
-                                                                     .MapRightKey("serviceID"));
-
-      /* StationServiceEntity Mappings **********************************************/
-      var stationService = modelBuilder.Entity<StationServiceEntity>();
-
-      // Map properties inherited from BaseValueEntity<>
-      stationService.Map(x => x.MapInheritedProperties());
-      stationService.HasKey(x => x.Id);
-      stationService.Property(x => x.Description).HasColumnName("description");
-      stationService.Property(x => x.Id).HasColumnName("serviceID");
-      stationService.Property(x => x.Name).HasColumnName("serviceName");
-
-      /* StationTypeEntity Mappings *************************************************/
-
-      // All mappings defined by Data Annotations
-
-      /* UnitEntity Mappings ********************************************************/
-      var unit = modelBuilder.Entity<UnitEntity>();
-
-      // Map properties inherited from BaseValueEntity<>
-      unit.Map(x => x.MapInheritedProperties());
-      unit.HasKey(x => x.Id);
-      unit.Property(x => x.Description).HasColumnName("description");
-      unit.Property(x => x.Id).HasColumnName("unitID");
-      unit.Property(x => x.Name).HasColumnName("unitName");
-
-      /* UniverseEntity Mappings ****************************************************/
-      var universe = modelBuilder.Entity<UniverseEntity>();
-
-      // All mappings defined by Data Annotations
+    [ContractInvariantMethod]
+    private void ObjectInvariant()
+    {
+      Contract.Invariant(this.innerContext != null);
     }
   }
 }

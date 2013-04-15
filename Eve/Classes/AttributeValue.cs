@@ -80,7 +80,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<AttributeType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.attributeType ?? (this.attributeType = this.Container.Cache.GetOrAdd<AttributeType>(this.Id, () => this.Entity.AttributeType.ToAdapter(this.Container)));
+        return this.attributeType ?? (this.attributeType = this.Container.Load<AttributeType>(this.Id, () => this.Entity.AttributeType.ToAdapter(this.Container)));
       }
     }
 

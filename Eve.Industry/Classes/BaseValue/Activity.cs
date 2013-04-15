@@ -19,7 +19,8 @@ namespace Eve.Industry
   using FreeNet.Data.Entity;
 
   /// <summary>
-  /// Contains information about a category to which an EVE item belongs.
+  /// Contains information about an activity performed by an industrial
+  /// facility.
   /// </summary>
   public sealed partial class Activity
     : BaseValue<ActivityId, ActivityId, ActivityEntity, Activity>,

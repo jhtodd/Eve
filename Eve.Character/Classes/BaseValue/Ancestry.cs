@@ -57,7 +57,7 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<Bloodline>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.bloodline ?? (this.bloodline = this.Container.Cache.GetOrAdd<Bloodline>(this.BloodlineId, () => this.Entity.Bloodline.ToAdapter(this.Container)));
+        return this.bloodline ?? (this.bloodline = this.Container.Load<Bloodline>(this.BloodlineId, () => this.Entity.Bloodline.ToAdapter(this.Container)));
       }
     }
 
@@ -75,11 +75,11 @@ namespace Eve.Character
     /* Properties */
 
     /// <summary>
-    /// Gets the base value of the Charisma attribute for characters
+    /// Gets the modifier applied to the Charisma attribute for characters
     /// belonging to this ancestry.
     /// </summary>
     /// <value>
-    /// The base value of the ancestry's Charisma attribute.
+    /// The modifier applied to the Charisma attribute.
     /// </value>
     public byte Charisma
     {
@@ -103,7 +103,7 @@ namespace Eve.Character
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.Cache.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+        return this.icon ?? (this.icon = this.Container.Load<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
       }
     }
 
@@ -120,11 +120,11 @@ namespace Eve.Character
     }
 
     /// <summary>
-    /// Gets the base value of the Intelligence attribute for characters
+    /// Gets the modifier applied to the Intelligence attribute for characters
     /// belonging to this ancestry.
     /// </summary>
     /// <value>
-    /// The base value of the ancestry's Intelligence attribute.
+    /// The modifier applied to the Intelligence attribute.
     /// </value>
     public byte Intelligence
     {
@@ -132,11 +132,11 @@ namespace Eve.Character
     }
 
     /// <summary>
-    /// Gets the base value of the Memory attribute for characters
+    /// Gets the modifier applied to the Memory attribute for characters
     /// belonging to this ancestry.
     /// </summary>
     /// <value>
-    /// The base value of the ancestry's Memory attribute.
+    /// The modifier applied to the Memory attribute.
     /// </value>
     public byte Memory
     {
@@ -144,11 +144,11 @@ namespace Eve.Character
     }
 
     /// <summary>
-    /// Gets the base value of the Perception attribute for characters
+    /// Gets the modifier applied to the Perception attribute for characters
     /// belonging to this ancestry.
     /// </summary>
     /// <value>
-    /// The base value of the ancestry's Perception attribute.
+    /// The modifier applied to the Perception attribute.
     /// </value>
     public byte Perception
     {
@@ -172,11 +172,11 @@ namespace Eve.Character
     }
 
     /// <summary>
-    /// Gets the base value of the Willpower attribute for characters
+    /// Gets the modifier applied to the Willpower attribute for characters
     /// belonging to this ancestry.
     /// </summary>
     /// <value>
-    /// The base value of the ancestry's Willpower attribute.
+    /// The modifier applied to the Willpower attribute.
     /// </value>
     public byte Willpower
     {

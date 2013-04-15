@@ -26,7 +26,7 @@ namespace Eve.Data.Entities
   [Table("dgmTypeAttributes")]
   public class AttributeValueEntity : EveEntityBase<AttributeValue>
   {
-    // Check EveDbContext.OnModelCreating() for customization of this type's
+    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

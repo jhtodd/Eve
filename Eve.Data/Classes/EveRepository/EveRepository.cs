@@ -27,9 +27,9 @@ namespace Eve.Data
 
   /// <summary>
   /// An EveRepository that uses an automatically-generated
-  /// <see cref="EveDbContext" /> object to query the database.
+  /// <see cref="InnerEveDbContext" /> object to query the database.
   /// </summary>
-  public class EveRepository : IEveRepository
+  public partial class EveRepository : IEveRepository
   {
     private EveCache cache;
     private IEveDbContext context;
@@ -39,7 +39,7 @@ namespace Eve.Data
 
     /// <summary>
     /// Initializes a new instance of the EveRepository class, using the default
-    /// <see cref="EveDbContext" /> to provide access to the database.
+    /// <see cref="InnerEveDbContext" /> to provide access to the database.
     /// </summary>
     public EveRepository() : this(null, null)
     {
@@ -47,23 +47,26 @@ namespace Eve.Data
 
     /// <summary>
     /// Initializes a new instance of the EveRepository class, using the specified
-    /// <see cref="EveDbContext" /> to provide access to the database, and the
+    /// <see cref="InnerEveDbContext" /> to provide access to the database, and the
     /// specified <see cref="EveCache"/> to store local data.
     /// </summary>
     /// <param name="context">
-    /// The <see cref="EveDbContext" /> used to provide access to the database,
-    /// or <see langword="null" /> to use the default context.
+    /// The <see cref="IEveDbContext" /> used to provide access to the database,
+    /// or <see langword="null" /> to use a newly-created <see cref="EveDbContext" />
+    /// with default settings.  The context is considered "owned" by the repository
+    /// and will be disposed when the repository is disposed.
     /// </param>
     /// <param name="cache">
     /// The <see cref="EveCache" /> used to store data locally, or 
     /// <see langword="null" /> to use a newly-created cache with default
-    /// settings.
+    /// settings.  The cache is considered "owned" by the repository
+    /// and will be disposed when the repository is disposed.
     /// </param>
     public EveRepository(IEveDbContext context, EveCache cache)
     {
       if (context == null)
       {
-        context = EveDbContext.Default;
+        context = new EveDbContext();
       }
 
       if (cache == null)
@@ -81,14 +84,20 @@ namespace Eve.Data
     /* Properties */
 
     /// <summary>
-    /// Gets the <see cref="EveDbContext" /> used to provide
+    /// Gets the <see cref="InnerEveDbContext" /> used to provide
     /// access to the database.
     /// </summary>
     /// <value>
-    /// An <see cref="EveDbContext" /> that can be used to provide
+    /// An <see cref="InnerEveDbContext" /> that can be used to provide
     /// access to the database.
     /// </value>
-    public IEveDbContext Context
+    /// <remarks>
+    /// <para>
+    /// The context is considered "owned" by the repository and will be disposed
+    /// when the repository is disposed.
+    /// </para>
+    /// </remarks>
+    protected IEveDbContext Context
     {
       get
       {
@@ -98,7 +107,13 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public EveCache Cache
+    /// <remarks>
+    /// <para>
+    /// The cache is considered "owned" by the repository and will be disposed
+    /// when the repository is disposed.
+    /// </para>
+    /// </remarks>
+    protected EveCache Cache
     {
       get
       {
@@ -251,6 +266,111 @@ namespace Eve.Data
     {
       // Construct the result set, filtering items through the global cache along the way
       return GetList(modifiers).Select(x => this.Cache.GetOrAdd<Ancestry>(x.Id, () => x.ToAdapter(this)))
+                               .ToArray();
+    }
+    #endregion
+
+    #region AssemblyLineType Methods
+    /// <inheritdoc />
+    public AssemblyLineType GetAssemblyLineTypeById(AssemblyLineTypeId id)
+    {
+      AssemblyLineType result;
+      if (this.Cache.TryGetValue<AssemblyLineType>(id, out result))
+      {
+        return result;
+      }
+
+      var query = this.GetAssemblyLineTypes(x => x.Id == id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
+    }
+
+    /// <inheritdoc />
+    public IReadOnlyList<AssemblyLineType> GetAssemblyLineTypes(Expression<Func<AssemblyLineTypeEntity, bool>> filter)
+    {
+      return this.GetAssemblyLineTypes(new QuerySpecification<AssemblyLineTypeEntity>(filter));
+    }
+
+    /// <inheritdoc />
+    [EveQueryMethod(typeof(AssemblyLineType))]
+    public IReadOnlyList<AssemblyLineType> GetAssemblyLineTypes(params IQueryModifier<AssemblyLineTypeEntity>[] modifiers)
+    {
+      // Construct the result set, filtering items through the global cache along the way
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<AssemblyLineType>(x.Id, () => x.ToAdapter(this)))
+                               .ToArray();
+    }
+    #endregion
+
+    #region AssemblyLineTypeCategoryDetail Methods
+    /// <inheritdoc />
+    public AssemblyLineTypeCategoryDetail GetAssemblyLineTypeCategoryDetailById(AssemblyLineTypeId assemblyLineTypeId, CategoryId categoryId)
+    {
+      AssemblyLineTypeCategoryDetail result;
+      if (this.Cache.TryGetValue<AssemblyLineTypeCategoryDetail>(AssemblyLineTypeCategoryDetail.CreateCompoundId(assemblyLineTypeId, categoryId), out result))
+      {
+        return result;
+      }
+
+      var query = this.GetAssemblyLineTypeCategoryDetails(x => x.AssemblyLineTypeId == assemblyLineTypeId && x.CategoryId == categoryId);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
+    }
+
+    /// <inheritdoc />
+    public IReadOnlyList<AssemblyLineTypeCategoryDetail> GetAssemblyLineTypeCategoryDetails(Expression<Func<AssemblyLineTypeCategoryDetailEntity, bool>> filter)
+    {
+      return this.GetAssemblyLineTypeCategoryDetails(new QuerySpecification<AssemblyLineTypeCategoryDetailEntity>(filter));
+    }
+
+    /// <inheritdoc />
+    [EveQueryMethod(typeof(AssemblyLineTypeCategoryDetail))]
+    public IReadOnlyList<AssemblyLineTypeCategoryDetail> GetAssemblyLineTypeCategoryDetails(params IQueryModifier<AssemblyLineTypeCategoryDetailEntity>[] modifiers)
+    {
+      // Construct the result set, filtering items through the global cache along the way
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<AssemblyLineTypeCategoryDetail>(AssemblyLineTypeCategoryDetail.CreateCompoundId(x.AssemblyLineTypeId, x.CategoryId), () => x.ToAdapter(this)))
+                               .ToArray();
+    }
+    #endregion
+
+    #region AssemblyLineTypeGroupDetail Methods
+    /// <inheritdoc />
+    public AssemblyLineTypeGroupDetail GetAssemblyLineTypeGroupDetailById(AssemblyLineTypeId assemblyLineTypeId, GroupId groupId)
+    {
+      AssemblyLineTypeGroupDetail result;
+      if (this.Cache.TryGetValue<AssemblyLineTypeGroupDetail>(AssemblyLineTypeGroupDetail.CreateCompoundId(assemblyLineTypeId, groupId), out result))
+      {
+        return result;
+      }
+
+      var query = this.GetAssemblyLineTypeGroupDetails(x => x.AssemblyLineTypeId == assemblyLineTypeId && x.GroupId == groupId);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
+    }
+
+    /// <inheritdoc />
+    public IReadOnlyList<AssemblyLineTypeGroupDetail> GetAssemblyLineTypeGroupDetails(Expression<Func<AssemblyLineTypeGroupDetailEntity, bool>> filter)
+    {
+      return this.GetAssemblyLineTypeGroupDetails(new QuerySpecification<AssemblyLineTypeGroupDetailEntity>(filter));
+    }
+
+    /// <inheritdoc />
+    [EveQueryMethod(typeof(AssemblyLineTypeGroupDetail))]
+    public IReadOnlyList<AssemblyLineTypeGroupDetail> GetAssemblyLineTypeGroupDetails(params IQueryModifier<AssemblyLineTypeGroupDetailEntity>[] modifiers)
+    {
+      // Construct the result set, filtering items through the global cache along the way
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<AssemblyLineTypeGroupDetail>(AssemblyLineTypeGroupDetail.CreateCompoundId(x.AssemblyLineTypeId, x.GroupId), () => x.ToAdapter(this)))
                                .ToArray();
     }
     #endregion
@@ -957,6 +1077,41 @@ namespace Eve.Data
     }
     #endregion
 
+    #region ItemPosition Methods
+    /// <inheritdoc />
+    public ItemPosition GetItemPositionById(ItemId id)
+    {
+      ItemPosition result;
+      if (this.Cache.TryGetValue<ItemPosition>(id, out result))
+      {
+        return result;
+      }
+
+      var query = this.GetItemPositions(x => x.ItemId == id.Value);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
+    }
+
+    /// <inheritdoc />
+    public IReadOnlyList<ItemPosition> GetItemPositions(Expression<Func<ItemPositionEntity, bool>> filter)
+    {
+      return this.GetItemPositions(new QuerySpecification<ItemPositionEntity>(filter));
+    }
+
+    /// <inheritdoc />
+    [EveQueryMethod(typeof(ItemPosition))]
+    public IReadOnlyList<ItemPosition> GetItemPositions(params IQueryModifier<ItemPositionEntity>[] modifiers)
+    {
+      // Construct the result set, filtering items through the global cache along the way
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<ItemPosition>(x.ItemId, () => x.ToAdapter(this)))
+                               .ToArray();
+    }
+    #endregion
+
     #region MarketGroup Methods
     /// <inheritdoc />
     public MarketGroup GetMarketGroupById(MarketGroupId id)
@@ -1558,7 +1713,7 @@ namespace Eve.Data
     /// An <see cref="IQueryable{T}" /> for the given entity type, with the
     /// specified modifiers applied.
     /// </returns>
-    internal IQueryable<TEntity> GetQuery<TEntity>(params IQueryModifier<TEntity>[] modifiers) where TEntity : Entity
+    protected internal IQueryable<TEntity> GetQuery<TEntity>(params IQueryModifier<TEntity>[] modifiers) where TEntity : Entity
     {
       Contract.Requires(modifiers != null, "The array of query modifiers cannot be null.");
       Contract.Ensures(Contract.Result<IQueryable<TEntity>>() != null);
@@ -1592,7 +1747,7 @@ namespace Eve.Data
     /// An <see cref="IReadOnlyList{T}" /> containing the results of
     /// the query.
     /// </returns>
-    internal IReadOnlyList<TEntity> GetList<TEntity>(params IQueryModifier<TEntity>[] modifiers) where TEntity : Entity
+    protected internal IReadOnlyList<TEntity> GetList<TEntity>(params IQueryModifier<TEntity>[] modifiers) where TEntity : Entity
     {
       Contract.Requires(modifiers != null, "The array of query modifiers cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<TEntity>>() != null);
@@ -1610,6 +1765,34 @@ namespace Eve.Data
 
         return query.ToList();
       }
+    }
+
+    /// <summary>
+    /// Retrieves and returns any previously loaded entity with the specified type
+    /// and ID, or loads a value using the given delegate if no previously loaded
+    /// version exists.
+    /// </summary>
+    /// <typeparam name="T">
+    /// The type of object to retrieve or load.
+    /// </typeparam>
+    /// <param name="id">
+    /// The ID of the object to retrieve.
+    /// </param>
+    /// <param name="valueFactory">
+    /// A delegate which can be used to load the value if no previously
+    /// loaded version exists.  This is only invoked if no previously loaded
+    /// version can be found.
+    /// </param>
+    /// <returns>
+    /// An object of the desired type, either retrieved from a previously-loaded
+    /// version, or loaded on demand.
+    /// </returns>
+    protected internal T Load<T>(IConvertible id, Func<T> valueFactory) where T : IEveCacheable
+    {
+      Contract.Requires(id != null, "The ID cannot be null.");
+      Contract.Requires(valueFactory != null, "The value creation method cannot be null.");
+      Contract.Ensures(Contract.Result<T>() != null);
+      return this.Cache.GetOrAdd<T>(id, valueFactory);
     }
 
     /// <summary>
@@ -1665,4 +1848,17 @@ namespace Eve.Data
       }
     }
   }
+
+  #region IEveRepository Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IEveRepository" /> interface.
+  /// </content>
+  public partial class EveRepository : IEveRepository
+  {
+    T IEveRepository.Load<T>(IConvertible id, Func<T> valueFactory)
+    {
+      return this.Load<T>(id, valueFactory);
+    }
+  }
+  #endregion
 }

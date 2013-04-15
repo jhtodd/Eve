@@ -70,7 +70,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Constellation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.fromConstellation ?? (this.fromConstellation = this.Container.Cache.GetOrAdd<Constellation>(this.FromConstellationId, () => this.Entity.FromConstellation.ToAdapter(this.Container)));
+        return this.fromConstellation ?? (this.fromConstellation = this.Container.Load<Constellation>(this.FromConstellationId, () => this.Entity.FromConstellation.ToAdapter(this.Container)));
       }
     }
 
@@ -98,7 +98,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.fromRegion ?? (this.fromRegion = this.Container.Cache.GetOrAdd<Region>(this.FromRegionId, () => this.Entity.FromRegion.ToAdapter(this.Container)));
+        return this.fromRegion ?? (this.fromRegion = this.Container.Load<Region>(this.FromRegionId, () => this.Entity.FromRegion.ToAdapter(this.Container)));
       }
     }
 
@@ -126,7 +126,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Constellation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.toConstellation ?? (this.toConstellation = this.Container.Cache.GetOrAdd<Constellation>(this.ToConstellationId, () => this.Entity.ToConstellation.ToAdapter(this.Container)));
+        return this.toConstellation ?? (this.toConstellation = this.Container.Load<Constellation>(this.ToConstellationId, () => this.Entity.ToConstellation.ToAdapter(this.Container)));
       }
     }
 
@@ -154,7 +154,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.toRegion ?? (this.toRegion = this.Container.Cache.GetOrAdd<Region>(this.ToRegionId, () => this.Entity.ToRegion.ToAdapter(this.Container)));
+        return this.toRegion ?? (this.toRegion = this.Container.Load<Region>(this.ToRegionId, () => this.Entity.ToRegion.ToAdapter(this.Container)));
       }
     }
 

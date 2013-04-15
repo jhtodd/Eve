@@ -70,7 +70,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<MetaGroup>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.metaGroup ?? (this.metaGroup = this.Container.Cache.GetOrAdd<MetaGroup>(this.MetaGroupId, () => this.Entity.MetaGroup.ToAdapter(this.Container)));
+        return this.metaGroup ?? (this.metaGroup = this.Container.Load<MetaGroup>(this.MetaGroupId, () => this.Entity.MetaGroup.ToAdapter(this.Container)));
       }
     }
 
@@ -98,7 +98,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<EveType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.parentType ?? (this.parentType = this.Container.Cache.GetOrAdd<EveType>(this.ParentTypeId, () => Entity.ParentType.ToAdapter(this.Container)));
+        return this.parentType ?? (this.parentType = this.Container.Load<EveType>(this.ParentTypeId, () => Entity.ParentType.ToAdapter(this.Container)));
       }
     }
 
@@ -126,7 +126,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<EveType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.type ?? (this.type = this.Container.Cache.GetOrAdd<EveType>(this.TypeId, () => Entity.Type.ToAdapter(this.Container)));
+        return this.type ?? (this.type = this.Container.Load<EveType>(this.TypeId, () => Entity.Type.ToAdapter(this.Container)));
       }
     }
 

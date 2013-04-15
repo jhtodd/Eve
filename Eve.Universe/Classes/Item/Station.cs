@@ -62,7 +62,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Constellation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.constellation ?? (this.constellation = this.Container.Cache.GetOrAdd<Constellation>(this.ConstellationId, () => this.Entity.Constellation.ToAdapter(this.Container)));
+        return this.constellation ?? (this.constellation = this.Container.Load<Constellation>(this.ConstellationId, () => this.Entity.Constellation.ToAdapter(this.Container)));
       }
     }
 
@@ -90,7 +90,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<NpcCorporation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.corporation ?? (this.corporation = this.Container.Cache.GetOrAdd<NpcCorporation>(this.CorporationId, () => this.Entity.Corporation.ToAdapter(this.Container)));
+        return this.corporation ?? (this.corporation = this.Container.Load<NpcCorporation>(this.CorporationId, () => this.Entity.Corporation.ToAdapter(this.Container)));
       }
     }
 
@@ -199,7 +199,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<StationOperation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.operation ?? (this.operation = this.Container.Cache.GetOrAdd<StationOperation>(this.OperationId, () => this.Entity.Operation.ToAdapter(this.Container)));
+        return this.operation ?? (this.operation = this.Container.Load<StationOperation>(this.OperationId, () => this.Entity.Operation.ToAdapter(this.Container)));
       }
     }
 
@@ -227,7 +227,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.region ?? (this.region = this.Container.Cache.GetOrAdd<Region>(this.RegionId, () => this.Entity.Region.ToAdapter(this.Container)));
+        return this.region ?? (this.region = this.Container.Load<Region>(this.RegionId, () => this.Entity.Region.ToAdapter(this.Container)));
       }
     }
 
@@ -332,7 +332,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<SolarSystem>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.solarSystem ?? (this.solarSystem = this.Container.Cache.GetOrAdd<SolarSystem>(this.SolarSystemId, () => this.Entity.SolarSystem.ToAdapter(this.Container)));
+        return this.solarSystem ?? (this.solarSystem = this.Container.Load<SolarSystem>(this.SolarSystemId, () => this.Entity.SolarSystem.ToAdapter(this.Container)));
       }
     }
 
@@ -360,7 +360,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<StationType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.stationType ?? (this.stationType = this.Container.Cache.GetOrAdd<StationType>(this.StationTypeId, () => (StationType)this.Entity.StationType.ToAdapter(this.Container)));
+        return this.stationType ?? (this.stationType = this.Container.Load<StationType>(this.StationTypeId, () => (StationType)this.Entity.StationType.ToAdapter(this.Container)));
       }
     }
 

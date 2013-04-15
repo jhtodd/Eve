@@ -26,7 +26,7 @@ namespace Eve.Data.Entities
   [Table("invItems")]
   public class ItemEntity : EveEntityBase<Item>
   {
-    // Check EveDbContext.OnModelCreating() for customization of this type's
+    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */
@@ -67,6 +67,15 @@ namespace Eve.Data.Entities
     [Column("itemID")]
     [Key]
     public long Id { get; internal set; }
+
+    /// <summary>
+    /// Gets the underlying database value of the corresponding adapter property.
+    /// </summary>
+    /// <value>
+    /// The underlying database value of the corresponding adapter property.
+    /// </value>
+    [ForeignKey("ItemId")]
+    public virtual ItemPositionEntity Position { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.

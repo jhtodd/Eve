@@ -59,7 +59,7 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<Icon>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.Cache.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+        return this.icon ?? (this.icon = this.Container.Load<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
       }
     }
 

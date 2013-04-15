@@ -77,7 +77,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.faction = this.Container.Cache.GetOrAdd<Faction>(factionEntity.Id, () => factionEntity.ToAdapter(this.Container));
+        return this.faction = this.Container.Load<Faction>(factionEntity.Id, () => factionEntity.ToAdapter(this.Container));
       }
     }
 
@@ -161,7 +161,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.region ?? (this.region = this.Container.Cache.GetOrAdd<Region>(this.RegionId, () => this.Entity.Region.ToAdapter(this.Container)));
+        return this.region ?? (this.region = this.Container.Load<Region>(this.RegionId, () => this.Entity.Region.ToAdapter(this.Container)));
       }
     }
 

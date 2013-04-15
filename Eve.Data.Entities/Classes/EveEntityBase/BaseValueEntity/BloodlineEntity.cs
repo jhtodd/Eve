@@ -29,7 +29,7 @@ namespace Eve.Data.Entities
   [Table("chrBloodlines")]
   public class BloodlineEntity : BaseValueEntity<BloodlineId, Bloodline>
   {
-    // Check EveDbContext.OnModelCreating() for customization of this type's
+    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

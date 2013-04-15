@@ -65,7 +65,7 @@ namespace Eve.Character
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.corporation ?? (this.corporation = this.Container.Cache.GetOrAdd<NpcCorporation>(this.CorporationId, () => this.Entity.Corporation.ToAdapter(this.Container)));
+        return this.corporation ?? (this.corporation = this.Container.Load<NpcCorporation>(this.CorporationId, () => this.Entity.Corporation.ToAdapter(this.Container)));
       }
     }
 
@@ -97,7 +97,7 @@ namespace Eve.Character
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.Cache.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+        return this.icon ?? (this.icon = this.Container.Load<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
       }
     }
 
@@ -130,7 +130,7 @@ namespace Eve.Character
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.militiaCorporation ?? (this.militiaCorporation = this.Container.Cache.GetOrAdd<NpcCorporation>(this.MilitiaCorporationId, () => this.Entity.MilitiaCorporation.ToAdapter(this.Container)));
+        return this.militiaCorporation ?? (this.militiaCorporation = this.Container.Load<NpcCorporation>(this.MilitiaCorporationId, () => this.Entity.MilitiaCorporation.ToAdapter(this.Container)));
       }
     }
 
@@ -197,7 +197,7 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<SolarSystem>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.solarSystem ?? (this.solarSystem = this.Container.Cache.GetOrAdd<SolarSystem>(this.SolarSystemId, () => this.Entity.SolarSystem.ToAdapter(this.Container)));
+        return this.solarSystem ?? (this.solarSystem = this.Container.Load<SolarSystem>(this.SolarSystemId, () => this.Entity.SolarSystem.ToAdapter(this.Container)));
       }
     }
 

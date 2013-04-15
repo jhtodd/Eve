@@ -80,7 +80,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<EffectType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.effectType ?? (this.effectType = this.Container.Cache.GetOrAdd<EffectType>(this.Id, () => this.Entity.EffectType.ToAdapter(this.Container)));
+        return this.effectType ?? (this.effectType = this.Container.Load<EffectType>(this.Id, () => this.Entity.EffectType.ToAdapter(this.Container)));
       }
     }
 

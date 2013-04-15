@@ -42,6 +42,7 @@ namespace Eve
     private EveType itemType;
     private Item location;
     private Item owner;
+    private ItemPosition position;
 
     /* Constructors */
 
@@ -77,7 +78,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<Flag>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.flag ?? (this.flag = this.Container.Cache.GetOrAdd<Flag>(this.FlagId, () => this.Entity.Flag.ToAdapter(this.Container)));
+        return this.flag ?? (this.flag = this.Container.Load<Flag>(this.FlagId, () => this.Entity.Flag.ToAdapter(this.Container)));
       }
     }
 
@@ -116,7 +117,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<EveType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.itemType ?? (this.itemType = this.Container.Cache.GetOrAdd<EveType>(this.ItemTypeId, () => this.Entity.ItemType.ToAdapter(this.Container)));
+        return this.itemType ?? (this.itemType = this.Container.Load<EveType>(this.ItemTypeId, () => this.Entity.ItemType.ToAdapter(this.Container)));
       }
     }
 
@@ -144,7 +145,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<Item>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.location ?? (this.location = this.Container.Cache.GetOrAdd<Item>(this.LocationId, () => this.Entity.Location.ToAdapter(this.Container)));
+        return this.location ?? (this.location = this.Container.Load<Item>(this.LocationId, () => this.Entity.Location.ToAdapter(this.Container)));
       }
     }
 
@@ -197,7 +198,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.owner ?? (this.owner = this.Container.Cache.GetOrAdd<Item>(this.OwnerId, () => this.Entity.Owner.ToAdapter(this.Container)));
+        return this.owner ?? (this.owner = this.Container.Load<Item>(this.OwnerId, () => this.Entity.Owner.ToAdapter(this.Container)));
       }
     }
 
@@ -210,6 +211,22 @@ namespace Eve
     public ItemId OwnerId
     {
       get { return Entity.OwnerId; }
+    }
+
+    /// <summary>
+    /// Gets the position of the item in space, if applicable.
+    /// </summary>
+    /// <value>
+    /// An <see cref="ItemPosition" /> object specifying the position
+    /// of the item in space.
+    /// </value>
+    public ItemPosition Position
+    {
+      get
+      {
+        // If not already set, load from the cache, or else create an instance from the base entity
+        return this.position ?? (this.position = this.Container.Load<ItemPosition>(this.Id, () => this.Container.GetItemPositionById(this.Id)));
+      }
     }
 
     /// <summary>

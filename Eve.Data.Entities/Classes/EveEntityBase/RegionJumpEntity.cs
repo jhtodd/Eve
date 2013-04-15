@@ -28,7 +28,7 @@ namespace Eve.Data.Entities
   [Table("mapRegionJumps")]
   public class RegionJumpEntity : EveEntityBase<RegionJump>
   {
-    // Check EveDbContext.OnModelCreating() for customization of this type's
+    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

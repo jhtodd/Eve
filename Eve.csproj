@@ -150,10 +150,14 @@
     <Compile Include="Eve.Character\Interfaces\ISkill.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\BaseValueEntity\AncestryEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\BaseValueEntity\ActivityEntity.cs" />
+    <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\BaseValueEntity\AssemblyLineTypeEntity.cs" />
+    <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\AssemblyLineTypeGroupDetailEntity.cs" />
+    <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\AssemblyLineTypeCategoryDetailEntity.cs" />
+    <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\ItemPositionEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\NpcCorporationDivisionEntity.cs" />
     <Compile Include="Eve.Data\Classes\Attribute\EveCacheDomainAttribute.cs" />
     <Compile Include="Eve.Data\Classes\Attribute\EveQueryMethodAttribute.cs" />
-    <Compile Include="Eve.Data\Classes\DbContext\ReadOnlyEveDbContext.cs" />
+    <Compile Include="Eve.Data\Classes\DbContext\EveDbContext.cs" />
     <Compile Include="Eve.Data\Classes\EveCache.CacheStatistics.cs" />
     <Compile Include="Eve.Data\Classes\EveCache.CacheRegionMap.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\BaseValueEntity\BaseValueEntity.cs" />
@@ -206,8 +210,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Eve.Character\Classes\BaseValue\Bloodline.cs" />
+    <Compile Include="Eve.Industry\Classes\AssemblyLineTypeGroupDetail.cs" />
     <Compile Include="Eve.Industry\Classes\BaseValue\Activity.cs" />
+    <Compile Include="Eve.Industry\Classes\BaseValue\AssemblyLineType.cs" />
+    <Compile Include="Eve.Industry\Classes\AssemblyLineTypeCategoryDetail.cs" />
+    <Compile Include="Eve.Industry\Classes\ReadOnlyAssemblyLineTypeGroupDetailCollection.cs" />
+    <Compile Include="Eve.Industry\Classes\ID Types\AssemblyLineTypeId.cs" />
+    <Compile Include="Eve.Industry\Classes\ReadOnlyAssemblyLineTypeCategoryDetailCollection.cs" />
     <Compile Include="Eve.Industry\Enums\ActivityId.cs" />
+    <Compile Include="Eve.Universe\Classes\ItemPosition.cs" />
     <Compile Include="Eve.Universe\Classes\ReadOnlySolarSystemJumpCollection.cs" />
     <Compile Include="Eve.Universe\Classes\ReadOnlyRegionJumpCollection.cs" />
     <Compile Include="Eve.Universe\Classes\ReadOnlyNpcCorporationInvestorCollection.cs" />
@@ -279,7 +290,7 @@
     <Compile Include="Eve\Classes\Effect.cs" />
     <Compile Include="Eve\Classes\EveSettings.cs" />
     <Compile Include="Eve\Classes\General.cs" />
-    <Compile Include="Eve.Data\Classes\DbContext\EveDbContext.cs" />
+    <Compile Include="Eve.Data\Classes\DbContext\InnerEveDbContext.cs" />
     <Compile Include="Eve.Data\Classes\EveRepository\EveRepository.cs" />
     <Compile Include="Eve\Classes\BaseValue\Icon.cs" />
     <Compile Include="Eve.Data\Interfaces\IEveRepository.cs" />

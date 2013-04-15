@@ -28,7 +28,7 @@ namespace Eve.Data.Entities
   [Table("staStationTypes")]
   public class StationTypeEntity : EveTypeEntity
   {
-    // Check EveDbContext.OnModelCreating() for customization of this type's
+    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

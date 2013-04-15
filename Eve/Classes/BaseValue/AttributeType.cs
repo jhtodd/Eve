@@ -28,7 +28,7 @@ namespace Eve
       IComparable<IAttribute>,
       IHasIcon
   {
-    // Check EveDbContext.OnModelCreating() for customization of this type's
+    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
     private AttributeCategory category;
     private Icon icon;
@@ -69,7 +69,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.category ?? (this.category = this.Container.Cache.GetOrAdd<AttributeCategory>(this.CategoryId, () => this.Entity.Category.ToAdapter(this.Container)));
+        return this.category ?? (this.category = this.Container.Load<AttributeCategory>(this.CategoryId, () => this.Entity.Category.ToAdapter(this.Container)));
       }
     }
 
@@ -150,7 +150,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.Cache.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+        return this.icon ?? (this.icon = this.Container.Load<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
       }
     }
 
@@ -209,7 +209,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.unit ?? (this.unit = this.Container.Cache.GetOrAdd<Unit>(this.UnitId, () => this.Entity.Unit.ToAdapter(this.Container)));
+        return this.unit ?? (this.unit = this.Container.Load<Unit>(this.UnitId, () => this.Entity.Unit.ToAdapter(this.Container)));
       }
     }
 

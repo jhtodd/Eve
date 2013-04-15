@@ -28,7 +28,7 @@ namespace Eve.Data.Entities
   [Table("mapSolarSystems")]
   public class SolarSystemEntity : ItemEntity
   {
-    // Check EveDbContext.OnModelCreating() for customization of this type's
+    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

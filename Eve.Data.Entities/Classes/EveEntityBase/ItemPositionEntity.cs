@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="NpcCorporationDivisionEntity.cs" company="Jeremy H. Todd">
+// <copyright file="ItemPositionEntity.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
@@ -22,11 +22,11 @@ namespace Eve.Data.Entities
   using FreeNet.Data.Entity;
 
   /// <summary>
-  /// The data entity for the <see cref="NpcCorporationDivision" /> class.
+  /// The data entity for the <see cref="ItemPosition" /> class.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("crpNPCCorporationDivisions")]
-  public class NpcCorporationDivisionEntity : EveEntityBase<NpcCorporationDivision>
+  [Table("invPositions")]
+  public class ItemPositionEntity : EveEntityBase<ItemPosition>
   {
     // Check InnerEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
@@ -34,10 +34,9 @@ namespace Eve.Data.Entities
     /* Constructors */
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="NpcCorporationDivisionEntity" /> class.
+    /// Initializes a new instance of the <see cref="ItemPositionEntity" /> class.
     /// </summary>
-    public NpcCorporationDivisionEntity()
-      : base()
+    public ItemPositionEntity() : base()
     {
     }
 
@@ -49,7 +48,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    public virtual ICollection<AgentEntity> Agents { get; internal set; }
+    [ForeignKey("ItemId")]
+    public virtual ItemEntity Item { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -57,18 +57,9 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("CorporationId")]
-    public virtual NpcCorporationEntity Corporation { get; internal set; }
-
-    /// <summary>
-    /// Gets the underlying database value of the corresponding adapter property.
-    /// </summary>
-    /// <value>
-    /// The underlying database value of the corresponding adapter property.
-    /// </value>
-    [Column("corporationID", Order = 1)]
+    [Column("itemID")]
     [Key]
-    public long CorporationId { get; internal set; }
+    public long ItemId { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -76,8 +67,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("DivisionId")]
-    public virtual DivisionEntity Division { get; internal set; }
+    [Column("pitch")]
+    public float? Pitch { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -85,9 +76,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("divisionID", Order = 2)]
-    [Key]
-    public DivisionId DivisionId { get; internal set; }
+    [Column("roll")]
+    public float? Roll { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -95,16 +85,43 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("size")]
-    public byte Size { get; internal set; }
+    [Column("x")]
+    public double X { get; internal set; }
+
+    /// <summary>
+    /// Gets the underlying database value of the corresponding adapter property.
+    /// </summary>
+    /// <value>
+    /// The underlying database value of the corresponding adapter property.
+    /// </value>
+    [Column("y")]
+    public double Y { get; internal set; }
+
+    /// <summary>
+    /// Gets the underlying database value of the corresponding adapter property.
+    /// </summary>
+    /// <value>
+    /// The underlying database value of the corresponding adapter property.
+    /// </value>
+    [Column("yaw")]
+    public float? Yaw { get; internal set; }
+
+    /// <summary>
+    /// Gets the underlying database value of the corresponding adapter property.
+    /// </summary>
+    /// <value>
+    /// The underlying database value of the corresponding adapter property.
+    /// </value>
+    [Column("z")]
+    public double Z { get; internal set; }
 
     /* Methods */
 
     /// <inheritdoc />
-    public override NpcCorporationDivision ToAdapter(IEveRepository container)
+    public override ItemPosition ToAdapter(IEveRepository container)
     {
       Contract.Assume(container != null); // TODO: Should not be necessary due to base class requires -- check in future version of static checker
-      return new NpcCorporationDivision(container, this);
+      return new ItemPosition(container, this);
     }
   }
 }

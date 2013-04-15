@@ -31,7 +31,7 @@ namespace Eve.Data
   /// </para>
   /// <para>
   /// A cache domain is a collection of types that share a range of unique
-  /// ID values.  In most cases, a type's cache domain is the type itself,
+  /// ID values.  In most cases, a type forms its own cache domain,
   /// meaning that a cache key exposed by an instance of that type must not
   /// be the same as the key for any other instance of the same type.
   /// </para>

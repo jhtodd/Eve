@@ -27,18 +27,15 @@ namespace Eve.Data
   [ContractClassFor(typeof(IEveRepository))]
   internal abstract partial class IEveRepositoryContracts : IEveRepository
   {
-    /* Properties */
-
-    EveCache IEveRepository.Cache
-    {
-      get
-      {
-        Contract.Ensures(Contract.Result<EveCache>() != null);
-        throw new NotImplementedException();
-      }
-    }
-
     /* Methods */
+
+    T IEveRepository.Load<T>(IConvertible id, Func<T> valueFactory)
+    {
+      Contract.Requires(id != null, "The ID cannot be null.");
+      Contract.Requires(valueFactory != null, "The value creation method cannot be null.");
+      Contract.Ensures(Contract.Result<T>() != null);
+      throw new NotImplementedException();
+    }
 
     #region Activity Methods
     Activity IEveRepository.GetActivityById(ActivityId id)
@@ -124,6 +121,72 @@ namespace Eve.Data
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<Ancestry>>() != null);
+      throw new NotImplementedException();
+    }
+    #endregion
+
+    #region AssemblyLineType Methods
+    AssemblyLineType IEveRepository.GetAssemblyLineTypeById(AssemblyLineTypeId id)
+    {
+      Contract.Ensures(Contract.Result<AssemblyLineType>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<AssemblyLineType> IEveRepository.GetAssemblyLineTypes(Expression<Func<AssemblyLineTypeEntity, bool>> filter)
+    {
+      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<AssemblyLineType>>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<AssemblyLineType> IEveRepository.GetAssemblyLineTypes(params IQueryModifier<AssemblyLineTypeEntity>[] modifiers)
+    {
+      Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<AssemblyLineType>>() != null);
+      throw new NotImplementedException();
+    }
+    #endregion
+
+    #region AssemblyLineTypeCategoryDetail Methods
+    AssemblyLineTypeCategoryDetail IEveRepository.GetAssemblyLineTypeCategoryDetailById(AssemblyLineTypeId assemblyLineTypeId, CategoryId categoryId)
+    {
+      Contract.Ensures(Contract.Result<AssemblyLineTypeCategoryDetail>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<AssemblyLineTypeCategoryDetail> IEveRepository.GetAssemblyLineTypeCategoryDetails(Expression<Func<AssemblyLineTypeCategoryDetailEntity, bool>> filter)
+    {
+      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<AssemblyLineTypeCategoryDetail>>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<AssemblyLineTypeCategoryDetail> IEveRepository.GetAssemblyLineTypeCategoryDetails(params IQueryModifier<AssemblyLineTypeCategoryDetailEntity>[] modifiers)
+    {
+      Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<AssemblyLineTypeCategoryDetail>>() != null);
+      throw new NotImplementedException();
+    }
+    #endregion
+
+    #region AssemblyLineTypeGroupDetail Methods
+    AssemblyLineTypeGroupDetail IEveRepository.GetAssemblyLineTypeGroupDetailById(AssemblyLineTypeId assemblyLineTypeId, GroupId groupId)
+    {
+      Contract.Ensures(Contract.Result<AssemblyLineTypeGroupDetail>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<AssemblyLineTypeGroupDetail> IEveRepository.GetAssemblyLineTypeGroupDetails(Expression<Func<AssemblyLineTypeGroupDetailEntity, bool>> filter)
+    {
+      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<AssemblyLineTypeGroupDetail>>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<AssemblyLineTypeGroupDetail> IEveRepository.GetAssemblyLineTypeGroupDetails(params IQueryModifier<AssemblyLineTypeGroupDetailEntity>[] modifiers)
+    {
+      Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<AssemblyLineTypeGroupDetail>>() != null);
       throw new NotImplementedException();
     }
     #endregion
@@ -560,6 +623,28 @@ namespace Eve.Data
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<TItem>>() != null);
+      throw new NotImplementedException();
+    }
+    #endregion
+
+    #region ItemPosition Methods
+    ItemPosition IEveRepository.GetItemPositionById(ItemId id)
+    {
+      Contract.Ensures(Contract.Result<ItemPosition>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<ItemPosition> IEveRepository.GetItemPositions(Expression<Func<ItemPositionEntity, bool>> filter)
+    {
+      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<ItemPosition>>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<ItemPosition> IEveRepository.GetItemPositions(params IQueryModifier<ItemPositionEntity>[] modifiers)
+    {
+      Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<ItemPosition>>() != null);
       throw new NotImplementedException();
     }
     #endregion

@@ -59,6 +59,30 @@ namespace Eve.Data
     IQueryable<AncestryEntity> Ancestries { get; }
 
     /// <summary>
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query assembly line type.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IQueryable{T}" /> for assembly line types.
+    /// </value>
+    IQueryable<AssemblyLineTypeEntity> AssemblyLineTypes { get; }
+
+    /// <summary>
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query assembly line category detail information.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IQueryable{T}" /> for assembly line type category details.
+    /// </value>
+    IQueryable<AssemblyLineTypeCategoryDetailEntity> AssemblyLineTypeCategoryDetails { get; }
+
+    /// <summary>
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query assembly line group detail information.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IQueryable{T}" /> for assembly line type group details.
+    /// </value>
+    IQueryable<AssemblyLineTypeGroupDetailEntity> AssemblyLineTypeGroupDetails { get; }
+
+    /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query attribute categories.
     /// </summary>
     /// <value>
@@ -201,6 +225,14 @@ namespace Eve.Data
     /// The <see cref="IQueryable{T}" /> for general items.
     /// </value>
     IQueryable<ItemEntity> Items { get; }
+
+    /// <summary>
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query the positions of items.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IQueryable{T}" /> for the positions of items.
+    /// </value>
+    IQueryable<ItemPositionEntity> ItemPositions { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query market groups.
