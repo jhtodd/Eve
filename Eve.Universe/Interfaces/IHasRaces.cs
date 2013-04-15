@@ -3,7 +3,7 @@
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Eve.Universe
+namespace Eve.Character
 {
   using System;
   using System.Collections;

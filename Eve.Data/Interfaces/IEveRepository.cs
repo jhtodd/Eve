@@ -15,6 +15,7 @@ namespace Eve.Data
 
   using Eve.Character;
   using Eve.Data.Entities;
+  using Eve.Industry;
   using Eve.Universe;
 
   using FreeNet;
@@ -38,6 +39,46 @@ namespace Eve.Data
     EveCache Cache { get; }
 
     /* Methods */
+
+    #region Activity Methods
+    /// <summary>
+    /// Returns the <see cref="Activity" /> object with the specified ID.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <returns>
+    /// The item with the specified key.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    Activity GetActivityById(ActivityId id);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="Activity" />
+    /// objects.
+    /// </summary>
+    /// <param name="filter">
+    /// The expression that will filter the results of the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<Activity> GetActivities(Expression<Func<ActivityEntity, bool>> filter);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="Activity" />
+    /// objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<Activity> GetActivities(params IQueryModifier<ActivityEntity>[] modifiers);
+    #endregion
 
     #region Agent Methods
     /// <summary>
@@ -116,6 +157,46 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<AgentType> GetAgentTypes(params IQueryModifier<AgentTypeEntity>[] modifiers);
+    #endregion
+
+    #region Ancestry Methods
+    /// <summary>
+    /// Returns the <see cref="Ancestry" /> object with the specified ID.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <returns>
+    /// The item with the specified key.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    Ancestry GetAncestryById(AncestryId id);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="Ancestry" />
+    /// objects.
+    /// </summary>
+    /// <param name="filter">
+    /// The expression that will filter the results of the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<Ancestry> GetAncestries(Expression<Func<AncestryEntity, bool>> filter);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="Ancestry" />
+    /// objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<Ancestry> GetAncestries(params IQueryModifier<AncestryEntity>[] modifiers);
     #endregion
 
     #region AttributeCategory Methods
@@ -239,6 +320,46 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<AttributeValue> GetAttributeValues(params IQueryModifier<AttributeValueEntity>[] modifiers);
+    #endregion
+
+    #region Bloodline Methods
+    /// <summary>
+    /// Returns the <see cref="Bloodline" /> object with the specified ID.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <returns>
+    /// The item with the specified key.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    Bloodline GetBloodlineById(BloodlineId id);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="Bloodline" />
+    /// objects.
+    /// </summary>
+    /// <param name="filter">
+    /// The expression that will filter the results of the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<Bloodline> GetBloodlines(Expression<Func<BloodlineEntity, bool>> filter);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="Bloodline" />
+    /// objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<Bloodline> GetBloodlines(params IQueryModifier<BloodlineEntity>[] modifiers);
     #endregion
 
     #region Category Methods

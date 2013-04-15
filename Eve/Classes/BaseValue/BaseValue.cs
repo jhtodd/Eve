@@ -160,7 +160,11 @@ namespace Eve
     /// </value>
     protected virtual IConvertible CacheKey
     {
-      get { return this.Id; }
+      get
+      {
+        Contract.Ensures(Contract.Result<IConvertible>() != null);
+        return this.Id;
+      }
     }
 
     /* Methods */

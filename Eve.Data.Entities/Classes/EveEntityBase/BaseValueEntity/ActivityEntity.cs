@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="MetaGroupEntity.cs" company="Jeremy H. Todd">
+// <copyright file="ActivityEntity.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
@@ -15,15 +15,18 @@ namespace Eve.Data.Entities
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Industry;
+
   using FreeNet;
+  using FreeNet.Configuration;
   using FreeNet.Data.Entity;
 
   /// <summary>
-  /// The data entity for the <see cref="MetaGroup" /> class.
+  /// The data entity for the <see cref="Activity" /> class.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("invMetaGroups")]
-  public class MetaGroupEntity : BaseValueEntity<MetaGroupId, MetaGroup>
+  [Table("ramActivities")]
+  public class ActivityEntity : BaseValueEntity<ActivityId, Activity>
   {
     // Check EveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
@@ -31,13 +34,13 @@ namespace Eve.Data.Entities
     /* Constructors */
 
     /// <summary>
-    /// Initializes a new instance of the MetaGroupEntity class.
+    /// Initializes a new instance of the ActivityEntity class.
     /// </summary>
-    public MetaGroupEntity() : base()
+    public ActivityEntity() : base()
     {
     }
 
-    /* Properties */
+    /* Constructors */
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -45,25 +48,25 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("IconId")]
-    public virtual IconEntity Icon { get; internal set; }
+    [Column("iconNo")]
+    public string IconNo { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
     /// </summary>
     /// <value>
     /// The underlying database value of the corresponding adapter property.
-    /// </value>
-    [Column("iconID")]
-    public int? IconId { get; internal set; }
+    /// </value>    
+    [Column("published")]
+    public bool Published { get; internal set; }
 
     /* Methods */
 
     /// <inheritdoc />
-    public override MetaGroup ToAdapter(IEveRepository container)
+    public override Activity ToAdapter(IEveRepository container)
     {
       Contract.Assume(container != null); // TODO: Should not be necessary due to base class requires -- check in future version of static checker
-      return new MetaGroup(container, this);
+      return new Activity(container, this);
     }
   }
 }

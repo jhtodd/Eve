@@ -35,10 +35,10 @@ namespace Eve.Data
 
     private static readonly CacheRegionMap RegionMapInstance = new CacheRegionMap();
 
-    private ObjectCache innerCache;
-    private ReaderWriterLockSlim masterLock;
-    private ConcurrentDictionary<string, ReaderWriterLockSlim> regionLocks;
-    private CacheStatistics statistics;
+    private readonly ObjectCache innerCache;
+    private readonly ReaderWriterLockSlim masterLock;
+    private readonly ConcurrentDictionary<string, ReaderWriterLockSlim> regionLocks;
+    private readonly CacheStatistics statistics;
 
     /* Constructors */
 
@@ -284,12 +284,6 @@ namespace Eve.Data
       finally
       {
         this.ExitReadLock(region);
-
-        // TODO: These should be unnecessary.  Bug in static checker?  Check with future version.
-        Contract.Assume(this.innerCache != null);
-        Contract.Assume(this.masterLock != null);
-        Contract.Assume(this.regionLocks != null);
-        Contract.Assume(this.statistics != null);
       }
     }
 
@@ -601,6 +595,7 @@ namespace Eve.Data
     public bool TryGetValue<T>(IConvertible id, out T value)
     {
       Contract.Requires(id != null, Resources.Messages.EveCache_IdCannotBeNull);
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn<T>(out value) != null);
 
       string region = RegionMap.GetRegion(typeof(T));
       string key = EveCache.CreateCacheKey(region, id);
@@ -640,6 +635,11 @@ namespace Eve.Data
     internal static string ByteArrayToShortString(byte[] data)
     {
       Contract.Requires(data != null, "The data to encode cannot be null.");
+
+      if (data.Length == 0)
+      {
+        return string.Empty;
+      }
 
       // Skip past leading zeroes
       int offset = 0;

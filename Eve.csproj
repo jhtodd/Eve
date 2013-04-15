@@ -34,13 +34,13 @@
     <CodeContractsArithmeticObligations>True</CodeContractsArithmeticObligations>
     <CodeContractsEnumObligations>True</CodeContractsEnumObligations>
     <CodeContractsRedundantAssumptions>True</CodeContractsRedundantAssumptions>
-    <CodeContractsInferRequires>True</CodeContractsInferRequires>
-    <CodeContractsInferEnsures>True</CodeContractsInferEnsures>
-    <CodeContractsInferObjectInvariants>True</CodeContractsInferObjectInvariants>
+    <CodeContractsInferRequires>False</CodeContractsInferRequires>
+    <CodeContractsInferEnsures>False</CodeContractsInferEnsures>
+    <CodeContractsInferObjectInvariants>False</CodeContractsInferObjectInvariants>
     <CodeContractsSuggestAssumptions>True</CodeContractsSuggestAssumptions>
-    <CodeContractsSuggestRequires>True</CodeContractsSuggestRequires>
+    <CodeContractsSuggestRequires>False</CodeContractsSuggestRequires>
     <CodeContractsSuggestEnsures>False</CodeContractsSuggestEnsures>
-    <CodeContractsSuggestObjectInvariants>True</CodeContractsSuggestObjectInvariants>
+    <CodeContractsSuggestObjectInvariants>False</CodeContractsSuggestObjectInvariants>
     <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
     <CodeContractsShowSquigglies>True</CodeContractsShowSquigglies>
     <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
@@ -54,7 +54,10 @@
     <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
     <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
     <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
-    <CodeContractsAnalysisWarningLevel>2</CodeContractsAnalysisWarningLevel>
+    <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
+    <CodeContractsMissingPublicRequiresAsWarnings>True</CodeContractsMissingPublicRequiresAsWarnings>
+    <CodeContractsSQLServerOption />
+    <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -123,9 +126,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Eve.Character\Classes\BaseValue\CharacterAttributeType.cs" />
+    <Compile Include="Eve.Character\Classes\BaseValue\Ancestry.cs" />
+    <Compile Include="Eve.Character\Classes\ReadOnlyAncestryCollection.cs" />
     <Compile Include="Eve.Character\Classes\ReadOnlySkillLevelCollection.cs" />
+    <Compile Include="Eve.Character\Classes\ReadOnlyBloodlineCollection.cs" />
     <Compile Include="Eve.Character\Classes\SkillLevel.cs" />
     <Compile Include="Eve.Character\Classes\ReadOnlySkillTypeCollection.cs" />
+    <Compile Include="Eve.Character\Enums\AncestryId.cs" />
     <Compile Include="Eve.Character\Enums\BloodlineId.cs" />
     <Compile Include="Eve.Character\Enums\CharacterAttributeModifiers.cs" />
     <Compile Include="Eve.Character\Enums\CharacterAttributeId.cs" />
@@ -141,6 +148,8 @@
     <Compile Include="Eve.Character\Interfaces\IHasCharacterAttributes.cs" />
     <Compile Include="Eve.Character\Interfaces\IHasSkills.cs" />
     <Compile Include="Eve.Character\Interfaces\ISkill.cs" />
+    <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\BaseValueEntity\AncestryEntity.cs" />
+    <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\BaseValueEntity\ActivityEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\NpcCorporationDivisionEntity.cs" />
     <Compile Include="Eve.Data\Classes\Attribute\EveCacheDomainAttribute.cs" />
     <Compile Include="Eve.Data\Classes\Attribute\EveQueryMethodAttribute.cs" />
@@ -154,7 +163,7 @@
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\AttributeValueEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\BaseValueEntity\AgentTypeEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\BaseValueEntity\CharacterAttributeTypeEntity.cs" />
-    <None Include="Eve.Data.Entities\Classes\EveEntityBase\BaseValueEntity\BloodlineEntity.cs" />
+    <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\BaseValueEntity\BloodlineEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\GraphicEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\BaseValueEntity\EveTypeEntity\StationTypeEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\BaseValueEntity\StationOperationEntity.cs" />
@@ -196,6 +205,9 @@
     <Compile Include="Eve.Data\Interfaces\IDbContext\IEveDbContext.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Eve.Character\Classes\BaseValue\Bloodline.cs" />
+    <Compile Include="Eve.Industry\Classes\BaseValue\Activity.cs" />
+    <Compile Include="Eve.Industry\Enums\ActivityId.cs" />
     <Compile Include="Eve.Universe\Classes\ReadOnlySolarSystemJumpCollection.cs" />
     <Compile Include="Eve.Universe\Classes\ReadOnlyRegionJumpCollection.cs" />
     <Compile Include="Eve.Universe\Classes\ReadOnlyNpcCorporationInvestorCollection.cs" />
@@ -209,7 +221,7 @@
     <Compile Include="Eve.Universe\Classes\BaseValue\CorporateActivity.cs" />
     <Compile Include="Eve.Universe\Classes\BaseValue\StationService.cs" />
     <Compile Include="Eve.Universe\Classes\BaseValue\Division.cs" />
-    <Compile Include="Eve.Universe\Classes\BaseValue\Faction.cs" />
+    <Compile Include="Eve.Character\Classes\BaseValue\Faction.cs" />
     <Compile Include="Eve.Universe\Classes\ConstellationJump.cs" />
     <Compile Include="Eve.Universe\Classes\Item\Agent.cs" />
     <Compile Include="Eve.Universe\Classes\Item\Station.cs" />
@@ -279,7 +291,7 @@
     <Compile Include="Eve\Enums\AttributeId.cs" />
     <Compile Include="Eve\Enums\AttributeModifiers.cs" />
     <Compile Include="Eve\Enums\CategoryId.cs" />
-    <Compile Include="Eve.Universe\Enums\FactionId.cs" />
+    <Compile Include="Eve.Character\Enums\FactionId.cs" />
     <Compile Include="Eve\Enums\FlagId.cs" />
     <Compile Include="Eve\Enums\EffectId.cs" />
     <Compile Include="Eve\Enums\GroupId.cs" />
@@ -311,9 +323,9 @@
     <Compile Include="Eve\Classes\BaseValue\BaseValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Eve.Universe\Classes\BaseValue\AgentType.cs" />
-    <Compile Include="Eve.Universe\Classes\BaseValue\Race.cs" />
+    <Compile Include="Eve.Character\Classes\BaseValue\Race.cs" />
     <Compile Include="Eve.Universe\Enums\AgentTypeId.cs" />
-    <Compile Include="Eve.Universe\Enums\RaceId.cs" />
+    <Compile Include="Eve.Character\Enums\RaceId.cs" />
     <Compile Include="Eve.Universe\Interfaces\IHasRaces.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -328,7 +340,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Eve.Industry\Interfaces\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Eve.Data\Update Information\Database Notes.txt" />
     <Content Include="Eve.Data\Update Information\Update Scripts\84566.sql" />

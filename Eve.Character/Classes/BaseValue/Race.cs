@@ -3,7 +3,7 @@
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Eve.Universe
+namespace Eve.Character
 {
   using System;
   using System.Collections;
@@ -23,6 +23,7 @@ namespace Eve.Universe
     : BaseValue<RaceId, RaceId, RaceEntity, Race>,
       IHasIcon
   {
+    private ReadOnlyBloodlineCollection bloodlines;
     private Icon icon;
 
     /* Constructors */
@@ -43,6 +44,22 @@ namespace Eve.Universe
     }
 
     /* Properties */
+
+    /// <summary>
+    /// Gets the collection of bloodlines belonging to the race.
+    /// </summary>
+    /// <value>
+    /// The collection of bloodlines belonging to the race.
+    /// </value>
+    public ReadOnlyBloodlineCollection Bloodlines
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<ReadOnlyBloodlineCollection>() != null);
+
+        return this.bloodlines ?? (this.bloodlines = new ReadOnlyBloodlineCollection(this.Container.GetBloodlines(x => x.RaceId == this.Id).OrderBy(x => x)));
+      }
+    }
 
     /// <summary>
     /// Gets the icon associated with the item, if any.

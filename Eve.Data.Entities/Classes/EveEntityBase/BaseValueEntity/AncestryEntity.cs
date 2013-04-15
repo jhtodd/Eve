@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="SolarSystemJumpEntity.cs" company="Jeremy H. Todd">
+// <copyright file="AncestryEntity.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
@@ -9,24 +9,25 @@ namespace Eve.Data.Entities
   using System.Collections;
   using System.Collections.Generic;
   using System.ComponentModel;
-  using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
   using System.Data.Entity;
   using System.Diagnostics.CodeAnalysis;
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Character;
   using Eve.Universe;
 
   using FreeNet;
+  using FreeNet.Configuration;
   using FreeNet.Data.Entity;
 
   /// <summary>
-  /// The base class for data entities for jumps between solar systems.
+  /// The data entity for the <see cref="Ancestry" /> class.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("mapSolarSystemJumps")]
-  public class SolarSystemJumpEntity : EveEntityBase<SolarSystemJump>
+  [Table("chrAncestries")]
+  public class AncestryEntity : BaseValueEntity<AncestryId, Ancestry>
   {
     // Check EveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
@@ -34,9 +35,9 @@ namespace Eve.Data.Entities
     /* Constructors */
 
     /// <summary>
-    /// Initializes a new instance of the SolarSystemJumpEntity class.
+    /// Initializes a new instance of the AncestryEntity class.
     /// </summary>
-    public SolarSystemJumpEntity() : base()
+    public AncestryEntity() : base()
     {
     }
 
@@ -48,8 +49,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("FromConstellationId")]
-    public virtual ConstellationEntity FromConstellation { get; internal set; }
+    [ForeignKey("BloodlineId")]
+    public virtual BloodlineEntity Bloodline { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -57,8 +58,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("fromConstellationID")]
-    public long FromConstellationId { get; internal set; }
+    [Column("bloodlineID")]
+    public BloodlineId BloodlineId { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -66,8 +67,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("FromRegionId")]
-    public virtual RegionEntity FromRegion { get; internal set; }
+    [Column("charisma")]
+    public byte Charisma { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -75,8 +76,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("fromRegionID")]
-    public long FromRegionId { get; internal set; }
+    [ForeignKey("IconId")]
+    public virtual IconEntity Icon { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -84,8 +85,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("FromSolarSystemId")]
-    public virtual SolarSystemEntity FromSolarSystem { get; internal set; }
+    [Column("iconID")]
+    public int? IconId { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -93,9 +94,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("fromSolarSystemID", Order = 1)]
-    [Key]
-    public long FromSolarSystemId { get; internal set; }
+    [Column("intelligence")]
+    public byte Intelligence { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -103,8 +103,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("ToConstellationId")]
-    public virtual ConstellationEntity ToConstellation { get; internal set; }
+    [Column("memory")]
+    public byte Memory { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -112,8 +112,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("toConstellationID")]
-    public long ToConstellationId { get; internal set; }
+    [Column("perception")]
+    public byte Perception { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -121,8 +121,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("ToRegionId")]
-    public virtual RegionEntity ToRegion { get; internal set; }
+    [Column("shortDescription")]
+    public string ShortDescription { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -130,35 +130,16 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("toRegionID")]
-    public long ToRegionId { get; internal set; }
-
-    /// <summary>
-    /// Gets the underlying database value of the corresponding adapter property.
-    /// </summary>
-    /// <value>
-    /// The underlying database value of the corresponding adapter property.
-    /// </value>
-    [ForeignKey("ToSolarSystemId")]
-    public virtual SolarSystemEntity ToSolarSystem { get; internal set; }
-
-    /// <summary>
-    /// Gets the underlying database value of the corresponding adapter property.
-    /// </summary>
-    /// <value>
-    /// The underlying database value of the corresponding adapter property.
-    /// </value>
-    [Column("toSolarSystemID", Order = 2)]
-    [Key]
-    public long ToSolarSystemId { get; internal set; }
+    [Column("willpower")]
+    public byte Willpower { get; internal set; }
 
     /* Methods */
 
     /// <inheritdoc />
-    public override SolarSystemJump ToAdapter(IEveRepository container)
+    public override Ancestry ToAdapter(IEveRepository container)
     {
       Contract.Assume(container != null); // TODO: Should not be necessary due to base class requires -- check in future version of static checker
-      return new SolarSystemJump(container, this);
+      return new Ancestry(container, this);
     }
   }
 }

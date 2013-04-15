@@ -341,6 +341,7 @@ namespace Eve.Data.Entities
     /// <inheritdoc />
     public override EffectType ToAdapter(IEveRepository container)
     {
+      Contract.Assume(container != null); // TODO: Should not be necessary due to base class requires -- check in future version of static checker
       return new EffectType(container, this);
     }
   }

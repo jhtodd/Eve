@@ -15,7 +15,7 @@ namespace Eve.Data.Entities
   using System.Diagnostics.Contracts;
   using System.Linq;
 
-  using Eve.Universe;
+  using Eve.Character;
 
   using FreeNet;
   using FreeNet.Configuration;
@@ -239,6 +239,7 @@ namespace Eve.Data.Entities
     /// <inheritdoc />
     public override EveType ToAdapter(IEveRepository container)
     {
+      Contract.Assume(container != null); // TODO: Should not be necessary due to base class requires -- check in future version of static checker
       return EveType.Create(container, this);
     }
   }

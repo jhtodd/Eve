@@ -27,6 +27,14 @@ namespace Eve.Data
     /* Properties */
 
     /// <summary>
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query industrial activities.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IQueryable{T}" /> for industrial activities.
+    /// </value>
+    IQueryable<ActivityEntity> Activities { get; }
+
+    /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query agents.
     /// </summary>
     /// <value>
@@ -41,6 +49,14 @@ namespace Eve.Data
     /// The <see cref="IQueryable{T}" /> for agent types.
     /// </value>
     IQueryable<AgentTypeEntity> AgentTypes { get; }
+
+    /// <summary>
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query ancestries.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IQueryable{T}" /> for ancestries.
+    /// </value>
+    IQueryable<AncestryEntity> Ancestries { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query attribute categories.
@@ -65,6 +81,14 @@ namespace Eve.Data
     /// The <see cref="IQueryable{T}" /> for attribute values.
     /// </value>
     IQueryable<AttributeValueEntity> AttributeValues { get; }
+
+    /// <summary>
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query bloodlines.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IQueryable{T}" /> for bloodlines.
+    /// </value>
+    IQueryable<BloodlineEntity> Bloodlines { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query categories.

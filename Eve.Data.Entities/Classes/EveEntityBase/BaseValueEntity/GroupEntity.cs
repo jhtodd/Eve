@@ -12,6 +12,7 @@ namespace Eve.Data.Entities
   using System.ComponentModel.DataAnnotations.Schema;
   using System.Data.Entity;
   using System.Diagnostics.CodeAnalysis;
+  using System.Diagnostics.Contracts;
   using System.Linq;
 
   using FreeNet;
@@ -150,6 +151,7 @@ namespace Eve.Data.Entities
     /// <inheritdoc />
     public override Group ToAdapter(IEveRepository container)
     {
+      Contract.Assume(container != null); // TODO: Should not be necessary due to base class requires -- check in future version of static checker
       return new Group(container, this);
     }
   }

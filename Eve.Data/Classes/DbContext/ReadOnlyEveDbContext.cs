@@ -93,6 +93,12 @@ namespace Eve.Data
     /* Properties */
 
     /// <inheritdoc />
+    public IQueryable<ActivityEntity> Activities
+    {
+      get { return this.Query<ActivityEntity>(); }
+    }
+
+    /// <inheritdoc />
     public IQueryable<AgentEntity> Agents
     {
       get { return this.Query<AgentEntity>(); }
@@ -102,6 +108,12 @@ namespace Eve.Data
     public IQueryable<AgentTypeEntity> AgentTypes
     {
       get { return this.Query<AgentTypeEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<AncestryEntity> Ancestries
+    {
+      get { return this.Query<AncestryEntity>(); }
     }
 
     /// <inheritdoc />
@@ -120,6 +132,12 @@ namespace Eve.Data
     public IQueryable<AttributeValueEntity> AttributeValues
     {
       get { return this.Query<AttributeValueEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<BloodlineEntity> Bloodlines
+    {
+      get { return this.Query<BloodlineEntity>(); }
     }
 
     /// <inheritdoc />

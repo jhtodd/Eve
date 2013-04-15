@@ -20,16 +20,14 @@ namespace Eve.Data
   using FreeNet.Data.Entity;
 
   /// <summary>
-  /// The base interface for objects which are associated with an
-  /// EVE repository.
+  /// The base interface for objects which are bound to an EVE repository.
   /// </summary>
   /// <remarks>
   /// <para>
   /// A repository item is an object which is associated with an
   /// <see cref="IEveRepository" />.  Normally this means that one
   /// or more properties are lazily loaded, and therefore need
-  /// access to an object which can perform queries against the
-  /// data source.
+  /// the ability to perform queries against the data source.
   /// </para>
   /// </remarks>
   [ContractClass(typeof(IEveRepositoryItemContracts))]

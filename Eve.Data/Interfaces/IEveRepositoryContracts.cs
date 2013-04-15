@@ -15,6 +15,7 @@ namespace Eve.Data
 
   using Eve.Character;
   using Eve.Data.Entities;
+  using Eve.Industry;
   using Eve.Universe;
 
   using FreeNet;
@@ -38,6 +39,28 @@ namespace Eve.Data
     }
 
     /* Methods */
+
+    #region Activity Methods
+    Activity IEveRepository.GetActivityById(ActivityId id)
+    {
+      Contract.Ensures(Contract.Result<Activity>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<Activity> IEveRepository.GetActivities(Expression<Func<ActivityEntity, bool>> filter)
+    {
+      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<Activity>>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<Activity> IEveRepository.GetActivities(params IQueryModifier<ActivityEntity>[] modifiers)
+    {
+      Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<Activity>>() != null);
+      throw new NotImplementedException();
+    }
+    #endregion
 
     #region Agent Methods
     Agent IEveRepository.GetAgentById(AgentId id)
@@ -79,6 +102,28 @@ namespace Eve.Data
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<AgentType>>() != null);
+      throw new NotImplementedException();
+    }
+    #endregion
+
+    #region Ancestry Methods
+    Ancestry IEveRepository.GetAncestryById(AncestryId id)
+    {
+      Contract.Ensures(Contract.Result<Ancestry>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<Ancestry> IEveRepository.GetAncestries(Expression<Func<AncestryEntity, bool>> filter)
+    {
+      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<Ancestry>>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<Ancestry> IEveRepository.GetAncestries(params IQueryModifier<AncestryEntity>[] modifiers)
+    {
+      Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<Ancestry>>() != null);
       throw new NotImplementedException();
     }
     #endregion
@@ -145,6 +190,28 @@ namespace Eve.Data
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<AttributeValue>>() != null);
+      throw new NotImplementedException();
+    }
+    #endregion
+
+    #region Bloodline Methods
+    Bloodline IEveRepository.GetBloodlineById(BloodlineId id)
+    {
+      Contract.Ensures(Contract.Result<Bloodline>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<Bloodline> IEveRepository.GetBloodlines(Expression<Func<BloodlineEntity, bool>> filter)
+    {
+      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<Bloodline>>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<Bloodline> IEveRepository.GetBloodlines(params IQueryModifier<BloodlineEntity>[] modifiers)
+    {
+      Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<Bloodline>>() != null);
       throw new NotImplementedException();
     }
     #endregion

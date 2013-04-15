@@ -336,7 +336,10 @@ namespace Eve.Universe
     {
       if (disposing)
       {
-        this.services.Dispose();
+        if (this.services != null)
+        {
+          this.services.Dispose();
+        }
       }
     }
   }

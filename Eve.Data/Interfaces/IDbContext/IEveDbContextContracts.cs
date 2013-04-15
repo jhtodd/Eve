@@ -23,10 +23,19 @@ namespace Eve.Data
   [ContractClassFor(typeof(IEveDbContext))]
   internal abstract partial class IEveDbContextContracts : IEveDbContext
   {
+    IQueryable<ActivityEntity> IEveDbContext.Activities
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IQueryable<ActivityEntity>>() != null);
+        throw new NotImplementedException();
+      }
+    }
+
     IQueryable<AgentEntity> IEveDbContext.Agents
     {
       get
-      { 
+      {
         Contract.Ensures(Contract.Result<IQueryable<AgentEntity>>() != null);
         throw new NotImplementedException();
       }
@@ -37,6 +46,15 @@ namespace Eve.Data
       get
       {
         Contract.Ensures(Contract.Result<IQueryable<AgentTypeEntity>>() != null);
+        throw new NotImplementedException();
+      }
+    }
+
+    IQueryable<AncestryEntity> IEveDbContext.Ancestries
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IQueryable<AncestryEntity>>() != null);
         throw new NotImplementedException();
       }
     }
@@ -64,6 +82,15 @@ namespace Eve.Data
       get
       {
         Contract.Ensures(Contract.Result<IQueryable<AttributeValueEntity>>() != null);
+        throw new NotImplementedException();
+      }
+    }
+
+    IQueryable<BloodlineEntity> IEveDbContext.Bloodlines
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IQueryable<BloodlineEntity>>() != null);
         throw new NotImplementedException();
       }
     }

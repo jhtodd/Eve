@@ -173,7 +173,7 @@ namespace Eve
         Contract.Ensures(!string.IsNullOrWhiteSpace(Contract.Result<string>()));
 
         var result = Entity.Name;
-        Contract.Assert(!string.IsNullOrWhiteSpace(result));
+        Contract.Assume(!string.IsNullOrWhiteSpace(result));
         return result;
       }
     }
@@ -231,7 +231,11 @@ namespace Eve
     /// </value>
     protected virtual IConvertible CacheKey
     {
-      get { return this.Id; }
+      get 
+      {
+        Contract.Ensures(Contract.Result<IConvertible>() != null);
+        return this.Id;
+      }
     }
 
     /* Methods */

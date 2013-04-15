@@ -499,7 +499,7 @@ namespace Eve
             {
               Contract.Assume(skillAttribute != null);
               Contract.Assume(levelAttribute != null);
-              Contract.Assert(Enum.IsDefined(typeof(SkillId), (SkillId)skillAttribute.BaseValue));
+              Contract.Assume(Enum.IsDefined(typeof(SkillId), (SkillId)skillAttribute.BaseValue));
 
               SkillId skillId = (SkillId)skillAttribute.BaseValue;
               byte skillLevel = (byte)levelAttribute.BaseValue;
@@ -729,10 +729,25 @@ namespace Eve
     {
       if (disposing)
       {
-        this.attributes.Dispose();
-        this.effects.Dispose();
-        this.requiredSkills.Dispose();
-        this.variations.Dispose();
+        if (this.attributes != null)
+        {
+          this.attributes.Dispose();
+        }
+
+        if (this.effects != null)
+        {
+          this.effects.Dispose();
+        }
+
+        if (this.requiredSkills != null)
+        {
+          this.requiredSkills.Dispose();
+        }
+
+        if (this.variations != null)
+        {
+          this.variations.Dispose();
+        }
       }
     }
   }

@@ -15,7 +15,7 @@ namespace Eve.Data.Entities
   using System.Diagnostics.Contracts;
   using System.Linq;
 
-  using Eve.Universe;
+  using Eve.Character;
 
   using FreeNet;
   using FreeNet.Configuration;
@@ -41,6 +41,14 @@ namespace Eve.Data.Entities
     }
 
     /* Properties */
+
+    /// <summary>
+    /// Gets the underlying database value of the corresponding adapter property.
+    /// </summary>
+    /// <value>
+    /// The underlying database value of the corresponding adapter property.
+    /// </value>
+    public virtual ICollection<BloodlineEntity> Bloodlines { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -74,6 +82,7 @@ namespace Eve.Data.Entities
     /// <inheritdoc />
     public override Race ToAdapter(IEveRepository container)
     {
+      Contract.Assume(container != null); // TODO: Should not be necessary due to base class requires -- check in future version of static checker
       return new Race(container, this);
     }
   }

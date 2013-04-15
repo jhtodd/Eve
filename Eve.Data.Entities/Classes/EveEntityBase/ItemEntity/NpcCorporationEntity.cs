@@ -15,6 +15,7 @@ namespace Eve.Data.Entities
   using System.Diagnostics.CodeAnalysis;
   using System.Linq;
 
+  using Eve.Character;
   using Eve.Universe;
 
   using FreeNet;

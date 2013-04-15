@@ -17,6 +17,7 @@ namespace Eve.Data
   using Eve.Character;
   using Eve.Data;
   using Eve.Data.Entities;
+  using Eve.Industry;
   using Eve.Universe;
 
   using FreeNet;
@@ -114,48 +115,40 @@ namespace Eve.Data
       this.Dispose(true);
     }
 
-    /// <summary>
-    /// Disposes the current object.
-    /// </summary>
-    /// <param name="disposing">
-    /// Indicates whether to dispose managed resources.
-    /// </param>
-    protected virtual void Dispose(bool disposing)
+    #region Activity Methods
+    /// <inheritdoc />
+    public Activity GetActivityById(ActivityId id)
     {
-      if (disposing)
+      Activity result;
+      if (this.Cache.TryGetValue<Activity>(id, out result))
       {
-        this.cache.Dispose();
-        this.context.Dispose();
+        return result;
       }
+
+      var query = this.GetActivities(x => x.Id == id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
-    /// <summary>
-    /// Loads and caches the set of data that is necessary for future queries
-    /// to be performed.
-    /// </summary>
-    private void PrepopulateCache()
+    /// <inheritdoc />
+    public IReadOnlyList<Activity> GetActivities(Expression<Func<ActivityEntity, bool>> filter)
     {
-      // Permanently add all published Categories
-      foreach (Category category in this.Context.Categories.Where(x => x.Published == true).ToList().Select(x => x.ToAdapter(this)))
-      {
-        Contract.Assume(category != null);
-        this.Cache.AddOrReplace<Category>(category, true);
-      }
-
-      // Permanently add all Groups -- necessary for EveType.Create() to load successfully
-      foreach (Group group in this.Context.Groups.Where(x => x.Published == true).ToList().Select(x => x.ToAdapter(this)))
-      {
-        Contract.Assume(group != null);
-        this.Cache.AddOrReplace<Group>(group, true);
-      }
-
-      // Permanently add all units
-      foreach (Unit unit in this.Context.Units.ToList().Select(x => x.ToAdapter(this)))
-      {
-        Contract.Assume(unit != null);
-        this.Cache.AddOrReplace<Unit>(unit, true);
-      }
+      return this.GetActivities(new QuerySpecification<ActivityEntity>(filter));
     }
+
+    /// <inheritdoc />
+    [EveQueryMethod(typeof(Activity))]
+    public IReadOnlyList<Activity> GetActivities(params IQueryModifier<ActivityEntity>[] modifiers)
+    {
+      // Construct the result set, filtering items through the global cache along the way
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<Activity>(x.Id, () => x.ToAdapter(this)))
+                               .ToArray();
+    }
+    #endregion
 
     #region Agent Methods
     /// <inheritdoc />
@@ -167,7 +160,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetAgents(x => x.Id == id.Value).Single();
+      var query = this.GetAgents(x => x.Id == id.Value);
+      Contract.Assume(query.Count() == 1);
+      
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -196,7 +195,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetAgentTypes(x => x.Id == id).Single();
+      var query = this.GetAgentTypes(x => x.Id == id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -215,6 +220,41 @@ namespace Eve.Data
     }
     #endregion
 
+    #region Ancestry Methods
+    /// <inheritdoc />
+    public Ancestry GetAncestryById(AncestryId id)
+    {
+      Ancestry result;
+      if (this.Cache.TryGetValue<Ancestry>(id, out result))
+      {
+        return result;
+      }
+
+      var query = this.GetAncestries(x => x.Id == id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
+    }
+
+    /// <inheritdoc />
+    public IReadOnlyList<Ancestry> GetAncestries(Expression<Func<AncestryEntity, bool>> filter)
+    {
+      return this.GetAncestries(new QuerySpecification<AncestryEntity>(filter));
+    }
+
+    /// <inheritdoc />
+    [EveQueryMethod(typeof(Ancestry))]
+    public IReadOnlyList<Ancestry> GetAncestries(params IQueryModifier<AncestryEntity>[] modifiers)
+    {
+      // Construct the result set, filtering items through the global cache along the way
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<Ancestry>(x.Id, () => x.ToAdapter(this)))
+                               .ToArray();
+    }
+    #endregion
+
     #region AttributeCategory Methods
     /// <inheritdoc />
     public AttributeCategory GetAttributeCategoryById(AttributeCategoryId id)
@@ -225,7 +265,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetAttributeCategories(x => x.Id == id).Single();
+      var query = this.GetAttributeCategories(x => x.Id == id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -254,7 +300,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetAttributeTypes(x => x.Id == id).Single();
+      var query = this.GetAttributeTypes(x => x.Id == id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -283,7 +335,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetAttributeValues(x => x.ItemTypeId == itemTypeId && x.AttributeId == id).Single();
+      var query = this.GetAttributeValues(x => x.ItemTypeId == itemTypeId && x.AttributeId == id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -303,6 +361,41 @@ namespace Eve.Data
     }
     #endregion
 
+    #region Bloodline Methods
+    /// <inheritdoc />
+    public Bloodline GetBloodlineById(BloodlineId id)
+    {
+      Bloodline result;
+      if (this.Cache.TryGetValue<Bloodline>(id, out result))
+      {
+        return result;
+      }
+
+      var query = this.GetBloodlines(x => x.Id == id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
+    }
+
+    /// <inheritdoc />
+    public IReadOnlyList<Bloodline> GetBloodlines(Expression<Func<BloodlineEntity, bool>> filter)
+    {
+      return this.GetBloodlines(new QuerySpecification<BloodlineEntity>(filter));
+    }
+
+    /// <inheritdoc />
+    [EveQueryMethod(typeof(Bloodline))]
+    public IReadOnlyList<Bloodline> GetBloodlines(params IQueryModifier<BloodlineEntity>[] modifiers)
+    {
+      // Construct the result set, filtering items through the global cache along the way
+      return GetList(modifiers).Select(x => this.Cache.GetOrAdd<Bloodline>(x.Id, () => x.ToAdapter(this)))
+                               .ToArray();
+    }
+    #endregion
+
     #region Category Methods
     /// <inheritdoc />
     public Category GetCategoryById(CategoryId id)
@@ -313,7 +406,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetCategories(x => x.Id == id).Single();
+      var query = this.GetCategories(x => x.Id == id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -342,7 +441,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetCharacterAttributeTypes(x => x.Id == id).Single();
+      var query = this.GetCharacterAttributeTypes(x => x.Id == id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -371,7 +476,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetConstellations(x => x.Id == id.Value).Single();
+      var query = this.GetConstellations(x => x.Id == id.Value);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -400,7 +511,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetConstellationJumps(x => x.FromConstellationId == fromConstellationId.Value && x.ToConstellationId == toConstellationId.Value).Single();
+      var query = this.GetConstellationJumps(x => x.FromConstellationId == fromConstellationId.Value && x.ToConstellationId == toConstellationId.Value);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -432,7 +549,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetCorporateActivities(x => x.Id == id).Single();
+      var query = this.GetCorporateActivities(x => x.Id == id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -461,7 +584,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetDivisions(x => x.Id == id).Single();
+      var query = this.GetDivisions(x => x.Id == id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -490,7 +619,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetEffects(x => x.ItemTypeId == itemTypeId && x.EffectId == (short)id).Single();
+      var query = this.GetEffects(x => x.ItemTypeId == itemTypeId && x.EffectId == (short)id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -520,7 +655,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetEffectTypes(x => x.Id == (short)id).Single();
+      var query = this.GetEffectTypes(x => x.Id == (short)id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -550,7 +691,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetEveTypes(x => x.Id == id.Value).Single();
+      var query = this.GetEveTypes(x => x.Id == id.Value);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -577,7 +724,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetEveTypes<EveType>(x => x.Id == id.Value).Cast<TEveType>().Single();
+      var query = this.GetEveTypes<EveType>(x => x.Id == id.Value).Cast<TEveType>();
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -606,7 +759,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetFactions(x => x.Id == id).Single();
+      var query = this.GetFactions(x => x.Id == id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -635,7 +794,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetGraphics(x => x.Id == id.Value).Single();
+      var query = this.GetGraphics(x => x.Id == id.Value);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -664,7 +829,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetGroups(x => x.Id == id).Single();
+      var query = this.GetGroups(x => x.Id == id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <summary>
@@ -702,7 +873,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetIcons(x => x.Id == id.Value).Single();
+      var query = this.GetIcons(x => x.Id == id.Value);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -731,7 +908,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetItems(x => x.Id == id.Value).Single();
+      var query = this.GetItems(x => x.Id == id.Value);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -784,7 +967,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetMarketGroups(x => x.Id == id).Single();
+      var query = this.GetMarketGroups(x => x.Id == id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -813,7 +1002,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetMetaGroups(x => x.Id == id).Single();
+      var query = this.GetMetaGroups(x => x.Id == id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <summary>
@@ -851,7 +1046,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetMetaTypes(x => x.TypeId == id).Single();
+      var query = this.GetMetaTypes(x => x.TypeId == id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <summary>
@@ -889,7 +1090,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetNpcCorporations(x => x.Id == id.Value).Single();
+      var query = this.GetNpcCorporations(x => x.Id == id.Value);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -918,7 +1125,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetNpcCorporationDivisions(x => x.CorporationId == corporationId.Value && x.DivisionId == divisionId).Single();
+      var query = this.GetNpcCorporationDivisions(x => x.CorporationId == corporationId.Value && x.DivisionId == divisionId);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -950,7 +1163,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetRaces(x => x.Id == id).Single();
+      var query = this.GetRaces(x => x.Id == id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -979,7 +1198,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetRegions(x => x.Id == id.Value).Single();
+      var query = this.GetRegions(x => x.Id == id.Value);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -1008,7 +1233,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetRegionJumps(x => x.FromRegionId == fromRegionId && x.ToRegionId == toRegionId).Single();
+      var query = this.GetRegionJumps(x => x.FromRegionId == fromRegionId && x.ToRegionId == toRegionId);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -1040,7 +1271,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetSolarSystems(x => x.Id == id.Value).Single();
+      var query = this.GetSolarSystems(x => x.Id == id.Value);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -1069,7 +1306,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetSolarSystemJumps(x => x.FromSolarSystemId == fromSolarSystemId.Value && x.ToSolarSystemId == toSolarSystemId.Value).Single();
+      var query = this.GetSolarSystemJumps(x => x.FromSolarSystemId == fromSolarSystemId.Value && x.ToSolarSystemId == toSolarSystemId.Value);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -1101,7 +1344,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetStations(x => x.Id == id).Single();
+      var query = this.GetStations(x => x.Id == id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -1130,7 +1379,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetStationOperations(x => x.Id == id).Single();
+      var query = this.GetStationOperations(x => x.Id == id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -1159,7 +1414,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetStationServices(x => x.Id == id).Single();
+      var query = this.GetStationServices(x => x.Id == id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -1188,7 +1449,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetStationTypes(x => x.Id == id.Value).Single();
+      var query = this.GetStationTypes(x => x.Id == id.Value);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -1217,7 +1484,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetUnits(x => x.Id == id).Single();
+      var query = this.GetUnits(x => x.Id == id);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -1246,7 +1519,13 @@ namespace Eve.Data
         return result;
       }
 
-      return this.GetUniverses(x => x.Id == id.Value).Single();
+      var query = this.GetUniverses(x => x.Id == id.Value);
+      Contract.Assume(query.Count() == 1);
+
+      result = query.Single();
+      Contract.Assume(result != null);
+
+      return result;
     }
 
     /// <inheritdoc />
@@ -1334,6 +1613,21 @@ namespace Eve.Data
     }
 
     /// <summary>
+    /// Disposes the current object.
+    /// </summary>
+    /// <param name="disposing">
+    /// Indicates whether to dispose managed resources.
+    /// </param>
+    protected virtual void Dispose(bool disposing)
+    {
+      if (disposing)
+      {
+        this.cache.Dispose();
+        this.context.Dispose();
+      }
+    }
+
+    /// <summary>
     /// Establishes object invariants of the class.
     /// </summary>
     [ContractInvariantMethod]
@@ -1341,6 +1635,34 @@ namespace Eve.Data
     {
       Contract.Invariant(this.cache != null);
       Contract.Invariant(this.context != null);
+    }
+
+    /// <summary>
+    /// Loads and caches the set of data that is necessary for future queries
+    /// to be performed.
+    /// </summary>
+    private void PrepopulateCache()
+    {
+      // Permanently add all published Categories
+      foreach (Category category in this.Context.Categories.Where(x => x.Published == true).ToList().Select(x => x.ToAdapter(this)))
+      {
+        Contract.Assume(category != null);
+        this.Cache.AddOrReplace<Category>(category, true);
+      }
+
+      // Permanently add all Groups -- necessary for EveType.Create() to load successfully
+      foreach (Group group in this.Context.Groups.Where(x => x.Published == true).ToList().Select(x => x.ToAdapter(this)))
+      {
+        Contract.Assume(group != null);
+        this.Cache.AddOrReplace<Group>(group, true);
+      }
+
+      // Permanently add all units
+      foreach (Unit unit in this.Context.Units.ToList().Select(x => x.ToAdapter(this)))
+      {
+        Contract.Assume(unit != null);
+        this.Cache.AddOrReplace<Unit>(unit, true);
+      }
     }
   }
 }

@@ -54,6 +54,7 @@ namespace Eve.Data.Entities
     /// <inheritdoc />
     public override Unit ToAdapter(IEveRepository container)
     {
+      Contract.Assume(container != null); // TODO: Should not be necessary due to base class requires -- check in future version of static checker
       return new Unit(container, this);
     }
   }

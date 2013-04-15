@@ -11,16 +11,16 @@ namespace Eve.Data.Entities
   using System.ComponentModel;
   using System.ComponentModel.DataAnnotations.Schema;
   using System.Data.Entity;
-  using System.Diagnostics.Contracts;
   using System.Diagnostics.CodeAnalysis;
+  using System.Diagnostics.Contracts;
   using System.Linq;
+
+  using Eve.Character;
+  using Eve.Universe;
 
   using FreeNet;
   using FreeNet.Configuration;
   using FreeNet.Data.Entity;
-
-  using Eve.Character;
-  using Eve.Universe;
 
   /// <summary>
   /// The data entity for the <see cref="Bloodline" /> class.
@@ -158,7 +158,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("ShipTypeId")]
-    public EveTypeEntity ShipType { get; internal set; } // TODO: Change to ShipType once implemented
+    public virtual EveTypeEntity ShipType { get; internal set; } // TODO: Change to ShipType once implemented
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -167,7 +167,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [Column("shipTypeID")]
-    public TypeId ShipTypeId { get; internal set; }
+    public int ShipTypeId { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -204,5 +204,14 @@ namespace Eve.Data.Entities
     /// </value>
     [Column("willpower")]
     public byte Willpower { get; internal set; }
+
+    /* Methods */
+
+    /// <inheritdoc />
+    public override Bloodline ToAdapter(IEveRepository container)
+    {
+      Contract.Assume(container != null); // TODO: Should not be necessary due to base class requires -- check in future version of static checker
+      return new Bloodline(container, this);
+    }
   }
 }

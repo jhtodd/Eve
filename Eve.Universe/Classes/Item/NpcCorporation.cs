@@ -721,11 +721,30 @@ namespace Eve.Universe
     {
       if (disposing)
       {
-        this.agents.Dispose();
-        this.divisions.Dispose();
-        this.investors.Dispose();
-        this.researchFields.Dispose();
-        this.tradeGoods.Dispose();
+        if (this.agents != null)
+        {
+          this.agents.Dispose();
+        }
+
+        if (this.divisions != null)
+        {
+          this.divisions.Dispose();
+        }
+
+        if (this.investors != null)
+        {
+          this.investors.Dispose();
+        }
+
+        if (this.researchFields != null)
+        {
+          this.researchFields.Dispose();
+        }
+
+        if (this.tradeGoods != null)
+        {
+          this.tradeGoods.Dispose();
+        }
       }
     }
   }

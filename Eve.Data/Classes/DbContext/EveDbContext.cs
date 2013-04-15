@@ -159,6 +159,16 @@ namespace Eve.Data
     {
       base.OnModelCreating(modelBuilder);
 
+      /* ActivityEntity Mappings *******************************************/
+      var activity = modelBuilder.Entity<ActivityEntity>();
+
+      // Map properties inherited from BaseValueEntity<>
+      activity.Map(x => x.MapInheritedProperties());
+      activity.HasKey(x => x.Id);
+      activity.Property(x => x.Description).HasColumnName("description");
+      activity.Property(x => x.Id).HasColumnName("activityID");
+      activity.Property(x => x.Name).HasColumnName("activityName");
+
       /* AgentEntity Mappings *******************************************************/
       var agent = modelBuilder.Entity<AgentEntity>();
 
@@ -178,6 +188,16 @@ namespace Eve.Data
       agentType.Ignore(x => x.Description);
       agentType.Property(x => x.Id).HasColumnName("agentTypeID");
       agentType.Property(x => x.Name).HasColumnName("agentType");
+
+      /* AncestryEntity Mappings *******************************************/
+      var ancestry = modelBuilder.Entity<AncestryEntity>();
+
+      // Map properties inherited from BaseValueEntity<>
+      ancestry.Map(x => x.MapInheritedProperties());
+      ancestry.HasKey(x => x.Id);
+      ancestry.Property(x => x.Description).HasColumnName("description");
+      ancestry.Property(x => x.Id).HasColumnName("ancestryID");
+      ancestry.Property(x => x.Name).HasColumnName("ancestryName");
 
       /* AttributeTypeEntity Mappings ***********************************************/
       var attributeType = modelBuilder.Entity<AttributeTypeEntity>();
@@ -203,7 +223,17 @@ namespace Eve.Data
       attributeCategory.Property(x => x.Id).HasColumnName("categoryID");
       attributeCategory.Property(x => x.Name).HasColumnName("categoryName");
 
-      /* AttributeCategoryEntity Mappings *******************************************/
+      /* BloodlineEntity Mappings *******************************************/
+      var bloodline = modelBuilder.Entity<BloodlineEntity>();
+
+      // Map properties inherited from BaseValueEntity<>
+      bloodline.Map(x => x.MapInheritedProperties());
+      bloodline.HasKey(x => x.Id);
+      bloodline.Property(x => x.Description).HasColumnName("description");
+      bloodline.Property(x => x.Id).HasColumnName("bloodlineID");
+      bloodline.Property(x => x.Name).HasColumnName("bloodlineName");
+
+      /* CategoryEntity Mappings *******************************************/
       var category = modelBuilder.Entity<CategoryEntity>();
 
       // Map properties inherited from BaseValueEntity<>

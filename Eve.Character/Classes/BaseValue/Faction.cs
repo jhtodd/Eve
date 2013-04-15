@@ -3,7 +3,7 @@
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Eve.Universe
+namespace Eve.Character
 {
   using System;
   using System.Collections;
@@ -13,6 +13,7 @@ namespace Eve.Universe
 
   using Eve.Data;
   using Eve.Data.Entities;
+  using Eve.Universe;
 
   using FreeNet;
 

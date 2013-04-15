@@ -328,7 +328,10 @@ namespace Eve.Universe
     {
       if (disposing)
       {
-        this.researchFields.Dispose();
+        if (this.researchFields != null)
+        {
+          this.researchFields.Dispose();
+        }
       }
     }
   }
