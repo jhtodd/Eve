@@ -41,7 +41,7 @@ namespace Eve.Sandbox {
     }
 
     private void Button_Click_1(object sender, RoutedEventArgs e) {
-      IEveDbContext context = new ReadOnlyEveDbContext();
+      IEveDbContext context = new EveDbContext();
       IEveRepository ds = new EveRepository(context, null);
 
       NpcCorporation corp = ds.GetNpcCorporations(x => x.Name == "Lai Dai Corporation").Single();

@@ -1693,7 +1693,7 @@ namespace EveUpdater {
             connection.Close();
           }
 
-          IEveDbContext context = new ReadOnlyEveDbContext(connection, true);
+          IEveDbContext context = new EveDbContext(connection, true);
           dataSource = new EveRepository(context, null);
 
         } catch (Exception ex) {
