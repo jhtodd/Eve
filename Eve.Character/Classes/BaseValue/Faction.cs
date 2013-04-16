@@ -5,17 +5,11 @@
 //-----------------------------------------------------------------------
 namespace Eve.Character
 {
-  using System;
-  using System.Collections;
-  using System.Collections.Generic;
   using System.Diagnostics.Contracts;
-  using System.Linq;
 
   using Eve.Data;
   using Eve.Data.Entities;
   using Eve.Universe;
-
-  using FreeNet;
 
   /// <summary>
   /// Contains information about an EVE faction.
@@ -65,7 +59,7 @@ namespace Eve.Character
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.corporation ?? (this.corporation = this.Container.Load<NpcCorporation>(this.CorporationId, () => this.Entity.Corporation.ToAdapter(this.Container)));
+        return this.corporation ?? (this.corporation = this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => this.Entity.Corporation.ToAdapter(this.Container)));
       }
     }
 
@@ -97,7 +91,7 @@ namespace Eve.Character
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.Load<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+        return this.icon ?? (this.icon = this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
       }
     }
 
@@ -130,7 +124,7 @@ namespace Eve.Character
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.militiaCorporation ?? (this.militiaCorporation = this.Container.Load<NpcCorporation>(this.MilitiaCorporationId, () => this.Entity.MilitiaCorporation.ToAdapter(this.Container)));
+        return this.militiaCorporation ?? (this.militiaCorporation = this.Container.GetOrAdd<NpcCorporation>(this.MilitiaCorporationId, () => this.Entity.MilitiaCorporation.ToAdapter(this.Container)));
       }
     }
 
@@ -197,7 +191,7 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<SolarSystem>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.solarSystem ?? (this.solarSystem = this.Container.Load<SolarSystem>(this.SolarSystemId, () => this.Entity.SolarSystem.ToAdapter(this.Container)));
+        return this.solarSystem ?? (this.solarSystem = this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => this.Entity.SolarSystem.ToAdapter(this.Container)));
       }
     }
 

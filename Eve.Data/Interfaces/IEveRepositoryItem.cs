@@ -5,19 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data
 {
-  using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.Data.Entity;
   using System.Diagnostics.Contracts;
-  using System.Linq;
-  using System.Linq.Expressions;
-
-  using Eve.Character;
-  using Eve.Universe;
-
-  using FreeNet;
-  using FreeNet.Data.Entity;
 
   /// <summary>
   /// The base interface for objects which are bound to an EVE repository.

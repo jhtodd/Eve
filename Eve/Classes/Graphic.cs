@@ -6,17 +6,12 @@
 namespace Eve
 {
   using System;
-  using System.ComponentModel;
   using System.Diagnostics.Contracts;
-  using System.Linq;
 
   using Eve.Data;
   using Eve.Data.Entities;
 
-  using FreeNet;
   using FreeNet.Collections;
-  using FreeNet.Data.Entity;
-  using FreeNet.Utilities;
 
   /// <summary>
   /// Contains information about an icon associated with an EVE item.

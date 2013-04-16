@@ -6,12 +6,7 @@
 namespace Eve
 {
   using System;
-  using System.Collections;
-  using System.Collections.Generic;
   using System.ComponentModel;
-  using System.Data.Entity;
-  using System.Diagnostics.Contracts;
-  using System.Linq;
 
   /// <summary>
   /// The modifiers which can affect the adjusted value of an EVE attribute.

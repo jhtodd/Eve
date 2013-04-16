@@ -6,17 +6,10 @@
 namespace Eve
 {
   using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.ComponentModel;
   using System.Diagnostics.Contracts;
-  using System.Linq;
 
   using Eve.Data;
   using Eve.Data.Entities;
-
-  using FreeNet;
-  using FreeNet.Data.Entity;
 
   /// <summary>
   /// Contains information about an attribute of an EVE item.
@@ -69,7 +62,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.category ?? (this.category = this.Container.Load<AttributeCategory>(this.CategoryId, () => this.Entity.Category.ToAdapter(this.Container)));
+        return this.category ?? (this.category = this.Container.GetOrAdd<AttributeCategory>(this.CategoryId, () => this.Entity.Category.ToAdapter(this.Container)));
       }
     }
 
@@ -150,7 +143,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.Load<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+        return this.icon ?? (this.icon = this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
       }
     }
 
@@ -209,7 +202,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.unit ?? (this.unit = this.Container.Load<Unit>(this.UnitId, () => this.Entity.Unit.ToAdapter(this.Container)));
+        return this.unit ?? (this.unit = this.Container.GetOrAdd<Unit>(this.UnitId, () => this.Entity.Unit.ToAdapter(this.Container)));
       }
     }
 

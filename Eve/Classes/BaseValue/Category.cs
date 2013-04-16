@@ -5,18 +5,10 @@
 //-----------------------------------------------------------------------
 namespace Eve
 {
-  using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.ComponentModel;
   using System.Diagnostics.Contracts;
-  using System.Linq;
 
   using Eve.Data;
   using Eve.Data.Entities;
-
-  using FreeNet;
-  using FreeNet.Data.Entity;
 
   /// <summary>
   /// Contains information about a category to which an EVE item belongs.
@@ -63,7 +55,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.Load<Icon>(this.IconId, () => (Icon)this.Entity.Icon.ToAdapter(this.Container)));
+        return this.icon ?? (this.icon = this.Container.GetOrAdd<Icon>(this.IconId, () => (Icon)this.Entity.Icon.ToAdapter(this.Container)));
       }
     }
 

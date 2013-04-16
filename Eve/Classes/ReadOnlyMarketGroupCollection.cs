@@ -5,19 +5,9 @@
 //-----------------------------------------------------------------------
 namespace Eve
 {
-  using System;
-  using System.Collections;
   using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Diagnostics.Contracts;
-  using System.Linq;
 
-  using Eve.Data.Entities;
-
-  using FreeNet;
-  using FreeNet.Collections;
   using FreeNet.Collections.ObjectModel;
-  using FreeNet.Data.Entity;
 
   /// <summary>
   /// A read-only collection of market groups.

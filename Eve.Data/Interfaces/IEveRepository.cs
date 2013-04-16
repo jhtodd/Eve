@@ -6,11 +6,8 @@
 namespace Eve.Data
 {
   using System;
-  using System.Collections;
   using System.Collections.Generic;
-  using System.Data.Entity;
   using System.Diagnostics.Contracts;
-  using System.Linq;
   using System.Linq.Expressions;
 
   using Eve.Character;
@@ -18,7 +15,6 @@ namespace Eve.Data
   using Eve.Industry;
   using Eve.Universe;
 
-  using FreeNet;
   using FreeNet.Data.Entity;
 
   /// <summary>
@@ -31,26 +27,32 @@ namespace Eve.Data
     /* Methods */
    
     /// <summary>
-    /// Retrieves and returns any previously loaded entity with the specified type
-    /// and ID, or loads a value using the given delegate if no previously loaded
-    /// version exists.
+    /// Retrieves any previously stored object with the specified type and
+    /// ID value, or creates and stores a value if no stored version already
+    /// exists.
     /// </summary>
     /// <typeparam name="T">
-    /// The type of object to retrieve or load.
+    /// The type of object to retrieve from or store in the repository.
     /// </typeparam>
     /// <param name="id">
-    /// The ID of the object to retrieve.
+    /// The ID to attempt to retrieve from the repository.
     /// </param>
     /// <param name="valueFactory">
-    /// A delegate which can be used to load the value if no previously
-    /// loaded version exists.  This is only invoked if no previously loaded
-    /// version can be found.
+    /// A delegate which can be used to create a value to store in the
+    /// repository, in the event that no previously stored version exists.
+    /// If a previously stored version does exist, this delegate is never
+    /// invoked.  The value returned by the delegate must implement
+    /// <see cref="IEveCacheable" />, and the value of its
+    /// <see cref="IEveCacheable.CacheKey" /> property must be equal to
+    /// <paramref name="id" />.
     /// </param>
     /// <returns>
-    /// An object of the desired type, either retrieved from a previously-loaded
-    /// version, or loaded on demand.
+    /// The previously stored object with the specified type and ID, if one
+    /// exists.  Otherwise, the value returned by the 
+    /// <paramref name="valueFactory" /> delegate, after it has been 
+    /// stored in the repository.
     /// </returns>
-    T Load<T>(IConvertible id, Func<T> valueFactory) where T : IEveCacheable;
+    T GetOrAdd<T>(IConvertible id, Func<T> valueFactory) where T : IEveCacheable;
 
     #region Activity Methods
     /// <summary>
@@ -209,6 +211,89 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<Ancestry> GetAncestries(params IQueryModifier<AncestryEntity>[] modifiers);
+    #endregion
+
+    #region AssemblyLine Methods
+    /// <summary>
+    /// Returns the <see cref="AssemblyLine" /> object with the specified ID.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <returns>
+    /// The item with the specified key.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    AssemblyLine GetAssemblyLineById(AssemblyLineId id);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="AssemblyLine" />
+    /// objects.
+    /// </summary>
+    /// <param name="filter">
+    /// The expression that will filter the results of the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<AssemblyLine> GetAssemblyLines(Expression<Func<AssemblyLineEntity, bool>> filter);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="AssemblyLine" />
+    /// objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<AssemblyLine> GetAssemblyLines(params IQueryModifier<AssemblyLineEntity>[] modifiers);
+    #endregion
+
+    #region AssemblyLineStation Methods
+    /// <summary>
+    /// Returns the <see cref="AssemblyLineStation" /> object with the specified ID.
+    /// </summary>
+    /// <param name="stationId">
+    /// The ID of the station.
+    /// </param>
+    /// <param name="assemblyLineType">
+    /// The ID of the assembly line.
+    /// </param>
+    /// <returns>
+    /// The item with the specified key.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    AssemblyLineStation GetAssemblyLineStationById(StationId stationId, AssemblyLineTypeId assemblyLineType);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="AssemblyLineStation" />
+    /// objects.
+    /// </summary>
+    /// <param name="filter">
+    /// The expression that will filter the results of the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<AssemblyLineStation> GetAssemblyLineStations(Expression<Func<AssemblyLineStationEntity, bool>> filter);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="AssemblyLineStation" />
+    /// objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<AssemblyLineStation> GetAssemblyLineStations(params IQueryModifier<AssemblyLineStationEntity>[] modifiers);
     #endregion
 
     #region AssemblyLineType Methods

@@ -6,16 +6,10 @@
 namespace Eve.Data
 {
   using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.Data.Entity;
   using System.Diagnostics.Contracts;
   using System.Linq;
 
   using Eve.Data.Entities;
-
-  using FreeNet;
-  using FreeNet.Data.Entity;
 
   /// <summary>
   /// Contract class for the <see cref="IEveDbContext" /> interface.
@@ -55,6 +49,24 @@ namespace Eve.Data
       get
       {
         Contract.Ensures(Contract.Result<IQueryable<AncestryEntity>>() != null);
+        throw new NotImplementedException();
+      }
+    }
+
+    IQueryable<AssemblyLineEntity> IEveDbContext.AssemblyLines
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IQueryable<AssemblyLineEntity>>() != null);
+        throw new NotImplementedException();
+      }
+    }
+
+    IQueryable<AssemblyLineStationEntity> IEveDbContext.AssemblyLineStations
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IQueryable<AssemblyLineStationEntity>>() != null);
         throw new NotImplementedException();
       }
     }

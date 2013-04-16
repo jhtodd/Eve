@@ -5,17 +5,10 @@
 //-----------------------------------------------------------------------
 namespace Eve
 {
-  using System;
-  using System.ComponentModel;
-  using System.Data.Entity;
   using System.Diagnostics.Contracts;
-  using System.Linq;
 
   using Eve.Data;
   using Eve.Data.Entities;
-
-  using FreeNet;
-  using FreeNet.Data.Entity;
 
   /// <summary>
   /// Contains information about the category of an attribute.

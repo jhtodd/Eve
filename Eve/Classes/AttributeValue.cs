@@ -6,20 +6,12 @@
 namespace Eve
 {
   using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data.Entity;
   using System.Diagnostics.Contracts;
-  using System.Linq;
 
   using Eve.Data;
   using Eve.Data.Entities;
 
-  using FreeNet;
   using FreeNet.Collections;
-  using FreeNet.Collections.ObjectModel;
-  using FreeNet.Data.Entity;
   using FreeNet.Utilities;
 
   /// <summary>
@@ -35,7 +27,7 @@ namespace Eve
       IHasIcon,
       IKeyItem<AttributeId>
   {
-    private AttributeType attributeType;
+    private AttributeType type;
 
     /* Constructors */
 
@@ -65,23 +57,6 @@ namespace Eve
     public AttributeId Id
     {
       get { return Entity.AttributeId; }
-    }
-
-    /// <summary>
-    /// Gets the attribute type to which the value applies.
-    /// </summary>
-    /// <value>
-    /// The <see cref="AttributeType" /> to which the value applies.
-    /// </value>
-    public AttributeType Type
-    {
-      get
-      {
-        Contract.Ensures(Contract.Result<AttributeType>() != null);
-
-        // If not already set, load from the cache, or else create an instance from the base entity
-        return this.attributeType ?? (this.attributeType = this.Container.Load<AttributeType>(this.Id, () => this.Entity.AttributeType.ToAdapter(this.Container)));
-      }
     }
 
     /// <summary>
@@ -118,6 +93,23 @@ namespace Eve
         Contract.Assume(!double.IsNaN(result));
 
         return result;
+      }
+    }
+
+    /// <summary>
+    /// Gets the attribute type to which the value applies.
+    /// </summary>
+    /// <value>
+    /// The <see cref="AttributeType" /> to which the value applies.
+    /// </value>
+    public AttributeType Type
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<AttributeType>() != null);
+
+        // If not already set, load from the cache, or else create an instance from the base entity
+        return this.type ?? (this.type = this.Container.GetOrAdd<AttributeType>(this.Id, () => this.Entity.AttributeType.ToAdapter(this.Container)));
       }
     }
 

@@ -5,17 +5,12 @@
 //-----------------------------------------------------------------------
 namespace Eve.Character
 {
-  using System;
-  using System.Collections;
-  using System.Collections.Generic;
   using System.Diagnostics.Contracts;
   using System.Linq;
 
   using Eve.Data;
   using Eve.Data.Entities;
   using Eve.Universe;
-
-  using FreeNet;
 
   /// <summary>
   /// Contains information about an EVE bloodline.
@@ -92,7 +87,7 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<NpcCorporation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.corporation ?? (this.corporation = this.Container.Load<NpcCorporation>(this.CorporationId, () => this.Entity.Corporation.ToAdapter(this.Container)));
+        return this.corporation ?? (this.corporation = this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => this.Entity.Corporation.ToAdapter(this.Container)));
       }
     }
 
@@ -142,7 +137,7 @@ namespace Eve.Character
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.Load<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+        return this.icon ?? (this.icon = this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
       }
     }
 
@@ -223,7 +218,7 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<EveType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.shipType ?? (this.shipType = this.Container.Load<EveType>(this.ShipTypeId, () => this.Entity.ShipType.ToAdapter(this.Container)));
+        return this.shipType ?? (this.shipType = this.Container.GetOrAdd<EveType>(this.ShipTypeId, () => this.Entity.ShipType.ToAdapter(this.Container)));
       }
     }
 
@@ -251,7 +246,7 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<Race>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.race ?? (this.race = this.Container.Load<Race>(this.RaceId, () => this.Entity.Race.ToAdapter(this.Container)));
+        return this.race ?? (this.race = this.Container.GetOrAdd<Race>(this.RaceId, () => this.Entity.Race.ToAdapter(this.Container)));
       }
     }
 

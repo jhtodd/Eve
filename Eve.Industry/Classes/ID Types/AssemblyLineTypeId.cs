@@ -3,20 +3,9 @@
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Eve
+namespace Eve.Industry
 {
   using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.Data.Common;
-  using System.Diagnostics.Contracts;
-
-  using FreeNet;
-
-  // Replace the following constants:
-  //
-  // AssemblyLineTypeId - The name of the structure (e.g. WidgetId)
-  // byte - The underlying type of the ID (e.g. int)
 
   /// <summary>
   /// Represents an ID value for the <see cref="AssemblyLineType" /> class.

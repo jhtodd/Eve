@@ -6,19 +6,8 @@
 namespace Eve.Data
 {
   using System;
-  using System.Collections;
-  using System.Collections.Concurrent;
-  using System.Collections.Generic;
-  using System.Collections.Specialized;
   using System.Diagnostics.Contracts;
-  using System.Linq;
-  using System.Runtime.Caching;
   using System.Threading;
-
-  using Eve.Character;
-  using Eve.Universe;
-
-  using FreeNet;
 
   /// <content>
   /// Contains the definition of the <see cref="CacheStatistics" /> helper class.

@@ -1,42 +1,36 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ConstellationId.cs" company="Jeremy H. Todd">
+// <copyright file="StationId.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
 namespace Eve.Universe
 {
   using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.Data.Common;
-  using System.Diagnostics.Contracts;
-
-  using FreeNet;
 
   /// <summary>
-  /// Represents an ID value for the <see cref="Constellation" /> class.
+  /// Represents an ID value for the <see cref="Station" /> class.
   /// </summary>
-  public partial struct ConstellationId
+  public partial struct StationId 
     : IConvertible,
-      IEquatable<ConstellationId>
+      IEquatable<StationId>
   {
     private readonly long value;
 
     /* Constructors */
 
     /// <summary>
-    /// Initializes a new instance of the ConstellationId structure.
+    /// Initializes a new instance of the StationId structure.
     /// </summary>
     /// <param name="value">
     /// The value of the structure.
     /// </param>
-    public ConstellationId(long value)
+    public StationId(long value)
     {
       this.value = value;
     }
 
-    /* Constructors */
-    
+    /* Properties */
+
     /// <summary>
     /// Gets the ID value.
     /// </summary>
@@ -63,7 +57,7 @@ namespace Eve.Universe
     /// <see langword="true" /> if the two values are equal; otherwise
     /// <see langword="false" />.
     /// </returns>
-    public static bool operator ==(ConstellationId left, ConstellationId right)
+    public static bool operator ==(StationId left, StationId right)
     {
       return left.Value.Equals(right.Value);
     }
@@ -81,7 +75,7 @@ namespace Eve.Universe
     /// <see langword="true" /> if the two values are unequal; otherwise
     /// <see langword="false" />.
     /// </returns>
-    public static bool operator !=(ConstellationId left, ConstellationId right)
+    public static bool operator !=(StationId left, StationId right)
     {
       return !left.Value.Equals(right.Value);
     }
@@ -95,9 +89,9 @@ namespace Eve.Universe
     /// <returns>
     /// The converted value.
     /// </returns>
-    public static implicit operator ConstellationId(long value)
+    public static implicit operator StationId(long value)
     {
-      return new ConstellationId(value);
+      return new StationId(value);
     }
 
     /// <summary>
@@ -109,7 +103,7 @@ namespace Eve.Universe
     /// <returns>
     /// The converted value.
     /// </returns>
-    public static implicit operator long(ConstellationId value)
+    public static implicit operator long(StationId value)
     {
       return value.Value;
     }
@@ -123,9 +117,9 @@ namespace Eve.Universe
     /// <returns>
     /// The converted value.
     /// </returns>
-    public static implicit operator ItemId(ConstellationId value)
+    public static implicit operator ItemId(StationId value)
     {
-      // ConstellationId "derives" from ItemId and can always be converted to it
+      // StationId "derives" from ItemId and can always be converted to it
       // (but not vice versa).
       return new ItemId(value.Value);
     }
@@ -138,16 +132,16 @@ namespace Eve.Universe
         return false;
       }
 
-      if (!typeof(ConstellationId).IsAssignableFrom(obj.GetType()))
+      if (!typeof(StationId).IsAssignableFrom(obj.GetType()))
       {
         return false;
       }
 
-      return this.Equals((ConstellationId)obj);
+      return this.Equals((StationId)obj);
     }
 
     /// <inheritdoc />
-    public bool Equals(ConstellationId other)
+    public bool Equals(StationId other)
     {
       return this.Value.Equals(other.Value);
     }
@@ -169,7 +163,7 @@ namespace Eve.Universe
   /// <content>
   /// Explicit implementation of the <see cref="IConvertible" /> interface.
   /// </content>
-  public partial struct ConstellationId : IConvertible
+  public partial struct StationId : IConvertible
   {
     TypeCode IConvertible.GetTypeCode()
     {

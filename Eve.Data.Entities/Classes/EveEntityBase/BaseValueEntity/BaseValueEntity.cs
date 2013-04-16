@@ -5,17 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
-  using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.ComponentModel.DataAnnotations.Schema;
-  using System.Data.Entity;
   using System.Diagnostics.CodeAnalysis;
-  using System.Linq;
-
-  using FreeNet;
-  using FreeNet.Data.Entity;
 
   /// <summary>
   /// The base class for data entities for basic EVE values.

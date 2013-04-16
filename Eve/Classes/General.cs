@@ -6,17 +6,7 @@
 namespace Eve
 {
   using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.Data.Common;
   using System.Diagnostics.Contracts;
-  using System.Linq;
-
-  using Eve.Data;
-
-  using FreeNet;
-  using FreeNet.Configuration;
-  using FreeNet.Data.Entity;
 
   /// <summary>
   /// Contains application-level properties and methods that other

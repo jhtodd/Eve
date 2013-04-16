@@ -5,19 +5,12 @@
 //-----------------------------------------------------------------------
 namespace Eve.Universe
 {
-  using System;
-  using System.Collections;
-  using System.Collections.Generic;
   using System.Diagnostics.Contracts;
   using System.Linq;
 
   using Eve.Character;
   using Eve.Data;
   using Eve.Data.Entities;
-  using Eve.Universe;
-
-  using FreeNet;
-  using FreeNet.Collections.ObjectModel;
 
   /// <summary>
   /// An EVE item describing an in-game constellation.
@@ -77,7 +70,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.faction = this.Container.Load<Faction>(factionEntity.Id, () => factionEntity.ToAdapter(this.Container));
+        return this.faction = this.Container.GetOrAdd<Faction>(factionEntity.Id, () => factionEntity.ToAdapter(this.Container));
       }
     }
 
@@ -161,7 +154,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.region ?? (this.region = this.Container.Load<Region>(this.RegionId, () => this.Entity.Region.ToAdapter(this.Container)));
+        return this.region ?? (this.region = this.Container.GetOrAdd<Region>(this.RegionId, () => this.Entity.Region.ToAdapter(this.Container)));
       }
     }
 

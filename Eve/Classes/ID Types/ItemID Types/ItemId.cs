@@ -6,14 +6,6 @@
 namespace Eve
 {
   using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.Data.Common;
-  using System.Diagnostics.Contracts;
-
-  using Eve.Universe;
-
-  using FreeNet;
 
   /// <summary>
   /// Represents an ID value for the <see cref="Item" /> class.

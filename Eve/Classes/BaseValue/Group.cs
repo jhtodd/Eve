@@ -5,18 +5,11 @@
 //-----------------------------------------------------------------------
 namespace Eve
 {
-  using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.ComponentModel;
   using System.Diagnostics.Contracts;
   using System.Linq;
 
   using Eve.Data;
   using Eve.Data.Entities;
-
-  using FreeNet;
-  using FreeNet.Data.Entity;
 
   /// <summary>
   /// Contains information about a group to which an EVE item belongs.
@@ -109,7 +102,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<Category>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.category ?? (this.category = this.Container.Load<Category>(this.CategoryId, () => this.Entity.Category.ToAdapter(this.Container)));
+        return this.category ?? (this.category = this.Container.GetOrAdd<Category>(this.CategoryId, () => this.Entity.Category.ToAdapter(this.Container)));
       }
     }
 
@@ -154,7 +147,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.Load<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+        return this.icon ?? (this.icon = this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
       }
     }
 

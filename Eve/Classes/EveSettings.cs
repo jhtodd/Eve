@@ -5,13 +5,9 @@
 //-----------------------------------------------------------------------
 namespace Eve
 {
-  using System;
-  using System.Collections;
-  using System.Collections.Generic;
   using System.Diagnostics.Contracts;
   using System.Globalization;
 
-  using FreeNet;
   using FreeNet.Configuration;
 
   /// <summary>

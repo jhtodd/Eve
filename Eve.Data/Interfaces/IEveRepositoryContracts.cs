@@ -6,11 +6,8 @@
 namespace Eve.Data
 {
   using System;
-  using System.Collections;
   using System.Collections.Generic;
-  using System.Data.Entity;
   using System.Diagnostics.Contracts;
-  using System.Linq;
   using System.Linq.Expressions;
 
   using Eve.Character;
@@ -18,7 +15,6 @@ namespace Eve.Data
   using Eve.Industry;
   using Eve.Universe;
 
-  using FreeNet;
   using FreeNet.Data.Entity;
 
   /// <summary>
@@ -29,7 +25,7 @@ namespace Eve.Data
   {
     /* Methods */
 
-    T IEveRepository.Load<T>(IConvertible id, Func<T> valueFactory)
+    T IEveRepository.GetOrAdd<T>(IConvertible id, Func<T> valueFactory)
     {
       Contract.Requires(id != null, "The ID cannot be null.");
       Contract.Requires(valueFactory != null, "The value creation method cannot be null.");
@@ -121,6 +117,50 @@ namespace Eve.Data
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<Ancestry>>() != null);
+      throw new NotImplementedException();
+    }
+    #endregion
+
+    #region AssemblyLine Methods
+    AssemblyLine IEveRepository.GetAssemblyLineById(AssemblyLineId id)
+    {
+      Contract.Ensures(Contract.Result<AssemblyLine>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<AssemblyLine> IEveRepository.GetAssemblyLines(Expression<Func<AssemblyLineEntity, bool>> filter)
+    {
+      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<AssemblyLine>>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<AssemblyLine> IEveRepository.GetAssemblyLines(params IQueryModifier<AssemblyLineEntity>[] modifiers)
+    {
+      Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<AssemblyLine>>() != null);
+      throw new NotImplementedException();
+    }
+    #endregion
+
+    #region AssemblyLineStation Methods
+    AssemblyLineStation IEveRepository.GetAssemblyLineStationById(StationId stationId, AssemblyLineTypeId assemblyLineTypeId)
+    {
+      Contract.Ensures(Contract.Result<AssemblyLineStation>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<AssemblyLineStation> IEveRepository.GetAssemblyLineStations(Expression<Func<AssemblyLineStationEntity, bool>> filter)
+    {
+      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<AssemblyLineStation>>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<AssemblyLineStation> IEveRepository.GetAssemblyLineStations(params IQueryModifier<AssemblyLineStationEntity>[] modifiers)
+    {
+      Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<AssemblyLineStation>>() != null);
       throw new NotImplementedException();
     }
     #endregion

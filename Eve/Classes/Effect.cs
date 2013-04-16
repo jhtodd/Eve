@@ -6,20 +6,12 @@
 namespace Eve
 {
   using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data.Entity;
   using System.Diagnostics.Contracts;
-  using System.Linq;
 
   using Eve.Data;
   using Eve.Data.Entities;
 
-  using FreeNet;
   using FreeNet.Collections;
-  using FreeNet.Collections.ObjectModel;
-  using FreeNet.Data.Entity;
   using FreeNet.Utilities;
 
   /// <summary>
@@ -68,6 +60,18 @@ namespace Eve
     }
 
     /// <summary>
+    /// Gets a value indicating whether it is the default effect for the item.
+    /// </summary>
+    /// <value>
+    /// <see langword="true" /> if the effect is the default effect for the item;
+    /// otherwise <see langword="false" />.
+    /// </value>
+    public bool IsDefault
+    {
+      get { return Entity.IsDefault; }
+    }
+
+    /// <summary>
     /// Gets the effect type to which the value applies.
     /// </summary>
     /// <value>
@@ -80,20 +84,8 @@ namespace Eve
         Contract.Ensures(Contract.Result<EffectType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.effectType ?? (this.effectType = this.Container.Load<EffectType>(this.Id, () => this.Entity.EffectType.ToAdapter(this.Container)));
+        return this.effectType ?? (this.effectType = this.Container.GetOrAdd<EffectType>(this.Id, () => this.Entity.EffectType.ToAdapter(this.Container)));
       }
-    }
-
-    /// <summary>
-    /// Gets a value indicating whether it is the default effect for the item.
-    /// </summary>
-    /// <value>
-    /// <see langword="true" /> if the effect is the default effect for the item;
-    /// otherwise <see langword="false" />.
-    /// </value>
-    public bool IsDefault
-    {
-      get { return Entity.IsDefault; }
     }
 
     /* Methods */

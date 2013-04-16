@@ -5,24 +5,20 @@
 //-----------------------------------------------------------------------
 namespace Eve.Universe
 {
-  using System;
-  using System.Collections;
-  using System.Collections.Generic;
   using System.Diagnostics.Contracts;
   using System.Linq;
 
   using Eve.Data;
   using Eve.Data.Entities;
-  using Eve.Universe;
-
-  using FreeNet;
-  using FreeNet.Collections.ObjectModel;
+  using Eve.Industry;
 
   /// <summary>
   /// An EVE item describing an in-game station.
   /// </summary>
   public sealed class Station : Item
   {
+    private ReadOnlyAssemblyLineCollection assemblyLines;
+    private ReadOnlyAssemblyLineStationCollection assemblyLineTypes;
     private Constellation constellation;
     private NpcCorporation corporation;
     private StationOperation operation;
@@ -48,6 +44,40 @@ namespace Eve.Universe
     }
 
     /* Properties */
+
+    /// <summary>
+    /// Gets the collection of assembly lines located at the station.
+    /// </summary>
+    /// <value>
+    /// The collection of assembly lines located at the station.
+    /// </value>
+    public ReadOnlyAssemblyLineCollection AssemblyLines
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<ReadOnlyAssemblyLineCollection>() != null);
+
+        return this.assemblyLines ?? (this.assemblyLines = new ReadOnlyAssemblyLineCollection(this.Container.GetAssemblyLines(x => x.ContainerId == this.Id.Value).OrderBy(x => x)));
+      }
+    }
+
+    /// <summary>
+    /// Gets a collection describing the types and number of assembly
+    /// lines located at the station.
+    /// </summary>
+    /// <value>
+    /// A collection describing the types and number of assembly
+    /// lines located at the station.
+    /// </value>
+    public ReadOnlyAssemblyLineStationCollection AssemblyLineTypes
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<ReadOnlyAssemblyLineStationCollection>() != null);
+
+        return this.assemblyLineTypes ?? (this.assemblyLineTypes = new ReadOnlyAssemblyLineStationCollection(this.Container.GetAssemblyLineStations(x => x.StationId == this.Id.Value).OrderBy(x => x)));
+      }
+    }
     
     /// <summary>
     /// Gets the constellation in which the station resides.
@@ -62,7 +92,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Constellation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.constellation ?? (this.constellation = this.Container.Load<Constellation>(this.ConstellationId, () => this.Entity.Constellation.ToAdapter(this.Container)));
+        return this.constellation ?? (this.constellation = this.Container.GetOrAdd<Constellation>(this.ConstellationId, () => this.Entity.Constellation.ToAdapter(this.Container)));
       }
     }
 
@@ -90,7 +120,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<NpcCorporation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.corporation ?? (this.corporation = this.Container.Load<NpcCorporation>(this.CorporationId, () => this.Entity.Corporation.ToAdapter(this.Container)));
+        return this.corporation ?? (this.corporation = this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => this.Entity.Corporation.ToAdapter(this.Container)));
       }
     }
 
@@ -199,7 +229,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<StationOperation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.operation ?? (this.operation = this.Container.Load<StationOperation>(this.OperationId, () => this.Entity.Operation.ToAdapter(this.Container)));
+        return this.operation ?? (this.operation = this.Container.GetOrAdd<StationOperation>(this.OperationId, () => this.Entity.Operation.ToAdapter(this.Container)));
       }
     }
 
@@ -227,7 +257,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.region ?? (this.region = this.Container.Load<Region>(this.RegionId, () => this.Entity.Region.ToAdapter(this.Container)));
+        return this.region ?? (this.region = this.Container.GetOrAdd<Region>(this.RegionId, () => this.Entity.Region.ToAdapter(this.Container)));
       }
     }
 
@@ -332,7 +362,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<SolarSystem>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.solarSystem ?? (this.solarSystem = this.Container.Load<SolarSystem>(this.SolarSystemId, () => this.Entity.SolarSystem.ToAdapter(this.Container)));
+        return this.solarSystem ?? (this.solarSystem = this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => this.Entity.SolarSystem.ToAdapter(this.Container)));
       }
     }
 
@@ -360,7 +390,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<StationType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.stationType ?? (this.stationType = this.Container.Load<StationType>(this.StationTypeId, () => (StationType)this.Entity.StationType.ToAdapter(this.Container)));
+        return this.stationType ?? (this.stationType = this.Container.GetOrAdd<StationType>(this.StationTypeId, () => (StationType)this.Entity.StationType.ToAdapter(this.Container)));
       }
     }
 

@@ -5,18 +5,11 @@
 //-----------------------------------------------------------------------
 namespace Eve.Industry
 {
-  using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.ComponentModel;
   using System.Diagnostics.Contracts;
   using System.Linq;
 
   using Eve.Data;
   using Eve.Data.Entities;
-
-  using FreeNet;
-  using FreeNet.Data.Entity;
 
   /// <summary>
   /// Contains information about the type of an assembly line that can
@@ -63,7 +56,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<Activity>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.activity ?? (this.activity = this.Container.Load<Activity>(this.ActivityId, () => this.Entity.Activity.ToAdapter(this.Container)));
+        return this.activity ?? (this.activity = this.Container.GetOrAdd<Activity>(this.ActivityId, () => this.Entity.Activity.ToAdapter(this.Container)));
       }
     }
 

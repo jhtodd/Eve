@@ -6,7 +6,6 @@
 namespace Eve.Universe
 {
   using System;
-  using System.Collections;
   using System.Collections.Generic;
   using System.Diagnostics.Contracts;
   using System.Linq;
@@ -14,10 +13,6 @@ namespace Eve.Universe
   using Eve.Character;
   using Eve.Data;
   using Eve.Data.Entities;
-  using Eve.Universe;
-
-  using FreeNet;
-  using FreeNet.Collections.ObjectModel;
 
   /// <summary>
   /// An EVE item describing an NPC-controlled corporation.
@@ -148,7 +143,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.enemy ?? (this.enemy = this.Container.Load<NpcCorporation>(this.EnemyId, () => this.Entity.Enemy.ToAdapter(this.Container)));
+        return this.enemy ?? (this.enemy = this.Container.GetOrAdd<NpcCorporation>(this.EnemyId, () => this.Entity.Enemy.ToAdapter(this.Container)));
       }
     }
 
@@ -243,7 +238,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.faction ?? (this.faction = this.Container.Load<Faction>(this.FactionId, () => this.Entity.Faction.ToAdapter(this.Container)));
+        return this.faction ?? (this.faction = this.Container.GetOrAdd<Faction>(this.FactionId, () => this.Entity.Faction.ToAdapter(this.Container)));
       }
     }
 
@@ -277,7 +272,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.friend ?? (this.friend = this.Container.Load<NpcCorporation>(this.FriendId, () => this.Entity.Friend.ToAdapter(this.Container)));
+        return this.friend ?? (this.friend = this.Container.GetOrAdd<NpcCorporation>(this.FriendId, () => this.Entity.Friend.ToAdapter(this.Container)));
       }
     }
 
@@ -333,7 +328,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Icon>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.Load<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+        return this.icon ?? (this.icon = this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
       }
     }
 
@@ -487,7 +482,7 @@ namespace Eve.Universe
           Contract.Assume(this.Entity.ResearchFields != null);
 
           this.researchFields = new ReadOnlySkillTypeCollection(
-            this.Entity.ResearchFields.Select(x => this.Container.Load<SkillType>(x.Id, () => (SkillType)x.ToAdapter(this.Container)))
+            this.Entity.ResearchFields.Select(x => this.Container.GetOrAdd<SkillType>(x.Id, () => (SkillType)x.ToAdapter(this.Container)))
                                       .OrderBy(x => x));
         }
 
@@ -604,7 +599,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<SolarSystem>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.solarSystem ?? (this.solarSystem = this.Container.Load<SolarSystem>(this.SolarSystemId, () => this.Entity.SolarSystem.ToAdapter(this.Container)));
+        return this.solarSystem ?? (this.solarSystem = this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => this.Entity.SolarSystem.ToAdapter(this.Container)));
       }
     }
 
@@ -679,7 +674,7 @@ namespace Eve.Universe
           Contract.Assume(this.Entity.TradeGoods != null);
 
           this.tradeGoods = new ReadOnlyTypeCollection(
-            this.Entity.TradeGoods.Select(x => this.Container.Load<EveType>(x.Id, () => x.ToAdapter(this.Container)))
+            this.Entity.TradeGoods.Select(x => this.Container.GetOrAdd<EveType>(x.Id, () => x.ToAdapter(this.Container)))
                                   .OrderBy(x => x));
         }
 

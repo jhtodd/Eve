@@ -6,21 +6,12 @@
 namespace Eve
 {
   using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data.Entity;
   using System.Diagnostics.Contracts;
-  using System.Linq;
 
   using Eve.Data;
   using Eve.Data.Entities;
 
-  using FreeNet;
   using FreeNet.Collections;
-  using FreeNet.Collections.ObjectModel;
-  using FreeNet.Data.Entity;
-  using FreeNet.Utilities;
 
   /// <summary>
   /// Contains meta-information about an EVE item type.
@@ -70,7 +61,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<MetaGroup>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.metaGroup ?? (this.metaGroup = this.Container.Load<MetaGroup>(this.MetaGroupId, () => this.Entity.MetaGroup.ToAdapter(this.Container)));
+        return this.metaGroup ?? (this.metaGroup = this.Container.GetOrAdd<MetaGroup>(this.MetaGroupId, () => this.Entity.MetaGroup.ToAdapter(this.Container)));
       }
     }
 
@@ -98,7 +89,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<EveType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.parentType ?? (this.parentType = this.Container.Load<EveType>(this.ParentTypeId, () => Entity.ParentType.ToAdapter(this.Container)));
+        return this.parentType ?? (this.parentType = this.Container.GetOrAdd<EveType>(this.ParentTypeId, () => Entity.ParentType.ToAdapter(this.Container)));
       }
     }
 
@@ -126,7 +117,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<EveType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.type ?? (this.type = this.Container.Load<EveType>(this.TypeId, () => Entity.Type.ToAdapter(this.Container)));
+        return this.type ?? (this.type = this.Container.GetOrAdd<EveType>(this.TypeId, () => Entity.Type.ToAdapter(this.Container)));
       }
     }
 

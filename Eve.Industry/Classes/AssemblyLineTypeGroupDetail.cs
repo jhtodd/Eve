@@ -6,25 +6,24 @@
 namespace Eve.Industry
 {
   using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.ComponentModel;
   using System.Diagnostics.Contracts;
-  using System.Linq;
 
   using Eve.Data;
   using Eve.Data.Entities;
 
-  using FreeNet;
   using FreeNet.Collections;
-  using FreeNet.Data.Entity;
   using FreeNet.Utilities;
 
   /// <summary>
   /// Contains information about which <see cref="Group">Groups</see> an assembly
   /// line can process.
   /// </summary>
-  public sealed partial class AssemblyLineTypeGroupDetail : EveEntityAdapter<AssemblyLineTypeGroupDetailEntity>
+  public sealed partial class AssemblyLineTypeGroupDetail
+    : EveEntityAdapter<AssemblyLineTypeGroupDetailEntity>,
+      IComparable<AssemblyLineTypeGroupDetail>,
+      IEquatable<AssemblyLineTypeGroupDetail>,
+      IEveCacheable,
+      IKeyItem<long>
   {
     private AssemblyLineType assemblyLineType;
     private Group group;
@@ -63,7 +62,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<AssemblyLineType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.assemblyLineType ?? (this.assemblyLineType = this.Container.Load<AssemblyLineType>(this.AssemblyLineTypeId, () => this.Entity.AssemblyLineType.ToAdapter(this.Container)));
+        return this.assemblyLineType ?? (this.assemblyLineType = this.Container.GetOrAdd<AssemblyLineType>(this.AssemblyLineTypeId, () => this.Entity.AssemblyLineType.ToAdapter(this.Container)));
       }
     }
 
@@ -98,7 +97,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<Group>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.group ?? (this.group = this.Container.Load<Group>(this.GroupId, () => this.Entity.Group.ToAdapter(this.Container)));
+        return this.group ?? (this.group = this.Container.GetOrAdd<Group>(this.GroupId, () => this.Entity.Group.ToAdapter(this.Container)));
       }
     }
 

@@ -6,7 +6,6 @@
 namespace Eve
 {
   using System;
-  using System.Collections;
   using System.Collections.Generic;
   using System.Diagnostics.Contracts;
   using System.Linq;
@@ -15,9 +14,6 @@ namespace Eve
   using Eve.Data;
   using Eve.Data.Entities;
   using Eve.Universe;
-
-  using FreeNet;
-  using FreeNet.Collections.ObjectModel;
 
   /// <summary>
   /// The base class for EVE item types.
@@ -210,7 +206,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.graphic ?? (this.graphic = this.Container.Load<Graphic>(this.GraphicId, () => this.Entity.Graphic.ToAdapter(this.Container)));
+        return this.graphic ?? (this.graphic = this.Container.GetOrAdd<Graphic>(this.GraphicId, () => this.Entity.Graphic.ToAdapter(this.Container)));
       }
     }
 
@@ -238,7 +234,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<Group>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.group ?? (this.group = this.Container.Load<Group>(this.GroupId, () => (Group)this.Entity.Group.ToAdapter(this.Container)));
+        return this.group ?? (this.group = this.Container.GetOrAdd<Group>(this.GroupId, () => (Group)this.Entity.Group.ToAdapter(this.Container)));
       }
     }
 
@@ -270,7 +266,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.Load<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+        return this.icon ?? (this.icon = this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
       }
     }
 
@@ -302,7 +298,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.marketGroup ?? (this.marketGroup = this.Container.Load<MarketGroup>(this.MarketGroupId, () => this.Entity.MarketGroup.ToAdapter(this.Container)));
+        return this.marketGroup ?? (this.marketGroup = this.Container.GetOrAdd<MarketGroup>(this.MarketGroupId, () => this.Entity.MarketGroup.ToAdapter(this.Container)));
       }
     }
 

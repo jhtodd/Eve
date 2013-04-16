@@ -5,19 +5,11 @@
 //-----------------------------------------------------------------------
 namespace Eve
 {
-  using System;
-  using System.Collections;
-  using System.Collections.Generic;
   using System.Diagnostics.Contracts;
-  using System.Linq;
 
   using Eve.Character;
   using Eve.Data;
   using Eve.Data.Entities;
-  using Eve.Universe;
-
-  using FreeNet;
-  using FreeNet.Collections.ObjectModel;
 
   /// <summary>
   /// An EVE type which doesn't fall into any particular category.

@@ -5,17 +5,10 @@
 //-----------------------------------------------------------------------
 namespace Eve.Character
 {
-  using System;
-  using System.Collections;
-  using System.Collections.Generic;
   using System.Diagnostics.Contracts;
-  using System.Linq;
 
   using Eve.Data;
   using Eve.Data.Entities;
-  using Eve.Universe;
-
-  using FreeNet;
 
   /// <summary>
   /// Contains information about an EVE ancestry.
@@ -57,7 +50,7 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<Bloodline>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.bloodline ?? (this.bloodline = this.Container.Load<Bloodline>(this.BloodlineId, () => this.Entity.Bloodline.ToAdapter(this.Container)));
+        return this.bloodline ?? (this.bloodline = this.Container.GetOrAdd<Bloodline>(this.BloodlineId, () => this.Entity.Bloodline.ToAdapter(this.Container)));
       }
     }
 
@@ -103,7 +96,7 @@ namespace Eve.Character
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.Load<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+        return this.icon ?? (this.icon = this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
       }
     }
 

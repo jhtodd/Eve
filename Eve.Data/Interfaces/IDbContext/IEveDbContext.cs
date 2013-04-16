@@ -6,15 +6,11 @@
 namespace Eve.Data
 {
   using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.Data.Entity;
   using System.Diagnostics.Contracts;
   using System.Linq;
 
   using Eve.Data.Entities;
 
-  using FreeNet;
   using FreeNet.Data.Entity;
 
   /// <summary>
@@ -57,6 +53,24 @@ namespace Eve.Data
     /// The <see cref="IQueryable{T}" /> for ancestries.
     /// </value>
     IQueryable<AncestryEntity> Ancestries { get; }
+
+    /// <summary>
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query
+    /// information about the assembly lines.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IQueryable{T}" /> for assembly line information.
+    /// </value>
+    IQueryable<AssemblyLineEntity> AssemblyLines { get; }
+
+    /// <summary>
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query
+    /// information about the types of assembly lines at stations.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IQueryable{T}" /> for assembly line station information.
+    /// </value>
+    IQueryable<AssemblyLineStationEntity> AssemblyLineStations { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query assembly line type.

@@ -5,17 +5,8 @@
 //-----------------------------------------------------------------------
 namespace Eve.Universe
 {
-  using System;
-  using System.Collections;
   using System.Collections.Generic;
-  using System.Diagnostics.Contracts;
-  using System.Linq;
 
-  using Eve.Character;
-  using Eve.Data.Entities;
-  using Eve.Universe;
-
-  using FreeNet;
   using FreeNet.Collections.ObjectModel;
 
   /// <summary>

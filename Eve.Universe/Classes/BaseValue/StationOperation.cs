@@ -6,15 +6,11 @@
 namespace Eve.Universe
 {
   using System;
-  using System.Collections;
-  using System.Collections.Generic;
   using System.Diagnostics.Contracts;
   using System.Linq;
 
   using Eve.Data;
   using Eve.Data.Entities;
-
-  using FreeNet;
 
   /// <summary>
   /// Contains information about the operation performed by a station.
@@ -62,7 +58,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<CorporateActivity>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.activity ?? (this.activity = this.Container.Load<CorporateActivity>(this.ActivityId, () => this.Entity.Activity.ToAdapter(this.Container)));
+        return this.activity ?? (this.activity = this.Container.GetOrAdd<CorporateActivity>(this.ActivityId, () => this.Entity.Activity.ToAdapter(this.Container)));
       }
     }
 
@@ -94,7 +90,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.amarrStationType ?? (this.amarrStationType = this.Container.Load<StationType>(this.AmarrStationTypeId, () => (StationType)this.Entity.AmarrStationType.ToAdapter(this.Container)));
+        return this.amarrStationType ?? (this.amarrStationType = this.Container.GetOrAdd<StationType>(this.AmarrStationTypeId, () => (StationType)this.Entity.AmarrStationType.ToAdapter(this.Container)));
       }
     }
 
@@ -136,7 +132,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.caldariStationType ?? (this.caldariStationType = this.Container.Load<StationType>(this.CaldariStationTypeId, () => (StationType)this.Entity.CaldariStationType.ToAdapter(this.Container)));
+        return this.caldariStationType ?? (this.caldariStationType = this.Container.GetOrAdd<StationType>(this.CaldariStationTypeId, () => (StationType)this.Entity.CaldariStationType.ToAdapter(this.Container)));
       }
     }
 
@@ -189,7 +185,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.gallenteStationType ?? (this.gallenteStationType = this.Container.Load<StationType>(this.GallenteStationTypeId, () => (StationType)this.Entity.GallenteStationType.ToAdapter(this.Container)));
+        return this.gallenteStationType ?? (this.gallenteStationType = this.Container.GetOrAdd<StationType>(this.GallenteStationTypeId, () => (StationType)this.Entity.GallenteStationType.ToAdapter(this.Container)));
       }
     }
 
@@ -231,7 +227,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.joveStationType ?? (this.joveStationType = this.Container.Load<StationType>(this.JoveStationTypeId, () => (StationType)this.Entity.JoveStationType.ToAdapter(this.Container)));
+        return this.joveStationType ?? (this.joveStationType = this.Container.GetOrAdd<StationType>(this.JoveStationTypeId, () => (StationType)this.Entity.JoveStationType.ToAdapter(this.Container)));
       }
     }
 
@@ -262,7 +258,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.minmatarStationType ?? (this.minmatarStationType = this.Container.Load<StationType>(this.MinmatarStationTypeId, () => (StationType)this.Entity.MinmatarStationType.ToAdapter(this.Container)));
+        return this.minmatarStationType ?? (this.minmatarStationType = this.Container.GetOrAdd<StationType>(this.MinmatarStationTypeId, () => (StationType)this.Entity.MinmatarStationType.ToAdapter(this.Container)));
       }
     }
 
@@ -310,7 +306,7 @@ namespace Eve.Universe
           else
           {
             this.services = new ReadOnlyStationServiceCollection(
-              this.Entity.Services.Select(x => this.Container.Load<StationService>(x.Id, () => x.ToAdapter(this.Container))).OrderBy(x => x));
+              this.Entity.Services.Select(x => this.Container.GetOrAdd<StationService>(x.Id, () => x.ToAdapter(this.Container))).OrderBy(x => x));
           }
         }
 

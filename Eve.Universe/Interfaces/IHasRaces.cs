@@ -5,17 +5,6 @@
 //-----------------------------------------------------------------------
 namespace Eve.Character
 {
-  using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.Data.Entity;
-  using System.Diagnostics.Contracts;
-  using System.Linq;
-  using System.Linq.Expressions;
-
-  using FreeNet;
-  using FreeNet.Data.Entity;
-
   /// <summary>
   /// The base interface for classes which are associated with one or more
   /// EVE races.
@@ -40,5 +29,7 @@ namespace Eve.Character
     /// item is not associated with any races.
     /// </value>
     RaceId? RaceId { get; }
+
+    // TODO: Add collection for races
   }
 }

@@ -5,18 +5,10 @@
 //-----------------------------------------------------------------------
 namespace Eve
 {
-  using System;
-  using System.Collections;
-  using System.Collections.Generic;
   using System.Diagnostics.Contracts;
-  using System.Linq;
 
   using Eve.Data;
   using Eve.Data.Entities;
-  using Eve.Universe;
-
-  using FreeNet;
-  using FreeNet.Collections.ObjectModel;
 
   /// <summary>
   /// An EVE item which doesn't fall into any particular category.

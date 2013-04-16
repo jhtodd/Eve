@@ -5,18 +5,9 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
-  using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.ComponentModel;
   using System.ComponentModel.DataAnnotations.Schema;
-  using System.Data.Entity;
   using System.Diagnostics.CodeAnalysis;
   using System.Diagnostics.Contracts;
-  using System.Linq;
-
-  using FreeNet;
-  using FreeNet.Data.Entity;
 
   /// <summary>
   /// The data entity for the <see cref="AttributeCategory" /> class.

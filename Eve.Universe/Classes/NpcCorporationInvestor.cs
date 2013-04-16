@@ -6,19 +6,11 @@
 namespace Eve.Universe
 {
   using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.Data.Entity;
   using System.Diagnostics.Contracts;
-  using System.Linq;
-  using System.Linq.Expressions;
 
   using Eve.Data;
 
-  using FreeNet;
   using FreeNet.Collections;
-  using FreeNet.Collections.ObjectModel;
-  using FreeNet.Data.Entity;
 
   /// <summary>
   /// Contains information about an investor in a corporation.

@@ -1,36 +1,30 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="SolarSystemId.cs" company="Jeremy H. Todd">
+// <copyright file="AgentId.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
 namespace Eve.Universe
 {
   using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.Data.Common;
-  using System.Diagnostics.Contracts;
-
-  using FreeNet;
 
   /// <summary>
-  /// Represents an ID value for the <see cref="SolarSystem" /> class.
+  /// Represents an ID value for the <see cref="Agent" /> class.
   /// </summary>
-  public partial struct SolarSystemId
+  public partial struct AgentId 
     : IConvertible,
-      IEquatable<SolarSystemId>
+      IEquatable<AgentId>
   {
     private readonly long value;
 
     /* Constructors */
 
     /// <summary>
-    /// Initializes a new instance of the SolarSystemId structure.
+    /// Initializes a new instance of the AgentId structure.
     /// </summary>
     /// <param name="value">
     /// The value of the structure.
     /// </param>
-    public SolarSystemId(long value)
+    public AgentId(long value)
     {
       this.value = value;
     }
@@ -63,7 +57,7 @@ namespace Eve.Universe
     /// <see langword="true" /> if the two values are equal; otherwise
     /// <see langword="false" />.
     /// </returns>
-    public static bool operator ==(SolarSystemId left, SolarSystemId right)
+    public static bool operator ==(AgentId left, AgentId right)
     {
       return left.Value.Equals(right.Value);
     }
@@ -81,7 +75,7 @@ namespace Eve.Universe
     /// <see langword="true" /> if the two values are unequal; otherwise
     /// <see langword="false" />.
     /// </returns>
-    public static bool operator !=(SolarSystemId left, SolarSystemId right)
+    public static bool operator !=(AgentId left, AgentId right)
     {
       return !left.Value.Equals(right.Value);
     }
@@ -95,9 +89,9 @@ namespace Eve.Universe
     /// <returns>
     /// The converted value.
     /// </returns>
-    public static implicit operator SolarSystemId(long value)
+    public static implicit operator AgentId(long value)
     {
-      return new SolarSystemId(value);
+      return new AgentId(value);
     }
 
     /// <summary>
@@ -109,7 +103,7 @@ namespace Eve.Universe
     /// <returns>
     /// The converted value.
     /// </returns>
-    public static implicit operator long(SolarSystemId value)
+    public static implicit operator long(AgentId value)
     {
       return value.Value;
     }
@@ -123,9 +117,9 @@ namespace Eve.Universe
     /// <returns>
     /// The converted value.
     /// </returns>
-    public static implicit operator ItemId(SolarSystemId value)
+    public static implicit operator ItemId(AgentId value)
     {
-      // SolarSystemId "derives" from ItemId and can always be converted to it
+      // AgentId "derives" from ItemId and can always be converted to it
       // (but not vice versa).
       return new ItemId(value.Value);
     }
@@ -138,16 +132,16 @@ namespace Eve.Universe
         return false;
       }
 
-      if (!typeof(SolarSystemId).IsAssignableFrom(obj.GetType()))
+      if (!typeof(AgentId).IsAssignableFrom(obj.GetType()))
       {
         return false;
       }
 
-      return this.Equals((SolarSystemId)obj);
+      return this.Equals((AgentId)obj);
     }
 
     /// <inheritdoc />
-    public bool Equals(SolarSystemId other)
+    public bool Equals(AgentId other)
     {
       return this.Value.Equals(other.Value);
     }
@@ -169,7 +163,7 @@ namespace Eve.Universe
   /// <content>
   /// Explicit implementation of the <see cref="IConvertible" /> interface.
   /// </content>
-  public partial struct SolarSystemId : IConvertible
+  public partial struct AgentId : IConvertible
   {
     TypeCode IConvertible.GetTypeCode()
     {

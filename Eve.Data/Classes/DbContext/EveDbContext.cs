@@ -5,23 +5,13 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data
 {
-  using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.ComponentModel.DataAnnotations.Schema;
   using System.Data.Common;
   using System.Data.Entity;
-  using System.Data.Objects;
   using System.Diagnostics.Contracts;
   using System.Linq;
 
-  using Eve;
   using Eve.Data.Entities;
-  using Eve.Universe;
 
-  using FreeNet;
-  using FreeNet.Configuration;
   using FreeNet.Data.Entity;
 
   /// <summary>
@@ -111,6 +101,18 @@ namespace Eve.Data
     public IQueryable<AncestryEntity> Ancestries
     {
       get { return this.Query<AncestryEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<AssemblyLineEntity> AssemblyLines
+    {
+      get { return this.Query<AssemblyLineEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<AssemblyLineStationEntity> AssemblyLineStations
+    {
+      get { return this.Query<AssemblyLineStationEntity>(); }
     }
 
     /// <inheritdoc />

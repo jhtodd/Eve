@@ -6,18 +6,11 @@
 namespace Eve.Character
 {
   using System;
-  using System.Collections;
-  using System.Collections.Generic;
   using System.Diagnostics.Contracts;
-  using System.Linq;
 
   using Eve.Data;
-  using Eve.Data.Entities;
-  using Eve.Universe;
 
-  using FreeNet;
   using FreeNet.Collections;
-  using FreeNet.Collections.ObjectModel;
   using FreeNet.Utilities;
 
   /// <summary>

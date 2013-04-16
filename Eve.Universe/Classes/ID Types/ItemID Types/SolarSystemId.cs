@@ -1,36 +1,30 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="RegionId.cs" company="Jeremy H. Todd">
+// <copyright file="SolarSystemId.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
 namespace Eve.Universe
 {
   using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.Data.Common;
-  using System.Diagnostics.Contracts;
-
-  using FreeNet;
 
   /// <summary>
-  /// Represents an ID value for the <see cref="Region" /> class.
+  /// Represents an ID value for the <see cref="SolarSystem" /> class.
   /// </summary>
-  public partial struct RegionId
+  public partial struct SolarSystemId
     : IConvertible,
-      IEquatable<RegionId>
+      IEquatable<SolarSystemId>
   {
     private readonly long value;
 
     /* Constructors */
 
     /// <summary>
-    /// Initializes a new instance of the RegionId structure.
+    /// Initializes a new instance of the SolarSystemId structure.
     /// </summary>
     /// <param name="value">
     /// The value of the structure.
     /// </param>
-    public RegionId(long value)
+    public SolarSystemId(long value)
     {
       this.value = value;
     }
@@ -63,7 +57,7 @@ namespace Eve.Universe
     /// <see langword="true" /> if the two values are equal; otherwise
     /// <see langword="false" />.
     /// </returns>
-    public static bool operator ==(RegionId left, RegionId right)
+    public static bool operator ==(SolarSystemId left, SolarSystemId right)
     {
       return left.Value.Equals(right.Value);
     }
@@ -81,7 +75,7 @@ namespace Eve.Universe
     /// <see langword="true" /> if the two values are unequal; otherwise
     /// <see langword="false" />.
     /// </returns>
-    public static bool operator !=(RegionId left, RegionId right)
+    public static bool operator !=(SolarSystemId left, SolarSystemId right)
     {
       return !left.Value.Equals(right.Value);
     }
@@ -95,9 +89,9 @@ namespace Eve.Universe
     /// <returns>
     /// The converted value.
     /// </returns>
-    public static implicit operator RegionId(long value)
+    public static implicit operator SolarSystemId(long value)
     {
-      return new RegionId(value);
+      return new SolarSystemId(value);
     }
 
     /// <summary>
@@ -109,7 +103,7 @@ namespace Eve.Universe
     /// <returns>
     /// The converted value.
     /// </returns>
-    public static implicit operator long(RegionId value)
+    public static implicit operator long(SolarSystemId value)
     {
       return value.Value;
     }
@@ -123,9 +117,9 @@ namespace Eve.Universe
     /// <returns>
     /// The converted value.
     /// </returns>
-    public static implicit operator ItemId(RegionId value)
+    public static implicit operator ItemId(SolarSystemId value)
     {
-      // RegionId "derives" from ItemId and can always be converted to it
+      // SolarSystemId "derives" from ItemId and can always be converted to it
       // (but not vice versa).
       return new ItemId(value.Value);
     }
@@ -138,16 +132,16 @@ namespace Eve.Universe
         return false;
       }
 
-      if (!typeof(RegionId).IsAssignableFrom(obj.GetType()))
+      if (!typeof(SolarSystemId).IsAssignableFrom(obj.GetType()))
       {
         return false;
       }
 
-      return this.Equals((RegionId)obj);
+      return this.Equals((SolarSystemId)obj);
     }
 
     /// <inheritdoc />
-    public bool Equals(RegionId other)
+    public bool Equals(SolarSystemId other)
     {
       return this.Value.Equals(other.Value);
     }
@@ -169,7 +163,7 @@ namespace Eve.Universe
   /// <content>
   /// Explicit implementation of the <see cref="IConvertible" /> interface.
   /// </content>
-  public partial struct RegionId : IConvertible
+  public partial struct SolarSystemId : IConvertible
   {
     TypeCode IConvertible.GetTypeCode()
     {

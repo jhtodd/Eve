@@ -6,20 +6,13 @@
 namespace Eve.Universe
 {
   using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data.Entity;
   using System.Diagnostics.Contracts;
   using System.Linq;
 
   using Eve.Data;
   using Eve.Data.Entities;
 
-  using FreeNet;
   using FreeNet.Collections;
-  using FreeNet.Collections.ObjectModel;
-  using FreeNet.Data.Entity;
   using FreeNet.Utilities;
 
   /// <summary>
@@ -95,7 +88,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Division>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.division ?? (this.division = this.Container.Load<Division>(this.DivisionId, () => this.Entity.Division.ToAdapter(this.Container)));
+        return this.division ?? (this.division = this.Container.GetOrAdd<Division>(this.DivisionId, () => this.Entity.Division.ToAdapter(this.Container)));
       }
     }
 

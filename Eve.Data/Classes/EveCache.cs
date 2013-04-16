@@ -15,11 +15,6 @@ namespace Eve.Data
   using System.Runtime.Caching;
   using System.Threading;
 
-  using Eve.Character;
-  using Eve.Universe;
-
-  using FreeNet;
-
   /// <summary>
   /// A central cache for storing commonly used EVE values.
   /// </summary>

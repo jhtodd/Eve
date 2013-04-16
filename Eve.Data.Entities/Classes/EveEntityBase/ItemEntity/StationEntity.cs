@@ -5,20 +5,11 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
-  using System;
-  using System.Collections;
   using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
-  using System.Data.Entity;
   using System.Diagnostics.CodeAnalysis;
-  using System.Linq;
 
   using Eve.Universe;
-
-  using FreeNet;
-  using FreeNet.Data.Entity;
 
   /// <summary>
   /// The data entity for the <see cref="Station" /> class.
@@ -40,6 +31,24 @@ namespace Eve.Data.Entities
     }
 
     /* Properties */
+
+    /// <summary>
+    /// Gets the underlying database value of the corresponding adapter property.
+    /// </summary>
+    /// <value>
+    /// The underlying database value of the corresponding adapter property.
+    /// </value>
+    [ForeignKey("ContainerId")]
+    public virtual ICollection<AssemblyLineEntity> AssemblyLines { get; internal set; }
+
+    /// <summary>
+    /// Gets the underlying database value of the corresponding adapter property.
+    /// </summary>
+    /// <value>
+    /// The underlying database value of the corresponding adapter property.
+    /// </value>
+    [ForeignKey("StationId")]
+    public virtual ICollection<AssemblyLineStationEntity> AssemblyLineTypes { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.

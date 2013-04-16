@@ -5,24 +5,11 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data
 {
-  using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.ComponentModel.DataAnnotations.Schema;
   using System.Data.Common;
   using System.Data.Entity;
-  using System.Data.Objects;
   using System.Diagnostics.Contracts;
-  using System.Linq;
 
-  using Eve;
   using Eve.Data.Entities;
-  using Eve.Universe;
-
-  using FreeNet;
-  using FreeNet.Configuration;
-  using FreeNet.Data.Entity;
 
   /// <summary>
   /// A <see cref="DbContext" /> that provides data access to the EVE database.
@@ -173,6 +160,16 @@ namespace Eve.Data
       ancestry.Property(x => x.Description).HasColumnName("description");
       ancestry.Property(x => x.Id).HasColumnName("ancestryID");
       ancestry.Property(x => x.Name).HasColumnName("ancestryName");
+
+      /* AssemblyLineEntity Mappings *******************************************/
+
+      // All mappings defined by Data Annotations
+      var assemblyLine = modelBuilder.Entity<AssemblyLineEntity>();
+
+      /* AssemblyLineStationEntity Mappings *******************************************/
+
+      // All mappings defined by Data Annotations
+      var assemblyLineStation = modelBuilder.Entity<AssemblyLineStationEntity>();
 
       /* AssemblyLineTypeEntity Mappings *******************************************/
       var assemblyLineType = modelBuilder.Entity<AssemblyLineTypeEntity>();

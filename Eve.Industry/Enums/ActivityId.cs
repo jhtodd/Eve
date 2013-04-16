@@ -3,11 +3,8 @@
 // Any changes you make may be overwritten the next time the contents are generated.
 namespace Eve.Industry
 {
-  using System;
   using System.CodeDom.Compiler;
   using System.ComponentModel;
-  using FreeNet;
-
 
   /// <summary>Contains the ID values associated with the Activity class.</summary>
   [GeneratedCode("Eve.Meta", "1.0.0.0")]

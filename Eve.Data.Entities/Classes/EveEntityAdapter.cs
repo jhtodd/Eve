@@ -5,23 +5,11 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
-  using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.ComponentModel.DataAnnotations;
-  using System.ComponentModel.DataAnnotations.Schema;
-  using System.Data.Entity;
   using System.Diagnostics.Contracts;
-  using System.Linq;
 
   using Eve.Data;
-  using Eve.Data.Entities;
 
-  using FreeNet;
-  using FreeNet.Collections;
   using FreeNet.Data.Entity;
-  using FreeNet.Utilities;
 
   /// <summary>
   /// The base class for objects which serve as an adapter for EVE entities.

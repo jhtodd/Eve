@@ -1,36 +1,30 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="AgentId.cs" company="Jeremy H. Todd">
+// <copyright file="AssemblyLineId.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Eve.Universe
+namespace Eve.Industry
 {
   using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.Data.Common;
-  using System.Diagnostics.Contracts;
-
-  using FreeNet;
 
   /// <summary>
-  /// Represents an ID value for the <see cref="Agent" /> class.
+  /// Represents an ID value for the <see cref="AssemblyLine" /> class.
   /// </summary>
-  public partial struct AgentId 
+  public partial struct AssemblyLineId 
     : IConvertible,
-      IEquatable<AgentId>
+      IEquatable<AssemblyLineId>
   {
-    private readonly long value;
+    private readonly int value;
 
     /* Constructors */
 
     /// <summary>
-    /// Initializes a new instance of the AgentId structure.
+    /// Initializes a new instance of the AssemblyLineId structure.
     /// </summary>
     /// <param name="value">
     /// The value of the structure.
     /// </param>
-    public AgentId(long value)
+    public AssemblyLineId(int value)
     {
       this.value = value;
     }
@@ -43,13 +37,13 @@ namespace Eve.Universe
     /// <value>
     /// The ID value.
     /// </value>
-    public long Value
+    public int Value
     {
       get { return this.value; }
     }
 
     /* Methods */
-
+    
     /// <summary>
     /// The equality operator.
     /// </summary>
@@ -63,7 +57,7 @@ namespace Eve.Universe
     /// <see langword="true" /> if the two values are equal; otherwise
     /// <see langword="false" />.
     /// </returns>
-    public static bool operator ==(AgentId left, AgentId right)
+    public static bool operator ==(AssemblyLineId left, AssemblyLineId right)
     {
       return left.Value.Equals(right.Value);
     }
@@ -81,7 +75,7 @@ namespace Eve.Universe
     /// <see langword="true" /> if the two values are unequal; otherwise
     /// <see langword="false" />.
     /// </returns>
-    public static bool operator !=(AgentId left, AgentId right)
+    public static bool operator !=(AssemblyLineId left, AssemblyLineId right)
     {
       return !left.Value.Equals(right.Value);
     }
@@ -95,9 +89,9 @@ namespace Eve.Universe
     /// <returns>
     /// The converted value.
     /// </returns>
-    public static implicit operator AgentId(long value)
+    public static implicit operator AssemblyLineId(int value)
     {
-      return new AgentId(value);
+      return new AssemblyLineId(value);
     }
 
     /// <summary>
@@ -109,25 +103,9 @@ namespace Eve.Universe
     /// <returns>
     /// The converted value.
     /// </returns>
-    public static implicit operator long(AgentId value)
+    public static implicit operator int(AssemblyLineId value)
     {
       return value.Value;
-    }
-
-    /// <summary>
-    /// Implicit conversion from another type.
-    /// </summary>
-    /// <param name="value">
-    /// The value to convert.
-    /// </param>
-    /// <returns>
-    /// The converted value.
-    /// </returns>
-    public static implicit operator ItemId(AgentId value)
-    {
-      // AgentId "derives" from ItemId and can always be converted to it
-      // (but not vice versa).
-      return new ItemId(value.Value);
     }
 
     /// <inheritdoc />
@@ -138,16 +116,16 @@ namespace Eve.Universe
         return false;
       }
 
-      if (!typeof(AgentId).IsAssignableFrom(obj.GetType()))
+      if (!typeof(AssemblyLineId).IsAssignableFrom(obj.GetType()))
       {
         return false;
       }
 
-      return this.Equals((AgentId)obj);
+      return this.Equals((AssemblyLineId)obj);
     }
 
     /// <inheritdoc />
-    public bool Equals(AgentId other)
+    public bool Equals(AssemblyLineId other)
     {
       return this.Value.Equals(other.Value);
     }
@@ -169,7 +147,7 @@ namespace Eve.Universe
   /// <content>
   /// Explicit implementation of the <see cref="IConvertible" /> interface.
   /// </content>
-  public partial struct AgentId : IConvertible
+  public partial struct AssemblyLineId : IConvertible
   {
     TypeCode IConvertible.GetTypeCode()
     {
