@@ -16,7 +16,7 @@ namespace Eve.Data.Entities
   [Table("eveUnits")]
   public class UnitEntity : BaseValueEntity<UnitId, Unit>
   {
-    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
+    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

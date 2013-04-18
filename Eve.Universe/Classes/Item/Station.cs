@@ -17,6 +17,7 @@ namespace Eve.Universe
   /// </summary>
   public sealed class Station : Item
   {
+    private ReadOnlyAgentCollection agents;
     private ReadOnlyAssemblyLineCollection assemblyLines;
     private ReadOnlyAssemblyLineStationCollection assemblyLineTypes;
     private Constellation constellation;
@@ -37,13 +38,30 @@ namespace Eve.Universe
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal Station(IEveRepository container, StationEntity entity) : base(container, entity)
+    internal Station(IEveRepository container, ItemEntity entity) : base(container, entity)
     {
       Contract.Requires(container != null, "The containing repository cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
+      Contract.Requires(entity.IsStation, "The entity must be a station.");
     }
 
     /* Properties */
+
+    /// <summary>
+    /// Gets the collection of agents in the station.
+    /// </summary>
+    /// <value>
+    /// The collection of agents in the station.
+    /// </value>
+    public ReadOnlyAgentCollection Agents
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<ReadOnlyAgentCollection>() != null);
+
+        return this.agents ?? (this.agents = new ReadOnlyAgentCollection(this.Container.GetAgents(x => x.AgentInfo.LocationId == this.Id.Value).OrderBy(x => x)));
+      }
+    }
 
     /// <summary>
     /// Gets the collection of assembly lines located at the station.
@@ -92,7 +110,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Constellation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.constellation ?? (this.constellation = this.Container.GetOrAdd<Constellation>(this.ConstellationId, () => this.Entity.Constellation.ToAdapter(this.Container)));
+        return this.constellation ?? (this.constellation = this.Container.GetOrAdd<Constellation>(this.ConstellationId, () => (Constellation)this.StationInfo.Constellation.ToAdapter(this.Container)));
       }
     }
 
@@ -104,7 +122,7 @@ namespace Eve.Universe
     /// </value>
     public ConstellationId ConstellationId
     {
-      get { return (ConstellationId)this.Entity.ConstellationId; }
+      get { return (ConstellationId)this.StationInfo.ConstellationId; }
     }
 
     /// <summary>
@@ -120,7 +138,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<NpcCorporation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.corporation ?? (this.corporation = this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => this.Entity.Corporation.ToAdapter(this.Container)));
+        return this.corporation ?? (this.corporation = this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.StationInfo.Corporation.ToAdapter(this.Container)));
       }
     }
 
@@ -132,7 +150,7 @@ namespace Eve.Universe
     /// </value>
     public NpcCorporationId CorporationId
     {
-      get { return (NpcCorporationId)this.Entity.CorporationId; }
+      get { return (NpcCorporationId)this.StationInfo.CorporationId; }
     }
 
     /// <summary>
@@ -150,7 +168,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.Entity.DockingCostPerVolume;
+        var result = this.StationInfo.DockingCostPerVolume;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -185,7 +203,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.Entity.MaxShipVolumeDockable;
+        var result = this.StationInfo.MaxShipVolumeDockable;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -208,7 +226,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<int>() >= 0);
 
-        var result = this.Entity.OfficeRentalCost;
+        var result = this.StationInfo.OfficeRentalCost;
 
         Contract.Assume(result >= 0);
 
@@ -229,7 +247,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<StationOperation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.operation ?? (this.operation = this.Container.GetOrAdd<StationOperation>(this.OperationId, () => this.Entity.Operation.ToAdapter(this.Container)));
+        return this.operation ?? (this.operation = this.Container.GetOrAdd<StationOperation>(this.OperationId, () => this.StationInfo.Operation.ToAdapter(this.Container)));
       }
     }
 
@@ -241,7 +259,7 @@ namespace Eve.Universe
     /// </value>
     public StationOperationId OperationId
     {
-      get { return this.Entity.OperationId; }
+      get { return this.StationInfo.OperationId; }
     }
 
     /// <summary>
@@ -257,7 +275,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.region ?? (this.region = this.Container.GetOrAdd<Region>(this.RegionId, () => this.Entity.Region.ToAdapter(this.Container)));
+        return this.region ?? (this.region = this.Container.GetOrAdd<Region>(this.RegionId, () => (Region)this.StationInfo.Region.ToAdapter(this.Container)));
       }
     }
 
@@ -269,7 +287,7 @@ namespace Eve.Universe
     /// </value>
     public RegionId RegionId
     {
-      get { return (RegionId)this.Entity.RegionId; }
+      get { return (RegionId)this.StationInfo.RegionId; }
     }
 
     /// <summary>
@@ -287,7 +305,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
         Contract.Ensures(Contract.Result<double>() <= 1.0D);
 
-        var result = this.Entity.ReprocessingEfficiency;
+        var result = this.StationInfo.ReprocessingEfficiency;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -307,7 +325,7 @@ namespace Eve.Universe
     /// </value>
     public byte ReprocessingHangarFlag
     {
-      get { return this.Entity.ReprocessingHangarFlag; }
+      get { return this.StationInfo.ReprocessingHangarFlag; }
     }
 
     /// <summary>
@@ -325,7 +343,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
         Contract.Ensures(Contract.Result<double>() <= 1.0D);
 
-        var result = this.Entity.ReprocessingStationsTake;
+        var result = this.StationInfo.ReprocessingStationsTake;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -346,7 +364,7 @@ namespace Eve.Universe
     /// </value>
     public short Security
     {
-      get { return this.Entity.Security; }
+      get { return this.StationInfo.Security; }
     }
 
     /// <summary>
@@ -362,7 +380,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<SolarSystem>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.solarSystem ?? (this.solarSystem = this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => this.Entity.SolarSystem.ToAdapter(this.Container)));
+        return this.solarSystem ?? (this.solarSystem = this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.StationInfo.SolarSystem.ToAdapter(this.Container)));
       }
     }
 
@@ -374,7 +392,7 @@ namespace Eve.Universe
     /// </value>
     public SolarSystemId SolarSystemId
     {
-      get { return (SolarSystemId)this.Entity.SolarSystemId; }
+      get { return (SolarSystemId)this.StationInfo.SolarSystemId; }
     }
 
     /// <summary>
@@ -390,7 +408,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<StationType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.stationType ?? (this.stationType = this.Container.GetOrAdd<StationType>(this.StationTypeId, () => (StationType)this.Entity.StationType.ToAdapter(this.Container)));
+        return this.stationType ?? (this.stationType = this.Container.GetOrAdd<StationType>(this.StationTypeId, () => (StationType)this.StationInfo.StationType.ToAdapter(this.Container)));
       }
     }
 
@@ -402,7 +420,7 @@ namespace Eve.Universe
     /// </value>
     public TypeId StationTypeId
     {
-      get { return this.Entity.StationTypeId; }
+      get { return this.StationInfo.StationTypeId; }
     }
 
     /// <summary>
@@ -419,7 +437,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.X;
+        double result = this.StationInfo.X;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -442,7 +460,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.Y;
+        double result = this.StationInfo.Y;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -465,7 +483,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.Z;
+        double result = this.StationInfo.Z;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -474,19 +492,16 @@ namespace Eve.Universe
       }
     }
 
-    /// <summary>
-    /// Gets the data entity that forms the basis of the adapter.
-    /// </summary>
-    /// <value>
-    /// The data entity that forms the basis of the adapter.
-    /// </value>
-    private new StationEntity Entity
+    private StationEntity StationInfo
     {
       get
       {
         Contract.Ensures(Contract.Result<StationEntity>() != null);
 
-        return (StationEntity)base.Entity;
+        var result = this.Entity.StationInfo;
+
+        Contract.Assume(result != null);
+        return result;
       }
     }
   }

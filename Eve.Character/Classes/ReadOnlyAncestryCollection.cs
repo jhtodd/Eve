@@ -13,7 +13,7 @@ namespace Eve.Character
   /// A read-only collection of solar systems.
   /// </summary>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
-  public class ReadOnlyAncestryCollection : ReadOnlyCollection<Ancestry>
+  public sealed class ReadOnlyAncestryCollection : ReadOnlyCollection<Ancestry>
   {
     /* Constructors */
 

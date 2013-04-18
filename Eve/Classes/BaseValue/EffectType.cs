@@ -21,7 +21,7 @@ namespace Eve
       IEffect,
       IHasIcon
   {
-    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
+    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
     private AttributeType dischargeAttribute;
     private AttributeType durationAttribute;

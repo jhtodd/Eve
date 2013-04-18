@@ -14,7 +14,7 @@ namespace Eve.Industry
   /// A read-only collection of effects.
   /// </summary>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
-  public partial class ReadOnlyAssemblyLineTypeCategoryDetailCollection : ReadOnlyKeyedCollection<CategoryId, AssemblyLineTypeCategoryDetail>
+  public sealed partial class ReadOnlyAssemblyLineTypeCategoryDetailCollection : ReadOnlyKeyedCollection<CategoryId, AssemblyLineTypeCategoryDetail>
   {
     /* Constructors */
 

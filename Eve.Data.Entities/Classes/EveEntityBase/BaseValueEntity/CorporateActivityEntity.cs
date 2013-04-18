@@ -18,7 +18,7 @@ namespace Eve.Data.Entities
   [Table("crpActivities")]
   public class CorporateActivityEntity : BaseValueEntity<CorporateActivityId, CorporateActivity>
   {
-    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
+    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

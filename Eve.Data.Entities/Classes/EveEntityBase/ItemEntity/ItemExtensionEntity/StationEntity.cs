@@ -6,6 +6,7 @@
 namespace Eve.Data.Entities
 {
   using System.Collections.Generic;
+  using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
 
@@ -16,9 +17,9 @@ namespace Eve.Data.Entities
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
   [Table("staStations")]
-  public class StationEntity : ItemEntity
+  public class StationEntity : ItemExtensionEntity
   {
-    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
+    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */
@@ -57,7 +58,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("ConstellationId")]
-    public virtual ConstellationEntity Constellation { get; internal set; }
+    public virtual ItemEntity Constellation { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -75,7 +76,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("CorporationId")]
-    public virtual NpcCorporationEntity Corporation { get; internal set; }
+    public virtual ItemEntity Corporation { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -138,7 +139,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("RegionId")]
-    public virtual RegionEntity Region { get; internal set; }
+    public virtual ItemEntity Region { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -192,7 +193,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("SolarSystemId")]
-    public virtual SolarSystemEntity SolarSystem { get; internal set; }
+    public virtual ItemEntity SolarSystem { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -202,6 +203,16 @@ namespace Eve.Data.Entities
     /// </value>
     [Column("solarSystemID")]
     public long SolarSystemId { get; internal set; }
+
+    /// <summary>
+    /// Gets the underlying database value of the corresponding adapter property.
+    /// </summary>
+    /// <value>
+    /// The underlying database value of the corresponding adapter property.
+    /// </value>
+    [Column("stationID")]
+    [Key]
+    public long StationId { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -256,13 +267,5 @@ namespace Eve.Data.Entities
     /// </value>
     [Column("z")]
     public double Z { get; internal set; }
-
-    /* Methods */
-
-    /// <inheritdoc />
-    public new Station ToAdapter(IEveRepository container)
-    {
-      return (Station)base.ToAdapter(container);
-    }
   }
 }

@@ -96,7 +96,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<NpcCorporation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.owner ?? (this.owner = this.Container.GetOrAdd<NpcCorporation>(this.OwnerId, () => this.Entity.Owner.ToAdapter(this.Container)));
+        return this.owner ?? (this.owner = this.Container.GetOrAdd<NpcCorporation>(this.OwnerId, () => (NpcCorporation)this.Entity.Owner.ToAdapter(this.Container)));
       }
     }
 
@@ -145,7 +145,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.region ?? (this.region = this.Container.GetOrAdd<Region>(this.RegionId, () => this.Entity.Region.ToAdapter(this.Container)));
+        return this.region ?? (this.region = this.Container.GetOrAdd<Region>(this.RegionId, () => (Region)this.Entity.Region.ToAdapter(this.Container)));
       }
     }
 
@@ -173,7 +173,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<SolarSystem>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.solarSystem ?? (this.solarSystem = this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => this.Entity.SolarSystem.ToAdapter(this.Container)));
+        return this.solarSystem ?? (this.solarSystem = this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.Entity.SolarSystem.ToAdapter(this.Container)));
       }
     }
 
@@ -201,7 +201,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<Station>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.station ?? (this.station = this.Container.GetOrAdd<Station>(this.StationId, () => this.Entity.Station.ToAdapter(this.Container)));
+        return this.station ?? (this.station = this.Container.GetOrAdd<Station>(this.StationId, () => (Station)this.Entity.Station.ToAdapter(this.Container)));
       }
     }
 
@@ -258,7 +258,7 @@ namespace Eve.Industry
     /// <returns>
     /// A compound ID combining the two sub-IDs.
     /// </returns>
-    public static long CreateCompoundId(StationId stationId, AssemblyLineTypeId assemblyLineTypeId)
+    public static long CreateCacheKey(StationId stationId, AssemblyLineTypeId assemblyLineTypeId)
     {
       return (long)((((ulong)(long)stationId.Value) << 32) | ((ulong)(long)assemblyLineTypeId.Value));
     }
@@ -333,7 +333,7 @@ namespace Eve.Industry
   {
     IConvertible IEveCacheable.CacheKey
     {
-      get { return CreateCompoundId(this.StationId, this.AssemblyLineTypeId); }
+      get { return CreateCacheKey(this.StationId, this.AssemblyLineTypeId); }
     }
   }
   #endregion
@@ -346,7 +346,7 @@ namespace Eve.Industry
   {
     long IKeyItem<long>.Key
     {
-      get { return CreateCompoundId(this.StationId, this.AssemblyLineTypeId); }
+      get { return CreateCacheKey(this.StationId, this.AssemblyLineTypeId); }
     }
   }
   #endregion

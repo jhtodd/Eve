@@ -15,7 +15,7 @@ namespace Eve.Character
   /// Contains information about an EVE faction.
   /// </summary>
   public sealed partial class Faction 
-    : BaseValue<FactionId, FactionId, FactionEntity, Faction>,
+    : Item,
       IHasIcon,
       IHasRaces
   {
@@ -35,10 +35,11 @@ namespace Eve.Character
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal Faction(IEveRepository container, FactionEntity entity) : base(container, entity)
+    internal Faction(IEveRepository container, ItemEntity entity) : base(container, entity)
     {
       Contract.Requires(container != null, "The containing repository cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
+      Contract.Requires(entity.IsFaction, "The entity must be a faction.");
     }
 
     /* Properties */
@@ -59,7 +60,7 @@ namespace Eve.Character
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.corporation ?? (this.corporation = this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => this.Entity.Corporation.ToAdapter(this.Container)));
+        return this.corporation ?? (this.corporation = this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.FactionInfo.Corporation.ToAdapter(this.Container)));
       }
     }
 
@@ -71,7 +72,7 @@ namespace Eve.Character
     /// </value>
     public NpcCorporationId CorporationId
     {
-      get { return (NpcCorporationId)Entity.CorporationId; }
+      get { return (NpcCorporationId)this.FactionInfo.CorporationId; }
     }
 
     /// <summary>
@@ -91,7 +92,7 @@ namespace Eve.Character
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+        return this.icon ?? (this.icon = this.Container.GetOrAdd<Icon>(this.IconId, () => this.FactionInfo.Icon.ToAdapter(this.Container)));
       }
     }
 
@@ -104,7 +105,7 @@ namespace Eve.Character
     /// </value>
     public IconId IconId
     {
-      get { return Entity.IconId; }
+      get { return this.FactionInfo.IconId; }
     }
 
     /// <summary>
@@ -124,7 +125,7 @@ namespace Eve.Character
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.militiaCorporation ?? (this.militiaCorporation = this.Container.GetOrAdd<NpcCorporation>(this.MilitiaCorporationId, () => this.Entity.MilitiaCorporation.ToAdapter(this.Container)));
+        return this.militiaCorporation ?? (this.militiaCorporation = this.Container.GetOrAdd<NpcCorporation>(this.MilitiaCorporationId, () => (NpcCorporation)this.FactionInfo.MilitiaCorporation.ToAdapter(this.Container)));
       }
     }
 
@@ -137,7 +138,7 @@ namespace Eve.Character
     /// </value>
     public NpcCorporationId? MilitiaCorporationId
     {
-      get { return (NpcCorporationId?)Entity.MilitiaCorporationId; }
+      get { return (NpcCorporationId?)this.FactionInfo.MilitiaCorporationId; }
     }
 
     /// <summary>
@@ -150,7 +151,7 @@ namespace Eve.Character
     /// </value>
     public RaceId RaceId
     {
-      get { return (RaceId)Entity.RaceIds; }
+      get { return (RaceId)this.FactionInfo.RaceIds; }
     }
 
     /// <summary>
@@ -168,7 +169,7 @@ namespace Eve.Character
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = Entity.SizeFactor;
+        var result = this.FactionInfo.SizeFactor;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -191,7 +192,7 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<SolarSystem>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.solarSystem ?? (this.solarSystem = this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => this.Entity.SolarSystem.ToAdapter(this.Container)));
+        return this.solarSystem ?? (this.solarSystem = this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.FactionInfo.SolarSystem.ToAdapter(this.Container)));
       }
     }
 
@@ -203,7 +204,7 @@ namespace Eve.Character
     /// </value>
     public SolarSystemId SolarSystemId
     {
-      get { return (SolarSystemId)Entity.SolarSystemId; }
+      get { return (SolarSystemId)this.FactionInfo.SolarSystemId; }
     }
 
     /// <summary>
@@ -218,7 +219,7 @@ namespace Eve.Character
       {
         Contract.Ensures(Contract.Result<short>() >= 0);
 
-        var result = Entity.StationCount;
+        var result = this.FactionInfo.StationCount;
 
         Contract.Assume(result >= 0);
 
@@ -240,10 +241,23 @@ namespace Eve.Character
       {
         Contract.Ensures(Contract.Result<short>() >= 0);
 
-        var result = Entity.StationSystemCount;
+        var result = this.FactionInfo.StationSystemCount;
 
         Contract.Assume(result >= 0);
 
+        return result;
+      }
+    }
+
+    private FactionEntity FactionInfo
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<FactionEntity>() != null);
+
+        var result = this.Entity.FactionInfo;
+
+        Contract.Assume(result != null);
         return result;
       }
     }

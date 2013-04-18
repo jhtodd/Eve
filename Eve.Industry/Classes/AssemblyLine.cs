@@ -302,7 +302,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<NpcCorporation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.owner ?? (this.owner = this.Container.GetOrAdd<NpcCorporation>(this.OwnerId, () => this.Entity.Owner.ToAdapter(this.Container)));
+        return this.owner ?? (this.owner = this.Container.GetOrAdd<NpcCorporation>(this.OwnerId, () => (NpcCorporation)this.Entity.Owner.ToAdapter(this.Container)));
       }
     }
 
@@ -344,7 +344,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<Station>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.station ?? (this.station = this.Container.GetOrAdd<Station>(this.StationId, () => this.Entity.Container.ToAdapter(this.Container)));
+        return this.station ?? (this.station = this.Container.GetOrAdd<Station>(this.StationId, () => (Station)this.Entity.Container.ToAdapter(this.Container)));
       }
     }
 

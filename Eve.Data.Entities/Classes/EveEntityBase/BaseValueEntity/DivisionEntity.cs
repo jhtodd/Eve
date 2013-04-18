@@ -18,7 +18,7 @@ namespace Eve.Data.Entities
   [Table("crpNPCDivisions")]
   public class DivisionEntity : BaseValueEntity<DivisionId, Division>
   {
-    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
+    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

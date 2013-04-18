@@ -3,7 +3,7 @@
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Eve.Universe
+namespace Eve.Industry
 {
   using System.Collections.Generic;
 
@@ -15,7 +15,7 @@ namespace Eve.Universe
   /// A read-only collection of agents.
   /// </summary>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
-  public class ReadOnlyAssemblyLineStationCollection : ReadOnlyCollection<AssemblyLineStation>
+  public sealed class ReadOnlyAssemblyLineStationCollection : ReadOnlyCollection<AssemblyLineStation>
   {
     /* Constructors */
 

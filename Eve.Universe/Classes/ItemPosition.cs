@@ -64,6 +64,17 @@ namespace Eve.Universe
     }
 
     /// <summary>
+    /// Gets the ID of the item.
+    /// </summary>
+    /// <value>
+    /// The ID of the item.
+    /// </value>
+    public ItemId ItemId
+    {
+      get { return this.Entity.ItemId; }
+    }
+
+    /// <summary>
     /// Gets the pitch orientation of the item.  This property is not set for
     /// the vast majority of items.
     /// </summary>
@@ -201,16 +212,7 @@ namespace Eve.Universe
       }
     }
 
-    /// <summary>
-    /// Gets the ID of the item.
-    /// </summary>
-    /// <value>
-    /// The ID of the item.
-    /// </value>
-    public ItemId ItemId
-    {
-      get { return this.Entity.ItemId; }
-    }
+    /* Methods */
 
     /// <inheritdoc />
     public int CompareTo(ItemPosition other)

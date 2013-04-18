@@ -1,32 +1,32 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="AgentEntity.cs" company="Jeremy H. Todd">
+// <copyright file="UniverseEntity.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
-  using System.Collections.Generic;
+  using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
 
   using Eve.Universe;
 
   /// <summary>
-  /// The data entity for the <see cref="Agent" /> class.
+  /// The data entity for the <see cref="Universe" /> class.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("agtAgents")]
-  public class AgentEntity : ItemEntity
+  [Table("mapUniverse")]
+  public class UniverseEntity : ItemExtensionEntity
   {
-    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
+    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */
 
     /// <summary>
-    /// Initializes a new instance of the AgentEntity class.
+    /// Initializes a new instance of the UniverseEntity class.
     /// </summary>
-    public AgentEntity() : base()
+    public UniverseEntity() : base()
     {
     }
 
@@ -38,8 +38,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("AgentLocationId")]
-    public virtual ItemEntity AgentLocation { get; internal set; }
+    [Column("radius")]
+    public double Radius { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -47,8 +47,9 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("locationID")]
-    public long AgentLocationId { get; internal set; }
+    [Column("universeID")]
+    [Key]
+    public long UniverseId { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -56,8 +57,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("AgentTypeId")]
-    public virtual AgentTypeEntity AgentType { get; internal set; }
+    [Column("universeName")]
+    public string UniverseName { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -65,8 +66,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("agentTypeID")]
-    public AgentTypeId AgentTypeId { get; internal set; }
+    [Column("x")]
+    public double X { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -74,8 +75,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("CorporationId")]
-    public virtual NpcCorporationEntity Corporation { get; internal set; }
+    [Column("xMax")]
+    public double XMax { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -83,8 +84,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("corporationID")]
-    public long CorporationId { get; internal set; }
+    [Column("xMin")]
+    public double XMin { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -92,8 +93,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("DivisionId")]
-    public virtual DivisionEntity Division { get; internal set; }
+    [Column("y")]
+    public double Y { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -101,8 +102,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("divisionID")]
-    public DivisionId DivisionId { get; internal set; }
+    [Column("yMax")]
+    public double YMax { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -110,8 +111,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("isLocator")]
-    public bool IsLocator { get; internal set; }
+    [Column("yMin")]
+    public double YMin { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -119,8 +120,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("level")]
-    public byte Level { get; internal set; }
+    [Column("z")]
+    public double Z { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -128,8 +129,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("quality")]
-    public short Quality { get; internal set; }
+    [Column("zMax")]
+    public double ZMax { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -137,14 +138,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    public virtual ICollection<EveTypeEntity> ResearchFields { get; internal set; }
-
-    /* Methods */
-
-    /// <inheritdoc />
-    public new Agent ToAdapter(IEveRepository container)
-    {
-      return (Agent)base.ToAdapter(container);
-    }
+    [Column("zMin")]
+    public double ZMin { get; internal set; }
   }
 }

@@ -1708,16 +1708,23 @@ namespace EveUpdater {
         Type parameterType = arrayType.GetElementType();
         var parameter = Array.CreateInstance(parameterType, 0);
 
-        IReadOnlyList<object> entities = (IReadOnlyList<object>) SelectedQuery.Invoke(dataSource, new object[] { parameter });
-                
-        int entityCount = entities.Count;
+        IReadOnlyList<object> entities = (IReadOnlyList<object>)SelectedQuery.Invoke(dataSource, new object[] { parameter });
+        var entityCount = entities.Count;        
 
         SelectedQueryTestResults += entityCount.ToString() + " entities loaded, testing each entity." + Environment.NewLine;
 
         int succeeded = 0;
         int failed = 0;
+        int total = 0;
 
         foreach (object entity in entities) {
+          total++;
+
+          if (total % 500 == 0)
+          {
+            SelectedQueryTestResults += "Tested " + total.ToString() + " entities..." + Environment.NewLine;
+          }
+
           try {
             TestEntityProperties(entity);
             succeeded++;

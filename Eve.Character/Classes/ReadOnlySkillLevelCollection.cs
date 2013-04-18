@@ -14,7 +14,7 @@ namespace Eve.Character
   /// A read-only collection of skill levels.
   /// </summary>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
-  public partial class ReadOnlySkillLevelCollection 
+  public sealed partial class ReadOnlySkillLevelCollection 
     : ReadOnlyKeyedCollection<SkillId, SkillLevel>,
       ISkillCollection
   {
@@ -68,7 +68,7 @@ namespace Eve.Character
   /// <content>
   /// Explicit implementation of the <see cref="IEnumerable{T}" /> interface.
   /// </content>
-  public partial class ReadOnlySkillLevelCollection : IEnumerable<ISkill>
+  public sealed partial class ReadOnlySkillLevelCollection : IEnumerable<ISkill>
   {
     IEnumerator<ISkill> IEnumerable<ISkill>.GetEnumerator()
     {
@@ -81,7 +81,7 @@ namespace Eve.Character
   /// <content>
   /// Explicit implementation of the <see cref="IReadOnlyList{T}" /> interface.
   /// </content>
-  public partial class ReadOnlySkillLevelCollection : IReadOnlyList<ISkill>
+  public sealed partial class ReadOnlySkillLevelCollection : IReadOnlyList<ISkill>
   {
     ISkill IReadOnlyList<ISkill>.this[int index]
     {
@@ -94,7 +94,7 @@ namespace Eve.Character
   /// <content>
   /// Explicit implementation of the <see cref="ISkillCollection" /> interface.
   /// </content>
-  public partial class ReadOnlySkillLevelCollection : ISkillCollection
+  public sealed partial class ReadOnlySkillLevelCollection : ISkillCollection
   {
     ISkill ISkillCollection.this[SkillId skillId]
     {

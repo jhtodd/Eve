@@ -11,16 +11,40 @@ namespace Eve.Data
   using System.Linq;
 
   using Eve.Data.Entities;
+  using Eve.Universe;
 
   using FreeNet.Data.Entity;
 
   /// <summary>
-  /// A <see cref="DbContext" /> that provides data access to the EVE database.
-  /// This access is read-only.
+  /// A <see cref="DbContext" />-style object that provides low-level data
+  /// access to the EVE database. This access is read-only.
   /// </summary>
+  /// <remarks>
+  /// <para>
+  /// Because it only needs to provide read access, the <c>EveDbContext</c>
+  /// class is not an actual Entity Framework <see cref="DbContext" />, but
+  /// a custom object that provides similar functionality while obscuring
+  /// some <see cref="DbContext" /> methods that are unnecessary or even
+  /// harmful in a read-only environment.
+  /// </para>
+  /// <para>
+  /// Instead of a <c>Set&lt;TEntity&gt;</c> method, it provides a
+  /// <see cref="Query{TEntity}" /> method that returns an
+  /// <see cref="IQueryable{T}" /> that can be used to query the desired
+  /// entity type. It also provides predefined <see cref="IQueryable{T}" />
+  /// properties for each EVE entity type, for convenience and some
+  /// "under-the-hood" processing.
+  /// </para>
+  /// <para>
+  /// All queries initiated by the context are performed without object
+  /// tracking, which means that it's acceptable (and possibly even
+  /// preferred) to retain a single <c>EveDbContext</c> instance for the
+  /// lifetime of the application.
+  /// </para>
+  /// </remarks>
   public class EveDbContext : IEveDbContext
   {
-    private InnerEveDbContext innerContext;
+    private DirectEveDbContext directContext;
 
     /* Constructors */
 
@@ -31,8 +55,13 @@ namespace Eve.Data
     /// of the derived context class.  For more information on how this is used
     /// to create a connection, see the remarks section for <see cref="DbContext" />.
     /// </summary>
-    public EveDbContext() : this(typeof(EveDbContext).FullName)
+    public EveDbContext()
     {
+      // By default, use the name of the current type (including derived
+      // types) as the key for finding the connection string in the application
+      // configuration, in order to follow EF naming conventions.
+      string connectionStringLookup = this.GetType().FullName;
+      this.directContext = new DirectEveDbContext(connectionStringLookup);
     }
 
     /// <summary>
@@ -44,7 +73,7 @@ namespace Eve.Data
     /// <param name="nameOrConnectionString">
     /// Either the database name or a connection string.
     /// </param>
-    public EveDbContext(string nameOrConnectionString) : this(new InnerEveDbContext(nameOrConnectionString))
+    public EveDbContext(string nameOrConnectionString) : this(new DirectEveDbContext(nameOrConnectionString))
     {
     }
 
@@ -60,21 +89,21 @@ namespace Eve.Data
     /// If set to true the connection is disposed when the context is disposed,
     /// otherwise the caller must dispose the connection.
     /// </param>
-    public EveDbContext(DbConnection existingConnection, bool contextOwnsConnection) : this(new InnerEveDbContext(existingConnection, contextOwnsConnection))
+    public EveDbContext(DbConnection existingConnection, bool contextOwnsConnection) : this(new DirectEveDbContext(existingConnection, contextOwnsConnection))
     {
     }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="EveDbContext" /> class,
-    /// using the specified <see cref="InnerEveDbContext" /> to provide access to the database.
+    /// using the specified <see cref="DirectEveDbContext" /> to provide access to the database.
     /// </summary>
-    /// <param name="innerContext">
-    /// The <see cref="InnerEveDbContext" /> which will be used to provide access to the database.
+    /// <param name="directContext">
+    /// The <see cref="DirectEveDbContext" /> which will be used to provide access to the database.
     /// </param>
-    private EveDbContext(InnerEveDbContext innerContext)
+    private EveDbContext(DirectEveDbContext directContext)
     {
-      Contract.Requires(innerContext != null, "The inner InnerEveDbContext cannot be null.");
-      this.innerContext = innerContext;
+      Contract.Requires(directContext != null, "The inner DirectEveDbContext cannot be null.");
+      this.directContext = directContext;
     }
 
     /* Properties */
@@ -86,9 +115,17 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IQueryable<AgentEntity> Agents
+    public IQueryable<ItemEntity> Agents
     {
-      get { return this.Query<AgentEntity>(); }
+      get
+      { 
+        var result = this.Query<ItemEntity>()
+                         .Where(x => x.AgentInfo != null)
+                         .Include(x => x.AgentInfo);
+
+        Contract.Assume(result != null);
+        return result;
+      }
     }
 
     /// <inheritdoc />
@@ -170,9 +207,31 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IQueryable<ConstellationEntity> Constellations
+    public IQueryable<ItemEntity> Celestials
     {
-      get { return this.Query<ConstellationEntity>(); }
+      get
+      {
+        var result = this.Query<ItemEntity>()
+                         .Where(x => x.CelestialInfo != null)
+                         .Include(x => x.CelestialInfo);
+
+        Contract.Assume(result != null);
+        return result;
+      }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<ItemEntity> Constellations
+    {
+      get
+      {
+        var result = this.Query<ItemEntity>()
+                         .Where(x => x.ConstellationInfo != null)
+                         .Include(x => x.ConstellationInfo);
+
+        Contract.Assume(result != null);
+        return result;
+      }
     }
 
     /// <inheritdoc />
@@ -209,6 +268,20 @@ namespace Eve.Data
     public IQueryable<EveTypeEntity> EveTypes
     {
       get { return this.Query<EveTypeEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<ItemEntity> Factions
+    {
+      get
+      {
+        var result = this.Query<ItemEntity>()
+                         .Where(x => x.FactionInfo != null)
+                         .Include(x => x.FactionInfo);
+
+        Contract.Assume(result != null);
+        return result;
+      }
     }
 
     /// <inheritdoc />
@@ -266,9 +339,17 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IQueryable<NpcCorporationEntity> NpcCorporations
+    public IQueryable<ItemEntity> NpcCorporations
     {
-      get { return this.Query<NpcCorporationEntity>(); }
+      get
+      {
+        var result = this.Query<ItemEntity>()
+                         .Where(x => x.CorporationInfo != null)
+                         .Include(x => x.CorporationInfo);
+
+        Contract.Assume(result != null);
+        return result;
+      }
     }
 
     /// <inheritdoc />
@@ -284,9 +365,17 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IQueryable<RegionEntity> Regions
+    public IQueryable<ItemEntity> Regions
     {
-      get { return this.Query<RegionEntity>(); }
+      get
+      {
+        var result = this.Query<ItemEntity>()
+                         .Where(x => x.RegionInfo != null)
+                         .Include(x => x.RegionInfo);
+
+        Contract.Assume(result != null);
+        return result;
+      }
     }
 
     /// <inheritdoc />
@@ -296,9 +385,17 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IQueryable<SolarSystemEntity> SolarSystems
+    public IQueryable<ItemEntity> SolarSystems
     {
-      get { return this.Query<SolarSystemEntity>(); }
+      get
+      {
+        var result = this.Query<ItemEntity>()
+                         .Where(x => x.SolarSystemInfo != null)
+                         .Include(x => x.SolarSystemInfo);
+
+        Contract.Assume(result != null);
+        return result;
+      }
     }
 
     /// <inheritdoc />
@@ -308,9 +405,31 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IQueryable<StationEntity> Stations
+    public IQueryable<ItemEntity> Stargates
     {
-      get { return this.Query<StationEntity>(); }
+      get
+      {
+        var result = this.Query<ItemEntity>()
+                         .Where(x => x.StargateInfo != null)
+                         .Include(x => x.StargateInfo);
+
+        Contract.Assume(result != null);
+        return result;
+      }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<ItemEntity> Stations
+    {
+      get
+      {
+        var result = this.Query<ItemEntity>()
+                         .Where(x => x.StationInfo != null)
+                         .Include(x => x.StationInfo);
+
+        Contract.Assume(result != null);
+        return result;
+      }
     }
 
     /// <inheritdoc />
@@ -338,23 +457,31 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IQueryable<UniverseEntity> Universes
+    public IQueryable<ItemEntity> Universes
     {
-      get { return this.Query<UniverseEntity>(); }
+      get
+      {
+        var result = this.Query<ItemEntity>()
+                         .Where(x => x.UniverseInfo != null)
+                         .Include(x => x.UniverseInfo);
+
+        Contract.Assume(result != null);
+        return result;
+      }
     }
 
     /// <summary>
     /// Gets the inner context.
     /// </summary>
     /// <value>
-    /// The <see cref="InnerEveDbContext" /> wrapped by the current instance.
+    /// The <see cref="DirectEveDbContext" /> wrapped by the current instance.
     /// </value>
-    private InnerEveDbContext InnerContext
+    private DirectEveDbContext DirectContext
     {
       get
       {
-        Contract.Ensures(Contract.Result<InnerEveDbContext>() != null);
-        return this.innerContext;
+        Contract.Ensures(Contract.Result<DirectEveDbContext>() != null);
+        return this.directContext;
       }
     }
 
@@ -367,9 +494,9 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IQueryable<TEntity> Query<TEntity>() where TEntity : Entity
+    public IQueryable<TEntity> Query<TEntity>() where TEntity : class, IEveEntity
     {
-      var result = this.InnerContext.Set<TEntity>().AsNoTracking();
+      var result = this.DirectContext.Set<TEntity>().AsNoTracking();
 
       Contract.Assume(result != null);
       return result;
@@ -385,14 +512,14 @@ namespace Eve.Data
     {
       if (disposing)
       {
-        this.innerContext.Dispose();
+        this.directContext.Dispose();
       }
     }
 
     [ContractInvariantMethod]
     private void ObjectInvariant()
     {
-      Contract.Invariant(this.innerContext != null);
+      Contract.Invariant(this.directContext != null);
     }
   }
 }

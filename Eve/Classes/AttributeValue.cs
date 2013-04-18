@@ -221,7 +221,7 @@ namespace Eve
     /// <returns>
     /// A compound ID combining the two sub-IDs.
     /// </returns>
-    internal static long CreateCompoundId(TypeId itemTypeId, AttributeId attributeId)
+    internal static long CreateCacheKey(TypeId itemTypeId, AttributeId attributeId)
     {
       return (long)((((ulong)(long)itemTypeId) << 32) | ((ulong)(long)attributeId));
     }
@@ -272,7 +272,7 @@ namespace Eve
   {
     IConvertible IEveCacheable.CacheKey
     {
-      get { return CreateCompoundId(this.Entity.ItemTypeId, this.Id); }
+      get { return CreateCacheKey(this.Entity.ItemTypeId, this.Id); }
     }
   }
   #endregion

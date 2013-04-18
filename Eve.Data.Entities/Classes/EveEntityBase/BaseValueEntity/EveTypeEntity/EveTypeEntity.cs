@@ -19,7 +19,7 @@ namespace Eve.Data.Entities
   [Table("invTypes")]
   public class EveTypeEntity : BaseValueEntity<int, EveType>
   {
-    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
+    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /// <summary>

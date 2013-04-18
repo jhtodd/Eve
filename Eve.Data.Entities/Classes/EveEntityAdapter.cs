@@ -20,7 +20,7 @@ namespace Eve.Data.Entities
   public abstract partial class EveEntityAdapter<TEntity> 
     : EntityAdapter<TEntity>,
       IEveEntityAdapter<TEntity>
-    where TEntity : Entity
+    where TEntity : IEveEntity
   {
     private readonly IEveRepository container;
 

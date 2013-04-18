@@ -18,7 +18,7 @@ namespace Eve.Data.Entities
   [Table("agtAgentTypes")]
   public class AgentTypeEntity : BaseValueEntity<AgentTypeId, AgentType>
   {
-    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
+    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

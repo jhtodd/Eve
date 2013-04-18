@@ -18,7 +18,7 @@ namespace Eve.Data.Entities
   [Table("chrAncestries")]
   public class AncestryEntity : BaseValueEntity<AncestryId, Ancestry>
   {
-    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
+    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

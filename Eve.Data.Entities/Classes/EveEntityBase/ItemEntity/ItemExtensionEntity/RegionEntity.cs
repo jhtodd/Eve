@@ -1,11 +1,12 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ConstellationEntity.cs" company="Jeremy H. Todd">
+// <copyright file="RegionEntity.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
   using System.Collections.Generic;
+  using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
 
@@ -13,34 +14,34 @@ namespace Eve.Data.Entities
   using Eve.Universe;
 
   /// <summary>
-  /// The data entity for the <see cref="Constellation" /> class.
+  /// The data entity for the <see cref="Region" /> class.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("mapConstellations")]
-  public class ConstellationEntity : ItemEntity
+  [Table("mapRegions")]
+  public class RegionEntity : ItemExtensionEntity
   {
-    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
+    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */
 
     /// <summary>
-    /// Initializes a new instance of the ConstellationEntity class.
+    /// Initializes a new instance of the RegionEntity class.
     /// </summary>
-    public ConstellationEntity() : base()
+    public RegionEntity() : base()
     {
     }
 
     /* Properties */
-
+    
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
     /// </summary>
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("constellationName")]
-    public string ConstellationName { get; internal set; }
+    [ForeignKey("Id")]
+    public virtual ICollection<ItemEntity> Constellations { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -49,7 +50,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("FactionId")]
-    public virtual FactionEntity Faction { get; internal set; }
+    public virtual ItemEntity Faction { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -58,7 +59,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [Column("factionID")]
-    public FactionId? FactionId { get; internal set; }
+    public long? FactionId { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -66,7 +67,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    public virtual ICollection<ConstellationJumpEntity> Jumps { get; internal set; }
+    public virtual ICollection<RegionJumpEntity> Jumps { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -83,16 +84,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("RegionId")]
-    public virtual RegionEntity Region { get; internal set; }
-
-    /// <summary>
-    /// Gets the underlying database value of the corresponding adapter property.
-    /// </summary>
-    /// <value>
-    /// The underlying database value of the corresponding adapter property.
-    /// </value>
     [Column("regionID")]
+    [Key]
     public long RegionId { get; internal set; }
 
     /// <summary>
@@ -101,8 +94,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("Id")]
-    public virtual ICollection<SolarSystemEntity> SolarSystems { get; internal set; }
+    [Column("regionName")]
+    public string RegionName { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -184,13 +177,5 @@ namespace Eve.Data.Entities
     /// </value>
     [Column("zMin")]
     public double ZMin { get; internal set; }
-
-    /* Methods */
-
-    /// <inheritdoc />
-    public new Constellation ToAdapter(IEveRepository container)
-    {
-      return (Constellation)base.ToAdapter(container);
-    }
   }
 }

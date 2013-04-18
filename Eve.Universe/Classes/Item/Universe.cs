@@ -26,10 +26,11 @@ namespace Eve.Universe
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal Universe(IEveRepository container, UniverseEntity entity) : base(container, entity)
+    internal Universe(IEveRepository container, ItemEntity entity) : base(container, entity)
     {
       Contract.Requires(container != null, "The containing repository cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
+      Contract.Requires(entity.IsUniverse, "The entity must be a universe.");
     }
 
     /* Properties */
@@ -59,7 +60,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        double result = this.Entity.Radius;
+        double result = this.UniverseInfo.Radius;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -82,7 +83,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.X;
+        double result = this.UniverseInfo.X;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -104,7 +105,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.Y;
+        double result = this.UniverseInfo.Y;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -126,7 +127,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.Z;
+        double result = this.UniverseInfo.Z;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -148,7 +149,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.XMax;
+        double result = this.UniverseInfo.XMax;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -170,7 +171,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.YMax;
+        double result = this.UniverseInfo.YMax;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -192,7 +193,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.ZMax;
+        double result = this.UniverseInfo.ZMax;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -214,7 +215,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.XMin;
+        double result = this.UniverseInfo.XMin;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -236,7 +237,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.YMin;
+        double result = this.UniverseInfo.YMin;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -258,7 +259,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.ZMin;
+        double result = this.UniverseInfo.ZMin;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -267,19 +268,16 @@ namespace Eve.Universe
       }
     }
 
-    /// <summary>
-    /// Gets the data entity that forms the basis of the adapter.
-    /// </summary>
-    /// <value>
-    /// The data entity that forms the basis of the adapter.
-    /// </value>
-    private new UniverseEntity Entity
+    private UniverseEntity UniverseInfo
     {
       get
       {
         Contract.Ensures(Contract.Result<UniverseEntity>() != null);
 
-        return (UniverseEntity)base.Entity;
+        var result = this.Entity.UniverseInfo;
+
+        Contract.Assume(result != null);
+        return result;
       }
     }
   }

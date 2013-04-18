@@ -60,7 +60,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyAgentCollection>() != null);
 
-        return this.agents ?? (this.agents = new ReadOnlyAgentCollection(this.Container.GetAgents(x => x.CorporationId == this.CorporationId.Value && x.DivisionId == this.DivisionId).OrderBy(x => x)));
+        return this.agents ?? (this.agents = new ReadOnlyAgentCollection(this.Container.GetAgents(x => x.AgentInfo.CorporationId == this.CorporationId.Value && x.AgentInfo.DivisionId == this.DivisionId).OrderBy(x => x)));
       }
     }
 
@@ -128,7 +128,7 @@ namespace Eve.Universe
     /// <returns>
     /// A compound ID combining the two sub-IDs.
     /// </returns>
-    public static long CreateCompoundId(NpcCorporationId corporationId, DivisionId divisionId)
+    public static long CreateCacheKey(NpcCorporationId corporationId, DivisionId divisionId)
     {
       return (long)((((ulong)(long)divisionId) << 32) | (ulong)(long)corporationId);
     }
@@ -198,7 +198,7 @@ namespace Eve.Universe
   {
     IConvertible IEveCacheable.CacheKey
     {
-      get { return CreateCompoundId(this.CorporationId, this.DivisionId); }
+      get { return CreateCacheKey(this.CorporationId, this.DivisionId); }
     }
   }
   #endregion

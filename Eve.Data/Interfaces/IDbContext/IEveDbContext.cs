@@ -36,7 +36,7 @@ namespace Eve.Data
     /// <value>
     /// The <see cref="IQueryable{T}" /> for agents.
     /// </value>
-    IQueryable<AgentEntity> Agents { get; }
+    IQueryable<ItemEntity> Agents { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query agent types.
@@ -137,6 +137,14 @@ namespace Eve.Data
     IQueryable<CategoryEntity> Categories { get; }
 
     /// <summary>
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query categories.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IQueryable{T}" /> for categories.
+    /// </value>
+    IQueryable<ItemEntity> Celestials { get; }
+
+    /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query character attribute types.
     /// </summary>
     /// <value>
@@ -150,7 +158,7 @@ namespace Eve.Data
     /// <value>
     /// The <see cref="IQueryable{T}" /> for constellations.
     /// </value>
-    IQueryable<ConstellationEntity> Constellations { get; }
+    IQueryable<ItemEntity> Constellations { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query constellation jumps.
@@ -199,6 +207,14 @@ namespace Eve.Data
     /// The <see cref="IQueryable{T}" /> for item types.
     /// </value>
     IQueryable<EveTypeEntity> EveTypes { get; }
+
+    /// <summary>
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query factions.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IQueryable{T}" /> for factions.
+    /// </value>
+    IQueryable<ItemEntity> Factions { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query flag types.
@@ -278,7 +294,7 @@ namespace Eve.Data
     /// <value>
     /// The <see cref="IQueryable{T}" /> for NPC corporations.
     /// </value>
-    IQueryable<NpcCorporationEntity> NpcCorporations { get; }
+    IQueryable<ItemEntity> NpcCorporations { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query divisions of NPC corporations.
@@ -302,7 +318,7 @@ namespace Eve.Data
     /// <value>
     /// The <see cref="IQueryable{T}" /> for regions.
     /// </value>
-    IQueryable<RegionEntity> Regions { get; }
+    IQueryable<ItemEntity> Regions { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query region jumps.
@@ -318,7 +334,7 @@ namespace Eve.Data
     /// <value>
     /// The <see cref="IQueryable{T}" /> for solar Systems.
     /// </value>
-    IQueryable<SolarSystemEntity> SolarSystems { get; }
+    IQueryable<ItemEntity> SolarSystems { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query solar system jumps.
@@ -329,12 +345,20 @@ namespace Eve.Data
     IQueryable<SolarSystemJumpEntity> SolarSystemJumps { get; }
 
     /// <summary>
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query stargates.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IQueryable{T}" /> for stargates.
+    /// </value>
+    IQueryable<ItemEntity> Stargates { get; }
+
+    /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query stations.
     /// </summary>
     /// <value>
     /// The <see cref="IQueryable{T}" /> for stations.
     /// </value>
-    IQueryable<StationEntity> Stations { get; }
+    IQueryable<ItemEntity> Stations { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query station operations.
@@ -374,7 +398,7 @@ namespace Eve.Data
     /// <value>
     /// The <see cref="IQueryable{T}" /> for universes.
     /// </value>
-    IQueryable<UniverseEntity> Universes { get; }
+    IQueryable<ItemEntity> Universes { get; }
 
     /* Methods */
 
@@ -388,6 +412,6 @@ namespace Eve.Data
     /// <returns>
     /// An <see cref="IQueryable{T}" /> for the specified entity type.
     /// </returns>
-    IQueryable<TEntity> Query<TEntity>() where TEntity : Entity;
+    IQueryable<TEntity> Query<TEntity>() where TEntity : class, IEveEntity;
   }
 }

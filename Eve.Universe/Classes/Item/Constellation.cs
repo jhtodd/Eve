@@ -33,10 +33,11 @@ namespace Eve.Universe
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal Constellation(IEveRepository container, ConstellationEntity entity) : base(container, entity)
+    internal Constellation(IEveRepository container, ItemEntity entity) : base(container, entity)
     {
       Contract.Requires(container != null, "The containing repository cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
+      Contract.Requires(entity.IsConstellation, "The entity must be a constellation.");
     }
 
     /* Properties */
@@ -62,7 +63,8 @@ namespace Eve.Universe
           return this.faction;
         }
 
-        FactionEntity factionEntity = this.Entity.Faction ?? this.Entity.Region.Faction;
+        Contract.Assume(this.ConstellationInfo.Region.RegionInfo != null);
+        ItemEntity factionEntity = this.ConstellationInfo.Faction ?? this.ConstellationInfo.Region.RegionInfo.Faction;
 
         if (factionEntity == null)
         {
@@ -70,7 +72,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.faction = this.Container.GetOrAdd<Faction>(factionEntity.Id, () => factionEntity.ToAdapter(this.Container));
+        return this.faction = this.Container.GetOrAdd<Faction>(factionEntity.Id, () => (Faction)factionEntity.ToAdapter(this.Container));
       }
     }
 
@@ -85,8 +87,15 @@ namespace Eve.Universe
     {
       get
       {
-        Contract.Assume(this.Entity.Region != null);
-        return this.Entity.FactionId ?? this.Entity.Region.FactionId;
+        Contract.Assume(this.ConstellationInfo.Region != null);
+
+        if (this.ConstellationInfo.FactionId.HasValue)
+        {
+          return (FactionId?)this.ConstellationInfo.FactionId;
+        }
+
+        Contract.Assume(this.ConstellationInfo.Region.RegionInfo != null);
+        return (FactionId?)this.ConstellationInfo.Region.RegionInfo.FactionId;
       }
     }
 
@@ -131,7 +140,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        double result = this.Entity.Radius;
+        double result = this.ConstellationInfo.Radius;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -154,7 +163,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.region ?? (this.region = this.Container.GetOrAdd<Region>(this.RegionId, () => this.Entity.Region.ToAdapter(this.Container)));
+        return this.region ?? (this.region = this.Container.GetOrAdd<Region>(this.RegionId, () => (Region)this.ConstellationInfo.Region.ToAdapter(this.Container)));
       }
     }
 
@@ -166,7 +175,7 @@ namespace Eve.Universe
     /// </value>
     public RegionId RegionId
     {
-      get { return (RegionId)this.Entity.RegionId; }
+      get { return (RegionId)this.ConstellationInfo.RegionId; }
     }
 
     /// <summary>
@@ -181,7 +190,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlySolarSystemCollection>() != null);
 
-        return this.solarSystems ?? (this.solarSystems = new ReadOnlySolarSystemCollection(this.Container.GetSolarSystems(x => x.ConstellationId == this.Id.Value).OrderBy(x => x)));
+        return this.solarSystems ?? (this.solarSystems = new ReadOnlySolarSystemCollection(this.Container.GetSolarSystems(x => x.SolarSystemInfo.ConstellationId == this.Id.Value).OrderBy(x => x)));
       }
     }
 
@@ -198,7 +207,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.X;
+        double result = this.ConstellationInfo.X;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -220,7 +229,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.Y;
+        double result = this.ConstellationInfo.Y;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -242,7 +251,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.Z;
+        double result = this.ConstellationInfo.Z;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -264,7 +273,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.XMax;
+        double result = this.ConstellationInfo.XMax;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -286,7 +295,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.YMax;
+        double result = this.ConstellationInfo.YMax;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -308,7 +317,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.ZMax;
+        double result = this.ConstellationInfo.ZMax;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -330,7 +339,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.XMin;
+        double result = this.ConstellationInfo.XMin;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -352,7 +361,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.YMin;
+        double result = this.ConstellationInfo.YMin;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -374,7 +383,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.ZMin;
+        double result = this.ConstellationInfo.ZMin;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -383,19 +392,16 @@ namespace Eve.Universe
       }
     }
 
-    /// <summary>
-    /// Gets the data entity that forms the basis of the adapter.
-    /// </summary>
-    /// <value>
-    /// The data entity that forms the basis of the adapter.
-    /// </value>
-    private new ConstellationEntity Entity
+    private ConstellationEntity ConstellationInfo
     {
       get
       {
         Contract.Ensures(Contract.Result<ConstellationEntity>() != null);
 
-        return (ConstellationEntity)base.Entity;
+        var result = this.Entity.ConstellationInfo;
+
+        Contract.Assume(result != null);
+        return result;
       }
     }
   }

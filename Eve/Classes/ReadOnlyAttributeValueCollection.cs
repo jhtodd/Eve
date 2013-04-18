@@ -17,7 +17,7 @@ namespace Eve
   /// A read-only collection of attributes.
   /// </summary>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
-  public partial class ReadOnlyAttributeValueCollection 
+  public sealed partial class ReadOnlyAttributeValueCollection 
     : ReadOnlyKeyedCollection<AttributeId, AttributeValue>,
       IAttributeCollection,
       IEveRepositoryItem
@@ -58,7 +58,7 @@ namespace Eve
     /// <value>
     /// The <see cref="IEveRepository" /> the item is associated with.
     /// </value>
-    protected IEveRepository Container
+    private IEveRepository Container
     {
       get
       {
@@ -188,7 +188,7 @@ namespace Eve
   /// <content>
   /// Explicit implementation of the <see cref="IAttributeCollection" /> interface.
   /// </content>
-  public partial class ReadOnlyAttributeValueCollection : IAttributeCollection
+  public sealed partial class ReadOnlyAttributeValueCollection : IAttributeCollection
   {
     IAttribute IAttributeCollection.this[AttributeId attributeId]
     {
@@ -218,7 +218,7 @@ namespace Eve
   /// <content>
   /// Explicit implementation of the <see cref="IEnumerable{T}" /> interface.
   /// </content>
-  public partial class ReadOnlyAttributeValueCollection : IEnumerable<IAttribute>
+  public sealed partial class ReadOnlyAttributeValueCollection : IEnumerable<IAttribute>
   {
     IEnumerator<IAttribute> IEnumerable<IAttribute>.GetEnumerator()
     {
@@ -231,7 +231,7 @@ namespace Eve
   /// <content>
   /// Explicit implementation of the <see cref="IEveRepositoryItem" /> interface.
   /// </content>
-  public partial class ReadOnlyAttributeValueCollection : IEveRepositoryItem
+  public sealed partial class ReadOnlyAttributeValueCollection : IEveRepositoryItem
   {
     IEveRepository IEveRepositoryItem.Container
     {
@@ -244,7 +244,7 @@ namespace Eve
   /// <content>
   /// Explicit implementation of the <see cref="IReadOnlyList{T}" /> interface.
   /// </content>
-  public partial class ReadOnlyAttributeValueCollection : IReadOnlyList<IAttribute>
+  public sealed partial class ReadOnlyAttributeValueCollection : IReadOnlyList<IAttribute>
   {
     IAttribute IReadOnlyList<IAttribute>.this[int index]
     {

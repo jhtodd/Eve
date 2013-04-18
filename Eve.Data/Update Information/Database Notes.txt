@@ -25,7 +25,7 @@ before it can be used with this framework.  I'll try to keep this list up to dat
    those tables:
 
      - agtAgents: Add column itemID, with value copied from agentID
-     - crpNPCCorporations: Add column itemID, with value copied from corporationID
+     - crpNPCCorporations: Add column itemID, with value copied from Stargate
      - invBlueprintTypes: Add column typeID, with value copied from blueprintTypeID
      - mapConstellations: Add column itemID, with value copied from constellationID
      - mapRegions: Add column itemID, with value copied from regionID

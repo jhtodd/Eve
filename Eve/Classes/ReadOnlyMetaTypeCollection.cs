@@ -13,7 +13,7 @@ namespace Eve
   /// A read-only collection of meta types.
   /// </summary>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
-  public class ReadOnlyMetaTypeCollection : ReadOnlyCollection<MetaType>
+  public sealed class ReadOnlyMetaTypeCollection : ReadOnlyCollection<MetaType>
   {
     /* Constructors */
 

@@ -26,11 +26,11 @@ namespace Eve.Data
       }
     }
 
-    IQueryable<AgentEntity> IEveDbContext.Agents
+    IQueryable<ItemEntity> IEveDbContext.Agents
     {
       get
       {
-        Contract.Ensures(Contract.Result<IQueryable<AgentEntity>>() != null);
+        Contract.Ensures(Contract.Result<IQueryable<ItemEntity>>() != null);
         throw new NotImplementedException();
       }
     }
@@ -143,6 +143,15 @@ namespace Eve.Data
       }
     }
 
+    IQueryable<ItemEntity> IEveDbContext.Celestials
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IQueryable<ItemEntity>>() != null);
+        throw new NotImplementedException();
+      }
+    }
+
     IQueryable<CharacterAttributeTypeEntity> IEveDbContext.CharacterAttributeTypes
     {
       get
@@ -152,11 +161,11 @@ namespace Eve.Data
       }
     }
 
-    IQueryable<ConstellationEntity> IEveDbContext.Constellations
+    IQueryable<ItemEntity> IEveDbContext.Constellations
     {
       get
       {
-        Contract.Ensures(Contract.Result<IQueryable<ConstellationEntity>>() != null);
+        Contract.Ensures(Contract.Result<IQueryable<ItemEntity>>() != null);
         throw new NotImplementedException();
       }
     }
@@ -211,6 +220,15 @@ namespace Eve.Data
       get
       {
         Contract.Ensures(Contract.Result<IQueryable<EveTypeEntity>>() != null);
+        throw new NotImplementedException();
+      }
+    }
+
+    IQueryable<ItemEntity> IEveDbContext.Factions
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IQueryable<ItemEntity>>() != null);
         throw new NotImplementedException();
       }
     }
@@ -296,11 +314,11 @@ namespace Eve.Data
       }
     }
 
-    IQueryable<NpcCorporationEntity> IEveDbContext.NpcCorporations
+    IQueryable<ItemEntity> IEveDbContext.NpcCorporations
     {
       get
       {
-        Contract.Ensures(Contract.Result<IQueryable<NpcCorporationEntity>>() != null);
+        Contract.Ensures(Contract.Result<IQueryable<ItemEntity>>() != null);
         throw new NotImplementedException();
       }
     }
@@ -323,11 +341,11 @@ namespace Eve.Data
       }
     }
 
-    IQueryable<RegionEntity> IEveDbContext.Regions
+    IQueryable<ItemEntity> IEveDbContext.Regions
     {
       get
       {
-        Contract.Ensures(Contract.Result<IQueryable<RegionEntity>>() != null);
+        Contract.Ensures(Contract.Result<IQueryable<ItemEntity>>() != null);
         throw new NotImplementedException();
       }
     }
@@ -341,11 +359,11 @@ namespace Eve.Data
       }
     }
 
-    IQueryable<SolarSystemEntity> IEveDbContext.SolarSystems
+    IQueryable<ItemEntity> IEveDbContext.SolarSystems
     {
       get
       {
-        Contract.Ensures(Contract.Result<IQueryable<SolarSystemEntity>>() != null);
+        Contract.Ensures(Contract.Result<IQueryable<ItemEntity>>() != null);
         throw new NotImplementedException();
       }
     }
@@ -359,11 +377,20 @@ namespace Eve.Data
       }
     }
 
-    IQueryable<StationEntity> IEveDbContext.Stations
+    IQueryable<ItemEntity> IEveDbContext.Stargates
     {
       get
       {
-        Contract.Ensures(Contract.Result<IQueryable<StationEntity>>() != null);
+        Contract.Ensures(Contract.Result<IQueryable<ItemEntity>>() != null);
+        throw new NotImplementedException();
+      }
+    }
+
+    IQueryable<ItemEntity> IEveDbContext.Stations
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IQueryable<ItemEntity>>() != null);
         throw new NotImplementedException();
       }
     }
@@ -404,11 +431,11 @@ namespace Eve.Data
       }
     }
 
-    IQueryable<UniverseEntity> IEveDbContext.Universes
+    IQueryable<ItemEntity> IEveDbContext.Universes
     {
       get
       {
-        Contract.Ensures(Contract.Result<IQueryable<UniverseEntity>>() != null);
+        Contract.Ensures(Contract.Result<IQueryable<ItemEntity>>() != null);
         throw new NotImplementedException();
       }
     }

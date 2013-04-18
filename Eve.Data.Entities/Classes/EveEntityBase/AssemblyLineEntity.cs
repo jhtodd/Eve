@@ -18,9 +18,9 @@ namespace Eve.Data.Entities
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
   [Table("ramAssemblyLines")]
-  public class AssemblyLineEntity : EveEntityBase<AssemblyLine>
+  public class AssemblyLineEntity : EveEntity<AssemblyLine>
   {
-    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
+    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */
@@ -77,7 +77,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>    
     [ForeignKey("ContainerId")]
-    public virtual StationEntity Container { get; internal set; }
+    public virtual ItemEntity Container { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -186,7 +186,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>    
     [ForeignKey("OwnerId")]
-    public virtual NpcCorporationEntity Owner { get; internal set; }
+    public virtual ItemEntity Owner { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.

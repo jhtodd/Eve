@@ -67,6 +67,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     Activity GetActivityById(ActivityId id);
 
     /// <summary>
@@ -92,6 +100,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<Activity> GetActivities(params IQueryModifier<ActivityEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="Activity" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetActivityById(ActivityId id, out Activity value);
     #endregion
 
     #region Agent Methods
@@ -107,9 +132,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
-    /// <exception cref="InvalidCastException">
-    /// Thrown if the item with the specified ID was not of the correct type.
-    /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     Agent GetAgentById(AgentId id);
 
     /// <summary>
@@ -121,7 +151,7 @@ namespace Eve.Data
     /// <returns>
     /// The results of the query.
     /// </returns>
-    IReadOnlyList<Agent> GetAgents(Expression<Func<AgentEntity, bool>> filter);
+    IReadOnlyList<Agent> GetAgents(Expression<Func<ItemEntity, bool>> filter);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Agent" /> objects.
@@ -132,7 +162,24 @@ namespace Eve.Data
     /// <returns>
     /// The results of the query.
     /// </returns>
-    IReadOnlyList<Agent> GetAgents(params IQueryModifier<AgentEntity>[] modifiers);
+    IReadOnlyList<Agent> GetAgents(params IQueryModifier<ItemEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="Agent" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetAgentById(AgentId id, out Agent value);
     #endregion
 
     #region AgentType Methods
@@ -148,6 +195,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     AgentType GetAgentTypeById(AgentTypeId id);
 
     /// <summary>
@@ -171,6 +226,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<AgentType> GetAgentTypes(params IQueryModifier<AgentTypeEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="AgentType" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetAgentTypeById(AgentTypeId id, out AgentType value);
     #endregion
 
     #region Ancestry Methods
@@ -186,6 +258,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     Ancestry GetAncestryById(AncestryId id);
 
     /// <summary>
@@ -211,6 +291,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<Ancestry> GetAncestries(params IQueryModifier<AncestryEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="Ancestry" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetAncestryById(AncestryId id, out Ancestry value);
     #endregion
 
     #region AssemblyLine Methods
@@ -226,6 +323,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     AssemblyLine GetAssemblyLineById(AssemblyLineId id);
 
     /// <summary>
@@ -251,6 +356,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<AssemblyLine> GetAssemblyLines(params IQueryModifier<AssemblyLineEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="AssemblyLine" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetAssemblyLineById(AssemblyLineId id, out AssemblyLine value);
     #endregion
 
     #region AssemblyLineStation Methods
@@ -260,8 +382,8 @@ namespace Eve.Data
     /// <param name="stationId">
     /// The ID of the station.
     /// </param>
-    /// <param name="assemblyLineType">
-    /// The ID of the assembly line.
+    /// <param name="assemblyLineTypeId">
+    /// The ID of the assembly line type.
     /// </param>
     /// <returns>
     /// The item with the specified key.
@@ -269,7 +391,15 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
-    AssemblyLineStation GetAssemblyLineStationById(StationId stationId, AssemblyLineTypeId assemblyLineType);
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
+    AssemblyLineStation GetAssemblyLineStationById(StationId stationId, AssemblyLineTypeId assemblyLineTypeId);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="AssemblyLineStation" />
@@ -294,6 +424,26 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<AssemblyLineStation> GetAssemblyLineStations(params IQueryModifier<AssemblyLineStationEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="AssemblyLineStation" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="stationId">
+    /// The ID of the station.
+    /// </param>
+    /// <param name="assemblyLineTypeId">
+    /// The ID of the assembly line type.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetAssemblyLineStationById(StationId stationId, AssemblyLineTypeId assemblyLineTypeId, out AssemblyLineStation value);
     #endregion
 
     #region AssemblyLineType Methods
@@ -309,6 +459,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     AssemblyLineType GetAssemblyLineTypeById(AssemblyLineTypeId id);
 
     /// <summary>
@@ -334,6 +492,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<AssemblyLineType> GetAssemblyLineTypes(params IQueryModifier<AssemblyLineTypeEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="AssemblyLineType" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetAssemblyLineTypeById(AssemblyLineTypeId id, out AssemblyLineType value);
     #endregion
 
     #region AssemblyLineTypeCategoryDetail Methods
@@ -352,6 +527,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     AssemblyLineTypeCategoryDetail GetAssemblyLineTypeCategoryDetailById(AssemblyLineTypeId assemblyLineTypeId, CategoryId categoryId);
 
     /// <summary>
@@ -377,6 +560,26 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<AssemblyLineTypeCategoryDetail> GetAssemblyLineTypeCategoryDetails(params IQueryModifier<AssemblyLineTypeCategoryDetailEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="AssemblyLineTypeCategoryDetail" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="assemblyLineTypeId">
+    /// The ID of the assembly line type.
+    /// </param>
+    /// <param name="categoryId">
+    /// The ID of the category.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetAssemblyLineTypeCategoryDetailById(AssemblyLineTypeId assemblyLineTypeId, CategoryId categoryId, out AssemblyLineTypeCategoryDetail value);
     #endregion
 
     #region AssemblyLineTypeGroupDetail Methods
@@ -395,6 +598,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     AssemblyLineTypeGroupDetail GetAssemblyLineTypeGroupDetailById(AssemblyLineTypeId assemblyLineTypeId, GroupId groupId);
 
     /// <summary>
@@ -420,6 +631,26 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<AssemblyLineTypeGroupDetail> GetAssemblyLineTypeGroupDetails(params IQueryModifier<AssemblyLineTypeGroupDetailEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="AssemblyLineTypeGroupDetail" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="assemblyLineTypeId">
+    /// The ID of the assembly line type.
+    /// </param>
+    /// <param name="groupId">
+    /// The ID of the group.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetAssemblyLineTypeGroupDetailById(AssemblyLineTypeId assemblyLineTypeId, GroupId groupId, out AssemblyLineTypeGroupDetail value);
     #endregion
 
     #region AttributeCategory Methods
@@ -435,6 +666,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     AttributeCategory GetAttributeCategoryById(AttributeCategoryId id);
 
     /// <summary>
@@ -460,6 +699,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<AttributeCategory> GetAttributeCategories(params IQueryModifier<AttributeCategoryEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="AttributeCategory" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetAttributeCategoryById(AttributeCategoryId id, out AttributeCategory value);
     #endregion
 
     #region AttributeType Methods
@@ -475,6 +731,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     AttributeType GetAttributeTypeById(AttributeId id);
 
     /// <summary>
@@ -500,6 +764,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<AttributeType> GetAttributeTypes(params IQueryModifier<AttributeTypeEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="AttributeType" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetAttributeTypeById(AttributeId id, out AttributeType value);
     #endregion
 
     #region AttributeValue Methods
@@ -509,7 +790,7 @@ namespace Eve.Data
     /// <param name="itemTypeId">
     /// The type ID of the attribute to return.
     /// </param>
-    /// <param name="id">
+    /// <param name="attributeId">
     /// The ID of the attribute to return.
     /// </param>
     /// <returns>
@@ -518,7 +799,15 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
-    AttributeValue GetAttributeValueById(TypeId itemTypeId, AttributeId id);
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
+    AttributeValue GetAttributeValueById(TypeId itemTypeId, AttributeId attributeId);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="AttributeValue" />
@@ -543,6 +832,26 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<AttributeValue> GetAttributeValues(params IQueryModifier<AttributeValueEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="AttributeValue" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="itemTypeId">
+    /// The type ID of the attribute to return.
+    /// </param>
+    /// <param name="attributeId">
+    /// The ID of the attribute to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetAttributeValueById(TypeId itemTypeId, AttributeId attributeId, out AttributeValue value);
     #endregion
 
     #region Bloodline Methods
@@ -558,6 +867,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     Bloodline GetBloodlineById(BloodlineId id);
 
     /// <summary>
@@ -583,6 +900,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<Bloodline> GetBloodlines(params IQueryModifier<BloodlineEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="Bloodline" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetBloodlineById(BloodlineId id, out Bloodline value);
     #endregion
 
     #region Category Methods
@@ -598,6 +932,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     Category GetCategoryById(CategoryId id);
 
     /// <summary>
@@ -623,6 +965,88 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<Category> GetCategories(params IQueryModifier<CategoryEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="Category" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetCategoryById(CategoryId id, out Category value);
+    #endregion
+
+    #region Celestial Methods
+    /// <summary>
+    /// Returns the <see cref="Celestial" /> object with the specified ID.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <returns>
+    /// The item with the specified key.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
+    Celestial GetCelestialById(CelestialId id);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="Celestial" />
+    /// objects.
+    /// </summary>
+    /// <param name="filter">
+    /// The expression that will filter the results of the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<Celestial> GetCelestials(Expression<Func<ItemEntity, bool>> filter);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="Celestial" />
+    /// objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<Celestial> GetCelestials(params IQueryModifier<ItemEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="Celestial" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetCelestialById(CelestialId id, out Celestial value);
     #endregion
 
     #region CharacterAttributeType Methods
@@ -639,6 +1063,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     CharacterAttributeType GetCharacterAttributeTypeById(CharacterAttributeId id);
 
     /// <summary>
@@ -664,6 +1096,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<CharacterAttributeType> GetCharacterAttributeTypes(params IQueryModifier<CharacterAttributeTypeEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="CharacterAttributeType" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetCharacterAttributeTypeById(CharacterAttributeId id, out CharacterAttributeType value);
     #endregion
 
     #region Constellation Methods
@@ -679,9 +1128,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
-    /// <exception cref="InvalidCastException">
-    /// Thrown if the item with the specified ID was not of the correct type.
-    /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     Constellation GetConstellationById(ConstellationId id);
 
     /// <summary>
@@ -693,7 +1147,7 @@ namespace Eve.Data
     /// <returns>
     /// The results of the query.
     /// </returns>
-    IReadOnlyList<Constellation> GetConstellations(Expression<Func<ConstellationEntity, bool>> filter);
+    IReadOnlyList<Constellation> GetConstellations(Expression<Func<ItemEntity, bool>> filter);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Constellation" /> objects.
@@ -704,7 +1158,24 @@ namespace Eve.Data
     /// <returns>
     /// The results of the query.
     /// </returns>
-    IReadOnlyList<Constellation> GetConstellations(params IQueryModifier<ConstellationEntity>[] modifiers);
+    IReadOnlyList<Constellation> GetConstellations(params IQueryModifier<ItemEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="Constellation" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetConstellationById(ConstellationId id, out Constellation value);
     #endregion
 
     #region ConstellationJump Methods
@@ -723,9 +1194,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
-    /// <exception cref="InvalidCastException">
-    /// Thrown if the item with the specified ID was not of the correct type.
-    /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     ConstellationJump GetConstellationJumpById(ConstellationId fromConstellationId, ConstellationId toConstellationId);
 
     /// <summary>
@@ -749,6 +1225,26 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<ConstellationJump> GetConstellationJumps(params IQueryModifier<ConstellationJumpEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="ConstellationJump" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="fromConstellationId">
+    /// The ID of the origin region of the jump to return.
+    /// </param>
+    /// <param name="toConstellationId">
+    /// The ID of the destination region of the jump to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetConstellationJumpById(ConstellationId fromConstellationId, ConstellationId toConstellationId, out ConstellationJump value);
     #endregion
 
     #region CorporateActivity Methods
@@ -764,6 +1260,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     CorporateActivity GetCorporateActivityById(CorporateActivityId id);
 
     /// <summary>
@@ -787,6 +1291,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<CorporateActivity> GetCorporateActivities(params IQueryModifier<CorporateActivityEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="CorporateActivity" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetCorporateActivityById(CorporateActivityId id, out CorporateActivity value);
     #endregion
 
     #region Division Methods
@@ -802,6 +1323,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     Division GetDivisionById(DivisionId id);
 
     /// <summary>
@@ -825,6 +1354,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<Division> GetDivisions(params IQueryModifier<DivisionEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="Division" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetDivisionById(DivisionId id, out Division value);
     #endregion
 
     #region Effect Methods
@@ -834,7 +1380,7 @@ namespace Eve.Data
     /// <param name="itemTypeId">
     /// The type ID of the effect to return.
     /// </param>
-    /// <param name="id">
+    /// <param name="effectId">
     /// The ID of the effect to return.
     /// </param>
     /// <returns>
@@ -843,7 +1389,15 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
-    Effect GetEffectById(TypeId itemTypeId, EffectId id);
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
+    Effect GetEffectById(TypeId itemTypeId, EffectId effectId);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Effect" />
@@ -868,6 +1422,26 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<Effect> GetEffects(params IQueryModifier<EffectEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="Constellation" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="itemTypeId">
+    /// The type ID of the effect to return.
+    /// </param>
+    /// <param name="effectId">
+    /// The ID of the effect to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetEffectById(TypeId itemTypeId, EffectId effectId, out Effect value);
     #endregion
 
     #region EffectType Methods
@@ -883,6 +1457,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     EffectType GetEffectTypeById(EffectId id);
 
     /// <summary>
@@ -908,6 +1490,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<EffectType> GetEffectTypes(params IQueryModifier<EffectTypeEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="EffectType" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetEffectTypeById(EffectId id, out EffectType value);
     #endregion
 
     #region EveType Methods
@@ -923,6 +1522,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     EveType GetEveTypeById(TypeId id);
 
     /// <summary>
@@ -948,7 +1555,25 @@ namespace Eve.Data
     IReadOnlyList<EveType> GetEveTypes(params IQueryModifier<EveTypeEntity>[] modifiers);
 
     /// <summary>
-    /// Returns the <see cref="EveType" /> object with the specified ID.
+    /// Attempts to retrieve the <see cref="EveType" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetEveTypeById(TypeId id, out EveType value);
+
+    /// <summary>
+    /// Returns the <see cref="EveType" /> object of the desired type and
+    /// with the specified ID.
     /// </summary>
     /// <typeparam name="TEveType">
     /// The desired item type.  Only items of this type will be returned.
@@ -957,7 +1582,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID.
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -966,10 +1591,19 @@ namespace Eve.Data
     /// Thrown if the item with the specified ID was not of type
     /// <typeparamref name="TEveType" />.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     TEveType GetEveTypeById<TEveType>(TypeId id) where TEveType : EveType;
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="EveType" /> objects.
+    /// Returns the results of the specified query for <see cref="EveType" /> objects
+    /// of the desired type.
     /// </summary>
     /// <typeparam name="TEveType">
     /// The desired item type.  Only items of this type will be returned.
@@ -979,12 +1613,13 @@ namespace Eve.Data
     /// </param>
     /// <returns>
     /// The results of the query.  Only items of type <typeparamref name="TEveType" />
-    /// will be returned.
+    /// will be returned.  Any matching items of other types will be omitted.
     /// </returns>
     IReadOnlyList<TEveType> GetEveTypes<TEveType>(Expression<Func<EveTypeEntity, bool>> filter) where TEveType : EveType;
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="EveType" /> objects.
+    /// Returns the results of the specified query for <see cref="EveType" /> objects
+    /// of the desired type.
     /// </summary>
     /// <typeparam name="TEveType">
     /// The desired item type.  Only items of this type will be returned.
@@ -994,9 +1629,29 @@ namespace Eve.Data
     /// </param>
     /// <returns>
     /// The results of the query.  Only items of type <typeparamref name="TEveType" />
-    /// will be returned.
+    /// will be returned.  Any matching items of other types will be omitted.
     /// </returns>
     IReadOnlyList<TEveType> GetEveTypes<TEveType>(params IQueryModifier<EveTypeEntity>[] modifiers) where TEveType : EveType;
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="EveType" /> object of the desired
+    /// type and with the specified ID, returning success or failure.
+    /// </summary>
+    /// <typeparam name="TEveType">
+    /// The desired item type.  Only items of this type will be returned.
+    /// </typeparam>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item of the desired type is
+    /// found; otherwise <see langword="false" />.
+    /// </returns>
+    bool TryGetEveTypeById<TEveType>(TypeId id, out TEveType value) where TEveType : EveType;
     #endregion
 
     #region Faction Methods
@@ -1012,6 +1667,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     Faction GetFactionById(FactionId id);
 
     /// <summary>
@@ -1023,7 +1686,7 @@ namespace Eve.Data
     /// <returns>
     /// The results of the query.
     /// </returns>
-    IReadOnlyList<Faction> GetFactions(Expression<Func<FactionEntity, bool>> filter);
+    IReadOnlyList<Faction> GetFactions(Expression<Func<ItemEntity, bool>> filter);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Faction" /> objects.
@@ -1034,7 +1697,24 @@ namespace Eve.Data
     /// <returns>
     /// The results of the query.
     /// </returns>
-    IReadOnlyList<Faction> GetFactions(params IQueryModifier<FactionEntity>[] modifiers);
+    IReadOnlyList<Faction> GetFactions(params IQueryModifier<ItemEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="Faction" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetFactionById(FactionId id, out Faction value);
     #endregion
 
     #region Graphic Methods
@@ -1050,6 +1730,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     Graphic GetGraphicById(GraphicId id);
 
     /// <summary>
@@ -1073,6 +1761,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<Graphic> GetGraphics(params IQueryModifier<GraphicEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="Graphic" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetGraphicById(GraphicId id, out Graphic value);
     #endregion
 
     #region Group Methods
@@ -1088,6 +1793,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     Group GetGroupById(GroupId id);
 
     /// <summary>
@@ -1111,6 +1824,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<Group> GetGroups(params IQueryModifier<GroupEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="Group" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetGroupById(GroupId id, out Group value);
     #endregion
 
     #region Icon Methods
@@ -1126,6 +1856,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     Icon GetIconById(IconId id);
 
     /// <summary>
@@ -1149,6 +1887,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<Icon> GetIcons(params IQueryModifier<IconEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="Icon" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetIconById(IconId id, out Icon value);
     #endregion
 
     #region Item Methods
@@ -1164,6 +1919,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     Item GetItemById(ItemId id);
 
     /// <summary>
@@ -1189,7 +1952,25 @@ namespace Eve.Data
     IReadOnlyList<Item> GetItems(params IQueryModifier<ItemEntity>[] modifiers);
 
     /// <summary>
-    /// Returns the <see cref="Item" /> object with the specified ID.
+    /// Attempts to retrieve the <see cref="Item" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetItemById(ItemId id, out Item value);
+
+    /// <summary>
+    /// Returns the <see cref="Item" /> object of the desired type and
+    /// with the specified ID.
     /// </summary>
     /// <typeparam name="TItem">
     /// The type of the item to retrieve.
@@ -1206,10 +1987,19 @@ namespace Eve.Data
     /// <exception cref="InvalidCastException">
     /// Thrown if the item with the specified ID was not of the desired type.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     TItem GetItemById<TItem>(ItemId id) where TItem : Item;
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Item" /> objects.
+    /// Returns the results of the specified query for <see cref="Item" /> objects
+    /// of the desired type.
     /// </summary>
     /// <typeparam name="TItem">
     /// The desired item type.  Only items of this type will be returned.
@@ -1219,12 +2009,13 @@ namespace Eve.Data
     /// </param>
     /// <returns>
     /// The results of the query.  Only items of type <typeparamref name="TItem" />
-    /// will be returned.
+    /// will be returned.  Any matching items of other types will be omitted.
     /// </returns>
     IReadOnlyList<TItem> GetItems<TItem>(Expression<Func<ItemEntity, bool>> filter) where TItem : Item;
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Item" /> objects.
+    /// Returns the results of the specified query for <see cref="Item" /> objects
+    /// of the desired type.
     /// </summary>
     /// <typeparam name="TItem">
     /// The desired item type.  Only items of this type will be returned.
@@ -1234,9 +2025,29 @@ namespace Eve.Data
     /// </param>
     /// <returns>
     /// The results of the query.  Only items of type <typeparamref name="TItem" />
-    /// will be returned.
+    /// will be returned.  Any matching items of other types will be omitted.
     /// </returns>
     IReadOnlyList<TItem> GetItems<TItem>(params IQueryModifier<ItemEntity>[] modifiers) where TItem : Item;
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="Item" /> object of the desired
+    /// type and with the specified ID, returning success or failure.
+    /// </summary>
+    /// <typeparam name="TItem">
+    /// The type of the item to return.
+    /// </typeparam>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item of the desired type
+    /// is found; otherwise <see langword="false" />.
+    /// </returns>
+    bool TryGetItemById<TItem>(ItemId id, out TItem value) where TItem : Item;
     #endregion
 
     #region ItemPosition Methods
@@ -1252,6 +2063,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     ItemPosition GetItemPositionById(ItemId id);
 
     /// <summary>
@@ -1275,6 +2094,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<ItemPosition> GetItemPositions(params IQueryModifier<ItemPositionEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="ItemPosition" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetItemPositionById(ItemId id, out ItemPosition value);
     #endregion
 
     #region MarketGroup Methods
@@ -1290,6 +2126,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     MarketGroup GetMarketGroupById(MarketGroupId id);
 
     /// <summary>
@@ -1313,6 +2157,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<MarketGroup> GetMarketGroups(params IQueryModifier<MarketGroupEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="MarketGroup" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetMarketGroupById(MarketGroupId id, out MarketGroup value);
     #endregion
 
     #region MetaGroup Methods
@@ -1328,6 +2189,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     MetaGroup GetMetaGroupById(MetaGroupId id);
 
     /// <summary>
@@ -1351,6 +2220,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<MetaGroup> GetMetaGroups(params IQueryModifier<MetaGroupEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="MetaGroup" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetMetaGroupById(MetaGroupId id, out MetaGroup value);
     #endregion
 
     #region MetaType Methods
@@ -1366,6 +2252,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     MetaType GetMetaTypeById(TypeId typeId);
 
     /// <summary>
@@ -1391,6 +2285,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<MetaType> GetMetaTypes(params IQueryModifier<MetaTypeEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="MetaType" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetMetaTypeById(TypeId id, out MetaType value);
     #endregion
 
     #region NpcCorporation Methods
@@ -1409,6 +2320,14 @@ namespace Eve.Data
     /// <exception cref="InvalidCastException">
     /// Thrown if the item with the specified ID was not of the correct type.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     NpcCorporation GetNpcCorporationById(NpcCorporationId id);
 
     /// <summary>
@@ -1420,7 +2339,7 @@ namespace Eve.Data
     /// <returns>
     /// The results of the query.
     /// </returns>
-    IReadOnlyList<NpcCorporation> GetNpcCorporations(Expression<Func<NpcCorporationEntity, bool>> filter);
+    IReadOnlyList<NpcCorporation> GetNpcCorporations(Expression<Func<ItemEntity, bool>> filter);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="NpcCorporation" /> objects.
@@ -1431,7 +2350,24 @@ namespace Eve.Data
     /// <returns>
     /// The results of the query.
     /// </returns>
-    IReadOnlyList<NpcCorporation> GetNpcCorporations(params IQueryModifier<NpcCorporationEntity>[] modifiers);
+    IReadOnlyList<NpcCorporation> GetNpcCorporations(params IQueryModifier<ItemEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="NpcCorporation" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetNpcCorporationById(NpcCorporationId id, out NpcCorporation value);
     #endregion
 
     #region NpcCorporationDivision Methods
@@ -1450,6 +2386,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     NpcCorporationDivision GetNpcCorporationDivisionById(NpcCorporationId corporationId, DivisionId divisionId);
 
     /// <summary>
@@ -1473,6 +2417,26 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<NpcCorporationDivision> GetNpcCorporationDivisions(params IQueryModifier<NpcCorporationDivisionEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="NpcCorporationDivision" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="corporationId">
+    /// The ID of the corporation.
+    /// </param>
+    /// <param name="divisionId">
+    /// The ID of the division.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetNpcCorporationDivisionById(NpcCorporationId corporationId, DivisionId divisionId, out NpcCorporationDivision value);
     #endregion
 
     #region Race Methods
@@ -1488,6 +2452,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     Race GetRaceById(RaceId id);
 
     /// <summary>
@@ -1511,6 +2483,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<Race> GetRaces(params IQueryModifier<RaceEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="Race" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetRaceById(RaceId id, out Race value);
     #endregion
 
     #region Region Methods
@@ -1526,9 +2515,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
-    /// <exception cref="InvalidCastException">
-    /// Thrown if the item with the specified ID was not of the correct type.
-    /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     Region GetRegionById(RegionId id);
 
     /// <summary>
@@ -1540,7 +2534,7 @@ namespace Eve.Data
     /// <returns>
     /// The results of the query.
     /// </returns>
-    IReadOnlyList<Region> GetRegions(Expression<Func<RegionEntity, bool>> filter);
+    IReadOnlyList<Region> GetRegions(Expression<Func<ItemEntity, bool>> filter);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Region" /> objects.
@@ -1551,7 +2545,24 @@ namespace Eve.Data
     /// <returns>
     /// The results of the query.
     /// </returns>
-    IReadOnlyList<Region> GetRegions(params IQueryModifier<RegionEntity>[] modifiers);
+    IReadOnlyList<Region> GetRegions(params IQueryModifier<ItemEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="Region" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetRegionById(RegionId id, out Region value);
     #endregion
 
     #region RegionJump Methods
@@ -1570,9 +2581,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
-    /// <exception cref="InvalidCastException">
-    /// Thrown if the item with the specified ID was not of the correct type.
-    /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     RegionJump GetRegionJumpById(RegionId fromRegionId, RegionId toRegionId);
 
     /// <summary>
@@ -1596,6 +2612,26 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<RegionJump> GetRegionJumps(params IQueryModifier<RegionJumpEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="RegionJump" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="fromRegionId">
+    /// The ID of the origin region of the jump to return.
+    /// </param>
+    /// <param name="toRegionId">
+    /// The ID of the destination region of the jump to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetRegionJumpById(RegionId fromRegionId, RegionId toRegionId, out RegionJump value);
     #endregion
 
     #region SolarSystem Methods
@@ -1611,9 +2647,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
-    /// <exception cref="InvalidCastException">
-    /// Thrown if the item with the specified ID was not of the correct type.
-    /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     SolarSystem GetSolarSystemById(SolarSystemId id);
 
     /// <summary>
@@ -1625,7 +2666,7 @@ namespace Eve.Data
     /// <returns>
     /// The results of the query.
     /// </returns>
-    IReadOnlyList<SolarSystem> GetSolarSystems(Expression<Func<SolarSystemEntity, bool>> filter);
+    IReadOnlyList<SolarSystem> GetSolarSystems(Expression<Func<ItemEntity, bool>> filter);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="SolarSystem" /> objects.
@@ -1636,7 +2677,24 @@ namespace Eve.Data
     /// <returns>
     /// The results of the query.
     /// </returns>
-    IReadOnlyList<SolarSystem> GetSolarSystems(params IQueryModifier<SolarSystemEntity>[] modifiers);
+    IReadOnlyList<SolarSystem> GetSolarSystems(params IQueryModifier<ItemEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="SolarSystem" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetSolarSystemById(SolarSystemId id, out SolarSystem value);
     #endregion
 
     #region SolarSystemJump Methods
@@ -1655,9 +2713,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
-    /// <exception cref="InvalidCastException">
-    /// Thrown if the item with the specified ID was not of the correct type.
-    /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     SolarSystemJump GetSolarSystemJumpById(SolarSystemId fromSolarSystemId, SolarSystemId toSolarSystemId);
 
     /// <summary>
@@ -1681,6 +2744,91 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<SolarSystemJump> GetSolarSystemJumps(params IQueryModifier<SolarSystemJumpEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="SolarSystemJump" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="fromSolarSystemId">
+    /// The ID of the origin region of the jump to return.
+    /// </param>
+    /// <param name="toSolarSystemId">
+    /// The ID of the destination region of the jump to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetSolarSystemJumpById(SolarSystemId fromSolarSystemId, SolarSystemId toSolarSystemId, out SolarSystemJump value);
+    #endregion
+
+    #region Stargate Methods
+    /// <summary>
+    /// Returns the <see cref="Stargate" /> object with the specified ID.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <returns>
+    /// The item with the specified key.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
+    Stargate GetStargateById(StargateId id);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="Stargate" />
+    /// objects.
+    /// </summary>
+    /// <param name="filter">
+    /// The expression that will filter the results of the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<Stargate> GetStargates(Expression<Func<ItemEntity, bool>> filter);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="Stargate" />
+    /// objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// The results of the query.
+    /// </returns>
+    IReadOnlyList<Stargate> GetStargates(params IQueryModifier<ItemEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="Stargate" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetStargateById(StargateId id, out Stargate value);
     #endregion
 
     #region Station Methods
@@ -1696,6 +2844,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     Station GetStationById(StationId id);
 
     /// <summary>
@@ -1707,7 +2863,7 @@ namespace Eve.Data
     /// <returns>
     /// The results of the query.
     /// </returns>
-    IReadOnlyList<Station> GetStations(Expression<Func<StationEntity, bool>> filter);
+    IReadOnlyList<Station> GetStations(Expression<Func<ItemEntity, bool>> filter);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Station" /> objects.
@@ -1718,7 +2874,24 @@ namespace Eve.Data
     /// <returns>
     /// The results of the query.
     /// </returns>
-    IReadOnlyList<Station> GetStations(params IQueryModifier<StationEntity>[] modifiers);
+    IReadOnlyList<Station> GetStations(params IQueryModifier<ItemEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="Station" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetStationById(StationId id, out Station value);
     #endregion
 
     #region StationOperation Methods
@@ -1734,6 +2907,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     StationOperation GetStationOperationById(StationOperationId id);
 
     /// <summary>
@@ -1757,6 +2938,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<StationOperation> GetStationOperations(params IQueryModifier<StationOperationEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="StationOperation" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetStationOperationById(StationOperationId id, out StationOperation value);
     #endregion
 
     #region StationService Methods
@@ -1772,6 +2970,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     StationService GetStationServiceById(StationServiceId id);
 
     /// <summary>
@@ -1795,6 +3001,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<StationService> GetStationServices(params IQueryModifier<StationServiceEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="StationService" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetStationServiceById(StationServiceId id, out StationService value);
     #endregion
 
     #region StationType Methods
@@ -1810,6 +3033,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     StationType GetStationTypeById(TypeId id);
 
     /// <summary>
@@ -1833,6 +3064,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<StationType> GetStationTypes(params IQueryModifier<StationTypeEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="StationType" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetStationTypeById(TypeId id, out StationType value);
     #endregion
 
     #region Unit Methods
@@ -1848,6 +3096,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     Unit GetUnitById(UnitId id);
 
     /// <summary>
@@ -1871,6 +3127,23 @@ namespace Eve.Data
     /// The results of the query.
     /// </returns>
     IReadOnlyList<Unit> GetUnits(params IQueryModifier<UnitEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="Unit" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetUnitById(UnitId id, out Unit value);
     #endregion
 
     #region Universe Methods
@@ -1886,6 +3159,14 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
     /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
     Universe GetUniverseById(UniverseId id);
 
     /// <summary>
@@ -1897,7 +3178,7 @@ namespace Eve.Data
     /// <returns>
     /// The results of the query.
     /// </returns>
-    IReadOnlyList<Universe> GetUniverses(Expression<Func<UniverseEntity, bool>> filter);
+    IReadOnlyList<Universe> GetUniverses(Expression<Func<ItemEntity, bool>> filter);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Universe" /> objects.
@@ -1908,7 +3189,24 @@ namespace Eve.Data
     /// <returns>
     /// The results of the query.
     /// </returns>
-    IReadOnlyList<Universe> GetUniverses(params IQueryModifier<UniverseEntity>[] modifiers);
+    IReadOnlyList<Universe> GetUniverses(params IQueryModifier<ItemEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="Universe" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID,
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    bool TryGetUniverseById(UniverseId id, out Universe value);
     #endregion
   }
 }

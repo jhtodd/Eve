@@ -13,7 +13,7 @@ namespace Eve.Universe
   /// A read-only collection of region jumps.
   /// </summary>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
-  public class ReadOnlyRegionJumpCollection : ReadOnlyCollection<RegionJump>
+  public sealed class ReadOnlyRegionJumpCollection : ReadOnlyCollection<RegionJump>
   {
     /* Constructors */
 

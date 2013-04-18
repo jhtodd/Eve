@@ -13,7 +13,7 @@ namespace Eve.Universe
   /// A read-only collection of solar system jumps.
   /// </summary>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
-  public class ReadOnlySolarSystemJumpCollection : ReadOnlyCollection<SolarSystemJump>
+  public sealed class ReadOnlySolarSystemJumpCollection : ReadOnlyCollection<SolarSystemJump>
   {
     /* Constructors */
 

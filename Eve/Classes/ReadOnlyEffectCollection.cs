@@ -14,7 +14,7 @@ namespace Eve
   /// A read-only collection of effects.
   /// </summary>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
-  public partial class ReadOnlyEffectCollection
+  public sealed partial class ReadOnlyEffectCollection
     : ReadOnlyKeyedCollection<EffectId, Effect>,
       IEffectCollection
   {
@@ -42,7 +42,7 @@ namespace Eve
   /// <content>
   /// Explicit implementation of the <see cref="IEffectCollection" /> interface.
   /// </content>
-  public partial class ReadOnlyEffectCollection : IEffectCollection
+  public sealed partial class ReadOnlyEffectCollection : IEffectCollection
   {
     IEffect IEffectCollection.this[EffectId effectId]
     {
@@ -72,7 +72,7 @@ namespace Eve
   /// <content>
   /// Explicit implementation of the <see cref="IEnumerable{T}" /> interface.
   /// </content>
-  public partial class ReadOnlyEffectCollection : IEnumerable<IEffect>
+  public sealed partial class ReadOnlyEffectCollection : IEnumerable<IEffect>
   {
     IEnumerator<IEffect> IEnumerable<IEffect>.GetEnumerator()
     {
@@ -85,7 +85,7 @@ namespace Eve
   /// <content>
   /// Explicit implementation of the <see cref="IReadOnlyList{T}" /> interface.
   /// </content>
-  public partial class ReadOnlyEffectCollection : IReadOnlyList<IEffect>
+  public sealed partial class ReadOnlyEffectCollection : IReadOnlyList<IEffect>
   {
     IEffect IReadOnlyList<IEffect>.this[int index]
     {

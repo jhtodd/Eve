@@ -15,11 +15,110 @@ namespace Eve.Data.Entities
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
   [Table("invItems")]
-  public class ItemEntity : EveEntityBase<Item>
+  public class ItemEntity : EveEntity<Item>
   {
-    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
-    // data mappings.
+    // Check DirectEveDbContext.OnModelCreating() for customization of this type's data mappings.
 
+    /// <summary>
+    /// Defines the range of ID values belonging to Agent items.
+    /// </summary>
+    internal const long AgentMaximumId = 3999999L;
+
+    /// <summary>
+    /// Defines the range of ID values belonging to Agent items.
+    /// </summary>
+    internal const long AgentMinimumId = 3000000L;
+
+    /// <summary>
+    /// Defines the range of ID values belonging to Celestial items.
+    /// </summary>
+    internal const long CelestialMaximumId = 49999999L;
+
+    /// <summary>
+    /// Defines the range of ID values belonging to Celestial items.
+    /// </summary>
+    internal const long CelestialMinimumId = 40000000L;
+
+    /// <summary>
+    /// Defines the range of ID values belonging to Constellation items.
+    /// </summary>
+    internal const long ConstellationMaximumId = 29999999L;
+
+    /// <summary>
+    /// Defines the range of ID values belonging to Constellation items.
+    /// </summary>
+    internal const long ConstellationMinimumId = 20000000L;
+
+    /// <summary>
+    /// Defines the range of ID values belonging to Corporation items.
+    /// </summary>
+    internal const long CorporationMaximumId = 1999999L;
+
+    /// <summary>
+    /// Defines the range of ID values belonging to Corporation items.
+    /// </summary>
+    internal const long CorporationMinimumId = 1000000L;
+
+    /// <summary>
+    /// Defines the range of ID values belonging to Faction items.
+    /// </summary>
+    internal const long FactionMaximumId = 599999L;
+
+    /// <summary>
+    /// Defines the range of ID values belonging to Faction items.
+    /// </summary>
+    internal const long FactionMinimumId = 500000L;
+
+    /// <summary>
+    /// Defines the range of ID values belonging to Region items.
+    /// </summary>
+    internal const long RegionMaximumId = 19999999L;
+
+    /// <summary>
+    /// Defines the range of ID values belonging to Region items.
+    /// </summary>
+    internal const long RegionMinimumId = 10000000L;
+
+    /// <summary>
+    /// Defines the range of ID values belonging to SolarSystem items.
+    /// </summary>
+    internal const long SolarSystemMaximumId = 39999999L;
+
+    /// <summary>
+    /// Defines the range of ID values belonging to SolarSystem items.
+    /// </summary>
+    internal const long SolarSystemMinimumId = 30000000L;
+
+    /// <summary>
+    /// Defines the range of ID values belonging to Stargate items.
+    /// </summary>
+    internal const long StargateMaximumId = 59999999L;
+
+    /// <summary>
+    /// Defines the range of ID values belonging to Stargate items.
+    /// </summary>
+    internal const long StargateMinimumId = 50000000L;
+
+    /// <summary>
+    /// Defines the range of ID values belonging to Station items.
+    /// </summary>
+    internal const long StationMaximumId = 69999999L;
+
+    /// <summary>
+    /// Defines the range of ID values belonging to Station items.
+    /// </summary>
+    internal const long StationMinimumId = 60000000L;
+
+    /// <summary>
+    /// Defines the range of ID values belonging to Universe items.
+    /// </summary>
+    internal const long UniverseMaximumId = 9999999L;
+
+    /// <summary>
+    /// Defines the range of ID values belonging to Universe items.
+    /// </summary>
+    internal const long UniverseMinimumId = 9000000L;
+    
     /* Constructors */
 
     /// <summary>
@@ -30,6 +129,61 @@ namespace Eve.Data.Entities
     }
 
     /* Properties */
+
+    /// <summary>
+    /// Gets additional information if the current item is an agent.
+    /// </summary>
+    /// <value>
+    /// An <see cref="AgentEntity" /> containing extra information about the
+    /// item, or <see langword="null" /> if the current item does not describe
+    /// an agent.
+    /// </value>
+    [ForeignKey("AgentId")]
+    public virtual AgentEntity AgentInfo { get; internal set; }
+
+    /// <summary>
+    /// Gets additional information if the current item is a celestial object.
+    /// </summary>
+    /// <value>
+    /// A <see cref="CelestialEntity" /> containing extra information about the
+    /// item, or <see langword="null" /> if the current item does not describe
+    /// a celestial object.
+    /// </value>
+    [ForeignKey("CelestialId")]
+    public virtual CelestialEntity CelestialInfo { get; internal set; }
+
+    /// <summary>
+    /// Gets additional information if the current item is a constellation.
+    /// </summary>
+    /// <value>
+    /// A <see cref="ConstellationEntity" /> containing extra information about the
+    /// item, or <see langword="null" /> if the current item does not describe
+    /// a constellation.
+    /// </value>
+    [ForeignKey("ConstellationId")]
+    public virtual ConstellationEntity ConstellationInfo { get; internal set; }
+
+    /// <summary>
+    /// Gets additional information if the current item is a corporation.
+    /// </summary>
+    /// <value>
+    /// A <see cref="NpcCorporationEntity" /> containing extra information about the
+    /// item, or <see langword="null" /> if the current item does not describe
+    /// a corporation.
+    /// </value>
+    [ForeignKey("CorporationId")]
+    public virtual NpcCorporationEntity CorporationInfo { get; internal set; }
+
+    /// <summary>
+    /// Gets additional information if the current item is a faction.
+    /// </summary>
+    /// <value>
+    /// A <see cref="FactionEntity" /> containing extra information about the
+    /// item, or <see langword="null" /> if the current item does not describe
+    /// a faction.
+    /// </value>
+    [ForeignKey("FactionId")]
+    public virtual FactionEntity FactionInfo { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -60,13 +214,374 @@ namespace Eve.Data.Entities
     public long Id { get; internal set; }
 
     /// <summary>
-    /// Gets the underlying database value of the corresponding adapter property.
+    /// Gets a value indicating whether the item is an agent.
     /// </summary>
     /// <value>
-    /// The underlying database value of the corresponding adapter property.
+    /// <see langword="true" /> if the item is an agent; otherwise
+    /// <see langword="false" />.
     /// </value>
-    [ForeignKey("ItemId")]
-    public virtual ItemPositionEntity Position { get; internal set; }
+    /// <remarks>
+    /// <para>
+    /// If the value of this property is <see langword="true" />,
+    /// the <see cref="AgentInfo" /> property will contain additional
+    /// information about the item.
+    /// </para>
+    /// </remarks>
+    [NotMapped]
+    public bool IsAgent
+    {
+      get 
+      {
+        // If the ID is outside the allowed range, it's definitely not the
+        // specified type.
+        if (!(this.Id >= AgentMinimumId && this.Id <= AgentMaximumId))
+        {
+          return false;
+        }
+
+        // In some cases the ID is in the allowed range but there is no entry
+        // in the related table, so check for that too.  No database calls
+        // should be needed -- if the entity isn't of the desired type,
+        // checking the ID first should abort before it even gets here.  And
+        // if it is of the desired type, then more than likely the navigation
+        // property was loaded with an .Include() call when the entity was
+        // materialized.
+        return this.AgentInfo != null;
+      }
+    }
+
+    /// <summary>
+    /// Gets a value indicating whether the item is a celestial object.
+    /// </summary>
+    /// <value>
+    /// <see langword="true" /> if the item is a celestial object; otherwise
+    /// <see langword="false" />.
+    /// </value>
+    /// <remarks>
+    /// <para>
+    /// If the value of this property is <see langword="true" />,
+    /// the <see cref="CelestialInfo" /> property will contain additional
+    /// information about the item.
+    /// </para>
+    /// </remarks>
+    [NotMapped]
+    public bool IsCelestial
+    {
+      get
+      {
+        // If the ID is outside the allowed range, it's definitely not the
+        // specified type.
+        if (!(this.Id >= CelestialMinimumId && this.Id <= CelestialMaximumId))
+        {
+          return false;
+        }
+
+        // In some cases the ID is in the allowed range but there is no entry
+        // in the related table, so check for that too.  No database calls
+        // should be needed -- if the entity isn't of the desired type,
+        // checking the ID first should abort before it even gets here.  And
+        // if it is of the desired type, then more than likely the navigation
+        // property was loaded with an .Include() call when the entity was
+        // materialized.
+        return this.CelestialInfo != null;
+      }
+    }
+
+    /// <summary>
+    /// Gets a value indicating whether the item is a constellation.
+    /// </summary>
+    /// <value>
+    /// <see langword="true" /> if the item is a constellation; otherwise
+    /// <see langword="false" />.
+    /// </value>
+    /// <remarks>
+    /// <para>
+    /// If the value of this property is <see langword="true" />,
+    /// the <see cref="ConstellationInfo" /> property will contain additional
+    /// information about the item.
+    /// </para>
+    /// </remarks>
+    [NotMapped]
+    public bool IsConstellation
+    {
+      get
+      {
+        // If the ID is outside the allowed range, it's definitely not the
+        // specified type.
+        if (!(this.Id >= ConstellationMinimumId && this.Id <= ConstellationMaximumId))
+        {
+          return false;
+        }
+
+        // In some cases the ID is in the allowed range but there is no entry
+        // in the related table, so check for that too.  No database calls
+        // should be needed -- if the entity isn't of the desired type,
+        // checking the ID first should abort before it even gets here.  And
+        // if it is of the desired type, then more than likely the navigation
+        // property was loaded with an .Include() call when the entity was
+        // materialized.
+        return this.ConstellationInfo != null;
+      }
+    }
+
+    /// <summary>
+    /// Gets a value indicating whether the item is a corporation.
+    /// </summary>
+    /// <value>
+    /// <see langword="true" /> if the item is a corporation; otherwise
+    /// <see langword="false" />.
+    /// </value>
+    /// <remarks>
+    /// <para>
+    /// If the value of this property is <see langword="true" />,
+    /// the <see cref="CorporationInfo" /> property will contain additional
+    /// information about the item.
+    /// </para>
+    /// </remarks>
+    [NotMapped]
+    public bool IsCorporation
+    {
+      get
+      {
+        // If the ID is outside the allowed range, it's definitely not the
+        // specified type.
+        if (!(this.Id >= CorporationMinimumId && this.Id <= CorporationMaximumId))
+        {
+          return false;
+        }
+
+        // In some cases the ID is in the allowed range but there is no entry
+        // in the related table, so check for that too.  No database calls
+        // should be needed -- if the entity isn't of the desired type,
+        // checking the ID first should abort before it even gets here.  And
+        // if it is of the desired type, then more than likely the navigation
+        // property was loaded with an .Include() call when the entity was
+        // materialized.
+        return this.CorporationInfo != null;
+      }
+    }
+
+    /// <summary>
+    /// Gets a value indicating whether the item is a faction.
+    /// </summary>
+    /// <value>
+    /// <see langword="true" /> if the item is a faction; otherwise
+    /// <see langword="false" />.
+    /// </value>
+    /// <remarks>
+    /// <para>
+    /// If the value of this property is <see langword="true" />,
+    /// the <see cref="FactionInfo" /> property will contain additional
+    /// information about the item.
+    /// </para>
+    /// </remarks>
+    [NotMapped]
+    public bool IsFaction
+    {
+      get
+      {
+        // If the ID is outside the allowed range, it's definitely not the
+        // specified type.
+        if (!(this.Id >= FactionMinimumId && this.Id <= FactionMaximumId))
+        {
+          return false;
+        }
+
+        // In some cases the ID is in the allowed range but there is no entry
+        // in the related table, so check for that too.  No database calls
+        // should be needed -- if the entity isn't of the desired type,
+        // checking the ID first should abort before it even gets here.  And
+        // if it is of the desired type, then more than likely the navigation
+        // property was loaded with an .Include() call when the entity was
+        // materialized.
+        return this.FactionInfo != null;
+      }
+    }
+
+    /// <summary>
+    /// Gets a value indicating whether the item is a region.
+    /// </summary>
+    /// <value>
+    /// <see langword="true" /> if the item is a region; otherwise
+    /// <see langword="false" />.
+    /// </value>
+    /// <remarks>
+    /// <para>
+    /// If the value of this property is <see langword="true" />,
+    /// the <see cref="RegionInfo" /> property will contain additional
+    /// information about the item.
+    /// </para>
+    /// </remarks>
+    [NotMapped]
+    public bool IsRegion
+    {
+      get
+      {
+        // If the ID is outside the allowed range, it's definitely not the
+        // specified type.
+        if (!(this.Id >= RegionMinimumId && this.Id <= RegionMaximumId))
+        {
+          return false;
+        }
+
+        // In some cases the ID is in the allowed range but there is no entry
+        // in the related table, so check for that too.  No database calls
+        // should be needed -- if the entity isn't of the desired type,
+        // checking the ID first should abort before it even gets here.  And
+        // if it is of the desired type, then more than likely the navigation
+        // property was loaded with an .Include() call when the entity was
+        // materialized.
+        return this.RegionInfo != null;
+      }
+    }
+
+    /// <summary>
+    /// Gets a value indicating whether the item is a solar system.
+    /// </summary>
+    /// <value>
+    /// <see langword="true" /> if the item is a solar system; otherwise
+    /// <see langword="false" />.
+    /// </value>
+    /// <remarks>
+    /// <para>
+    /// If the value of this property is <see langword="true" />,
+    /// the <see cref="SolarSystemInfo" /> property will contain additional
+    /// information about the item.
+    /// </para>
+    /// </remarks>
+    [NotMapped]
+    public bool IsSolarSystem
+    {
+      get
+      {
+        // If the ID is outside the allowed range, it's definitely not the
+        // specified type.
+        if (!(this.Id >= SolarSystemMinimumId && this.Id <= SolarSystemMaximumId))
+        {
+          return false;
+        }
+
+        // In some cases the ID is in the allowed range but there is no entry
+        // in the related table, so check for that too.  No database calls
+        // should be needed -- if the entity isn't of the desired type,
+        // checking the ID first should abort before it even gets here.  And
+        // if it is of the desired type, then more than likely the navigation
+        // property was loaded with an .Include() call when the entity was
+        // materialized.
+        return this.SolarSystemInfo != null;
+      }
+    }
+
+    /// <summary>
+    /// Gets a value indicating whether the item is a stargate.
+    /// </summary>
+    /// <value>
+    /// <see langword="true" /> if the item is a stargate; otherwise
+    /// <see langword="false" />.
+    /// </value>
+    /// <remarks>
+    /// <para>
+    /// If the value of this property is <see langword="true" />,
+    /// the <see cref="StargateInfo" /> property will contain additional
+    /// information about the item.
+    /// </para>
+    /// </remarks>
+    [NotMapped]
+    public bool IsStargate
+    {
+      get
+      {
+        // If the ID is outside the allowed range, it's definitely not the
+        // specified type.
+        if (!(this.Id >= StargateMinimumId && this.Id <= StargateMaximumId))
+        {
+          return false;
+        }
+
+        // In some cases the ID is in the allowed range but there is no entry
+        // in the related table, so check for that too.  No database calls
+        // should be needed -- if the entity isn't of the desired type,
+        // checking the ID first should abort before it even gets here.  And
+        // if it is of the desired type, then more than likely the navigation
+        // property was loaded with an .Include() call when the entity was
+        // materialized.
+        return this.StargateInfo != null;
+      }
+    }
+
+    /// <summary>
+    /// Gets a value indicating whether the item is a station.
+    /// </summary>
+    /// <value>
+    /// <see langword="true" /> if the item is a station; otherwise
+    /// <see langword="false" />.
+    /// </value>
+    /// <remarks>
+    /// <para>
+    /// If the value of this property is <see langword="true" />,
+    /// the <see cref="StationInfo" /> property will contain additional
+    /// information about the item.
+    /// </para>
+    /// </remarks>
+    [NotMapped]
+    public bool IsStation
+    {
+      get
+      {
+        // If the ID is outside the allowed range, it's definitely not the
+        // specified type.
+        if (!(this.Id >= StationMinimumId && this.Id <= StationMaximumId))
+        {
+          return false;
+        }
+
+        // In some cases the ID is in the allowed range but there is no entry
+        // in the related table, so check for that too.  No database calls
+        // should be needed -- if the entity isn't of the desired type,
+        // checking the ID first should abort before it even gets here.  And
+        // if it is of the desired type, then more than likely the navigation
+        // property was loaded with an .Include() call when the entity was
+        // materialized.
+        return this.StationInfo != null;
+      }
+    }
+
+    /// <summary>
+    /// Gets a value indicating whether the item is a universe.
+    /// </summary>
+    /// <value>
+    /// <see langword="true" /> if the item is a universe; otherwise
+    /// <see langword="false" />.
+    /// </value>
+    /// <remarks>
+    /// <para>
+    /// If the value of this property is <see langword="true" />,
+    /// the <see cref="UniverseInfo" /> property will contain additional
+    /// information about the item.
+    /// </para>
+    /// </remarks>
+    [NotMapped]
+    public bool IsUniverse
+    {
+      get
+      {
+        // If the ID is outside the allowed range, it's definitely not the
+        // specified type.
+        if (!(this.Id == 9 || (this.Id >= UniverseMinimumId && this.Id <= UniverseMaximumId)))
+        {
+          return false;
+        }
+
+        // In some cases the ID is in the allowed range but there is no entry
+        // in the related table, so check for that too.  No database calls
+        // should be needed -- if the entity isn't of the desired type,
+        // checking the ID first should abort before it even gets here.  And
+        // if it is of the desired type, then more than likely the navigation
+        // property was loaded with an .Include() call when the entity was
+        // materialized.
+        return this.UniverseInfo != null;
+      }
+    }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -137,8 +652,72 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
+    [ForeignKey("ItemId")]
+    public virtual ItemPositionEntity Position { get; internal set; }
+
+    /// <summary>
+    /// Gets the underlying database value of the corresponding adapter property.
+    /// </summary>
+    /// <value>
+    /// The underlying database value of the corresponding adapter property.
+    /// </value>
     [Column("quantity")]
     public int Quantity { get; internal set; }
+
+    /// <summary>
+    /// Gets additional information if the current item is a region.
+    /// </summary>
+    /// <value>
+    /// A <see cref="RegionEntity" /> containing extra information about the
+    /// item, or <see langword="null" /> if the current item does not describe
+    /// a region.
+    /// </value>
+    [ForeignKey("RegionId")]
+    public virtual RegionEntity RegionInfo { get; internal set; }
+
+    /// <summary>
+    /// Gets additional information if the current item is a solar system.
+    /// </summary>
+    /// <value>
+    /// A <see cref="SolarSystemEntity" /> containing extra information about the
+    /// item, or <see langword="null" /> if the current item does not describe
+    /// a solar system.
+    /// </value>
+    [ForeignKey("SolarSystemId")]
+    public virtual SolarSystemEntity SolarSystemInfo { get; internal set; }
+
+    /// <summary>
+    /// Gets additional information if the current item is a stargate.
+    /// </summary>
+    /// <value>
+    /// A <see cref="StargateEntity" /> containing extra information about the
+    /// item, or <see langword="null" /> if the current item does not describe
+    /// a stargate.
+    /// </value>
+    [ForeignKey("StargateId")]
+    public virtual StargateEntity StargateInfo { get; internal set; }
+
+    /// <summary>
+    /// Gets additional information if the current item is a station.
+    /// </summary>
+    /// <value>
+    /// A <see cref="StationEntity" /> containing extra information about the
+    /// item, or <see langword="null" /> if the current item does not describe
+    /// a station.
+    /// </value>
+    [ForeignKey("StationId")]
+    public virtual StationEntity StationInfo { get; internal set; }
+
+    /// <summary>
+    /// Gets additional information if the current item is a universe.
+    /// </summary>
+    /// <value>
+    /// A <see cref="UniverseEntity" /> containing extra information about the
+    /// item, or <see langword="null" /> if the current item does not describe
+    /// a universe.
+    /// </value>
+    [ForeignKey("UniverseId")]
+    public virtual UniverseEntity UniverseInfo { get; internal set; }
 
     /* Methods */
 

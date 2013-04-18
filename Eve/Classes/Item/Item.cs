@@ -163,8 +163,13 @@ namespace Eve
       {
         Contract.Ensures(!string.IsNullOrWhiteSpace(Contract.Result<string>()));
 
-        var result = Entity.Name;
-        Contract.Assume(!string.IsNullOrWhiteSpace(result));
+        var result = this.Entity.Name;
+
+        if (string.IsNullOrWhiteSpace(result))
+        {
+          result = "[Unknown]";
+        }
+
         return result;
       }
     }
@@ -214,8 +219,13 @@ namespace Eve
     {
       get
       {
+        if (this.Entity.Position == null)
+        {
+          return null;
+        }
+
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.position ?? (this.position = this.Container.GetOrAdd<ItemPosition>(this.Id, () => this.Container.GetItemPositionById(this.Id)));
+        return this.position ?? (this.position = this.Container.GetOrAdd<ItemPosition>(this.Id, () => this.Entity.Position.ToAdapter(this.Container)));
       }
     }
 
@@ -266,56 +276,57 @@ namespace Eve
       Contract.Requires(entity != null, "The entity cannot be null.");
       Contract.Ensures(Contract.Result<Item>() != null);
 
-      // Universes
-      UniverseEntity universeEntity = entity as UniverseEntity;
-      if (universeEntity != null)
+      if (entity.IsAgent)
       {
-        return new Universe.Universe(container, universeEntity);
+        return new Agent(container, entity);
       }
 
-      // Regions
-      RegionEntity regionEntity = entity as RegionEntity;
-      if (regionEntity != null)
+      if (entity.IsCelestial)
       {
-        return new Region(container, regionEntity);
+        return new Celestial(container, entity);
       }
 
-      // Constellations
-      ConstellationEntity constellationEntity = entity as ConstellationEntity;
-      if (constellationEntity != null)
+      if (entity.IsConstellation)
       {
-        return new Constellation(container, constellationEntity);
+        return new Constellation(container, entity);
       }
 
-      // Solar Systems
-      SolarSystemEntity solarSystemEntity = entity as SolarSystemEntity;
-      if (solarSystemEntity != null)
+      if (entity.IsCorporation)
       {
-        return new SolarSystem(container, solarSystemEntity);
+        return new NpcCorporation(container, entity);
       }
 
-      // Corporations
-      NpcCorporationEntity corporationEntity = entity as NpcCorporationEntity;
-      if (corporationEntity != null)
+      if (entity.IsFaction)
       {
-        return new NpcCorporation(container, corporationEntity);
+        return new Character.Faction(container, entity);
       }
 
-      // Stations
-      StationEntity stationEntity = entity as StationEntity;
-      if (stationEntity != null)
+      if (entity.IsRegion)
       {
-        return new Station(container, stationEntity);
+        return new Region(container, entity);
       }
 
-      // Agents
-      AgentEntity agentEntity = entity as AgentEntity;
-      if (agentEntity != null)
+      if (entity.IsSolarSystem)
       {
-        return new Agent(container, agentEntity);
+        return new SolarSystem(container, entity);
       }
 
-      // If we've failed to identify the specified item type, fall back on a 
+      if (entity.IsStargate)
+      {
+        return new Stargate(container, entity);
+      }
+
+      if (entity.IsStation)
+      {
+        return new Station(container, entity);
+      }
+
+      if (entity.IsUniverse)
+      {
+        return new Universe.Universe(container, entity);
+      }
+
+      // If we've failed to identify the specific item type, fall back on a 
       // generic item.
       return new GenericItem(container, entity);
     }

@@ -10,10 +10,14 @@ namespace Eve.Universe
   using Eve.Data;
   using Eve.Data.Entities;
 
+  using FreeNet.Data.Entity;
+
   /// <summary>
   /// The type of an EVE station.
   /// </summary>
-  public sealed class StationType : EveType
+  public sealed partial class StationType
+    : EveType,
+      IEveEntityAdapter<StationTypeEntity>
   {
     private StationOperation operation;
 
@@ -262,6 +266,19 @@ namespace Eve.Universe
 
         return (StationTypeEntity)base.Entity;
       }
+    }       
+  }
+
+  #region IEveEntityAdapter<StationTypeEntity> Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IEveEntityAdapter{TEntity}" /> interface.
+  /// </content>
+  public partial class StationType : IEveEntityAdapter<StationTypeEntity>
+  {
+    StationTypeEntity IEntityAdapter<StationTypeEntity>.Entity
+    {
+      get { return this.Entity; }
     }
   }
+  #endregion
 }

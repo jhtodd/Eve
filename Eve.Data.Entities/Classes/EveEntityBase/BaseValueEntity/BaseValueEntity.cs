@@ -18,8 +18,8 @@ namespace Eve.Data.Entities
   /// </typeparam>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
   public abstract class BaseValueEntity<TId, TAdapter> 
-    : EveEntityBase<TAdapter>
-    where TAdapter : IEveEntityAdapter<EveEntityBase<TAdapter>>
+    : EveEntity<TAdapter>
+    where TAdapter : IEveEntityAdapter<EveEntity<TAdapter>>
   {
     /* Constructors */
 

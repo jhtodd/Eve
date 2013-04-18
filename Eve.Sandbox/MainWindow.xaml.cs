@@ -36,21 +36,24 @@ namespace Eve.Sandbox {
   /// Interaction logic for MainWindow.xaml
   /// </summary>
   public partial class MainWindow : Window {
+    IEveRepository ds = new EveRepository(null, null);
+
     public MainWindow() {
       InitializeComponent();
     }
 
     private void Button_Click_1(object sender, RoutedEventArgs e) {
-      IEveDbContext context = new EveDbContext();
-      IEveRepository ds = new EveRepository(context, null);
+      var t = ds.GetMarketGroupById((MarketGroupId)405);
 
-      NpcCorporation corp = ds.GetNpcCorporations(x => x.Name == "Lai Dai Corporation").Single();
+      foreach (var a in t.Types)
+      {
+        textBox1.AppendText(a.Name + Environment.NewLine);
+      }
 
-      textBox1.AppendText(corp.Name + Environment.NewLine);
-
-      context.Dispose();
-
-      textBox1.AppendText(corp.SolarSystem.Name + Environment.NewLine);
+      //foreach (var a in t.Jumps)
+      //{
+      //  textBox1.AppendText(a.ToConstellation.Name + Environment.NewLine);
+      //}
     }
   }
 }

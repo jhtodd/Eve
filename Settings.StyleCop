@@ -8,6 +8,10 @@
       <Value>Gallente</Value>
       <Value>Gallentean</Value>
       <Value>Minmatar</Value>
+      <Value>pascals</Value>
+      <Value>stargate</Value>
+      <Value>stargates</Value>
+      <Value>unusability</Value>
     </CollectionProperty>
   </GlobalSettings>
   <Analyzers>

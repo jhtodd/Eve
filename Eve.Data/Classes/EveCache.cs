@@ -41,8 +41,19 @@ namespace Eve.Data
     /// Initializes a new instance of the EveCache class that uses the default
     /// <see cref="MemoryCache" /> to store data.
     /// </summary>
-    public EveCache() : this(MemoryCache.Default)
+    public EveCache() : base()
     {
+      string name = this.GetType().FullName;
+      Contract.Assume(!string.Equals(name, "default", StringComparison.OrdinalIgnoreCase));
+
+      this.innerCache = new MemoryCache(name);
+
+      // The master lock needs recursive read locks so that region locks don't
+      // unnecessarily block.
+      this.masterLock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
+
+      this.regionLocks = new ConcurrentDictionary<string, ReaderWriterLockSlim>();
+      this.statistics = new CacheStatistics();
     }
 
     /// <summary>
@@ -899,7 +910,7 @@ namespace Eve.Data
           break;
       }
 
-      return region + "_" + idKey;
+      return EveCacheRegionPrefix + region + "_" + idKey;
     }
 
     /// <summary>

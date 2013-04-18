@@ -17,9 +17,9 @@ namespace Eve.Data.Entities
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
   [Table("ramAssemblyLineStations")]
-  public class AssemblyLineStationEntity : EveEntityBase<AssemblyLineStation>
+  public class AssemblyLineStationEntity : EveEntity<AssemblyLineStation>
   {
-    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
+    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
     
     /* Constructors */
@@ -59,7 +59,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("OwnerId")]
-    public virtual NpcCorporationEntity Owner { get; internal set; }
+    public virtual ItemEntity Owner { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -86,7 +86,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("RegionId")]
-    public virtual RegionEntity Region { get; internal set; }
+    public virtual ItemEntity Region { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -104,7 +104,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("SolarSystemId")]
-    public virtual SolarSystemEntity SolarSystem { get; internal set; }
+    public virtual ItemEntity SolarSystem { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -122,7 +122,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("StationId")]
-    public virtual StationEntity Station { get; internal set; }
+    public virtual ItemEntity Station { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.

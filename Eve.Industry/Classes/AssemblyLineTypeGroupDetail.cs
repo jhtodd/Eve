@@ -183,7 +183,7 @@ namespace Eve.Industry
     /// <returns>
     /// A compound ID combining the two sub-IDs.
     /// </returns>
-    public static long CreateCompoundId(AssemblyLineTypeId assemblyLineTypeId, GroupId groupId)
+    public static long CreateCacheKey(AssemblyLineTypeId assemblyLineTypeId, GroupId groupId)
     {
       return (long)((((ulong)(long)assemblyLineTypeId.Value) << 32) | ((ulong)(long)groupId));
     }
@@ -258,7 +258,7 @@ namespace Eve.Industry
   {
     IConvertible IEveCacheable.CacheKey
     {
-      get { return CreateCompoundId(this.AssemblyLineTypeId, this.GroupId); }
+      get { return CreateCacheKey(this.AssemblyLineTypeId, this.GroupId); }
     }
   }
   #endregion
@@ -271,7 +271,7 @@ namespace Eve.Industry
   {
     long IKeyItem<long>.Key
     {
-      get { return CreateCompoundId(this.AssemblyLineTypeId, this.GroupId); }
+      get { return CreateCacheKey(this.AssemblyLineTypeId, this.GroupId); }
     }
   }
   #endregion

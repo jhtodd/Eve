@@ -60,7 +60,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.fromRegion ?? (this.fromRegion = this.Container.GetOrAdd<Region>(this.FromRegionId, () => this.Entity.FromRegion.ToAdapter(this.Container)));
+        return this.fromRegion ?? (this.fromRegion = this.Container.GetOrAdd<Region>(this.FromRegionId, () => (Region)this.Entity.FromRegion.ToAdapter(this.Container)));
       }
     }
 
@@ -88,7 +88,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.toRegion ?? (this.toRegion = this.Container.GetOrAdd<Region>(this.ToRegionId, () => this.Entity.ToRegion.ToAdapter(this.Container)));
+        return this.toRegion ?? (this.toRegion = this.Container.GetOrAdd<Region>(this.ToRegionId, () => (Region)this.Entity.ToRegion.ToAdapter(this.Container)));
       }
     }
 
@@ -117,7 +117,7 @@ namespace Eve.Universe
     /// <returns>
     /// A compound ID combining the two sub-IDs.
     /// </returns>
-    public static long CreateCompoundId(RegionId fromId, RegionId toId)
+    public static long CreateCacheKey(RegionId fromId, RegionId toId)
     {
       return (long)((((ulong)(long)fromId.GetHashCode()) << 32) | ((ulong)(long)toId.GetHashCode()));
     }
@@ -192,7 +192,7 @@ namespace Eve.Universe
   {
     IConvertible IEveCacheable.CacheKey
     {
-      get { return CreateCompoundId(this.FromRegionId, this.ToRegionId); }
+      get { return CreateCacheKey(this.FromRegionId, this.ToRegionId); }
     }
   }
   #endregion
@@ -205,7 +205,7 @@ namespace Eve.Universe
   {
     long IKeyItem<long>.Key
     {
-      get { return CreateCompoundId(this.FromRegionId, this.ToRegionId); }
+      get { return CreateCacheKey(this.FromRegionId, this.ToRegionId); }
     }
   }
   #endregion

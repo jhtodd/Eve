@@ -53,6 +53,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<Activity>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetActivityById(ActivityId id, out Activity value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region Agent Methods
@@ -62,17 +68,23 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Agent> IEveRepository.GetAgents(Expression<Func<AgentEntity, bool>> filter)
+    IReadOnlyList<Agent> IEveRepository.GetAgents(Expression<Func<ItemEntity, bool>> filter)
     {
       Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<Agent>>() != null);
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Agent> IEveRepository.GetAgents(params IQueryModifier<AgentEntity>[] modifiers)
+    IReadOnlyList<Agent> IEveRepository.GetAgents(params IQueryModifier<ItemEntity>[] modifiers)
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<Agent>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetAgentById(AgentId id, out Agent value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
     }
     #endregion
@@ -97,6 +109,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<AgentType>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetAgentTypeById(AgentTypeId id, out AgentType value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region Ancestry Methods
@@ -117,6 +135,12 @@ namespace Eve.Data
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<Ancestry>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetAncestryById(AncestryId id, out Ancestry value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
     }
     #endregion
@@ -141,6 +165,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<AssemblyLine>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetAssemblyLineById(AssemblyLineId id, out AssemblyLine value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region AssemblyLineStation Methods
@@ -161,6 +191,12 @@ namespace Eve.Data
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<AssemblyLineStation>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetAssemblyLineStationById(StationId stationId, AssemblyLineTypeId assemblyLineTypeId, out AssemblyLineStation value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
     }
     #endregion
@@ -185,6 +221,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<AssemblyLineType>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetAssemblyLineTypeById(AssemblyLineTypeId id, out AssemblyLineType value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region AssemblyLineTypeCategoryDetail Methods
@@ -205,6 +247,12 @@ namespace Eve.Data
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<AssemblyLineTypeCategoryDetail>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetAssemblyLineTypeCategoryDetailById(AssemblyLineTypeId assemblyLineTypeId, CategoryId categoryId, out AssemblyLineTypeCategoryDetail value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
     }
     #endregion
@@ -229,6 +277,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<AssemblyLineTypeGroupDetail>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetAssemblyLineTypeGroupDetailById(AssemblyLineTypeId assemblyLineTypeId, GroupId groupId, out AssemblyLineTypeGroupDetail value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region AttributeCategory Methods
@@ -249,6 +303,12 @@ namespace Eve.Data
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<AttributeCategory>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetAttributeCategoryById(AttributeCategoryId id, out AttributeCategory value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
     }
     #endregion
@@ -273,6 +333,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<AttributeType>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetAttributeTypeById(AttributeId id, out AttributeType value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region AttributeValue Methods
@@ -293,6 +359,12 @@ namespace Eve.Data
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<AttributeValue>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetAttributeValueById(TypeId itemTypeId, AttributeId attributeId, out AttributeValue value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
     }
     #endregion
@@ -317,6 +389,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<Bloodline>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetBloodlineById(BloodlineId id, out Bloodline value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region Category Methods
@@ -337,6 +415,40 @@ namespace Eve.Data
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<Category>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetCategoryById(CategoryId id, out Category value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
+    #endregion
+
+    #region Celestial Methods
+    Celestial IEveRepository.GetCelestialById(CelestialId id)
+    {
+      Contract.Ensures(Contract.Result<Celestial>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<Celestial> IEveRepository.GetCelestials(Expression<Func<ItemEntity, bool>> filter)
+    {
+      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<Celestial>>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<Celestial> IEveRepository.GetCelestials(params IQueryModifier<ItemEntity>[] modifiers)
+    {
+      Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<Celestial>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetCelestialById(CelestialId id, out Celestial value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
     }
     #endregion
@@ -361,6 +473,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<CharacterAttributeType>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetCharacterAttributeTypeById(CharacterAttributeId id, out CharacterAttributeType value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region Constellation Methods
@@ -370,17 +488,23 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Constellation> IEveRepository.GetConstellations(Expression<Func<ConstellationEntity, bool>> filter)
+    IReadOnlyList<Constellation> IEveRepository.GetConstellations(Expression<Func<ItemEntity, bool>> filter)
     {
       Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<Constellation>>() != null);
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Constellation> IEveRepository.GetConstellations(params IQueryModifier<ConstellationEntity>[] modifiers)
+    IReadOnlyList<Constellation> IEveRepository.GetConstellations(params IQueryModifier<ItemEntity>[] modifiers)
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<Constellation>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetConstellationById(ConstellationId id, out Constellation value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
     }
     #endregion
@@ -405,6 +529,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<ConstellationJump>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetConstellationJumpById(ConstellationId fromConstellationId, ConstellationId toConstellationId, out ConstellationJump value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region CorporateActivity Methods
@@ -425,6 +555,12 @@ namespace Eve.Data
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<CorporateActivity>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetCorporateActivityById(CorporateActivityId id, out CorporateActivity value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
     }
     #endregion
@@ -449,6 +585,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<Division>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetDivisionById(DivisionId id, out Division value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region EffectType Methods
@@ -471,6 +613,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<EffectType>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetEffectTypeById(EffectId id, out EffectType value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region Effect Methods
@@ -491,6 +639,12 @@ namespace Eve.Data
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<Effect>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetEffectById(TypeId itemTypeId, EffectId effectId, out Effect value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
     }
     #endregion
@@ -516,6 +670,12 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
+    bool IEveRepository.TryGetEveTypeById(TypeId id, out EveType value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
+
     TEveType IEveRepository.GetEveTypeById<TEveType>(TypeId id)
     {
       Contract.Ensures(Contract.Result<TEveType>() != null);
@@ -535,6 +695,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<TEveType>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetEveTypeById<TEveType>(TypeId id, out TEveType value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region Faction Methods
@@ -544,17 +710,23 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Faction> IEveRepository.GetFactions(Expression<Func<FactionEntity, bool>> filter)
+    IReadOnlyList<Faction> IEveRepository.GetFactions(Expression<Func<ItemEntity, bool>> filter)
     {
       Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<Faction>>() != null);
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Faction> IEveRepository.GetFactions(params IQueryModifier<FactionEntity>[] modifiers)
+    IReadOnlyList<Faction> IEveRepository.GetFactions(params IQueryModifier<ItemEntity>[] modifiers)
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<Faction>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetFactionById(FactionId id, out Faction value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
     }
     #endregion
@@ -579,6 +751,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<Graphic>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetGraphicById(GraphicId id, out Graphic value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region Group Methods
@@ -601,6 +779,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<Group>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetGroupById(GroupId id, out Group value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region Icon Methods
@@ -621,6 +805,12 @@ namespace Eve.Data
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<Icon>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetIconById(IconId id, out Icon value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
     }
     #endregion
@@ -646,6 +836,12 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
+    bool IEveRepository.TryGetItemById(ItemId id, out Item value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
+
     TItem IEveRepository.GetItemById<TItem>(ItemId id)
     {
       Contract.Ensures(Contract.Result<Item>() != null);
@@ -663,6 +859,12 @@ namespace Eve.Data
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<TItem>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetItemById<TItem>(ItemId id, out TItem value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
     }
     #endregion
@@ -687,6 +889,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<ItemPosition>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetItemPositionById(ItemId id, out ItemPosition value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region MarketGroup Methods
@@ -707,6 +915,12 @@ namespace Eve.Data
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<MarketGroup>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetMarketGroupById(MarketGroupId id, out MarketGroup value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
     }
     #endregion
@@ -731,6 +945,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<MetaGroup>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetMetaGroupById(MetaGroupId id, out MetaGroup value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region MetaType Methods
@@ -753,6 +973,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<MetaType>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetMetaTypeById(TypeId id, out MetaType value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region NpcCorporation Methods
@@ -762,17 +988,23 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<NpcCorporation> IEveRepository.GetNpcCorporations(Expression<Func<NpcCorporationEntity, bool>> filter)
+    IReadOnlyList<NpcCorporation> IEveRepository.GetNpcCorporations(Expression<Func<ItemEntity, bool>> filter)
     {
       Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<NpcCorporation>>() != null);
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<NpcCorporation> IEveRepository.GetNpcCorporations(params IQueryModifier<NpcCorporationEntity>[] modifiers)
+    IReadOnlyList<NpcCorporation> IEveRepository.GetNpcCorporations(params IQueryModifier<ItemEntity>[] modifiers)
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<NpcCorporation>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetNpcCorporationById(NpcCorporationId id, out NpcCorporation value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
     }
     #endregion
@@ -797,6 +1029,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<NpcCorporationDivision>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetNpcCorporationDivisionById(NpcCorporationId corporationId, DivisionId divisionId, out NpcCorporationDivision value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region Race Methods
@@ -819,6 +1057,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<Race>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetRaceById(RaceId id, out Race value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region Region Methods
@@ -828,17 +1072,23 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Region> IEveRepository.GetRegions(Expression<Func<RegionEntity, bool>> filter)
+    IReadOnlyList<Region> IEveRepository.GetRegions(Expression<Func<ItemEntity, bool>> filter)
     {
       Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<Region>>() != null);
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Region> IEveRepository.GetRegions(params IQueryModifier<RegionEntity>[] modifiers)
+    IReadOnlyList<Region> IEveRepository.GetRegions(params IQueryModifier<ItemEntity>[] modifiers)
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<Region>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetRegionById(RegionId id, out Region value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
     }
     #endregion
@@ -863,6 +1113,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<RegionJump>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetRegionJumpById(RegionId fromRegionId, RegionId toRegionId, out RegionJump value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region SolarSystem Methods
@@ -872,17 +1128,23 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<SolarSystem> IEveRepository.GetSolarSystems(Expression<Func<SolarSystemEntity, bool>> filter)
+    IReadOnlyList<SolarSystem> IEveRepository.GetSolarSystems(Expression<Func<ItemEntity, bool>> filter)
     {
       Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<SolarSystem>>() != null);
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<SolarSystem> IEveRepository.GetSolarSystems(params IQueryModifier<SolarSystemEntity>[] modifiers)
+    IReadOnlyList<SolarSystem> IEveRepository.GetSolarSystems(params IQueryModifier<ItemEntity>[] modifiers)
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<SolarSystem>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetSolarSystemById(SolarSystemId id, out SolarSystem value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
     }
     #endregion
@@ -907,6 +1169,40 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<SolarSystemJump>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetSolarSystemJumpById(SolarSystemId fromSolarSystemId, SolarSystemId toSolarSystemId, out SolarSystemJump value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
+    #endregion
+
+    #region Stargate Methods
+    Stargate IEveRepository.GetStargateById(StargateId id)
+    {
+      Contract.Ensures(Contract.Result<Stargate>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<Stargate> IEveRepository.GetStargates(Expression<Func<ItemEntity, bool>> filter)
+    {
+      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<Stargate>>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<Stargate> IEveRepository.GetStargates(params IQueryModifier<ItemEntity>[] modifiers)
+    {
+      Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<Stargate>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetStargateById(StargateId id, out Stargate value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region Station Methods
@@ -916,17 +1212,23 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Station> IEveRepository.GetStations(Expression<Func<StationEntity, bool>> filter)
+    IReadOnlyList<Station> IEveRepository.GetStations(Expression<Func<ItemEntity, bool>> filter)
     {
       Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<Station>>() != null);
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Station> IEveRepository.GetStations(params IQueryModifier<StationEntity>[] modifiers)
+    IReadOnlyList<Station> IEveRepository.GetStations(params IQueryModifier<ItemEntity>[] modifiers)
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<Station>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetStationById(StationId id, out Station value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
     }
     #endregion
@@ -951,6 +1253,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<StationOperation>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetStationOperationById(StationOperationId id, out StationOperation value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region StationService Methods
@@ -971,6 +1279,12 @@ namespace Eve.Data
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<StationService>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetStationServiceById(StationServiceId id, out StationService value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
     }
     #endregion
@@ -995,6 +1309,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<StationType>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetStationTypeById(TypeId id, out StationType value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region Unit Methods
@@ -1017,6 +1337,12 @@ namespace Eve.Data
       Contract.Ensures(Contract.Result<IReadOnlyList<Unit>>() != null);
       throw new NotImplementedException();
     }
+
+    bool IEveRepository.TryGetUnitById(UnitId id, out Unit value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region Universe Methods
@@ -1026,17 +1352,23 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Universe> IEveRepository.GetUniverses(Expression<Func<UniverseEntity, bool>> filter)
+    IReadOnlyList<Universe> IEveRepository.GetUniverses(Expression<Func<ItemEntity, bool>> filter)
     {
       Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<Universe>>() != null);
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Universe> IEveRepository.GetUniverses(params IQueryModifier<UniverseEntity>[] modifiers)
+    IReadOnlyList<Universe> IEveRepository.GetUniverses(params IQueryModifier<ItemEntity>[] modifiers)
     {
       Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
       Contract.Ensures(Contract.Result<IReadOnlyList<Universe>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetUniverseById(UniverseId id, out Universe value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
     }
     #endregion

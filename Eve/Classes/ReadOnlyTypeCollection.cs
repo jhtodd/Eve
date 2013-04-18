@@ -13,7 +13,7 @@ namespace Eve
   /// A read-only collection of item types.
   /// </summary>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
-  public class ReadOnlyTypeCollection : ReadOnlyCollection<EveType>
+  public sealed class ReadOnlyTypeCollection : ReadOnlyCollection<EveType>
   {
     /* Constructors */
 

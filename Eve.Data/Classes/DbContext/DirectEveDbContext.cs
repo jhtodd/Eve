@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="InnerEveDbContext.cs" company="Jeremy H. Todd">
+// <copyright file="DirectEveDbContext.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
@@ -10,6 +10,7 @@ namespace Eve.Data
   using System.Diagnostics.Contracts;
 
   using Eve.Data.Entities;
+  using Eve.Universe;
 
   /// <summary>
   /// A <see cref="DbContext" /> that provides data access to the EVE database.
@@ -21,31 +22,31 @@ namespace Eve.Data
   /// purposes, you should use the <see cref="EveDbContext" /> wrapper class
   /// instead.
   /// </summary>
-  internal class InnerEveDbContext : DbContext
+  internal class DirectEveDbContext : DbContext
   {
     /* Constructors */
 
     /// <summary>
-    /// Initializes static members of the <see cref="InnerEveDbContext" /> class.
+    /// Initializes static members of the <see cref="DirectEveDbContext" /> class.
     /// </summary>
-    static InnerEveDbContext()
+    static DirectEveDbContext()
     {
-      Database.SetInitializer<InnerEveDbContext>(null);
+      Database.SetInitializer<DirectEveDbContext>(null);
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="InnerEveDbContext" /> class using
+    /// Initializes a new instance of the <see cref="DirectEveDbContext" /> class using
     /// conventions to create the name of the database to which a connection will
     /// be made. By convention the name is the full name (namespace + class name)
     /// of the derived context class.  For more information on how this is used
     /// to create a connection, see the remarks section for <see cref="DbContext" />.
     /// </summary>
-    internal InnerEveDbContext() : base()
+    internal DirectEveDbContext() : base()
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="InnerEveDbContext" /> class using
+    /// Initializes a new instance of the <see cref="DirectEveDbContext" /> class using
     /// the given string as the name or connection string for the database to which
     /// a connection will be made.  For more information on how this is used to
     /// create a connection, see the remarks section for <see cref="DbContext" />.
@@ -53,12 +54,12 @@ namespace Eve.Data
     /// <param name="nameOrConnectionString">
     /// Either the database name or a connection string.
     /// </param>
-    internal InnerEveDbContext(string nameOrConnectionString) : base(nameOrConnectionString)
+    internal DirectEveDbContext(string nameOrConnectionString) : base(nameOrConnectionString)
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="InnerEveDbContext" /> class using
+    /// Initializes a new instance of the <see cref="DirectEveDbContext" /> class using
     /// the existing connection to connect to a database. The connection will not be
     /// disposed when the context is disposed.
     /// </summary>
@@ -69,7 +70,7 @@ namespace Eve.Data
     /// If set to true the connection is disposed when the context is disposed,
     /// otherwise the caller must dispose the connection.
     /// </param>
-    internal InnerEveDbContext(DbConnection existingConnection, bool contextOwnsConnection) : base(existingConnection, contextOwnsConnection)
+    internal DirectEveDbContext(DbConnection existingConnection, bool contextOwnsConnection) : base(existingConnection, contextOwnsConnection)
     {
     }
 
@@ -219,7 +220,7 @@ namespace Eve.Data
       attributeCategory.Property(x => x.Id).HasColumnName("categoryID");
       attributeCategory.Property(x => x.Name).HasColumnName("categoryName");
 
-      /* BloodlineEntity Mappings *******************************************/
+      /* BloodlineEntity Mappings ***************************************************/
       var bloodline = modelBuilder.Entity<BloodlineEntity>();
 
       // Map properties inherited from BaseValueEntity<>
@@ -229,7 +230,7 @@ namespace Eve.Data
       bloodline.Property(x => x.Id).HasColumnName("bloodlineID");
       bloodline.Property(x => x.Name).HasColumnName("bloodlineName");
 
-      /* CategoryEntity Mappings *******************************************/
+      /* CategoryEntity Mappings ****************************************************/
       var category = modelBuilder.Entity<CategoryEntity>();
 
       // Map properties inherited from BaseValueEntity<>
@@ -253,7 +254,7 @@ namespace Eve.Data
       var constellation = modelBuilder.Entity<ConstellationEntity>();
 
       // Map the Jumps collection
-      constellation.HasMany(x => x.Jumps).WithRequired(x => x.FromConstellation).HasForeignKey(x => x.FromConstellationId);
+      constellation.HasMany(x => x.Jumps).WithRequired().HasForeignKey(x => x.FromConstellationId);
 
       /* ConstellationJumpEntity Mappings *******************************************/
 
@@ -318,13 +319,6 @@ namespace Eve.Data
       /* FactionEntity Mappings *****************************************************/
       var faction = modelBuilder.Entity<FactionEntity>();
 
-      // Map properties inherited from BaseValueEntity<>
-      faction.Map(x => x.MapInheritedProperties());
-      faction.HasKey(x => x.Id);
-      faction.Property(x => x.Description).HasColumnName("description");
-      faction.Property(x => x.Id).HasColumnName("factionID");
-      faction.Property(x => x.Name).HasColumnName("factionName");
-
       faction.HasRequired(x => x.SolarSystem).WithMany().HasForeignKey(x => x.SolarSystemId);
 
       /* FlagEntity Mappings ********************************************************/
@@ -366,6 +360,18 @@ namespace Eve.Data
 
       /* ItemEntity Mappings ********************************************************/
       var item = modelBuilder.Entity<ItemEntity>();
+
+      // Extension entities
+      item.HasOptional(x => x.AgentInfo).WithRequired();
+      item.HasOptional(x => x.CelestialInfo).WithRequired();
+      item.HasOptional(x => x.ConstellationInfo).WithRequired();
+      item.HasOptional(x => x.CorporationInfo).WithRequired();
+      item.HasOptional(x => x.FactionInfo).WithRequired();
+      item.HasOptional(x => x.RegionInfo).WithRequired();
+      item.HasOptional(x => x.SolarSystemInfo).WithRequired();
+      item.HasOptional(x => x.StargateInfo).WithRequired();
+      item.HasOptional(x => x.StationInfo).WithRequired();
+      item.HasOptional(x => x.UniverseInfo).WithRequired();
 
       item.HasRequired(x => x.Location).WithMany().HasForeignKey(x => x.LocationId);
       item.HasRequired(x => x.Owner).WithMany().HasForeignKey(x => x.OwnerId);
@@ -432,13 +438,18 @@ namespace Eve.Data
       var corporation = modelBuilder.Entity<NpcCorporationEntity>();
 
       // Map the Agents collection
-      corporation.HasMany(x => x.Agents)
-                 .WithRequired(x => x.Corporation)
-                 .HasForeignKey(x => x.CorporationId);
+      // TODO: Fix mapping
+      ////corporation.HasMany(x => x.Agents)
+      ////           .WithRequired(x => x.AgentInfo.Corporation.CorporationInfo)
+      ////           .HasForeignKey(x => x.AgentInfo.CorporationId);
+      ////corporation.HasMany(c => c.Agents)
+      ////           .WithRequired()
+      ////           .Map(m => m.MapKey("corporationID").ToTable("agtAgents"));
+      corporation.Ignore(c => c.Agents);
 
       // Map the TradeGoods collection
       corporation.HasMany<EveTypeEntity>(x => x.TradeGoods)
-                 .WithMany().Map(x => x.ToTable("crpNPCCorporationTrades")
+                 .WithMany().Map(m => m.ToTable("crpNPCCorporationTrades")
                             .MapLeftKey("corporationID")
                             .MapRightKey("typeID"));
 
@@ -470,7 +481,7 @@ namespace Eve.Data
       var region = modelBuilder.Entity<RegionEntity>();
 
       // Map the Jumps collection
-      region.HasMany(x => x.Jumps).WithRequired(x => x.FromRegion).HasForeignKey(x => x.FromRegionId);
+      region.HasMany(x => x.Jumps).WithRequired().HasForeignKey(x => x.FromRegionId);
 
       /* RegionJumpEntity Mappings **************************************************/
 
@@ -483,7 +494,7 @@ namespace Eve.Data
       solarSystem.HasOptional(x => x.Faction).WithMany().HasForeignKey(x => x.FactionId);
 
       // Map the Jumps collection
-      solarSystem.HasMany(x => x.Jumps).WithRequired(x => x.FromSolarSystem).HasForeignKey(x => x.FromSolarSystemId);
+      solarSystem.HasMany(x => x.Jumps).WithRequired().HasForeignKey(x => x.FromSolarSystemId);
 
       /* SolarSystemJumpEntity Mappings *********************************************/
 

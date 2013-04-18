@@ -16,7 +16,7 @@ namespace Eve.Data.Entities
   [Table("dgmEffects")]
   public class EffectTypeEntity : BaseValueEntity<short, EffectType>
   {
-    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
+    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

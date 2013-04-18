@@ -19,7 +19,7 @@ namespace Eve.Data.Entities
   [Table("staOperations")]
   public class StationOperationEntity : BaseValueEntity<StationOperationId, StationOperation>
   {
-    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
+    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

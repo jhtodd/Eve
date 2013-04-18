@@ -62,7 +62,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Constellation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.fromConstellation ?? (this.fromConstellation = this.Container.GetOrAdd<Constellation>(this.FromConstellationId, () => this.Entity.FromConstellation.ToAdapter(this.Container)));
+        return this.fromConstellation ?? (this.fromConstellation = this.Container.GetOrAdd<Constellation>(this.FromConstellationId, () => (Constellation)this.Entity.FromConstellation.ToAdapter(this.Container)));
       }
     }
 
@@ -90,7 +90,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.fromRegion ?? (this.fromRegion = this.Container.GetOrAdd<Region>(this.FromRegionId, () => this.Entity.FromRegion.ToAdapter(this.Container)));
+        return this.fromRegion ?? (this.fromRegion = this.Container.GetOrAdd<Region>(this.FromRegionId, () => (Region)this.Entity.FromRegion.ToAdapter(this.Container)));
       }
     }
 
@@ -118,7 +118,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Constellation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.toConstellation ?? (this.toConstellation = this.Container.GetOrAdd<Constellation>(this.ToConstellationId, () => this.Entity.ToConstellation.ToAdapter(this.Container)));
+        return this.toConstellation ?? (this.toConstellation = this.Container.GetOrAdd<Constellation>(this.ToConstellationId, () => (Constellation)this.Entity.ToConstellation.ToAdapter(this.Container)));
       }
     }
 
@@ -146,7 +146,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.toRegion ?? (this.toRegion = this.Container.GetOrAdd<Region>(this.ToRegionId, () => this.Entity.ToRegion.ToAdapter(this.Container)));
+        return this.toRegion ?? (this.toRegion = this.Container.GetOrAdd<Region>(this.ToRegionId, () => (Region)this.Entity.ToRegion.ToAdapter(this.Container)));
       }
     }
 
@@ -175,7 +175,7 @@ namespace Eve.Universe
     /// <returns>
     /// A compound ID combining the two sub-IDs.
     /// </returns>
-    public static long CreateCompoundId(ConstellationId fromId, ConstellationId toId)
+    public static long CreateCacheKey(ConstellationId fromId, ConstellationId toId)
     {
       return (long)((((ulong)(long)fromId.GetHashCode()) << 32) | ((ulong)(long)toId.GetHashCode()));
     }
@@ -250,7 +250,7 @@ namespace Eve.Universe
   {
     IConvertible IEveCacheable.CacheKey
     {
-      get { return CreateCompoundId(this.FromConstellationId, this.ToConstellationId); }
+      get { return CreateCacheKey(this.FromConstellationId, this.ToConstellationId); }
     }
   }
   #endregion
@@ -263,7 +263,7 @@ namespace Eve.Universe
   {
     long IKeyItem<long>.Key
     {
-      get { return CreateCompoundId(this.FromConstellationId, this.ToConstellationId); }
+      get { return CreateCacheKey(this.FromConstellationId, this.ToConstellationId); }
     }
   }
   #endregion

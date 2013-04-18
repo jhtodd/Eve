@@ -44,7 +44,7 @@ namespace Eve.Universe
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal NpcCorporation(IEveRepository container, NpcCorporationEntity entity) : base(container, entity)
+    internal NpcCorporation(IEveRepository container, ItemEntity entity) : base(container, entity)
     {
       Contract.Requires(container != null, "The containing repository cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
@@ -64,7 +64,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyAgentCollection>() != null);
 
-        return this.agents ?? (this.agents = new ReadOnlyAgentCollection(this.Container.GetAgents(x => x.CorporationId == this.Id.Value).OrderBy(x => x)));
+        return this.agents ?? (this.agents = new ReadOnlyAgentCollection(this.Container.GetAgents(x => x.AgentInfo.CorporationId == this.Id.Value).OrderBy(x => x)));
       }
     }
 
@@ -78,7 +78,7 @@ namespace Eve.Universe
     /// </value>
     public byte Border
     {
-      get { return this.Entity.Border; }
+      get { return this.CorporationInfo.Border; }
     }
 
     /// <summary>
@@ -91,7 +91,7 @@ namespace Eve.Universe
     /// </value>
     public byte Corridor
     {
-      get { return this.Entity.Corridor; }
+      get { return this.CorporationInfo.Corridor; }
     }
 
     /// <summary>
@@ -106,7 +106,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<string>() != null);
 
-        return this.Entity.Description ?? string.Empty;
+        return this.CorporationInfo.Description ?? string.Empty;
       }
     }
 
@@ -143,7 +143,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.enemy ?? (this.enemy = this.Container.GetOrAdd<NpcCorporation>(this.EnemyId, () => this.Entity.Enemy.ToAdapter(this.Container)));
+        return this.enemy ?? (this.enemy = this.Container.GetOrAdd<NpcCorporation>(this.EnemyId, () => (NpcCorporation)this.CorporationInfo.Enemy.ToAdapter(this.Container)));
       }
     }
 
@@ -156,7 +156,7 @@ namespace Eve.Universe
     /// </value>
     public NpcCorporationId? EnemyId
     {
-      get { return (NpcCorporationId?)this.Entity.EnemyId; }
+      get { return (NpcCorporationId?)this.CorporationInfo.EnemyId; }
     }
 
     /// <summary>
@@ -209,7 +209,7 @@ namespace Eve.Universe
         Contract.Ensures(!string.IsNullOrWhiteSpace(Contract.Result<string>()));
         Contract.Ensures(Contract.Result<string>().Length == 1);
 
-        string result = this.Entity.Extent;
+        string result = this.CorporationInfo.Extent;
 
         Contract.Assume(!string.IsNullOrWhiteSpace(result));
         Contract.Assume(result.Length == 1);
@@ -232,13 +232,13 @@ namespace Eve.Universe
         // This property can sometimes be null even with a FactionId value,
         // because a small number of records have a FactionId pointing to an
         // "Unknown" item that is not a faction.  Return null in that case.
-        if (this.Entity.Faction == null)
+        if (this.CorporationInfo.Faction == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.faction ?? (this.faction = this.Container.GetOrAdd<Faction>(this.FactionId, () => this.Entity.Faction.ToAdapter(this.Container)));
+        return this.faction ?? (this.faction = this.Container.GetOrAdd<Faction>(this.FactionId, () => (Faction)this.CorporationInfo.Faction.ToAdapter(this.Container)));
       }
     }
 
@@ -252,7 +252,7 @@ namespace Eve.Universe
     /// </value>
     public FactionId FactionId
     {
-      get { return this.Entity.FactionId; }
+      get { return (FactionId)this.CorporationInfo.FactionId; }
     }
 
     /// <summary>
@@ -272,7 +272,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.friend ?? (this.friend = this.Container.GetOrAdd<NpcCorporation>(this.FriendId, () => this.Entity.Friend.ToAdapter(this.Container)));
+        return this.friend ?? (this.friend = this.Container.GetOrAdd<NpcCorporation>(this.FriendId, () => (NpcCorporation)this.CorporationInfo.Friend.ToAdapter(this.Container)));
       }
     }
 
@@ -285,7 +285,7 @@ namespace Eve.Universe
     /// </value>
     public NpcCorporationId? FriendId
     {
-      get { return (NpcCorporationId?)this.Entity.FriendId; }
+      get { return (NpcCorporationId?)this.CorporationInfo.FriendId; }
     }
 
     /// <summary>
@@ -298,7 +298,7 @@ namespace Eve.Universe
     /// </value>
     public byte Fringe
     {
-      get { return this.Entity.Fringe; }
+      get { return this.CorporationInfo.Fringe; }
     }
 
     /// <summary>
@@ -311,7 +311,7 @@ namespace Eve.Universe
     /// </value>
     public byte Hub
     {
-      get { return this.Entity.Hub; }
+      get { return this.CorporationInfo.Hub; }
     }
 
     /// <summary>
@@ -328,7 +328,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Icon>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+        return this.icon ?? (this.icon = this.Container.GetOrAdd<Icon>(this.IconId, () => this.CorporationInfo.Icon.ToAdapter(this.Container)));
       }
     }
 
@@ -341,7 +341,7 @@ namespace Eve.Universe
     /// </value>
     public IconId IconId
     {
-      get { return this.Entity.IconId; }
+      get { return this.CorporationInfo.IconId; }
     }
 
     /// <summary>
@@ -367,7 +367,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<int>() >= 0);
 
-        int result = this.Entity.InitialPrice;
+        int result = this.CorporationInfo.InitialPrice;
 
         Contract.Assume(result >= 0);
 
@@ -393,24 +393,24 @@ namespace Eve.Universe
         {
           List<NpcCorporationInvestor> items = new List<NpcCorporationInvestor>();
 
-          if (this.Entity.InvestorId1 != null)
+          if (this.CorporationInfo.InvestorId1 != null)
           {
-            items.Add(new NpcCorporationInvestor(this.Container, this.Entity.InvestorId1.Value, this.Entity.InvestorShares1));
+            items.Add(new NpcCorporationInvestor(this.Container, this.CorporationInfo.InvestorId1.Value, this.CorporationInfo.InvestorShares1));
           }
 
-          if (this.Entity.InvestorId2 != null)
+          if (this.CorporationInfo.InvestorId2 != null)
           {
-            items.Add(new NpcCorporationInvestor(this.Container, this.Entity.InvestorId2.Value, this.Entity.InvestorShares1));
+            items.Add(new NpcCorporationInvestor(this.Container, this.CorporationInfo.InvestorId2.Value, this.CorporationInfo.InvestorShares1));
           }
 
-          if (this.Entity.InvestorId3 != null)
+          if (this.CorporationInfo.InvestorId3 != null)
           {
-            items.Add(new NpcCorporationInvestor(this.Container, this.Entity.InvestorId3.Value, this.Entity.InvestorShares1));
+            items.Add(new NpcCorporationInvestor(this.Container, this.CorporationInfo.InvestorId3.Value, this.CorporationInfo.InvestorShares1));
           }
 
-          if (this.Entity.InvestorId4 != null)
+          if (this.CorporationInfo.InvestorId4 != null)
           {
-            items.Add(new NpcCorporationInvestor(this.Container, this.Entity.InvestorId4.Value, this.Entity.InvestorShares1));
+            items.Add(new NpcCorporationInvestor(this.Container, this.CorporationInfo.InvestorId4.Value, this.CorporationInfo.InvestorShares1));
           }
 
           this.investors = new ReadOnlyNpcCorporationInvestorCollection(items.ToArray());
@@ -435,7 +435,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
 
-        double result = this.Entity.MinSecurity;
+        double result = this.CorporationInfo.MinSecurity;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -456,7 +456,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<long>() >= 0L);
 
-        long result = this.Entity.PublicShares;
+        long result = this.CorporationInfo.PublicShares;
 
         Contract.Assume(result >= 0L);
 
@@ -479,11 +479,11 @@ namespace Eve.Universe
         if (this.researchFields == null)
         {
           // Filter through the cache
-          Contract.Assume(this.Entity.ResearchFields != null);
+          Contract.Assume(this.CorporationInfo.ResearchFields != null);
 
           this.researchFields = new ReadOnlySkillTypeCollection(
-            this.Entity.ResearchFields.Select(x => this.Container.GetOrAdd<SkillType>(x.Id, () => (SkillType)x.ToAdapter(this.Container)))
-                                      .OrderBy(x => x));
+            this.CorporationInfo.ResearchFields.Select(x => this.Container.GetOrAdd<SkillType>(x.Id, () => (SkillType)x.ToAdapter(this.Container)))
+                                                      .OrderBy(x => x));
         }
 
         return this.researchFields;
@@ -500,7 +500,7 @@ namespace Eve.Universe
     /// </value>
     public bool Scattered
     {
-      get { return this.Entity.Scattered; }
+      get { return this.CorporationInfo.Scattered; }
     }
 
     /// <summary>
@@ -552,7 +552,7 @@ namespace Eve.Universe
         Contract.Ensures(!string.IsNullOrWhiteSpace(Contract.Result<string>()));
         Contract.Ensures(Contract.Result<string>().Length == 1);
 
-        string result = this.Entity.Size;
+        string result = this.CorporationInfo.Size;
 
         Contract.Assume(!string.IsNullOrWhiteSpace(result));
         Contract.Assume(result.Length == 1);
@@ -576,7 +576,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        double result = this.Entity.SizeFactor.HasValue ? this.Entity.SizeFactor.Value : 0.0D;
+        double result = this.CorporationInfo.SizeFactor.HasValue ? this.CorporationInfo.SizeFactor.Value : 0.0D;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -599,7 +599,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<SolarSystem>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.solarSystem ?? (this.solarSystem = this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => this.Entity.SolarSystem.ToAdapter(this.Container)));
+        return this.solarSystem ?? (this.solarSystem = this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.CorporationInfo.SolarSystem.ToAdapter(this.Container)));
       }
     }
 
@@ -611,7 +611,7 @@ namespace Eve.Universe
     /// </value>
     public SolarSystemId SolarSystemId
     {
-      get { return (SolarSystemId)this.Entity.SolarSystemId; }
+      get { return (SolarSystemId)this.CorporationInfo.SolarSystemId; }
     }
 
     /// <summary>
@@ -626,7 +626,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<short>() >= 0);
 
-        short result = this.Entity.StationCount.HasValue ? this.Entity.StationCount.Value : (short)0;
+        short result = this.CorporationInfo.StationCount.HasValue ? this.CorporationInfo.StationCount.Value : (short)0;
 
         Contract.Assume(result >= 0);
 
@@ -648,7 +648,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<short>() >= 0);
 
-        var result = this.Entity.StationSystemCount.HasValue ? this.Entity.StationSystemCount.Value : (short)0;
+        var result = this.CorporationInfo.StationSystemCount.HasValue ? this.CorporationInfo.StationSystemCount.Value : (short)0;
 
         Contract.Assume(result >= 0);
 
@@ -671,30 +671,27 @@ namespace Eve.Universe
         if (this.tradeGoods == null)
         {
           // Filter through the cache
-          Contract.Assume(this.Entity.TradeGoods != null);
+          Contract.Assume(this.CorporationInfo.TradeGoods != null);
 
           this.tradeGoods = new ReadOnlyTypeCollection(
-            this.Entity.TradeGoods.Select(x => this.Container.GetOrAdd<EveType>(x.Id, () => x.ToAdapter(this.Container)))
-                                  .OrderBy(x => x));
+            this.CorporationInfo.TradeGoods.Select(x => this.Container.GetOrAdd<EveType>(x.Id, () => x.ToAdapter(this.Container)))
+                                                  .OrderBy(x => x));
         }
 
         return this.tradeGoods;
       }
     }
 
-    /// <summary>
-    /// Gets the data entity that forms the basis of the adapter.
-    /// </summary>
-    /// <value>
-    /// The data entity that forms the basis of the adapter.
-    /// </value>
-    private new NpcCorporationEntity Entity
+    private NpcCorporationEntity CorporationInfo
     {
       get
       {
         Contract.Ensures(Contract.Result<NpcCorporationEntity>() != null);
 
-        return (NpcCorporationEntity)base.Entity;
+        var result = this.Entity.CorporationInfo;
+
+        Contract.Assume(result != null);
+        return result;
       }
     }
 

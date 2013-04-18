@@ -18,9 +18,9 @@ namespace Eve.Data.Entities
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
   [Table("crpNPCCorporationDivisions")]
-  public class NpcCorporationDivisionEntity : EveEntityBase<NpcCorporationDivision>
+  public class NpcCorporationDivisionEntity : EveEntity<NpcCorporationDivision>
   {
-    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
+    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

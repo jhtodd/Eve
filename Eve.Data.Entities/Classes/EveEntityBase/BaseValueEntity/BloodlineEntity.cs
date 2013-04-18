@@ -18,7 +18,7 @@ namespace Eve.Data.Entities
   [Table("chrBloodlines")]
   public class BloodlineEntity : BaseValueEntity<BloodlineId, Bloodline>
   {
-    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
+    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */
@@ -48,7 +48,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("CorporationId")]
-    public virtual NpcCorporationEntity Corporation { get; internal set; }
+    public virtual ItemEntity Corporation { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.

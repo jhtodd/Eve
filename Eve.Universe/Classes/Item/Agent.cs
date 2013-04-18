@@ -38,10 +38,11 @@ namespace Eve.Universe
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal Agent(IEveRepository container, AgentEntity entity) : base(container, entity)
+    internal Agent(IEveRepository container, ItemEntity entity) : base(container, entity)
     {
       Contract.Requires(container != null, "The containing repository cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
+      Contract.Requires(entity.IsAgent, "The entity must be an agent.");
     }
 
     /* Properties */
@@ -59,7 +60,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<AgentType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.agentType ?? (this.agentType = this.Container.GetOrAdd<AgentType>(this.AgentTypeId, () => this.Entity.AgentType.ToAdapter(this.Container)));
+        return this.agentType ?? (this.agentType = this.Container.GetOrAdd<AgentType>(this.AgentTypeId, () => this.AgentInfo.AgentType.ToAdapter(this.Container)));
       }
     }
 
@@ -71,7 +72,7 @@ namespace Eve.Universe
     /// </value>
     public AgentTypeId AgentTypeId
     {
-      get { return this.Entity.AgentTypeId; }
+      get { return this.AgentInfo.AgentTypeId; }
     }
 
     /// <summary>
@@ -87,7 +88,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<NpcCorporation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.corporation ?? (this.corporation = this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => this.Entity.Corporation.ToAdapter(this.Container)));
+        return this.corporation ?? (this.corporation = this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.AgentInfo.Corporation.ToAdapter(this.Container)));
       }
     }
 
@@ -99,7 +100,7 @@ namespace Eve.Universe
     /// </value>
     public NpcCorporationId CorporationId
     {
-      get { return (NpcCorporationId)this.Entity.CorporationId; }
+      get { return (NpcCorporationId)this.AgentInfo.CorporationId; }
     }
 
     /// <summary>
@@ -115,7 +116,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Division>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.division ?? (this.division = this.Container.GetOrAdd<Division>(this.DivisionId, () => this.Entity.Division.ToAdapter(this.Container)));
+        return this.division ?? (this.division = this.Container.GetOrAdd<Division>(this.DivisionId, () => this.AgentInfo.Division.ToAdapter(this.Container)));
       }
     }
 
@@ -127,7 +128,7 @@ namespace Eve.Universe
     /// </value>
     public DivisionId DivisionId
     {
-      get { return this.Entity.DivisionId; }
+      get { return this.AgentInfo.DivisionId; }
     }
 
     /// <summary>
@@ -150,7 +151,7 @@ namespace Eve.Universe
     /// </value>
     public bool IsLocator
     {
-      get { return this.Entity.IsLocator; }
+      get { return this.AgentInfo.IsLocator; }
     }
 
     /// <summary>
@@ -161,7 +162,7 @@ namespace Eve.Universe
     /// </value>
     public byte Level
     {
-      get { return this.Entity.Level; }
+      get { return this.AgentInfo.Level; }
     }
 
     /// <summary>
@@ -188,7 +189,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Item>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.location ?? (this.location = this.Container.GetOrAdd<Item>(this.LocationId, () => this.Entity.AgentLocation.ToAdapter(this.Container)));
+        return this.location ?? (this.location = this.Container.GetOrAdd<Item>(this.LocationId, () => this.AgentInfo.Location.ToAdapter(this.Container)));
       }
     }
 
@@ -200,7 +201,7 @@ namespace Eve.Universe
     /// </value>
     public new ItemId LocationId
     {
-      get { return this.Entity.AgentLocationId; }
+      get { return this.AgentInfo.LocationId; }
     }
 
     /// <summary>
@@ -212,7 +213,7 @@ namespace Eve.Universe
     /// </value>
     public short Quality
     {
-      get { return this.Entity.Quality; }
+      get { return this.AgentInfo.Quality; }
     }
 
     /// <summary>
@@ -229,7 +230,7 @@ namespace Eve.Universe
 
         if (this.researchFields == null)
         {
-          if (this.Entity.ResearchFields == null)
+          if (this.AgentInfo.ResearchFields == null)
           {
             this.researchFields = new ReadOnlySkillTypeCollection(null);
           }
@@ -237,8 +238,8 @@ namespace Eve.Universe
           {
             // Filter through the cache
             this.researchFields = new ReadOnlySkillTypeCollection(
-              this.Entity.ResearchFields.Select(x => this.Container.GetOrAdd<SkillType>(x.Id, () => (SkillType)x.ToAdapter(this.Container)))
-                                        .OrderBy(x => x));
+              this.AgentInfo.ResearchFields.Select(x => this.Container.GetOrAdd<SkillType>(x.Id, () => (SkillType)x.ToAdapter(this.Container)))
+                                           .OrderBy(x => x));
           }
         }
 
@@ -246,19 +247,16 @@ namespace Eve.Universe
       }
     }
 
-    /// <summary>
-    /// Gets the data entity that forms the basis of the adapter.
-    /// </summary>
-    /// <value>
-    /// The data entity that forms the basis of the adapter.
-    /// </value>
-    private new AgentEntity Entity
+    private AgentEntity AgentInfo
     {
       get
       {
         Contract.Ensures(Contract.Result<AgentEntity>() != null);
 
-        return (AgentEntity)base.Entity;
+        var result = this.Entity.AgentInfo;
+
+        Contract.Assume(result != null);
+        return result;
       }
     }
 

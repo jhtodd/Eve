@@ -17,9 +17,9 @@ namespace Eve.Data.Entities
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
   [Table("ramAssemblyLineTypeDetailPerCategory")]
-  public class AssemblyLineTypeCategoryDetailEntity : EveEntityBase<AssemblyLineTypeCategoryDetail>
+  public class AssemblyLineTypeCategoryDetailEntity : EveEntity<AssemblyLineTypeCategoryDetail>
   {
-    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
+    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

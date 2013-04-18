@@ -18,7 +18,7 @@ namespace Eve.Data.Entities
   [Table("ramActivities")]
   public class ActivityEntity : BaseValueEntity<ActivityId, Activity>
   {
-    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
+    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

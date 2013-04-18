@@ -17,7 +17,7 @@ namespace Eve.Data.Entities
   [Table("invGroups")]
   public class GroupEntity : BaseValueEntity<GroupId, Group>
   {
-    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
+    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */

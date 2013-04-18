@@ -16,7 +16,7 @@ namespace Eve.Data.Entities
   [Table("dgmAttributeCategories")]
   public class AttributeCategoryEntity : BaseValueEntity<AttributeCategoryId, AttributeCategory>
   {
-    // Check InnerEveDbContext.OnModelCreating() for customization of this type's
+    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
 
     /* Constructors */
