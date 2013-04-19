@@ -7,6 +7,7 @@ namespace Eve.Industry
 {
   using System;
   using System.Diagnostics.Contracts;
+  using System.Threading;
 
   using Eve.Data;
   using Eve.Data.Entities;
@@ -62,7 +63,12 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<AssemblyLineType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.assemblyLineType ?? (this.assemblyLineType = this.Container.GetOrAdd<AssemblyLineType>(this.AssemblyLineTypeId, () => this.Entity.AssemblyLineType.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.assemblyLineType,
+          () => this.Container.GetOrAdd<AssemblyLineType>(this.AssemblyLineTypeId, () => this.Entity.AssemblyLineType.ToAdapter(this.Container)));
+
+        Contract.Assume(this.assemblyLineType != null);
+        return this.assemblyLineType;
       }
     }
 
@@ -76,10 +82,7 @@ namespace Eve.Industry
     /// </value>   
     public AssemblyLineTypeId AssemblyLineTypeId
     {
-      get
-      {
-        return this.Entity.AssemblyLineTypeId;
-      }
+      get { return this.Entity.AssemblyLineTypeId; }
     }
 
     /// <summary>
@@ -97,7 +100,12 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<Group>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.group ?? (this.group = this.Container.GetOrAdd<Group>(this.GroupId, () => this.Entity.Group.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.group,
+          () => this.Container.GetOrAdd<Group>(this.GroupId, () => this.Entity.Group.ToAdapter(this.Container)));
+
+        Contract.Assume(this.group != null);
+        return this.group;
       }
     }
 
@@ -111,10 +119,7 @@ namespace Eve.Industry
     /// </value> 
     public GroupId GroupId
     {
-      get
-      {
-        return this.Entity.GroupId;
-      }
+      get { return this.Entity.GroupId; }
     }
 
     /// <summary>

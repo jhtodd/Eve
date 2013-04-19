@@ -6,6 +6,7 @@
 namespace Eve
 {
   using System.Diagnostics.Contracts;
+  using System.Threading;
 
   using Eve.Data;
   using Eve.Data.Entities;
@@ -49,13 +50,20 @@ namespace Eve
     {
       get
       {
+        Contract.Ensures(this.IconId == null || Contract.Result<Icon>() != null);
+
         if (this.IconId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.GetOrAdd<Icon>(this.IconId, () => (Icon)this.Entity.Icon.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.icon,
+          () => this.Container.GetOrAdd<Icon>(this.IconId, () => (Icon)this.Entity.Icon.ToAdapter(this.Container)));
+
+        Contract.Assume(this.icon != null);
+        return this.icon;
       }
     }
 

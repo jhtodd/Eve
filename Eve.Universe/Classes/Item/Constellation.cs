@@ -7,6 +7,7 @@ namespace Eve.Universe
 {
   using System.Diagnostics.Contracts;
   using System.Linq;
+  using System.Threading;
 
   using Eve.Character;
   using Eve.Data;
@@ -122,7 +123,12 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyConstellationJumpCollection>() != null);
 
-        return this.jumps ?? (this.jumps = new ReadOnlyConstellationJumpCollection(this.Container.GetConstellationJumps(x => x.FromConstellationId == this.Id.Value).OrderBy(x => x)));
+        LazyInitializer.EnsureInitialized(
+          ref this.jumps,
+          () => new ReadOnlyConstellationJumpCollection(this.Container.GetConstellationJumps(x => x.FromConstellationId == this.Id.Value).OrderBy(x => x)));
+
+        Contract.Assume(this.jumps != null);
+        return this.jumps;
       }
     }
 
@@ -163,7 +169,12 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.region ?? (this.region = this.Container.GetOrAdd<Region>(this.RegionId, () => (Region)this.ConstellationInfo.Region.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.region,
+          () => this.Container.GetOrAdd<Region>(this.RegionId, () => (Region)this.ConstellationInfo.Region.ToAdapter(this.Container)));
+
+        Contract.Assume(this.region != null);
+        return this.region;
       }
     }
 
@@ -190,7 +201,12 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlySolarSystemCollection>() != null);
 
-        return this.solarSystems ?? (this.solarSystems = new ReadOnlySolarSystemCollection(this.Container.GetSolarSystems(x => x.SolarSystemInfo.ConstellationId == this.Id.Value).OrderBy(x => x)));
+        LazyInitializer.EnsureInitialized(
+          ref this.solarSystems,
+          () => new ReadOnlySolarSystemCollection(this.Container.GetSolarSystems(x => x.SolarSystemInfo.ConstellationId == this.Id.Value).OrderBy(x => x)));
+
+        Contract.Assume(this.solarSystems != null);
+        return this.solarSystems;
       }
     }
 

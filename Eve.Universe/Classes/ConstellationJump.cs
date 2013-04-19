@@ -7,6 +7,7 @@ namespace Eve.Universe
 {
   using System;
   using System.Diagnostics.Contracts;
+  using System.Threading;
 
   using Eve.Data;
   using Eve.Data.Entities;
@@ -62,7 +63,12 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Constellation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.fromConstellation ?? (this.fromConstellation = this.Container.GetOrAdd<Constellation>(this.FromConstellationId, () => (Constellation)this.Entity.FromConstellation.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.fromConstellation,
+          () => this.Container.GetOrAdd<Constellation>(this.FromConstellationId, () => (Constellation)this.Entity.FromConstellation.ToAdapter(this.Container)));
+
+        Contract.Assume(this.fromConstellation != null);
+        return this.fromConstellation;
       }
     }
 
@@ -90,7 +96,12 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.fromRegion ?? (this.fromRegion = this.Container.GetOrAdd<Region>(this.FromRegionId, () => (Region)this.Entity.FromRegion.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.fromRegion,
+          () => this.Container.GetOrAdd<Region>(this.FromRegionId, () => (Region)this.Entity.FromRegion.ToAdapter(this.Container)));
+
+        Contract.Assume(this.fromRegion != null);
+        return this.fromRegion;
       }
     }
 
@@ -118,7 +129,12 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Constellation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.toConstellation ?? (this.toConstellation = this.Container.GetOrAdd<Constellation>(this.ToConstellationId, () => (Constellation)this.Entity.ToConstellation.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.toConstellation,
+          () => this.Container.GetOrAdd<Constellation>(this.ToConstellationId, () => (Constellation)this.Entity.ToConstellation.ToAdapter(this.Container)));
+
+        Contract.Assume(this.toConstellation != null);
+        return this.toConstellation;
       }
     }
 
@@ -146,7 +162,12 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.toRegion ?? (this.toRegion = this.Container.GetOrAdd<Region>(this.ToRegionId, () => (Region)this.Entity.ToRegion.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.toRegion,
+          () => this.Container.GetOrAdd<Region>(this.ToRegionId, () => (Region)this.Entity.ToRegion.ToAdapter(this.Container)));
+
+        Contract.Assume(this.toRegion != null);
+        return this.toRegion;
       }
     }
 

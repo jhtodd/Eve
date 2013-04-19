@@ -7,6 +7,7 @@ namespace Eve.Character
 {
   using System.Diagnostics.Contracts;
   using System.Linq;
+  using System.Threading;
 
   using Eve.Data;
   using Eve.Data.Entities;
@@ -56,7 +57,12 @@ namespace Eve.Character
       {
         Contract.Ensures(Contract.Result<ReadOnlyAncestryCollection>() != null);
 
-        return this.ancestries ?? (this.ancestries = new ReadOnlyAncestryCollection(this.Container.GetAncestries(x => x.BloodlineId == this.Id).OrderBy(x => x)));
+        LazyInitializer.EnsureInitialized(
+          ref this.ancestries,
+          () => new ReadOnlyAncestryCollection(this.Container.GetAncestries(x => x.BloodlineId == this.Id).OrderBy(x => x)));
+
+        Contract.Assume(this.ancestries != null);
+        return this.ancestries;
       }
     }
 
@@ -87,7 +93,12 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<NpcCorporation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.corporation ?? (this.corporation = this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.Entity.Corporation.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.corporation,
+          () => this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.Entity.Corporation.ToAdapter(this.Container)));
+
+        Contract.Assume(this.corporation != null);
+        return this.corporation;
       }
     }
 
@@ -131,13 +142,20 @@ namespace Eve.Character
     {
       get
       {
+        Contract.Ensures(this.IconId == null || Contract.Result<Icon>() != null);
+
         if (this.IconId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.icon,
+          () => this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+
+        Contract.Assume(this.icon != null);
+        return this.icon;
       }
     }
 
@@ -218,7 +236,12 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<EveType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.shipType ?? (this.shipType = this.Container.GetOrAdd<EveType>(this.ShipTypeId, () => this.Entity.ShipType.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.shipType,
+          () => this.Container.GetOrAdd<EveType>(this.ShipTypeId, () => this.Entity.ShipType.ToAdapter(this.Container)));
+
+        Contract.Assume(this.shipType != null);
+        return this.shipType;
       }
     }
 
@@ -246,7 +269,12 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<Race>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.race ?? (this.race = this.Container.GetOrAdd<Race>(this.RaceId, () => this.Entity.Race.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.race,
+          () => this.Container.GetOrAdd<Race>(this.RaceId, () => this.Entity.Race.ToAdapter(this.Container)));
+
+        Contract.Assume(this.race != null);
+        return this.race;
       }
     }
 

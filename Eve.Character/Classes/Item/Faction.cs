@@ -6,6 +6,7 @@
 namespace Eve.Character
 {
   using System.Diagnostics.Contracts;
+  using System.Threading;
 
   using Eve.Data;
   using Eve.Data.Entities;
@@ -54,13 +55,15 @@ namespace Eve.Character
     {
       get
       {
-        if (this.CorporationId == null)
-        {
-          return null;
-        }
+        Contract.Ensures(Contract.Result<NpcCorporation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.corporation ?? (this.corporation = this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.FactionInfo.Corporation.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.corporation,
+          () => this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.FactionInfo.Corporation.ToAdapter(this.Container)));
+
+        Contract.Assume(this.corporation != null);
+        return this.corporation;
       }
     }
 
@@ -86,13 +89,15 @@ namespace Eve.Character
     {
       get
       {
-        if (this.IconId == null)
-        {
-          return null;
-        }
+        Contract.Ensures(Contract.Result<Icon>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.GetOrAdd<Icon>(this.IconId, () => this.FactionInfo.Icon.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.icon, 
+          () => this.Container.GetOrAdd<Icon>(this.IconId, () => this.FactionInfo.Icon.ToAdapter(this.Container)));
+
+        Contract.Assume(this.icon != null);
+        return this.icon;
       }
     }
 
@@ -119,13 +124,20 @@ namespace Eve.Character
     {
       get
       {
+        Contract.Ensures(this.MilitiaCorporationId == null || Contract.Result<NpcCorporation>() != null);
+
         if (this.MilitiaCorporationId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.militiaCorporation ?? (this.militiaCorporation = this.Container.GetOrAdd<NpcCorporation>(this.MilitiaCorporationId, () => (NpcCorporation)this.FactionInfo.MilitiaCorporation.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.militiaCorporation,
+          () => this.Container.GetOrAdd<NpcCorporation>(this.MilitiaCorporationId, () => (NpcCorporation)this.FactionInfo.MilitiaCorporation.ToAdapter(this.Container)));
+
+        Contract.Assume(this.militiaCorporation != null);
+        return this.militiaCorporation;
       }
     }
 
@@ -192,7 +204,12 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<SolarSystem>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.solarSystem ?? (this.solarSystem = this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.FactionInfo.SolarSystem.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.solarSystem,
+          () => this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.FactionInfo.SolarSystem.ToAdapter(this.Container)));
+
+        Contract.Assume(this.solarSystem != null);
+        return this.solarSystem;
       }
     }
 

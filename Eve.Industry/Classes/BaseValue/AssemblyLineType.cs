@@ -7,6 +7,7 @@ namespace Eve.Industry
 {
   using System.Diagnostics.Contracts;
   using System.Linq;
+  using System.Threading;
 
   using Eve.Data;
   using Eve.Data.Entities;
@@ -56,7 +57,12 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<Activity>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.activity ?? (this.activity = this.Container.GetOrAdd<Activity>(this.ActivityId, () => this.Entity.Activity.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.activity,
+          () => this.Container.GetOrAdd<Activity>(this.ActivityId, () => this.Entity.Activity.ToAdapter(this.Container)));
+
+        Contract.Assume(this.activity != null);
+        return this.activity;
       }
     }
 
@@ -70,10 +76,7 @@ namespace Eve.Industry
     /// </value>    
     public ActivityId ActivityId
     {
-      get
-      {
-        return this.Entity.ActivityId;
-      }
+      get { return this.Entity.ActivityId; }
     }
 
     /// <summary>
@@ -138,7 +141,12 @@ namespace Eve.Industry
       {
         Contract.Ensures(Contract.Result<ReadOnlyAssemblyLineTypeCategoryDetailCollection>() != null);
 
-        return this.categoryDetails ?? (this.categoryDetails = new ReadOnlyAssemblyLineTypeCategoryDetailCollection(this.Container.GetAssemblyLineTypeCategoryDetails(x => x.AssemblyLineTypeId == this.Id.Value).OrderBy(x => x)));
+        LazyInitializer.EnsureInitialized(
+          ref this.categoryDetails,
+          () => new ReadOnlyAssemblyLineTypeCategoryDetailCollection(this.Container.GetAssemblyLineTypeCategoryDetails(x => x.AssemblyLineTypeId == this.Id.Value).OrderBy(x => x)));
+
+        Contract.Assume(this.categoryDetails != null);
+        return this.categoryDetails;
       }
     }
 
@@ -156,7 +164,12 @@ namespace Eve.Industry
       {
         Contract.Ensures(Contract.Result<ReadOnlyAssemblyLineTypeGroupDetailCollection>() != null);
 
-        return this.groupDetails ?? (this.groupDetails = new ReadOnlyAssemblyLineTypeGroupDetailCollection(this.Container.GetAssemblyLineTypeGroupDetails(x => x.AssemblyLineTypeId == this.Id.Value).OrderBy(x => x)));
+        LazyInitializer.EnsureInitialized(
+          ref this.groupDetails,
+          () => new ReadOnlyAssemblyLineTypeGroupDetailCollection(this.Container.GetAssemblyLineTypeGroupDetails(x => x.AssemblyLineTypeId == this.Id.Value).OrderBy(x => x)));
+
+        Contract.Assume(this.groupDetails != null);
+        return this.groupDetails;
       }
     }
 
@@ -192,10 +205,7 @@ namespace Eve.Industry
     /// </value>    
     public double? Volume
     {
-      get
-      {
-        return this.Entity.Volume;
-      }
+      get { return this.Entity.Volume; }
     }
   }
 }

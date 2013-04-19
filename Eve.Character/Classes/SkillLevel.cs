@@ -7,6 +7,7 @@ namespace Eve.Character
 {
   using System;
   using System.Diagnostics.Contracts;
+  using System.Threading;
 
   using Eve.Data;
 
@@ -89,7 +90,12 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<SkillType>() != null);
 
         // If not already set, load from the data source
-        return this.skillType ?? (this.skillType = this.Container.GetEveTypeById<SkillType>((TypeId)(int)SkillId));
+        LazyInitializer.EnsureInitialized(
+          ref this.skillType,
+          () => this.Container.GetEveTypeById<SkillType>((TypeId)(int)SkillId));
+
+        Contract.Assume(this.skillType != null);
+        return this.skillType;
       }
     }
 

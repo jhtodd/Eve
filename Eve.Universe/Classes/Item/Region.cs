@@ -7,6 +7,7 @@ namespace Eve.Universe
 {
   using System.Diagnostics.Contracts;
   using System.Linq;
+  using System.Threading;
 
   using Eve.Character;
   using Eve.Data;
@@ -53,7 +54,12 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyConstellationCollection>() != null);
 
-        return this.constellations ?? (this.constellations = new ReadOnlyConstellationCollection(this.Container.GetConstellations(x => x.ConstellationInfo.RegionId == this.Id.Value).OrderBy(x => x)));
+        LazyInitializer.EnsureInitialized(
+          ref this.constellations,
+          () => new ReadOnlyConstellationCollection(this.Container.GetConstellations(x => x.ConstellationInfo.RegionId == this.Id.Value).OrderBy(x => x)));
+
+        Contract.Assume(this.constellations != null);
+        return this.constellations;
       }
     }
 
@@ -68,13 +74,20 @@ namespace Eve.Universe
     {
       get
       {
+        Contract.Ensures(this.FactionId == null || Contract.Result<Faction>() != null);
+
         if (this.FactionId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.faction ?? (this.faction = this.Container.GetOrAdd<Faction>(this.FactionId, () => (Faction)this.RegionInfo.Faction.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.faction,
+          () => this.Container.GetOrAdd<Faction>(this.FactionId, () => (Faction)this.RegionInfo.Faction.ToAdapter(this.Container)));
+
+        Contract.Assume(this.faction != null);
+        return this.faction;
       }
     }
 
@@ -113,7 +126,12 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyRegionJumpCollection>() != null);
 
-        return this.jumps ?? (this.jumps = new ReadOnlyRegionJumpCollection(this.Container.GetRegionJumps(x => x.FromRegionId == this.Id.Value).OrderBy(x => x)));
+        LazyInitializer.EnsureInitialized(
+          ref this.jumps, 
+          () => new ReadOnlyRegionJumpCollection(this.Container.GetRegionJumps(x => x.FromRegionId == this.Id.Value).OrderBy(x => x)));
+
+        Contract.Assume(this.jumps != null);
+        return this.jumps;
       }
     }
 

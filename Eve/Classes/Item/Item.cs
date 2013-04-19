@@ -7,6 +7,7 @@ namespace Eve
 {
   using System;
   using System.Diagnostics.Contracts;
+  using System.Threading;
 
   using Eve.Data;
   using Eve.Data.Entities;
@@ -68,7 +69,12 @@ namespace Eve
         Contract.Ensures(Contract.Result<Flag>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.flag ?? (this.flag = this.Container.GetOrAdd<Flag>(this.FlagId, () => this.Entity.Flag.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.flag,
+          () => this.Container.GetOrAdd<Flag>(this.FlagId, () => this.Entity.Flag.ToAdapter(this.Container)));
+
+        Contract.Assume(this.flag != null);
+        return this.flag;
       }
     }
 
@@ -107,7 +113,12 @@ namespace Eve
         Contract.Ensures(Contract.Result<EveType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.itemType ?? (this.itemType = this.Container.GetOrAdd<EveType>(this.ItemTypeId, () => this.Entity.ItemType.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.itemType,
+          () => this.Container.GetOrAdd<EveType>(this.ItemTypeId, () => this.Entity.ItemType.ToAdapter(this.Container)));
+
+        Contract.Assume(this.itemType != null);
+        return this.itemType;
       }
     }
 
@@ -135,7 +146,12 @@ namespace Eve
         Contract.Ensures(Contract.Result<Item>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.location ?? (this.location = this.Container.GetOrAdd<Item>(this.LocationId, () => this.Entity.Location.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.location,
+          () => this.Container.GetOrAdd<Item>(this.LocationId, () => this.Entity.Location.ToAdapter(this.Container)));
+
+        Contract.Assume(this.location != null);
+        return this.location;
       }
     }
 
@@ -167,7 +183,7 @@ namespace Eve
 
         if (string.IsNullOrWhiteSpace(result))
         {
-          result = "[Unknown]";
+          result = "[Unknown Item (ID " + this.Id.ToString() + ")]";
         }
 
         return result;
@@ -184,7 +200,7 @@ namespace Eve
     {
       get
       {
-        // This property can sometimes be null even with a FactionId value,
+        // This property can sometimes be null even with a OwnerId value,
         // because a small number of records have an invalid OwnerId.  Return 
         // null in that case.
         if (this.Entity.Owner == null)
@@ -193,7 +209,12 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.owner ?? (this.owner = this.Container.GetOrAdd<Item>(this.OwnerId, () => this.Entity.Owner.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.owner,
+          () => this.Container.GetOrAdd<Item>(this.OwnerId, () => this.Entity.Owner.ToAdapter(this.Container)));
+
+        Contract.Assume(this.owner != null);
+        return this.owner;
       }
     }
 
@@ -225,7 +246,12 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.position ?? (this.position = this.Container.GetOrAdd<ItemPosition>(this.Id, () => this.Entity.Position.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.position,
+          () => this.Container.GetOrAdd<ItemPosition>(this.Id, () => this.Entity.Position.ToAdapter(this.Container)));
+
+        Contract.Assume(this.position != null);
+        return this.position;
       }
     }
 

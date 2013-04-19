@@ -8,6 +8,7 @@ namespace Eve.Universe
   using System;
   using System.Diagnostics.Contracts;
   using System.Linq;
+  using System.Threading;
 
   using Eve.Data;
   using Eve.Data.Entities;
@@ -60,7 +61,12 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyAgentCollection>() != null);
 
-        return this.agents ?? (this.agents = new ReadOnlyAgentCollection(this.Container.GetAgents(x => x.AgentInfo.CorporationId == this.CorporationId.Value && x.AgentInfo.DivisionId == this.DivisionId).OrderBy(x => x)));
+        LazyInitializer.EnsureInitialized(
+          ref this.agents,
+          () => new ReadOnlyAgentCollection(this.Container.GetAgents(x => x.AgentInfo.CorporationId == this.CorporationId.Value && x.AgentInfo.DivisionId == this.DivisionId).OrderBy(x => x)));
+
+        Contract.Assume(this.agents != null);
+        return this.agents;
       }
     }
 
@@ -88,7 +94,12 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Division>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.division ?? (this.division = this.Container.GetOrAdd<Division>(this.DivisionId, () => this.Entity.Division.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.division,
+          () => this.Container.GetOrAdd<Division>(this.DivisionId, () => this.Entity.Division.ToAdapter(this.Container)));
+
+        Contract.Assume(this.division != null);
+        return this.division;
       }
     }
 

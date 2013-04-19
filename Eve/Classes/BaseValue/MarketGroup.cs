@@ -7,6 +7,7 @@ namespace Eve
 {
   using System.Diagnostics.Contracts;
   using System.Linq;
+  using System.Threading;
 
   using Eve.Data;
   using Eve.Data.Entities;
@@ -55,7 +56,12 @@ namespace Eve
       {
         Contract.Ensures(Contract.Result<ReadOnlyMarketGroupCollection>() != null);
 
-        return this.childGroups ?? (this.childGroups = new ReadOnlyMarketGroupCollection(this.Container.GetMarketGroups(x => x.ParentGroupId == this.Id).OrderBy(x => x)));
+        LazyInitializer.EnsureInitialized(
+          ref this.childGroups,
+          () => new ReadOnlyMarketGroupCollection(this.Container.GetMarketGroups(x => x.ParentGroupId == this.Id).OrderBy(x => x)));
+
+        Contract.Assume(this.childGroups != null);
+        return this.childGroups;
       }
     }
 
@@ -83,13 +89,20 @@ namespace Eve
     {
       get
       {
+        Contract.Ensures(this.IconId == null || Contract.Result<Icon>() != null);
+
         if (this.IconId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.icon,
+          () => this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+
+        Contract.Assume(this.icon != null);
+        return this.icon;
       }
     }
 
@@ -116,13 +129,20 @@ namespace Eve
     {
       get
       {
+        Contract.Ensures(this.ParentGroupId == null || Contract.Result<MarketGroup>() != null);
+
         if (this.ParentGroupId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.parentGroup ?? (this.parentGroup = this.Container.GetOrAdd<MarketGroup>(this.ParentGroupId, () => this.Entity.ParentGroup.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.parentGroup,
+          () => this.Container.GetOrAdd<MarketGroup>(this.ParentGroupId, () => this.Entity.ParentGroup.ToAdapter(this.Container)));
+
+        Contract.Assume(this.parentGroup != null);
+        return this.parentGroup;
       }
     }
 
@@ -151,7 +171,12 @@ namespace Eve
       {
         Contract.Ensures(Contract.Result<ReadOnlyTypeCollection>() != null);
 
-        return this.types ?? (this.types = new ReadOnlyTypeCollection(this.Container.GetEveTypes(x => x.MarketGroupId == this.Id).OrderBy(x => x)));
+        LazyInitializer.EnsureInitialized(
+          ref this.types,
+          () => new ReadOnlyTypeCollection(this.Container.GetEveTypes(x => x.MarketGroupId == this.Id).OrderBy(x => x)));
+
+        Contract.Assume(this.types != null);
+        return this.types;
       }
     }
 
@@ -186,7 +211,6 @@ namespace Eve
       }
 
       // Recurse upward
-      Contract.Assume(this.ParentGroup != null); // Because we know ParentGroupId is not null
       return this.ParentGroup.IsChildOf(groupId);
     }
   }

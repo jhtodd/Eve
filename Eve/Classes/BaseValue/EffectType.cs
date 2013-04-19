@@ -7,6 +7,7 @@ namespace Eve
 {
   using System;
   using System.Diagnostics.Contracts;
+  using System.Threading;
 
   using Eve.Data;
   using Eve.Data.Entities;
@@ -77,13 +78,20 @@ namespace Eve
     {
       get
       {
+        Contract.Ensures(this.DischargeAttributeId == null || Contract.Result<AttributeType>() != null);
+
         if (this.DischargeAttributeId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.dischargeAttribute ?? (this.dischargeAttribute = this.Container.GetOrAdd<AttributeType>(this.DischargeAttributeId, () => this.Entity.DischargeAttribute.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.dischargeAttribute,
+          () => this.Container.GetOrAdd<AttributeType>(this.DischargeAttributeId, () => this.Entity.DischargeAttribute.ToAdapter(this.Container)));
+
+        Contract.Assume(this.dischargeAttribute != null);
+        return this.dischargeAttribute;
       }
     }
 
@@ -139,13 +147,20 @@ namespace Eve
     {
       get
       {
+        Contract.Ensures(this.DurationAttributeId == null || Contract.Result<AttributeType>() != null);
+
         if (this.DurationAttributeId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.durationAttribute ?? (this.durationAttribute = this.Container.GetOrAdd<AttributeType>(this.DurationAttributeId, () => this.Entity.DurationAttribute.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.durationAttribute,
+          () => this.Container.GetOrAdd<AttributeType>(this.DurationAttributeId, () => this.Entity.DurationAttribute.ToAdapter(this.Container)));
+
+        Contract.Assume(this.durationAttribute != null);
+        return this.durationAttribute;
       }
     }
 
@@ -199,13 +214,20 @@ namespace Eve
     {
       get
       {
+        Contract.Ensures(this.FalloffAttributeId == null || Contract.Result<AttributeType>() != null);
+
         if (this.FalloffAttributeId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.falloffAttribute ?? (this.falloffAttribute = this.Container.GetOrAdd<AttributeType>(this.FalloffAttributeId, () => this.Entity.FalloffAttribute.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.falloffAttribute,
+          () => this.Container.GetOrAdd<AttributeType>(this.FalloffAttributeId, () => this.Entity.FalloffAttribute.ToAdapter(this.Container)));
+
+        Contract.Assume(this.falloffAttribute != null);
+        return this.falloffAttribute;
       }
     }
 
@@ -236,13 +258,20 @@ namespace Eve
     {
       get
       {
+        Contract.Ensures(this.FittingUsageChanceAttributeId == null || Contract.Result<AttributeType>() != null);
+
         if (this.FittingUsageChanceAttributeId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.fittingUsageChanceAttribute ?? (this.fittingUsageChanceAttribute = this.Container.GetOrAdd<AttributeType>(this.FittingUsageChanceAttributeId, () => this.Entity.FittingUsageChanceAttribute.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.fittingUsageChanceAttribute,
+          () => this.Container.GetOrAdd<AttributeType>(this.FittingUsageChanceAttributeId, () => this.Entity.FittingUsageChanceAttribute.ToAdapter(this.Container)));
+
+        Contract.Assume(this.fittingUsageChanceAttribute != null);
+        return this.fittingUsageChanceAttribute;
       }
     }
 
@@ -287,13 +316,20 @@ namespace Eve
     {
       get
       {
+        Contract.Ensures(this.IconId == null || Contract.Result<Icon>() != null);
+
         if (this.IconId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.icon,
+          () => this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+
+        Contract.Assume(this.icon != null);
+        return this.icon;
       }
     }
 
@@ -360,13 +396,19 @@ namespace Eve
     {
       get
       {
+        Contract.Ensures(this.NpcActivationChanceAttributeId == null || Contract.Result<AttributeType>() != null);
+
         if (this.NpcActivationChanceAttributeId == null)
         {
           return null;
         }
 
-        // If not already set, load from the cache, or else create an instance from the base entity
-        return this.npcActivationChanceAttribute ?? (this.npcActivationChanceAttribute = this.Container.GetOrAdd<AttributeType>(this.NpcActivationChanceAttributeId, () => this.Entity.NpcActivationChanceAttribute.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.npcActivationChanceAttribute,
+          () => this.Container.GetOrAdd<AttributeType>(this.NpcActivationChanceAttributeId, () => this.Entity.NpcActivationChanceAttribute.ToAdapter(this.Container)));
+
+        Contract.Assume(this.npcActivationChanceAttribute != null);
+        return this.npcActivationChanceAttribute;
       }
     }
 
@@ -397,13 +439,20 @@ namespace Eve
     {
       get
       {
+        Contract.Ensures(this.NpcUsageChanceAttributeId == null || Contract.Result<AttributeType>() != null);
+
         if (this.NpcUsageChanceAttributeId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.npcUsageChanceAttribute ?? (this.npcUsageChanceAttribute = this.Container.GetOrAdd<AttributeType>(this.NpcUsageChanceAttributeId, () => this.Entity.NpcUsageChanceAttribute.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.npcUsageChanceAttribute,
+          () => this.Container.GetOrAdd<AttributeType>(this.NpcUsageChanceAttributeId, () => this.Entity.NpcUsageChanceAttribute.ToAdapter(this.Container)));
+
+        Contract.Assume(this.npcUsageChanceAttribute != null);
+        return this.npcUsageChanceAttribute;
       }
     }
 
@@ -483,13 +532,20 @@ namespace Eve
     {
       get
       {
+        Contract.Ensures(this.RangeAttributeId == null || Contract.Result<AttributeType>() != null);
+
         if (this.RangeAttributeId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.rangeAttribute ?? (this.rangeAttribute = this.Container.GetOrAdd<AttributeType>(this.RangeAttributeId, () => this.Entity.RangeAttribute.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.rangeAttribute,
+          () => this.Container.GetOrAdd<AttributeType>(this.RangeAttributeId, () => this.Entity.RangeAttribute.ToAdapter(this.Container)));
+
+        Contract.Assume(this.rangeAttribute != null);
+        return this.rangeAttribute;
       }
     }
 
@@ -547,13 +603,20 @@ namespace Eve
     {
       get
       {
+        Contract.Ensures(this.TrackingSpeedAttributeId == null || Contract.Result<AttributeType>() != null);
+
         if (this.TrackingSpeedAttributeId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.trackingSpeedAttribute ?? (this.trackingSpeedAttribute = this.Container.GetOrAdd<AttributeType>(this.TrackingSpeedAttributeId, () => this.Entity.TrackingSpeedAttribute.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.trackingSpeedAttribute,
+          () => this.Container.GetOrAdd<AttributeType>(this.TrackingSpeedAttributeId, () => this.Entity.TrackingSpeedAttribute.ToAdapter(this.Container)));
+
+        Contract.Assume(this.trackingSpeedAttribute != null);
+        return this.trackingSpeedAttribute;
       }
     }
 

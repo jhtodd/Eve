@@ -136,9 +136,10 @@ namespace Eve
         // Performance is not a concern since it's literally like a dozen or so.
         if (string.IsNullOrWhiteSpace(result))
         {
-          return "[Unknown (ID " + this.Id.ToString() + ")]";
+          result = "[Unknown " + typeof(TDerived).Name + " (ID " + this.Id.ToString() + ")]";
         }
 
+        Contract.Assume(!string.IsNullOrWhiteSpace(result));
         return result;
       }
     }

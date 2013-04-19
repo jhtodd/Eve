@@ -7,6 +7,7 @@ namespace Eve
 {
   using System;
   using System.Diagnostics.Contracts;
+  using System.Threading;
 
   using Eve.Data;
   using Eve.Data.Entities;
@@ -56,13 +57,20 @@ namespace Eve
     {
       get
       {
+        Contract.Ensures(this.CategoryId == null || Contract.Result<AttributeCategory>() != null);
+
         if (this.CategoryId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.category ?? (this.category = this.Container.GetOrAdd<AttributeCategory>(this.CategoryId, () => this.Entity.Category.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.category,
+          () => this.Container.GetOrAdd<AttributeCategory>(this.CategoryId, () => this.Entity.Category.ToAdapter(this.Container)));
+
+        Contract.Assume(this.category != null);
+        return this.category;
       }
     }
 
@@ -92,8 +100,10 @@ namespace Eve
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
 
         var result = Entity.DefaultValue;
+
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
+
         return result;
       }
     }
@@ -137,13 +147,20 @@ namespace Eve
     {
       get
       {
+        Contract.Ensures(this.IconId == null || Contract.Result<Icon>() != null);
+
         if (this.IconId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.icon,
+          () => this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+
+        Contract.Assume(this.icon != null);
+        return this.icon;
       }
     }
 
@@ -196,13 +213,20 @@ namespace Eve
     {
       get
       {
+        Contract.Ensures(this.UnitId == null || Contract.Result<Unit>() != null);
+
         if (this.UnitId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.unit ?? (this.unit = this.Container.GetOrAdd<Unit>(this.UnitId, () => this.Entity.Unit.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.unit,
+          () => this.Container.GetOrAdd<Unit>(this.UnitId, () => this.Entity.Unit.ToAdapter(this.Container)));
+
+        Contract.Assume(this.unit != null);
+        return this.unit;
       }
     }
 

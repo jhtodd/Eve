@@ -51,10 +51,7 @@ namespace Eve
     /// </value>
     public bool Collidable
     {
-      get
-      {
-        return this.Entity.Collidable;
-      }
+      get { return this.Entity.Collidable; }
     }
 
     /// <summary>
@@ -99,10 +96,7 @@ namespace Eve
     /// </value>
     public int? DirectoryId
     {
-      get
-      {
-        return this.Entity.DirectoryId;
-      }
+      get { return this.Entity.DirectoryId; }
     }
 
     /// <summary>
@@ -113,10 +107,7 @@ namespace Eve
     /// </value>
     public int? ExplosionId
     {
-      get
-      {
-        return this.Entity.ExplosionId;
-      }
+      get { return this.Entity.ExplosionId; }
     }
 
     /// <summary>
@@ -199,10 +190,7 @@ namespace Eve
     /// </value>
     public GraphicId Id
     {
-      get
-      {
-        return this.Entity.Id;
-      }
+      get { return this.Entity.Id; }
     }
 
     /// <summary>
@@ -214,10 +202,7 @@ namespace Eve
     /// </value>
     public bool Obsolete
     {
-      get
-      {
-        return this.Entity.Obsolete;
-      }
+      get { return this.Entity.Obsolete; }
     }
 
     /* Methods */

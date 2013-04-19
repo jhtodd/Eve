@@ -7,6 +7,7 @@ namespace Eve.Universe
 {
   using System.Diagnostics.Contracts;
   using System.Linq;
+  using System.Threading;
 
   using Eve.Character;
   using Eve.Data;
@@ -67,7 +68,12 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Constellation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.constellation ?? (this.constellation = this.Container.GetOrAdd<Constellation>(this.ConstellationId, () => (Constellation)this.SolarSystemInfo.Constellation.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.constellation,
+          () => this.Container.GetOrAdd<Constellation>(this.ConstellationId, () => (Constellation)this.SolarSystemInfo.Constellation.ToAdapter(this.Container)));
+
+        Contract.Assume(this.constellation != null);
+        return this.constellation;
       }
     }
 
@@ -239,7 +245,12 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlySolarSystemJumpCollection>() != null);
 
-        return this.jumps ?? (this.jumps = new ReadOnlySolarSystemJumpCollection(this.Container.GetSolarSystemJumps(x => x.FromSolarSystemId == this.Id.Value).OrderBy(x => x)));
+        LazyInitializer.EnsureInitialized(
+          ref this.jumps,
+          () => new ReadOnlySolarSystemJumpCollection(this.Container.GetSolarSystemJumps(x => x.FromSolarSystemId == this.Id.Value).OrderBy(x => x)));
+
+        Contract.Assume(this.jumps != null);
+        return this.jumps;
       }
     }
 
@@ -304,7 +315,12 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.region ?? (this.region = this.Container.GetOrAdd<Region>(this.RegionId, () => (Region)this.SolarSystemInfo.Region.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.region,
+          () => this.Container.GetOrAdd<Region>(this.RegionId, () => (Region)this.SolarSystemInfo.Region.ToAdapter(this.Container)));
+
+        Contract.Assume(this.region != null);
+        return this.region;
       }
     }
 
@@ -380,13 +396,15 @@ namespace Eve.Universe
     { // TODO: Update with specified type
       get
       {
-        if (this.SunTypeId == null)
-        {
-          return null;
-        }
+        Contract.Ensures(Contract.Result<EveType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.sunType ?? (this.sunType = this.Container.GetOrAdd<EveType>(this.SunTypeId, () => this.SolarSystemInfo.SunType.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.sunType,
+          () => this.Container.GetOrAdd<EveType>(this.SunTypeId, () => this.SolarSystemInfo.SunType.ToAdapter(this.Container)));
+
+        Contract.Assume(this.sunType != null);
+        return this.sunType;
       }
     }
 

@@ -8,6 +8,7 @@ namespace Eve.Universe
   using System;
   using System.Diagnostics.Contracts;
   using System.Linq;
+  using System.Threading;
 
   using Eve.Data;
   using Eve.Data.Entities;
@@ -58,7 +59,12 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<CorporateActivity>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.activity ?? (this.activity = this.Container.GetOrAdd<CorporateActivity>(this.ActivityId, () => this.Entity.Activity.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.activity,
+          () => this.Container.GetOrAdd<CorporateActivity>(this.ActivityId, () => this.Entity.Activity.ToAdapter(this.Container)));
+
+        Contract.Assume(this.activity != null);
+        return this.activity;
       }
     }
 
@@ -84,13 +90,20 @@ namespace Eve.Universe
     {
       get
       {
+        Contract.Ensures(this.AmarrStationTypeId == null || Contract.Result<StationType>() != null);
+
         if (this.AmarrStationTypeId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.amarrStationType ?? (this.amarrStationType = this.Container.GetOrAdd<StationType>(this.AmarrStationTypeId, () => (StationType)this.Entity.AmarrStationType.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.amarrStationType,
+          () => this.Container.GetOrAdd<StationType>(this.AmarrStationTypeId, () => (StationType)this.Entity.AmarrStationType.ToAdapter(this.Container)));
+
+        Contract.Assume(this.amarrStationType != null);
+        return this.amarrStationType;
       }
     }
 
@@ -122,17 +135,24 @@ namespace Eve.Universe
     /// <value>
     /// The type of the Caldari version of this type of station.
     /// </value>
-    public EveType CaldariStationType
+    public StationType CaldariStationType
     {
       get
       {
+        Contract.Ensures(this.CaldariStationTypeId == null || Contract.Result<StationType>() != null);
+
         if (this.CaldariStationTypeId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.caldariStationType ?? (this.caldariStationType = this.Container.GetOrAdd<StationType>(this.CaldariStationTypeId, () => (StationType)this.Entity.CaldariStationType.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.caldariStationType,
+          () => this.Container.GetOrAdd<StationType>(this.CaldariStationTypeId, () => (StationType)this.Entity.CaldariStationType.ToAdapter(this.Container)));
+
+        Contract.Assume(this.caldariStationType != null);
+        return this.caldariStationType;
       }
     }
 
@@ -175,17 +195,24 @@ namespace Eve.Universe
     /// <value>
     /// The type of the Gallente version of this type of station.
     /// </value>
-    public EveType GallenteStationType
+    public StationType GallenteStationType
     {
       get
       {
+        Contract.Ensures(this.GallenteStationTypeId == null || Contract.Result<StationType>() != null);
+
         if (this.GallenteStationTypeId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.gallenteStationType ?? (this.gallenteStationType = this.Container.GetOrAdd<StationType>(this.GallenteStationTypeId, () => (StationType)this.Entity.GallenteStationType.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.gallenteStationType,
+          () => this.Container.GetOrAdd<StationType>(this.GallenteStationTypeId, () => (StationType)this.Entity.GallenteStationType.ToAdapter(this.Container)));
+
+        Contract.Assume(this.gallenteStationType != null);
+        return this.gallenteStationType;
       }
     }
 
@@ -217,17 +244,24 @@ namespace Eve.Universe
     /// <value>
     /// The type of the Jovian version of this type of station.
     /// </value>
-    public EveType JoveStationType
+    public StationType JoveStationType
     {
       get
       {
+        Contract.Ensures(this.JoveStationTypeId == null || Contract.Result<StationType>() != null);
+
         if (this.JoveStationTypeId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.joveStationType ?? (this.joveStationType = this.Container.GetOrAdd<StationType>(this.JoveStationTypeId, () => (StationType)this.Entity.JoveStationType.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.joveStationType,
+          () => this.Container.GetOrAdd<StationType>(this.JoveStationTypeId, () => (StationType)this.Entity.JoveStationType.ToAdapter(this.Container)));
+
+        Contract.Assume(this.joveStationType != null);
+        return this.joveStationType;
       }
     }
 
@@ -248,17 +282,24 @@ namespace Eve.Universe
     /// <value>
     /// The type of the Minmatar version of this type of station.
     /// </value>
-    public EveType MinmatarStationType
+    public StationType MinmatarStationType
     {
       get
       {
+        Contract.Ensures(this.MinmatarStationTypeId == null || Contract.Result<StationType>() != null);
+
         if (this.MinmatarStationTypeId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.minmatarStationType ?? (this.minmatarStationType = this.Container.GetOrAdd<StationType>(this.MinmatarStationTypeId, () => (StationType)this.Entity.MinmatarStationType.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.minmatarStationType,
+          () => this.Container.GetOrAdd<StationType>(this.MinmatarStationTypeId, () => (StationType)this.Entity.MinmatarStationType.ToAdapter(this.Container)));
+
+        Contract.Assume(this.minmatarStationType != null);
+        return this.minmatarStationType;
       }
     }
 
@@ -297,19 +338,19 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyStationServiceCollection>() != null);
 
-        if (this.services == null)
-        {
-          if (this.Entity.Services == null)
+        LazyInitializer.EnsureInitialized(
+          ref this.services,
+          () =>
           {
-            this.services = new ReadOnlyStationServiceCollection(null);
-          }
-          else
-          {
-            this.services = new ReadOnlyStationServiceCollection(
-              this.Entity.Services.Select(x => this.Container.GetOrAdd<StationService>(x.Id, () => x.ToAdapter(this.Container))).OrderBy(x => x));
-          }
-        }
+            if (this.Entity.Services == null)
+            {
+              return new ReadOnlyStationServiceCollection(null);
+            }
 
+            return new ReadOnlyStationServiceCollection(this.Entity.Services.Select(x => this.Container.GetOrAdd<StationService>(x.Id, () => x.ToAdapter(this.Container))).OrderBy(x => x));
+          });
+
+        Contract.Assume(this.services != null);
         return this.services;
       }
     }

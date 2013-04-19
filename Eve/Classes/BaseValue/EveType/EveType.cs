@@ -9,11 +9,14 @@ namespace Eve
   using System.Collections.Generic;
   using System.Diagnostics.Contracts;
   using System.Linq;
+  using System.Threading;
 
   using Eve.Character;
   using Eve.Data;
   using Eve.Data.Entities;
   using Eve.Universe;
+
+  using FreeNet.Collections;
 
   /// <summary>
   /// The base class for EVE item types.
@@ -40,6 +43,29 @@ namespace Eve
       IHasIcon,
       IEveTypeInstance
   {
+    // This is the list of attributes specifying which skills are required for a type.
+    // This list may need to be expanded later if additional required skill attributes
+    // are added.
+    private static readonly AttributeId[] RequiredSkillIdAttributes = 
+    {
+      AttributeId.RequiredSkill1,
+      AttributeId.RequiredSkill2,
+      AttributeId.RequiredSkill3,
+      AttributeId.RequiredSkill4,
+      AttributeId.RequiredSkill5,
+      AttributeId.RequiredSkill6,
+    };
+
+    private static readonly AttributeId[] RequiredSkillLevelAttributes =
+    {
+      AttributeId.RequiredSkill1Level,
+      AttributeId.RequiredSkill2Level,
+      AttributeId.RequiredSkill3Level,
+      AttributeId.RequiredSkill4Level,
+      AttributeId.RequiredSkill5Level,
+      AttributeId.RequiredSkill6Level,
+    };
+
     private ReadOnlyAttributeValueCollection attributes;
     private ReadOnlyEffectCollection effects;
     private Graphic graphic;
@@ -83,8 +109,12 @@ namespace Eve
         Contract.Ensures(Contract.Result<ReadOnlyAttributeValueCollection>() != null);
 
         // If not already set, construct a collection of this type's attribute values.
-        return this.attributes ??
-               (this.attributes = new ReadOnlyAttributeValueCollection(this.Container, this.Container.GetAttributeValues(x => x.ItemTypeId == this.Id.Value).OrderBy(x => x)));
+        LazyInitializer.EnsureInitialized(
+          ref this.attributes,
+          () => new ReadOnlyAttributeValueCollection(this.Container, this.Container.GetAttributeValues(x => x.ItemTypeId == this.Id.Value).OrderBy(x => x)));
+
+        Contract.Assume(this.attributes != null);
+        return this.attributes;
       }
     }
 
@@ -118,6 +148,7 @@ namespace Eve
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
 
         var result = Entity.Capacity;
+
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
 
@@ -165,6 +196,7 @@ namespace Eve
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
 
         var result = Entity.ChanceOfDuplicating;
+
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
 
@@ -185,8 +217,12 @@ namespace Eve
         Contract.Ensures(Contract.Result<ReadOnlyEffectCollection>() != null);
 
         // If not already set, construct a collection of this type's effects.
-        return this.effects ??
-               (this.effects = new ReadOnlyEffectCollection(this.Container.GetEffects(x => x.ItemTypeId == this.Id.Value).OrderBy(x => x)));
+        LazyInitializer.EnsureInitialized(
+          ref this.effects,
+          () => new ReadOnlyEffectCollection(this.Container.GetEffects(x => x.ItemTypeId == this.Id.Value).OrderBy(x => x)));
+
+        Contract.Assume(this.effects != null);
+        return this.effects;
       }
     }
 
@@ -200,13 +236,20 @@ namespace Eve
     {
       get
       {
+        Contract.Ensures(this.GraphicId == null || Contract.Result<Graphic>() != null);
+
         if (this.GraphicId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.graphic ?? (this.graphic = this.Container.GetOrAdd<Graphic>(this.GraphicId, () => this.Entity.Graphic.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.graphic,
+          () => this.Container.GetOrAdd<Graphic>(this.GraphicId, () => this.Entity.Graphic.ToAdapter(this.Container)));
+
+        Contract.Assume(this.graphic != null);
+        return this.graphic;
       }
     }
 
@@ -234,7 +277,12 @@ namespace Eve
         Contract.Ensures(Contract.Result<Group>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.group ?? (this.group = this.Container.GetOrAdd<Group>(this.GroupId, () => (Group)this.Entity.Group.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.group,
+          () => this.Container.GetOrAdd<Group>(this.GroupId, () => this.Entity.Group.ToAdapter(this.Container)));
+
+        Contract.Assume(this.group != null);
+        return this.group;
       }
     }
 
@@ -260,13 +308,20 @@ namespace Eve
     {
       get
       {
+        Contract.Ensures(this.IconId == null || Contract.Result<Icon>() != null);
+
         if (this.IconId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.icon,
+          () => this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+
+        Contract.Assume(this.icon != null);
+        return this.icon;
       }
     }
 
@@ -292,13 +347,20 @@ namespace Eve
     {
       get
       {
+        Contract.Ensures(this.MarketGroupId == null || Contract.Result<MarketGroup>() != null);
+
         if (this.MarketGroupId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.marketGroup ?? (this.marketGroup = this.Container.GetOrAdd<MarketGroup>(this.MarketGroupId, () => this.Entity.MarketGroup.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.marketGroup,
+          () => this.Container.GetOrAdd<MarketGroup>(this.MarketGroupId, () => this.Entity.MarketGroup.ToAdapter(this.Container)));
+
+        Contract.Assume(this.marketGroup != null);
+        return this.marketGroup;
       }
     }
 
@@ -327,6 +389,7 @@ namespace Eve
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
 
         var result = Entity.Mass;
+
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
 
@@ -347,7 +410,12 @@ namespace Eve
         Contract.Ensures(Contract.Result<MetaGroup>() != null);
 
         // Default to Tech I if no meta type information is available
-        return this.metaGroup ?? (this.metaGroup = (MetaType != null) ? MetaType.MetaGroup : this.Container.GetMetaGroupById(MetaGroupId.TechI));
+        LazyInitializer.EnsureInitialized(
+          ref this.metaGroup,
+          () => (MetaType != null) ? MetaType.MetaGroup : this.Container.GetMetaGroupById(MetaGroupId.TechI));
+
+        Contract.Assume(this.metaGroup != null);
+        return this.metaGroup;
       }
     }
 
@@ -374,10 +442,7 @@ namespace Eve
     /// </value>
     public int MetaLevel
     {
-      get
-      {
-        return this.Attributes.GetAttributeValue<int>(AttributeId.MetaLevel, 0);
-      }
+      get { return this.Attributes.GetAttributeValue<int>(AttributeId.MetaLevel, 0); }
     }
 
     /// <summary>
@@ -391,7 +456,19 @@ namespace Eve
     {
       get
       {
-        return this.metaType ?? (this.metaType = (Entity.MetaType != null) ? Entity.MetaType.ToAdapter(this.Container) : null);
+        if (Entity.MetaType == null)
+        {
+          return null;
+        }
+
+        // If not already set, create an instance from the base entity.  Do not cache, because the
+        // MetaType only has relevance to the current EveType, and that will be cached already.
+        LazyInitializer.EnsureInitialized(
+          ref this.metaType,
+          () => Entity.MetaType.ToAdapter(this.Container));
+
+        Contract.Assume(this.metaType != null);
+        return this.metaType;
       }
     }
 
@@ -448,6 +525,7 @@ namespace Eve
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
 
         var result = Entity.Radius;
+
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
 
@@ -468,50 +546,46 @@ namespace Eve
       {
         Contract.Ensures(Contract.Result<ReadOnlySkillLevelCollection>() != null);
 
-        if (this.requiredSkills == null)
-        {
-          // This is the list of attributes specifying which skills are required for a type.
-          // This list may need to be expanded later if additional required skill attributes
-          // are added.
-          var requiredSkillAttributes = new[]
+        LazyInitializer.EnsureInitialized(
+          ref this.requiredSkills,
+          () =>
           {
-            new { SkillId = AttributeId.RequiredSkill1, Level = AttributeId.RequiredSkill1Level },
-            new { SkillId = AttributeId.RequiredSkill2, Level = AttributeId.RequiredSkill2Level },
-            new { SkillId = AttributeId.RequiredSkill3, Level = AttributeId.RequiredSkill3Level },
-            new { SkillId = AttributeId.RequiredSkill4, Level = AttributeId.RequiredSkill4Level },
-            new { SkillId = AttributeId.RequiredSkill5, Level = AttributeId.RequiredSkill5Level },
-            new { SkillId = AttributeId.RequiredSkill6, Level = AttributeId.RequiredSkill6Level },
-          };
+            List<SkillLevel> skills = new List<SkillLevel>(RequiredSkillIdAttributes.Length);
 
-          List<SkillLevel> skills = new List<SkillLevel>();
+            AttributeValue skillAttribute;
+            AttributeValue levelAttribute;
 
-          AttributeValue skillAttribute;
-          AttributeValue levelAttribute;
-
-          foreach (var currentSkill in requiredSkillAttributes)
-          {
-            if (this.Attributes.TryGetValue(currentSkill.SkillId, out skillAttribute) &&
-                this.Attributes.TryGetValue(currentSkill.Level, out levelAttribute))
+            // Iterate through the static array of required skill attribute IDs,
+            // adding each one to the list as needed.
+            for (int i = 0; i < RequiredSkillIdAttributes.Length; i++)
             {
-              Contract.Assume(skillAttribute != null);
-              Contract.Assume(levelAttribute != null);
-              Contract.Assume(Enum.IsDefined(typeof(SkillId), (SkillId)skillAttribute.BaseValue));
-
-              SkillId skillId = (SkillId)skillAttribute.BaseValue;
-              byte skillLevel = (byte)levelAttribute.BaseValue;
-              Contract.Assume(skillLevel <= SkillType.MaxSkillLevel);
-
-              // Some items have duplicate skills
-              if (!skills.Any(x => x.SkillId == skillId))
+              if (this.Attributes.TryGetValue(RequiredSkillIdAttributes[i], out skillAttribute) &&
+                  this.Attributes.TryGetValue(RequiredSkillLevelAttributes[i], out levelAttribute))
               {
-                skills.Add(new SkillLevel(this.Container, skillId, skillLevel));
+                Contract.Assume(skillAttribute != null);
+                Contract.Assume(levelAttribute != null);
+
+                // As of 84566, a handful of types have invalid skill IDs listed
+                // as requirements, so we have to check
+                if (Enum.IsDefined(typeof(SkillId), (SkillId)skillAttribute.BaseValue))
+                {
+                  SkillId skillId = (SkillId)skillAttribute.BaseValue;
+                  byte skillLevel = (byte)levelAttribute.BaseValue;
+                  Contract.Assume(skillLevel <= SkillType.MaxSkillLevel);
+
+                  // Some items have duplicate skills
+                  if (!skills.Any(x => x.SkillId == skillId))
+                  {
+                    skills.Add(new SkillLevel(this.Container, skillId, skillLevel));
+                  }
+                }
               }
             }
-          }
 
-          this.requiredSkills = new ReadOnlySkillLevelCollection(skills.ToArray());
-        }
+            return new ReadOnlySkillLevelCollection(skills);
+          });
 
+        Contract.Assume(this.requiredSkills != null);
         return this.requiredSkills;
       }
     }
@@ -546,49 +620,53 @@ namespace Eve
       {
         Contract.Ensures(Contract.Result<ReadOnlyTypeCollection>() != null);
 
-        if (this.variations == null)
-        {
-          List<EveType> variations = new List<EveType>();
-
-          // If the meta type is not null, then this is one variant of a parent
-          // item -- it and its children are the variants.
-          if (MetaType != null)
+        LazyInitializer.EnsureInitialized(
+          ref this.variations,
+          () => 
           {
-            variations.Add(MetaType.ParentType);
+            List<EveType> variations = new List<EveType>(20);
 
-            foreach (EveType type in this.Container.GetEveTypes(x => x.MetaType.ParentTypeId == MetaType.ParentTypeId.Value))
+            // If the meta type is not null, then this is one variant of a parent
+            // item -- it and its children are the variants.
+            if (MetaType != null)
             {
-              variations.Add(type);
+              variations.Add(MetaType.ParentType);
+
+              foreach (EveType type in this.Container.GetEveTypes(x => x.MetaType.ParentTypeId == MetaType.ParentTypeId.Value))
+              {
+                variations.Add(type);
+              }
+
+            // If the meta type is null, then the current item is the parent --
+            // load its children
+            }
+            else
+            {
+              variations.Add(this);
+
+              foreach (EveType type in this.Container.GetEveTypes(x => x.MetaType.ParentTypeId == this.Id.Value))
+              {
+                variations.Add(type);
+              }
             }
 
-          // If the meta type is null, then the current item is the parent --
-          // load its children
-          }
-          else
-          {
-            variations.Add(this);
+            variations.Sort(
+              (x, y) =>
+              {
+                int compareResult = x.MetaGroupId.CompareTo(y.MetaGroupId);
 
-            foreach (EveType type in this.Container.GetEveTypes(x => x.MetaType.ParentTypeId == this.Id.Value))
-            {
-              variations.Add(type);
-            }
-          }
+                if (compareResult == 0)
+                {
+                  compareResult = x.CompareTo(y);
+                }
 
-          variations.Sort((x, y) => 
-          {
-            int result = x.MetaGroupId.CompareTo(y.MetaGroupId);
+                return compareResult;
+              });
 
-            if (result == 0)
-            {
-              result = x.CompareTo(y);
-            }
-
-            return result;
+            return new ReadOnlyTypeCollection(variations);
           });
 
-          this.variations = new ReadOnlyTypeCollection(variations.ToArray());
-        }
-
+        Contract.Assume(this.variations != null);
         return this.variations;
       }
     }
@@ -769,10 +847,7 @@ namespace Eve
   {
     IAttributeCollection IHasAttributes.Attributes
     {
-      get
-      {
-        return this.Attributes;
-      }
+      get { return this.Attributes; }
     }
   }
   #endregion
@@ -785,10 +860,7 @@ namespace Eve
   {
     IEffectCollection IHasEffects.Effects
     {
-      get
-      {
-        return this.Effects;
-      }
+      get { return this.Effects; }
     }
   }
   #endregion

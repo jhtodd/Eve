@@ -7,6 +7,7 @@ namespace Eve.Industry
 {
   using System;
   using System.Diagnostics.Contracts;
+  using System.Threading;
 
   using Eve.Data;
   using Eve.Data.Entities;
@@ -62,7 +63,12 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<Activity>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.activity ?? (this.activity = this.Container.GetOrAdd<Activity>(this.ActivityId, () => this.Entity.Activity.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.activity,
+          () => this.Container.GetOrAdd<Activity>(this.ActivityId, () => this.Entity.Activity.ToAdapter(this.Container)));
+
+        Contract.Assume(this.activity != null);
+        return this.activity;
       }
     }
 
@@ -302,7 +308,12 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<NpcCorporation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.owner ?? (this.owner = this.Container.GetOrAdd<NpcCorporation>(this.OwnerId, () => (NpcCorporation)this.Entity.Owner.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.owner, 
+          () => this.Container.GetOrAdd<NpcCorporation>(this.OwnerId, () => (NpcCorporation)this.Entity.Owner.ToAdapter(this.Container)));
+
+        Contract.Assume(this.owner != null);
+        return this.owner;
       }
     }
 
@@ -325,10 +336,7 @@ namespace Eve.Industry
     /// </value>
     public byte RestrictionMask
     {
-      get
-      {
-        return this.Entity.RestrictionMask;
-      }
+      get { return this.Entity.RestrictionMask; }
     }
 
     /// <summary>
@@ -344,7 +352,12 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<Station>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.station ?? (this.station = this.Container.GetOrAdd<Station>(this.StationId, () => (Station)this.Entity.Container.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.station,
+          () => this.Container.GetOrAdd<Station>(this.StationId, () => (Station)this.Entity.Container.ToAdapter(this.Container)));
+
+        Contract.Assume(this.station != null);
+        return this.station;
       }
     }
 
@@ -399,7 +412,12 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<AssemblyLineType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.assemblyLineType ?? (this.assemblyLineType = this.Container.GetOrAdd<AssemblyLineType>(this.TypeId, () => this.Entity.AssemblyLineType.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.assemblyLineType,
+          () => this.Container.GetOrAdd<AssemblyLineType>(this.TypeId, () => this.Entity.AssemblyLineType.ToAdapter(this.Container)));
+
+        Contract.Assume(this.assemblyLineType != null);
+        return this.assemblyLineType;
       }
     }
 

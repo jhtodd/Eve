@@ -7,6 +7,7 @@ namespace Eve
 {
   using System.Diagnostics.Contracts;
   using System.Linq;
+  using System.Threading;
 
   using Eve.Data;
   using Eve.Data.Entities;
@@ -102,7 +103,12 @@ namespace Eve
         Contract.Ensures(Contract.Result<Category>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.category ?? (this.category = this.Container.GetOrAdd<Category>(this.CategoryId, () => this.Entity.Category.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.category,
+          () => this.Container.GetOrAdd<Category>(this.CategoryId, () => this.Entity.Category.ToAdapter(this.Container)));
+
+        Contract.Assume(this.category != null);
+        return this.category;
       }
     }
 
@@ -141,13 +147,20 @@ namespace Eve
     {
       get
       {
+        Contract.Ensures(this.IconId == null || Contract.Result<Icon>() != null);
+
         if (this.IconId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.icon,
+          () => this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+
+        Contract.Assume(this.icon != null);
+        return this.icon;
       }
     }
 
@@ -189,7 +202,12 @@ namespace Eve
       {
         Contract.Ensures(Contract.Result<ReadOnlyTypeCollection>() != null);
 
-        return this.types ?? (this.types = new ReadOnlyTypeCollection(this.Container.GetEveTypes(x => x.GroupId == this.Id).OrderBy(x => x)));
+        LazyInitializer.EnsureInitialized(
+          ref this.types, 
+          () => new ReadOnlyTypeCollection(this.Container.GetEveTypes(x => x.GroupId == this.Id).OrderBy(x => x)));
+
+        Contract.Assume(this.types != null);
+        return this.types;
       }
     }
 

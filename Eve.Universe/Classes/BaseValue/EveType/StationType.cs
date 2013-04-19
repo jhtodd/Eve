@@ -6,6 +6,7 @@
 namespace Eve.Universe
 {
   using System.Diagnostics.Contracts;
+  using System.Threading;
 
   using Eve.Data;
   using Eve.Data.Entities;
@@ -211,13 +212,20 @@ namespace Eve.Universe
     {
       get
       {
+        Contract.Ensures(this.OperationId == null || Contract.Result<StationOperation>() != null);
+
         if (this.OperationId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.operation ?? (this.operation = this.Container.GetOrAdd<StationOperation>(this.OperationId, () => this.Entity.Operation.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.operation,
+          () => this.Container.GetOrAdd<StationOperation>(this.OperationId, () => this.Entity.Operation.ToAdapter(this.Container)));
+
+        Contract.Assume(this.operation != null);
+        return this.operation;
       }
     }
 

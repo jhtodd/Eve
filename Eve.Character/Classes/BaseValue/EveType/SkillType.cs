@@ -7,6 +7,7 @@ namespace Eve.Character
 {
   using System;
   using System.Diagnostics.Contracts;
+  using System.Threading;
 
   using Eve.Data;
   using Eve.Data.Entities;
@@ -91,7 +92,12 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<CharacterAttributeType>() != null);
 
         // If not already set, load from the data source
-        return this.primaryAttribute ?? (this.primaryAttribute = this.Container.GetCharacterAttributeTypeById(this.PrimaryAttributeId));
+        LazyInitializer.EnsureInitialized(
+          ref this.primaryAttribute,
+          () => this.Container.GetCharacterAttributeTypeById(this.PrimaryAttributeId));
+
+        Contract.Assume(this.primaryAttribute != null);
+        return this.primaryAttribute;
       }
     }
 
@@ -123,6 +129,7 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<int>() >= 1);
 
         int result = Attributes.GetAttributeValue<int>(AttributeId.SkillTimeConstant);
+
         Contract.Assume(result >= 1);
 
         return result;
@@ -143,7 +150,12 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<CharacterAttributeType>() != null);
 
         // If not already set, load from the data source
-        return this.secondaryAttribute ?? (this.secondaryAttribute = this.Container.GetCharacterAttributeTypeById(this.SecondaryAttributeId));
+        LazyInitializer.EnsureInitialized(
+          ref this.secondaryAttribute,
+          () => this.Container.GetCharacterAttributeTypeById(this.SecondaryAttributeId));
+
+        Contract.Assume(this.secondaryAttribute != null);
+        return this.secondaryAttribute;
       }
     }
 

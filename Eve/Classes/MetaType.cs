@@ -7,6 +7,7 @@ namespace Eve
 {
   using System;
   using System.Diagnostics.Contracts;
+  using System.Threading;
 
   using Eve.Data;
   using Eve.Data.Entities;
@@ -61,7 +62,12 @@ namespace Eve
         Contract.Ensures(Contract.Result<MetaGroup>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.metaGroup ?? (this.metaGroup = this.Container.GetOrAdd<MetaGroup>(this.MetaGroupId, () => this.Entity.MetaGroup.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.metaGroup,
+          () => this.Container.GetOrAdd<MetaGroup>(this.MetaGroupId, () => this.Entity.MetaGroup.ToAdapter(this.Container)));
+
+        Contract.Assume(this.metaGroup != null);
+        return this.metaGroup;
       }
     }
 
@@ -89,7 +95,12 @@ namespace Eve
         Contract.Ensures(Contract.Result<EveType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.parentType ?? (this.parentType = this.Container.GetOrAdd<EveType>(this.ParentTypeId, () => Entity.ParentType.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.parentType,
+          () => this.Container.GetOrAdd<EveType>(this.ParentTypeId, () => Entity.ParentType.ToAdapter(this.Container)));
+
+        Contract.Assume(this.parentType != null);
+        return this.parentType;
       }
     }
 
@@ -117,7 +128,12 @@ namespace Eve
         Contract.Ensures(Contract.Result<EveType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.type ?? (this.type = this.Container.GetOrAdd<EveType>(this.TypeId, () => Entity.Type.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.type,
+          () => this.Container.GetOrAdd<EveType>(this.TypeId, () => Entity.Type.ToAdapter(this.Container)));
+
+        Contract.Assume(this.type != null);
+        return this.type;
       }
     }
 

@@ -7,6 +7,7 @@ namespace Eve
 {
   using System;
   using System.Diagnostics.Contracts;
+  using System.Threading;
 
   using Eve.Data;
   using Eve.Data.Entities;
@@ -84,7 +85,12 @@ namespace Eve
         Contract.Ensures(Contract.Result<EffectType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.effectType ?? (this.effectType = this.Container.GetOrAdd<EffectType>(this.Id, () => this.Entity.EffectType.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.effectType,
+          () => this.Container.GetOrAdd<EffectType>(this.Id, () => this.Entity.EffectType.ToAdapter(this.Container)));
+
+        Contract.Assume(this.effectType != null);
+        return this.effectType;
       }
     }
 

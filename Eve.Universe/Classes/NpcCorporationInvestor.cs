@@ -7,6 +7,7 @@ namespace Eve.Universe
 {
   using System;
   using System.Diagnostics.Contracts;
+  using System.Threading;
 
   using Eve.Data;
 
@@ -65,7 +66,12 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<NpcCorporation>() != null);
 
-        return this.investor ?? (this.investor = this.Container.GetNpcCorporationById(this.InvestorId));
+        LazyInitializer.EnsureInitialized(
+          ref this.investor,
+          () => this.Container.GetNpcCorporationById(this.InvestorId));
+
+        Contract.Assume(this.investor != null);
+        return this.investor;
       }
     }
 

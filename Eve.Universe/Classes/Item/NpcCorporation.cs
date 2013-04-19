@@ -9,6 +9,7 @@ namespace Eve.Universe
   using System.Collections.Generic;
   using System.Diagnostics.Contracts;
   using System.Linq;
+  using System.Threading;
 
   using Eve.Character;
   using Eve.Data;
@@ -64,7 +65,12 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyAgentCollection>() != null);
 
-        return this.agents ?? (this.agents = new ReadOnlyAgentCollection(this.Container.GetAgents(x => x.AgentInfo.CorporationId == this.Id.Value).OrderBy(x => x)));
+        LazyInitializer.EnsureInitialized(
+          ref this.agents,
+          () => new ReadOnlyAgentCollection(this.Container.GetAgents(x => x.AgentInfo.CorporationId == this.Id.Value).OrderBy(x => x)));
+
+        Contract.Assume(this.agents != null);
+        return this.agents;
       }
     }
 
@@ -122,7 +128,12 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyNpcCorporationDivisionCollection>() != null);
 
-        return this.divisions ?? (this.divisions = new ReadOnlyNpcCorporationDivisionCollection(this.Container.GetNpcCorporationDivisions(x => x.CorporationId == this.Id.Value).OrderBy(x => x)));
+        LazyInitializer.EnsureInitialized(
+          ref this.divisions,
+          () => new ReadOnlyNpcCorporationDivisionCollection(this.Container.GetNpcCorporationDivisions(x => x.CorporationId == this.Id.Value).OrderBy(x => x)));
+
+        Contract.Assume(this.divisions != null);
+        return this.divisions;
       }
     }
 
@@ -137,13 +148,20 @@ namespace Eve.Universe
     {
       get
       {
+        Contract.Ensures(this.EnemyId == null || Contract.Result<NpcCorporation>() != null);
+
         if (this.EnemyId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.enemy ?? (this.enemy = this.Container.GetOrAdd<NpcCorporation>(this.EnemyId, () => (NpcCorporation)this.CorporationInfo.Enemy.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.enemy,
+          () => this.Container.GetOrAdd<NpcCorporation>(this.EnemyId, () => (NpcCorporation)this.CorporationInfo.Enemy.ToAdapter(this.Container)));
+
+        Contract.Assume(this.enemy != null);
+        return this.enemy;
       }
     }
 
@@ -229,16 +247,22 @@ namespace Eve.Universe
     {
       get
       {
-        // This property can sometimes be null even with a FactionId value,
-        // because a small number of records have a FactionId pointing to an
-        // "Unknown" item that is not a faction.  Return null in that case.
-        if (this.CorporationInfo.Faction == null)
+        // TODO: As of 84566, the corporation 'Arkombine' has a factionID with no
+        // corresponding entry in the chrFactions table (it points to a generic Item
+        // entry with a name of "Unknown").  As a result, we include this code to 
+        // work around it.  It might not be necessary in the future.
+        if (this.CorporationInfo.Faction == null || !this.CorporationInfo.Faction.IsFaction)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.faction ?? (this.faction = this.Container.GetOrAdd<Faction>(this.FactionId, () => (Faction)this.CorporationInfo.Faction.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.faction,
+          () => this.Container.GetOrAdd<Faction>(this.FactionId, () => (Faction)this.CorporationInfo.Faction.ToAdapter(this.Container)));
+
+        Contract.Assume(this.faction != null);
+        return this.faction;
       }
     }
 
@@ -266,13 +290,20 @@ namespace Eve.Universe
     {
       get
       {
+        Contract.Ensures(this.FriendId == null || Contract.Result<NpcCorporation>() != null);
+
         if (this.FriendId == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.friend ?? (this.friend = this.Container.GetOrAdd<NpcCorporation>(this.FriendId, () => (NpcCorporation)this.CorporationInfo.Friend.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.friend,
+          () => this.Container.GetOrAdd<NpcCorporation>(this.FriendId, () => (NpcCorporation)this.CorporationInfo.Friend.ToAdapter(this.Container)));
+
+        Contract.Assume(this.friend != null);
+        return this.friend;
       }
     }
 
@@ -328,7 +359,12 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Icon>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.GetOrAdd<Icon>(this.IconId, () => this.CorporationInfo.Icon.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.icon,
+          () => this.Container.GetOrAdd<Icon>(this.IconId, () => this.CorporationInfo.Icon.ToAdapter(this.Container)));
+
+        Contract.Assume(this.icon != null);
+        return this.icon;
       }
     }
 
@@ -389,33 +425,36 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyNpcCorporationInvestorCollection>() != null);
 
-        if (this.investors == null)
-        {
-          List<NpcCorporationInvestor> items = new List<NpcCorporationInvestor>();
-
-          if (this.CorporationInfo.InvestorId1 != null)
+        LazyInitializer.EnsureInitialized(
+          ref this.investors,
+          () =>
           {
-            items.Add(new NpcCorporationInvestor(this.Container, this.CorporationInfo.InvestorId1.Value, this.CorporationInfo.InvestorShares1));
-          }
+            List<NpcCorporationInvestor> items = new List<NpcCorporationInvestor>(4);
 
-          if (this.CorporationInfo.InvestorId2 != null)
-          {
-            items.Add(new NpcCorporationInvestor(this.Container, this.CorporationInfo.InvestorId2.Value, this.CorporationInfo.InvestorShares1));
-          }
+            if (this.CorporationInfo.InvestorId1 != null)
+            {
+              items.Add(new NpcCorporationInvestor(this.Container, this.CorporationInfo.InvestorId1.Value, this.CorporationInfo.InvestorShares1));
+            }
 
-          if (this.CorporationInfo.InvestorId3 != null)
-          {
-            items.Add(new NpcCorporationInvestor(this.Container, this.CorporationInfo.InvestorId3.Value, this.CorporationInfo.InvestorShares1));
-          }
+            if (this.CorporationInfo.InvestorId2 != null)
+            {
+              items.Add(new NpcCorporationInvestor(this.Container, this.CorporationInfo.InvestorId2.Value, this.CorporationInfo.InvestorShares1));
+            }
 
-          if (this.CorporationInfo.InvestorId4 != null)
-          {
-            items.Add(new NpcCorporationInvestor(this.Container, this.CorporationInfo.InvestorId4.Value, this.CorporationInfo.InvestorShares1));
-          }
+            if (this.CorporationInfo.InvestorId3 != null)
+            {
+              items.Add(new NpcCorporationInvestor(this.Container, this.CorporationInfo.InvestorId3.Value, this.CorporationInfo.InvestorShares1));
+            }
 
-          this.investors = new ReadOnlyNpcCorporationInvestorCollection(items.ToArray());
-        }
+            if (this.CorporationInfo.InvestorId4 != null)
+            {
+              items.Add(new NpcCorporationInvestor(this.Container, this.CorporationInfo.InvestorId4.Value, this.CorporationInfo.InvestorShares1));
+            }
 
+            return new ReadOnlyNpcCorporationInvestorCollection(items);
+          });
+
+        Contract.Assume(this.investors != null);
         return this.investors;
       }
     }
@@ -476,16 +515,19 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlySkillTypeCollection>() != null);
 
-        if (this.researchFields == null)
-        {
-          // Filter through the cache
-          Contract.Assume(this.CorporationInfo.ResearchFields != null);
+        LazyInitializer.EnsureInitialized(
+          ref this.researchFields,
+          () => 
+          {
+            // Filter through the cache
+            Contract.Assume(this.CorporationInfo.ResearchFields != null);
 
-          this.researchFields = new ReadOnlySkillTypeCollection(
-            this.CorporationInfo.ResearchFields.Select(x => this.Container.GetOrAdd<SkillType>(x.Id, () => (SkillType)x.ToAdapter(this.Container)))
-                                                      .OrderBy(x => x));
-        }
+            return new ReadOnlySkillTypeCollection(
+              this.CorporationInfo.ResearchFields.Select(x => this.Container.GetOrAdd<SkillType>(x.Id, () => (SkillType)x.ToAdapter(this.Container)))
+                                                 .OrderBy(x => x));
+          });
 
+        Contract.Assume(this.researchFields != null);
         return this.researchFields;
       }
     }
@@ -599,7 +641,12 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<SolarSystem>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.solarSystem ?? (this.solarSystem = this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.CorporationInfo.SolarSystem.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.solarSystem,
+          () => this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.CorporationInfo.SolarSystem.ToAdapter(this.Container)));
+
+        Contract.Assume(this.solarSystem != null);
+        return this.solarSystem;
       }
     }
 
@@ -668,16 +715,19 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyTypeCollection>() != null);
 
-        if (this.tradeGoods == null)
-        {
-          // Filter through the cache
-          Contract.Assume(this.CorporationInfo.TradeGoods != null);
+        LazyInitializer.EnsureInitialized(
+          ref this.tradeGoods,
+          () => 
+          {
+            // Filter through the cache
+            Contract.Assume(this.CorporationInfo.TradeGoods != null);
 
-          this.tradeGoods = new ReadOnlyTypeCollection(
-            this.CorporationInfo.TradeGoods.Select(x => this.Container.GetOrAdd<EveType>(x.Id, () => x.ToAdapter(this.Container)))
-                                                  .OrderBy(x => x));
-        }
+            return new ReadOnlyTypeCollection(
+              this.CorporationInfo.TradeGoods.Select(x => this.Container.GetOrAdd<EveType>(x.Id, () => x.ToAdapter(this.Container)))
+                                            .OrderBy(x => x));
+          });
 
+        Contract.Assume(this.tradeGoods != null);
         return this.tradeGoods;
       }
     }

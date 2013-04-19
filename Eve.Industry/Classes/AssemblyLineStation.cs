@@ -7,6 +7,7 @@ namespace Eve.Industry
 {
   using System;
   using System.Diagnostics.Contracts;
+  using System.Threading;
 
   using Eve.Data;
   using Eve.Data.Entities;
@@ -66,7 +67,12 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<AssemblyLineType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.assemblyLineType ?? (this.assemblyLineType = this.Container.GetOrAdd<AssemblyLineType>(this.AssemblyLineTypeId, () => this.Entity.AssemblyLineType.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.assemblyLineType,
+          () => this.Container.GetOrAdd<AssemblyLineType>(this.AssemblyLineTypeId, () => this.Entity.AssemblyLineType.ToAdapter(this.Container)));
+
+        Contract.Assume(this.assemblyLineType != null);
+        return this.assemblyLineType;
       }
     }
 
@@ -96,7 +102,12 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<NpcCorporation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.owner ?? (this.owner = this.Container.GetOrAdd<NpcCorporation>(this.OwnerId, () => (NpcCorporation)this.Entity.Owner.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.owner,
+          () => this.Container.GetOrAdd<NpcCorporation>(this.OwnerId, () => (NpcCorporation)this.Entity.Owner.ToAdapter(this.Container)));
+
+        Contract.Assume(this.owner != null);
+        return this.owner;
       }
     }
 
@@ -145,7 +156,12 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.region ?? (this.region = this.Container.GetOrAdd<Region>(this.RegionId, () => (Region)this.Entity.Region.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.region,
+          () => this.Container.GetOrAdd<Region>(this.RegionId, () => (Region)this.Entity.Region.ToAdapter(this.Container)));
+
+        Contract.Assume(this.region != null);
+        return this.region;
       }
     }
 
@@ -173,7 +189,12 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<SolarSystem>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.solarSystem ?? (this.solarSystem = this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.Entity.SolarSystem.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.solarSystem,
+          () => this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.Entity.SolarSystem.ToAdapter(this.Container)));
+
+        Contract.Assume(this.solarSystem != null);
+        return this.solarSystem;
       }
     }
 
@@ -201,7 +222,12 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<Station>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.station ?? (this.station = this.Container.GetOrAdd<Station>(this.StationId, () => (Station)this.Entity.Station.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.station, 
+          () => this.Container.GetOrAdd<Station>(this.StationId, () => (Station)this.Entity.Station.ToAdapter(this.Container)));
+
+        Contract.Assume(this.station != null);
+        return this.station;
       }
     }
 
@@ -229,7 +255,12 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<StationType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.stationType ?? (this.stationType = this.Container.GetOrAdd<StationType>(this.StationTypeId, () => this.Entity.StationType.ToAdapter(this.Container)));
+        LazyInitializer.EnsureInitialized(
+          ref this.stationType,
+          () => this.Container.GetOrAdd<StationType>(this.StationTypeId, () => this.Entity.StationType.ToAdapter(this.Container)));
+
+        Contract.Assume(this.stationType != null);
+        return this.stationType;
       }
     }
 

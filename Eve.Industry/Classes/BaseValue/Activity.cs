@@ -7,6 +7,7 @@ namespace Eve.Industry
 {
   using System.Diagnostics.Contracts;
   using System.Linq;
+  using System.Threading;
 
   using Eve.Data;
   using Eve.Data.Entities;
@@ -51,13 +52,35 @@ namespace Eve.Industry
     {
       get
       {
+        Contract.Ensures(this.IconNo == null || Contract.Result<Icon>() != null);
+
         if (this.IconNo == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.icon ?? (this.icon = this.Container.GetIcons(x => x.Name == this.IconNo).FirstOrDefault());
+        LazyInitializer.EnsureInitialized(
+          ref this.icon,
+          () => 
+          {
+            Icon iconResult = this.Container.GetIcons(x => x.Name == this.IconNo).FirstOrDefault();
+
+            // TODO: As of 84566, some iconNo values don't have a corresponding
+            // entry in eveIcons, although the matching image file is available.
+            // In that case, we created a hard-coded entity so that the icon
+            // provider can still work.
+            if (iconResult == null)
+            {
+              IconEntity iconEntity = new IconEntity() { Id = 0, Name = this.IconNo, Description = "Missing Icon" };
+              iconResult = new Icon(this.Container, iconEntity);
+            }
+
+            return iconResult;
+          });
+
+        Contract.Assume(this.icon != null);
+        return this.icon;
       }
     }
 
