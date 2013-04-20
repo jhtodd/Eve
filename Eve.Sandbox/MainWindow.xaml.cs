@@ -43,12 +43,12 @@ namespace Eve.Sandbox {
     }
 
     private void Button_Click_1(object sender, RoutedEventArgs e) {
-      var t = ds.GetMarketGroupById((MarketGroupId)405);
+      var i1 = ds.GetItemById(14);
+      var i2 = ds.GetItemById(15);
+      var i3 = ds.GetItemById(1007);
 
-      foreach (var a in t.Types)
-      {
-        textBox1.AppendText(a.Name + Environment.NewLine);
-      }
+      textBox1.AppendText(i3.Name + Environment.NewLine);
+      textBox1.AppendText(object.ReferenceEquals(i1.Owner, i2.Owner).ToString() + Environment.NewLine);
 
       //foreach (var a in t.Jumps)
       //{

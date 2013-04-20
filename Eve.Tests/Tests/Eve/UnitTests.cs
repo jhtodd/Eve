@@ -23,7 +23,7 @@ namespace Eve.Tests {
   /// <summary>
   /// Contains test functions for the <see cref="Unit" /> class.
   /// </summary>
-  [TestFixture()]
+  [TestFixture]
   public class UnitTests {
 
     #region Test Methods
