@@ -52,7 +52,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.CelestialInfo.Age;
+        var result = this.Entity.CelestialInfo == null ? 0.0D : this.Entity.CelestialInfo.Age;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -76,7 +76,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.CelestialInfo.Density;
+        var result = this.Entity.CelestialInfo == null ? 0.0D : this.Entity.CelestialInfo.Density;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -100,7 +100,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.CelestialInfo.Eccentricity;
+        var result = this.Entity.CelestialInfo == null ? 0.0D : this.Entity.CelestialInfo.Eccentricity;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -124,7 +124,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.CelestialInfo.EscapeVelocity;
+        var result = this.Entity.CelestialInfo == null ? 0.0D : this.Entity.CelestialInfo.EscapeVelocity;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -144,7 +144,10 @@ namespace Eve.Universe
     /// </value>
     public bool Fragmented
     {
-      get { return this.CelestialInfo.Fragmented; }
+      get 
+      {
+        return this.Entity.CelestialInfo == null ? false : this.Entity.CelestialInfo.Fragmented; 
+      }
     }
 
     /// <summary>
@@ -173,7 +176,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.CelestialInfo.Life;
+        var result = this.Entity.CelestialInfo == null ? 0.0D : this.Entity.CelestialInfo.Life;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -193,7 +196,10 @@ namespace Eve.Universe
     /// </value>
     public bool Locked
     {
-      get { return this.CelestialInfo.Locked; }
+      get 
+      {
+        return this.Entity.CelestialInfo == null ? false : this.Entity.CelestialInfo.Locked; 
+      }
     }
 
     /// <summary>
@@ -211,7 +217,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.CelestialInfo.Luminosity;
+        var result = this.Entity.CelestialInfo == null ? 0.0D : this.Entity.CelestialInfo.Luminosity;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -234,7 +240,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<double>() == 0.0D);
 
-        var result = this.CelestialInfo.Mass;
+        var result = this.Entity.CelestialInfo == null ? 0.0D : this.Entity.CelestialInfo.Mass;
         Contract.Assume(result == 0.0D);
 
         return result;
@@ -256,7 +262,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.CelestialInfo.MassDust;
+        var result = this.Entity.CelestialInfo == null ? 0.0D : this.Entity.CelestialInfo.MassDust;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -281,7 +287,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.CelestialInfo.MassGas;
+        var result = this.Entity.CelestialInfo == null ? 0.0D : this.Entity.CelestialInfo.MassGas;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -307,7 +313,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.CelestialInfo.OrbitPeriod;
+        var result = this.Entity.CelestialInfo == null ? 0.0D : this.Entity.CelestialInfo.OrbitPeriod;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -332,7 +338,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.CelestialInfo.OrbitRadius;
+        var result = this.Entity.CelestialInfo == null ? 0.0D : this.Entity.CelestialInfo.OrbitRadius;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -356,7 +362,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.CelestialInfo.Pressure;
+        var result = this.Entity.CelestialInfo == null ? 0.0D : this.Entity.CelestialInfo.Pressure;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -380,7 +386,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.CelestialInfo.Radius;
+        var result = this.Entity.CelestialInfo == null ? 0.0D : this.Entity.CelestialInfo.Radius;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -404,7 +410,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.CelestialInfo.RotationRate;
+        var result = this.Entity.CelestialInfo == null ? 0.0D : this.Entity.CelestialInfo.RotationRate;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -427,7 +433,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<string>() != null);
 
-        var result = this.CelestialInfo.SpectralClass;
+        var result = this.Entity.CelestialInfo == null ? string.Empty : this.Entity.CelestialInfo.SpectralClass;
         Contract.Assume(result != null);
         return result;
       }
@@ -449,7 +455,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.CelestialInfo.SurfaceGravity;
+        var result = this.Entity.CelestialInfo == null ? 0.0D : this.Entity.CelestialInfo.SurfaceGravity;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -473,25 +479,12 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.CelestialInfo.Temperature;
+        var result = this.Entity.CelestialInfo == null ? 0.0D : this.Entity.CelestialInfo.Temperature;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
         Contract.Assume(result >= 0.0D);
 
-        return result;
-      }
-    }
-
-    private CelestialEntity CelestialInfo
-    {
-      get
-      {
-        Contract.Ensures(Contract.Result<CelestialEntity>() != null);
-
-        var result = this.Entity.CelestialInfo;
-
-        Contract.Assume(result != null);
         return result;
       }
     }

@@ -52,18 +52,24 @@ namespace Eve.Universe
     /// Gets the type of the agent.
     /// </summary>
     /// <value>
-    /// The type of the agent.
+    /// The type of the agent, or <see langword="null" /> if no agent
+    /// type information exists.
     /// </value>
     public AgentType AgentType
     {
       get
       {
-        Contract.Ensures(Contract.Result<AgentType>() != null);
+        Contract.Ensures(this.AgentTypeId == null || Contract.Result<AgentType>() != null);
+
+        if (this.AgentTypeId == null)
+        {
+          return null;
+        }
 
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.agentType,
-          () => this.Container.GetOrAdd<AgentType>(this.AgentTypeId, () => this.AgentInfo.AgentType.ToAdapter(this.Container)));
+          () => this.Container.GetOrAdd<AgentType>(this.AgentTypeId, () => this.Entity.AgentInfo.AgentType.ToAdapter(this.Container)));
 
         Contract.Assume(this.agentType != null);
         return this.agentType;
@@ -74,29 +80,39 @@ namespace Eve.Universe
     /// Gets the ID of the type of the agent.
     /// </summary>
     /// <value>
-    /// The ID of the type of the agent.
+    /// The ID of the type of the agent, or <see langword="null" />
+    /// if no agent type information exists.
     /// </value>
-    public AgentTypeId AgentTypeId
+    public AgentTypeId? AgentTypeId
     {
-      get { return this.AgentInfo.AgentTypeId; }
+      get 
+      { 
+        return this.Entity.AgentInfo == null ? (AgentTypeId?)null : (AgentTypeId?)this.Entity.AgentInfo.AgentTypeId; 
+      }
     }
 
     /// <summary>
     /// Gets the corporation to which the agent belongs.
     /// </summary>
     /// <value>
-    /// The corporation to which the agent belongs.
+    /// The corporation to which the agent belongs, or <see langword="null"/>
+    /// if no corporation information exists.
     /// </value>
     public NpcCorporation Corporation
     {
       get
       {
-        Contract.Ensures(Contract.Result<NpcCorporation>() != null);
+        Contract.Ensures(this.Entity.AgentInfo == null || Contract.Result<NpcCorporation>() != null);
+
+        if (this.Entity.AgentInfo == null)
+        {
+          return null;
+        }
 
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.corporation,
-          () => this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.AgentInfo.Corporation.ToAdapter(this.Container)));
+          () => this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.Entity.AgentInfo.Corporation.ToAdapter(this.Container)));
 
         Contract.Assume(this.corporation != null);
         return this.corporation;
@@ -107,29 +123,39 @@ namespace Eve.Universe
     /// Gets the ID of the corporation to which the agent belongs.
     /// </summary>
     /// <value>
-    /// The ID of the corporation to which the agent belongs.
+    /// The ID of the corporation to which the agent belongs, or
+    /// <see langword="null"/> if no corporation information exists..
     /// </value>
-    public NpcCorporationId CorporationId
+    public NpcCorporationId? CorporationId
     {
-      get { return (NpcCorporationId)this.AgentInfo.CorporationId; }
+      get
+      {
+        return this.Entity.AgentInfo == null ? (NpcCorporationId?)null : (NpcCorporationId?)this.Entity.AgentInfo.CorporationId;
+      }
     }
 
     /// <summary>
     /// Gets the corporate division to which the agent belongs.
     /// </summary>
     /// <value>
-    /// The corporate division to which the agent belongs.
+    /// The corporate division to which the agent belongs, or
+    /// <see langword="null"/> if no division information exists.
     /// </value>
     public Division Division
     {
       get
       {
-        Contract.Ensures(Contract.Result<Division>() != null);
+        Contract.Ensures(this.DivisionId == null || Contract.Result<Division>() != null);
+
+        if (this.DivisionId == null)
+        {
+          return null;
+        }
 
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.division,
-          () => this.Container.GetOrAdd<Division>(this.DivisionId, () => this.AgentInfo.Division.ToAdapter(this.Container)));
+          () => this.Container.GetOrAdd<Division>(this.DivisionId, () => this.Entity.AgentInfo.Division.ToAdapter(this.Container)));
 
         Contract.Assume(this.division != null);
         return this.division;
@@ -140,11 +166,15 @@ namespace Eve.Universe
     /// Gets the ID of the corporate division to which the agent belongs.
     /// </summary>
     /// <value>
-    /// The ID of the corporate division to which the agent belongs.
+    /// The ID of the corporate division to which the agent belongs, or
+    /// <see langword="null"/> if no division information exists.
     /// </value>
-    public DivisionId DivisionId
+    public DivisionId? DivisionId
     {
-      get { return this.AgentInfo.DivisionId; }
+      get
+      {
+        return this.Entity.AgentInfo == null ? (DivisionId?)null : (DivisionId?)this.Entity.AgentInfo.DivisionId;
+      }
     }
 
     /// <summary>
@@ -167,7 +197,10 @@ namespace Eve.Universe
     /// </value>
     public bool IsLocator
     {
-      get { return this.AgentInfo.IsLocator; }
+      get
+      {
+        return this.Entity.AgentInfo == null ? false : this.Entity.AgentInfo.IsLocator;
+      }
     }
 
     /// <summary>
@@ -178,14 +211,18 @@ namespace Eve.Universe
     /// </value>
     public byte Level
     {
-      get { return this.AgentInfo.Level; }
+      get
+      { 
+        return this.Entity.AgentInfo == null ? (byte)1 : this.Entity.AgentInfo.Level;
+      }
     }
 
     /// <summary>
     /// Gets the item where the agent is located.
     /// </summary>
     /// <value>
-    /// The item where the agent is located.
+    /// The item where the agent is located, or
+    /// <see langword="null"/> if no location information exists.
     /// </value>
     /// <remarks>
     /// <para>
@@ -202,12 +239,17 @@ namespace Eve.Universe
     {
       get
       {
-        Contract.Ensures(Contract.Result<Item>() != null);
+        Contract.Ensures(this.LocationId == null || Contract.Result<Item>() != null);
+
+        if (this.LocationId == null)
+        {
+          return null;
+        }
 
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.location,
-          () => this.Container.GetOrAdd<Item>(this.LocationId, () => this.AgentInfo.Location.ToAdapter(this.Container)));
+          () => this.Container.GetOrAdd<Item>(this.LocationId, () => this.Entity.AgentInfo.Location.ToAdapter(this.Container)));
 
         Contract.Assume(this.location != null);
         return this.location;
@@ -218,11 +260,15 @@ namespace Eve.Universe
     /// Gets the ID of the item where the agent is located.
     /// </summary>
     /// <value>
-    /// The ID of the item where the agent is located.
+    /// The ID of the item where the agent is located, or
+    /// <see langword="null"/> if no location information exists.
     /// </value>
-    public new ItemId LocationId
+    public new ItemId? LocationId
     {
-      get { return this.AgentInfo.LocationId; }
+      get
+      {
+        return this.Entity.AgentInfo == null ? (ItemId?)null : this.Entity.AgentInfo.LocationId;
+      }
     }
 
     /// <summary>
@@ -234,7 +280,10 @@ namespace Eve.Universe
     /// </value>
     public short Quality
     {
-      get { return this.AgentInfo.Quality; }
+      get 
+      { 
+        return this.Entity.AgentInfo == null ? (short)0 : this.Entity.AgentInfo.Quality;
+      }
     }
 
     /// <summary>
@@ -253,32 +302,19 @@ namespace Eve.Universe
           ref this.researchFields,
           () => 
           {
-            if (this.AgentInfo.ResearchFields == null)
+            if (this.Entity.AgentInfo == null || this.Entity.AgentInfo.ResearchFields == null)
             {
               return new ReadOnlySkillTypeCollection(null);
             }
 
             // Filter through the cache
             return new ReadOnlySkillTypeCollection(
-              this.AgentInfo.ResearchFields.Select(x => this.Container.GetOrAdd<SkillType>(x.Id, () => (SkillType)x.ToAdapter(this.Container)))
-                                           .OrderBy(x => x));
+              this.Entity.AgentInfo.ResearchFields.Select(x => this.Container.GetOrAdd<SkillType>(x.Id, () => (SkillType)x.ToAdapter(this.Container)))
+                                                  .OrderBy(x => x));
           });
 
         Contract.Assume(this.researchFields != null);
         return this.researchFields;
-      }
-    }
-
-    private AgentEntity AgentInfo
-    {
-      get
-      {
-        Contract.Ensures(Contract.Result<AgentEntity>() != null);
-
-        var result = this.Entity.AgentInfo;
-
-        Contract.Assume(result != null);
-        return result;
       }
     }
 

@@ -13,6 +13,12 @@ namespace Eve.Universe
   public enum NpcCorporationExtent : byte
   {
     /// <summary>
+    /// The extent of the corporation is unknown.
+    /// </summary>
+    [Description("Unknown")]
+    Unknown,
+
+    /// <summary>
     /// The corporation is limited to a small local area.
     /// </summary>
     [Description("Local")]

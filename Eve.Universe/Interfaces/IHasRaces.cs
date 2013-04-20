@@ -28,7 +28,7 @@ namespace Eve.Character
     /// races the current item is associated with, or <see langword="null" /> if the
     /// item is not associated with any races.
     /// </value>
-    RaceId? RaceId { get; }
+    RaceId? RaceIds { get; }
 
     // TODO: Add collection for races
   }

@@ -155,6 +155,7 @@
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\AssemblyLineTypeCategoryDetailEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\AssemblyLineStationEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\AssemblyLineEntity.cs" />
+    <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\ItemNameEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\EveEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\ItemEntity\ItemExtensionEntity\CelestialEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\ItemEntity\ItemExtensionEntity\StargateEntity.cs" />

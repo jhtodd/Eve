@@ -6,6 +6,7 @@
 namespace Eve.Universe
 {
   using System.Collections.Generic;
+  using System.Linq;
 
   using FreeNet.Collections.ObjectModel;
 
@@ -23,7 +24,7 @@ namespace Eve.Universe
     /// <param name="contents">
     /// The contents of the collection.
     /// </param>
-    public ReadOnlyAgentCollection(IEnumerable<Agent> contents) : base()
+    public ReadOnlyAgentCollection(IEnumerable<Agent> contents) : base(contents == null ? 0 : contents.Count())
     {
       if (contents != null)
       {

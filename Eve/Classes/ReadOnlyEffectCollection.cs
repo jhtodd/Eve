@@ -7,6 +7,7 @@ namespace Eve
 {
   using System.Collections.Generic;
   using System.Diagnostics.Contracts;
+  using System.Linq;
 
   using FreeNet.Collections.ObjectModel;
 
@@ -26,7 +27,7 @@ namespace Eve
     /// <param name="contents">
     /// The contents of the collection.
     /// </param>
-    public ReadOnlyEffectCollection(IEnumerable<Effect> contents) : base()
+    public ReadOnlyEffectCollection(IEnumerable<Effect> contents) : base(contents == null ? 0 : contents.Count())
     {
       if (contents != null)
       {

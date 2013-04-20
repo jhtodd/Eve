@@ -232,21 +232,7 @@ namespace Eve.Data.Entities
     {
       get 
       {
-        // If the ID is outside the allowed range, it's definitely not the
-        // specified type.
-        if (!(this.Id >= AgentMinimumId && this.Id <= AgentMaximumId))
-        {
-          return false;
-        }
-
-        // In some cases the ID is in the allowed range but there is no entry
-        // in the related table, so check for that too.  No database calls
-        // should be needed -- if the entity isn't of the desired type,
-        // checking the ID first should abort before it even gets here.  And
-        // if it is of the desired type, then more than likely the navigation
-        // property was loaded with an .Include() call when the entity was
-        // materialized.
-        return this.AgentInfo != null;
+        return this.Id >= AgentMinimumId && this.Id <= AgentMaximumId;
       }
     }
 
@@ -269,21 +255,7 @@ namespace Eve.Data.Entities
     {
       get
       {
-        // If the ID is outside the allowed range, it's definitely not the
-        // specified type.
-        if (!(this.Id >= CelestialMinimumId && this.Id <= CelestialMaximumId))
-        {
-          return false;
-        }
-
-        // In some cases the ID is in the allowed range but there is no entry
-        // in the related table, so check for that too.  No database calls
-        // should be needed -- if the entity isn't of the desired type,
-        // checking the ID first should abort before it even gets here.  And
-        // if it is of the desired type, then more than likely the navigation
-        // property was loaded with an .Include() call when the entity was
-        // materialized.
-        return this.CelestialInfo != null;
+        return this.Id >= CelestialMinimumId && this.Id <= CelestialMaximumId;
       }
     }
 
@@ -306,21 +278,7 @@ namespace Eve.Data.Entities
     {
       get
       {
-        // If the ID is outside the allowed range, it's definitely not the
-        // specified type.
-        if (!(this.Id >= ConstellationMinimumId && this.Id <= ConstellationMaximumId))
-        {
-          return false;
-        }
-
-        // In some cases the ID is in the allowed range but there is no entry
-        // in the related table, so check for that too.  No database calls
-        // should be needed -- if the entity isn't of the desired type,
-        // checking the ID first should abort before it even gets here.  And
-        // if it is of the desired type, then more than likely the navigation
-        // property was loaded with an .Include() call when the entity was
-        // materialized.
-        return this.ConstellationInfo != null;
+        return this.Id >= ConstellationMinimumId && this.Id <= ConstellationMaximumId;
       }
     }
 
@@ -343,21 +301,7 @@ namespace Eve.Data.Entities
     {
       get
       {
-        // If the ID is outside the allowed range, it's definitely not the
-        // specified type.
-        if (!(this.Id >= CorporationMinimumId && this.Id <= CorporationMaximumId))
-        {
-          return false;
-        }
-
-        // In some cases the ID is in the allowed range but there is no entry
-        // in the related table, so check for that too.  No database calls
-        // should be needed -- if the entity isn't of the desired type,
-        // checking the ID first should abort before it even gets here.  And
-        // if it is of the desired type, then more than likely the navigation
-        // property was loaded with an .Include() call when the entity was
-        // materialized.
-        return this.CorporationInfo != null;
+        return this.Id >= CorporationMinimumId && this.Id <= CorporationMaximumId;
       }
     }
 
@@ -380,21 +324,7 @@ namespace Eve.Data.Entities
     {
       get
       {
-        // If the ID is outside the allowed range, it's definitely not the
-        // specified type.
-        if (!(this.Id >= FactionMinimumId && this.Id <= FactionMaximumId))
-        {
-          return false;
-        }
-
-        // In some cases the ID is in the allowed range but there is no entry
-        // in the related table, so check for that too.  No database calls
-        // should be needed -- if the entity isn't of the desired type,
-        // checking the ID first should abort before it even gets here.  And
-        // if it is of the desired type, then more than likely the navigation
-        // property was loaded with an .Include() call when the entity was
-        // materialized.
-        return this.FactionInfo != null;
+        return this.Id >= FactionMinimumId && this.Id <= FactionMaximumId;
       }
     }
 
@@ -417,21 +347,7 @@ namespace Eve.Data.Entities
     {
       get
       {
-        // If the ID is outside the allowed range, it's definitely not the
-        // specified type.
-        if (!(this.Id >= RegionMinimumId && this.Id <= RegionMaximumId))
-        {
-          return false;
-        }
-
-        // In some cases the ID is in the allowed range but there is no entry
-        // in the related table, so check for that too.  No database calls
-        // should be needed -- if the entity isn't of the desired type,
-        // checking the ID first should abort before it even gets here.  And
-        // if it is of the desired type, then more than likely the navigation
-        // property was loaded with an .Include() call when the entity was
-        // materialized.
-        return this.RegionInfo != null;
+        return this.Id >= RegionMinimumId && this.Id <= RegionMaximumId;
       }
     }
 
@@ -454,21 +370,7 @@ namespace Eve.Data.Entities
     {
       get
       {
-        // If the ID is outside the allowed range, it's definitely not the
-        // specified type.
-        if (!(this.Id >= SolarSystemMinimumId && this.Id <= SolarSystemMaximumId))
-        {
-          return false;
-        }
-
-        // In some cases the ID is in the allowed range but there is no entry
-        // in the related table, so check for that too.  No database calls
-        // should be needed -- if the entity isn't of the desired type,
-        // checking the ID first should abort before it even gets here.  And
-        // if it is of the desired type, then more than likely the navigation
-        // property was loaded with an .Include() call when the entity was
-        // materialized.
-        return this.SolarSystemInfo != null;
+        return this.Id >= SolarSystemMinimumId && this.Id <= SolarSystemMaximumId;
       }
     }
 
@@ -491,21 +393,7 @@ namespace Eve.Data.Entities
     {
       get
       {
-        // If the ID is outside the allowed range, it's definitely not the
-        // specified type.
-        if (!(this.Id >= StargateMinimumId && this.Id <= StargateMaximumId))
-        {
-          return false;
-        }
-
-        // In some cases the ID is in the allowed range but there is no entry
-        // in the related table, so check for that too.  No database calls
-        // should be needed -- if the entity isn't of the desired type,
-        // checking the ID first should abort before it even gets here.  And
-        // if it is of the desired type, then more than likely the navigation
-        // property was loaded with an .Include() call when the entity was
-        // materialized.
-        return this.StargateInfo != null;
+        return this.Id >= StargateMinimumId && this.Id <= StargateMaximumId;
       }
     }
 
@@ -528,21 +416,7 @@ namespace Eve.Data.Entities
     {
       get
       {
-        // If the ID is outside the allowed range, it's definitely not the
-        // specified type.
-        if (!(this.Id >= StationMinimumId && this.Id <= StationMaximumId))
-        {
-          return false;
-        }
-
-        // In some cases the ID is in the allowed range but there is no entry
-        // in the related table, so check for that too.  No database calls
-        // should be needed -- if the entity isn't of the desired type,
-        // checking the ID first should abort before it even gets here.  And
-        // if it is of the desired type, then more than likely the navigation
-        // property was loaded with an .Include() call when the entity was
-        // materialized.
-        return this.StationInfo != null;
+        return this.Id >= StationMinimumId && this.Id <= StationMaximumId;
       }
     }
 
@@ -565,21 +439,7 @@ namespace Eve.Data.Entities
     {
       get
       {
-        // If the ID is outside the allowed range, it's definitely not the
-        // specified type.
-        if (!(this.Id == 9 || (this.Id >= UniverseMinimumId && this.Id <= UniverseMaximumId)))
-        {
-          return false;
-        }
-
-        // In some cases the ID is in the allowed range but there is no entry
-        // in the related table, so check for that too.  No database calls
-        // should be needed -- if the entity isn't of the desired type,
-        // checking the ID first should abort before it even gets here.  And
-        // if it is of the desired type, then more than likely the navigation
-        // property was loaded with an .Include() call when the entity was
-        // materialized.
-        return this.UniverseInfo != null;
+        return this.Id == 9 || (this.Id >= UniverseMinimumId && this.Id <= UniverseMaximumId);
       }
     }
 
@@ -625,8 +485,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("itemName")]
-    public virtual string Name { get; internal set; }
+    public virtual ItemNameEntity Name { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.

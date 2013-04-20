@@ -6,6 +6,7 @@
 namespace Eve.Industry
 {
   using System.Collections.Generic;
+  using System.Linq;
 
   using Eve.Industry;
 
@@ -25,7 +26,7 @@ namespace Eve.Industry
     /// <param name="contents">
     /// The contents of the collection.
     /// </param>
-    public ReadOnlyAssemblyLineStationCollection(IEnumerable<AssemblyLineStation> contents) : base()
+    public ReadOnlyAssemblyLineStationCollection(IEnumerable<AssemblyLineStation> contents) : base(contents == null ? 0 : contents.Count())
     {
       if (contents != null)
       {

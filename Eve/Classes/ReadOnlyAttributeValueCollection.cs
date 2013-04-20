@@ -7,6 +7,7 @@ namespace Eve
 {
   using System.Collections.Generic;
   using System.Diagnostics.Contracts;
+  using System.Linq;
 
   using Eve.Data;
 
@@ -35,7 +36,7 @@ namespace Eve
     /// <param name="contents">
     /// The contents of the collection.
     /// </param>
-    public ReadOnlyAttributeValueCollection(IEveRepository container, IEnumerable<AttributeValue> contents) : base()
+    public ReadOnlyAttributeValueCollection(IEveRepository container, IEnumerable<AttributeValue> contents) : base(contents == null ? 0 : contents.Count())
     {
       Contract.Requires(container != null, "The containing repository cannot be null.");
       this.container = container;

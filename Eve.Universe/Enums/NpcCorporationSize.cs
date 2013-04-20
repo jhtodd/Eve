@@ -13,6 +13,12 @@ namespace Eve.Universe
   public enum NpcCorporationSize : byte
   {
     /// <summary>
+    /// The size of the corporation is unknown.
+    /// </summary>
+    [Description("Unknown")]
+    Unknown,
+
+    /// <summary>
     /// The corporation is tiny.
     /// </summary>
     [Description("Tiny")]

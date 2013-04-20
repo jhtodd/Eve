@@ -6,6 +6,7 @@
 namespace Eve.Character
 {
   using System.Collections.Generic;
+  using System.Linq;
 
   using FreeNet.Collections.ObjectModel;
 
@@ -23,7 +24,7 @@ namespace Eve.Character
     /// <param name="contents">
     /// The contents of the collection.
     /// </param>
-    public ReadOnlyBloodlineCollection(IEnumerable<Bloodline> contents) : base()
+    public ReadOnlyBloodlineCollection(IEnumerable<Bloodline> contents) : base(contents == null ? 0 : contents.Count())
     {
       if (contents != null)
       {

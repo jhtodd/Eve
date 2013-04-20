@@ -117,18 +117,25 @@ namespace Eve.Universe
     /// Gets the constellation in which the station resides.
     /// </summary>
     /// <value>
-    /// The constellation in which the station resides.
+    /// The constellation in which the station resides, or
+    /// <see langword="null" /> if no constellation information
+    /// exists.
     /// </value>
     public Constellation Constellation
     {
       get
       {
-        Contract.Ensures(Contract.Result<Constellation>() != null);
+        Contract.Ensures(this.ConstellationId == null || Contract.Result<Constellation>() != null);
+
+        if (this.ConstellationId == null)
+        {
+          return null;
+        }
 
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.constellation,
-          () => this.Container.GetOrAdd<Constellation>(this.ConstellationId, () => (Constellation)this.StationInfo.Constellation.ToAdapter(this.Container)));
+          () => this.Container.GetOrAdd<Constellation>(this.ConstellationId, () => (Constellation)this.Entity.StationInfo.Constellation.ToAdapter(this.Container)));
 
         Contract.Assume(this.constellation != null);
         return this.constellation;
@@ -139,29 +146,41 @@ namespace Eve.Universe
     /// Gets the ID of the constellation in which the station resides.
     /// </summary>
     /// <value>
-    /// The ID of the constellation in which the station resides.
+    /// The ID of the constellation in which the station resides, or
+    /// <see langword="null" /> if no constellation information
+    /// exists.
     /// </value>
-    public ConstellationId ConstellationId
+    public ConstellationId? ConstellationId
     {
-      get { return (ConstellationId)this.StationInfo.ConstellationId; }
+      get 
+      {
+        return this.Entity.StationInfo == null ? (ConstellationId?)null : (ConstellationId?)this.Entity.StationInfo.ConstellationId;
+      }
     }
 
     /// <summary>
     /// Gets the corporation that controls the station.
     /// </summary>
     /// <value>
-    /// The corporation that controls the station.
+    /// The corporation that controls the station, or
+    /// <see langword="null" /> if no corporation information
+    /// exists.
     /// </value>
     public NpcCorporation Corporation
     {
       get
       {
-        Contract.Ensures(Contract.Result<NpcCorporation>() != null);
+        Contract.Ensures(this.CorporationId == null || Contract.Result<NpcCorporation>() != null);
+
+        if (this.CorporationId == null)
+        {
+          return null;
+        }
 
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.corporation,
-          () => this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.StationInfo.Corporation.ToAdapter(this.Container)));
+          () => this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.Entity.StationInfo.Corporation.ToAdapter(this.Container)));
 
         Contract.Assume(this.corporation != null);
         return this.corporation;
@@ -172,11 +191,16 @@ namespace Eve.Universe
     /// Gets the ID of the corporation that controls the station.
     /// </summary>
     /// <value>
-    /// The ID of the corporation that controls the station.
+    /// The ID of the corporation that controls the station, or
+    /// <see langword="null" /> if no corporation information
+    /// exists..
     /// </value>
-    public NpcCorporationId CorporationId
+    public NpcCorporationId? CorporationId
     {
-      get { return (NpcCorporationId)this.StationInfo.CorporationId; }
+      get
+      {
+        return this.Entity.StationInfo == null ? (NpcCorporationId?)null : (NpcCorporationId?)this.Entity.StationInfo.CorporationId;
+      }
     }
 
     /// <summary>
@@ -194,7 +218,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.StationInfo.DockingCostPerVolume;
+        var result = this.Entity.StationInfo == null ? 0.0D : this.Entity.StationInfo.DockingCostPerVolume;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -229,7 +253,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.StationInfo.MaxShipVolumeDockable;
+        var result = this.Entity.StationInfo == null ? 0.0D : this.Entity.StationInfo.MaxShipVolumeDockable;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -252,7 +276,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<int>() >= 0);
 
-        var result = this.StationInfo.OfficeRentalCost;
+        var result = this.Entity.StationInfo == null ? 0 : this.Entity.StationInfo.OfficeRentalCost;
 
         Contract.Assume(result >= 0);
 
@@ -264,18 +288,24 @@ namespace Eve.Universe
     /// Gets the mode in which the station is operating.
     /// </summary>
     /// <value>
-    /// The mode in which the station is operating.
+    /// The mode in which the station is operating, or
+    /// <see langword="null" /> if no operation information exists.
     /// </value>
     public StationOperation Operation
     {
       get
       {
-        Contract.Ensures(Contract.Result<StationOperation>() != null);
+        Contract.Ensures(this.OperationId == null || Contract.Result<StationOperation>() != null);
+
+        if (this.OperationId == null)
+        {
+          return null;
+        }
 
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.operation,
-          () => this.Container.GetOrAdd<StationOperation>(this.OperationId, () => this.StationInfo.Operation.ToAdapter(this.Container)));
+          () => this.Container.GetOrAdd<StationOperation>(this.OperationId, () => this.Entity.StationInfo.Operation.ToAdapter(this.Container)));
 
         Contract.Assume(this.operation != null);
         return this.operation;
@@ -286,29 +316,39 @@ namespace Eve.Universe
     /// Gets the ID of the mode in which the station is operating.
     /// </summary>
     /// <value>
-    /// The ID of the mode in which the station is operating.
+    /// The ID of the mode in which the station is operating, or
+    /// <see langword="null" /> if no operation information exists.
     /// </value>
-    public StationOperationId OperationId
+    public StationOperationId? OperationId
     {
-      get { return this.StationInfo.OperationId; }
+      get
+      {
+        return this.Entity.StationInfo == null ? (StationOperationId?)null : (StationOperationId?)this.Entity.StationInfo.OperationId;
+      }
     }
 
     /// <summary>
     /// Gets the region in which the station resides.
     /// </summary>
     /// <value>
-    /// The region in which the station resides.
+    /// The region in which the station resides, or
+    /// <see langword="null" /> if no region information exists.
     /// </value>
     public Region Region
     {
       get
       {
-        Contract.Ensures(Contract.Result<Region>() != null);
+        Contract.Ensures(this.RegionId == null || Contract.Result<Region>() != null);
+
+        if (this.RegionId == null)
+        {
+          return null;
+        }
 
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.region,
-          () => this.Container.GetOrAdd<Region>(this.RegionId, () => (Region)this.StationInfo.Region.ToAdapter(this.Container)));
+          () => this.Container.GetOrAdd<Region>(this.RegionId, () => (Region)this.Entity.StationInfo.Region.ToAdapter(this.Container)));
 
         Contract.Assume(this.region != null);
         return this.region;
@@ -319,11 +359,15 @@ namespace Eve.Universe
     /// Gets the ID of the region in which the station resides.
     /// </summary>
     /// <value>
-    /// The ID of the region in which the station resides.
+    /// The ID of the region in which the station resides, or
+    /// <see langword="null" /> if no region information exists.
     /// </value>
-    public RegionId RegionId
+    public RegionId? RegionId
     {
-      get { return (RegionId)this.StationInfo.RegionId; }
+      get 
+      {
+        return this.Entity.StationInfo == null ? (RegionId?)null : (RegionId?)this.Entity.StationInfo.RegionId;
+      }
     }
 
     /// <summary>
@@ -341,7 +385,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
         Contract.Ensures(Contract.Result<double>() <= 1.0D);
 
-        var result = this.StationInfo.ReprocessingEfficiency;
+        var result = this.Entity.StationInfo == null ? 0.0D : this.Entity.StationInfo.ReprocessingEfficiency;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -361,7 +405,7 @@ namespace Eve.Universe
     /// </value>
     public byte ReprocessingHangarFlag
     {
-      get { return this.StationInfo.ReprocessingHangarFlag; }
+      get { return this.Entity.StationInfo == null ? (byte)0 : this.Entity.StationInfo.ReprocessingHangarFlag; }
     }
 
     /// <summary>
@@ -379,7 +423,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
         Contract.Ensures(Contract.Result<double>() <= 1.0D);
 
-        var result = this.StationInfo.ReprocessingStationsTake;
+        var result = this.Entity.StationInfo == null ? 0.0D : this.Entity.StationInfo.ReprocessingStationsTake;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -400,25 +444,31 @@ namespace Eve.Universe
     /// </value>
     public short Security
     {
-      get { return this.StationInfo.Security; }
+      get { return this.Entity.StationInfo == null ? (short)0 : this.Entity.StationInfo.Security; }
     }
 
     /// <summary>
     /// Gets the solar system in which the station resides.
     /// </summary>
     /// <value>
-    /// The solar system in which the station resides.
+    /// The solar system in which the station resides, or
+    /// <see langword="null" /> if no solar system information exists.
     /// </value>
     public SolarSystem SolarSystem
     {
       get
       {
-        Contract.Ensures(Contract.Result<SolarSystem>() != null);
+        Contract.Ensures(this.SolarSystemId == null || Contract.Result<SolarSystem>() != null);
+
+        if (this.SolarSystemId == null)
+        {
+          return null;
+        }
 
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.solarSystem,
-          () => this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.StationInfo.SolarSystem.ToAdapter(this.Container)));
+          () => this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.Entity.StationInfo.SolarSystem.ToAdapter(this.Container)));
 
         Contract.Assume(this.solarSystem != null);
         return this.solarSystem;
@@ -429,29 +479,39 @@ namespace Eve.Universe
     /// Gets the ID of the solar system in which the station resides.
     /// </summary>
     /// <value>
-    /// The ID of the solar system in which the station resides.
+    /// The ID of the solar system in which the station resides, or
+    /// <see langword="null" /> if no solar system information exists.
     /// </value>
-    public SolarSystemId SolarSystemId
+    public SolarSystemId? SolarSystemId
     {
-      get { return (SolarSystemId)this.StationInfo.SolarSystemId; }
+      get
+      {
+        return this.Entity.StationInfo == null ? (SolarSystemId?)null : (SolarSystemId?)this.Entity.StationInfo.SolarSystemId;
+      }
     }
 
     /// <summary>
     /// Gets the type of the station.
     /// </summary>
     /// <value>
-    /// The type of the station.
+    /// The type of the station, or <see langword="null" />
+    /// if no station information exists.
     /// </value>
     public StationType StationType
     {
       get
       {
-        Contract.Ensures(Contract.Result<StationType>() != null);
+        Contract.Ensures(this.StationTypeId == null || Contract.Result<StationType>() != null);
+
+        if (this.StationTypeId == null)
+        {
+          return null;
+        }
 
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.stationType,
-          () => this.Container.GetOrAdd<StationType>(this.StationTypeId, () => (StationType)this.StationInfo.StationType.ToAdapter(this.Container)));
+          () => this.Container.GetOrAdd<StationType>(this.StationTypeId, () => (StationType)this.Entity.StationInfo.StationType.ToAdapter(this.Container)));
 
         Contract.Assume(this.stationType != null);
         return this.stationType;
@@ -462,11 +522,15 @@ namespace Eve.Universe
     /// Gets the ID of the type of the station.
     /// </summary>
     /// <value>
-    /// The ID of the type of the station.
+    /// The ID of the type of the station, or <see langword="null" />
+    /// if no station information exists.
     /// </value>
-    public TypeId StationTypeId
+    public TypeId? StationTypeId
     {
-      get { return this.StationInfo.StationTypeId; }
+      get
+      {
+        return this.Entity.StationInfo == null ? (TypeId?)null : (TypeId?)this.Entity.StationInfo.StationTypeId;
+      }
     }
 
     /// <summary>
@@ -483,7 +547,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.StationInfo.X;
+        double result = this.Entity.StationInfo == null ? 0.0D : this.Entity.StationInfo.X;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -506,7 +570,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.StationInfo.Y;
+        double result = this.Entity.StationInfo == null ? 0.0D : this.Entity.StationInfo.Y;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -529,24 +593,11 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.StationInfo.Z;
+        double result = this.Entity.StationInfo == null ? 0.0D : this.Entity.StationInfo.Z;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
 
-        return result;
-      }
-    }
-
-    private StationEntity StationInfo
-    {
-      get
-      {
-        Contract.Ensures(Contract.Result<StationEntity>() != null);
-
-        var result = this.Entity.StationInfo;
-
-        Contract.Assume(result != null);
         return result;
       }
     }

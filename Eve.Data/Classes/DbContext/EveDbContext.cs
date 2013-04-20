@@ -118,7 +118,7 @@ namespace Eve.Data
     public IQueryable<ItemEntity> Agents
     {
       get
-      { 
+      {
         var result = this.Query<ItemEntity>()
                          .Where(x => x.AgentInfo != null)
                          .Include(x => x.AgentInfo);

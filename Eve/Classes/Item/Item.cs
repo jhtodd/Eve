@@ -32,6 +32,7 @@ namespace Eve
     private ItemId id;
     private EveType itemType;
     private Item location;
+    private string name;
     private Item owner;
     private ItemPosition position;
 
@@ -179,14 +180,58 @@ namespace Eve
       {
         Contract.Ensures(!string.IsNullOrWhiteSpace(Contract.Result<string>()));
 
-        var result = this.Entity.Name;
+        LazyInitializer.EnsureInitialized(
+          ref this.name,
+          () =>
+          {
+            // Start by checking whether the item has an entry in the invNames table
+            if (this.Entity.Name != null && !string.IsNullOrWhiteSpace(this.Entity.Name.Value))
+            {
+              return this.Entity.Name.Value;
+            }
 
-        if (string.IsNullOrWhiteSpace(result))
-        {
-          result = "[Unknown Item (ID " + this.Id.ToString() + ")]";
-        }
+            // Next, fall back on the constellation name, if applicable
+            if (this.Entity.IsConstellation && this.Entity.ConstellationInfo != null && !string.IsNullOrWhiteSpace(this.Entity.ConstellationInfo.ConstellationName))
+            {
+              return this.Entity.ConstellationInfo.ConstellationName;
+            }
 
-        return result;
+            // Then the faction name
+            if (this.Entity.IsFaction && this.Entity.FactionInfo != null && !string.IsNullOrWhiteSpace(this.Entity.FactionInfo.FactionName))
+            {
+              return this.Entity.FactionInfo.FactionName;
+            }
+
+            // Then the region name
+            if (this.Entity.IsRegion && this.Entity.RegionInfo != null && !string.IsNullOrWhiteSpace(this.Entity.RegionInfo.RegionName))
+            {
+              return this.Entity.RegionInfo.RegionName;
+            }
+
+            // Then the solar system name
+            if (this.Entity.IsSolarSystem && this.Entity.SolarSystemInfo != null && !string.IsNullOrWhiteSpace(this.Entity.SolarSystemInfo.SolarSystemName))
+            {
+              return this.Entity.RegionInfo.RegionName;
+            }
+
+            // Then the station name
+            if (this.Entity.IsStation && this.Entity.StationInfo != null && !string.IsNullOrWhiteSpace(this.Entity.StationInfo.StationName))
+            {
+              return this.Entity.StationInfo.StationName;
+            }
+
+            // Then the universe name
+            if (this.Entity.IsUniverse && this.Entity.UniverseInfo != null && !string.IsNullOrWhiteSpace(this.Entity.UniverseInfo.UniverseName))
+            {
+              return this.Entity.UniverseInfo.UniverseName;
+            }
+
+            // If no name could be found, generate one dynamically.
+            return "[Unnamed Item " + this.Id.ToString() + "]";
+          });
+
+        Contract.Assume(!string.IsNullOrWhiteSpace(this.name));
+        return this.name;
       }
     }
 

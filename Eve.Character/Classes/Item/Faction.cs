@@ -49,18 +49,24 @@ namespace Eve.Character
     /// Gets the faction's main corporation.
     /// </summary>
     /// <value>
-    /// The faction's main corporation.
+    /// The faction's main corporation, or <see langword="null" />
+    /// if no corporation information exists.
     /// </value>
     public NpcCorporation Corporation
     {
       get
       {
-        Contract.Ensures(Contract.Result<NpcCorporation>() != null);
+        Contract.Ensures(this.CorporationId == null || Contract.Result<NpcCorporation>() != null);
+
+        if (this.CorporationId == null)
+        {
+          return null;
+        }
 
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.corporation,
-          () => this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.FactionInfo.Corporation.ToAdapter(this.Container)));
+          () => this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.Entity.FactionInfo.Corporation.ToAdapter(this.Container)));
 
         Contract.Assume(this.corporation != null);
         return this.corporation;
@@ -71,11 +77,15 @@ namespace Eve.Character
     /// Gets the ID of the faction's main corporation.
     /// </summary>
     /// <value>
-    /// The ID of the corporation's main corporation.
+    /// The ID of the corporation's main corporation, or
+    /// <see langword="null" /> if no corporation information exists..
     /// </value>
-    public NpcCorporationId CorporationId
+    public NpcCorporationId? CorporationId
     {
-      get { return (NpcCorporationId)this.FactionInfo.CorporationId; }
+      get 
+      {
+        return this.Entity.FactionInfo == null ? (NpcCorporationId?)null : this.Entity.FactionInfo.CorporationId;
+      }
     }
 
     /// <summary>
@@ -89,12 +99,17 @@ namespace Eve.Character
     {
       get
       {
-        Contract.Ensures(Contract.Result<Icon>() != null);
+        Contract.Ensures(this.IconId == null || Contract.Result<Icon>() != null);
+
+        if (this.IconId == null)
+        {
+          return null;
+        }
 
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.icon, 
-          () => this.Container.GetOrAdd<Icon>(this.IconId, () => this.FactionInfo.Icon.ToAdapter(this.Container)));
+          () => this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.FactionInfo.Icon.ToAdapter(this.Container)));
 
         Contract.Assume(this.icon != null);
         return this.icon;
@@ -108,17 +123,20 @@ namespace Eve.Character
     /// The ID of the icon associated with the item, or
     /// <see langword="null" /> if no such icon exists.
     /// </value>
-    public IconId IconId
+    public IconId? IconId
     {
-      get { return this.FactionInfo.IconId; }
+      get 
+      {
+        return this.Entity.FactionInfo == null ? (IconId?)null : this.Entity.FactionInfo.IconId;
+      }
     }
 
     /// <summary>
     /// Gets the faction's militia corporation, if any.
     /// </summary>
     /// <value>
-    /// The corporation's militia corporation, or <see langword="null" />
-    /// if the faction doesn't have a militia corporation.
+    /// The corporation's militia corporation, or
+    /// <see langword="null" /> if no militia corporation information exists.
     /// </value>
     public NpcCorporation MilitiaCorporation
     {
@@ -134,7 +152,7 @@ namespace Eve.Character
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.militiaCorporation,
-          () => this.Container.GetOrAdd<NpcCorporation>(this.MilitiaCorporationId, () => (NpcCorporation)this.FactionInfo.MilitiaCorporation.ToAdapter(this.Container)));
+          () => this.Container.GetOrAdd<NpcCorporation>(this.MilitiaCorporationId, () => (NpcCorporation)this.Entity.FactionInfo.MilitiaCorporation.ToAdapter(this.Container)));
 
         Contract.Assume(this.militiaCorporation != null);
         return this.militiaCorporation;
@@ -145,12 +163,15 @@ namespace Eve.Character
     /// Gets the ID of the faction's militia corporation, if any.
     /// </summary>
     /// <value>
-    /// The ID of the corporation's militia corporation, or <see langword="null" />
-    /// if the faction doesn't have a militia corporation.
+    /// The ID of the corporation's militia corporation, or
+    /// <see langword="null" /> if no militia corporation information exists.
     /// </value>
     public NpcCorporationId? MilitiaCorporationId
     {
-      get { return (NpcCorporationId?)this.FactionInfo.MilitiaCorporationId; }
+      get
+      {
+        return this.Entity.FactionInfo == null ? (NpcCorporationId?)null : (NpcCorporationId?)this.Entity.FactionInfo.MilitiaCorporationId;
+      }
     }
 
     /// <summary>
@@ -161,9 +182,13 @@ namespace Eve.Character
     /// races the current faction is associated with, or <see langword="null" /> if the
     /// faction is not associated with any races.
     /// </value>
-    public RaceId RaceId
+    public RaceId? RaceIds
     {
-      get { return (RaceId)this.FactionInfo.RaceIds; }
+      get 
+      {
+        // TODO: Replace with race array
+        return this.Entity.FactionInfo == null ? (RaceId?)null : (RaceId?)this.Entity.FactionInfo.RaceIds;
+      }
     }
 
     /// <summary>
@@ -181,7 +206,7 @@ namespace Eve.Character
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.FactionInfo.SizeFactor;
+        var result = this.Entity.FactionInfo == null ? 0.0D : this.Entity.FactionInfo.SizeFactor;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -195,18 +220,24 @@ namespace Eve.Character
     /// Gets the solar system containing the faction's capital.
     /// </summary>
     /// <value>
-    /// The solar system containing the faction's capital.
+    /// The solar system containing the faction's capital, or
+    /// <see langword="null" /> if no solar system information exists.
     /// </value>
     public SolarSystem SolarSystem
     {
       get
       {
-        Contract.Ensures(Contract.Result<SolarSystem>() != null);
+        Contract.Ensures(this.SolarSystemId == null || Contract.Result<SolarSystem>() != null);
+
+        if (this.SolarSystemId == null)
+        {
+          return null;
+        }
 
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.solarSystem,
-          () => this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.FactionInfo.SolarSystem.ToAdapter(this.Container)));
+          () => this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.Entity.FactionInfo.SolarSystem.ToAdapter(this.Container)));
 
         Contract.Assume(this.solarSystem != null);
         return this.solarSystem;
@@ -217,11 +248,15 @@ namespace Eve.Character
     /// Gets the ID of the solar system containing the faction's capital.
     /// </summary>
     /// <value>
-    /// The ID of the solar system containing the faction's capital.
+    /// The ID of the solar system containing the faction's capital, or
+    /// <see langword="null" /> if no solar system information exists.
     /// </value>
-    public SolarSystemId SolarSystemId
+    public SolarSystemId? SolarSystemId
     {
-      get { return (SolarSystemId)this.FactionInfo.SolarSystemId; }
+      get
+      {
+        return this.Entity.FactionInfo == null ? (SolarSystemId?)null : this.Entity.FactionInfo.SolarSystemId;
+      }
     }
 
     /// <summary>
@@ -236,7 +271,7 @@ namespace Eve.Character
       {
         Contract.Ensures(Contract.Result<short>() >= 0);
 
-        var result = this.FactionInfo.StationCount;
+        var result = this.Entity.FactionInfo == null ? (short)0 : this.Entity.FactionInfo.StationCount;
 
         Contract.Assume(result >= 0);
 
@@ -258,23 +293,10 @@ namespace Eve.Character
       {
         Contract.Ensures(Contract.Result<short>() >= 0);
 
-        var result = this.FactionInfo.StationSystemCount;
+        var result = this.Entity.FactionInfo == null ? (short)0 : this.Entity.FactionInfo.StationSystemCount;
 
         Contract.Assume(result >= 0);
 
-        return result;
-      }
-    }
-
-    private FactionEntity FactionInfo
-    {
-      get
-      {
-        Contract.Ensures(Contract.Result<FactionEntity>() != null);
-
-        var result = this.Entity.FactionInfo;
-
-        Contract.Assume(result != null);
         return result;
       }
     }
@@ -288,12 +310,12 @@ namespace Eve.Character
   {
     Icon IHasIcon.Icon
     {
-      get { return Icon; }
+      get { return this.Icon; }
     }
 
     IconId? IHasIcon.IconId
     {
-      get { return IconId; }
+      get { return this.IconId; }
     }
   }
   #endregion
@@ -304,9 +326,9 @@ namespace Eve.Character
   /// </content>
   public partial class Faction : IHasRaces
   {
-    RaceId? IHasRaces.RaceId
+    RaceId? IHasRaces.RaceIds
     {
-      get { return RaceId; }
+      get { return this.RaceIds; }
     }
   }
   #endregion

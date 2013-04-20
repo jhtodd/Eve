@@ -6,6 +6,7 @@
 namespace Eve
 {
   using System.Collections.Generic;
+  using System.Linq;
 
   using FreeNet.Collections.ObjectModel;
 
@@ -23,7 +24,7 @@ namespace Eve
     /// <param name="contents">
     /// The contents of the collection.
     /// </param>
-    public ReadOnlyMarketGroupCollection(IEnumerable<MarketGroup> contents) : base()
+    public ReadOnlyMarketGroupCollection(IEnumerable<MarketGroup> contents) : base(contents == null ? 0 : contents.Count())
     {
       if (contents != null)
       {

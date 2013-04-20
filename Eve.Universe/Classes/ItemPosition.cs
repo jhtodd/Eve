@@ -9,6 +9,7 @@ namespace Eve.Universe
   using System.Diagnostics.Contracts;
   using System.Threading;
 
+  using Eve;
   using Eve.Data;
   using Eve.Data.Entities;
 

@@ -373,31 +373,16 @@ namespace Eve.Data
       item.HasOptional(x => x.StationInfo).WithRequired();
       item.HasOptional(x => x.UniverseInfo).WithRequired();
 
+      item.HasOptional(x => x.Name).WithRequired();
+
       item.HasRequired(x => x.Location).WithMany().HasForeignKey(x => x.LocationId);
       item.HasRequired(x => x.Owner).WithMany().HasForeignKey(x => x.OwnerId);
       item.HasOptional(x => x.Position).WithRequired(x => x.Item);
-      
-      // Map the Name property to the invNames table
-      item.Map(m => 
-      {
-        m.Properties(x => x.Name);
-        m.ToTable("invNames");
-      });
 
-      // Map all other properties to the invTypes table
-      item.Map(m =>
-      {
-        m.Properties(x => new 
-        {
-          x.FlagId,
-          x.ItemTypeId,
-          x.LocationId,
-          x.OwnerId,
-          x.Quantity
-        });
+      /* ItemNameEntity Mappings ************************************************/
 
-        m.ToTable("invItems");
-      });
+      // All mappings defined by Data Annotations
+      var itemName = modelBuilder.Entity<ItemNameEntity>();
 
       /* ItemPositionEntity Mappings ************************************************/
 
