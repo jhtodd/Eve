@@ -55,7 +55,7 @@ namespace Eve.Character
 
         LazyInitializer.EnsureInitialized(
           ref this.bloodlines,
-          () => new ReadOnlyBloodlineCollection(this.Container.GetBloodlines(x => x.RaceId == this.Id).OrderBy(x => x)));
+          () => new ReadOnlyBloodlineCollection(this.Container.GetBloodlines(q => q.Where(x => x.RaceId == this.Id)).OrderBy(x => x)));
 
         Contract.Assume(this.bloodlines != null);
         return this.bloodlines;

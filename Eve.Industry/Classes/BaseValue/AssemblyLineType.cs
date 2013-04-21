@@ -143,7 +143,7 @@ namespace Eve.Industry
 
         LazyInitializer.EnsureInitialized(
           ref this.categoryDetails,
-          () => new ReadOnlyAssemblyLineTypeCategoryDetailCollection(this.Container.GetAssemblyLineTypeCategoryDetails(x => x.AssemblyLineTypeId == this.Id.Value).OrderBy(x => x)));
+          () => new ReadOnlyAssemblyLineTypeCategoryDetailCollection(this.Container.GetAssemblyLineTypeCategoryDetails(q => q.Where(x => x.AssemblyLineTypeId == this.Id.Value)).OrderBy(x => x)));
 
         Contract.Assume(this.categoryDetails != null);
         return this.categoryDetails;
@@ -166,7 +166,7 @@ namespace Eve.Industry
 
         LazyInitializer.EnsureInitialized(
           ref this.groupDetails,
-          () => new ReadOnlyAssemblyLineTypeGroupDetailCollection(this.Container.GetAssemblyLineTypeGroupDetails(x => x.AssemblyLineTypeId == this.Id.Value).OrderBy(x => x)));
+          () => new ReadOnlyAssemblyLineTypeGroupDetailCollection(this.Container.GetAssemblyLineTypeGroupDetails(q => q.Where(x => x.AssemblyLineTypeId == this.Id.Value)).OrderBy(x => x)));
 
         Contract.Assume(this.groupDetails != null);
         return this.groupDetails;

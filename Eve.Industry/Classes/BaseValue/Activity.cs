@@ -64,7 +64,7 @@ namespace Eve.Industry
           ref this.icon,
           () => 
           {
-            Icon iconResult = this.Container.GetIcons(x => x.Name == this.IconNo).FirstOrDefault();
+            Icon iconResult = this.Container.GetIcons(q => q.Where(x => x.Name == this.IconNo)).FirstOrDefault();
 
             // TODO: As of 84566, some iconNo values don't have a corresponding
             // entry in eveIcons, although the matching image file is available.

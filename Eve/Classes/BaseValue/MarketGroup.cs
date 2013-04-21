@@ -58,7 +58,7 @@ namespace Eve
 
         LazyInitializer.EnsureInitialized(
           ref this.childGroups,
-          () => new ReadOnlyMarketGroupCollection(this.Container.GetMarketGroups(x => x.ParentGroupId == this.Id).OrderBy(x => x)));
+          () => new ReadOnlyMarketGroupCollection(this.Container.GetMarketGroups(q => q.Where(x => x.ParentGroupId == this.Id)).OrderBy(x => x)));
 
         Contract.Assume(this.childGroups != null);
         return this.childGroups;
@@ -173,7 +173,7 @@ namespace Eve
 
         LazyInitializer.EnsureInitialized(
           ref this.types,
-          () => new ReadOnlyTypeCollection(this.Container.GetEveTypes(x => x.MarketGroupId == this.Id).OrderBy(x => x)));
+          () => new ReadOnlyTypeCollection(this.Container.GetEveTypes(q => q.Where(x => x.MarketGroupId == this.Id)).OrderBy(x => x)));
 
         Contract.Assume(this.types != null);
         return this.types;

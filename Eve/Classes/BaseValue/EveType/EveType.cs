@@ -111,7 +111,7 @@ namespace Eve
         // If not already set, construct a collection of this type's attribute values.
         LazyInitializer.EnsureInitialized(
           ref this.attributes,
-          () => new ReadOnlyAttributeValueCollection(this.Container, this.Container.GetAttributeValues(x => x.ItemTypeId == this.Id.Value).OrderBy(x => x)));
+          () => new ReadOnlyAttributeValueCollection(this.Container, this.Container.GetAttributeValues(q => q.Where(x => x.ItemTypeId == this.Id.Value)).OrderBy(x => x)));
 
         Contract.Assume(this.attributes != null);
         return this.attributes;
@@ -219,7 +219,7 @@ namespace Eve
         // If not already set, construct a collection of this type's effects.
         LazyInitializer.EnsureInitialized(
           ref this.effects,
-          () => new ReadOnlyEffectCollection(this.Container.GetEffects(x => x.ItemTypeId == this.Id.Value).OrderBy(x => x)));
+          () => new ReadOnlyEffectCollection(this.Container.GetEffects(q => q.Where(x => x.ItemTypeId == this.Id.Value)).OrderBy(x => x)));
 
         Contract.Assume(this.effects != null);
         return this.effects;
@@ -632,7 +632,7 @@ namespace Eve
             {
               variations.Add(MetaType.ParentType);
 
-              foreach (EveType type in this.Container.GetEveTypes(x => x.MetaType.ParentTypeId == MetaType.ParentTypeId.Value))
+              foreach (EveType type in this.Container.GetEveTypes(q => q.Where(x => x.MetaType.ParentTypeId == MetaType.ParentTypeId.Value)))
               {
                 variations.Add(type);
               }
@@ -644,7 +644,7 @@ namespace Eve
             {
               variations.Add(this);
 
-              foreach (EveType type in this.Container.GetEveTypes(x => x.MetaType.ParentTypeId == this.Id.Value))
+              foreach (EveType type in this.Container.GetEveTypes(q => q.Where(x => x.MetaType.ParentTypeId == this.Id.Value)))
               {
                 variations.Add(type);
               }

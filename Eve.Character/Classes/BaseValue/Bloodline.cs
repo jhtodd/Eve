@@ -59,7 +59,7 @@ namespace Eve.Character
 
         LazyInitializer.EnsureInitialized(
           ref this.ancestries,
-          () => new ReadOnlyAncestryCollection(this.Container.GetAncestries(x => x.BloodlineId == this.Id).OrderBy(x => x)));
+          () => new ReadOnlyAncestryCollection(this.Container.GetAncestries(q => q.Where(x => x.BloodlineId == this.Id)).OrderBy(x => x)));
 
         Contract.Assume(this.ancestries != null);
         return this.ancestries;

@@ -67,7 +67,7 @@ namespace Eve.Universe
 
         LazyInitializer.EnsureInitialized(
           ref this.agents,
-          () => new ReadOnlyAgentCollection(this.Container.GetAgents(x => x.AgentInfo.CorporationId == this.Id.Value).OrderBy(x => x)));
+          () => new ReadOnlyAgentCollection(this.Container.GetAgents(q => q.Where(x => x.AgentInfo.CorporationId == this.Id.Value)).OrderBy(x => x)));
 
         Contract.Assume(this.agents != null);
         return this.agents;
@@ -136,7 +136,7 @@ namespace Eve.Universe
 
         LazyInitializer.EnsureInitialized(
           ref this.divisions,
-          () => new ReadOnlyNpcCorporationDivisionCollection(this.Container.GetNpcCorporationDivisions(x => x.CorporationId == this.Id.Value).OrderBy(x => x)));
+          () => new ReadOnlyNpcCorporationDivisionCollection(this.Container.GetNpcCorporationDivisions(q => q.Where(x => x.CorporationId == this.Id.Value)).OrderBy(x => x)));
 
         Contract.Assume(this.divisions != null);
         return this.divisions;

@@ -8,6 +8,7 @@ namespace Eve.Data
   using System;
   using System.Collections.Generic;
   using System.Diagnostics.Contracts;
+  using System.Linq;
   using System.Linq.Expressions;
 
   using Eve.Character;
@@ -18,8 +19,8 @@ namespace Eve.Data
   using FreeNet.Data.Entity;
 
   /// <summary>
-  /// The base interface for a data source which provides access to the EVE
-  /// database.
+  /// The base interface for classes which provide high-level access to
+  /// information from the EVE database.
   /// </summary>
   [ContractClass(typeof(IEveRepositoryContracts))]
   public interface IEveRepository : IDisposable
@@ -62,7 +63,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -78,26 +79,25 @@ namespace Eve.Data
     Activity GetActivityById(ActivityId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Activity" />
-    /// objects.
+    /// Returns all <see cref="Activity" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Activity> GetActivities(Expression<Func<ActivityEntity, bool>> filter);
+    IReadOnlyList<Activity> GetActivities(Func<IQueryable<ActivityEntity>, IQueryable<ActivityEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Activity" />
-    /// objects.
     /// </summary>
     /// <param name="modifiers">
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<Activity> GetActivities(params IQueryModifier<ActivityEntity>[] modifiers);
 
@@ -109,13 +109,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetActivityById(ActivityId id, out Activity value);
     #endregion
 
@@ -127,7 +130,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -143,15 +146,16 @@ namespace Eve.Data
     Agent GetAgentById(AgentId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Agent" /> objects.
+    /// Returns all <see cref="Agent" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Agent> GetAgents(Expression<Func<ItemEntity, bool>> filter);
+    IReadOnlyList<Agent> GetAgents(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Agent" /> objects.
@@ -160,7 +164,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<Agent> GetAgents(params IQueryModifier<ItemEntity>[] modifiers);
 
@@ -172,13 +176,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetAgentById(AgentId id, out Agent value);
     #endregion
 
@@ -190,7 +197,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -206,15 +213,16 @@ namespace Eve.Data
     AgentType GetAgentTypeById(AgentTypeId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="AgentType" /> objects.
+    /// Returns all <see cref="AgentType" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<AgentType> GetAgentTypes(Expression<Func<AgentTypeEntity, bool>> filter);
+    IReadOnlyList<AgentType> GetAgentTypes(Func<IQueryable<AgentTypeEntity>, IQueryable<AgentTypeEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="AgentType" /> objects.
@@ -223,7 +231,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<AgentType> GetAgentTypes(params IQueryModifier<AgentTypeEntity>[] modifiers);
 
@@ -235,13 +243,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetAgentTypeById(AgentTypeId id, out AgentType value);
     #endregion
 
@@ -253,7 +264,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -269,16 +280,16 @@ namespace Eve.Data
     Ancestry GetAncestryById(AncestryId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Ancestry" />
-    /// objects.
+    /// Returns all <see cref="Ancestry" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Ancestry> GetAncestries(Expression<Func<AncestryEntity, bool>> filter);
+    IReadOnlyList<Ancestry> GetAncestries(Func<IQueryable<AncestryEntity>, IQueryable<AncestryEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Ancestry" />
@@ -288,7 +299,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<Ancestry> GetAncestries(params IQueryModifier<AncestryEntity>[] modifiers);
 
@@ -300,13 +311,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetAncestryById(AncestryId id, out Ancestry value);
     #endregion
 
@@ -318,7 +332,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -334,16 +348,16 @@ namespace Eve.Data
     AssemblyLine GetAssemblyLineById(AssemblyLineId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="AssemblyLine" />
-    /// objects.
+    /// Returns all <see cref="AssemblyLine" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<AssemblyLine> GetAssemblyLines(Expression<Func<AssemblyLineEntity, bool>> filter);
+    IReadOnlyList<AssemblyLine> GetAssemblyLines(Func<IQueryable<AssemblyLineEntity>, IQueryable<AssemblyLineEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="AssemblyLine" />
@@ -353,7 +367,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<AssemblyLine> GetAssemblyLines(params IQueryModifier<AssemblyLineEntity>[] modifiers);
 
@@ -365,13 +379,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetAssemblyLineById(AssemblyLineId id, out AssemblyLine value);
     #endregion
 
@@ -386,7 +403,7 @@ namespace Eve.Data
     /// The ID of the assembly line type.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -402,26 +419,25 @@ namespace Eve.Data
     AssemblyLineStation GetAssemblyLineStationById(StationId stationId, AssemblyLineTypeId assemblyLineTypeId);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="AssemblyLineStation" />
-    /// objects.
+    /// Returns all <see cref="AssemblyLineStation" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<AssemblyLineStation> GetAssemblyLineStations(Expression<Func<AssemblyLineStationEntity, bool>> filter);
+    IReadOnlyList<AssemblyLineStation> GetAssemblyLineStations(Func<IQueryable<AssemblyLineStationEntity>, IQueryable<AssemblyLineStationEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="AssemblyLineStation" />
-    /// objects.
     /// </summary>
     /// <param name="modifiers">
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<AssemblyLineStation> GetAssemblyLineStations(params IQueryModifier<AssemblyLineStationEntity>[] modifiers);
 
@@ -436,13 +452,16 @@ namespace Eve.Data
     /// The ID of the assembly line type.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetAssemblyLineStationById(StationId stationId, AssemblyLineTypeId assemblyLineTypeId, out AssemblyLineStation value);
     #endregion
 
@@ -454,7 +473,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -470,16 +489,16 @@ namespace Eve.Data
     AssemblyLineType GetAssemblyLineTypeById(AssemblyLineTypeId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="AssemblyLineType" />
-    /// objects.
+    /// Returns all <see cref="AssemblyLineType" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<AssemblyLineType> GetAssemblyLineTypes(Expression<Func<AssemblyLineTypeEntity, bool>> filter);
+    IReadOnlyList<AssemblyLineType> GetAssemblyLineTypes(Func<IQueryable<AssemblyLineTypeEntity>, IQueryable<AssemblyLineTypeEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="AssemblyLineType" />
@@ -489,7 +508,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<AssemblyLineType> GetAssemblyLineTypes(params IQueryModifier<AssemblyLineTypeEntity>[] modifiers);
 
@@ -501,13 +520,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetAssemblyLineTypeById(AssemblyLineTypeId id, out AssemblyLineType value);
     #endregion
 
@@ -538,16 +560,16 @@ namespace Eve.Data
     AssemblyLineTypeCategoryDetail GetAssemblyLineTypeCategoryDetailById(AssemblyLineTypeId assemblyLineTypeId, CategoryId categoryId);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="AssemblyLineTypeCategoryDetail" />
-    /// objects.
+    /// Returns all <see cref="AssemblyLineTypeCategoryDetail" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<AssemblyLineTypeCategoryDetail> GetAssemblyLineTypeCategoryDetails(Expression<Func<AssemblyLineTypeCategoryDetailEntity, bool>> filter);
+    IReadOnlyList<AssemblyLineTypeCategoryDetail> GetAssemblyLineTypeCategoryDetails(Func<IQueryable<AssemblyLineTypeCategoryDetailEntity>, IQueryable<AssemblyLineTypeCategoryDetailEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="AssemblyLineTypeCategoryDetail" />
@@ -557,7 +579,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<AssemblyLineTypeCategoryDetail> GetAssemblyLineTypeCategoryDetails(params IQueryModifier<AssemblyLineTypeCategoryDetailEntity>[] modifiers);
 
@@ -572,13 +594,16 @@ namespace Eve.Data
     /// The ID of the category.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetAssemblyLineTypeCategoryDetailById(AssemblyLineTypeId assemblyLineTypeId, CategoryId categoryId, out AssemblyLineTypeCategoryDetail value);
     #endregion
 
@@ -609,16 +634,16 @@ namespace Eve.Data
     AssemblyLineTypeGroupDetail GetAssemblyLineTypeGroupDetailById(AssemblyLineTypeId assemblyLineTypeId, GroupId groupId);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="AssemblyLineTypeGroupDetail" />
-    /// objects.
+    /// Returns all <see cref="AssemblyLineTypeGroupDetail" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<AssemblyLineTypeGroupDetail> GetAssemblyLineTypeGroupDetails(Expression<Func<AssemblyLineTypeGroupDetailEntity, bool>> filter);
+    IReadOnlyList<AssemblyLineTypeGroupDetail> GetAssemblyLineTypeGroupDetails(Func<IQueryable<AssemblyLineTypeGroupDetailEntity>, IQueryable<AssemblyLineTypeGroupDetailEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="AssemblyLineTypeGroupDetail" />
@@ -628,7 +653,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<AssemblyLineTypeGroupDetail> GetAssemblyLineTypeGroupDetails(params IQueryModifier<AssemblyLineTypeGroupDetailEntity>[] modifiers);
 
@@ -643,13 +668,16 @@ namespace Eve.Data
     /// The ID of the group.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetAssemblyLineTypeGroupDetailById(AssemblyLineTypeId assemblyLineTypeId, GroupId groupId, out AssemblyLineTypeGroupDetail value);
     #endregion
 
@@ -661,7 +689,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -677,16 +705,16 @@ namespace Eve.Data
     AttributeCategory GetAttributeCategoryById(AttributeCategoryId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="AttributeCategory" />
-    /// objects.
+    /// Returns all <see cref="AttributeCategory" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<AttributeCategory> GetAttributeCategories(Expression<Func<AttributeCategoryEntity, bool>> filter);
+    IReadOnlyList<AttributeCategory> GetAttributeCategories(Func<IQueryable<AttributeCategoryEntity>, IQueryable<AttributeCategoryEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="AttributeCategory" />
@@ -696,7 +724,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<AttributeCategory> GetAttributeCategories(params IQueryModifier<AttributeCategoryEntity>[] modifiers);
 
@@ -708,13 +736,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetAttributeCategoryById(AttributeCategoryId id, out AttributeCategory value);
     #endregion
 
@@ -726,7 +757,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -742,16 +773,16 @@ namespace Eve.Data
     AttributeType GetAttributeTypeById(AttributeId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="AttributeType" />
-    /// objects.
+    /// Returns all <see cref="AttributeType" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<AttributeType> GetAttributeTypes(Expression<Func<AttributeTypeEntity, bool>> filter);
+    IReadOnlyList<AttributeType> GetAttributeTypes(Func<IQueryable<AttributeTypeEntity>, IQueryable<AttributeTypeEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="AttributeType" />
@@ -761,7 +792,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<AttributeType> GetAttributeTypes(params IQueryModifier<AttributeTypeEntity>[] modifiers);
 
@@ -773,13 +804,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetAttributeTypeById(AttributeId id, out AttributeType value);
     #endregion
 
@@ -794,7 +828,7 @@ namespace Eve.Data
     /// The ID of the attribute to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -810,16 +844,16 @@ namespace Eve.Data
     AttributeValue GetAttributeValueById(TypeId itemTypeId, AttributeId attributeId);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="AttributeValue" />
-    /// objects.
+    /// Returns all <see cref="AttributeValue" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<AttributeValue> GetAttributeValues(Expression<Func<AttributeValueEntity, bool>> filter);
+    IReadOnlyList<AttributeValue> GetAttributeValues(Func<IQueryable<AttributeValueEntity>, IQueryable<AttributeValueEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="AttributeValue" />
@@ -829,7 +863,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<AttributeValue> GetAttributeValues(params IQueryModifier<AttributeValueEntity>[] modifiers);
 
@@ -844,13 +878,16 @@ namespace Eve.Data
     /// The ID of the attribute to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetAttributeValueById(TypeId itemTypeId, AttributeId attributeId, out AttributeValue value);
     #endregion
 
@@ -862,7 +899,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -878,16 +915,16 @@ namespace Eve.Data
     Bloodline GetBloodlineById(BloodlineId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Bloodline" />
-    /// objects.
+    /// Returns all <see cref="Bloodline" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Bloodline> GetBloodlines(Expression<Func<BloodlineEntity, bool>> filter);
+    IReadOnlyList<Bloodline> GetBloodlines(Func<IQueryable<BloodlineEntity>, IQueryable<BloodlineEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Bloodline" />
@@ -897,7 +934,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<Bloodline> GetBloodlines(params IQueryModifier<BloodlineEntity>[] modifiers);
 
@@ -909,13 +946,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetBloodlineById(BloodlineId id, out Bloodline value);
     #endregion
 
@@ -927,7 +967,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -943,16 +983,16 @@ namespace Eve.Data
     Category GetCategoryById(CategoryId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Category" />
-    /// objects.
+    /// Returns all <see cref="Category" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Category> GetCategories(Expression<Func<CategoryEntity, bool>> filter);
+    IReadOnlyList<Category> GetCategories(Func<IQueryable<CategoryEntity>, IQueryable<CategoryEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Category" />
@@ -962,7 +1002,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<Category> GetCategories(params IQueryModifier<CategoryEntity>[] modifiers);
 
@@ -974,13 +1014,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetCategoryById(CategoryId id, out Category value);
     #endregion
 
@@ -992,7 +1035,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -1008,16 +1051,16 @@ namespace Eve.Data
     Celestial GetCelestialById(CelestialId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Celestial" />
-    /// objects.
+    /// Returns all <see cref="Celestial" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Celestial> GetCelestials(Expression<Func<ItemEntity, bool>> filter);
+    IReadOnlyList<Celestial> GetCelestials(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Celestial" />
@@ -1027,7 +1070,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<Celestial> GetCelestials(params IQueryModifier<ItemEntity>[] modifiers);
 
@@ -1039,13 +1082,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetCelestialById(CelestialId id, out Celestial value);
     #endregion
 
@@ -1058,7 +1104,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -1077,13 +1123,14 @@ namespace Eve.Data
     /// Returns the results of the specified query for
     /// <see cref="CharacterAttributeType" /> objects.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<CharacterAttributeType> GetCharacterAttributeTypes(Expression<Func<CharacterAttributeTypeEntity, bool>> filter);
+    IReadOnlyList<CharacterAttributeType> GetCharacterAttributeTypes(Func<IQueryable<CharacterAttributeTypeEntity>, IQueryable<CharacterAttributeTypeEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for 
@@ -1093,7 +1140,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<CharacterAttributeType> GetCharacterAttributeTypes(params IQueryModifier<CharacterAttributeTypeEntity>[] modifiers);
 
@@ -1105,13 +1152,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetCharacterAttributeTypeById(CharacterAttributeId id, out CharacterAttributeType value);
     #endregion
 
@@ -1123,7 +1173,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -1139,15 +1189,16 @@ namespace Eve.Data
     Constellation GetConstellationById(ConstellationId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Constellation" /> objects.
+    /// Returns all <see cref="Constellation" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Constellation> GetConstellations(Expression<Func<ItemEntity, bool>> filter);
+    IReadOnlyList<Constellation> GetConstellations(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Constellation" /> objects.
@@ -1156,7 +1207,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<Constellation> GetConstellations(params IQueryModifier<ItemEntity>[] modifiers);
 
@@ -1168,13 +1219,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetConstellationById(ConstellationId id, out Constellation value);
     #endregion
 
@@ -1189,7 +1243,7 @@ namespace Eve.Data
     /// The ID of the destination region of the jump to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -1205,15 +1259,16 @@ namespace Eve.Data
     ConstellationJump GetConstellationJumpById(ConstellationId fromConstellationId, ConstellationId toConstellationId);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="ConstellationJump" /> objects.
+    /// Returns all <see cref="ConstellationJump" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<ConstellationJump> GetConstellationJumps(Expression<Func<ConstellationJumpEntity, bool>> filter);
+    IReadOnlyList<ConstellationJump> GetConstellationJumps(Func<IQueryable<ConstellationJumpEntity>, IQueryable<ConstellationJumpEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="ConstellationJump" /> objects.
@@ -1222,7 +1277,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<ConstellationJump> GetConstellationJumps(params IQueryModifier<ConstellationJumpEntity>[] modifiers);
 
@@ -1237,13 +1292,16 @@ namespace Eve.Data
     /// The ID of the destination region of the jump to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetConstellationJumpById(ConstellationId fromConstellationId, ConstellationId toConstellationId, out ConstellationJump value);
     #endregion
 
@@ -1255,7 +1313,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -1271,15 +1329,16 @@ namespace Eve.Data
     CorporateActivity GetCorporateActivityById(CorporateActivityId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="CorporateActivity" /> objects.
+    /// Returns all <see cref="CorporateActivity" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<CorporateActivity> GetCorporateActivities(Expression<Func<CorporateActivityEntity, bool>> filter);
+    IReadOnlyList<CorporateActivity> GetCorporateActivities(Func<IQueryable<CorporateActivityEntity>, IQueryable<CorporateActivityEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="CorporateActivity" /> objects.
@@ -1288,7 +1347,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<CorporateActivity> GetCorporateActivities(params IQueryModifier<CorporateActivityEntity>[] modifiers);
 
@@ -1300,13 +1359,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetCorporateActivityById(CorporateActivityId id, out CorporateActivity value);
     #endregion
 
@@ -1318,7 +1380,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -1334,15 +1396,16 @@ namespace Eve.Data
     Division GetDivisionById(DivisionId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Division" /> objects.
+    /// Returns all <see cref="Division" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Division> GetDivisions(Expression<Func<DivisionEntity, bool>> filter);
+    IReadOnlyList<Division> GetDivisions(Func<IQueryable<DivisionEntity>, IQueryable<DivisionEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Division" /> objects.
@@ -1351,7 +1414,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<Division> GetDivisions(params IQueryModifier<DivisionEntity>[] modifiers);
 
@@ -1363,13 +1426,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetDivisionById(DivisionId id, out Division value);
     #endregion
 
@@ -1384,7 +1450,7 @@ namespace Eve.Data
     /// The ID of the effect to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -1400,16 +1466,16 @@ namespace Eve.Data
     Effect GetEffectById(TypeId itemTypeId, EffectId effectId);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Effect" />
-    /// objects.
+    /// Returns all <see cref="Effect" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Effect> GetEffects(Expression<Func<EffectEntity, bool>> filter);
+    IReadOnlyList<Effect> GetEffects(Func<IQueryable<EffectEntity>, IQueryable<EffectEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Effect" />
@@ -1419,7 +1485,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<Effect> GetEffects(params IQueryModifier<EffectEntity>[] modifiers);
 
@@ -1434,13 +1500,16 @@ namespace Eve.Data
     /// The ID of the effect to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetEffectById(TypeId itemTypeId, EffectId effectId, out Effect value);
     #endregion
 
@@ -1452,7 +1521,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -1468,16 +1537,16 @@ namespace Eve.Data
     EffectType GetEffectTypeById(EffectId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="EffectType" />
-    /// objects.
+    /// Returns all <see cref="EffectType" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<EffectType> GetEffectTypes(Expression<Func<EffectTypeEntity, bool>> filter);
+    IReadOnlyList<EffectType> GetEffectTypes(Func<IQueryable<EffectTypeEntity>, IQueryable<EffectTypeEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="EffectType" />
@@ -1487,7 +1556,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<EffectType> GetEffectTypes(params IQueryModifier<EffectTypeEntity>[] modifiers);
 
@@ -1499,13 +1568,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetEffectTypeById(EffectId id, out EffectType value);
     #endregion
 
@@ -1517,7 +1589,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -1533,15 +1605,16 @@ namespace Eve.Data
     EveType GetEveTypeById(TypeId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="EveType" /> objects.
+    /// Returns all <see cref="EveType" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<EveType> GetEveTypes(Expression<Func<EveTypeEntity, bool>> filter);
+    IReadOnlyList<EveType> GetEveTypes(Func<IQueryable<EveTypeEntity>, IQueryable<EveTypeEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="EveType" /> objects.
@@ -1550,7 +1623,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<EveType> GetEveTypes(params IQueryModifier<EveTypeEntity>[] modifiers);
 
@@ -1562,13 +1635,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetEveTypeById(TypeId id, out EveType value);
 
     /// <summary>
@@ -1602,20 +1678,21 @@ namespace Eve.Data
     TEveType GetEveTypeById<TEveType>(TypeId id) where TEveType : EveType;
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="EveType" /> objects
+    /// Returns all <see cref="EveType" /> objects matching the specified criteria.
     /// of the desired type.
     /// </summary>
     /// <typeparam name="TEveType">
     /// The desired item type.  Only items of this type will be returned.
     /// </typeparam>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.  Only items of type <typeparamref name="TEveType" />
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.  Only items of type <typeparamref name="TEveType" />
     /// will be returned.  Any matching items of other types will be omitted.
     /// </returns>
-    IReadOnlyList<TEveType> GetEveTypes<TEveType>(Expression<Func<EveTypeEntity, bool>> filter) where TEveType : EveType;
+    IReadOnlyList<TEveType> GetEveTypes<TEveType>(Func<IQueryable<EveTypeEntity>, IQueryable<EveTypeEntity>> queryOperations) where TEveType : EveType;
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="EveType" /> objects
@@ -1628,7 +1705,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.  Only items of type <typeparamref name="TEveType" />
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.  Only items of type <typeparamref name="TEveType" />
     /// will be returned.  Any matching items of other types will be omitted.
     /// </returns>
     IReadOnlyList<TEveType> GetEveTypes<TEveType>(params IQueryModifier<EveTypeEntity>[] modifiers) where TEveType : EveType;
@@ -1644,13 +1721,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item of the desired type is
     /// found; otherwise <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetEveTypeById<TEveType>(TypeId id, out TEveType value) where TEveType : EveType;
     #endregion
 
@@ -1662,7 +1742,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -1678,15 +1758,16 @@ namespace Eve.Data
     Faction GetFactionById(FactionId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Faction" /> objects.
+    /// Returns all <see cref="Faction" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Faction> GetFactions(Expression<Func<ItemEntity, bool>> filter);
+    IReadOnlyList<Faction> GetFactions(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Faction" /> objects.
@@ -1695,7 +1776,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<Faction> GetFactions(params IQueryModifier<ItemEntity>[] modifiers);
 
@@ -1707,13 +1788,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetFactionById(FactionId id, out Faction value);
     #endregion
 
@@ -1725,7 +1809,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -1741,15 +1825,16 @@ namespace Eve.Data
     Graphic GetGraphicById(GraphicId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Graphic" /> objects.
+    /// Returns all <see cref="Graphic" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Graphic> GetGraphics(Expression<Func<GraphicEntity, bool>> filter);
+    IReadOnlyList<Graphic> GetGraphics(Func<IQueryable<GraphicEntity>, IQueryable<GraphicEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Graphic" /> objects.
@@ -1758,7 +1843,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<Graphic> GetGraphics(params IQueryModifier<GraphicEntity>[] modifiers);
 
@@ -1770,13 +1855,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetGraphicById(GraphicId id, out Graphic value);
     #endregion
 
@@ -1788,7 +1876,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -1804,15 +1892,16 @@ namespace Eve.Data
     Group GetGroupById(GroupId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Group" /> objects.
+    /// Returns all <see cref="Group" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Group> GetGroups(Expression<Func<GroupEntity, bool>> filter);
+    IReadOnlyList<Group> GetGroups(Func<IQueryable<GroupEntity>, IQueryable<GroupEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Group" /> objects.
@@ -1821,7 +1910,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<Group> GetGroups(params IQueryModifier<GroupEntity>[] modifiers);
 
@@ -1833,13 +1922,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetGroupById(GroupId id, out Group value);
     #endregion
 
@@ -1851,7 +1943,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -1867,15 +1959,16 @@ namespace Eve.Data
     Icon GetIconById(IconId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Icon" /> objects.
+    /// Returns all <see cref="Icon" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Icon> GetIcons(Expression<Func<IconEntity, bool>> filter);
+    IReadOnlyList<Icon> GetIcons(Func<IQueryable<IconEntity>, IQueryable<IconEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Icon" /> objects.
@@ -1884,7 +1977,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<Icon> GetIcons(params IQueryModifier<IconEntity>[] modifiers);
 
@@ -1896,13 +1989,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetIconById(IconId id, out Icon value);
     #endregion
 
@@ -1914,7 +2010,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -1930,15 +2026,16 @@ namespace Eve.Data
     Item GetItemById(ItemId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Item" /> objects.
+    /// Returns all <see cref="Item" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Item> GetItems(Expression<Func<ItemEntity, bool>> filter);
+    IReadOnlyList<Item> GetItems(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Item" /> objects.
@@ -1947,7 +2044,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<Item> GetItems(params IQueryModifier<ItemEntity>[] modifiers);
 
@@ -1959,13 +2056,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetItemById(ItemId id, out Item value);
 
     /// <summary>
@@ -1979,7 +2079,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -1998,20 +2098,21 @@ namespace Eve.Data
     TItem GetItemById<TItem>(ItemId id) where TItem : Item;
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Item" /> objects
+    /// Returns all <see cref="Item" /> objects matching the specified criteria.
     /// of the desired type.
     /// </summary>
     /// <typeparam name="TItem">
     /// The desired item type.  Only items of this type will be returned.
     /// </typeparam>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.  Only items of type <typeparamref name="TItem" />
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.  Only items of type <typeparamref name="TItem" />
     /// will be returned.  Any matching items of other types will be omitted.
     /// </returns>
-    IReadOnlyList<TItem> GetItems<TItem>(Expression<Func<ItemEntity, bool>> filter) where TItem : Item;
+    IReadOnlyList<TItem> GetItems<TItem>(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations) where TItem : Item;
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Item" /> objects
@@ -2024,7 +2125,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.  Only items of type <typeparamref name="TItem" />
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.  Only items of type <typeparamref name="TItem" />
     /// will be returned.  Any matching items of other types will be omitted.
     /// </returns>
     IReadOnlyList<TItem> GetItems<TItem>(params IQueryModifier<ItemEntity>[] modifiers) where TItem : Item;
@@ -2040,13 +2141,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item of the desired type
     /// is found; otherwise <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetItemById<TItem>(ItemId id, out TItem value) where TItem : Item;
     #endregion
 
@@ -2058,7 +2162,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -2074,15 +2178,16 @@ namespace Eve.Data
     ItemPosition GetItemPositionById(ItemId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="ItemPosition" /> objects.
+    /// Returns all <see cref="ItemPosition" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<ItemPosition> GetItemPositions(Expression<Func<ItemPositionEntity, bool>> filter);
+    IReadOnlyList<ItemPosition> GetItemPositions(Func<IQueryable<ItemPositionEntity>, IQueryable<ItemPositionEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="ItemPosition" /> objects.
@@ -2091,7 +2196,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<ItemPosition> GetItemPositions(params IQueryModifier<ItemPositionEntity>[] modifiers);
 
@@ -2103,13 +2208,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetItemPositionById(ItemId id, out ItemPosition value);
     #endregion
 
@@ -2121,7 +2229,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -2137,15 +2245,16 @@ namespace Eve.Data
     MarketGroup GetMarketGroupById(MarketGroupId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="MarketGroup" /> objects.
+    /// Returns all <see cref="MarketGroup" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<MarketGroup> GetMarketGroups(Expression<Func<MarketGroupEntity, bool>> filter);
+    IReadOnlyList<MarketGroup> GetMarketGroups(Func<IQueryable<MarketGroupEntity>, IQueryable<MarketGroupEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="MarketGroup" /> objects.
@@ -2154,7 +2263,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<MarketGroup> GetMarketGroups(params IQueryModifier<MarketGroupEntity>[] modifiers);
 
@@ -2166,13 +2275,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetMarketGroupById(MarketGroupId id, out MarketGroup value);
     #endregion
 
@@ -2184,7 +2296,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -2200,15 +2312,16 @@ namespace Eve.Data
     MetaGroup GetMetaGroupById(MetaGroupId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="MetaGroup" /> objects.
+    /// Returns all <see cref="MetaGroup" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<MetaGroup> GetMetaGroups(Expression<Func<MetaGroupEntity, bool>> filter);
+    IReadOnlyList<MetaGroup> GetMetaGroups(Func<IQueryable<MetaGroupEntity>, IQueryable<MetaGroupEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="MetaGroup" /> objects.
@@ -2217,7 +2330,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<MetaGroup> GetMetaGroups(params IQueryModifier<MetaGroupEntity>[] modifiers);
 
@@ -2229,13 +2342,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetMetaGroupById(MetaGroupId id, out MetaGroup value);
     #endregion
 
@@ -2247,7 +2363,7 @@ namespace Eve.Data
     /// The ID of the type whose meta type to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -2263,16 +2379,16 @@ namespace Eve.Data
     MetaType GetMetaTypeById(TypeId typeId);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="MetaType" />
-    /// objects.
+    /// Returns all <see cref="MetaType" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<MetaType> GetMetaTypes(Expression<Func<MetaTypeEntity, bool>> filter);
+    IReadOnlyList<MetaType> GetMetaTypes(Func<IQueryable<MetaTypeEntity>, IQueryable<MetaTypeEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="MetaType" />
@@ -2282,7 +2398,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<MetaType> GetMetaTypes(params IQueryModifier<MetaTypeEntity>[] modifiers);
 
@@ -2294,13 +2410,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetMetaTypeById(TypeId id, out MetaType value);
     #endregion
 
@@ -2312,7 +2431,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -2331,15 +2450,16 @@ namespace Eve.Data
     NpcCorporation GetNpcCorporationById(NpcCorporationId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="NpcCorporation" /> objects.
+    /// Returns all <see cref="NpcCorporation" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<NpcCorporation> GetNpcCorporations(Expression<Func<ItemEntity, bool>> filter);
+    IReadOnlyList<NpcCorporation> GetNpcCorporations(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="NpcCorporation" /> objects.
@@ -2348,7 +2468,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<NpcCorporation> GetNpcCorporations(params IQueryModifier<ItemEntity>[] modifiers);
 
@@ -2360,13 +2480,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetNpcCorporationById(NpcCorporationId id, out NpcCorporation value);
     #endregion
 
@@ -2381,7 +2504,7 @@ namespace Eve.Data
     /// The ID of the division.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -2397,15 +2520,16 @@ namespace Eve.Data
     NpcCorporationDivision GetNpcCorporationDivisionById(NpcCorporationId corporationId, DivisionId divisionId);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="NpcCorporationDivision" /> objects.
+    /// Returns all <see cref="NpcCorporationDivision" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<NpcCorporationDivision> GetNpcCorporationDivisions(Expression<Func<NpcCorporationDivisionEntity, bool>> filter);
+    IReadOnlyList<NpcCorporationDivision> GetNpcCorporationDivisions(Func<IQueryable<NpcCorporationDivisionEntity>, IQueryable<NpcCorporationDivisionEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="NpcCorporation" /> objects.
@@ -2414,7 +2538,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<NpcCorporationDivision> GetNpcCorporationDivisions(params IQueryModifier<NpcCorporationDivisionEntity>[] modifiers);
 
@@ -2429,13 +2553,16 @@ namespace Eve.Data
     /// The ID of the division.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetNpcCorporationDivisionById(NpcCorporationId corporationId, DivisionId divisionId, out NpcCorporationDivision value);
     #endregion
 
@@ -2447,7 +2574,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -2463,15 +2590,16 @@ namespace Eve.Data
     Race GetRaceById(RaceId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Race" /> objects.
+    /// Returns all <see cref="Race" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Race> GetRaces(Expression<Func<RaceEntity, bool>> filter);
+    IReadOnlyList<Race> GetRaces(Func<IQueryable<RaceEntity>, IQueryable<RaceEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Race" /> objects.
@@ -2480,7 +2608,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<Race> GetRaces(params IQueryModifier<RaceEntity>[] modifiers);
 
@@ -2492,13 +2620,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetRaceById(RaceId id, out Race value);
     #endregion
 
@@ -2510,7 +2641,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -2526,15 +2657,16 @@ namespace Eve.Data
     Region GetRegionById(RegionId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Region" /> objects.
+    /// Returns all <see cref="Region" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Region> GetRegions(Expression<Func<ItemEntity, bool>> filter);
+    IReadOnlyList<Region> GetRegions(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Region" /> objects.
@@ -2543,7 +2675,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<Region> GetRegions(params IQueryModifier<ItemEntity>[] modifiers);
 
@@ -2555,13 +2687,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetRegionById(RegionId id, out Region value);
     #endregion
 
@@ -2576,7 +2711,7 @@ namespace Eve.Data
     /// The ID of the destination region of the jump to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -2592,15 +2727,16 @@ namespace Eve.Data
     RegionJump GetRegionJumpById(RegionId fromRegionId, RegionId toRegionId);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="RegionJump" /> objects.
+    /// Returns all <see cref="RegionJump" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<RegionJump> GetRegionJumps(Expression<Func<RegionJumpEntity, bool>> filter);
+    IReadOnlyList<RegionJump> GetRegionJumps(Func<IQueryable<RegionJumpEntity>, IQueryable<RegionJumpEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="RegionJump" /> objects.
@@ -2609,7 +2745,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<RegionJump> GetRegionJumps(params IQueryModifier<RegionJumpEntity>[] modifiers);
 
@@ -2624,13 +2760,16 @@ namespace Eve.Data
     /// The ID of the destination region of the jump to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetRegionJumpById(RegionId fromRegionId, RegionId toRegionId, out RegionJump value);
     #endregion
 
@@ -2642,7 +2781,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -2658,15 +2797,16 @@ namespace Eve.Data
     SolarSystem GetSolarSystemById(SolarSystemId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="SolarSystem" /> objects.
+    /// Returns all <see cref="SolarSystem" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<SolarSystem> GetSolarSystems(Expression<Func<ItemEntity, bool>> filter);
+    IReadOnlyList<SolarSystem> GetSolarSystems(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="SolarSystem" /> objects.
@@ -2675,7 +2815,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<SolarSystem> GetSolarSystems(params IQueryModifier<ItemEntity>[] modifiers);
 
@@ -2687,13 +2827,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetSolarSystemById(SolarSystemId id, out SolarSystem value);
     #endregion
 
@@ -2708,7 +2851,7 @@ namespace Eve.Data
     /// The ID of the destination region of the jump to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -2724,15 +2867,16 @@ namespace Eve.Data
     SolarSystemJump GetSolarSystemJumpById(SolarSystemId fromSolarSystemId, SolarSystemId toSolarSystemId);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="SolarSystemJump" /> objects.
+    /// Returns all <see cref="SolarSystemJump" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<SolarSystemJump> GetSolarSystemJumps(Expression<Func<SolarSystemJumpEntity, bool>> filter);
+    IReadOnlyList<SolarSystemJump> GetSolarSystemJumps(Func<IQueryable<SolarSystemJumpEntity>, IQueryable<SolarSystemJumpEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="SolarSystemJump" /> objects.
@@ -2741,7 +2885,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<SolarSystemJump> GetSolarSystemJumps(params IQueryModifier<SolarSystemJumpEntity>[] modifiers);
 
@@ -2756,13 +2900,16 @@ namespace Eve.Data
     /// The ID of the destination region of the jump to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetSolarSystemJumpById(SolarSystemId fromSolarSystemId, SolarSystemId toSolarSystemId, out SolarSystemJump value);
     #endregion
 
@@ -2774,7 +2921,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -2790,16 +2937,16 @@ namespace Eve.Data
     Stargate GetStargateById(StargateId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Stargate" />
-    /// objects.
+    /// Returns all <see cref="Stargate" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Stargate> GetStargates(Expression<Func<ItemEntity, bool>> filter);
+    IReadOnlyList<Stargate> GetStargates(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Stargate" />
@@ -2809,7 +2956,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<Stargate> GetStargates(params IQueryModifier<ItemEntity>[] modifiers);
 
@@ -2821,13 +2968,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetStargateById(StargateId id, out Stargate value);
     #endregion
 
@@ -2839,7 +2989,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -2855,15 +3005,16 @@ namespace Eve.Data
     Station GetStationById(StationId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Station" /> objects.
+    /// Returns all <see cref="Station" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Station> GetStations(Expression<Func<ItemEntity, bool>> filter);
+    IReadOnlyList<Station> GetStations(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Station" /> objects.
@@ -2872,7 +3023,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<Station> GetStations(params IQueryModifier<ItemEntity>[] modifiers);
 
@@ -2884,13 +3035,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetStationById(StationId id, out Station value);
     #endregion
 
@@ -2902,7 +3056,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -2918,15 +3072,16 @@ namespace Eve.Data
     StationOperation GetStationOperationById(StationOperationId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="StationOperation" /> objects.
+    /// Returns all <see cref="StationOperation" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<StationOperation> GetStationOperations(Expression<Func<StationOperationEntity, bool>> filter);
+    IReadOnlyList<StationOperation> GetStationOperations(Func<IQueryable<StationOperationEntity>, IQueryable<StationOperationEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="StationOperation" /> objects.
@@ -2935,7 +3090,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<StationOperation> GetStationOperations(params IQueryModifier<StationOperationEntity>[] modifiers);
 
@@ -2947,13 +3102,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetStationOperationById(StationOperationId id, out StationOperation value);
     #endregion
 
@@ -2965,7 +3123,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -2981,15 +3139,16 @@ namespace Eve.Data
     StationService GetStationServiceById(StationServiceId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="StationService" /> objects.
+    /// Returns all <see cref="StationService" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<StationService> GetStationServices(Expression<Func<StationServiceEntity, bool>> filter);
+    IReadOnlyList<StationService> GetStationServices(Func<IQueryable<StationServiceEntity>, IQueryable<StationServiceEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="StationService" /> objects.
@@ -2998,7 +3157,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<StationService> GetStationServices(params IQueryModifier<StationServiceEntity>[] modifiers);
 
@@ -3010,13 +3169,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetStationServiceById(StationServiceId id, out StationService value);
     #endregion
 
@@ -3028,7 +3190,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -3044,15 +3206,16 @@ namespace Eve.Data
     StationType GetStationTypeById(TypeId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="StationType" /> objects.
+    /// Returns all <see cref="StationType" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<StationType> GetStationTypes(Expression<Func<StationTypeEntity, bool>> filter);
+    IReadOnlyList<StationType> GetStationTypes(Func<IQueryable<StationTypeEntity>, IQueryable<StationTypeEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="StationType" /> objects.
@@ -3061,7 +3224,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<StationType> GetStationTypes(params IQueryModifier<StationTypeEntity>[] modifiers);
 
@@ -3073,13 +3236,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetStationTypeById(TypeId id, out StationType value);
     #endregion
 
@@ -3091,7 +3257,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -3107,15 +3273,16 @@ namespace Eve.Data
     Unit GetUnitById(UnitId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Unit" /> objects.
+    /// Returns all <see cref="Unit" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Unit> GetUnits(Expression<Func<UnitEntity, bool>> filter);
+    IReadOnlyList<Unit> GetUnits(Func<IQueryable<UnitEntity>, IQueryable<UnitEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Unit" /> objects.
@@ -3124,7 +3291,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<Unit> GetUnits(params IQueryModifier<UnitEntity>[] modifiers);
 
@@ -3136,13 +3303,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetUnitById(UnitId id, out Unit value);
     #endregion
 
@@ -3154,7 +3324,7 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <returns>
-    /// The item with the specified key.
+    /// The item with the specified ID value(s).
     /// </returns>
     /// <exception cref="InvalidOperationException">
     /// Thrown if no unique item with the specified ID was found.
@@ -3170,15 +3340,16 @@ namespace Eve.Data
     Universe GetUniverseById(UniverseId id);
 
     /// <summary>
-    /// Returns the results of the specified query for <see cref="Universe" /> objects.
+    /// Returns all <see cref="Universe" /> objects matching the specified criteria.
     /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Universe> GetUniverses(Expression<Func<ItemEntity, bool>> filter);
+    IReadOnlyList<Universe> GetUniverses(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Universe" /> objects.
@@ -3187,7 +3358,7 @@ namespace Eve.Data
     /// The modifiers that are applied to the query.
     /// </param>
     /// <returns>
-    /// The results of the query.
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     IReadOnlyList<Universe> GetUniverses(params IQueryModifier<ItemEntity>[] modifiers);
 
@@ -3199,13 +3370,16 @@ namespace Eve.Data
     /// The ID of the item to return.
     /// </param>
     /// <param name="value">
-    /// The parameter which will hold the item with the specified ID,
+    /// The parameter which will hold the item with the specified ID value(s),
     /// if a matching item is found.  Output parameter.
     /// </param>
     /// <returns>
     /// <see langword="true" /> if a matching item is found; otherwise
     /// <see langword="false" />.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
     bool TryGetUniverseById(UniverseId id, out Universe value);
     #endregion
   }

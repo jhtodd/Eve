@@ -62,7 +62,7 @@ namespace Eve.Universe
 
         LazyInitializer.EnsureInitialized(
           ref this.agents,
-          () => new ReadOnlyAgentCollection(this.Container.GetAgents(x => x.AgentInfo.LocationId == this.Id.Value).OrderBy(x => x)));
+          () => new ReadOnlyAgentCollection(this.Container.GetAgents(q => q.Where(x => x.AgentInfo.LocationId == this.Id.Value)).OrderBy(x => x)));
 
         Contract.Assume(this.agents != null);
         return this.agents;
@@ -83,7 +83,7 @@ namespace Eve.Universe
 
         LazyInitializer.EnsureInitialized(
           ref this.assemblyLines,
-          () => new ReadOnlyAssemblyLineCollection(this.Container.GetAssemblyLines(x => x.ContainerId == this.Id.Value).OrderBy(x => x)));
+          () => new ReadOnlyAssemblyLineCollection(this.Container.GetAssemblyLines(q => q.Where(x => x.ContainerId == this.Id.Value)).OrderBy(x => x)));
 
         Contract.Assume(this.assemblyLines != null);
         return this.assemblyLines;
@@ -106,7 +106,7 @@ namespace Eve.Universe
 
         LazyInitializer.EnsureInitialized(
           ref this.assemblyLineTypes,
-          () => new ReadOnlyAssemblyLineStationCollection(this.Container.GetAssemblyLineStations(x => x.StationId == this.Id.Value).OrderBy(x => x)));
+          () => new ReadOnlyAssemblyLineStationCollection(this.Container.GetAssemblyLineStations(q => q.Where(x => x.StationId == this.Id.Value)).OrderBy(x => x)));
 
         Contract.Assume(this.assemblyLineTypes != null);
         return this.assemblyLineTypes;

@@ -204,7 +204,7 @@ namespace Eve
 
         LazyInitializer.EnsureInitialized(
           ref this.types, 
-          () => new ReadOnlyTypeCollection(this.Container.GetEveTypes(x => x.GroupId == this.Id).OrderBy(x => x)));
+          () => new ReadOnlyTypeCollection(this.Container.GetEveTypes(q => q.Where(x => x.GroupId == this.Id)).OrderBy(x => x)));
 
         Contract.Assume(this.types != null);
         return this.types;

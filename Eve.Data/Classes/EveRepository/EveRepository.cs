@@ -135,24 +135,19 @@ namespace Eve.Data
     public Activity GetActivityById(ActivityId id)
     {
       Activity result;
-      if (this.Cache.TryGetValue<Activity>(id, out result))
+
+      if (!this.TryGetActivityById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No Activity with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetActivities(x => x.Id == id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Activity> GetActivities(Expression<Func<ActivityEntity, bool>> filter)
+    public IReadOnlyList<Activity> GetActivities(Func<IQueryable<ActivityEntity>, IQueryable<ActivityEntity>> queryOperations)
     {
-      return this.GetActivities(new QuerySpecification<ActivityEntity>(filter));
+      return this.GetActivities(new QueryTransform<ActivityEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -171,9 +166,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetActivities(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetActivities(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -183,24 +176,19 @@ namespace Eve.Data
     public Agent GetAgentById(AgentId id)
     {
       Agent result;
-      if (this.Cache.TryGetValue<Agent>(id, out result))
-      {
-        return result;
-      }
 
-      var query = this.GetAgents(x => x.Id == id.Value);
-      Contract.Assume(query.Count() == 1);
-      
-      result = query.Single();
-      Contract.Assume(result != null);
+      if (!this.TryGetAgentById(id, out result))
+      {
+        throw new InvalidOperationException("No Agent with ID " + id.ToString() + " could be found.");
+      }
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Agent> GetAgents(Expression<Func<ItemEntity, bool>> filter)
+    public IReadOnlyList<Agent> GetAgents(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      return this.GetAgents(new QuerySpecification<ItemEntity>(filter));
+      return this.GetAgents(new QueryTransform<ItemEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -219,9 +207,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetAgents(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetAgents(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -231,24 +217,19 @@ namespace Eve.Data
     public AgentType GetAgentTypeById(AgentTypeId id)
     {
       AgentType result;
-      if (this.Cache.TryGetValue<AgentType>(id, out result))
+
+      if (!this.TryGetAgentTypeById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No AgentType with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetAgentTypes(x => x.Id == id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<AgentType> GetAgentTypes(Expression<Func<AgentTypeEntity, bool>> filter)
+    public IReadOnlyList<AgentType> GetAgentTypes(Func<IQueryable<AgentTypeEntity>, IQueryable<AgentTypeEntity>> queryOperations)
     {
-      return this.GetAgentTypes(new QuerySpecification<AgentTypeEntity>(filter));
+      return this.GetAgentTypes(new QueryTransform<AgentTypeEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -267,9 +248,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetAgentTypes(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetAgentTypes(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -279,24 +258,19 @@ namespace Eve.Data
     public Ancestry GetAncestryById(AncestryId id)
     {
       Ancestry result;
-      if (this.Cache.TryGetValue<Ancestry>(id, out result))
+
+      if (!this.TryGetAncestryById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No Ancestry with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetAncestries(x => x.Id == id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Ancestry> GetAncestries(Expression<Func<AncestryEntity, bool>> filter)
+    public IReadOnlyList<Ancestry> GetAncestries(Func<IQueryable<AncestryEntity>, IQueryable<AncestryEntity>> queryOperations)
     {
-      return this.GetAncestries(new QuerySpecification<AncestryEntity>(filter));
+      return this.GetAncestries(new QueryTransform<AncestryEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -315,9 +289,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetAncestries(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetAncestries(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -327,24 +299,19 @@ namespace Eve.Data
     public AssemblyLine GetAssemblyLineById(AssemblyLineId id)
     {
       AssemblyLine result;
-      if (this.Cache.TryGetValue<AssemblyLine>(id, out result))
+
+      if (!this.TryGetAssemblyLineById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No AssemblyLine with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetAssemblyLines(x => x.Id == id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<AssemblyLine> GetAssemblyLines(Expression<Func<AssemblyLineEntity, bool>> filter)
+    public IReadOnlyList<AssemblyLine> GetAssemblyLines(Func<IQueryable<AssemblyLineEntity>, IQueryable<AssemblyLineEntity>> queryOperations)
     {
-      return this.GetAssemblyLines(new QuerySpecification<AssemblyLineEntity>(filter));
+      return this.GetAssemblyLines(new QueryTransform<AssemblyLineEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -363,9 +330,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetAssemblyLines(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetAssemblyLines(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -375,24 +340,19 @@ namespace Eve.Data
     public AssemblyLineStation GetAssemblyLineStationById(StationId stationId, AssemblyLineTypeId assemblyLineTypeId)
     {
       AssemblyLineStation result;
-      if (this.Cache.TryGetValue<AssemblyLineStation>(AssemblyLineStation.CreateCacheKey(stationId, assemblyLineTypeId), out result))
+
+      if (!this.TryGetAssemblyLineStationById(stationId, assemblyLineTypeId, out result))
       {
-        return result;
+        throw new InvalidOperationException("No AssemblyLineStation with ID (" + stationId.ToString() + ", " + assemblyLineTypeId.ToString() + ") could be found.");
       }
-
-      var query = this.GetAssemblyLineStations(x => x.StationId == stationId.Value && x.AssemblyLineTypeId == assemblyLineTypeId.Value);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<AssemblyLineStation> GetAssemblyLineStations(Expression<Func<AssemblyLineStationEntity, bool>> filter)
+    public IReadOnlyList<AssemblyLineStation> GetAssemblyLineStations(Func<IQueryable<AssemblyLineStationEntity>, IQueryable<AssemblyLineStationEntity>> queryOperations)
     {
-      return this.GetAssemblyLineStations(new QuerySpecification<AssemblyLineStationEntity>(filter));
+      return this.GetAssemblyLineStations(new QueryTransform<AssemblyLineStationEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -414,9 +374,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetAssemblyLineStations(x => x.StationId == stationId && x.AssemblyLineTypeId == assemblyLineTypeId);
-      value = query.SingleOrDefault();
-
+      value = this.GetAssemblyLineStations(q => q.Where(x => x.StationId == stationId && x.AssemblyLineTypeId == assemblyLineTypeId)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -426,24 +384,19 @@ namespace Eve.Data
     public AssemblyLineType GetAssemblyLineTypeById(AssemblyLineTypeId id)
     {
       AssemblyLineType result;
-      if (this.Cache.TryGetValue<AssemblyLineType>(id, out result))
+
+      if (!this.TryGetAssemblyLineTypeById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No AssemblyLineType with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetAssemblyLineTypes(x => x.Id == id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<AssemblyLineType> GetAssemblyLineTypes(Expression<Func<AssemblyLineTypeEntity, bool>> filter)
+    public IReadOnlyList<AssemblyLineType> GetAssemblyLineTypes(Func<IQueryable<AssemblyLineTypeEntity>, IQueryable<AssemblyLineTypeEntity>> queryOperations)
     {
-      return this.GetAssemblyLineTypes(new QuerySpecification<AssemblyLineTypeEntity>(filter));
+      return this.GetAssemblyLineTypes(new QueryTransform<AssemblyLineTypeEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -462,9 +415,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetAssemblyLineTypes(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetAssemblyLineTypes(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -474,24 +425,19 @@ namespace Eve.Data
     public AssemblyLineTypeCategoryDetail GetAssemblyLineTypeCategoryDetailById(AssemblyLineTypeId assemblyLineTypeId, CategoryId categoryId)
     {
       AssemblyLineTypeCategoryDetail result;
-      if (this.Cache.TryGetValue<AssemblyLineTypeCategoryDetail>(AssemblyLineTypeCategoryDetail.CreateCacheKey(assemblyLineTypeId, categoryId), out result))
+
+      if (!this.TryGetAssemblyLineTypeCategoryDetailById(assemblyLineTypeId, categoryId, out result))
       {
-        return result;
+        throw new InvalidOperationException("No AssemblyLineTypeCategoryDetail with ID (" + assemblyLineTypeId.ToString() + ", " + categoryId.ToString() + ") could be found.");
       }
-
-      var query = this.GetAssemblyLineTypeCategoryDetails(x => x.AssemblyLineTypeId == assemblyLineTypeId && x.CategoryId == categoryId);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<AssemblyLineTypeCategoryDetail> GetAssemblyLineTypeCategoryDetails(Expression<Func<AssemblyLineTypeCategoryDetailEntity, bool>> filter)
+    public IReadOnlyList<AssemblyLineTypeCategoryDetail> GetAssemblyLineTypeCategoryDetails(Func<IQueryable<AssemblyLineTypeCategoryDetailEntity>, IQueryable<AssemblyLineTypeCategoryDetailEntity>> queryOperations)
     {
-      return this.GetAssemblyLineTypeCategoryDetails(new QuerySpecification<AssemblyLineTypeCategoryDetailEntity>(filter));
+      return this.GetAssemblyLineTypeCategoryDetails(new QueryTransform<AssemblyLineTypeCategoryDetailEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -513,9 +459,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetAssemblyLineTypeCategoryDetails(x => x.AssemblyLineTypeId == assemblyLineTypeId && x.CategoryId == categoryId);
-      value = query.SingleOrDefault();
-
+      value = this.GetAssemblyLineTypeCategoryDetails(q => q.Where(x => x.AssemblyLineTypeId == assemblyLineTypeId && x.CategoryId == categoryId)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -525,24 +469,19 @@ namespace Eve.Data
     public AssemblyLineTypeGroupDetail GetAssemblyLineTypeGroupDetailById(AssemblyLineTypeId assemblyLineTypeId, GroupId groupId)
     {
       AssemblyLineTypeGroupDetail result;
-      if (this.Cache.TryGetValue<AssemblyLineTypeGroupDetail>(AssemblyLineTypeGroupDetail.CreateCacheKey(assemblyLineTypeId, groupId), out result))
+
+      if (!this.TryGetAssemblyLineTypeGroupDetailById(assemblyLineTypeId, groupId, out result))
       {
-        return result;
+        throw new InvalidOperationException("No AssemblyLineTypeGroupDetail with ID (" + assemblyLineTypeId.ToString() + ", " + groupId.ToString() + ") could be found.");
       }
-
-      var query = this.GetAssemblyLineTypeGroupDetails(x => x.AssemblyLineTypeId == assemblyLineTypeId && x.GroupId == groupId);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<AssemblyLineTypeGroupDetail> GetAssemblyLineTypeGroupDetails(Expression<Func<AssemblyLineTypeGroupDetailEntity, bool>> filter)
+    public IReadOnlyList<AssemblyLineTypeGroupDetail> GetAssemblyLineTypeGroupDetails(Func<IQueryable<AssemblyLineTypeGroupDetailEntity>, IQueryable<AssemblyLineTypeGroupDetailEntity>> queryOperations)
     {
-      return this.GetAssemblyLineTypeGroupDetails(new QuerySpecification<AssemblyLineTypeGroupDetailEntity>(filter));
+      return this.GetAssemblyLineTypeGroupDetails(new QueryTransform<AssemblyLineTypeGroupDetailEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -564,9 +503,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetAssemblyLineTypeGroupDetails(x => x.AssemblyLineTypeId == assemblyLineTypeId && x.GroupId == groupId);
-      value = query.SingleOrDefault();
-
+      value = this.GetAssemblyLineTypeGroupDetails(q => q.Where(x => x.AssemblyLineTypeId == assemblyLineTypeId && x.GroupId == groupId)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -576,24 +513,19 @@ namespace Eve.Data
     public AttributeCategory GetAttributeCategoryById(AttributeCategoryId id)
     {
       AttributeCategory result;
-      if (this.Cache.TryGetValue<AttributeCategory>(id, out result))
+
+      if (!this.TryGetAttributeCategoryById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No AttributeCategory with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetAttributeCategories(x => x.Id == id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<AttributeCategory> GetAttributeCategories(Expression<Func<AttributeCategoryEntity, bool>> filter)
+    public IReadOnlyList<AttributeCategory> GetAttributeCategories(Func<IQueryable<AttributeCategoryEntity>, IQueryable<AttributeCategoryEntity>> queryOperations)
     {
-      return this.GetAttributeCategories(new QuerySpecification<AttributeCategoryEntity>(filter));
+      return this.GetAttributeCategories(new QueryTransform<AttributeCategoryEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -612,9 +544,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetAttributeCategories(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetAttributeCategories(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -624,24 +554,19 @@ namespace Eve.Data
     public AttributeType GetAttributeTypeById(AttributeId id)
     {
       AttributeType result;
-      if (this.Cache.TryGetValue<AttributeType>(id, out result))
+
+      if (!this.TryGetAttributeTypeById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No AttributeType with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetAttributeTypes(x => x.Id == id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<AttributeType> GetAttributeTypes(Expression<Func<AttributeTypeEntity, bool>> filter)
+    public IReadOnlyList<AttributeType> GetAttributeTypes(Func<IQueryable<AttributeTypeEntity>, IQueryable<AttributeTypeEntity>> queryOperations)
     {
-      return this.GetAttributeTypes(new QuerySpecification<AttributeTypeEntity>(filter));
+      return this.GetAttributeTypes(new QueryTransform<AttributeTypeEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -660,36 +585,29 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetAttributeTypes(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetAttributeTypes(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
 
     #region AttributeValue Methods
     /// <inheritdoc />
-    public AttributeValue GetAttributeValueById(TypeId itemTypeId, AttributeId id)
+    public AttributeValue GetAttributeValueById(TypeId itemTypeId, AttributeId attributeId)
     {
       AttributeValue result;
-      if (this.Cache.TryGetValue<AttributeValue>(id, out result))
+
+      if (!this.TryGetAttributeValueById(itemTypeId, attributeId, out result))
       {
-        return result;
+        throw new InvalidOperationException("No AttributeValue with ID (" + itemTypeId.ToString() + ", " + attributeId.ToString() + ") could be found.");
       }
-
-      var query = this.GetAttributeValues(x => x.ItemTypeId == itemTypeId && x.AttributeId == id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<AttributeValue> GetAttributeValues(Expression<Func<AttributeValueEntity, bool>> filter)
+    public IReadOnlyList<AttributeValue> GetAttributeValues(Func<IQueryable<AttributeValueEntity>, IQueryable<AttributeValueEntity>> queryOperations)
     {
-      return this.GetAttributeValues(new QuerySpecification<AttributeValueEntity>(filter));
+      return this.GetAttributeValues(new QueryTransform<AttributeValueEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -710,9 +628,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetAttributeValues(x => x.ItemTypeId == itemTypeId && x.AttributeId == attributeId);
-      value = query.SingleOrDefault();
-
+      value = this.GetAttributeValues(q => q.Where(x => x.ItemTypeId == itemTypeId && x.AttributeId == attributeId)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -722,24 +638,19 @@ namespace Eve.Data
     public Bloodline GetBloodlineById(BloodlineId id)
     {
       Bloodline result;
-      if (this.Cache.TryGetValue<Bloodline>(id, out result))
+
+      if (!this.TryGetBloodlineById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No Bloodline with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetBloodlines(x => x.Id == id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Bloodline> GetBloodlines(Expression<Func<BloodlineEntity, bool>> filter)
+    public IReadOnlyList<Bloodline> GetBloodlines(Func<IQueryable<BloodlineEntity>, IQueryable<BloodlineEntity>> queryOperations)
     {
-      return this.GetBloodlines(new QuerySpecification<BloodlineEntity>(filter));
+      return this.GetBloodlines(new QueryTransform<BloodlineEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -758,9 +669,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetBloodlines(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetBloodlines(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -770,24 +679,19 @@ namespace Eve.Data
     public Category GetCategoryById(CategoryId id)
     {
       Category result;
-      if (this.Cache.TryGetValue<Category>(id, out result))
+
+      if (!this.TryGetCategoryById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No Category with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetCategories(x => x.Id == id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Category> GetCategories(Expression<Func<CategoryEntity, bool>> filter)
+    public IReadOnlyList<Category> GetCategories(Func<IQueryable<CategoryEntity>, IQueryable<CategoryEntity>> queryOperations)
     {
-      return this.GetCategories(new QuerySpecification<CategoryEntity>(filter));
+      return this.GetCategories(new QueryTransform<CategoryEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -806,9 +710,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetCategories(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetCategories(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -818,24 +720,19 @@ namespace Eve.Data
     public Celestial GetCelestialById(CelestialId id)
     {
       Celestial result;
-      if (this.Cache.TryGetValue<Celestial>(id, out result))
+
+      if (!this.TryGetCelestialById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No Celestial with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetCelestials(x => x.Id == id.Value);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Celestial> GetCelestials(Expression<Func<ItemEntity, bool>> filter)
+    public IReadOnlyList<Celestial> GetCelestials(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      return this.GetCelestials(new QuerySpecification<ItemEntity>(filter));
+      return this.GetCelestials(new QueryTransform<ItemEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -854,9 +751,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetCelestials(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetCelestials(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -866,24 +761,19 @@ namespace Eve.Data
     public CharacterAttributeType GetCharacterAttributeTypeById(CharacterAttributeId id)
     {
       CharacterAttributeType result;
-      if (this.Cache.TryGetValue<CharacterAttributeType>(id, out result))
+
+      if (!this.TryGetCharacterAttributeTypeById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No CharacterAttributeType with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetCharacterAttributeTypes(x => x.Id == id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<CharacterAttributeType> GetCharacterAttributeTypes(Expression<Func<CharacterAttributeTypeEntity, bool>> filter)
+    public IReadOnlyList<CharacterAttributeType> GetCharacterAttributeTypes(Func<IQueryable<CharacterAttributeTypeEntity>, IQueryable<CharacterAttributeTypeEntity>> queryOperations)
     {
-      return this.GetCharacterAttributeTypes(new QuerySpecification<CharacterAttributeTypeEntity>(filter));
+      return this.GetCharacterAttributeTypes(new QueryTransform<CharacterAttributeTypeEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -902,9 +792,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetCharacterAttributeTypes(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetCharacterAttributeTypes(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -914,24 +802,19 @@ namespace Eve.Data
     public Constellation GetConstellationById(ConstellationId id)
     {
       Constellation result;
-      if (this.Cache.TryGetValue<Constellation>(id, out result))
+
+      if (!this.TryGetConstellationById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No Constellation with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetConstellations(x => x.Id == id.Value);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Constellation> GetConstellations(Expression<Func<ItemEntity, bool>> filter)
+    public IReadOnlyList<Constellation> GetConstellations(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      return this.GetConstellations(new QuerySpecification<ItemEntity>(filter));
+      return this.GetConstellations(new QueryTransform<ItemEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -950,9 +833,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetConstellations(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetConstellations(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -962,24 +843,19 @@ namespace Eve.Data
     public ConstellationJump GetConstellationJumpById(ConstellationId fromConstellationId, ConstellationId toConstellationId)
     {
       ConstellationJump result;
-      if (this.Cache.TryGetValue<ConstellationJump>(ConstellationJump.CreateCacheKey(fromConstellationId, toConstellationId), out result))
+
+      if (!this.TryGetConstellationJumpById(fromConstellationId, toConstellationId, out result))
       {
-        return result;
+        throw new InvalidOperationException("No ConstellationJump with ID (" + fromConstellationId.ToString() + ", " + toConstellationId.ToString() + ") could be found.");
       }
-
-      var query = this.GetConstellationJumps(x => x.FromConstellationId == fromConstellationId.Value && x.ToConstellationId == toConstellationId.Value);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<ConstellationJump> GetConstellationJumps(Expression<Func<ConstellationJumpEntity, bool>> filter)
+    public IReadOnlyList<ConstellationJump> GetConstellationJumps(Func<IQueryable<ConstellationJumpEntity>, IQueryable<ConstellationJumpEntity>> queryOperations)
     {
-      return this.GetConstellationJumps(new QuerySpecification<ConstellationJumpEntity>(filter));
+      return this.GetConstellationJumps(new QueryTransform<ConstellationJumpEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -1001,9 +877,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetConstellationJumps(x => x.FromConstellationId == fromConstellationId && x.ToConstellationId == toConstellationId);
-      value = query.SingleOrDefault();
-
+      value = this.GetConstellationJumps(q => q.Where(x => x.FromConstellationId == fromConstellationId && x.ToConstellationId == toConstellationId)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1013,24 +887,19 @@ namespace Eve.Data
     public CorporateActivity GetCorporateActivityById(CorporateActivityId id)
     {
       CorporateActivity result;
-      if (this.Cache.TryGetValue<CorporateActivity>(id, out result))
+
+      if (!this.TryGetCorporateActivityById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No CorporateActivity with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetCorporateActivities(x => x.Id == id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<CorporateActivity> GetCorporateActivities(Expression<Func<CorporateActivityEntity, bool>> filter)
+    public IReadOnlyList<CorporateActivity> GetCorporateActivities(Func<IQueryable<CorporateActivityEntity>, IQueryable<CorporateActivityEntity>> queryOperations)
     {
-      return this.GetCorporateActivities(new QuerySpecification<CorporateActivityEntity>(filter));
+      return this.GetCorporateActivities(new QueryTransform<CorporateActivityEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -1049,9 +918,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetCorporateActivities(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetCorporateActivities(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1061,24 +928,19 @@ namespace Eve.Data
     public Division GetDivisionById(DivisionId id)
     {
       Division result;
-      if (this.Cache.TryGetValue<Division>(id, out result))
+
+      if (!this.TryGetDivisionById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No Division with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetDivisions(x => x.Id == id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Division> GetDivisions(Expression<Func<DivisionEntity, bool>> filter)
+    public IReadOnlyList<Division> GetDivisions(Func<IQueryable<DivisionEntity>, IQueryable<DivisionEntity>> queryOperations)
     {
-      return this.GetDivisions(new QuerySpecification<DivisionEntity>(filter));
+      return this.GetDivisions(new QueryTransform<DivisionEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -1097,36 +959,29 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetDivisions(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetDivisions(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
 
     #region Effect Methods
     /// <inheritdoc />
-    public Effect GetEffectById(TypeId itemTypeId, EffectId id)
+    public Effect GetEffectById(TypeId itemTypeId, EffectId effectId)
     {
       Effect result;
-      if (this.Cache.TryGetValue<Effect>(id, out result))
+
+      if (!this.TryGetEffectById(itemTypeId, effectId, out result))
       {
-        return result;
+        throw new InvalidOperationException("No Effect with ID (" + itemTypeId.ToString() + ", " + effectId.ToString() + ") could be found.");
       }
-
-      var query = this.GetEffects(x => x.ItemTypeId == itemTypeId && x.EffectId == (short)id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Effect> GetEffects(Expression<Func<EffectEntity, bool>> filter)
+    public IReadOnlyList<Effect> GetEffects(Func<IQueryable<EffectEntity>, IQueryable<EffectEntity>> queryOperations)
     {
-      return this.GetEffects(new QuerySpecification<EffectEntity>(filter));
+      return this.GetEffects(new QueryTransform<EffectEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -1147,9 +1002,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetEffects(x => x.ItemTypeId == itemTypeId.Value && x.EffectId == (short)effectId);
-      value = query.SingleOrDefault();
-
+      value = this.GetEffects(q => q.Where(x => x.ItemTypeId == itemTypeId.Value && x.EffectId == (short)effectId)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1159,24 +1012,19 @@ namespace Eve.Data
     public EffectType GetEffectTypeById(EffectId id)
     {
       EffectType result;
-      if (this.Cache.TryGetValue<EffectType>(id, out result))
+
+      if (!this.TryGetEffectTypeById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No EffectType with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetEffectTypes(x => x.Id == (short)id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<EffectType> GetEffectTypes(Expression<Func<EffectTypeEntity, bool>> filter)
+    public IReadOnlyList<EffectType> GetEffectTypes(Func<IQueryable<EffectTypeEntity>, IQueryable<EffectTypeEntity>> queryOperations)
     {
-      return this.GetEffectTypes(new QuerySpecification<EffectTypeEntity>(filter));
+      return this.GetEffectTypes(new QueryTransform<EffectTypeEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -1195,9 +1043,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetEffectTypes(x => x.Id == (short)id);
-      value = query.SingleOrDefault();
-
+      value = this.GetEffectTypes(q => q.Where(x => x.Id == (short)id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1208,24 +1054,18 @@ namespace Eve.Data
     {
       EveType result;
 
-      if (this.Cache.TryGetValue<EveType>(id, out result))
+      if (!this.TryGetEveTypeById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No EveType with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetEveTypes(x => x.Id == id.Value);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<EveType> GetEveTypes(Expression<Func<EveTypeEntity, bool>> filter)
+    public IReadOnlyList<EveType> GetEveTypes(Func<IQueryable<EveTypeEntity>, IQueryable<EveTypeEntity>> queryOperations)
     {
-      return this.GetEveTypes(new QuerySpecification<EveTypeEntity>(filter));
+      return this.GetEveTypes(new QueryTransform<EveTypeEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -1244,9 +1084,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetEveTypes(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetEveTypes(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
 
@@ -1254,24 +1092,19 @@ namespace Eve.Data
     public TEveType GetEveTypeById<TEveType>(TypeId id) where TEveType : EveType
     {
       TEveType result;
-      if (this.Cache.TryGetValue<TEveType>(id, out result))
+
+      if (!this.TryGetEveTypeById<TEveType>(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No " + typeof(TEveType).Name + " with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetEveTypes<EveType>(x => x.Id == id.Value).Cast<TEveType>();
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<TEveType> GetEveTypes<TEveType>(Expression<Func<EveTypeEntity, bool>> filter) where TEveType : EveType
+    public IReadOnlyList<TEveType> GetEveTypes<TEveType>(Func<IQueryable<EveTypeEntity>, IQueryable<EveTypeEntity>> queryOperations) where TEveType : EveType
     {
-      return this.GetEveTypes<TEveType>(new QuerySpecification<EveTypeEntity>(filter));
+      return this.GetEveTypes<TEveType>(new QueryTransform<EveTypeEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -1289,9 +1122,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetEveTypes<TEveType>(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetEveTypes<TEveType>(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1301,24 +1132,19 @@ namespace Eve.Data
     public Faction GetFactionById(FactionId id)
     {
       Faction result;
-      if (this.Cache.TryGetValue<Faction>(id, out result))
+
+      if (!this.TryGetFactionById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No Faction with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetFactions(x => x.Id == (long)id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Faction> GetFactions(Expression<Func<ItemEntity, bool>> filter)
+    public IReadOnlyList<Faction> GetFactions(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      return this.GetFactions(new QuerySpecification<ItemEntity>(filter));
+      return this.GetFactions(new QueryTransform<ItemEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -1337,9 +1163,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetFactions(x => x.Id == (long)id);
-      value = query.SingleOrDefault();
-
+      value = this.GetFactions(q => q.Where(x => x.Id == (long)id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1349,24 +1173,19 @@ namespace Eve.Data
     public Graphic GetGraphicById(GraphicId id)
     {
       Graphic result;
-      if (this.Cache.TryGetValue<Graphic>(id, out result))
+
+      if (!this.TryGetGraphicById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No Graphic with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetGraphics(x => x.Id == id.Value);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Graphic> GetGraphics(Expression<Func<GraphicEntity, bool>> filter)
+    public IReadOnlyList<Graphic> GetGraphics(Func<IQueryable<GraphicEntity>, IQueryable<GraphicEntity>> queryOperations)
     {
-      return this.GetGraphics(new QuerySpecification<GraphicEntity>(filter));
+      return this.GetGraphics(new QueryTransform<GraphicEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -1385,9 +1204,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetGraphics(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetGraphics(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1397,33 +1214,19 @@ namespace Eve.Data
     public Group GetGroupById(GroupId id)
     {
       Group result;
-      if (this.Cache.TryGetValue<Group>(id, out result))
+
+      if (!this.TryGetGroupById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No Group with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetGroups(x => x.Id == id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
-    /// <summary>
-    /// Returns the results of the specified query for <see cref="Group" /> objects.
-    /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
-    /// </param>
-    /// <returns>
-    /// The results of the query.
-    /// </returns>
     /// <inheritdoc />
-    public IReadOnlyList<Group> GetGroups(Expression<Func<GroupEntity, bool>> filter)
+    public IReadOnlyList<Group> GetGroups(Func<IQueryable<GroupEntity>, IQueryable<GroupEntity>> queryOperations)
     {
-      return this.GetGroups(new QuerySpecification<GroupEntity>(filter));
+      return this.GetGroups(new QueryTransform<GroupEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -1442,9 +1245,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetGroups(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetGroups(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1454,24 +1255,19 @@ namespace Eve.Data
     public Icon GetIconById(IconId id)
     {
       Icon result;
-      if (this.Cache.TryGetValue<Icon>(id, out result))
+
+      if (!this.TryGetIconById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No Icon with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetIcons(x => x.Id == id.Value);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Icon> GetIcons(Expression<Func<IconEntity, bool>> filter)
+    public IReadOnlyList<Icon> GetIcons(Func<IQueryable<IconEntity>, IQueryable<IconEntity>> queryOperations)
     {
-      return this.GetIcons(new QuerySpecification<IconEntity>(filter));
+      return this.GetIcons(new QueryTransform<IconEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -1490,9 +1286,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetIcons(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetIcons(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1502,24 +1296,19 @@ namespace Eve.Data
     public Item GetItemById(ItemId id)
     {
       Item result;
-      if (this.Cache.TryGetValue<Item>(id, out result))
+
+      if (!this.TryGetItemById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No Item with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetItems(x => x.Id == id.Value);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Item> GetItems(Expression<Func<ItemEntity, bool>> filter)
+    public IReadOnlyList<Item> GetItems(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      return this.GetItems(new QuerySpecification<ItemEntity>(filter));
+      return this.GetItems(new QueryTransform<ItemEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -1538,28 +1327,31 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetItems(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetItems(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
 
     /// <inheritdoc />
     public TItem GetItemById<TItem>(ItemId id) where TItem : Item
     {
-      TItem result = this.GetItemById(id).ConvertTo<TItem>();
-      Contract.Assume(result != null);
+      TItem result;
+
+      if (!this.TryGetItemById<TItem>(id, out result))
+      {
+        throw new InvalidOperationException("No " + typeof(TItem).Name + " with ID " + id.ToString() + " could be found.");
+      }
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<TItem> GetItems<TItem>(Expression<Func<ItemEntity, bool>> filter) where TItem : Item
+    public IReadOnlyList<TItem> GetItems<TItem>(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations) where TItem : Item
     {
-      return this.GetItems<TItem>(new QuerySpecification<ItemEntity>(filter));
+      return this.GetItems<TItem>(new QueryTransform<ItemEntity>(queryOperations));
     }
 
     /// <inheritdoc />
+    [EveQueryMethod(typeof(Item))]
     public IReadOnlyList<TItem> GetItems<TItem>(params IQueryModifier<ItemEntity>[] modifiers) where TItem : Item
     {
       // Construct the result set, filtering items through the global cache along the way
@@ -1574,8 +1366,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetItems<TItem>(x => x.Id == id);
-      value = query.SingleOrDefault();
+      value = this.GetItems<TItem>(q => q.Where(x => x.Id == id)).SingleOrDefault();
 
       return value != null;
     }
@@ -1586,24 +1377,19 @@ namespace Eve.Data
     public ItemPosition GetItemPositionById(ItemId id)
     {
       ItemPosition result;
-      if (this.Cache.TryGetValue<ItemPosition>(id, out result))
+
+      if (!this.TryGetItemPositionById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No ItemPosition with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetItemPositions(x => x.ItemId == id.Value);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<ItemPosition> GetItemPositions(Expression<Func<ItemPositionEntity, bool>> filter)
+    public IReadOnlyList<ItemPosition> GetItemPositions(Func<IQueryable<ItemPositionEntity>, IQueryable<ItemPositionEntity>> queryOperations)
     {
-      return this.GetItemPositions(new QuerySpecification<ItemPositionEntity>(filter));
+      return this.GetItemPositions(new QueryTransform<ItemPositionEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -1622,9 +1408,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetItemPositions(x => x.ItemId == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetItemPositions(q => q.Where(x => x.ItemId == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1634,24 +1418,19 @@ namespace Eve.Data
     public MarketGroup GetMarketGroupById(MarketGroupId id)
     {
       MarketGroup result;
-      if (this.Cache.TryGetValue<MarketGroup>(id, out result))
+
+      if (!this.TryGetMarketGroupById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No MarketGroup with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetMarketGroups(x => x.Id == id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<MarketGroup> GetMarketGroups(Expression<Func<MarketGroupEntity, bool>> filter)
+    public IReadOnlyList<MarketGroup> GetMarketGroups(Func<IQueryable<MarketGroupEntity>, IQueryable<MarketGroupEntity>> queryOperations)
     {
-      return this.GetMarketGroups(new QuerySpecification<MarketGroupEntity>(filter));
+      return this.GetMarketGroups(new QueryTransform<MarketGroupEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -1670,9 +1449,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetMarketGroups(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetMarketGroups(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1682,33 +1459,19 @@ namespace Eve.Data
     public MetaGroup GetMetaGroupById(MetaGroupId id)
     {
       MetaGroup result;
-      if (this.Cache.TryGetValue<MetaGroup>(id, out result))
+
+      if (!this.TryGetMetaGroupById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No MetaGroup with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetMetaGroups(x => x.Id == id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
-    /// <summary>
-    /// Returns the results of the specified query for <see cref="MetaGroup" /> objects.
-    /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
-    /// </param>
-    /// <returns>
-    /// The results of the query.
-    /// </returns>
     /// <inheritdoc />
-    public IReadOnlyList<MetaGroup> GetMetaGroups(Expression<Func<MetaGroupEntity, bool>> filter)
+    public IReadOnlyList<MetaGroup> GetMetaGroups(Func<IQueryable<MetaGroupEntity>, IQueryable<MetaGroupEntity>> queryOperations)
     {
-      return this.GetMetaGroups(new QuerySpecification<MetaGroupEntity>(filter));
+      return this.GetMetaGroups(new QueryTransform<MetaGroupEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -1727,9 +1490,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetMetaGroups(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetMetaGroups(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1739,33 +1500,19 @@ namespace Eve.Data
     public MetaType GetMetaTypeById(TypeId id)
     {
       MetaType result;
-      if (this.Cache.TryGetValue<MetaType>(id, out result))
+
+      if (!this.TryGetMetaTypeById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No MetaType with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetMetaTypes(x => x.TypeId == id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
-    /// <summary>
-    /// Returns the results of the specified query for <see cref="MetaType" /> objects.
-    /// </summary>
-    /// <param name="filter">
-    /// The expression that will filter the results of the query.
-    /// </param>
-    /// <returns>
-    /// The results of the query.
-    /// </returns>
     /// <inheritdoc />
-    public IReadOnlyList<MetaType> GetMetaTypes(Expression<Func<MetaTypeEntity, bool>> filter)
+    public IReadOnlyList<MetaType> GetMetaTypes(Func<IQueryable<MetaTypeEntity>, IQueryable<MetaTypeEntity>> queryOperations)
     {
-      return this.GetMetaTypes(new QuerySpecification<MetaTypeEntity>(filter));
+      return this.GetMetaTypes(new QueryTransform<MetaTypeEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -1784,9 +1531,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetMetaTypes(x => x.TypeId == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetMetaTypes(q => q.Where(x => x.TypeId == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1796,24 +1541,19 @@ namespace Eve.Data
     public NpcCorporation GetNpcCorporationById(NpcCorporationId id)
     {
       NpcCorporation result;
-      if (this.Cache.TryGetValue<NpcCorporation>(id, out result))
+
+      if (!this.TryGetNpcCorporationById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No NpcCorporation with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetNpcCorporations(x => x.Id == id.Value);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<NpcCorporation> GetNpcCorporations(Expression<Func<ItemEntity, bool>> filter)
+    public IReadOnlyList<NpcCorporation> GetNpcCorporations(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      return this.GetNpcCorporations(new QuerySpecification<ItemEntity>(filter));
+      return this.GetNpcCorporations(new QueryTransform<ItemEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -1832,9 +1572,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetNpcCorporations(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetNpcCorporations(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1844,24 +1582,19 @@ namespace Eve.Data
     public NpcCorporationDivision GetNpcCorporationDivisionById(NpcCorporationId corporationId, DivisionId divisionId)
     {
       NpcCorporationDivision result;
-      if (this.Cache.TryGetValue<NpcCorporationDivision>(NpcCorporationDivision.CreateCacheKey(corporationId, divisionId), out result))
+
+      if (!this.TryGetNpcCorporationDivisionById(corporationId, divisionId, out result))
       {
-        return result;
+        throw new InvalidOperationException("No NpcCorporationDivision with ID (" + corporationId.ToString() + ", " + divisionId.ToString() + ") could be found.");
       }
-
-      var query = this.GetNpcCorporationDivisions(x => x.CorporationId == corporationId.Value && x.DivisionId == divisionId);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<NpcCorporationDivision> GetNpcCorporationDivisions(Expression<Func<NpcCorporationDivisionEntity, bool>> filter)
+    public IReadOnlyList<NpcCorporationDivision> GetNpcCorporationDivisions(Func<IQueryable<NpcCorporationDivisionEntity>, IQueryable<NpcCorporationDivisionEntity>> queryOperations)
     {
-      return this.GetNpcCorporationDivisions(new QuerySpecification<NpcCorporationDivisionEntity>(filter));
+      return this.GetNpcCorporationDivisions(new QueryTransform<NpcCorporationDivisionEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -1883,9 +1616,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetNpcCorporationDivisions(x => x.CorporationId == corporationId && x.DivisionId == divisionId);
-      value = query.SingleOrDefault();
-
+      value = this.GetNpcCorporationDivisions(q => q.Where(x => x.CorporationId == corporationId && x.DivisionId == divisionId)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1895,24 +1626,19 @@ namespace Eve.Data
     public Race GetRaceById(RaceId id)
     {
       Race result;
-      if (this.Cache.TryGetValue<Race>(id, out result))
+
+      if (!this.TryGetRaceById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No Race with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetRaces(x => x.Id == id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Race> GetRaces(Expression<Func<RaceEntity, bool>> filter)
+    public IReadOnlyList<Race> GetRaces(Func<IQueryable<RaceEntity>, IQueryable<RaceEntity>> queryOperations)
     {
-      return this.GetRaces(new QuerySpecification<RaceEntity>(filter));
+      return this.GetRaces(new QueryTransform<RaceEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -1931,9 +1657,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetRaces(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetRaces(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1943,24 +1667,19 @@ namespace Eve.Data
     public Region GetRegionById(RegionId id)
     {
       Region result;
-      if (this.Cache.TryGetValue<Region>(id, out result))
+
+      if (!this.TryGetRegionById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No Region with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetRegions(x => x.Id == id.Value);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Region> GetRegions(Expression<Func<ItemEntity, bool>> filter)
+    public IReadOnlyList<Region> GetRegions(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      return this.GetRegions(new QuerySpecification<ItemEntity>(filter));
+      return this.GetRegions(new QueryTransform<ItemEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -1979,9 +1698,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetRegions(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetRegions(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1991,24 +1708,19 @@ namespace Eve.Data
     public RegionJump GetRegionJumpById(RegionId fromRegionId, RegionId toRegionId)
     {
       RegionJump result;
-      if (this.Cache.TryGetValue<RegionJump>(RegionJump.CreateCacheKey(fromRegionId, toRegionId), out result))
+
+      if (!this.TryGetRegionJumpById(fromRegionId, toRegionId, out result))
       {
-        return result;
+        throw new InvalidOperationException("No RegionJump with ID (" + fromRegionId.ToString() + ", " + toRegionId.ToString() + ") could be found.");
       }
-
-      var query = this.GetRegionJumps(x => x.FromRegionId == fromRegionId && x.ToRegionId == toRegionId);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<RegionJump> GetRegionJumps(Expression<Func<RegionJumpEntity, bool>> filter)
+    public IReadOnlyList<RegionJump> GetRegionJumps(Func<IQueryable<RegionJumpEntity>, IQueryable<RegionJumpEntity>> queryOperations)
     {
-      return this.GetRegionJumps(new QuerySpecification<RegionJumpEntity>(filter));
+      return this.GetRegionJumps(new QueryTransform<RegionJumpEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -2030,9 +1742,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetRegionJumps(x => x.FromRegionId == fromRegionId && x.ToRegionId == toRegionId);
-      value = query.SingleOrDefault();
-
+      value = this.GetRegionJumps(q => q.Where(x => x.FromRegionId == fromRegionId && x.ToRegionId == toRegionId)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -2042,24 +1752,19 @@ namespace Eve.Data
     public SolarSystem GetSolarSystemById(SolarSystemId id)
     {
       SolarSystem result;
-      if (this.Cache.TryGetValue<SolarSystem>(id, out result))
+
+      if (!this.TryGetSolarSystemById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No SolarSystem with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetSolarSystems(x => x.Id == id.Value);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<SolarSystem> GetSolarSystems(Expression<Func<ItemEntity, bool>> filter)
+    public IReadOnlyList<SolarSystem> GetSolarSystems(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      return this.GetSolarSystems(new QuerySpecification<ItemEntity>(filter));
+      return this.GetSolarSystems(new QueryTransform<ItemEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -2078,9 +1783,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetSolarSystems(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetSolarSystems(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -2090,24 +1793,19 @@ namespace Eve.Data
     public SolarSystemJump GetSolarSystemJumpById(SolarSystemId fromSolarSystemId, SolarSystemId toSolarSystemId)
     {
       SolarSystemJump result;
-      if (this.Cache.TryGetValue<SolarSystemJump>(SolarSystemJump.CreateCacheKey(fromSolarSystemId, toSolarSystemId), out result))
+
+      if (!this.TryGetSolarSystemJumpById(fromSolarSystemId, toSolarSystemId, out result))
       {
-        return result;
+        throw new InvalidOperationException("No SolarSystemJump with ID (" + fromSolarSystemId.ToString() + ", " + toSolarSystemId.ToString() + ") could be found.");
       }
-
-      var query = this.GetSolarSystemJumps(x => x.FromSolarSystemId == fromSolarSystemId.Value && x.ToSolarSystemId == toSolarSystemId.Value);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<SolarSystemJump> GetSolarSystemJumps(Expression<Func<SolarSystemJumpEntity, bool>> filter)
+    public IReadOnlyList<SolarSystemJump> GetSolarSystemJumps(Func<IQueryable<SolarSystemJumpEntity>, IQueryable<SolarSystemJumpEntity>> queryOperations)
     {
-      return this.GetSolarSystemJumps(new QuerySpecification<SolarSystemJumpEntity>(filter));
+      return this.GetSolarSystemJumps(new QueryTransform<SolarSystemJumpEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -2129,9 +1827,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetSolarSystemJumps(x => x.FromSolarSystemId == fromSolarSystemId && x.ToSolarSystemId == toSolarSystemId);
-      value = query.SingleOrDefault();
-
+      value = this.GetSolarSystemJumps(q => q.Where(x => x.FromSolarSystemId == fromSolarSystemId && x.ToSolarSystemId == toSolarSystemId)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -2141,24 +1837,19 @@ namespace Eve.Data
     public Stargate GetStargateById(StargateId id)
     {
       Stargate result;
-      if (this.Cache.TryGetValue<Stargate>(id, out result))
+
+      if (!this.TryGetStargateById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No Stargate with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetStargates(x => x.Id == id.Value);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Stargate> GetStargates(Expression<Func<ItemEntity, bool>> filter)
+    public IReadOnlyList<Stargate> GetStargates(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      return this.GetStargates(new QuerySpecification<ItemEntity>(filter));
+      return this.GetStargates(new QueryTransform<ItemEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -2177,9 +1868,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetStargates(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetStargates(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -2189,24 +1878,19 @@ namespace Eve.Data
     public Station GetStationById(StationId id)
     {
       Station result;
-      if (this.Cache.TryGetValue<Station>(id, out result))
+
+      if (!this.TryGetStationById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No Station with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetStations(x => x.Id == id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Station> GetStations(Expression<Func<ItemEntity, bool>> filter)
+    public IReadOnlyList<Station> GetStations(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      return this.GetStations(new QuerySpecification<ItemEntity>(filter));
+      return this.GetStations(new QueryTransform<ItemEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -2225,9 +1909,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetStations(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetStations(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -2237,24 +1919,19 @@ namespace Eve.Data
     public StationOperation GetStationOperationById(StationOperationId id)
     {
       StationOperation result;
-      if (this.Cache.TryGetValue<StationOperation>(id, out result))
+
+      if (!this.TryGetStationOperationById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No StationOperation with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetStationOperations(x => x.Id == id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<StationOperation> GetStationOperations(Expression<Func<StationOperationEntity, bool>> filter)
+    public IReadOnlyList<StationOperation> GetStationOperations(Func<IQueryable<StationOperationEntity>, IQueryable<StationOperationEntity>> queryOperations)
     {
-      return this.GetStationOperations(new QuerySpecification<StationOperationEntity>(filter));
+      return this.GetStationOperations(new QueryTransform<StationOperationEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -2273,9 +1950,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetStationOperations(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetStationOperations(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -2285,24 +1960,19 @@ namespace Eve.Data
     public StationService GetStationServiceById(StationServiceId id)
     {
       StationService result;
-      if (this.Cache.TryGetValue<StationService>(id, out result))
+
+      if (!this.TryGetStationServiceById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No StationService with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetStationServices(x => x.Id == id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<StationService> GetStationServices(Expression<Func<StationServiceEntity, bool>> filter)
+    public IReadOnlyList<StationService> GetStationServices(Func<IQueryable<StationServiceEntity>, IQueryable<StationServiceEntity>> queryOperations)
     {
-      return this.GetStationServices(new QuerySpecification<StationServiceEntity>(filter));
+      return this.GetStationServices(new QueryTransform<StationServiceEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -2321,9 +1991,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetStationServices(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetStationServices(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -2333,24 +2001,19 @@ namespace Eve.Data
     public StationType GetStationTypeById(TypeId id)
     {
       StationType result;
-      if (this.Cache.TryGetValue<StationType>(id, out result))
+
+      if (!this.TryGetStationTypeById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No StationType with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetStationTypes(x => x.Id == id.Value);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<StationType> GetStationTypes(Expression<Func<StationTypeEntity, bool>> filter)
+    public IReadOnlyList<StationType> GetStationTypes(Func<IQueryable<StationTypeEntity>, IQueryable<StationTypeEntity>> queryOperations)
     {
-      return this.GetStationTypes(new QuerySpecification<StationTypeEntity>(filter));
+      return this.GetStationTypes(new QueryTransform<StationTypeEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -2369,9 +2032,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetStationTypes(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetStationTypes(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -2381,24 +2042,19 @@ namespace Eve.Data
     public Unit GetUnitById(UnitId id)
     {
       Unit result;
-      if (this.Cache.TryGetValue<Unit>(id, out result))
+
+      if (!this.TryGetUnitById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No Unit with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetUnits(x => x.Id == id);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Unit> GetUnits(Expression<Func<UnitEntity, bool>> filter)
+    public IReadOnlyList<Unit> GetUnits(Func<IQueryable<UnitEntity>, IQueryable<UnitEntity>> queryOperations)
     {
-      return this.GetUnits(new QuerySpecification<UnitEntity>(filter));
+      return this.GetUnits(new QueryTransform<UnitEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -2417,9 +2073,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetUnits(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetUnits(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -2429,24 +2083,19 @@ namespace Eve.Data
     public Universe GetUniverseById(UniverseId id)
     {
       Universe result;
-      if (this.Cache.TryGetValue<Universe>(id, out result))
+
+      if (!this.TryGetUniverseById(id, out result))
       {
-        return result;
+        throw new InvalidOperationException("No Universe with ID " + id.ToString() + " could be found.");
       }
-
-      var query = this.GetUniverses(x => x.Id == id.Value);
-      Contract.Assume(query.Count() == 1);
-
-      result = query.Single();
-      Contract.Assume(result != null);
 
       return result;
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Universe> GetUniverses(Expression<Func<ItemEntity, bool>> filter)
+    public IReadOnlyList<Universe> GetUniverses(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      return this.GetUniverses(new QuerySpecification<ItemEntity>(filter));
+      return this.GetUniverses(new QueryTransform<ItemEntity>(queryOperations));
     }
 
     /// <inheritdoc />
@@ -2465,9 +2114,7 @@ namespace Eve.Data
         return true;
       }
 
-      var query = this.GetUniverses(x => x.Id == id);
-      value = query.SingleOrDefault();
-
+      value = this.GetUniverses(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -2502,7 +2149,6 @@ namespace Eve.Data
       where TAdapter : IEveCacheable
     {
       Contract.Requires(query != null, "The base query cannot be null.");
-      Contract.Requires(modifiers != null, "The array of query modifiers cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<TAdapter>>() != null);
 
       lock (this.queryLock)
@@ -2543,7 +2189,6 @@ namespace Eve.Data
       where TAdapter : IEveCacheable
     {
       Contract.Requires(query != null, "The base query cannot be null.");
-      Contract.Requires(modifiers != null, "The array of query modifiers cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<TResult>>() != null);
 
       lock (this.queryLock)
@@ -2575,14 +2220,16 @@ namespace Eve.Data
       where TEntity : IEveEntity
     {
       Contract.Requires(query != null, "The base query cannot be null.");
-      Contract.Requires(modifiers != null, "The array of query modifiers cannot be null.");
       Contract.Ensures(Contract.Result<IEnumerable<TEntity>>() != null);
 
       // Apply the modifiers
-      foreach (IQueryModifier<TEntity> modifier in modifiers)
+      if (modifiers != null)
       {
-        Contract.Assume(modifier != null);
-        query = modifier.GetResults(query);
+        foreach (IQueryModifier<TEntity> modifier in modifiers)
+        {
+          Contract.Assume(modifier != null);
+          query = modifier.GetResults(query);
+        }
       }
 
       return query;

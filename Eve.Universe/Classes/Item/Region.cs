@@ -56,7 +56,7 @@ namespace Eve.Universe
 
         LazyInitializer.EnsureInitialized(
           ref this.constellations,
-          () => new ReadOnlyConstellationCollection(this.Container.GetConstellations(x => x.ConstellationInfo.RegionId == this.Id.Value).OrderBy(x => x)));
+          () => new ReadOnlyConstellationCollection(this.Container.GetConstellations(q => q.Where(x => x.ConstellationInfo.RegionId == this.Id.Value)).OrderBy(x => x)));
 
         Contract.Assume(this.constellations != null);
         return this.constellations;
@@ -128,7 +128,7 @@ namespace Eve.Universe
 
         LazyInitializer.EnsureInitialized(
           ref this.jumps, 
-          () => new ReadOnlyRegionJumpCollection(this.Container.GetRegionJumps(x => x.FromRegionId == this.Id.Value).OrderBy(x => x)));
+          () => new ReadOnlyRegionJumpCollection(this.Container.GetRegionJumps(q => q.Where(x => x.FromRegionId == this.Id.Value)).OrderBy(x => x)));
 
         Contract.Assume(this.jumps != null);
         return this.jumps;

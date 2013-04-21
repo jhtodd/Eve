@@ -8,6 +8,7 @@ namespace Eve.Data
   using System;
   using System.Collections.Generic;
   using System.Diagnostics.Contracts;
+  using System.Linq;
   using System.Linq.Expressions;
 
   using Eve.Character;
@@ -40,9 +41,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Activity> IEveRepository.GetActivities(Expression<Func<ActivityEntity, bool>> filter)
+    IReadOnlyList<Activity> IEveRepository.GetActivities(Func<IQueryable<ActivityEntity>, IQueryable<ActivityEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<Activity>>() != null);
       throw new NotImplementedException();
     }
@@ -68,9 +69,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Agent> IEveRepository.GetAgents(Expression<Func<ItemEntity, bool>> filter)
+    IReadOnlyList<Agent> IEveRepository.GetAgents(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<Agent>>() != null);
       throw new NotImplementedException();
     }
@@ -96,9 +97,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<AgentType> IEveRepository.GetAgentTypes(Expression<Func<AgentTypeEntity, bool>> filter)
+    IReadOnlyList<AgentType> IEveRepository.GetAgentTypes(Func<IQueryable<AgentTypeEntity>, IQueryable<AgentTypeEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<AgentType>>() != null);
       throw new NotImplementedException();
     }
@@ -124,9 +125,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Ancestry> IEveRepository.GetAncestries(Expression<Func<AncestryEntity, bool>> filter)
+    IReadOnlyList<Ancestry> IEveRepository.GetAncestries(Func<IQueryable<AncestryEntity>, IQueryable<AncestryEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<Ancestry>>() != null);
       throw new NotImplementedException();
     }
@@ -152,9 +153,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<AssemblyLine> IEveRepository.GetAssemblyLines(Expression<Func<AssemblyLineEntity, bool>> filter)
+    IReadOnlyList<AssemblyLine> IEveRepository.GetAssemblyLines(Func<IQueryable<AssemblyLineEntity>, IQueryable<AssemblyLineEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<AssemblyLine>>() != null);
       throw new NotImplementedException();
     }
@@ -180,9 +181,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<AssemblyLineStation> IEveRepository.GetAssemblyLineStations(Expression<Func<AssemblyLineStationEntity, bool>> filter)
+    IReadOnlyList<AssemblyLineStation> IEveRepository.GetAssemblyLineStations(Func<IQueryable<AssemblyLineStationEntity>, IQueryable<AssemblyLineStationEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<AssemblyLineStation>>() != null);
       throw new NotImplementedException();
     }
@@ -208,9 +209,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<AssemblyLineType> IEveRepository.GetAssemblyLineTypes(Expression<Func<AssemblyLineTypeEntity, bool>> filter)
+    IReadOnlyList<AssemblyLineType> IEveRepository.GetAssemblyLineTypes(Func<IQueryable<AssemblyLineTypeEntity>, IQueryable<AssemblyLineTypeEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<AssemblyLineType>>() != null);
       throw new NotImplementedException();
     }
@@ -236,9 +237,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<AssemblyLineTypeCategoryDetail> IEveRepository.GetAssemblyLineTypeCategoryDetails(Expression<Func<AssemblyLineTypeCategoryDetailEntity, bool>> filter)
+    IReadOnlyList<AssemblyLineTypeCategoryDetail> IEveRepository.GetAssemblyLineTypeCategoryDetails(Func<IQueryable<AssemblyLineTypeCategoryDetailEntity>, IQueryable<AssemblyLineTypeCategoryDetailEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<AssemblyLineTypeCategoryDetail>>() != null);
       throw new NotImplementedException();
     }
@@ -264,9 +265,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<AssemblyLineTypeGroupDetail> IEveRepository.GetAssemblyLineTypeGroupDetails(Expression<Func<AssemblyLineTypeGroupDetailEntity, bool>> filter)
+    IReadOnlyList<AssemblyLineTypeGroupDetail> IEveRepository.GetAssemblyLineTypeGroupDetails(Func<IQueryable<AssemblyLineTypeGroupDetailEntity>, IQueryable<AssemblyLineTypeGroupDetailEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<AssemblyLineTypeGroupDetail>>() != null);
       throw new NotImplementedException();
     }
@@ -292,9 +293,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<AttributeCategory> IEveRepository.GetAttributeCategories(Expression<Func<AttributeCategoryEntity, bool>> filter)
+    IReadOnlyList<AttributeCategory> IEveRepository.GetAttributeCategories(Func<IQueryable<AttributeCategoryEntity>, IQueryable<AttributeCategoryEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<AttributeCategory>>() != null);
       throw new NotImplementedException();
     }
@@ -320,9 +321,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<AttributeType> IEveRepository.GetAttributeTypes(Expression<Func<AttributeTypeEntity, bool>> filter)
+    IReadOnlyList<AttributeType> IEveRepository.GetAttributeTypes(Func<IQueryable<AttributeTypeEntity>, IQueryable<AttributeTypeEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<AttributeType>>() != null);
       throw new NotImplementedException();
     }
@@ -342,15 +343,15 @@ namespace Eve.Data
     #endregion
 
     #region AttributeValue Methods
-    AttributeValue IEveRepository.GetAttributeValueById(TypeId itemTypeId, AttributeId id)
+    AttributeValue IEveRepository.GetAttributeValueById(TypeId itemTypeId, AttributeId attributeId)
     {
       Contract.Ensures(Contract.Result<AttributeValue>() != null);
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<AttributeValue> IEveRepository.GetAttributeValues(Expression<Func<AttributeValueEntity, bool>> filter)
+    IReadOnlyList<AttributeValue> IEveRepository.GetAttributeValues(Func<IQueryable<AttributeValueEntity>, IQueryable<AttributeValueEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<AttributeValue>>() != null);
       throw new NotImplementedException();
     }
@@ -376,9 +377,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Bloodline> IEveRepository.GetBloodlines(Expression<Func<BloodlineEntity, bool>> filter)
+    IReadOnlyList<Bloodline> IEveRepository.GetBloodlines(Func<IQueryable<BloodlineEntity>, IQueryable<BloodlineEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<Bloodline>>() != null);
       throw new NotImplementedException();
     }
@@ -404,9 +405,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Category> IEveRepository.GetCategories(Expression<Func<CategoryEntity, bool>> filter)
+    IReadOnlyList<Category> IEveRepository.GetCategories(Func<IQueryable<CategoryEntity>, IQueryable<CategoryEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<Category>>() != null);
       throw new NotImplementedException();
     }
@@ -432,9 +433,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Celestial> IEveRepository.GetCelestials(Expression<Func<ItemEntity, bool>> filter)
+    IReadOnlyList<Celestial> IEveRepository.GetCelestials(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<Celestial>>() != null);
       throw new NotImplementedException();
     }
@@ -460,9 +461,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<CharacterAttributeType> IEveRepository.GetCharacterAttributeTypes(Expression<Func<CharacterAttributeTypeEntity, bool>> filter)
+    IReadOnlyList<CharacterAttributeType> IEveRepository.GetCharacterAttributeTypes(Func<IQueryable<CharacterAttributeTypeEntity>, IQueryable<CharacterAttributeTypeEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<CharacterAttributeType>>() != null);
       throw new NotImplementedException();
     }
@@ -488,9 +489,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Constellation> IEveRepository.GetConstellations(Expression<Func<ItemEntity, bool>> filter)
+    IReadOnlyList<Constellation> IEveRepository.GetConstellations(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<Constellation>>() != null);
       throw new NotImplementedException();
     }
@@ -516,9 +517,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<ConstellationJump> IEveRepository.GetConstellationJumps(Expression<Func<ConstellationJumpEntity, bool>> filter)
+    IReadOnlyList<ConstellationJump> IEveRepository.GetConstellationJumps(Func<IQueryable<ConstellationJumpEntity>, IQueryable<ConstellationJumpEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<ConstellationJump>>() != null);
       throw new NotImplementedException();
     }
@@ -544,9 +545,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<CorporateActivity> IEveRepository.GetCorporateActivities(Expression<Func<CorporateActivityEntity, bool>> filter)
+    IReadOnlyList<CorporateActivity> IEveRepository.GetCorporateActivities(Func<IQueryable<CorporateActivityEntity>, IQueryable<CorporateActivityEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<CorporateActivity>>() != null);
       throw new NotImplementedException();
     }
@@ -572,9 +573,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Division> IEveRepository.GetDivisions(Expression<Func<DivisionEntity, bool>> filter)
+    IReadOnlyList<Division> IEveRepository.GetDivisions(Func<IQueryable<DivisionEntity>, IQueryable<DivisionEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<Division>>() != null);
       throw new NotImplementedException();
     }
@@ -600,9 +601,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<EffectType> IEveRepository.GetEffectTypes(Expression<Func<EffectTypeEntity, bool>> filter)
+    IReadOnlyList<EffectType> IEveRepository.GetEffectTypes(Func<IQueryable<EffectTypeEntity>, IQueryable<EffectTypeEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<EffectType>>() != null);
       throw new NotImplementedException();
     }
@@ -622,15 +623,15 @@ namespace Eve.Data
     #endregion
 
     #region Effect Methods
-    Effect IEveRepository.GetEffectById(TypeId itemTypeId, EffectId id)
+    Effect IEveRepository.GetEffectById(TypeId itemTypeId, EffectId effectId)
     {
       Contract.Ensures(Contract.Result<Effect>() != null);
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Effect> IEveRepository.GetEffects(Expression<Func<EffectEntity, bool>> filter)
+    IReadOnlyList<Effect> IEveRepository.GetEffects(Func<IQueryable<EffectEntity>, IQueryable<EffectEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<Effect>>() != null);
       throw new NotImplementedException();
     }
@@ -656,9 +657,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<EveType> IEveRepository.GetEveTypes(Expression<Func<EveTypeEntity, bool>> filter)
+    IReadOnlyList<EveType> IEveRepository.GetEveTypes(Func<IQueryable<EveTypeEntity>, IQueryable<EveTypeEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<EveType>>() != null);
       throw new NotImplementedException();
     }
@@ -682,9 +683,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<TEveType> IEveRepository.GetEveTypes<TEveType>(Expression<Func<EveTypeEntity, bool>> filter)
+    IReadOnlyList<TEveType> IEveRepository.GetEveTypes<TEveType>(Func<IQueryable<EveTypeEntity>, IQueryable<EveTypeEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<TEveType>>() != null);
       throw new NotImplementedException();
     }
@@ -710,9 +711,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Faction> IEveRepository.GetFactions(Expression<Func<ItemEntity, bool>> filter)
+    IReadOnlyList<Faction> IEveRepository.GetFactions(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<Faction>>() != null);
       throw new NotImplementedException();
     }
@@ -738,9 +739,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Graphic> IEveRepository.GetGraphics(Expression<Func<GraphicEntity, bool>> filter)
+    IReadOnlyList<Graphic> IEveRepository.GetGraphics(Func<IQueryable<GraphicEntity>, IQueryable<GraphicEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<Graphic>>() != null);
       throw new NotImplementedException();
     }
@@ -766,9 +767,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Group> IEveRepository.GetGroups(Expression<Func<GroupEntity, bool>> filter)
+    IReadOnlyList<Group> IEveRepository.GetGroups(Func<IQueryable<GroupEntity>, IQueryable<GroupEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<Group>>() != null);
       throw new NotImplementedException();
     }
@@ -794,9 +795,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Icon> IEveRepository.GetIcons(Expression<Func<IconEntity, bool>> filter)
+    IReadOnlyList<Icon> IEveRepository.GetIcons(Func<IQueryable<IconEntity>, IQueryable<IconEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<Icon>>() != null);
       throw new NotImplementedException();
     }
@@ -822,9 +823,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Item> IEveRepository.GetItems(Expression<Func<ItemEntity, bool>> filter)
+    IReadOnlyList<Item> IEveRepository.GetItems(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<Item>>() != null);
       throw new NotImplementedException();
     }
@@ -848,9 +849,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<TItem> IEveRepository.GetItems<TItem>(Expression<Func<ItemEntity, bool>> filter)
+    IReadOnlyList<TItem> IEveRepository.GetItems<TItem>(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<TItem>>() != null);
       throw new NotImplementedException();
     }
@@ -876,9 +877,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<ItemPosition> IEveRepository.GetItemPositions(Expression<Func<ItemPositionEntity, bool>> filter)
+    IReadOnlyList<ItemPosition> IEveRepository.GetItemPositions(Func<IQueryable<ItemPositionEntity>, IQueryable<ItemPositionEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<ItemPosition>>() != null);
       throw new NotImplementedException();
     }
@@ -904,9 +905,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<MarketGroup> IEveRepository.GetMarketGroups(Expression<Func<MarketGroupEntity, bool>> filter)
+    IReadOnlyList<MarketGroup> IEveRepository.GetMarketGroups(Func<IQueryable<MarketGroupEntity>, IQueryable<MarketGroupEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<MarketGroup>>() != null);
       throw new NotImplementedException();
     }
@@ -932,9 +933,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<MetaGroup> IEveRepository.GetMetaGroups(Expression<Func<MetaGroupEntity, bool>> filter)
+    IReadOnlyList<MetaGroup> IEveRepository.GetMetaGroups(Func<IQueryable<MetaGroupEntity>, IQueryable<MetaGroupEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<MetaGroup>>() != null);
       throw new NotImplementedException();
     }
@@ -960,9 +961,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<MetaType> IEveRepository.GetMetaTypes(Expression<Func<MetaTypeEntity, bool>> filter)
+    IReadOnlyList<MetaType> IEveRepository.GetMetaTypes(Func<IQueryable<MetaTypeEntity>, IQueryable<MetaTypeEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<MetaType>>() != null);
       throw new NotImplementedException();
     }
@@ -988,9 +989,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<NpcCorporation> IEveRepository.GetNpcCorporations(Expression<Func<ItemEntity, bool>> filter)
+    IReadOnlyList<NpcCorporation> IEveRepository.GetNpcCorporations(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<NpcCorporation>>() != null);
       throw new NotImplementedException();
     }
@@ -1016,9 +1017,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<NpcCorporationDivision> IEveRepository.GetNpcCorporationDivisions(Expression<Func<NpcCorporationDivisionEntity, bool>> filter)
+    IReadOnlyList<NpcCorporationDivision> IEveRepository.GetNpcCorporationDivisions(Func<IQueryable<NpcCorporationDivisionEntity>, IQueryable<NpcCorporationDivisionEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<NpcCorporationDivision>>() != null);
       throw new NotImplementedException();
     }
@@ -1044,9 +1045,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Race> IEveRepository.GetRaces(Expression<Func<RaceEntity, bool>> filter)
+    IReadOnlyList<Race> IEveRepository.GetRaces(Func<IQueryable<RaceEntity>, IQueryable<RaceEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<Race>>() != null);
       throw new NotImplementedException();
     }
@@ -1072,9 +1073,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Region> IEveRepository.GetRegions(Expression<Func<ItemEntity, bool>> filter)
+    IReadOnlyList<Region> IEveRepository.GetRegions(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<Region>>() != null);
       throw new NotImplementedException();
     }
@@ -1100,9 +1101,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<RegionJump> IEveRepository.GetRegionJumps(Expression<Func<RegionJumpEntity, bool>> filter)
+    IReadOnlyList<RegionJump> IEveRepository.GetRegionJumps(Func<IQueryable<RegionJumpEntity>, IQueryable<RegionJumpEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<RegionJump>>() != null);
       throw new NotImplementedException();
     }
@@ -1128,9 +1129,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<SolarSystem> IEveRepository.GetSolarSystems(Expression<Func<ItemEntity, bool>> filter)
+    IReadOnlyList<SolarSystem> IEveRepository.GetSolarSystems(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<SolarSystem>>() != null);
       throw new NotImplementedException();
     }
@@ -1156,9 +1157,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<SolarSystemJump> IEveRepository.GetSolarSystemJumps(Expression<Func<SolarSystemJumpEntity, bool>> filter)
+    IReadOnlyList<SolarSystemJump> IEveRepository.GetSolarSystemJumps(Func<IQueryable<SolarSystemJumpEntity>, IQueryable<SolarSystemJumpEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<SolarSystemJump>>() != null);
       throw new NotImplementedException();
     }
@@ -1184,9 +1185,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Stargate> IEveRepository.GetStargates(Expression<Func<ItemEntity, bool>> filter)
+    IReadOnlyList<Stargate> IEveRepository.GetStargates(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<Stargate>>() != null);
       throw new NotImplementedException();
     }
@@ -1212,9 +1213,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Station> IEveRepository.GetStations(Expression<Func<ItemEntity, bool>> filter)
+    IReadOnlyList<Station> IEveRepository.GetStations(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<Station>>() != null);
       throw new NotImplementedException();
     }
@@ -1240,9 +1241,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<StationOperation> IEveRepository.GetStationOperations(Expression<Func<StationOperationEntity, bool>> filter)
+    IReadOnlyList<StationOperation> IEveRepository.GetStationOperations(Func<IQueryable<StationOperationEntity>, IQueryable<StationOperationEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<StationOperation>>() != null);
       throw new NotImplementedException();
     }
@@ -1268,9 +1269,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<StationService> IEveRepository.GetStationServices(Expression<Func<StationServiceEntity, bool>> filter)
+    IReadOnlyList<StationService> IEveRepository.GetStationServices(Func<IQueryable<StationServiceEntity>, IQueryable<StationServiceEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<StationService>>() != null);
       throw new NotImplementedException();
     }
@@ -1296,9 +1297,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<StationType> IEveRepository.GetStationTypes(Expression<Func<StationTypeEntity, bool>> filter)
+    IReadOnlyList<StationType> IEveRepository.GetStationTypes(Func<IQueryable<StationTypeEntity>, IQueryable<StationTypeEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<StationType>>() != null);
       throw new NotImplementedException();
     }
@@ -1324,9 +1325,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Unit> IEveRepository.GetUnits(Expression<Func<UnitEntity, bool>> filter)
+    IReadOnlyList<Unit> IEveRepository.GetUnits(Func<IQueryable<UnitEntity>, IQueryable<UnitEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<Unit>>() != null);
       throw new NotImplementedException();
     }
@@ -1352,9 +1353,9 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    IReadOnlyList<Universe> IEveRepository.GetUniverses(Expression<Func<ItemEntity, bool>> filter)
+    IReadOnlyList<Universe> IEveRepository.GetUniverses(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
     {
-      Contract.Requires(filter != null, Resources.Messages.IEveDataSource_FilterCannotBeNull);
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
       Contract.Ensures(Contract.Result<IReadOnlyList<Universe>>() != null);
       throw new NotImplementedException();
     }

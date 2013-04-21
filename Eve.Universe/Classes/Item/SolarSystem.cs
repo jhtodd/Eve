@@ -247,7 +247,7 @@ namespace Eve.Universe
 
         LazyInitializer.EnsureInitialized(
           ref this.jumps,
-          () => new ReadOnlySolarSystemJumpCollection(this.Container.GetSolarSystemJumps(x => x.FromSolarSystemId == this.Id.Value).OrderBy(x => x)));
+          () => new ReadOnlySolarSystemJumpCollection(this.Container.GetSolarSystemJumps(q => q.Where(x => x.FromSolarSystemId == this.Id.Value)).OrderBy(x => x)));
 
         Contract.Assume(this.jumps != null);
         return this.jumps;

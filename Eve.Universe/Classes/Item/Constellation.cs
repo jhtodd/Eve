@@ -125,7 +125,7 @@ namespace Eve.Universe
 
         LazyInitializer.EnsureInitialized(
           ref this.jumps,
-          () => new ReadOnlyConstellationJumpCollection(this.Container.GetConstellationJumps(x => x.FromConstellationId == this.Id.Value).OrderBy(x => x)));
+          () => new ReadOnlyConstellationJumpCollection(this.Container.GetConstellationJumps(q => q.Where(x => x.FromConstellationId == this.Id.Value)).OrderBy(x => x)));
 
         Contract.Assume(this.jumps != null);
         return this.jumps;
@@ -203,7 +203,7 @@ namespace Eve.Universe
 
         LazyInitializer.EnsureInitialized(
           ref this.solarSystems,
-          () => new ReadOnlySolarSystemCollection(this.Container.GetSolarSystems(x => x.SolarSystemInfo.ConstellationId == this.Id.Value).OrderBy(x => x)));
+          () => new ReadOnlySolarSystemCollection(this.Container.GetSolarSystems(q => q.Where(x => x.SolarSystemInfo.ConstellationId == this.Id.Value)).OrderBy(x => x)));
 
         Contract.Assume(this.solarSystems != null);
         return this.solarSystems;
