@@ -96,7 +96,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.division,
-          () => this.Container.GetOrAdd<Division>(this.DivisionId, () => this.Entity.Division.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Division>(this.DivisionId, () => this.Entity.Division.ToAdapter(this.Container)));
 
         Contract.Assume(this.division != null);
         return this.division;
@@ -126,23 +126,6 @@ namespace Eve.Universe
     }
 
     /* Methods */
-
-    /// <summary>
-    /// Computes a compound ID for the specified sub-IDs.
-    /// </summary>
-    /// <param name="corporationId">
-    /// The ID of the corporation.
-    /// </param>
-    /// <param name="divisionId">
-    /// The ID of the division.
-    /// </param>
-    /// <returns>
-    /// A compound ID combining the two sub-IDs.
-    /// </returns>
-    public static long CreateCacheKey(NpcCorporationId corporationId, DivisionId divisionId)
-    {
-      return (long)((((ulong)(long)divisionId) << 32) | (ulong)(long)corporationId);
-    }
 
     /// <inheritdoc />
     public int CompareTo(NpcCorporationDivision other)
@@ -197,19 +180,6 @@ namespace Eve.Universe
     {
       NpcCorporationDivision other = obj as NpcCorporationDivision;
       return this.CompareTo(other);
-    }
-  }
-  #endregion
-
-  #region IEveCacheable Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IEveCacheable" /> interface.
-  /// </content>
-  public sealed partial class NpcCorporationDivision : IEveCacheable
-  {
-    IConvertible IEveCacheable.CacheKey
-    {
-      get { return CreateCacheKey(this.CorporationId, this.DivisionId); }
     }
   }
   #endregion

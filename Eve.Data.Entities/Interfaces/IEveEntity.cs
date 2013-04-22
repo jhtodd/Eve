@@ -7,12 +7,14 @@ namespace Eve.Data.Entities
 {
   using System;
 
+  using Eve.Data;
+
   using FreeNet.Data.Entity;
 
   /// <summary>
   /// The base interface for all EVE game-related data entities.
   /// </summary>
-  public interface IEveEntity
+  public interface IEveEntity : IEveCacheable
   {
   }
 }

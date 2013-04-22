@@ -7,6 +7,7 @@ namespace Eve.Data
 {
   using System.Data.Common;
   using System.Data.Entity;
+  using System.Diagnostics.CodeAnalysis;
   using System.Diagnostics.Contracts;
 
   using Eve.Data.Entities;
@@ -118,415 +119,497 @@ namespace Eve.Data
 
     /// <inheritdoc />
     [ContractVerification(false)]
+    [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1123:DoNotPlaceRegionsWithinElements", Justification = "The many sections of code in the model creation method are more readable in regions.")]
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {
       base.OnModelCreating(modelBuilder);
 
-      /* ActivityEntity Mappings *******************************************/
+      #region ActivityEntity Mappings
       var activity = modelBuilder.Entity<ActivityEntity>();
 
       // Map properties inherited from BaseValueEntity<>
-      activity.Map(x => x.MapInheritedProperties());
-      activity.HasKey(x => x.Id);
-      activity.Property(x => x.Description).HasColumnName("description");
-      activity.Property(x => x.Id).HasColumnName("activityID");
-      activity.Property(x => x.Name).HasColumnName("activityName");
+      activity.Map(m => m.MapInheritedProperties());
+      activity.HasKey(a => a.Id);
+      activity.Property(a => a.Description).HasColumnName("description");
+      activity.Property(a => a.Id).HasColumnName("activityID");
+      activity.Property(a => a.Name).HasColumnName("activityName");
+      #endregion
 
-      /* AgentEntity Mappings *******************************************************/
+      #region AgenEntity Mappings
       var agent = modelBuilder.Entity<AgentEntity>();
 
+      agent.Map(m => m.MapInheritedProperties());
+      agent.HasKey(a => a.Id);
+      agent.Property(a => a.Id).HasColumnName("agentID");
+
       // Map the ResearchFields collection
-      agent.HasMany<EveTypeEntity>(x => x.ResearchFields)
+      agent.HasMany<EveTypeEntity>(a => a.ResearchFields)
            .WithMany()
-           .Map(x => x.ToTable("agtResearchAgents")
+           .Map(m => m.ToTable("agtResearchAgents")
                       .MapLeftKey("agentID")
                       .MapRightKey("typeID"));
+      #endregion
 
-      /* AgentTypeEntity Mappings ***************************************************/
+      #region AgentTypeEntity Mappings
       var agentType = modelBuilder.Entity<AgentTypeEntity>();
 
       // Map properties inherited from BaseValueEntity<>
-      agentType.Map(x => x.MapInheritedProperties());
-      agentType.HasKey(x => x.Id);
-      agentType.Ignore(x => x.Description);
-      agentType.Property(x => x.Id).HasColumnName("agentTypeID");
-      agentType.Property(x => x.Name).HasColumnName("agentType");
+      agentType.Map(m => m.MapInheritedProperties());
+      agentType.HasKey(at => at.Id);
+      agentType.Ignore(at => at.Description);
+      agentType.Property(at => at.Id).HasColumnName("agentTypeID");
+      agentType.Property(at => at.Name).HasColumnName("agentType");
+      #endregion
 
-      /* AncestryEntity Mappings *******************************************/
+      #region AncestryEntity Mappings
       var ancestry = modelBuilder.Entity<AncestryEntity>();
 
       // Map properties inherited from BaseValueEntity<>
-      ancestry.Map(x => x.MapInheritedProperties());
-      ancestry.HasKey(x => x.Id);
-      ancestry.Property(x => x.Description).HasColumnName("description");
-      ancestry.Property(x => x.Id).HasColumnName("ancestryID");
-      ancestry.Property(x => x.Name).HasColumnName("ancestryName");
+      ancestry.Map(m => m.MapInheritedProperties());
+      ancestry.HasKey(a => a.Id);
+      ancestry.Property(a => a.Description).HasColumnName("description");
+      ancestry.Property(a => a.Id).HasColumnName("ancestryID");
+      ancestry.Property(a => a.Name).HasColumnName("ancestryName");
+      #endregion
 
-      /* AssemblyLineEntity Mappings *******************************************/
-
-      // All mappings defined by Data Annotations
+      #region AssemblyLineEntity Mappings
       var assemblyLine = modelBuilder.Entity<AssemblyLineEntity>();
+      #endregion
 
-      /* AssemblyLineStationEntity Mappings *******************************************/
-
-      // All mappings defined by Data Annotations
+      #region AssemblyLineStationEntity Mappings
       var assemblyLineStation = modelBuilder.Entity<AssemblyLineStationEntity>();
+      #endregion
 
-      /* AssemblyLineTypeEntity Mappings *******************************************/
+      #region AssemblyLineTypeEntity Mappings
       var assemblyLineType = modelBuilder.Entity<AssemblyLineTypeEntity>();
 
       // Map properties inherited from BaseValueEntity<>
-      assemblyLineType.Map(x => x.MapInheritedProperties());
-      assemblyLineType.HasKey(x => x.Id);
-      assemblyLineType.Property(x => x.Description).HasColumnName("description");
-      assemblyLineType.Property(x => x.Id).HasColumnName("assemblyLineTypeID");
-      assemblyLineType.Property(x => x.Name).HasColumnName("assemblyLineTypeName");
+      assemblyLineType.Map(m => m.MapInheritedProperties());
+      assemblyLineType.HasKey(alt => alt.Id);
+      assemblyLineType.Property(alt => alt.Description).HasColumnName("description");
+      assemblyLineType.Property(alt => alt.Id).HasColumnName("assemblyLineTypeID");
+      assemblyLineType.Property(alt => alt.Name).HasColumnName("assemblyLineTypeName");
 
       // Map the details collections
-      assemblyLineType.HasMany(x => x.CategoryDetails).WithRequired(x => x.AssemblyLineType);
-      assemblyLineType.HasMany(x => x.GroupDetails).WithRequired(x => x.AssemblyLineType);
+      assemblyLineType.HasMany(alt => alt.CategoryDetails).WithRequired(altcd => altcd.AssemblyLineType);
+      assemblyLineType.HasMany(alt => alt.GroupDetails).WithRequired(altgd => altgd.AssemblyLineType);
+      #endregion
 
-      /* AssemblyLineTypeCategoryDetailEntity Mappings ******************************/
-
-      // All mappings defined by Data Annotations
+      #region AssemblyLineTypeCategoryDetailEntity Mappings
       modelBuilder.Entity<AssemblyLineTypeCategoryDetailEntity>(); // Needed to allow the model to pick up the entity type for some reason
+      #endregion
 
-      /* AssemblyLineTypeGroupDetailEntity Mappings *********************************/
-
-      // All mappings defined by Data Annotations
+      #region AssemblyLineTypeGroupDetailEntity Mappings
       modelBuilder.Entity<AssemblyLineTypeGroupDetailEntity>(); // Needed to allow the model to pick up the entity type for some reason
+      #endregion
 
-      /* AttributeTypeEntity Mappings ***********************************************/
+      #region AttributeTypeEntity Mappings
       var attributeType = modelBuilder.Entity<AttributeTypeEntity>();
 
       // Map properties inherited from BaseValueEntity<>
-      attributeType.Map(x => x.MapInheritedProperties());
-      attributeType.HasKey(x => x.Id);
-      attributeType.Property(x => x.Description).HasColumnName("description");
-      attributeType.Property(x => x.Id).HasColumnName("attributeID");
-      attributeType.Property(x => x.Name).HasColumnName("attributeName");
+      attributeType.Map(m => m.MapInheritedProperties());
+      attributeType.HasKey(at => at.Id);
+      attributeType.Property(at => at.Description).HasColumnName("description");
+      attributeType.Property(at => at.Id).HasColumnName("attributeID");
+      attributeType.Property(at => at.Name).HasColumnName("attributeName");
+      #endregion
 
-      /* AttributeValueEntity Mappings **********************************************/
-
+      #region AttributeValueEntity Mappings
       // All mappings defined by Data Annotations
+      #endregion
 
-      /* AttributeCategoryEntity Mappings *******************************************/
+      #region AttributeCategoryEntity Mappings
       var attributeCategory = modelBuilder.Entity<AttributeCategoryEntity>();
 
       // Map properties inherited from BaseValueEntity<>
-      attributeCategory.Map(x => x.MapInheritedProperties());
-      attributeCategory.HasKey(x => x.Id);
-      attributeCategory.Property(x => x.Description).HasColumnName("categoryDescription");
-      attributeCategory.Property(x => x.Id).HasColumnName("categoryID");
-      attributeCategory.Property(x => x.Name).HasColumnName("categoryName");
+      attributeCategory.Map(m => m.MapInheritedProperties());
+      attributeCategory.HasKey(ac => ac.Id);
+      attributeCategory.Property(ac => ac.Description).HasColumnName("categoryDescription");
+      attributeCategory.Property(ac => ac.Id).HasColumnName("categoryID");
+      attributeCategory.Property(ac => ac.Name).HasColumnName("categoryName");
+      #endregion
 
-      /* BloodlineEntity Mappings ***************************************************/
+      #region BloodlineEntity Mappings
       var bloodline = modelBuilder.Entity<BloodlineEntity>();
 
       // Map properties inherited from BaseValueEntity<>
-      bloodline.Map(x => x.MapInheritedProperties());
-      bloodline.HasKey(x => x.Id);
-      bloodline.Property(x => x.Description).HasColumnName("description");
-      bloodline.Property(x => x.Id).HasColumnName("bloodlineID");
-      bloodline.Property(x => x.Name).HasColumnName("bloodlineName");
+      bloodline.Map(m => m.MapInheritedProperties());
+      bloodline.HasKey(b => b.Id);
+      bloodline.Property(b => b.Description).HasColumnName("description");
+      bloodline.Property(b => b.Id).HasColumnName("bloodlineID");
+      bloodline.Property(b => b.Name).HasColumnName("bloodlineName");
+      #endregion
 
-      /* CategoryEntity Mappings ****************************************************/
+      #region CategoryEntity Mappings
       var category = modelBuilder.Entity<CategoryEntity>();
 
       // Map properties inherited from BaseValueEntity<>
-      category.Map(x => x.MapInheritedProperties());
-      category.HasKey(x => x.Id);
-      category.Property(x => x.Description).HasColumnName("description");
-      category.Property(x => x.Id).HasColumnName("categoryID");
-      category.Property(x => x.Name).HasColumnName("categoryName");
+      category.Map(m => m.MapInheritedProperties());
+      category.HasKey(c => c.Id);
+      category.Property(c => c.Description).HasColumnName("description");
+      category.Property(c => c.Id).HasColumnName("categoryID");
+      category.Property(c => c.Name).HasColumnName("categoryName");
+      #endregion
 
-      /* CharacterAttributeTypeEntity Mappings **************************************/
+      #region CelestialEntity Mappings
+      var celestial = modelBuilder.Entity<CelestialEntity>();
+
+      celestial.Map(m => m.MapInheritedProperties());
+      celestial.HasKey(c => c.Id);
+      celestial.Property(c => c.Id).HasColumnName("celestialID");
+      #endregion
+
+      #region CertificateCategoryEntity Mappings
+      var certificateCategory = modelBuilder.Entity<CertificateCategoryEntity>();
+
+      // Map properties inherited from BaseValueEntity<>
+      certificateCategory.Map(m => m.MapInheritedProperties());
+      certificateCategory.HasKey(cc => cc.Id);
+      certificateCategory.Property(cc => cc.Description).HasColumnName("description");
+      certificateCategory.Property(cc => cc.Id).HasColumnName("categoryID");
+      certificateCategory.Property(cc => cc.Name).HasColumnName("categoryName");
+      #endregion
+
+      #region CharacterAttributeTypeEntity Mappings
       var characterAttributeType = modelBuilder.Entity<CharacterAttributeTypeEntity>();
 
       // Map properties inherited from BaseValueEntity<>
-      characterAttributeType.Map(x => x.MapInheritedProperties());
-      characterAttributeType.HasKey(x => x.Id);
-      characterAttributeType.Property(x => x.Description).HasColumnName("description");
-      characterAttributeType.Property(x => x.Id).HasColumnName("attributeID");
-      characterAttributeType.Property(x => x.Name).HasColumnName("attributeName");
+      characterAttributeType.Map(m => m.MapInheritedProperties());
+      characterAttributeType.HasKey(cat => cat.Id);
+      characterAttributeType.Property(cat => cat.Description).HasColumnName("description");
+      characterAttributeType.Property(cat => cat.Id).HasColumnName("attributeID");
+      characterAttributeType.Property(cat => cat.Name).HasColumnName("attributeName");
+      #endregion
 
-      /* ConstellationEntity Mappings ***********************************************/
+      #region ConstellationEntity Mappings
       var constellation = modelBuilder.Entity<ConstellationEntity>();
 
+      constellation.Map(m => m.MapInheritedProperties());
+      constellation.HasKey(c => c.Id);
+      constellation.Property(c => c.Id).HasColumnName("constellationID");
+
       // Map the Jumps collection
-      constellation.HasMany(x => x.Jumps).WithRequired().HasForeignKey(x => x.FromConstellationId);
+      constellation.HasMany(c => c.Jumps).WithRequired().HasForeignKey(cj => cj.FromConstellationId);
+      #endregion
 
-      /* ConstellationJumpEntity Mappings *******************************************/
-
+      #region ConstellationJumpEntity Mappings
       // All mappings defined by Data Annotations
+      #endregion
 
-      /* CorporateActivityEntity Mappings *******************************************/
+      #region CorporateActivityEntity Mappings
       var corporateActivity = modelBuilder.Entity<CorporateActivityEntity>();
 
       // Map properties inherited from BaseValueEntity<>
-      corporateActivity.Map(x => x.MapInheritedProperties());
-      corporateActivity.HasKey(x => x.Id);
-      corporateActivity.Property(x => x.Description).HasColumnName("description");
-      corporateActivity.Property(x => x.Id).HasColumnName("activityID");
-      corporateActivity.Property(x => x.Name).HasColumnName("activityName");
+      corporateActivity.Map(m => m.MapInheritedProperties());
+      corporateActivity.HasKey(ca => ca.Id);
+      corporateActivity.Property(ca => ca.Description).HasColumnName("description");
+      corporateActivity.Property(ca => ca.Id).HasColumnName("activityID");
+      corporateActivity.Property(ca => ca.Name).HasColumnName("activityName");
+      #endregion
 
-      /* DivisionEntity Mappings ****************************************************/
+      #region DivisionEntity Mappings
       var division = modelBuilder.Entity<DivisionEntity>();
 
       // Map properties inherited from BaseValueEntity<>
-      division.Map(x => x.MapInheritedProperties());
-      division.HasKey(x => x.Id);
-      division.Property(x => x.Description).HasColumnName("description");
-      division.Property(x => x.Id).HasColumnName("divisionID");
-      division.Property(x => x.Name).HasColumnName("divisionName");
+      division.Map(m => m.MapInheritedProperties());
+      division.HasKey(d => d.Id);
+      division.Property(d => d.Description).HasColumnName("description");
+      division.Property(d => d.Id).HasColumnName("divisionID");
+      division.Property(d => d.Name).HasColumnName("divisionName");
+      #endregion
 
-      /* EffectEntity Mappings ******************************************************/
-
+      #region EffectEntity Mappings
       // All mappings defined by Data Annotations
+      #endregion
 
-      /* EffectTypeEntity Mappings **************************************************/
+      #region EffectTypeEntity Mappings
       var effectType = modelBuilder.Entity<EffectTypeEntity>();
 
       // Map properties inherited from BaseValueEntity<>
-      effectType.Map(x => x.MapInheritedProperties());
-      effectType.HasKey(x => x.Id);
-      effectType.Property(x => x.Description).HasColumnName("description");
-      effectType.Property(x => x.Id).HasColumnName("effectID");
-      effectType.Property(x => x.Name).HasColumnName("effectName");
+      effectType.Map(m => m.MapInheritedProperties());
+      effectType.HasKey(et => et.Id);
+      effectType.Property(et => et.Description).HasColumnName("description");
+      effectType.Property(et => et.Id).HasColumnName("effectID");
+      effectType.Property(et => et.Name).HasColumnName("effectName");
+      #endregion
 
-      /* EveTypeEntity Mappings *****************************************************/
-      var type = modelBuilder.Entity<EveTypeEntity>();
+      #region EveTypeEntity Mappings
+      var eveType = modelBuilder.Entity<EveTypeEntity>();
 
       // Map properties inherited from BaseValueEntity<>
-      type.Map(x => x.MapInheritedProperties());
-      type.HasKey(x => x.Id);
-      type.Property(x => x.Description).HasColumnName("description");
-      type.Property(x => x.Id).HasColumnName("typeID");
-      type.Property(x => x.Name).HasColumnName("typeName");
+      eveType.Map(m => m.MapInheritedProperties());
+      eveType.HasKey(et => et.Id);
+      eveType.Property(et => et.Description).HasColumnName("description");
+      eveType.Property(et => et.Id).HasColumnName("typeID");
+      eveType.Property(et => et.Name).HasColumnName("typeName");
 
       // Map the Attributes collection
-      type.HasMany(x => x.Attributes).WithRequired().HasForeignKey(x => x.ItemTypeId);
+      eveType.HasMany(et => et.Attributes).WithRequired().HasForeignKey(a => a.ItemTypeId);
 
       // Map the Effects collection
-      type.HasMany(x => x.Effects).WithRequired().HasForeignKey(x => x.ItemTypeId);
+      eveType.HasMany(et => et.Effects).WithRequired().HasForeignKey(e => e.ItemTypeId);
 
       // Map the MetaType property
-      type.HasOptional(x => x.MetaType).WithRequired(x => x.Type);
+      eveType.HasOptional(et => et.MetaType).WithRequired(mt => mt.Type);
 
       // Map the VariantMetaTypes collection
-      type.HasMany(x => x.ChildMetaTypes).WithRequired().HasForeignKey(x => x.ParentTypeId);
+      eveType.HasMany(et => et.ChildMetaTypes).WithRequired().HasForeignKey(mt => mt.ParentTypeId);
+      #endregion
 
-      /* FactionEntity Mappings *****************************************************/
+      #region FactionEntity Mappings
       var faction = modelBuilder.Entity<FactionEntity>();
+      faction.Map(m => m.MapInheritedProperties());
+      faction.HasKey(f => f.Id);
+      faction.Property(f => f.Id).HasColumnName("factionID");
 
-      faction.HasRequired(x => x.SolarSystem).WithMany().HasForeignKey(x => x.SolarSystemId);
+      faction.HasRequired(f => f.SolarSystem).WithMany().HasForeignKey(x => x.SolarSystemId);
+      #endregion
 
-      /* FlagEntity Mappings ********************************************************/
+      #region FlagEntity Mappings
       var flag = modelBuilder.Entity<FlagEntity>();
 
       // Map properties inherited from BaseValueEntity<>
-      flag.Map(x => x.MapInheritedProperties());
-      flag.HasKey(x => x.Id);
-      flag.Property(x => x.Description).HasColumnName("flagText");
-      flag.Property(x => x.Id).HasColumnName("flagID");
-      flag.Property(x => x.Name).HasColumnName("flagName");
+      flag.Map(m => m.MapInheritedProperties());
+      flag.HasKey(f => f.Id);
+      flag.Property(f => f.Description).HasColumnName("flagText");
+      flag.Property(f => f.Id).HasColumnName("flagID");
+      flag.Property(f => f.Name).HasColumnName("flagName");
+      #endregion
 
-      /* GraphicEntity Mappings ********************************************************/
-
+      #region GraphicEntity Mappings
       // All mappings defined by Data Annotations
+      #endregion
 
-      /* GroupEntity Mappings *******************************************************/
+      #region GroupEntity Mappings
       var group = modelBuilder.Entity<GroupEntity>();
 
       // Map properties inherited from BaseValueEntity<>
-      group.Map(x => x.MapInheritedProperties());
-      group.HasKey(x => x.Id);
-      group.Property(x => x.Description).HasColumnName("description");
-      group.Property(x => x.Id).HasColumnName("groupID");
-      group.Property(x => x.Name).HasColumnName("groupName");
+      group.Map(m => m.MapInheritedProperties());
+      group.HasKey(g => g.Id);
+      group.Property(g => g.Description).HasColumnName("description");
+      group.Property(g => g.Id).HasColumnName("groupID");
+      group.Property(g => g.Name).HasColumnName("groupName");
 
       // Map the Types collection
-      group.HasMany(x => x.Types).WithRequired(x => x.Group).HasForeignKey(x => x.GroupId);
+      group.HasMany(g => g.Types).WithRequired(et => et.Group).HasForeignKey(et => et.GroupId);
+      #endregion
 
-      /* IconEntity Mappings ********************************************************/
+      #region IconEntity Mappings
       var icon = modelBuilder.Entity<IconEntity>();
 
       // Map properties inherited from BaseValueEntity<>
-      icon.Map(x => x.MapInheritedProperties());
-      icon.HasKey(x => x.Id);
-      icon.Property(x => x.Description).HasColumnName("description");
-      icon.Property(x => x.Id).HasColumnName("iconID");
-      icon.Property(x => x.Name).HasColumnName("iconFile");
+      icon.Map(m => m.MapInheritedProperties());
+      icon.HasKey(i => i.Id);
+      icon.Property(i => i.Description).HasColumnName("description");
+      icon.Property(i => i.Id).HasColumnName("iconID");
+      icon.Property(i => i.Name).HasColumnName("iconFile");
+      #endregion
 
-      /* ItemEntity Mappings ********************************************************/
+      #region ItemEntity Mappings
       var item = modelBuilder.Entity<ItemEntity>();
 
       // Extension entities
-      item.HasOptional(x => x.AgentInfo).WithRequired();
-      item.HasOptional(x => x.CelestialInfo).WithRequired();
-      item.HasOptional(x => x.ConstellationInfo).WithRequired();
-      item.HasOptional(x => x.CorporationInfo).WithRequired();
-      item.HasOptional(x => x.FactionInfo).WithRequired();
-      item.HasOptional(x => x.RegionInfo).WithRequired();
-      item.HasOptional(x => x.SolarSystemInfo).WithRequired();
-      item.HasOptional(x => x.StargateInfo).WithRequired();
-      item.HasOptional(x => x.StationInfo).WithRequired();
-      item.HasOptional(x => x.UniverseInfo).WithRequired();
+      item.HasOptional(i => i.AgentInfo).WithRequired(a => a.ItemInfo);
+      item.HasOptional(i => i.CelestialInfo).WithRequired(c => c.ItemInfo);
+      item.HasOptional(i => i.ConstellationInfo).WithRequired(c => c.ItemInfo);
+      item.HasOptional(i => i.CorporationInfo).WithRequired(c => c.ItemInfo);
+      item.HasOptional(i => i.FactionInfo).WithRequired(f => f.ItemInfo);
+      item.HasOptional(i => i.RegionInfo).WithRequired(r => r.ItemInfo);
+      item.HasOptional(i => i.SolarSystemInfo).WithRequired(s => s.ItemInfo);
+      item.HasOptional(i => i.StargateInfo).WithRequired(s => s.ItemInfo);
+      item.HasOptional(i => i.StationInfo).WithRequired(s => s.ItemInfo);
+      item.HasOptional(i => i.UniverseInfo).WithRequired(u => u.ItemInfo);
 
-      item.HasOptional(x => x.Name).WithRequired();
+      item.HasOptional(i => i.Name).WithRequired();
 
-      item.HasRequired(x => x.Location).WithMany().HasForeignKey(x => x.LocationId);
-      item.HasRequired(x => x.Owner).WithMany().HasForeignKey(x => x.OwnerId);
-      item.HasOptional(x => x.Position).WithRequired(x => x.Item);
+      item.HasRequired(i => i.Location).WithMany().HasForeignKey(i => i.LocationId);
+      item.HasRequired(i => i.Owner).WithMany().HasForeignKey(i => i.OwnerId);
+      item.HasOptional(i => i.Position).WithRequired(i => i.Item);
+      #endregion
 
-      /* ItemNameEntity Mappings ************************************************/
-
-      // All mappings defined by Data Annotations
+      #region ItemNameEntity Mappings
       var itemName = modelBuilder.Entity<ItemNameEntity>();
+      #endregion
 
-      /* ItemPositionEntity Mappings ************************************************/
-
-      // All mappings defined by Data Annotations
+      #region ItemPositionEntity Mappings
       var itemPosition = modelBuilder.Entity<ItemPositionEntity>();
+      #endregion
 
-      /* MarketGroupEntity Mappings *************************************************/
+      #region MarketGroupEntity Mappings
       var marketGroup = modelBuilder.Entity<MarketGroupEntity>();
 
       // Map properties inherited from BaseValueEntity<>
-      marketGroup.Map(x => x.MapInheritedProperties());
-      marketGroup.HasKey(x => x.Id);
-      marketGroup.Property(x => x.Description).HasColumnName("description");
-      marketGroup.Property(x => x.Id).HasColumnName("marketGroupID");
-      marketGroup.Property(x => x.Name).HasColumnName("marketGroupName");
+      marketGroup.Map(m => m.MapInheritedProperties());
+      marketGroup.HasKey(mg => mg.Id);
+      marketGroup.Property(mg => mg.Description).HasColumnName("description");
+      marketGroup.Property(mg => mg.Id).HasColumnName("marketGroupID");
+      marketGroup.Property(mg => mg.Name).HasColumnName("marketGroupName");
 
       // Map the ChildGroups collection
-      marketGroup.HasMany(x => x.ChildGroups).WithOptional(x => x.ParentGroup).HasForeignKey(x => x.ParentGroupId);
+      marketGroup.HasMany(mg => mg.ChildGroups).WithOptional(mg => mg.ParentGroup).HasForeignKey(mg => mg.ParentGroupId);
 
       // Map the Types collection
-      marketGroup.HasMany(x => x.Types).WithRequired(x => x.MarketGroup).HasForeignKey(x => x.MarketGroupId);
+      marketGroup.HasMany(mg => mg.Types).WithRequired(mg => mg.MarketGroup).HasForeignKey(mg => mg.MarketGroupId);
+      #endregion
 
-      /* MetaGroupEntity Mappings ***************************************************/
+      #region MetaGroupEntity Mappings
       var metaGroup = modelBuilder.Entity<MetaGroupEntity>();
 
       // Map properties inherited from BaseValueEntity<>
-      metaGroup.Map(x => x.MapInheritedProperties());
-      metaGroup.HasKey(x => x.Id);
-      metaGroup.Property(x => x.Description).HasColumnName("description");
-      metaGroup.Property(x => x.Id).HasColumnName("metaGroupID");
-      metaGroup.Property(x => x.Name).HasColumnName("metaGroupName");
+      metaGroup.Map(m => m.MapInheritedProperties());
+      metaGroup.HasKey(mg => mg.Id);
+      metaGroup.Property(mg => mg.Description).HasColumnName("description");
+      metaGroup.Property(mg => mg.Id).HasColumnName("metaGroupID");
+      metaGroup.Property(mg => mg.Name).HasColumnName("metaGroupName");
+      #endregion
 
-      /* MetaTypeEntity Mappings ****************************************************/
-
+      #region MetaTypeEntity Mappings
       // All mappings defined by Data Annotations
+      #endregion
 
-      /* NpcCorporationEntity Mappings **********************************************/
-      var corporation = modelBuilder.Entity<NpcCorporationEntity>();
+      #region NpcCorporationEntity Mappings
+      var npcCorporation = modelBuilder.Entity<NpcCorporationEntity>();
+
+      npcCorporation.Map(m => m.MapInheritedProperties());
+      npcCorporation.HasKey(c => c.Id);
+      npcCorporation.Property(c => c.Id).HasColumnName("corporationID");
 
       // Map the Agents collection
-      // TODO: Fix mapping
-      ////corporation.HasMany(x => x.Agents)
-      ////           .WithRequired(x => x.AgentInfo.Corporation.CorporationInfo)
-      ////           .HasForeignKey(x => x.AgentInfo.CorporationId);
-      ////corporation.HasMany(c => c.Agents)
-      ////           .WithRequired()
-      ////           .Map(m => m.MapKey("corporationID").ToTable("agtAgents"));
-      corporation.Ignore(c => c.Agents);
+      npcCorporation.HasMany(c => c.Agents).WithRequired(a => a.Corporation).HasForeignKey(a => a.CorporationId);
 
       // Map the TradeGoods collection
-      corporation.HasMany<EveTypeEntity>(x => x.TradeGoods)
-                 .WithMany().Map(m => m.ToTable("crpNPCCorporationTrades")
-                            .MapLeftKey("corporationID")
-                            .MapRightKey("typeID"));
+      npcCorporation.HasMany<EveTypeEntity>(c => c.TradeGoods)
+                    .WithMany().Map(m => m.ToTable("crpNPCCorporationTrades")
+                               .MapLeftKey("corporationID")
+                               .MapRightKey("typeID"));
 
       // Map the ResearchFields collection
-      corporation.HasMany<EveTypeEntity>(x => x.ResearchFields)
-                 .WithMany().Map(x => x.ToTable("crpNPCCorporationResearchFields")
-                 .MapLeftKey("corporationID")
-                 .MapRightKey("skillID"));
+      npcCorporation.HasMany<EveTypeEntity>(c => c.ResearchFields)
+                    .WithMany().Map(x => x.ToTable("crpNPCCorporationResearchFields")
+                    .MapLeftKey("corporationID")
+                    .MapRightKey("skillID"));
+      #endregion
 
-      /* NpcCorporationDivisionEntity Mappings **************************************/
+      #region NpcCorporationDivisionEntity Mappings
       var corporationDivision = modelBuilder.Entity<NpcCorporationDivisionEntity>();
 
       // Map the Agents collection
-      corporationDivision.HasMany(x => x.Agents)
+      corporationDivision.HasMany(cd => cd.Agents)
                          .WithRequired()
-                         .HasForeignKey(x => new { x.CorporationId, x.DivisionId });
+                         .HasForeignKey(a => new { a.CorporationId, a.DivisionId });
+      #endregion
 
-      /* RaceEntity Mappings ********************************************************/
+      #region RaceEntity Mappings
       var race = modelBuilder.Entity<RaceEntity>();
 
       // Map properties inherited from BaseValueEntity<>
-      race.Map(x => x.MapInheritedProperties());
-      race.HasKey(x => x.Id);
-      race.Property(x => x.Description).HasColumnName("description");
-      race.Property(x => x.Id).HasColumnName("raceID");
-      race.Property(x => x.Name).HasColumnName("raceName");
+      race.Map(m => m.MapInheritedProperties());
+      race.HasKey(r => r.Id);
+      race.Property(r => r.Description).HasColumnName("description");
+      race.Property(r => r.Id).HasColumnName("raceID");
+      race.Property(r => r.Name).HasColumnName("raceName");
+      #endregion
 
-      /* RegionEntity Mappings ******************************************************/
+      #region RegionEntity Mappings
       var region = modelBuilder.Entity<RegionEntity>();
 
+      region.Map(m => m.MapInheritedProperties());
+      region.HasKey(r => r.Id);
+      region.Property(r => r.Id).HasColumnName("regionID");
+
       // Map the Jumps collection
-      region.HasMany(x => x.Jumps).WithRequired().HasForeignKey(x => x.FromRegionId);
+      region.HasMany(r => r.Jumps).WithRequired().HasForeignKey(rj => rj.FromRegionId);
+      #endregion
 
-      /* RegionJumpEntity Mappings **************************************************/
-
+      #region RegionJumpEntity Mappings
       // All mappings defined by Data Annotations
+      #endregion
 
-      /* SolarSystemEntity Mappings *************************************************/
+      #region SolarSystemEntity Mappings
       var solarSystem = modelBuilder.Entity<SolarSystemEntity>();
 
-      solarSystem.HasRequired(x => x.Constellation).WithMany().HasForeignKey(x => x.ConstellationId);
-      solarSystem.HasOptional(x => x.Faction).WithMany().HasForeignKey(x => x.FactionId);
+      solarSystem.Map(m => m.MapInheritedProperties());
+      solarSystem.HasKey(s => s.Id);
+      solarSystem.Property(s => s.Id).HasColumnName("solarSystemID");
+
+      solarSystem.HasRequired(s => s.Constellation).WithMany().HasForeignKey(s => s.ConstellationId);
+      solarSystem.HasOptional(s => s.Faction).WithMany().HasForeignKey(s => s.FactionId);
+      solarSystem.HasRequired(s => s.Region).WithMany().HasForeignKey(s => s.RegionId);
 
       // Map the Jumps collection
-      solarSystem.HasMany(x => x.Jumps).WithRequired().HasForeignKey(x => x.FromSolarSystemId);
+      solarSystem.HasMany(s => s.Jumps).WithRequired().HasForeignKey(sj => sj.FromSolarSystemId);
+      #endregion
 
-      /* SolarSystemJumpEntity Mappings *********************************************/
-
+      #region SolarSystemJumpEntity Mappings
       // All mappings defined by Data Annotations
+      #endregion
 
-      /* StationOperationEntity Mappings ********************************************/
+      #region StargateEntity Mappings
+      var stargate = modelBuilder.Entity<StargateEntity>();
+
+      stargate.Map(m => m.MapInheritedProperties());
+      stargate.HasKey(s => s.Id);
+      stargate.Property(s => s.Id).HasColumnName("stargateID");
+      #endregion
+
+      #region StationEntity Mappings
+      var station = modelBuilder.Entity<StationEntity>();
+
+      station.Map(m => m.MapInheritedProperties());
+      station.HasKey(s => s.Id);
+      station.Property(s => s.Id).HasColumnName("stationID");
+
+      station.HasRequired(s => s.SolarSystem).WithMany().HasForeignKey(s => s.SolarSystemId);
+      #endregion
+
+      #region StationOperationEntity Mappings
       var stationOperation = modelBuilder.Entity<StationOperationEntity>();
 
       // Map properties inherited from BaseValueEntity<>
-      stationOperation.Map(x => x.MapInheritedProperties());
-      stationOperation.HasKey(x => x.Id);
-      stationOperation.Property(x => x.Description).HasColumnName("description");
-      stationOperation.Property(x => x.Id).HasColumnName("operationID");
-      stationOperation.Property(x => x.Name).HasColumnName("operationName");
+      stationOperation.Map(m => m.MapInheritedProperties());
+      stationOperation.HasKey(so => so.Id);
+      stationOperation.Property(so => so.Description).HasColumnName("description");
+      stationOperation.Property(so => so.Id).HasColumnName("operationID");
+      stationOperation.Property(so => so.Name).HasColumnName("operationName");
 
       // Map the Services collection
-      stationOperation.HasMany(x => x.Services).WithMany().Map(x => x.ToTable("staOperationServices")
-                                                                     .MapLeftKey("operationID")
-                                                                     .MapRightKey("serviceID"));
+      stationOperation.HasMany(so => so.Services).WithMany().Map(x => x.ToTable("staOperationServices")
+                                                                       .MapLeftKey("operationID")
+                                                                       .MapRightKey("serviceID"));
+      #endregion
 
-      /* StationServiceEntity Mappings **********************************************/
+      #region StationServiceEntity Mappings
       var stationService = modelBuilder.Entity<StationServiceEntity>();
 
       // Map properties inherited from BaseValueEntity<>
-      stationService.Map(x => x.MapInheritedProperties());
-      stationService.HasKey(x => x.Id);
-      stationService.Property(x => x.Description).HasColumnName("description");
-      stationService.Property(x => x.Id).HasColumnName("serviceID");
-      stationService.Property(x => x.Name).HasColumnName("serviceName");
+      stationService.Map(m => m.MapInheritedProperties());
+      stationService.HasKey(ss => ss.Id);
+      stationService.Property(ss => ss.Description).HasColumnName("description");
+      stationService.Property(ss => ss.Id).HasColumnName("serviceID");
+      stationService.Property(ss => ss.Name).HasColumnName("serviceName");
+      #endregion
 
-      /* StationTypeEntity Mappings *************************************************/
-
+      #region StationTypeEntity Mappings
       // All mappings defined by Data Annotations
+      #endregion
 
-      /* UnitEntity Mappings ********************************************************/
+      #region UnitEntity Mappings
       var unit = modelBuilder.Entity<UnitEntity>();
 
-      // Map properties inherited from BaseValueEntity<>
-      unit.Map(x => x.MapInheritedProperties());
-      unit.HasKey(x => x.Id);
-      unit.Property(x => x.Description).HasColumnName("description");
-      unit.Property(x => x.Id).HasColumnName("unitID");
-      unit.Property(x => x.Name).HasColumnName("unitName");
+      unit.Map(m => m.MapInheritedProperties());
+      unit.HasKey(u => u.Id);
+      unit.Property(u => u.Description).HasColumnName("description");
+      unit.Property(u => u.Id).HasColumnName("unitID");
+      unit.Property(u => u.Name).HasColumnName("unitName");
+      #endregion
 
-      /* UniverseEntity Mappings ****************************************************/
+      #region UniverseEntity Mappings
+      var universe = modelBuilder.Entity<UniverseEntity>();
 
-      // All mappings defined by Data Annotations
+      universe.Map(m => m.MapInheritedProperties());
+      universe.HasKey(s => s.Id);
+      universe.Property(s => s.Id).HasColumnName("universeID");
+      #endregion
     }
   }
 }

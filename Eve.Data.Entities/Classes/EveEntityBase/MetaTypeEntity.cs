@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
+  using System;
   using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
@@ -85,6 +86,13 @@ namespace Eve.Data.Entities
     /// </value>
     [Column("parentTypeID")]
     public int ParentTypeId { get; internal set; }
+
+    /// <inheritdoc />
+    [NotMapped]
+    protected internal override IConvertible CacheKey
+    {
+      get { return this.TypeId; }
+    }
 
     /* Methods */
 

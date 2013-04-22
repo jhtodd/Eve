@@ -9,7 +9,9 @@ namespace Eve
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Collections;
   using Eve.Data;
+  using Eve.Data.Entities;
 
   using FreeNet.Collections.ObjectModel;
   using FreeNet.Utilities;
@@ -19,7 +21,7 @@ namespace Eve
   /// </summary>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
   public sealed partial class ReadOnlyAttributeValueCollection 
-    : ReadOnlyKeyedCollection<AttributeId, AttributeValue>,
+    : ReadOnlyKeyedEntityAdapterCollection<AttributeId, AttributeValueEntity, AttributeValue>,
       IAttributeCollection,
       IEveRepositoryItem
   {
@@ -36,18 +38,10 @@ namespace Eve
     /// <param name="contents">
     /// The contents of the collection.
     /// </param>
-    public ReadOnlyAttributeValueCollection(IEveRepository container, IEnumerable<AttributeValue> contents) : base(contents == null ? 0 : contents.Count())
+    public ReadOnlyAttributeValueCollection(IEveRepository container, IEnumerable<AttributeValue> contents) : base(contents)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(container != null, "The provided repository cannot be null.");
       this.container = container;
-
-      if (contents != null)
-      {
-        foreach (AttributeValue attribute in contents)
-        {
-          Items.AddWithoutCallback(attribute);
-        }
-      }
     }
 
     /* Properties */
@@ -69,7 +63,7 @@ namespace Eve
     }
 
     /* Methods */
-    
+
     /// <summary>
     /// Gets the numeric value of the specified attribute, or the default value
     /// specified by the attribute type if a specific value for that attribute is

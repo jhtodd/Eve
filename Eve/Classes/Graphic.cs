@@ -262,19 +262,6 @@ namespace Eve
   }
   #endregion
 
-  #region IEveCacheable Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IEveCacheable" /> interface.
-  /// </content>
-  public sealed partial class Graphic : IEveCacheable
-  {
-    IConvertible IEveCacheable.CacheKey
-    {
-      get { return this.Id; }
-    }
-  }
-  #endregion
-
   #region IKeyItem<GraphicId> Implementation
   /// <content>
   /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.

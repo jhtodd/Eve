@@ -67,7 +67,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.category,
-          () => this.Container.GetOrAdd<AttributeCategory>(this.CategoryId, () => this.Entity.Category.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<AttributeCategory>(this.CategoryId, () => this.Entity.Category.ToAdapter(this.Container)));
 
         Contract.Assume(this.category != null);
         return this.category;
@@ -157,7 +157,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.icon,
-          () => this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
 
         Contract.Assume(this.icon != null);
         return this.icon;
@@ -223,7 +223,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.unit,
-          () => this.Container.GetOrAdd<Unit>(this.UnitId, () => this.Entity.Unit.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Unit>(this.UnitId, () => this.Entity.Unit.ToAdapter(this.Container)));
 
         Contract.Assume(this.unit != null);
         return this.unit;

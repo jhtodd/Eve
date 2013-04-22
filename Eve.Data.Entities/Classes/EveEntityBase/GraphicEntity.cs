@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
+  using System;
   using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
   using System.Diagnostics.Contracts;
@@ -128,6 +129,13 @@ namespace Eve.Data.Entities
     /// </value>
     [Column("obsolete")]
     public bool Obsolete { get; internal set; }
+
+    /// <inheritdoc />
+    [NotMapped]
+    protected internal override IConvertible CacheKey
+    {
+      get { return this.Id; }
+    }
 
     /* Methods */
 

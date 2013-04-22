@@ -43,13 +43,14 @@ namespace Eve.Sandbox {
     }
 
     private void Button_Click_1(object sender, RoutedEventArgs e) {
-      EveDbContext c = new EveDbContext();
+      EveDbContext ct = new EveDbContext();
 
-      var results = ds.GetBloodlines(q => q.Where(x => x.Id == BloodlineId.Achura).Include(x => x.Race).OrderBy(x => x.Charisma));
+      var results = ds.GetStations(q => q.Where(s => s.StationInfo.Agents.Any(a => a.ResearchFields.Count > 0))
+                                         .OrderBy(s => s.Name.Value));
 
-      foreach (Bloodline bloodline in results)
+      foreach (var result in results)
       {
-        textBox1.AppendText(bloodline.Name + Environment.NewLine);
+        textBox1.AppendText(result.Name + Environment.NewLine);
       }
     }
   }

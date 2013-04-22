@@ -65,7 +65,7 @@ namespace Eve.Industry
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.activity,
-          () => this.Container.GetOrAdd<Activity>(this.ActivityId, () => this.Entity.Activity.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Activity>(this.ActivityId, () => this.Entity.Activity.ToAdapter(this.Container)));
 
         Contract.Assume(this.activity != null);
         return this.activity;
@@ -310,7 +310,7 @@ namespace Eve.Industry
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.owner, 
-          () => this.Container.GetOrAdd<NpcCorporation>(this.OwnerId, () => (NpcCorporation)this.Entity.Owner.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<NpcCorporation>(this.OwnerId, () => (NpcCorporation)this.Entity.Owner.ToAdapter(this.Container)));
 
         Contract.Assume(this.owner != null);
         return this.owner;
@@ -354,7 +354,7 @@ namespace Eve.Industry
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.station,
-          () => this.Container.GetOrAdd<Station>(this.StationId, () => (Station)this.Entity.Container.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Station>(this.StationId, () => (Station)this.Entity.Container.ToAdapter(this.Container)));
 
         Contract.Assume(this.station != null);
         return this.station;
@@ -414,7 +414,7 @@ namespace Eve.Industry
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.assemblyLineType,
-          () => this.Container.GetOrAdd<AssemblyLineType>(this.TypeId, () => this.Entity.AssemblyLineType.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<AssemblyLineType>(this.TypeId, () => this.Entity.AssemblyLineType.ToAdapter(this.Container)));
 
         Contract.Assume(this.assemblyLineType != null);
         return this.assemblyLineType;
@@ -497,19 +497,6 @@ namespace Eve.Industry
     {
       AssemblyLine other = obj as AssemblyLine;
       return this.CompareTo(other);
-    }
-  }
-  #endregion
-
-  #region IEveCacheable Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IEveCacheable" /> interface.
-  /// </content>
-  public sealed partial class AssemblyLine : IEveCacheable
-  {
-    IConvertible IEveCacheable.CacheKey
-    {
-      get { return this.Id; }
     }
   }
   #endregion

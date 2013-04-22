@@ -65,7 +65,7 @@ namespace Eve.Industry
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.assemblyLineType,
-          () => this.Container.GetOrAdd<AssemblyLineType>(this.AssemblyLineTypeId, () => this.Entity.AssemblyLineType.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<AssemblyLineType>(this.AssemblyLineTypeId, () => this.Entity.AssemblyLineType.ToAdapter(this.Container)));
 
         Contract.Assume(this.assemblyLineType != null);
         return this.assemblyLineType;
@@ -102,7 +102,7 @@ namespace Eve.Industry
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.group,
-          () => this.Container.GetOrAdd<Group>(this.GroupId, () => this.Entity.Group.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Group>(this.GroupId, () => this.Entity.Group.ToAdapter(this.Container)));
 
         Contract.Assume(this.group != null);
         return this.group;
@@ -176,23 +176,6 @@ namespace Eve.Industry
 
     /* Methods */
 
-    /// <summary>
-    /// Computes a compound ID for the specified sub-IDs.
-    /// </summary>
-    /// <param name="assemblyLineTypeId">
-    /// The ID of the assembly line type.
-    /// </param>
-    /// <param name="groupId">
-    /// The ID of the group.
-    /// </param>
-    /// <returns>
-    /// A compound ID combining the two sub-IDs.
-    /// </returns>
-    public static long CreateCacheKey(AssemblyLineTypeId assemblyLineTypeId, GroupId groupId)
-    {
-      return (long)((((ulong)(long)assemblyLineTypeId.Value) << 32) | ((ulong)(long)groupId));
-    }
-
     /// <inheritdoc />
     public int CompareTo(AssemblyLineTypeGroupDetail other)
     {
@@ -255,19 +238,6 @@ namespace Eve.Industry
   }
   #endregion
 
-  #region IEveCacheable Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IEveCacheable" /> interface.
-  /// </content>
-  public sealed partial class AssemblyLineTypeGroupDetail : IEveCacheable
-  {
-    IConvertible IEveCacheable.CacheKey
-    {
-      get { return CreateCacheKey(this.AssemblyLineTypeId, this.GroupId); }
-    }
-  }
-  #endregion
-
   #region IKeyItem<long> Implementation
   /// <content>
   /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.
@@ -276,7 +246,7 @@ namespace Eve.Industry
   {
     long IKeyItem<long>.Key
     {
-      get { return CreateCacheKey(this.AssemblyLineTypeId, this.GroupId); }
+      get { return AssemblyLineTypeGroupDetailEntity.CreateCacheKey(this.AssemblyLineTypeId, this.GroupId); }
     }
   }
   #endregion

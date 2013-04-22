@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
+  using System;
   using System.Collections.Generic;
   using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
@@ -49,16 +50,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("celestialID")]
-    [Key]
-    public long CelestialId { get; internal set; }
-
-    /// <summary>
-    /// Gets the underlying database value of the corresponding adapter property.
-    /// </summary>
-    /// <value>
-    /// The underlying database value of the corresponding adapter property.
-    /// </value>
     [Column("density")]
     public double Density { get; internal set; }
 
@@ -88,6 +79,28 @@ namespace Eve.Data.Entities
     /// </value>
     [Column("fragmented")]
     public bool Fragmented { get; internal set; }
+
+    /// <summary>
+    /// Gets the ID of the <see cref="ItemEntity" /> associated with the current object.
+    /// </summary>
+    /// <value>
+    /// The ID <see cref="ItemEntity" /> associated with the current object.
+    /// </value>
+    [Key]
+    public long Id { get; internal set; }
+
+    /// <summary>
+    /// Gets the <see cref="ItemEntity" /> associated with the current object.
+    /// This can be considered the "other half" of the current object: 
+    /// <c>ItemInfo</c> holds the basic information about the item, while the
+    /// current object holds information specific to the item's current type
+    /// (e.g. agent, region, faction, solar system, etc.).
+    /// </summary>
+    /// <value>
+    /// The <see cref="ItemEntity" /> associated with the current object.
+    /// </value>
+    [ForeignKey("Id")]
+    public virtual ItemEntity ItemInfo { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -214,5 +227,11 @@ namespace Eve.Data.Entities
     /// </value>
     [Column("temperature")]
     public double Temperature { get; internal set; }
+
+    /// <inheritdoc />
+    protected internal override IConvertible CacheKey
+    {
+      get { return this.Id; }
+    }
   }
 }

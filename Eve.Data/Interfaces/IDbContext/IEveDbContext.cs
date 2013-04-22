@@ -137,6 +137,14 @@ namespace Eve.Data
     IQueryable<CategoryEntity> Categories { get; }
 
     /// <summary>
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query certificate categories.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IQueryable{T}" /> for certificate categories.
+    /// </value>
+    IQueryable<CertificateCategoryEntity> CertificateCategories { get; }
+
+    /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query categories.
     /// </summary>
     /// <value>

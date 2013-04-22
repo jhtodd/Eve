@@ -61,7 +61,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.activity,
-          () => this.Container.GetOrAdd<CorporateActivity>(this.ActivityId, () => this.Entity.Activity.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<CorporateActivity>(this.ActivityId, () => this.Entity.Activity.ToAdapter(this.Container)));
 
         Contract.Assume(this.activity != null);
         return this.activity;
@@ -100,7 +100,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.amarrStationType,
-          () => this.Container.GetOrAdd<StationType>(this.AmarrStationTypeId, () => (StationType)this.Entity.AmarrStationType.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<StationType>(this.AmarrStationTypeId, () => (StationType)this.Entity.AmarrStationType.ToAdapter(this.Container)));
 
         Contract.Assume(this.amarrStationType != null);
         return this.amarrStationType;
@@ -149,7 +149,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.caldariStationType,
-          () => this.Container.GetOrAdd<StationType>(this.CaldariStationTypeId, () => (StationType)this.Entity.CaldariStationType.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<StationType>(this.CaldariStationTypeId, () => (StationType)this.Entity.CaldariStationType.ToAdapter(this.Container)));
 
         Contract.Assume(this.caldariStationType != null);
         return this.caldariStationType;
@@ -209,7 +209,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.gallenteStationType,
-          () => this.Container.GetOrAdd<StationType>(this.GallenteStationTypeId, () => (StationType)this.Entity.GallenteStationType.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<StationType>(this.GallenteStationTypeId, () => (StationType)this.Entity.GallenteStationType.ToAdapter(this.Container)));
 
         Contract.Assume(this.gallenteStationType != null);
         return this.gallenteStationType;
@@ -258,7 +258,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.joveStationType,
-          () => this.Container.GetOrAdd<StationType>(this.JoveStationTypeId, () => (StationType)this.Entity.JoveStationType.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<StationType>(this.JoveStationTypeId, () => (StationType)this.Entity.JoveStationType.ToAdapter(this.Container)));
 
         Contract.Assume(this.joveStationType != null);
         return this.joveStationType;
@@ -296,7 +296,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.minmatarStationType,
-          () => this.Container.GetOrAdd<StationType>(this.MinmatarStationTypeId, () => (StationType)this.Entity.MinmatarStationType.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<StationType>(this.MinmatarStationTypeId, () => (StationType)this.Entity.MinmatarStationType.ToAdapter(this.Container)));
 
         Contract.Assume(this.minmatarStationType != null);
         return this.minmatarStationType;
@@ -347,7 +347,7 @@ namespace Eve.Universe
               return new ReadOnlyStationServiceCollection(null);
             }
 
-            return new ReadOnlyStationServiceCollection(this.Entity.Services.Select(x => this.Container.GetOrAdd<StationService>(x.Id, () => x.ToAdapter(this.Container))).OrderBy(x => x));
+            return new ReadOnlyStationServiceCollection(this.Entity.Services.Select(x => this.Container.GetOrAddStoredValue<StationService>(x.Id, () => x.ToAdapter(this.Container))).OrderBy(x => x));
           });
 
         Contract.Assume(this.services != null);

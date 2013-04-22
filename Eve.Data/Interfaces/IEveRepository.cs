@@ -53,7 +53,7 @@ namespace Eve.Data
     /// <paramref name="valueFactory" /> delegate, after it has been 
     /// stored in the repository.
     /// </returns>
-    T GetOrAdd<T>(IConvertible id, Func<T> valueFactory) where T : IEveCacheable;
+    T GetOrAddStoredValue<T>(IConvertible id, Func<T> valueFactory) where T : IEveCacheable;
 
     #region Activity Methods
     /// <summary>
@@ -1093,6 +1093,74 @@ namespace Eve.Data
     /// Thrown if more than one item with the specified ID was found.
     /// </exception>
     bool TryGetCelestialById(CelestialId id, out Celestial value);
+    #endregion
+
+    #region CertificateCategory Methods
+    /// <summary>
+    /// Returns the <see cref="CertificateCategory" /> object with the specified ID.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <returns>
+    /// The item with the specified ID value(s).
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
+    CertificateCategory GetCertificateCategoryById(CertificateCategoryId id);
+
+    /// <summary>
+    /// Returns all <see cref="CertificateCategory" /> objects matching the specified criteria.
+    /// </summary>
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
+    /// </returns>
+    IReadOnlyList<CertificateCategory> GetCertificateCategories(Func<IQueryable<CertificateCategoryEntity>, IQueryable<CertificateCategoryEntity>> queryOperations);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="CertificateCategory" />
+    /// objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
+    /// </returns>
+    IReadOnlyList<CertificateCategory> GetCertificateCategories(params IQueryModifier<CertificateCategoryEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="CertificateCategory" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID value(s),
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
+    bool TryGetCertificateCategoryById(CertificateCategoryId id, out CertificateCategory value);
     #endregion
 
     #region CharacterAttributeType Methods

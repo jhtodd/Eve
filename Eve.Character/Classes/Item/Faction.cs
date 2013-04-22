@@ -66,7 +66,7 @@ namespace Eve.Character
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.corporation,
-          () => this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.Entity.FactionInfo.Corporation.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.Entity.FactionInfo.Corporation.ItemInfo.ToAdapter(this.Container)));
 
         Contract.Assume(this.corporation != null);
         return this.corporation;
@@ -109,7 +109,7 @@ namespace Eve.Character
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.icon, 
-          () => this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.FactionInfo.Icon.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Icon>(this.IconId, () => this.Entity.FactionInfo.Icon.ToAdapter(this.Container)));
 
         Contract.Assume(this.icon != null);
         return this.icon;
@@ -152,7 +152,7 @@ namespace Eve.Character
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.militiaCorporation,
-          () => this.Container.GetOrAdd<NpcCorporation>(this.MilitiaCorporationId, () => (NpcCorporation)this.Entity.FactionInfo.MilitiaCorporation.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<NpcCorporation>(this.MilitiaCorporationId, () => (NpcCorporation)this.Entity.FactionInfo.MilitiaCorporation.ItemInfo.ToAdapter(this.Container)));
 
         Contract.Assume(this.militiaCorporation != null);
         return this.militiaCorporation;
@@ -237,7 +237,7 @@ namespace Eve.Character
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.solarSystem,
-          () => this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.Entity.FactionInfo.SolarSystem.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.Entity.FactionInfo.SolarSystem.ItemInfo.ToAdapter(this.Container)));
 
         Contract.Assume(this.solarSystem != null);
         return this.solarSystem;

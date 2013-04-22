@@ -135,7 +135,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.constellation,
-          () => this.Container.GetOrAdd<Constellation>(this.ConstellationId, () => (Constellation)this.Entity.StationInfo.Constellation.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Constellation>(this.ConstellationId, () => (Constellation)this.Entity.StationInfo.Constellation.ItemInfo.ToAdapter(this.Container)));
 
         Contract.Assume(this.constellation != null);
         return this.constellation;
@@ -180,7 +180,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.corporation,
-          () => this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.Entity.StationInfo.Corporation.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.Entity.StationInfo.Corporation.ItemInfo.ToAdapter(this.Container)));
 
         Contract.Assume(this.corporation != null);
         return this.corporation;
@@ -305,7 +305,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.operation,
-          () => this.Container.GetOrAdd<StationOperation>(this.OperationId, () => this.Entity.StationInfo.Operation.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<StationOperation>(this.OperationId, () => this.Entity.StationInfo.Operation.ToAdapter(this.Container)));
 
         Contract.Assume(this.operation != null);
         return this.operation;
@@ -348,7 +348,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.region,
-          () => this.Container.GetOrAdd<Region>(this.RegionId, () => (Region)this.Entity.StationInfo.Region.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Region>(this.RegionId, () => (Region)this.Entity.StationInfo.Region.ItemInfo.ToAdapter(this.Container)));
 
         Contract.Assume(this.region != null);
         return this.region;
@@ -468,7 +468,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.solarSystem,
-          () => this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.Entity.StationInfo.SolarSystem.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.Entity.StationInfo.SolarSystem.ItemInfo.ToAdapter(this.Container)));
 
         Contract.Assume(this.solarSystem != null);
         return this.solarSystem;
@@ -511,7 +511,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.stationType,
-          () => this.Container.GetOrAdd<StationType>(this.StationTypeId, () => (StationType)this.Entity.StationInfo.StationType.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<StationType>(this.StationTypeId, () => (StationType)this.Entity.StationInfo.StationType.ToAdapter(this.Container)));
 
         Contract.Assume(this.stationType != null);
         return this.stationType;

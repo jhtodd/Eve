@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
+  using System;
   using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
@@ -143,7 +144,31 @@ namespace Eve.Data.Entities
     [Key]
     public long ToSolarSystemId { get; internal set; }
 
+    /// <inheritdoc />
+    [NotMapped]
+    protected internal override IConvertible CacheKey
+    {
+      get { return CreateCacheKey(this.FromSolarSystemId, this.ToSolarSystemId); }
+    }
+
     /* Methods */
+
+    /// <summary>
+    /// Computes a compound ID for the specified sub-IDs.
+    /// </summary>
+    /// <param name="fromId">
+    /// The ID of the origin constellation.
+    /// </param>
+    /// <param name="toId">
+    /// The ID of the destination constellation.
+    /// </param>
+    /// <returns>
+    /// A compound ID combining the two sub-IDs.
+    /// </returns>
+    public static long CreateCacheKey(SolarSystemId fromId, SolarSystemId toId)
+    {
+      return (long)((((ulong)(long)fromId.GetHashCode()) << 32) | ((ulong)(long)toId.GetHashCode()));
+    }
 
     /// <inheritdoc />
     public override SolarSystemJump ToAdapter(IEveRepository container)

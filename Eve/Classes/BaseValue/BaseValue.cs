@@ -59,6 +59,7 @@ namespace Eve
       IEveCacheable,
       IKeyItem<TId>
     where TId : IConvertible, new()
+    where TEntityId : IConvertible
     where TEntity : BaseValueEntity<TEntityId, TDerived>
     where TDerived : BaseValue<TId, TEntityId, TEntity, TDerived>
   {
@@ -242,19 +243,6 @@ namespace Eve
     {
       TDerived other = obj as TDerived;
       return this.CompareTo(other);
-    }
-  }
-  #endregion
-
-  #region IEveCacheable Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IEveCacheable" /> interface.
-  /// </content>
-  public abstract partial class BaseValue<TId, TEntityId, TEntity, TDerived> : IEveCacheable
-  {
-    IConvertible IEveCacheable.CacheKey
-    {
-      get { return this.CacheKey; }
     }
   }
   #endregion

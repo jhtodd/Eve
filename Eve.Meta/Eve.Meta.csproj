@@ -123,6 +123,7 @@
   <ItemGroup>
     <Compile Include="Eve.Meta\Classes\Attribute\EveTableGeneratorAttribute.cs" />
     <Compile Include="Eve.Meta\Classes\Attribute\EveEnumGeneratorAttribute.cs" />
+    <Compile Include="Eve.Meta\Classes\EnumCodeGenerator\GenerateEnumCertificateCategoryId.cs" />
     <Compile Include="Eve.Meta\Classes\EnumCodeGenerator\GenerateEnumActivityId.cs" />
     <Compile Include="Eve.Meta\Classes\EnumCodeGenerator\GenerateEnumAncestryId.cs" />
     <Compile Include="Eve.Meta\Classes\EnumEntry.cs" />

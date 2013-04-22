@@ -14,7 +14,7 @@ namespace Eve.Data.Entities
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
   [Table("dgmEffects")]
-  public class EffectTypeEntity : BaseValueEntity<short, EffectType>
+  public class EffectTypeEntity : BaseValueEntity<EffectId, EffectType>
   {
     // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
@@ -100,7 +100,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [Column("effectCategory")]
-    public short EffectCategoryId { get; internal set; }
+    public EffectCategoryId EffectCategoryId { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.

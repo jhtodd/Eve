@@ -59,7 +59,7 @@ namespace Eve.Industry
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.activity,
-          () => this.Container.GetOrAdd<Activity>(this.ActivityId, () => this.Entity.Activity.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Activity>(this.ActivityId, () => this.Entity.Activity.ToAdapter(this.Container)));
 
         Contract.Assume(this.activity != null);
         return this.activity;

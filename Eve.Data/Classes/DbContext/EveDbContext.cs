@@ -221,6 +221,12 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
+    public IQueryable<CertificateCategoryEntity> CertificateCategories
+    {
+      get { return this.Query<CertificateCategoryEntity>(); }
+    }
+
+    /// <inheritdoc />
     public IQueryable<ItemEntity> Constellations
     {
       get

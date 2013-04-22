@@ -84,7 +84,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.faction,
-          () => this.Container.GetOrAdd<Faction>(this.FactionId, () => (Faction)this.RegionInfo.Faction.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Faction>(this.FactionId, () => (Faction)this.RegionInfo.Faction.ItemInfo.ToAdapter(this.Container)));
 
         Contract.Assume(this.faction != null);
         return this.faction;

@@ -152,6 +152,15 @@ namespace Eve.Data
       }
     }
 
+    IQueryable<CertificateCategoryEntity> IEveDbContext.CertificateCategories
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IQueryable<CertificateCategoryEntity>>() != null);
+        throw new NotImplementedException();
+      }
+    }
+
     IQueryable<CharacterAttributeTypeEntity> IEveDbContext.CharacterAttributeTypes
     {
       get

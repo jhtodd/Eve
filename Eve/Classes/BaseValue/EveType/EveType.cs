@@ -111,7 +111,7 @@ namespace Eve
         // If not already set, construct a collection of this type's attribute values.
         LazyInitializer.EnsureInitialized(
           ref this.attributes,
-          () => new ReadOnlyAttributeValueCollection(this.Container, this.Container.GetAttributeValues(q => q.Where(x => x.ItemTypeId == this.Id.Value)).OrderBy(x => x)));
+          () => new ReadOnlyAttributeValueCollection(this.Container, this.Container.GetAttributeValues(q => q.Where(x => x.ItemTypeId == this.Id.Value))));
 
         Contract.Assume(this.attributes != null);
         return this.attributes;
@@ -219,7 +219,7 @@ namespace Eve
         // If not already set, construct a collection of this type's effects.
         LazyInitializer.EnsureInitialized(
           ref this.effects,
-          () => new ReadOnlyEffectCollection(this.Container.GetEffects(q => q.Where(x => x.ItemTypeId == this.Id.Value)).OrderBy(x => x)));
+          () => new ReadOnlyEffectCollection(this.Container.GetEffects(q => q.Where(x => x.ItemTypeId == this.Id.Value))));
 
         Contract.Assume(this.effects != null);
         return this.effects;
@@ -246,7 +246,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.graphic,
-          () => this.Container.GetOrAdd<Graphic>(this.GraphicId, () => this.Entity.Graphic.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Graphic>(this.GraphicId, () => this.Entity.Graphic.ToAdapter(this.Container)));
 
         Contract.Assume(this.graphic != null);
         return this.graphic;
@@ -279,7 +279,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.group,
-          () => this.Container.GetOrAdd<Group>(this.GroupId, () => this.Entity.Group.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Group>(this.GroupId, () => this.Entity.Group.ToAdapter(this.Container)));
 
         Contract.Assume(this.group != null);
         return this.group;
@@ -318,7 +318,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.icon,
-          () => this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
 
         Contract.Assume(this.icon != null);
         return this.icon;
@@ -357,7 +357,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.marketGroup,
-          () => this.Container.GetOrAdd<MarketGroup>(this.MarketGroupId, () => this.Entity.MarketGroup.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<MarketGroup>(this.MarketGroupId, () => this.Entity.MarketGroup.ToAdapter(this.Container)));
 
         Contract.Assume(this.marketGroup != null);
         return this.marketGroup;
@@ -407,12 +407,14 @@ namespace Eve
     {
       get
       {
-        Contract.Ensures(Contract.Result<MetaGroup>() != null);
+        if (this.MetaGroupId == null)
+        {
+          return null;
+        }
 
-        // Default to Tech I if no meta type information is available
         LazyInitializer.EnsureInitialized(
           ref this.metaGroup,
-          () => (MetaType != null) ? MetaType.MetaGroup : this.Container.GetMetaGroupById(MetaGroupId.TechI));
+          () => this.MetaType.MetaGroup);
 
         Contract.Assume(this.metaGroup != null);
         return this.metaGroup;
@@ -425,12 +427,12 @@ namespace Eve
     /// <value>
     /// The ID of the meta group the current item is a member of.
     /// </value>
-    public MetaGroupId MetaGroupId
+    public MetaGroupId? MetaGroupId
     {
       get
       {
         // Default to Tech I if no meta type information is available
-        return (MetaType != null) ? MetaType.MetaGroupId : MetaGroupId.TechI;
+        return (MetaType != null) ? MetaType.MetaGroupId : (MetaGroupId?)null;
       }
     }
 
@@ -653,7 +655,7 @@ namespace Eve
             variations.Sort(
               (x, y) =>
               {
-                int compareResult = x.MetaGroupId.CompareTo(y.MetaGroupId);
+                int compareResult = Nullable.Compare(x.MetaGroupId, y.MetaGroupId);
 
                 if (compareResult == 0)
                 {

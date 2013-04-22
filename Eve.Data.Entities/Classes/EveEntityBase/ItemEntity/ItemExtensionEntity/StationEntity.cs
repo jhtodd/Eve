@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
+  using System;
   using System.Collections.Generic;
   using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
@@ -39,6 +40,15 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
+    [ForeignKey("LocationId")]
+    public virtual ICollection<AgentEntity> Agents { get; internal set; }
+
+    /// <summary>
+    /// Gets the underlying database value of the corresponding adapter property.
+    /// </summary>
+    /// <value>
+    /// The underlying database value of the corresponding adapter property.
+    /// </value>
     [ForeignKey("ContainerId")]
     public virtual ICollection<AssemblyLineEntity> AssemblyLines { get; internal set; }
 
@@ -58,7 +68,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("ConstellationId")]
-    public virtual ItemEntity Constellation { get; internal set; }
+    public virtual ConstellationEntity Constellation { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -76,7 +86,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("CorporationId")]
-    public virtual ItemEntity Corporation { get; internal set; }
+    public virtual NpcCorporationEntity Corporation { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -95,6 +105,28 @@ namespace Eve.Data.Entities
     /// </value>
     [Column("dockingCostPerVolume")]
     public double DockingCostPerVolume { get; internal set; }
+
+    /// <summary>
+    /// Gets the ID of the <see cref="ItemEntity" /> associated with the current object.
+    /// </summary>
+    /// <value>
+    /// The ID <see cref="ItemEntity" /> associated with the current object.
+    /// </value>
+    [Key]
+    public long Id { get; internal set; }
+
+    /// <summary>
+    /// Gets the <see cref="ItemEntity" /> associated with the current object.
+    /// This can be considered the "other half" of the current object: 
+    /// <c>ItemInfo</c> holds the basic information about the item, while the
+    /// current object holds information specific to the item's current type
+    /// (e.g. agent, region, faction, solar system, etc.).
+    /// </summary>
+    /// <value>
+    /// The <see cref="ItemEntity" /> associated with the current object.
+    /// </value>
+    [ForeignKey("Id")]
+    public virtual ItemEntity ItemInfo { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -139,7 +171,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("RegionId")]
-    public virtual ItemEntity Region { get; internal set; }
+    public virtual RegionEntity Region { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -193,7 +225,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("SolarSystemId")]
-    public virtual ItemEntity SolarSystem { get; internal set; }
+    public virtual SolarSystemEntity SolarSystem { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -203,16 +235,6 @@ namespace Eve.Data.Entities
     /// </value>
     [Column("solarSystemID")]
     public long SolarSystemId { get; internal set; }
-
-    /// <summary>
-    /// Gets the underlying database value of the corresponding adapter property.
-    /// </summary>
-    /// <value>
-    /// The underlying database value of the corresponding adapter property.
-    /// </value>
-    [Column("stationID")]
-    [Key]
-    public long StationId { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -267,5 +289,11 @@ namespace Eve.Data.Entities
     /// </value>
     [Column("z")]
     public double Z { get; internal set; }
+
+    /// <inheritdoc />
+    protected internal override IConvertible CacheKey
+    {
+      get { return this.Id; }
+    }
   }
 }

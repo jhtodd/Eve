@@ -286,7 +286,7 @@ namespace Eve.Tests {
     }
     //******************************************************************************
     /// <summary>
-    /// Test method for the <see cref="EveCache.GetOrAdd" /> method.
+    /// Test method for the <see cref="EveCache.GetOrAddStoredValue" /> method.
     /// </summary>
     [Test()]
     public void TestGetOrAdd() {
@@ -325,7 +325,7 @@ namespace Eve.Tests {
     }
     //******************************************************************************
     /// <summary>
-    /// Test method for the <see cref="EveCache.GetOrAdd" /> method, passing in
+    /// Test method for the <see cref="EveCache.GetOrAddStoredValue" /> method, passing in
     /// a value factory.
     /// </summary>
     [Test()]

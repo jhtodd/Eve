@@ -63,7 +63,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.item,
-          () => this.Container.GetOrAdd<Item>(this.ItemId, () => this.Entity.Item.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Item>(this.ItemId, () => this.Entity.Item.ToAdapter(this.Container)));
 
         Contract.Assume(this.item != null);
         return this.item;
@@ -284,19 +284,6 @@ namespace Eve.Universe
     {
       ItemPosition other = obj as ItemPosition;
       return this.CompareTo(other);
-    }
-  }
-  #endregion
-
-  #region IEveCacheable Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IEveCacheable" /> interface.
-  /// </content>
-  public sealed partial class ItemPosition : IEveCacheable
-  {
-    IConvertible IEveCacheable.CacheKey
-    {
-      get { return this.ItemId; }
     }
   }
   #endregion

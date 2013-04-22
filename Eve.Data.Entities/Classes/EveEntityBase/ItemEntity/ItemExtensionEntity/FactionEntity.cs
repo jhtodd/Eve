@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
+  using System;
   using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
@@ -17,7 +18,7 @@ namespace Eve.Data.Entities
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
   [Table("chrFactions")]
-  public class FactionEntity : ItemExtensionEntity
+  public partial class FactionEntity : ItemExtensionEntity
   {
     // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
@@ -40,7 +41,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("CorporationId")]
-    public virtual ItemEntity Corporation { get; internal set; }
+    public virtual NpcCorporationEntity Corporation { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -59,16 +60,6 @@ namespace Eve.Data.Entities
     /// </value>
     [Column("description")]
     public string Description { get; internal set; }
-
-    /// <summary>
-    /// Gets the underlying database value of the corresponding adapter property.
-    /// </summary>
-    /// <value>
-    /// The underlying database value of the corresponding adapter property.
-    /// </value>
-    [Column("factionID")]
-    [Key]
-    public long FactionId { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -98,13 +89,35 @@ namespace Eve.Data.Entities
     public int IconId { get; internal set; }
 
     /// <summary>
+    /// Gets the ID of the <see cref="ItemEntity" /> associated with the current object.
+    /// </summary>
+    /// <value>
+    /// The ID <see cref="ItemEntity" /> associated with the current object.
+    /// </value>
+    [Key]
+    public long Id { get; internal set; }
+
+    /// <summary>
+    /// Gets the <see cref="ItemEntity" /> associated with the current object.
+    /// This can be considered the "other half" of the current object: 
+    /// <c>ItemInfo</c> holds the basic information about the item, while the
+    /// current object holds information specific to the item's current type
+    /// (e.g. agent, region, faction, solar system, etc.).
+    /// </summary>
+    /// <value>
+    /// The <see cref="ItemEntity" /> associated with the current object.
+    /// </value>
+    [ForeignKey("Id")]
+    public virtual ItemEntity ItemInfo { get; internal set; }
+
+    /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
     /// </summary>
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("MilitiaCorporationId")]
-    public virtual ItemEntity MilitiaCorporation { get; internal set; }
+    public virtual NpcCorporationEntity MilitiaCorporation { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -140,7 +153,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("SolarSystemId")]
-    public virtual ItemEntity SolarSystem { get; internal set; }
+    public virtual SolarSystemEntity SolarSystem { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -168,5 +181,11 @@ namespace Eve.Data.Entities
     /// </value>
     [Column("stationSystemCount")]
     public short StationSystemCount { get; internal set; }
+
+    /// <inheritdoc />
+    protected internal override IConvertible CacheKey
+    {
+      get { return this.Id; }
+    }
   }
 }

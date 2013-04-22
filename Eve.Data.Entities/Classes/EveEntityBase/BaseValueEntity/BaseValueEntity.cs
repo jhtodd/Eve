@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
+  using System;
   using System.Diagnostics.CodeAnalysis;
 
   /// <summary>
@@ -17,8 +18,10 @@ namespace Eve.Data.Entities
   /// The type of the entity adapter.
   /// </typeparam>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  public abstract class BaseValueEntity<TId, TAdapter> 
-    : EveEntity<TAdapter>
+  public abstract partial class BaseValueEntity<TId, TAdapter> 
+    : EveEntity<TAdapter>,
+      IEveCacheable
+    where TId : IConvertible
     where TAdapter : IEveEntityAdapter<EveEntity<TAdapter>>
   {
     /* Constructors */
@@ -55,5 +58,11 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     public string Name { get; internal set; }
+
+    /// <inheritdoc />
+    protected internal override IConvertible CacheKey
+    {
+      get { return this.Id; }
+    }
   }
 }

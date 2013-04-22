@@ -87,7 +87,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.effectType,
-          () => this.Container.GetOrAdd<EffectType>(this.Id, () => this.Entity.EffectType.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<EffectType>(this.Id, () => this.Entity.EffectType.ToAdapter(this.Container)));
 
         Contract.Assume(this.effectType != null);
         return this.effectType;
@@ -95,23 +95,6 @@ namespace Eve
     }
 
     /* Methods */
-
-    /// <summary>
-    /// Computes a compound ID for the specified sub-IDs.
-    /// </summary>
-    /// <param name="itemTypeId">
-    /// The item type ID.
-    /// </param>
-    /// <param name="effectId">
-    /// The effect ID.
-    /// </param>
-    /// <returns>
-    /// A compound ID combining the two sub-IDs.
-    /// </returns>
-    public static long CreateCacheKey(TypeId itemTypeId, EffectId effectId)
-    {
-      return (long)((((ulong)(long)itemTypeId) << 32) | ((ulong)(long)effectId));
-    }
 
     /// <inheritdoc />
     public int CompareTo(IEffect other)
@@ -210,19 +193,6 @@ namespace Eve
     EffectType IEffect.Type
     {
       get { return this.Type; }
-    }
-  }
-  #endregion
-
-  #region IEveCacheable Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IEveCacheable" /> interface.
-  /// </content>
-  public sealed partial class Effect : IEveCacheable
-  {
-    IConvertible IEveCacheable.CacheKey
-    {
-      get { return CreateCacheKey(this.Entity.ItemTypeId, this.Id); }
     }
   }
   #endregion

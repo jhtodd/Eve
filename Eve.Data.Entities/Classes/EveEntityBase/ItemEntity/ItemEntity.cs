@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
+  using System;
   using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
@@ -15,7 +16,7 @@ namespace Eve.Data.Entities
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
   [Table("invItems")]
-  public class ItemEntity : EveEntity<Item>
+  public partial class ItemEntity : EveEntity<Item>, IEveCacheable
   {
     // Check DirectEveDbContext.OnModelCreating() for customization of this type's data mappings.
 
@@ -138,7 +139,7 @@ namespace Eve.Data.Entities
     /// item, or <see langword="null" /> if the current item does not describe
     /// an agent.
     /// </value>
-    [ForeignKey("AgentId")]
+    [ForeignKey("Id")]
     public virtual AgentEntity AgentInfo { get; internal set; }
 
     /// <summary>
@@ -149,7 +150,7 @@ namespace Eve.Data.Entities
     /// item, or <see langword="null" /> if the current item does not describe
     /// a celestial object.
     /// </value>
-    [ForeignKey("CelestialId")]
+    [ForeignKey("Id")]
     public virtual CelestialEntity CelestialInfo { get; internal set; }
 
     /// <summary>
@@ -160,7 +161,7 @@ namespace Eve.Data.Entities
     /// item, or <see langword="null" /> if the current item does not describe
     /// a constellation.
     /// </value>
-    [ForeignKey("ConstellationId")]
+    [ForeignKey("Id")]
     public virtual ConstellationEntity ConstellationInfo { get; internal set; }
 
     /// <summary>
@@ -171,7 +172,7 @@ namespace Eve.Data.Entities
     /// item, or <see langword="null" /> if the current item does not describe
     /// a corporation.
     /// </value>
-    [ForeignKey("CorporationId")]
+    [ForeignKey("Id")]
     public virtual NpcCorporationEntity CorporationInfo { get; internal set; }
 
     /// <summary>
@@ -182,7 +183,7 @@ namespace Eve.Data.Entities
     /// item, or <see langword="null" /> if the current item does not describe
     /// a faction.
     /// </value>
-    [ForeignKey("FactionId")]
+    [ForeignKey("Id")]
     public virtual FactionEntity FactionInfo { get; internal set; }
 
     /// <summary>
@@ -531,7 +532,7 @@ namespace Eve.Data.Entities
     /// item, or <see langword="null" /> if the current item does not describe
     /// a region.
     /// </value>
-    [ForeignKey("RegionId")]
+    [ForeignKey("Id")]
     public virtual RegionEntity RegionInfo { get; internal set; }
 
     /// <summary>
@@ -542,7 +543,7 @@ namespace Eve.Data.Entities
     /// item, or <see langword="null" /> if the current item does not describe
     /// a solar system.
     /// </value>
-    [ForeignKey("SolarSystemId")]
+    [ForeignKey("Id")]
     public virtual SolarSystemEntity SolarSystemInfo { get; internal set; }
 
     /// <summary>
@@ -553,7 +554,7 @@ namespace Eve.Data.Entities
     /// item, or <see langword="null" /> if the current item does not describe
     /// a stargate.
     /// </value>
-    [ForeignKey("StargateId")]
+    [ForeignKey("Id")]
     public virtual StargateEntity StargateInfo { get; internal set; }
 
     /// <summary>
@@ -564,7 +565,7 @@ namespace Eve.Data.Entities
     /// item, or <see langword="null" /> if the current item does not describe
     /// a station.
     /// </value>
-    [ForeignKey("StationId")]
+    [ForeignKey("Id")]
     public virtual StationEntity StationInfo { get; internal set; }
 
     /// <summary>
@@ -575,8 +576,14 @@ namespace Eve.Data.Entities
     /// item, or <see langword="null" /> if the current item does not describe
     /// a universe.
     /// </value>
-    [ForeignKey("UniverseId")]
+    [ForeignKey("Id")]
     public virtual UniverseEntity UniverseInfo { get; internal set; }
+
+    /// <inheritdoc />
+    protected internal override IConvertible CacheKey
+    {
+      get { return this.Id; }
+    }
 
     /* Methods */
 

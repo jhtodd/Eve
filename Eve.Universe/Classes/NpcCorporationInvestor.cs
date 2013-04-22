@@ -188,7 +188,7 @@ namespace Eve.Universe
   /// <content>
   /// Explicit implementation of the <see cref="IEveCacheable" /> interface.
   /// </content>
-  public sealed partial class NpcCorporationInvestor : IEveCacheable
+  public partial class NpcCorporationInvestor : IEveCacheable
   {
     IConvertible IEveCacheable.CacheKey
     {

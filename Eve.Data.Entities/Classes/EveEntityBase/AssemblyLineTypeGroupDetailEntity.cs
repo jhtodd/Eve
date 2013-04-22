@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
+  using System;
   using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
@@ -89,7 +90,30 @@ namespace Eve.Data.Entities
     [Column("timeMultiplier")]
     public double TimeMultiplier { get; internal set; }
 
+    /// <inheritdoc />
+    protected internal override IConvertible CacheKey
+    {
+      get { return CreateCacheKey(this.AssemblyLineTypeId, this.GroupId); }
+    }
+
     /* Methods */
+
+    /// <summary>
+    /// Computes a compound ID for the specified sub-IDs.
+    /// </summary>
+    /// <param name="assemblyLineTypeId">
+    /// The ID of the assembly line type.
+    /// </param>
+    /// <param name="groupId">
+    /// The ID of the group.
+    /// </param>
+    /// <returns>
+    /// A compound ID combining the two sub-IDs.
+    /// </returns>
+    public static long CreateCacheKey(byte assemblyLineTypeId, GroupId groupId)
+    {
+      return (long)((((ulong)(long)assemblyLineTypeId) << 32) | ((ulong)(long)groupId));
+    }
 
     /// <inheritdoc />
     public override AssemblyLineTypeGroupDetail ToAdapter(IEveRepository container)

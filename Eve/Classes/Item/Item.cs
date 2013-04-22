@@ -72,7 +72,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.flag,
-          () => this.Container.GetOrAdd<Flag>(this.FlagId, () => this.Entity.Flag.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Flag>(this.FlagId, () => this.Entity.Flag.ToAdapter(this.Container)));
 
         Contract.Assume(this.flag != null);
         return this.flag;
@@ -116,7 +116,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.itemType,
-          () => this.Container.GetOrAdd<EveType>(this.ItemTypeId, () => this.Entity.ItemType.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<EveType>(this.ItemTypeId, () => this.Entity.ItemType.ToAdapter(this.Container)));
 
         Contract.Assume(this.itemType != null);
         return this.itemType;
@@ -149,7 +149,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.location,
-          () => this.Container.GetOrAdd<Item>(this.LocationId, () => this.Entity.Location.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Item>(this.LocationId, () => this.Entity.Location.ToAdapter(this.Container)));
 
         Contract.Assume(this.location != null);
         return this.location;
@@ -256,7 +256,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.owner,
-          () => this.Container.GetOrAdd<Item>(this.OwnerId, () => this.Entity.Owner.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Item>(this.OwnerId, () => this.Entity.Owner.ToAdapter(this.Container)));
 
         Contract.Assume(this.owner != null);
         return this.owner;
@@ -293,7 +293,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.position,
-          () => this.Container.GetOrAdd<ItemPosition>(this.Id, () => this.Entity.Position.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<ItemPosition>(this.Id, () => this.Entity.Position.ToAdapter(this.Container)));
 
         Contract.Assume(this.position != null);
         return this.position;
@@ -453,19 +453,6 @@ namespace Eve
     {
       Item other = obj as Item;
       return this.CompareTo(other);
-    }
-  }
-  #endregion
-
-  #region IEveCacheable Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IEveCacheable" /> interface.
-  /// </content>
-  public abstract partial class Item : IEveCacheable
-  {
-    IConvertible IEveCacheable.CacheKey
-    {
-      get { return this.CacheKey; }
     }
   }
   #endregion

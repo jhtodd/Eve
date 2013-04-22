@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
+  using System;
   using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
@@ -87,6 +88,12 @@ namespace Eve.Data.Entities
     [Column("valueInt")]
     public int? ValueInt { get; internal set; }
 
+    /// <inheritdoc />
+    protected internal override IConvertible CacheKey
+    {
+      get { return CreateCacheKey(this.ItemTypeId, this.AttributeId); }
+    }
+
     /* Methods */
 
     /// <inheritdoc />
@@ -94,6 +101,23 @@ namespace Eve.Data.Entities
     {
       Contract.Assume(container != null); // TODO: Should not be necessary due to base class requires -- check in future version of static checker
       return new AttributeValue(container, this);
+    }
+
+    /// <summary>
+    /// Computes a compound ID for the specified sub-IDs.
+    /// </summary>
+    /// <param name="itemTypeId">
+    /// The item type ID.
+    /// </param>
+    /// <param name="attributeId">
+    /// The attribute ID.
+    /// </param>
+    /// <returns>
+    /// A compound ID combining the two sub-IDs.
+    /// </returns>
+    internal static long CreateCacheKey(int itemTypeId, AttributeId attributeId)
+    {
+      return (long)((((ulong)(long)itemTypeId) << 32) | ((ulong)(long)attributeId));
     }
   }
 }

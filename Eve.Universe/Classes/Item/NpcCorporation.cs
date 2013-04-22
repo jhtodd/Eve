@@ -164,7 +164,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.enemy,
-          () => this.Container.GetOrAdd<NpcCorporation>(this.EnemyId, () => (NpcCorporation)this.Entity.CorporationInfo.Enemy.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<NpcCorporation>(this.EnemyId, () => (NpcCorporation)this.Entity.CorporationInfo.Enemy.ItemInfo.ToAdapter(this.Container)));
 
         Contract.Assume(this.enemy != null);
         return this.enemy;
@@ -264,7 +264,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.faction,
-          () => this.Container.GetOrAdd<Faction>(this.FactionId, () => (Faction)this.Entity.CorporationInfo.Faction.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Faction>(this.FactionId, () => (Faction)this.Entity.CorporationInfo.Faction.ItemInfo.ToAdapter(this.Container)));
 
         Contract.Assume(this.faction != null);
         return this.faction;
@@ -308,7 +308,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.friend,
-          () => this.Container.GetOrAdd<NpcCorporation>(this.FriendId, () => (NpcCorporation)this.Entity.CorporationInfo.Friend.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<NpcCorporation>(this.FriendId, () => (NpcCorporation)this.Entity.CorporationInfo.Friend.ItemInfo.ToAdapter(this.Container)));
 
         Contract.Assume(this.friend != null);
         return this.friend;
@@ -380,7 +380,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.icon,
-          () => this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.CorporationInfo.Icon.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Icon>(this.IconId, () => this.Entity.CorporationInfo.Icon.ToAdapter(this.Container)));
 
         Contract.Assume(this.icon != null);
         return this.icon;
@@ -555,7 +555,7 @@ namespace Eve.Universe
             Contract.Assume(this.Entity.CorporationInfo.ResearchFields != null);
 
             return new ReadOnlySkillTypeCollection(
-              this.Entity.CorporationInfo.ResearchFields.Select(x => this.Container.GetOrAdd<SkillType>(x.Id, () => (SkillType)x.ToAdapter(this.Container)))
+              this.Entity.CorporationInfo.ResearchFields.Select(x => this.Container.GetOrAddStoredValue<SkillType>(x.Id, () => (SkillType)x.ToAdapter(this.Container)))
                                                  .OrderBy(x => x));
           });
 
@@ -682,7 +682,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.solarSystem,
-          () => this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.Entity.CorporationInfo.SolarSystem.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.Entity.CorporationInfo.SolarSystem.ItemInfo.ToAdapter(this.Container)));
 
         Contract.Assume(this.solarSystem != null);
         return this.solarSystem;
@@ -771,7 +771,7 @@ namespace Eve.Universe
             Contract.Assume(this.Entity.CorporationInfo.TradeGoods != null);
 
             return new ReadOnlyTypeCollection(
-              this.Entity.CorporationInfo.TradeGoods.Select(x => this.Container.GetOrAdd<EveType>(x.Id, () => x.ToAdapter(this.Container)))
+              this.Entity.CorporationInfo.TradeGoods.Select(x => this.Container.GetOrAddStoredValue<EveType>(x.Id, () => x.ToAdapter(this.Container)))
                                             .OrderBy(x => x));
           });
 

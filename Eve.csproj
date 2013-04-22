@@ -125,6 +125,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Eve.Character\Classes\BaseValue\CertificateCategory.cs" />
     <Compile Include="Eve.Character\Classes\BaseValue\CharacterAttributeType.cs" />
     <Compile Include="Eve.Character\Classes\BaseValue\Ancestry.cs" />
     <Compile Include="Eve.Character\Classes\ReadOnlyAncestryCollection.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="Eve.Character\Classes\ReadOnlySkillTypeCollection.cs" />
     <Compile Include="Eve.Character\Enums\AncestryId.cs" />
     <Compile Include="Eve.Character\Enums\BloodlineId.cs" />
+    <Compile Include="Eve.Character\Enums\CertificateCategoryId.cs" />
     <Compile Include="Eve.Character\Enums\CharacterAttributeModifiers.cs" />
     <Compile Include="Eve.Character\Enums\CharacterAttributeId.cs" />
     <Compile Include="Eve.Character\Interfaces\ISkillCollectionContracts.cs" />
@@ -148,6 +150,8 @@
     <Compile Include="Eve.Character\Interfaces\IHasCharacterAttributes.cs" />
     <Compile Include="Eve.Character\Interfaces\IHasSkills.cs" />
     <Compile Include="Eve.Character\Interfaces\ISkill.cs" />
+    <Compile Include="Eve.Collections\Classes\ReadOnlyKeyedEntityAdapterCollection.cs" />
+    <Compile Include="Eve.Collections\Classes\ReadOnlyEntityAdapterCollection.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\BaseValueEntity\AncestryEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\BaseValueEntity\ActivityEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\BaseValueEntity\AssemblyLineTypeEntity.cs" />
@@ -155,6 +159,7 @@
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\AssemblyLineTypeCategoryDetailEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\AssemblyLineStationEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\AssemblyLineEntity.cs" />
+    <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\BaseValueEntity\CertificateCategoryEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\ItemNameEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\EveEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntityBase\ItemEntity\ItemExtensionEntity\CelestialEntity.cs" />

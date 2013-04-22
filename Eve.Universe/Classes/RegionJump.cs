@@ -63,7 +63,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.fromRegion,
-          () => this.Container.GetOrAdd<Region>(this.FromRegionId, () => (Region)this.Entity.FromRegion.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Region>(this.FromRegionId, () => (Region)this.Entity.FromRegion.ToAdapter(this.Container)));
 
         Contract.Assume(this.fromRegion != null);
         return this.fromRegion;
@@ -96,7 +96,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.toRegion,
-          () => this.Container.GetOrAdd<Region>(this.ToRegionId, () => (Region)this.Entity.ToRegion.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Region>(this.ToRegionId, () => (Region)this.Entity.ToRegion.ToAdapter(this.Container)));
 
         Contract.Assume(this.toRegion != null);
         return this.toRegion;
@@ -115,23 +115,6 @@ namespace Eve.Universe
     }
 
     /* Methods */
-
-    /// <summary>
-    /// Computes a compound ID for the specified sub-IDs.
-    /// </summary>
-    /// <param name="fromId">
-    /// The ID of the origin region.
-    /// </param>
-    /// <param name="toId">
-    /// The ID of the destination region.
-    /// </param>
-    /// <returns>
-    /// A compound ID combining the two sub-IDs.
-    /// </returns>
-    public static long CreateCacheKey(RegionId fromId, RegionId toId)
-    {
-      return (long)((((ulong)(long)fromId.GetHashCode()) << 32) | ((ulong)(long)toId.GetHashCode()));
-    }
 
     /// <inheritdoc />
     public int CompareTo(RegionJump other)
@@ -195,19 +178,6 @@ namespace Eve.Universe
   }
   #endregion
 
-  #region IEveCacheable Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IEveCacheable" /> interface.
-  /// </content>
-  public sealed partial class RegionJump : IEveCacheable
-  {
-    IConvertible IEveCacheable.CacheKey
-    {
-      get { return CreateCacheKey(this.FromRegionId, this.ToRegionId); }
-    }
-  }
-  #endregion
-
   #region IKeyItem<long> Implementation
   /// <content>
   /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.
@@ -216,7 +186,7 @@ namespace Eve.Universe
   {
     long IKeyItem<long>.Key
     {
-      get { return CreateCacheKey(this.FromRegionId, this.ToRegionId); }
+      get { return RegionJumpEntity.CreateCacheKey(this.FromRegionId, this.ToRegionId); }
     }
   }
   #endregion

@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
+  using System;
   using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
@@ -39,7 +40,7 @@ namespace Eve.Data.Entities
     /// </value>
     [Column("effectID", Order = 1)]
     [Key]
-    public short EffectId { get; internal set; }
+    public EffectId EffectId { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -78,7 +79,30 @@ namespace Eve.Data.Entities
     [Key]
     public int ItemTypeId { get; internal set; }
 
+    /// <inheritdoc />
+    protected internal override IConvertible CacheKey
+    {
+      get { return CreateCacheKey(this.ItemTypeId, this.EffectId); }
+    }
+
     /* Methods */
+
+    /// <summary>
+    /// Computes a compound ID for the specified sub-IDs.
+    /// </summary>
+    /// <param name="itemTypeId">
+    /// The item type ID.
+    /// </param>
+    /// <param name="effectId">
+    /// The effect ID.
+    /// </param>
+    /// <returns>
+    /// A compound ID combining the two sub-IDs.
+    /// </returns>
+    public static long CreateCacheKey(int itemTypeId, EffectId effectId)
+    {
+      return (long)((((ulong)(long)itemTypeId) << 32) | ((ulong)(long)effectId));
+    }
 
     /// <inheritdoc />
     public override Effect ToAdapter(IEveRepository container)

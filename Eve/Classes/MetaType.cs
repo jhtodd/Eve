@@ -64,7 +64,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.metaGroup,
-          () => this.Container.GetOrAdd<MetaGroup>(this.MetaGroupId, () => this.Entity.MetaGroup.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<MetaGroup>(this.MetaGroupId, () => this.Entity.MetaGroup.ToAdapter(this.Container)));
 
         Contract.Assume(this.metaGroup != null);
         return this.metaGroup;
@@ -97,7 +97,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.parentType,
-          () => this.Container.GetOrAdd<EveType>(this.ParentTypeId, () => Entity.ParentType.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<EveType>(this.ParentTypeId, () => Entity.ParentType.ToAdapter(this.Container)));
 
         Contract.Assume(this.parentType != null);
         return this.parentType;
@@ -130,7 +130,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.type,
-          () => this.Container.GetOrAdd<EveType>(this.TypeId, () => Entity.Type.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<EveType>(this.TypeId, () => Entity.Type.ToAdapter(this.Container)));
 
         Contract.Assume(this.type != null);
         return this.type;
@@ -213,19 +213,6 @@ namespace Eve
     {
       MetaType other = obj as MetaType;
       return this.CompareTo(other);
-    }
-  }
-  #endregion
-
-  #region IEveCacheable Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IEveCacheable" /> interface.
-  /// </content>
-  public partial class MetaType : IEveCacheable
-  {
-    IConvertible IEveCacheable.CacheKey
-    {
-      get { return this.TypeId; }
     }
   }
   #endregion

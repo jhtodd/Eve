@@ -69,7 +69,7 @@ namespace Eve.Industry
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.assemblyLineType,
-          () => this.Container.GetOrAdd<AssemblyLineType>(this.AssemblyLineTypeId, () => this.Entity.AssemblyLineType.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<AssemblyLineType>(this.AssemblyLineTypeId, () => this.Entity.AssemblyLineType.ToAdapter(this.Container)));
 
         Contract.Assume(this.assemblyLineType != null);
         return this.assemblyLineType;
@@ -104,7 +104,7 @@ namespace Eve.Industry
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.owner,
-          () => this.Container.GetOrAdd<NpcCorporation>(this.OwnerId, () => (NpcCorporation)this.Entity.Owner.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<NpcCorporation>(this.OwnerId, () => (NpcCorporation)this.Entity.Owner.ToAdapter(this.Container)));
 
         Contract.Assume(this.owner != null);
         return this.owner;
@@ -158,7 +158,7 @@ namespace Eve.Industry
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.region,
-          () => this.Container.GetOrAdd<Region>(this.RegionId, () => (Region)this.Entity.Region.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Region>(this.RegionId, () => (Region)this.Entity.Region.ToAdapter(this.Container)));
 
         Contract.Assume(this.region != null);
         return this.region;
@@ -191,7 +191,7 @@ namespace Eve.Industry
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.solarSystem,
-          () => this.Container.GetOrAdd<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.Entity.SolarSystem.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.Entity.SolarSystem.ToAdapter(this.Container)));
 
         Contract.Assume(this.solarSystem != null);
         return this.solarSystem;
@@ -224,7 +224,7 @@ namespace Eve.Industry
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.station, 
-          () => this.Container.GetOrAdd<Station>(this.StationId, () => (Station)this.Entity.Station.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Station>(this.StationId, () => (Station)this.Entity.Station.ToAdapter(this.Container)));
 
         Contract.Assume(this.station != null);
         return this.station;
@@ -257,7 +257,7 @@ namespace Eve.Industry
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.stationType,
-          () => this.Container.GetOrAdd<StationType>(this.StationTypeId, () => this.Entity.StationType.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<StationType>(this.StationTypeId, () => this.Entity.StationType.ToAdapter(this.Container)));
 
         Contract.Assume(this.stationType != null);
         return this.stationType;
@@ -276,23 +276,6 @@ namespace Eve.Industry
     }
 
     /* Methods */
-
-    /// <summary>
-    /// Computes a compound ID for the specified sub-IDs.
-    /// </summary>
-    /// <param name="stationId">
-    /// The ID of the station.
-    /// </param>
-    /// <param name="assemblyLineTypeId">
-    /// The ID of the assembly line type.
-    /// </param>
-    /// <returns>
-    /// A compound ID combining the two sub-IDs.
-    /// </returns>
-    public static long CreateCacheKey(StationId stationId, AssemblyLineTypeId assemblyLineTypeId)
-    {
-      return (long)((((ulong)(long)stationId.Value) << 32) | ((ulong)(long)assemblyLineTypeId.Value));
-    }
 
     /// <inheritdoc />
     public int CompareTo(AssemblyLineStation other)
@@ -356,19 +339,6 @@ namespace Eve.Industry
   }
   #endregion
 
-  #region IEveCacheable Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IEveCacheable" /> interface.
-  /// </content>
-  public sealed partial class AssemblyLineStation : IEveCacheable
-  {
-    IConvertible IEveCacheable.CacheKey
-    {
-      get { return CreateCacheKey(this.StationId, this.AssemblyLineTypeId); }
-    }
-  }
-  #endregion
-
   #region IKeyItem<long> Implementation
   /// <content>
   /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.
@@ -377,7 +347,7 @@ namespace Eve.Industry
   {
     long IKeyItem<long>.Key
     {
-      get { return CreateCacheKey(this.StationId, this.AssemblyLineTypeId); }
+      get { return AssemblyLineStationEntity.CreateCacheKey(this.StationId, this.AssemblyLineTypeId); }
     }
   }
   #endregion

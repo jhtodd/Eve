@@ -65,7 +65,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.fromConstellation,
-          () => this.Container.GetOrAdd<Constellation>(this.FromConstellationId, () => (Constellation)this.Entity.FromConstellation.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Constellation>(this.FromConstellationId, () => (Constellation)this.Entity.FromConstellation.ToAdapter(this.Container)));
 
         Contract.Assume(this.fromConstellation != null);
         return this.fromConstellation;
@@ -98,7 +98,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.fromRegion,
-          () => this.Container.GetOrAdd<Region>(this.FromRegionId, () => (Region)this.Entity.FromRegion.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Region>(this.FromRegionId, () => (Region)this.Entity.FromRegion.ToAdapter(this.Container)));
 
         Contract.Assume(this.fromRegion != null);
         return this.fromRegion;
@@ -131,7 +131,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.toConstellation,
-          () => this.Container.GetOrAdd<Constellation>(this.ToConstellationId, () => (Constellation)this.Entity.ToConstellation.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Constellation>(this.ToConstellationId, () => (Constellation)this.Entity.ToConstellation.ToAdapter(this.Container)));
 
         Contract.Assume(this.toConstellation != null);
         return this.toConstellation;
@@ -164,7 +164,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.toRegion,
-          () => this.Container.GetOrAdd<Region>(this.ToRegionId, () => (Region)this.Entity.ToRegion.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Region>(this.ToRegionId, () => (Region)this.Entity.ToRegion.ToAdapter(this.Container)));
 
         Contract.Assume(this.toRegion != null);
         return this.toRegion;
@@ -183,23 +183,6 @@ namespace Eve.Universe
     }
 
     /* Methods */
-
-    /// <summary>
-    /// Computes a compound ID for the specified sub-IDs.
-    /// </summary>
-    /// <param name="fromId">
-    /// The ID of the origin constellation.
-    /// </param>
-    /// <param name="toId">
-    /// The ID of the destination constellation.
-    /// </param>
-    /// <returns>
-    /// A compound ID combining the two sub-IDs.
-    /// </returns>
-    public static long CreateCacheKey(ConstellationId fromId, ConstellationId toId)
-    {
-      return (long)((((ulong)(long)fromId.GetHashCode()) << 32) | ((ulong)(long)toId.GetHashCode()));
-    }
 
     /// <inheritdoc />
     public int CompareTo(ConstellationJump other)
@@ -263,19 +246,6 @@ namespace Eve.Universe
   }
   #endregion
 
-  #region IEveCacheable Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IEveCacheable" /> interface.
-  /// </content>
-  public sealed partial class ConstellationJump : IEveCacheable
-  {
-    IConvertible IEveCacheable.CacheKey
-    {
-      get { return CreateCacheKey(this.FromConstellationId, this.ToConstellationId); }
-    }
-  }
-  #endregion
-
   #region IKeyItem<long> Implementation
   /// <content>
   /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.
@@ -284,7 +254,7 @@ namespace Eve.Universe
   {
     long IKeyItem<long>.Key
     {
-      get { return CreateCacheKey(this.FromConstellationId, this.ToConstellationId); }
+      get { return ConstellationJumpEntity.CreateCacheKey(this.FromConstellationId, this.ToConstellationId); }
     }
   }
   #endregion

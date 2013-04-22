@@ -224,6 +224,12 @@ namespace Eve.Data.Entities
     [Column("UIGroupingID")]
     public byte UiGroupingId { get; internal set; }
 
+    /// <inheritdoc />
+    protected internal override IConvertible CacheKey
+    {
+      get { return this.Id; }
+    }
+
     /* Methods */
 
     /// <inheritdoc />

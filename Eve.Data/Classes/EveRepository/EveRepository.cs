@@ -20,8 +20,8 @@ namespace Eve.Data
   using FreeNet.Utilities;
 
   /// <summary>
-  /// An EveRepository that uses an automatically-generated
-  /// <see cref="DirectEveDbContext" /> object to query the database.
+  /// An EveRepository that uses a <see cref="EveDbContext" /> object
+  /// to query the database.
   /// </summary>
   public partial class EveRepository : IEveRepository
   {
@@ -125,7 +125,7 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public T GetOrAdd<T>(IConvertible id, Func<T> valueFactory) where T : IEveCacheable
+    public T GetOrAddStoredValue<T>(IConvertible id, Func<T> valueFactory) where T : IEveCacheable
     {
       return this.Cache.GetOrAdd<T>(id, valueFactory);
     }
@@ -363,13 +363,13 @@ namespace Eve.Data
       return LoadAndCacheResults<AssemblyLineStationEntity, AssemblyLineStation>(
         this.Context.AssemblyLineStations,
         modifiers,
-        x => AssemblyLineStation.CreateCacheKey(x.StationId, x.AssemblyLineTypeId));
+        x => x.CacheKey);
     }
 
     /// <inheritdoc />
     public bool TryGetAssemblyLineStationById(StationId stationId, AssemblyLineTypeId assemblyLineTypeId, out AssemblyLineStation value)
     {
-      if (this.Cache.TryGetValue<AssemblyLineStation>(AssemblyLineStation.CreateCacheKey(stationId, assemblyLineTypeId), out value))
+      if (this.Cache.TryGetValue<AssemblyLineStation>(AssemblyLineStationEntity.CreateCacheKey(stationId, assemblyLineTypeId), out value))
       {
         return true;
       }
@@ -448,13 +448,13 @@ namespace Eve.Data
       return LoadAndCacheResults<AssemblyLineTypeCategoryDetailEntity, AssemblyLineTypeCategoryDetail>(
         this.Context.AssemblyLineTypeCategoryDetails,
         modifiers,
-        x => AssemblyLineTypeCategoryDetail.CreateCacheKey(x.AssemblyLineTypeId, x.CategoryId));
+        x => AssemblyLineTypeCategoryDetailEntity.CreateCacheKey(x.AssemblyLineTypeId, x.CategoryId));
     }
 
     /// <inheritdoc />
     public bool TryGetAssemblyLineTypeCategoryDetailById(AssemblyLineTypeId assemblyLineTypeId, CategoryId categoryId, out AssemblyLineTypeCategoryDetail value)
     {
-      if (this.Cache.TryGetValue<AssemblyLineTypeCategoryDetail>(AssemblyLineTypeCategoryDetail.CreateCacheKey(assemblyLineTypeId, categoryId), out value))
+      if (this.Cache.TryGetValue<AssemblyLineTypeCategoryDetail>(AssemblyLineTypeCategoryDetailEntity.CreateCacheKey(assemblyLineTypeId, categoryId), out value))
       {
         return true;
       }
@@ -492,13 +492,13 @@ namespace Eve.Data
       return LoadAndCacheResults<AssemblyLineTypeGroupDetailEntity, AssemblyLineTypeGroupDetail>(
         this.Context.AssemblyLineTypeGroupDetails,
         modifiers, 
-        x => AssemblyLineTypeGroupDetail.CreateCacheKey(x.AssemblyLineTypeId, x.GroupId));
+        x => AssemblyLineTypeGroupDetailEntity.CreateCacheKey(x.AssemblyLineTypeId, x.GroupId));
     }
 
     /// <inheritdoc />
     public bool TryGetAssemblyLineTypeGroupDetailById(AssemblyLineTypeId assemblyLineTypeId, GroupId groupId, out AssemblyLineTypeGroupDetail value)
     {
-      if (this.Cache.TryGetValue<AssemblyLineTypeGroupDetail>(AssemblyLineTypeGroupDetail.CreateCacheKey(assemblyLineTypeId, groupId), out value))
+      if (this.Cache.TryGetValue<AssemblyLineTypeGroupDetail>(AssemblyLineTypeGroupDetailEntity.CreateCacheKey(assemblyLineTypeId, groupId), out value))
       {
         return true;
       }
@@ -623,7 +623,7 @@ namespace Eve.Data
     /// <inheritdoc />
     public bool TryGetAttributeValueById(TypeId itemTypeId, AttributeId attributeId, out AttributeValue value)
     {
-      if (this.Cache.TryGetValue<AttributeValue>(AttributeValue.CreateCacheKey(itemTypeId, attributeId), out value))
+      if (this.Cache.TryGetValue<AttributeValue>(AttributeValueEntity.CreateCacheKey(itemTypeId, attributeId), out value))
       {
         return true;
       }
@@ -756,6 +756,47 @@ namespace Eve.Data
     }
     #endregion
 
+    #region CertificateCategory Methods
+    /// <inheritdoc />
+    public CertificateCategory GetCertificateCategoryById(CertificateCategoryId id)
+    {
+      CertificateCategory result;
+
+      if (!this.TryGetCertificateCategoryById(id, out result))
+      {
+        throw new InvalidOperationException("No CertificateCategory with ID " + id.ToString() + " could be found.");
+      }
+
+      return result;
+    }
+
+    /// <inheritdoc />
+    public IReadOnlyList<CertificateCategory> GetCertificateCategories(Func<IQueryable<CertificateCategoryEntity>, IQueryable<CertificateCategoryEntity>> queryOperations)
+    {
+      return this.GetCertificateCategories(new QueryTransform<CertificateCategoryEntity>(queryOperations));
+    }
+
+    /// <inheritdoc />
+    [EveQueryMethod(typeof(CertificateCategory))]
+    public IReadOnlyList<CertificateCategory> GetCertificateCategories(params IQueryModifier<CertificateCategoryEntity>[] modifiers)
+    {
+      // Construct the result set, filtering items through the global cache along the way
+      return LoadAndCacheResults<CertificateCategoryEntity, CertificateCategory>(this.Context.CertificateCategories, modifiers, x => x.Id);
+    }
+
+    /// <inheritdoc />
+    public bool TryGetCertificateCategoryById(CertificateCategoryId id, out CertificateCategory value)
+    {
+      if (this.Cache.TryGetValue<CertificateCategory>(id, out value))
+      {
+        return true;
+      }
+
+      value = this.GetCertificateCategories(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      return value != null;
+    }
+    #endregion
+
     #region CharacterAttributeType Methods
     /// <inheritdoc />
     public CharacterAttributeType GetCharacterAttributeTypeById(CharacterAttributeId id)
@@ -866,13 +907,13 @@ namespace Eve.Data
       return LoadAndCacheResults<ConstellationJumpEntity, ConstellationJump>(
         this.Context.ConstellationJumps, 
         modifiers,
-        x => ConstellationJump.CreateCacheKey(x.FromConstellationId, x.ToConstellationId));
+        x => ConstellationJumpEntity.CreateCacheKey(x.FromConstellationId, x.ToConstellationId));
     }
 
     /// <inheritdoc />
     public bool TryGetConstellationJumpById(ConstellationId fromConstellationId, ConstellationId toConstellationId, out ConstellationJump value)
     {
-      if (this.Cache.TryGetValue<ConstellationJump>(ConstellationJump.CreateCacheKey(fromConstellationId, toConstellationId), out value))
+      if (this.Cache.TryGetValue<ConstellationJump>(ConstellationJumpEntity.CreateCacheKey(fromConstellationId, toConstellationId), out value))
       {
         return true;
       }
@@ -997,12 +1038,12 @@ namespace Eve.Data
     /// <inheritdoc />
     public bool TryGetEffectById(TypeId itemTypeId, EffectId effectId, out Effect value)
     {
-      if (this.Cache.TryGetValue<Effect>(Effect.CreateCacheKey(itemTypeId, effectId), out value))
+      if (this.Cache.TryGetValue<Effect>(EffectEntity.CreateCacheKey(itemTypeId, effectId), out value))
       {
         return true;
       }
 
-      value = this.GetEffects(q => q.Where(x => x.ItemTypeId == itemTypeId.Value && x.EffectId == (short)effectId)).SingleOrDefault();
+      value = this.GetEffects(q => q.Where(x => x.ItemTypeId == itemTypeId.Value && x.EffectId == effectId)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1043,7 +1084,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetEffectTypes(q => q.Where(x => x.Id == (short)id)).SingleOrDefault();
+      value = this.GetEffectTypes(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1605,13 +1646,13 @@ namespace Eve.Data
       return LoadAndCacheResults<NpcCorporationDivisionEntity, NpcCorporationDivision>(
         this.Context.NpcCorporationDivisions,
         modifiers,
-        x => NpcCorporationDivision.CreateCacheKey(x.CorporationId, x.DivisionId));
+        x => NpcCorporationDivisionEntity.CreateCacheKey(x.CorporationId, x.DivisionId));
     }
 
     /// <inheritdoc />
     public bool TryGetNpcCorporationDivisionById(NpcCorporationId corporationId, DivisionId divisionId, out NpcCorporationDivision value)
     {
-      if (this.Cache.TryGetValue<NpcCorporationDivision>(NpcCorporationDivision.CreateCacheKey(corporationId, divisionId), out value))
+      if (this.Cache.TryGetValue<NpcCorporationDivision>(NpcCorporationDivisionEntity.CreateCacheKey(corporationId, divisionId), out value))
       {
         return true;
       }
@@ -1731,13 +1772,13 @@ namespace Eve.Data
       return LoadAndCacheResults<RegionJumpEntity, RegionJump>(
         this.Context.RegionJumps,
         modifiers,
-        x => SolarSystemJump.CreateCacheKey(x.FromRegionId, x.ToRegionId));
+        x => SolarSystemJumpEntity.CreateCacheKey(x.FromRegionId, x.ToRegionId));
     }
 
     /// <inheritdoc />
     public bool TryGetRegionJumpById(RegionId fromRegionId, RegionId toRegionId, out RegionJump value)
     {
-      if (this.Cache.TryGetValue<RegionJump>(RegionJump.CreateCacheKey(fromRegionId, toRegionId), out value))
+      if (this.Cache.TryGetValue<RegionJump>(RegionJumpEntity.CreateCacheKey(fromRegionId, toRegionId), out value))
       {
         return true;
       }
@@ -1816,13 +1857,13 @@ namespace Eve.Data
       return LoadAndCacheResults<SolarSystemJumpEntity, SolarSystemJump>(
         this.Context.SolarSystemJumps,
         modifiers,
-        x => SolarSystemJump.CreateCacheKey(x.FromSolarSystemId, x.ToSolarSystemId));
+        x => SolarSystemJumpEntity.CreateCacheKey(x.FromSolarSystemId, x.ToSolarSystemId));
     }
 
     /// <inheritdoc />
     public bool TryGetSolarSystemJumpById(SolarSystemId fromSolarSystemId, SolarSystemId toSolarSystemId, out SolarSystemJump value)
     {
-      if (this.Cache.TryGetValue<SolarSystemJump>(SolarSystemJump.CreateCacheKey(fromSolarSystemId, toSolarSystemId), out value))
+      if (this.Cache.TryGetValue<SolarSystemJump>(SolarSystemJumpEntity.CreateCacheKey(fromSolarSystemId, toSolarSystemId), out value))
       {
         return true;
       }

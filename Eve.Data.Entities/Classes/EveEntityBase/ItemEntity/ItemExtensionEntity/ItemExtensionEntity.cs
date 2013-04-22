@@ -5,6 +5,8 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
+  using System.ComponentModel.DataAnnotations;
+  using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
 
   using FreeNet.Data.Entity;
@@ -59,7 +61,7 @@ namespace Eve.Data.Entities
   /// performance increase, which is vital.
   /// </para>
   /// </remarks>
-  public abstract class ItemExtensionEntity : ImmutableEntity
+  public abstract partial class ItemExtensionEntity : EveEntity
   {
     /* Constructors */
 

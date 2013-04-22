@@ -222,7 +222,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.operation,
-          () => this.Container.GetOrAdd<StationOperation>(this.OperationId, () => this.Entity.Operation.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<StationOperation>(this.OperationId, () => this.Entity.Operation.ToAdapter(this.Container)));
 
         Contract.Assume(this.operation != null);
         return this.operation;

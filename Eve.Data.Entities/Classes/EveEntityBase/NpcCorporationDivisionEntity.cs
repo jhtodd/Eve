@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
+  using System;
   using System.Collections.Generic;
   using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
@@ -90,7 +91,31 @@ namespace Eve.Data.Entities
     [Column("size")]
     public byte Size { get; internal set; }
 
+    /// <inheritdoc />
+    [NotMapped]
+    protected internal override IConvertible CacheKey
+    {
+      get { return CreateCacheKey(this.CorporationId, this.DivisionId); }
+    }
+
     /* Methods */
+
+    /// <summary>
+    /// Computes a compound ID for the specified sub-IDs.
+    /// </summary>
+    /// <param name="corporationId">
+    /// The ID of the corporation.
+    /// </param>
+    /// <param name="divisionId">
+    /// The ID of the division.
+    /// </param>
+    /// <returns>
+    /// A compound ID combining the two sub-IDs.
+    /// </returns>
+    public static long CreateCacheKey(long corporationId, DivisionId divisionId)
+    {
+      return (long)((((ulong)(long)divisionId) << 32) | (ulong)(long)corporationId);
+    }
 
     /// <inheritdoc />
     public override NpcCorporationDivision ToAdapter(IEveRepository container)

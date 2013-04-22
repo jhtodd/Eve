@@ -112,7 +112,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.type,
-          () => this.Container.GetOrAdd<AttributeType>(this.Id, () => this.Entity.AttributeType.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<AttributeType>(this.Id, () => this.Entity.AttributeType.ToAdapter(this.Container)));
 
         Contract.Assume(this.type != null);
         return this.type;
@@ -214,23 +214,6 @@ namespace Eve
       // Format the value according to the attribute
       return this.Type.DisplayName + ": " + this.Type.FormatValue(this.BaseValue, format);
     }
-
-    /// <summary>
-    /// Computes a compound ID for the specified sub-IDs.
-    /// </summary>
-    /// <param name="itemTypeId">
-    /// The item type ID.
-    /// </param>
-    /// <param name="attributeId">
-    /// The attribute ID.
-    /// </param>
-    /// <returns>
-    /// A compound ID combining the two sub-IDs.
-    /// </returns>
-    internal static long CreateCacheKey(TypeId itemTypeId, AttributeId attributeId)
-    {
-      return (long)((((ulong)(long)itemTypeId) << 32) | ((ulong)(long)attributeId));
-    }
   }
 
   #region IAttribute Implementation
@@ -266,19 +249,6 @@ namespace Eve
     {
       AttributeValue other = obj as AttributeValue;
       return this.CompareTo(other);
-    }
-  }
-  #endregion
-
-  #region IEveCacheable Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IEveCacheable" /> interface.
-  /// </content>
-  public sealed partial class AttributeValue : IEveCacheable
-  {
-    IConvertible IEveCacheable.CacheKey
-    {
-      get { return CreateCacheKey(this.Entity.ItemTypeId, this.Id); }
     }
   }
   #endregion

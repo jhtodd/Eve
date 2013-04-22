@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
+  using System;
   using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
@@ -105,6 +106,13 @@ namespace Eve.Data.Entities
     /// </value>
     [Column("z")]
     public double Z { get; internal set; }
+
+    /// <inheritdoc />
+    [NotMapped]
+    protected internal override IConvertible CacheKey
+    {
+      get { return this.ItemId; }
+    }
 
     /* Methods */
 

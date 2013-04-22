@@ -64,8 +64,8 @@ namespace Eve.Universe
           return this.faction;
         }
 
-        Contract.Assume(this.ConstellationInfo.Region.RegionInfo != null);
-        ItemEntity factionEntity = this.ConstellationInfo.Faction ?? this.ConstellationInfo.Region.RegionInfo.Faction;
+        Contract.Assume(this.ConstellationInfo.Region != null);
+        FactionEntity factionEntity = this.ConstellationInfo.Faction ?? this.ConstellationInfo.Region.Faction;
 
         if (factionEntity == null)
         {
@@ -73,7 +73,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.faction = this.Container.GetOrAdd<Faction>(factionEntity.Id, () => (Faction)factionEntity.ToAdapter(this.Container));
+        return this.faction = this.Container.GetOrAddStoredValue<Faction>(factionEntity.Id, () => (Faction)factionEntity.ItemInfo.ToAdapter(this.Container));
       }
     }
 
@@ -95,8 +95,8 @@ namespace Eve.Universe
           return (FactionId?)this.ConstellationInfo.FactionId;
         }
 
-        Contract.Assume(this.ConstellationInfo.Region.RegionInfo != null);
-        return (FactionId?)this.ConstellationInfo.Region.RegionInfo.FactionId;
+        Contract.Assume(this.ConstellationInfo.Region != null);
+        return (FactionId?)this.ConstellationInfo.Region.FactionId;
       }
     }
 
@@ -171,7 +171,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.region,
-          () => this.Container.GetOrAdd<Region>(this.RegionId, () => (Region)this.ConstellationInfo.Region.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Region>(this.RegionId, () => (Region)this.ConstellationInfo.Region.ItemInfo.ToAdapter(this.Container)));
 
         Contract.Assume(this.region != null);
         return this.region;

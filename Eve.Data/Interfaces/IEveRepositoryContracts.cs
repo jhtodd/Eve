@@ -26,7 +26,7 @@ namespace Eve.Data
   {
     /* Methods */
 
-    T IEveRepository.GetOrAdd<T>(IConvertible id, Func<T> valueFactory)
+    T IEveRepository.GetOrAddStoredValue<T>(IConvertible id, Func<T> valueFactory)
     {
       Contract.Requires(id != null, "The ID cannot be null.");
       Contract.Requires(valueFactory != null, "The value creation method cannot be null.");
@@ -448,6 +448,34 @@ namespace Eve.Data
     }
 
     bool IEveRepository.TryGetCelestialById(CelestialId id, out Celestial value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
+    #endregion
+
+    #region CertificateCategory Methods
+    CertificateCategory IEveRepository.GetCertificateCategoryById(CertificateCategoryId id)
+    {
+      Contract.Ensures(Contract.Result<CertificateCategory>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<CertificateCategory> IEveRepository.GetCertificateCategories(Func<IQueryable<CertificateCategoryEntity>, IQueryable<CertificateCategoryEntity>> queryOperations)
+    {
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
+      Contract.Ensures(Contract.Result<IReadOnlyList<CertificateCategory>>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<CertificateCategory> IEveRepository.GetCertificateCategories(params IQueryModifier<CertificateCategoryEntity>[] modifiers)
+    {
+      Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<CertificateCategory>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetCertificateCategoryById(CertificateCategoryId id, out CertificateCategory value)
     {
       Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();

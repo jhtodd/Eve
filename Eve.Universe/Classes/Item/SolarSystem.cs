@@ -70,7 +70,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.constellation,
-          () => this.Container.GetOrAdd<Constellation>(this.ConstellationId, () => (Constellation)this.SolarSystemInfo.Constellation.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Constellation>(this.ConstellationId, () => (Constellation)this.SolarSystemInfo.Constellation.ItemInfo.ToAdapter(this.Container)));
 
         Contract.Assume(this.constellation != null);
         return this.constellation;
@@ -135,12 +135,12 @@ namespace Eve.Universe
           return this.faction;
         }
 
-        Contract.Assume(this.SolarSystemInfo.Constellation.ConstellationInfo != null);
-        Contract.Assume(this.SolarSystemInfo.Region.RegionInfo != null);
+        Contract.Assume(this.SolarSystemInfo.Constellation != null);
+        Contract.Assume(this.SolarSystemInfo.Region != null);
 
-        ItemEntity factionEntity = this.SolarSystemInfo.Faction ??
-                                   this.SolarSystemInfo.Constellation.ConstellationInfo.Faction ??
-                                   this.SolarSystemInfo.Region.RegionInfo.Faction;
+        FactionEntity factionEntity = this.SolarSystemInfo.Faction ??
+                                      this.SolarSystemInfo.Constellation.Faction ??
+                                      this.SolarSystemInfo.Region.Faction;
 
         if (factionEntity == null)
         {
@@ -148,7 +148,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.faction = this.Container.GetOrAdd<Faction>(factionEntity.Id, () => (Faction)factionEntity.ToAdapter(this.Container));
+        return this.faction = this.Container.GetOrAddStoredValue<Faction>(factionEntity.Id, () => (Faction)factionEntity.ItemInfo.ToAdapter(this.Container));
       }
     }
 
@@ -172,14 +172,14 @@ namespace Eve.Universe
           return (FactionId?)this.SolarSystemInfo.FactionId;
         }
 
-        Contract.Assume(this.SolarSystemInfo.Constellation.ConstellationInfo != null);
-        if (this.SolarSystemInfo.Constellation.ConstellationInfo.FactionId.HasValue)
+        Contract.Assume(this.SolarSystemInfo.Constellation != null);
+        if (this.SolarSystemInfo.Constellation.FactionId.HasValue)
         {
-          return (FactionId?)this.SolarSystemInfo.Constellation.ConstellationInfo.FactionId;
+          return (FactionId?)this.SolarSystemInfo.Constellation.FactionId;
         }
 
-        Contract.Assume(this.SolarSystemInfo.Region.RegionInfo != null);
-        return (FactionId?)this.SolarSystemInfo.Region.RegionInfo.FactionId;
+        Contract.Assume(this.SolarSystemInfo.Region != null);
+        return (FactionId?)this.SolarSystemInfo.Region.FactionId;
       }
     }
 
@@ -317,7 +317,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.region,
-          () => this.Container.GetOrAdd<Region>(this.RegionId, () => (Region)this.SolarSystemInfo.Region.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Region>(this.RegionId, () => (Region)this.SolarSystemInfo.Region.ItemInfo.ToAdapter(this.Container)));
 
         Contract.Assume(this.region != null);
         return this.region;
@@ -401,7 +401,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.sunType,
-          () => this.Container.GetOrAdd<EveType>(this.SunTypeId, () => this.SolarSystemInfo.SunType.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<EveType>(this.SunTypeId, () => this.SolarSystemInfo.SunType.ToAdapter(this.Container)));
 
         Contract.Assume(this.sunType != null);
         return this.sunType;

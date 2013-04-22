@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
+  using System;
   using System.Diagnostics.Contracts;
 
   using Eve.Data;
@@ -19,6 +20,7 @@ namespace Eve.Data.Entities
   /// </typeparam>
   public abstract partial class EveEntityAdapter<TEntity> 
     : EntityAdapter<TEntity>,
+      IEveCacheable,
       IEveEntityAdapter<TEntity>
     where TEntity : IEveEntity
   {
@@ -61,12 +63,36 @@ namespace Eve.Data.Entities
       }
     }
 
+    /// <summary>
+    /// Gets the ID value used to store the object in the cache.
+    /// </summary>
+    /// <value>
+    /// A value which uniquely identifies the entity.
+    /// </value>
+    protected virtual IConvertible CacheKey
+    {
+      get { return this.Entity.CacheKey; }
+    }
+
     [ContractInvariantMethod]
     private void ObjectInvariant()
     {
       Contract.Invariant(this.container != null);
     }
   }
+
+  #region IEveCacheable Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IEveCacheable" /> interface.
+  /// </content>
+  public abstract partial class EveEntityAdapter<TEntity> : IEveCacheable
+  {
+    IConvertible IEveCacheable.CacheKey
+    {
+      get { return this.CacheKey; }
+    }
+  }
+  #endregion
 
   #region IEveRepositoryItem Implementation
   /// <content>

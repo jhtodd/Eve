@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
+  using System;
   using System.Collections.Generic;
   using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
@@ -18,7 +19,7 @@ namespace Eve.Data.Entities
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
   [Table("crpNPCCorporations")]
-  public class NpcCorporationEntity : ItemExtensionEntity
+  public partial class NpcCorporationEntity : ItemExtensionEntity
   {
     // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
@@ -40,7 +41,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    public virtual ICollection<ItemEntity> Agents { get; internal set; }
+    public virtual ICollection<AgentEntity> Agents { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -50,16 +51,6 @@ namespace Eve.Data.Entities
     /// </value>
     [Column("border")]
     public byte Border { get; internal set; }
-
-    /// <summary>
-    /// Gets the underlying database value of the corresponding adapter property.
-    /// </summary>
-    /// <value>
-    /// The underlying database value of the corresponding adapter property.
-    /// </value>
-    [Column("corporationID")]
-    [Key]
-    public long CorporationId { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -86,7 +77,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("EnemyId")]
-    public virtual ItemEntity Enemy { get; internal set; }
+    public virtual NpcCorporationEntity Enemy { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -113,7 +104,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("FactionId")]
-    public virtual ItemEntity Faction { get; internal set; }
+    public virtual FactionEntity Faction { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -131,7 +122,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("FriendId")]
-    public virtual ItemEntity Friend { get; internal set; }
+    public virtual NpcCorporationEntity Friend { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -179,6 +170,15 @@ namespace Eve.Data.Entities
     public int IconId { get; internal set; }
 
     /// <summary>
+    /// Gets the ID of the <see cref="ItemEntity" /> associated with the current object.
+    /// </summary>
+    /// <value>
+    /// The ID <see cref="ItemEntity" /> associated with the current object.
+    /// </value>
+    [Key]
+    public long Id { get; internal set; }
+
+    /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
     /// </summary>
     /// <value>
@@ -194,7 +194,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("InvestorId1")]
-    public virtual ItemEntity Investor1 { get; internal set; }
+    public virtual NpcCorporationEntity Investor1 { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -212,7 +212,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("InvestorId2")]
-    public virtual ItemEntity Investor2 { get; internal set; }
+    public virtual NpcCorporationEntity Investor2 { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -230,7 +230,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("InvestorId3")]
-    public virtual ItemEntity Investor3 { get; internal set; }
+    public virtual NpcCorporationEntity Investor3 { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -248,7 +248,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("InvestorId4")]
-    public virtual ItemEntity Investor4 { get; internal set; }
+    public virtual NpcCorporationEntity Investor4 { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -294,6 +294,19 @@ namespace Eve.Data.Entities
     /// </value>
     [Column("investorShares4")]
     public byte InvestorShares4 { get; internal set; }
+
+    /// <summary>
+    /// Gets the <see cref="ItemEntity" /> associated with the current object.
+    /// This can be considered the "other half" of the current object: 
+    /// <c>ItemInfo</c> holds the basic information about the item, while the
+    /// current object holds information specific to the item's current type
+    /// (e.g. agent, region, faction, solar system, etc.).
+    /// </summary>
+    /// <value>
+    /// The <see cref="ItemEntity" /> associated with the current object.
+    /// </value>
+    [ForeignKey("Id")]
+    public virtual ItemEntity ItemInfo { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -355,7 +368,7 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     [ForeignKey("SolarSystemId")]
-    public virtual ItemEntity SolarSystem { get; internal set; }
+    public virtual SolarSystemEntity SolarSystem { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -391,5 +404,11 @@ namespace Eve.Data.Entities
     /// The underlying database value of the corresponding adapter property.
     /// </value>
     public virtual ICollection<EveTypeEntity> TradeGoods { get; internal set; }
+
+    /// <inheritdoc />
+    protected internal override IConvertible CacheKey
+    {
+      get { return this.Id; }
+    }
   }
 }

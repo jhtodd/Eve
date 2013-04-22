@@ -69,7 +69,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.agentType,
-          () => this.Container.GetOrAdd<AgentType>(this.AgentTypeId, () => this.Entity.AgentInfo.AgentType.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<AgentType>(this.AgentTypeId, () => this.Entity.AgentInfo.AgentType.ToAdapter(this.Container)));
 
         Contract.Assume(this.agentType != null);
         return this.agentType;
@@ -112,7 +112,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.corporation,
-          () => this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.Entity.AgentInfo.Corporation.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.Entity.AgentInfo.Corporation.ItemInfo.ToAdapter(this.Container)));
 
         Contract.Assume(this.corporation != null);
         return this.corporation;
@@ -155,7 +155,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.division,
-          () => this.Container.GetOrAdd<Division>(this.DivisionId, () => this.Entity.AgentInfo.Division.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Division>(this.DivisionId, () => this.Entity.AgentInfo.Division.ToAdapter(this.Container)));
 
         Contract.Assume(this.division != null);
         return this.division;
@@ -249,7 +249,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.location,
-          () => this.Container.GetOrAdd<Item>(this.LocationId, () => this.Entity.AgentInfo.Location.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Item>(this.LocationId, () => this.Entity.AgentInfo.Location.ToAdapter(this.Container)));
 
         Contract.Assume(this.location != null);
         return this.location;
@@ -309,7 +309,7 @@ namespace Eve.Universe
 
             // Filter through the cache
             return new ReadOnlySkillTypeCollection(
-              this.Entity.AgentInfo.ResearchFields.Select(x => this.Container.GetOrAdd<SkillType>(x.Id, () => (SkillType)x.ToAdapter(this.Container)))
+              this.Entity.AgentInfo.ResearchFields.Select(x => this.Container.GetOrAddStoredValue<SkillType>(x.Id, () => (SkillType)x.ToAdapter(this.Container)))
                                                   .OrderBy(x => x));
           });
 

@@ -1562,7 +1562,7 @@ namespace EveUpdater {
           }
 
         } catch (Exception ex) {
-          MessageBox.Show("An error occurred while loading categories: " + ex.Message, "GetOrAdd Categories", MessageBoxButton.OK, MessageBoxImage.Error);
+          MessageBox.Show("An error occurred while loading categories: " + ex.Message, "GetOrAddStoredValue Categories", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         _eveCategories = results.AsReadOnly();
@@ -1615,7 +1615,7 @@ namespace EveUpdater {
         }
 
       } catch (Exception ex) {
-        MessageBox.Show("An error occurred while loading groups: " + ex.Message, "GetOrAdd Groups", MessageBoxButton.OK, MessageBoxImage.Error);
+        MessageBox.Show("An error occurred while loading groups: " + ex.Message, "GetOrAddStoredValue Groups", MessageBoxButton.OK, MessageBoxImage.Error);
       }
 
       return results.AsReadOnly();

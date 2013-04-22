@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
+  using System;
   using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
@@ -71,7 +72,31 @@ namespace Eve.Data.Entities
     [Key]
     public long ToRegionId { get; internal set; }
 
+    /// <inheritdoc />
+    [NotMapped]
+    protected internal override IConvertible CacheKey
+    {
+      get { return CreateCacheKey(this.FromRegionId, this.ToRegionId); }
+    }
+
     /* Methods */
+
+    /// <summary>
+    /// Computes a compound ID for the specified sub-IDs.
+    /// </summary>
+    /// <param name="fromRegionId">
+    /// The ID of the origin region.
+    /// </param>
+    /// <param name="toRegionId">
+    /// The ID of the destination region.
+    /// </param>
+    /// <returns>
+    /// A compound ID combining the two sub-IDs.
+    /// </returns>
+    public static long CreateCacheKey(long fromRegionId, long toRegionId)
+    {
+      return (long)((((ulong)(long)fromRegionId.GetHashCode()) << 32) | ((ulong)(long)toRegionId.GetHashCode()));
+    }
 
     /// <inheritdoc />
     public override RegionJump ToAdapter(IEveRepository container)

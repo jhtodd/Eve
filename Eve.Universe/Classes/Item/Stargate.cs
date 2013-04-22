@@ -55,7 +55,7 @@ namespace Eve.Universe
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.destination,
-          () => this.Container.GetOrAdd<Stargate>(this.DestinationId, () => (Stargate)this.StargateInfo.Destination.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Stargate>(this.DestinationId, () => (Stargate)this.StargateInfo.Destination.ItemInfo.ToAdapter(this.Container)));
 
         Contract.Assume(this.destination != null);
         return this.destination;

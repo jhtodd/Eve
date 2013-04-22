@@ -95,7 +95,7 @@ namespace Eve.Character
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.corporation,
-          () => this.Container.GetOrAdd<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.Entity.Corporation.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.Entity.Corporation.ToAdapter(this.Container)));
 
         Contract.Assume(this.corporation != null);
         return this.corporation;
@@ -152,7 +152,7 @@ namespace Eve.Character
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.icon,
-          () => this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
 
         Contract.Assume(this.icon != null);
         return this.icon;
@@ -238,7 +238,7 @@ namespace Eve.Character
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.shipType,
-          () => this.Container.GetOrAdd<EveType>(this.ShipTypeId, () => this.Entity.ShipType.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<EveType>(this.ShipTypeId, () => this.Entity.ShipType.ToAdapter(this.Container)));
 
         Contract.Assume(this.shipType != null);
         return this.shipType;
@@ -271,7 +271,7 @@ namespace Eve.Character
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.race,
-          () => this.Container.GetOrAdd<Race>(this.RaceId, () => this.Entity.Race.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Race>(this.RaceId, () => this.Entity.Race.ToAdapter(this.Container)));
 
         Contract.Assume(this.race != null);
         return this.race;

@@ -16,7 +16,7 @@ namespace Eve
   /// Contains information about an effect associated with an EVE item.
   /// </summary>
   public sealed partial class EffectType 
-    : BaseValue<EffectId, short, EffectTypeEntity, EffectType>,
+    : BaseValue<EffectId, EffectId, EffectTypeEntity, EffectType>,
       IComparable,
       IComparable<IEffect>,
       IEffect,
@@ -88,7 +88,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.dischargeAttribute,
-          () => this.Container.GetOrAdd<AttributeType>(this.DischargeAttributeId, () => this.Entity.DischargeAttribute.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<AttributeType>(this.DischargeAttributeId, () => this.Entity.DischargeAttribute.ToAdapter(this.Container)));
 
         Contract.Assume(this.dischargeAttribute != null);
         return this.dischargeAttribute;
@@ -157,7 +157,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.durationAttribute,
-          () => this.Container.GetOrAdd<AttributeType>(this.DurationAttributeId, () => this.Entity.DurationAttribute.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<AttributeType>(this.DurationAttributeId, () => this.Entity.DurationAttribute.ToAdapter(this.Container)));
 
         Contract.Assume(this.durationAttribute != null);
         return this.durationAttribute;
@@ -224,7 +224,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.falloffAttribute,
-          () => this.Container.GetOrAdd<AttributeType>(this.FalloffAttributeId, () => this.Entity.FalloffAttribute.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<AttributeType>(this.FalloffAttributeId, () => this.Entity.FalloffAttribute.ToAdapter(this.Container)));
 
         Contract.Assume(this.falloffAttribute != null);
         return this.falloffAttribute;
@@ -268,7 +268,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.fittingUsageChanceAttribute,
-          () => this.Container.GetOrAdd<AttributeType>(this.FittingUsageChanceAttributeId, () => this.Entity.FittingUsageChanceAttribute.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<AttributeType>(this.FittingUsageChanceAttributeId, () => this.Entity.FittingUsageChanceAttribute.ToAdapter(this.Container)));
 
         Contract.Assume(this.fittingUsageChanceAttribute != null);
         return this.fittingUsageChanceAttribute;
@@ -326,7 +326,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.icon,
-          () => this.Container.GetOrAdd<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
 
         Contract.Assume(this.icon != null);
         return this.icon;
@@ -405,7 +405,7 @@ namespace Eve
 
         LazyInitializer.EnsureInitialized(
           ref this.npcActivationChanceAttribute,
-          () => this.Container.GetOrAdd<AttributeType>(this.NpcActivationChanceAttributeId, () => this.Entity.NpcActivationChanceAttribute.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<AttributeType>(this.NpcActivationChanceAttributeId, () => this.Entity.NpcActivationChanceAttribute.ToAdapter(this.Container)));
 
         Contract.Assume(this.npcActivationChanceAttribute != null);
         return this.npcActivationChanceAttribute;
@@ -449,7 +449,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.npcUsageChanceAttribute,
-          () => this.Container.GetOrAdd<AttributeType>(this.NpcUsageChanceAttributeId, () => this.Entity.NpcUsageChanceAttribute.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<AttributeType>(this.NpcUsageChanceAttributeId, () => this.Entity.NpcUsageChanceAttribute.ToAdapter(this.Container)));
 
         Contract.Assume(this.npcUsageChanceAttribute != null);
         return this.npcUsageChanceAttribute;
@@ -542,7 +542,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.rangeAttribute,
-          () => this.Container.GetOrAdd<AttributeType>(this.RangeAttributeId, () => this.Entity.RangeAttribute.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<AttributeType>(this.RangeAttributeId, () => this.Entity.RangeAttribute.ToAdapter(this.Container)));
 
         Contract.Assume(this.rangeAttribute != null);
         return this.rangeAttribute;
@@ -613,7 +613,7 @@ namespace Eve
         // If not already set, load from the cache, or else create an instance from the base entity
         LazyInitializer.EnsureInitialized(
           ref this.trackingSpeedAttribute,
-          () => this.Container.GetOrAdd<AttributeType>(this.TrackingSpeedAttributeId, () => this.Entity.TrackingSpeedAttribute.ToAdapter(this.Container)));
+          () => this.Container.GetOrAddStoredValue<AttributeType>(this.TrackingSpeedAttributeId, () => this.Entity.TrackingSpeedAttribute.ToAdapter(this.Container)));
 
         Contract.Assume(this.trackingSpeedAttribute != null);
         return this.trackingSpeedAttribute;

@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
+  using System;
   using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
@@ -152,7 +153,30 @@ namespace Eve.Data.Entities
     [Column("stationTypeID")]
     public int StationTypeId { get; internal set; }
 
+    /// <inheritdoc />
+    protected internal override IConvertible CacheKey
+    {
+      get { return CreateCacheKey(this.StationId, this.AssemblyLineTypeId); }
+    }
+
     /* Methods */
+
+    /// <summary>
+    /// Computes a compound ID for the specified sub-IDs.
+    /// </summary>
+    /// <param name="stationId">
+    /// The ID of the station.
+    /// </param>
+    /// <param name="assemblyLineTypeId">
+    /// The ID of the assembly line type.
+    /// </param>
+    /// <returns>
+    /// A compound ID combining the two sub-IDs.
+    /// </returns>
+    public static long CreateCacheKey(long stationId, byte assemblyLineTypeId)
+    {
+      return (long)((((ulong)(long)stationId) << 32) | ((ulong)(long)assemblyLineTypeId));
+    }
 
     /// <inheritdoc />
     public override AssemblyLineStation ToAdapter(IEveRepository container)
