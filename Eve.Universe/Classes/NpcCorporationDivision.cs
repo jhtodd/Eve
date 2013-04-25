@@ -35,15 +35,15 @@ namespace Eve.Universe
     /// <summary>
     /// Initializes a new instance of the <see cref="NpcCorporationDivision" /> class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal NpcCorporationDivision(IEveRepository container, NpcCorporationDivisionEntity entity) : base(container, entity)
+    internal NpcCorporationDivision(IEveRepository repository, NpcCorporationDivisionEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
@@ -63,7 +63,7 @@ namespace Eve.Universe
 
         LazyInitializer.EnsureInitialized(
           ref this.agents,
-          () => new ReadOnlyAgentCollection(this.Container.GetAgents(q => q.Where(x => x.AgentInfo.CorporationId == this.CorporationId.Value && x.AgentInfo.DivisionId == this.DivisionId)).OrderBy(x => x)));
+          () => new ReadOnlyAgentCollection(this.Repository, this.Entity.Agents));
 
         Contract.Assume(this.agents != null);
         return this.agents;
@@ -94,12 +94,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Division>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.division,
-          () => this.Container.GetOrAddStoredValue<Division>(this.DivisionId, () => this.Entity.Division.ToAdapter(this.Container)));
-
-        Contract.Assume(this.division != null);
-        return this.division;
+        return this.LazyInitializeAdapter(ref this.division, this.Entity.DivisionId, () => this.Entity.Division);
       }
     }
 

@@ -31,15 +31,15 @@ namespace Eve.Character
     /// <summary>
     /// Initializes a new instance of the Bloodline class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal Bloodline(IEveRepository container, BloodlineEntity entity) : base(container, entity)
+    internal Bloodline(IEveRepository repository, BloodlineEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
@@ -59,7 +59,7 @@ namespace Eve.Character
 
         LazyInitializer.EnsureInitialized(
           ref this.ancestries,
-          () => new ReadOnlyAncestryCollection(this.Container.GetAncestries(q => q.Where(x => x.BloodlineId == this.Id)).OrderBy(x => x)));
+          () => new ReadOnlyAncestryCollection(this.Repository, this.Entity.Ancestries));
 
         Contract.Assume(this.ancestries != null);
         return this.ancestries;
@@ -93,12 +93,7 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<NpcCorporation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.corporation,
-          () => this.Container.GetOrAddStoredValue<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.Entity.Corporation.ToAdapter(this.Container)));
-
-        Contract.Assume(this.corporation != null);
-        return this.corporation;
+        return this.LazyInitializeAdapter(ref this.corporation, this.Entity.CorporationId, () => this.Entity.Corporation);
       }
     }
 
@@ -150,12 +145,7 @@ namespace Eve.Character
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.icon,
-          () => this.Container.GetOrAddStoredValue<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
-
-        Contract.Assume(this.icon != null);
-        return this.icon;
+        return this.LazyInitializeAdapter(ref this.icon, this.Entity.IconId, () => this.Entity.Icon);
       }
     }
 
@@ -236,12 +226,7 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<EveType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.shipType,
-          () => this.Container.GetOrAddStoredValue<EveType>(this.ShipTypeId, () => this.Entity.ShipType.ToAdapter(this.Container)));
-
-        Contract.Assume(this.shipType != null);
-        return this.shipType;
+        return this.LazyInitializeAdapter(ref this.shipType, this.Entity.ShipTypeId, () => this.Entity.ShipType);
       }
     }
 
@@ -269,12 +254,7 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<Race>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.race,
-          () => this.Container.GetOrAddStoredValue<Race>(this.RaceId, () => this.Entity.Race.ToAdapter(this.Container)));
-
-        Contract.Assume(this.race != null);
-        return this.race;
+        return this.LazyInitializeAdapter(ref this.race, this.Entity.RaceId, () => this.Entity.Race);
       }
     }
 

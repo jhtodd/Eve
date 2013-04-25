@@ -25,17 +25,20 @@ namespace Eve.Universe
     /// <summary>
     /// Initializes a new instance of the Stargate class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal Stargate(IEveRepository container, ItemEntity entity) : base(container, entity)
+    internal Stargate(IEveRepository repository, ItemEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
       Contract.Requires(entity.IsStargate, "The entity must be a station.");
+
+      // Use Assume instead of Requires to avoid lazy loading on release build
+      Contract.Assert(this.Entity.StargateInfo != null);
     }
 
     /* Properties */
@@ -53,12 +56,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Stargate>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.destination,
-          () => this.Container.GetOrAddStoredValue<Stargate>(this.DestinationId, () => (Stargate)this.StargateInfo.Destination.ItemInfo.ToAdapter(this.Container)));
-
-        Contract.Assume(this.destination != null);
-        return this.destination;
+        return this.LazyInitializeAdapter(ref this.destination, this.Entity.StargateInfo.DestinationId, () => this.Entity.StargateInfo.Destination);
       }
     }
 
@@ -70,7 +68,7 @@ namespace Eve.Universe
     /// </value>
     public StargateId DestinationId
     {
-      get { return this.StargateInfo.DestinationId; }
+      get { return this.Entity.StargateInfo.DestinationId; }
     }
 
     /// <summary>
@@ -84,17 +82,12 @@ namespace Eve.Universe
       get { return (StargateId)base.Id.Value; }
     }
 
-    private StargateEntity StargateInfo
+    /* Methods */
+
+    [ContractInvariantMethod]
+    private void ObjectInvariant()
     {
-      get
-      {
-        Contract.Ensures(Contract.Result<StargateEntity>() != null);
-
-        var result = this.Entity.StargateInfo;
-
-        Contract.Assume(result != null);
-        return result;
-      }
+      Contract.Invariant(this.Entity.StargateInfo != null);
     }
   }
 }

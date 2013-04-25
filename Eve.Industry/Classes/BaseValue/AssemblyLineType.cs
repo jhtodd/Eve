@@ -28,16 +28,16 @@ namespace Eve.Industry
     /// <summary>
     /// Initializes a new instance of the AssemblyLineType class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal AssemblyLineType(IEveRepository container, AssemblyLineTypeEntity entity)
-      : base(container, entity)
+    internal AssemblyLineType(IEveRepository repository, AssemblyLineTypeEntity entity)
+      : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
@@ -57,12 +57,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<Activity>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.activity,
-          () => this.Container.GetOrAddStoredValue<Activity>(this.ActivityId, () => this.Entity.Activity.ToAdapter(this.Container)));
-
-        Contract.Assume(this.activity != null);
-        return this.activity;
+        return this.LazyInitializeAdapter(ref this.activity, this.Entity.ActivityId, () => this.Entity.Activity);
       }
     }
 
@@ -143,7 +138,7 @@ namespace Eve.Industry
 
         LazyInitializer.EnsureInitialized(
           ref this.categoryDetails,
-          () => new ReadOnlyAssemblyLineTypeCategoryDetailCollection(this.Container.GetAssemblyLineTypeCategoryDetails(q => q.Where(x => x.AssemblyLineTypeId == this.Id.Value)).OrderBy(x => x)));
+          () => new ReadOnlyAssemblyLineTypeCategoryDetailCollection(this.Repository, this.Entity.CategoryDetails));
 
         Contract.Assume(this.categoryDetails != null);
         return this.categoryDetails;
@@ -166,7 +161,7 @@ namespace Eve.Industry
 
         LazyInitializer.EnsureInitialized(
           ref this.groupDetails,
-          () => new ReadOnlyAssemblyLineTypeGroupDetailCollection(this.Container.GetAssemblyLineTypeGroupDetails(q => q.Where(x => x.AssemblyLineTypeId == this.Id.Value)).OrderBy(x => x)));
+          () => new ReadOnlyAssemblyLineTypeGroupDetailCollection(this.Repository, this.Entity.GroupDetails));
 
         Contract.Assume(this.groupDetails != null);
         return this.groupDetails;

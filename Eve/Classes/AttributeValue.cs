@@ -35,15 +35,15 @@ namespace Eve
     /// <summary>
     /// Initializes a new instance of the AttributeValue class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    public AttributeValue(IEveRepository container, AttributeValueEntity entity) : base(container, entity)
+    public AttributeValue(IEveRepository repository, AttributeValueEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
@@ -110,12 +110,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<AttributeType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.type,
-          () => this.Container.GetOrAddStoredValue<AttributeType>(this.Id, () => this.Entity.AttributeType.ToAdapter(this.Container)));
-
-        Contract.Assume(this.type != null);
-        return this.type;
+        return this.LazyInitializeAdapter(ref this.type, this.Entity.AttributeId, () => this.Entity.AttributeType);
       }
     }
 

@@ -7,6 +7,7 @@ namespace Eve.Data
 {
   using System.Data.Common;
   using System.Data.Entity;
+  using System.Data.Entity.Infrastructure;
   using System.Diagnostics.Contracts;
   using System.Linq;
 
@@ -36,10 +37,20 @@ namespace Eve.Data
   /// "under-the-hood" processing.
   /// </para>
   /// <para>
-  /// All queries initiated by the context are performed without object
+  /// All queries initiated by the context are performed without entity
   /// tracking, which means that it's acceptable (and possibly even
   /// preferred) to retain a single <c>EveDbContext</c> instance for the
   /// lifetime of the application.
+  /// </para>
+  /// <para>
+  /// The results of queries performed by the context are entity types
+  /// in the <c>Eve.Data.Entities</c> namespace, which can be used to
+  /// display data, but which by and large do not implement the interfaces
+  /// needed to interact with the game-related functionality of the
+  /// EVE library.  You can create an <em>adapter</em> which can be used
+  /// for those purposes by calling the
+  /// <see cref="IEveEntity{TAdapter}.ToAdapter" /> method on the entities
+  /// returned by direct queries.
   /// </para>
   /// </remarks>
   public class EveDbContext : IEveDbContext
@@ -115,13 +126,12 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IQueryable<ItemEntity> Agents
+    public IQueryable<AgentEntity> Agents
     {
       get
       {
-        var result = this.Query<ItemEntity>()
-                         .Where(x => x.AgentInfo != null)
-                         .Include(x => x.AgentInfo);
+        var result = this.Query<AgentEntity>()
+                         .Include(x => x.ItemInfo);
 
         Contract.Assume(result != null);
         return result;
@@ -207,17 +217,22 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IQueryable<ItemEntity> Celestials
+    public IQueryable<CelestialEntity> Celestials
     {
       get
       {
-        var result = this.Query<ItemEntity>()
-                         .Where(x => x.CelestialInfo != null)
-                         .Include(x => x.CelestialInfo);
+        var result = this.Query<CelestialEntity>()
+                         .Include(x => x.ItemInfo);
 
         Contract.Assume(result != null);
         return result;
       }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<CertificateEntity> Certificates
+    {
+      get { return this.Query<CertificateEntity>(); }
     }
 
     /// <inheritdoc />
@@ -227,13 +242,18 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IQueryable<ItemEntity> Constellations
+    public IQueryable<CertificateClassEntity> CertificateClasses
+    {
+      get { return this.Query<CertificateClassEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<ConstellationEntity> Constellations
     {
       get
       {
-        var result = this.Query<ItemEntity>()
-                         .Where(x => x.ConstellationInfo != null)
-                         .Include(x => x.ConstellationInfo);
+        var result = this.Query<ConstellationEntity>()
+                         .Include(x => x.ItemInfo);
 
         Contract.Assume(result != null);
         return result;
@@ -277,13 +297,12 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IQueryable<ItemEntity> Factions
+    public IQueryable<FactionEntity> Factions
     {
       get
       {
-        var result = this.Query<ItemEntity>()
-                         .Where(x => x.FactionInfo != null)
-                         .Include(x => x.FactionInfo);
+        var result = this.Query<FactionEntity>()
+                         .Include(x => x.ItemInfo);
 
         Contract.Assume(result != null);
         return result;
@@ -345,13 +364,12 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IQueryable<ItemEntity> NpcCorporations
+    public IQueryable<NpcCorporationEntity> NpcCorporations
     {
       get
       {
-        var result = this.Query<ItemEntity>()
-                         .Where(x => x.CorporationInfo != null)
-                         .Include(x => x.CorporationInfo);
+        var result = this.Query<NpcCorporationEntity>()
+                         .Include(x => x.ItemInfo);
 
         Contract.Assume(result != null);
         return result;
@@ -371,13 +389,12 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IQueryable<ItemEntity> Regions
+    public IQueryable<RegionEntity> Regions
     {
       get
       {
-        var result = this.Query<ItemEntity>()
-                         .Where(x => x.RegionInfo != null)
-                         .Include(x => x.RegionInfo);
+        var result = this.Query<RegionEntity>()
+                         .Include(x => x.ItemInfo);
 
         Contract.Assume(result != null);
         return result;
@@ -391,13 +408,12 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IQueryable<ItemEntity> SolarSystems
+    public IQueryable<SolarSystemEntity> SolarSystems
     {
       get
       {
-        var result = this.Query<ItemEntity>()
-                         .Where(x => x.SolarSystemInfo != null)
-                         .Include(x => x.SolarSystemInfo);
+        var result = this.Query<SolarSystemEntity>()
+                         .Include(x => x.ItemInfo);
 
         Contract.Assume(result != null);
         return result;
@@ -411,13 +427,12 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IQueryable<ItemEntity> Stargates
+    public IQueryable<StargateEntity> Stargates
     {
       get
       {
-        var result = this.Query<ItemEntity>()
-                         .Where(x => x.StargateInfo != null)
-                         .Include(x => x.StargateInfo);
+        var result = this.Query<StargateEntity>()
+                         .Include(x => x.ItemInfo);
 
         Contract.Assume(result != null);
         return result;
@@ -425,13 +440,12 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IQueryable<ItemEntity> Stations
+    public IQueryable<StationEntity> Stations
     {
       get
       {
-        var result = this.Query<ItemEntity>()
-                         .Where(x => x.StationInfo != null)
-                         .Include(x => x.StationInfo);
+        var result = this.Query<StationEntity>()
+                         .Include(x => x.ItemInfo);
 
         Contract.Assume(result != null);
         return result;
@@ -463,13 +477,12 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IQueryable<ItemEntity> Universes
+    public IQueryable<UniverseEntity> Universes
     {
       get
       {
-        var result = this.Query<ItemEntity>()
-                         .Where(x => x.UniverseInfo != null)
-                         .Include(x => x.UniverseInfo);
+        var result = this.Query<UniverseEntity>()
+                         .Include(x => x.ItemInfo);
 
         Contract.Assume(result != null);
         return result;
@@ -482,7 +495,7 @@ namespace Eve.Data
     /// <value>
     /// The <see cref="DirectEveDbContext" /> wrapped by the current instance.
     /// </value>
-    private DirectEveDbContext DirectContext
+    internal DirectEveDbContext DirectContext
     {
       get
       {

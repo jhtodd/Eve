@@ -9,36 +9,35 @@ namespace Eve.Character
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Collections;
   using Eve.Data;
   using Eve.Data.Entities;
 
   using FreeNet.Collections.ObjectModel;
 
   /// <summary>
-  /// A read-only collection of skill levels.
+  /// A read-only collection of <see cref="SkillLevel" /> objects.
   /// </summary>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
-  public sealed partial class ReadOnlySkillLevelCollection 
-    : ReadOnlyKeyedCollection<SkillId, SkillLevel>,
-      ISkillCollection
+  public sealed partial class ReadOnlySkillLevelCollection
+    : ReadOnlyKeyedRepositoryItemCollection<SkillId, SkillLevel>
   {
     /* Constructors */
 
     /// <summary>
     /// Initializes a new instance of the ReadOnlySkillLevelCollection class.
     /// </summary>
+    /// <param name="repository">
+    /// The <see cref="IEveRepository" /> associated with the items in the 
+    /// collection.
+    /// </param>
     /// <param name="contents">
     /// The contents of the collection.
     /// </param>
-    public ReadOnlySkillLevelCollection(IEnumerable<SkillLevel> contents) : base(contents == null ? 0 : contents.Count())
+    public ReadOnlySkillLevelCollection(IEveRepository repository, IEnumerable<SkillLevel> contents)
+      : base(repository, contents)
     {
-      if (contents != null)
-      {
-        foreach (SkillLevel item in contents)
-        {
-          Items.AddWithoutCallback(item);
-        }
-      }
+      Contract.Requires(repository != null, "The provided repository cannot be null.");
     }
 
     /* Methods */

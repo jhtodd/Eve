@@ -3,7 +3,8 @@
 //     Copyright © Jeremy H. Todd 2012
 // </copyright>
 //-----------------------------------------------------------------------
-namespace EveUpdater {
+namespace EveUpdater
+{
   using System;
   using System.Collections.Generic;
   using System.Data;
@@ -16,40 +17,51 @@ namespace EveUpdater {
   using FreeNet;
   using FreeNet.Data;
 
-  //******************************************************************************
   /// <summary>
   /// Returns a list of EVE groups from a category ID.
   /// </summary>
-  public class EveCategoryToGroupListConverter : IMultiValueConverter {
+  public class EveCategoryToGroupListConverter : IMultiValueConverter
+  {
+    /* Constructors */
 
-    #region IMultiValueConverter Members
-    //******************************************************************************
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "The purpose of the class is to implement the interface and it will not be accessed in another context.")]
-    object IMultiValueConverter.Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture) {
-      if (values == null || values.Length < 2) {
+    /// <summary>
+    /// Initializes a new instance of the EveCategoryToGroupListConverter class.
+    /// </summary>
+    public EveCategoryToGroupListConverter()
+    {
+    }
+
+    /* Methods */
+
+    /// <inheritdoc />
+    public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    {
+      if (values == null || values.Length < 2)
+      {
         return null;
       }
 
       CategoryListEntry categoryEntry = values[0] as CategoryListEntry;
 
-      if (categoryEntry == null) {
+      if (categoryEntry == null)
+      {
         return null;
       }
 
       EveUpdaterWindowViewModel viewModel = values[1] as EveUpdaterWindowViewModel;
 
-      if (viewModel == null) {
+      if (viewModel == null)
+      {
         return null;
       }
 
       return viewModel.LoadGroupsForCategory(categoryEntry.Value);
     }
-    //******************************************************************************
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "The purpose of the class is to implement the interface and it will not be accessed in another context.")]
-    object[] IMultiValueConverter.ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture) {
+
+    /// <inheritdoc />
+    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
+    {
       throw new InvalidOperationException("This converter is for one-way binding only.");
     }
-    #endregion
-
   }
 }

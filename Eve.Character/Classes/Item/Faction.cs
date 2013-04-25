@@ -30,17 +30,20 @@ namespace Eve.Character
     /// <summary>
     /// Initializes a new instance of the Faction class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal Faction(IEveRepository container, ItemEntity entity) : base(container, entity)
+    internal Faction(IEveRepository repository, ItemEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
       Contract.Requires(entity.IsFaction, "The entity must be a faction.");
+
+      // Use Assume instead of Requires to avoid lazy loading on release build
+      Contract.Assert(this.Entity.FactionInfo != null);
     }
 
     /* Properties */
@@ -64,12 +67,7 @@ namespace Eve.Character
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.corporation,
-          () => this.Container.GetOrAddStoredValue<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.Entity.FactionInfo.Corporation.ItemInfo.ToAdapter(this.Container)));
-
-        Contract.Assume(this.corporation != null);
-        return this.corporation;
+        return this.LazyInitializeAdapter(ref this.corporation, this.Entity.FactionInfo.CorporationId, () => this.Entity.FactionInfo.Corporation);
       }
     }
 
@@ -107,12 +105,7 @@ namespace Eve.Character
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.icon, 
-          () => this.Container.GetOrAddStoredValue<Icon>(this.IconId, () => this.Entity.FactionInfo.Icon.ToAdapter(this.Container)));
-
-        Contract.Assume(this.icon != null);
-        return this.icon;
+        return this.LazyInitializeAdapter(ref this.icon, this.Entity.FactionInfo.IconId, () => this.Entity.FactionInfo.Icon);
       }
     }
 
@@ -150,12 +143,7 @@ namespace Eve.Character
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.militiaCorporation,
-          () => this.Container.GetOrAddStoredValue<NpcCorporation>(this.MilitiaCorporationId, () => (NpcCorporation)this.Entity.FactionInfo.MilitiaCorporation.ItemInfo.ToAdapter(this.Container)));
-
-        Contract.Assume(this.militiaCorporation != null);
-        return this.militiaCorporation;
+        return this.LazyInitializeAdapter(ref this.militiaCorporation, this.Entity.FactionInfo.MilitiaCorporationId, () => this.Entity.FactionInfo.MilitiaCorporation);
       }
     }
 
@@ -235,12 +223,7 @@ namespace Eve.Character
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.solarSystem,
-          () => this.Container.GetOrAddStoredValue<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.Entity.FactionInfo.SolarSystem.ItemInfo.ToAdapter(this.Container)));
-
-        Contract.Assume(this.solarSystem != null);
-        return this.solarSystem;
+        return this.LazyInitializeAdapter(ref this.solarSystem, this.Entity.FactionInfo.SolarSystemId, () => this.Entity.FactionInfo.SolarSystem);
       }
     }
 
@@ -299,6 +282,14 @@ namespace Eve.Character
 
         return result;
       }
+    }
+
+    /* Methods */
+
+    [ContractInvariantMethod]
+    private void ObjectInvariant()
+    {
+      Contract.Invariant(this.Entity.FactionInfo != null);
     }
   }
 

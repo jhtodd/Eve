@@ -14,7 +14,7 @@ namespace Eve.Data
   [ContractClassFor(typeof(IEveRepositoryItem))]
   internal abstract class IEveRepositoryItemContracts : IEveRepositoryItem
   {
-    IEveRepository IEveRepositoryItem.Container
+    IEveRepository IEveRepositoryItem.Repository
     {
       get 
       {

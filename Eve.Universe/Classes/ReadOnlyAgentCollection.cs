@@ -6,33 +6,54 @@
 namespace Eve.Universe
 {
   using System.Collections.Generic;
+  using System.Diagnostics.Contracts;
   using System.Linq;
+
+  using Eve.Collections;
+  using Eve.Data;
+  using Eve.Data.Entities;
 
   using FreeNet.Collections.ObjectModel;
 
   /// <summary>
-  /// A read-only collection of agents.
+  /// A read-only collection of <see cref="Agent" /> objects.
   /// </summary>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
-  public sealed class ReadOnlyAgentCollection : ReadOnlyCollection<Agent>
+  public sealed partial class ReadOnlyAgentCollection
+    : ReadOnlyEntityAdapterCollection<AgentEntity, Agent>
   {
     /* Constructors */
 
     /// <summary>
     /// Initializes a new instance of the ReadOnlyAgentCollection class.
     /// </summary>
+    /// <param name="repository">
+    /// The <see cref="IEveRepository" /> associated with the items in the 
+    /// collection.
+    /// </param>
     /// <param name="contents">
     /// The contents of the collection.
     /// </param>
-    public ReadOnlyAgentCollection(IEnumerable<Agent> contents) : base(contents == null ? 0 : contents.Count())
+    public ReadOnlyAgentCollection(IEveRepository repository, IEnumerable<Agent> contents)
+      : base(repository, contents)
     {
-      if (contents != null)
-      {
-        foreach (Agent agent in contents)
-        {
-          Items.AddWithoutCallback(agent);
-        }
-      }
+      Contract.Requires(repository != null, "The provided repository cannot be null.");
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the ReadOnlyAgentCollection class.
+    /// </summary>
+    /// <param name="repository">
+    /// The <see cref="IEveRepository" /> associated with the items in the 
+    /// collection.
+    /// </param>
+    /// <param name="entities">
+    /// A sequence of entities from which to create the contents of the collection.
+    /// </param>
+    public ReadOnlyAgentCollection(IEveRepository repository, IEnumerable<AgentEntity> entities)
+      : base(repository, entities)
+    {
+      Contract.Requires(repository != null, "The provided repository cannot be null.");
     }
   }
 }

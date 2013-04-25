@@ -13,11 +13,12 @@ before it can be used with this framework.  I'll try to keep this list up to dat
 1. All tables which tie to invItems must have the type of their related column changed
    to a 64-bit integer, to match the type of invItems' primary key.  This includes
    agtAgents, chrBloodlines, chrFactions, crpNPCCorporationDivisions, 
-   crpNPCCorporationResearchFields, crpNPCCorporationTrades, crpNPCCorporations, invItems,
-   invUniqueNames, mapCelestialStatistics, mapConstellationJumps,  mapConstellations,
-   mapDenormalize, mapJumps, mapLandmarks, mapLocationScenes, mapLocationWormholeClasses,
-   mapRegionJumps, mapRegions, mapSolarSystemJumps, mapSolarSystem, mapUniverse,
-   ramAssemblyLineStations, ramAssemblyLines, staStations, warCombatZoneSystems.
+   crpNPCCorporationResearchFields, crpNPCCorporationTrades, crpNPCCorporations,
+   crtCertificates, invItems, invUniqueNames, mapCelestialStatistics,
+   mapConstellationJumps, mapConstellations, mapDenormalize, mapJumps, mapLandmarks,
+   mapLocationScenes, mapLocationWormholeClasses, mapRegionJumps, mapRegions,
+   mapSolarSystemJumps, mapSolarSystem, mapUniverse, ramAssemblyLineStations,
+   ramAssemblyLines, staStations, warCombatZoneSystems.
 
 2. Some tables containing derived types have different key names than the parent
    table.  This confuses the Entity Framework, and currently there appears to be

@@ -24,6 +24,7 @@ namespace Eve.Industry
       IComparable<AssemblyLineTypeCategoryDetail>,
       IEquatable<AssemblyLineTypeCategoryDetail>,
       IEveCacheable,
+      IKeyItem<CategoryId>,
       IKeyItem<long>
   {
     private AssemblyLineType assemblyLineType;
@@ -34,15 +35,15 @@ namespace Eve.Industry
     /// <summary>
     /// Initializes a new instance of the AssemblyLineTypeCategoryDetail class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal AssemblyLineTypeCategoryDetail(IEveRepository container, AssemblyLineTypeCategoryDetailEntity entity) : base(container, entity)
+    internal AssemblyLineTypeCategoryDetail(IEveRepository repository, AssemblyLineTypeCategoryDetailEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
@@ -63,12 +64,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<AssemblyLineType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.assemblyLineType,
-          () => this.Container.GetOrAddStoredValue<AssemblyLineType>(this.AssemblyLineTypeId, () => this.Entity.AssemblyLineType.ToAdapter(this.Container)));
-
-        Contract.Assume(this.assemblyLineType != null);
-        return this.assemblyLineType;
+        return this.LazyInitializeAdapter(ref this.assemblyLineType, this.Entity.AssemblyLineTypeId, () => this.Entity.AssemblyLineType);
       }
     }
 
@@ -100,12 +96,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<Category>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.category,
-          () => this.Container.GetOrAddStoredValue<Category>(this.CategoryId, () => this.Entity.Category.ToAdapter(this.Container)));
-
-        Contract.Assume(this.category != null);
-        return this.category;
+        return this.LazyInitializeAdapter(ref this.category, this.Entity.CategoryId, () => this.Entity.Category);
       }
     }
 
@@ -234,6 +225,19 @@ namespace Eve.Industry
     {
       AssemblyLineTypeCategoryDetail other = obj as AssemblyLineTypeCategoryDetail;
       return this.CompareTo(other);
+    }
+  }
+  #endregion
+
+  #region IKeyItem<CategoryId> Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.
+  /// </content>
+  public sealed partial class AssemblyLineTypeCategoryDetail : IKeyItem<CategoryId>
+  {
+    CategoryId IKeyItem<CategoryId>.Key
+    {
+      get { return this.CategoryId; }
     }
   }
   #endregion

@@ -34,15 +34,15 @@ namespace Eve.Universe
     /// <summary>
     /// Initializes a new instance of the <see cref="ItemPosition" /> class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal ItemPosition(IEveRepository container, ItemPositionEntity entity) : base(container, entity)
+    internal ItemPosition(IEveRepository repository, ItemPositionEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
@@ -61,12 +61,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Item>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.item,
-          () => this.Container.GetOrAddStoredValue<Item>(this.ItemId, () => this.Entity.Item.ToAdapter(this.Container)));
-
-        Contract.Assume(this.item != null);
-        return this.item;
+        return this.LazyInitializeAdapter(ref this.item, this.Entity.ItemId, () => this.Entity.Item);
       }
     }
 

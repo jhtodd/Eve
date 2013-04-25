@@ -4,39 +4,30 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace Eve.Tests {
+namespace Eve.Tests
+{
   using System;
-  using System.Collections;
   using System.Collections.Generic;
-  using System.Diagnostics.Contracts;
   using System.Linq;
-
-  using Moq;
-  using Moq.Protected;
-  using NUnit.Framework;
-
-  using FreeNet;
-  using FreeNet.Debug;
-
-  using Eve;
-  using Eve.Data;
   using System.Runtime.Caching;
 
-  //******************************************************************************
+  using Eve.Data;
+
+  using NUnit.Framework;
+
   /// <summary>
   /// Contains test functions for the <see cref="EveCache" />
   /// class.
   /// </summary>
   [TestFixture()]
-  public class EveCacheTests {
-
+  public class EveCacheTests
+  {
     #region Classes
-    //******************************************************************************
     /// <summary>
     /// A class for testing cache storage functions.
     /// </summary>
-    public class TestItem : IEveCacheable {
-
+    public class TestItem : IEveCacheable
+    {
       #region Constructors/Finalizers
       //******************************************************************************
       /// <summary>
@@ -46,7 +37,8 @@ namespace Eve.Tests {
       /// <param name="id">
       /// The ID value.
       /// </param>
-      public TestItem(int id) {
+      public TestItem(int id)
+      {
         Id = id;
       }
       #endregion
@@ -74,7 +66,8 @@ namespace Eve.Tests {
     /// <summary>
     /// A class for testing cache storage functions of derived types.
     /// </summary>
-    public class TestChildItem : TestItem {
+    public class TestChildItem : TestItem
+    {
 
       #region Constructors/Finalizers
       //******************************************************************************
@@ -85,7 +78,9 @@ namespace Eve.Tests {
       /// <param name="id">
       /// The ID value.
       /// </param>
-      public TestChildItem(int id) : base(id) {
+      public TestChildItem(int id)
+        : base(id)
+      {
       }
       #endregion
     }
@@ -94,8 +89,8 @@ namespace Eve.Tests {
     /// <summary>
     /// Another class for testing cache storage functions with string IDs.
     /// </summary>
-    public class TestStringItem : IEveCacheable {
-
+    public class TestStringItem : IEveCacheable
+    {
       #region Constructors/Finalizers
       //******************************************************************************
       /// <summary>
@@ -105,7 +100,8 @@ namespace Eve.Tests {
       /// <param name="id">
       /// The ID value.
       /// </param>
-      public TestStringItem(string id) {
+      public TestStringItem(string id)
+      {
         Id = id;
       }
       #endregion
@@ -131,18 +127,18 @@ namespace Eve.Tests {
     #endregion
 
     #region Test Methods
-    //******************************************************************************
     /// <summary>
     /// Test method for the <see cref="EveCache.AddOrReplace" /> method.
     /// </summary>
     [Test()]
-    public void TestAddOrReplace() {
+    public void TestAddOrReplace()
+    {
 
       // Create the cache and register our test types
       EveCache cache = new EveCache(new MemoryCache("Eve.Tests"));
 
       // Verify the cache is initially empty
-      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 0);
+      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>)cache.InnerCache).Count(), 0);
 
       // Add a test item to the cache
       TestItem item = new TestItem(5);
@@ -155,7 +151,7 @@ namespace Eve.Tests {
       Assert.AreEqual(cache.Statistics.Writes, 1);
 
       // Verify that the item was added to the cache
-      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 1);
+      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>)cache.InnerCache).Count(), 1);
 
       // Add a new item with the same ID
       TestItem newItem = new TestItem(5);
@@ -168,14 +164,15 @@ namespace Eve.Tests {
       Assert.AreEqual(cache.Statistics.Writes, 2);
 
       // Verify that the cache count remains the same
-      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 1);
+      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>)cache.InnerCache).Count(), 1);
     }
     //******************************************************************************
     /// <summary>
     /// Test method for the <see cref="EveCache.Clear" /> method.
     /// </summary>
     [Test()]
-    public void TestClear() {
+    public void TestClear()
+    {
 
       // Create the cache and register our test types
       EveCache cache = new EveCache(new MemoryCache("Eve.Tests"));
@@ -185,7 +182,8 @@ namespace Eve.Tests {
       TestStringItem[] stringItems = new TestStringItem[10];
 
       // Populate with initial items
-      for (int i = 0; i < 10; i++) {
+      for (int i = 0; i < 10; i++)
+      {
         items[i] = new TestItem(i);
         childItems[i] = new TestChildItem(i + 100); // Add 100 to avoid ID collisions
         stringItems[i] = new TestStringItem("Test" + i.ToString());
@@ -195,14 +193,14 @@ namespace Eve.Tests {
       }
 
       // Verify that all test items have been added
-      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 30);
+      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>)cache.InnerCache).Count(), 30);
       Assert.AreEqual(cache.Statistics.Writes, 30);
 
       // Clean the cache
       cache.Clear();
 
       // Verify that the objects have been removed
-      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 0);
+      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>)cache.InnerCache).Count(), 0);
     }
     //******************************************************************************
     /// <summary>
@@ -210,7 +208,8 @@ namespace Eve.Tests {
     /// a key other than the EVE prefix are present.
     /// </summary>
     [Test()]
-    public void TestClearNonPrefix() {
+    public void TestClearNonPrefix()
+    {
 
       // Create the cache and register our test types
       EveCache cache = new EveCache(new MemoryCache("Eve.Tests"));
@@ -220,7 +219,8 @@ namespace Eve.Tests {
       TestStringItem[] stringItems = new TestStringItem[10];
 
       // Populate with initial items
-      for (int i = 0; i < 10; i++) {
+      for (int i = 0; i < 10; i++)
+      {
         items[i] = new TestItem(i);
         childItems[i] = new TestChildItem(i + 100); // Add 100 to avoid ID collisions
         stringItems[i] = new TestStringItem("Test" + i.ToString());
@@ -229,13 +229,13 @@ namespace Eve.Tests {
         cache.GetOrAdd(stringItems[i]);
       }
 
-      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 30);
+      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>)cache.InnerCache).Count(), 30);
       Assert.AreEqual(cache.Statistics.Writes, 30);
 
       cache.InnerCache.Add("NON-EveCacheRegionPrefix-1", "Test1", new CacheItemPolicy());
       cache.InnerCache.Add("NON-EveCacheRegionPrefix-2", "Test2", new CacheItemPolicy());
 
-      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 32);
+      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>)cache.InnerCache).Count(), 32);
 
       // Verify that all test items have been added
 
@@ -243,7 +243,7 @@ namespace Eve.Tests {
       cache.Clear();
 
       // Verify that the objects with the EVE prefix were removed but the others were not affected
-      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 2);
+      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>)cache.InnerCache).Count(), 2);
       Assert.That(cache.InnerCache.Contains("NON-EveCacheRegionPrefix-1"));
       Assert.That(cache.InnerCache.Contains("NON-EveCacheRegionPrefix-2"));
     }
@@ -252,7 +252,8 @@ namespace Eve.Tests {
     /// Test method for enumerating the <see cref="EveCache" />.
     /// </summary>
     [Test()]
-    public void TestEnumerate() {
+    public void TestEnumerate()
+    {
 
       // Create the cache and register our test types
       EveCache cache = new EveCache(new MemoryCache("Eve.Tests"));
@@ -262,7 +263,8 @@ namespace Eve.Tests {
       TestStringItem[] stringItems = new TestStringItem[10];
 
       // Populate with initial items
-      for (int i = 0; i < 10; i++) {
+      for (int i = 0; i < 10; i++)
+      {
         items[i] = new TestItem(i);
         childItems[i] = new TestChildItem(i + 100); // Add 100 to avoid ID collisions
         stringItems[i] = new TestStringItem("Test" + i.ToString());
@@ -271,14 +273,14 @@ namespace Eve.Tests {
         cache.GetOrAdd(stringItems[i]);
       }
 
-      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 30);
+      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>)cache.InnerCache).Count(), 30);
       Assert.AreEqual(cache.Statistics.Writes, 30);
 
       cache.InnerCache.Add("NON-EveCacheRegionPrefix-1", "Test1", new CacheItemPolicy());
       cache.InnerCache.Add("NON-EveCacheRegionPrefix-2", "Test2", new CacheItemPolicy());
 
       // Enumerate through the cache
-      var enumItems = ((IEnumerable<KeyValuePair<string, object>>) cache).ToArray();
+      var enumItems = ((IEnumerable<KeyValuePair<string, object>>)cache).ToArray();
 
       // Verify that the correct objects were returns
       Assert.AreEqual(enumItems.Length, 30);
@@ -289,26 +291,27 @@ namespace Eve.Tests {
     /// Test method for the <see cref="EveCache.GetOrAddStoredValue" /> method.
     /// </summary>
     [Test()]
-    public void TestGetOrAdd() {
+    public void TestGetOrAdd()
+    {
 
       // Create the cache and register our test types
       EveCache cache = new EveCache(new MemoryCache("Eve.Tests"));
 
       // Verify the cache is initially empty
-      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 0);
+      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>)cache.InnerCache).Count(), 0);
 
       // Add a test item to the cache
       TestItem item = new TestItem(5);
       TestItem returnedItem = cache.GetOrAdd(item);
       Assert.AreEqual(cache.Statistics.Hits, 0);
       Assert.AreEqual(cache.Statistics.Misses, 1);
-      
+
       // Verify the method returns the correct value
       Assert.That(item == returnedItem);
       Assert.AreEqual(cache.Statistics.Writes, 1);
 
       // Verify that the item was added to the cache
-      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 1);
+      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>)cache.InnerCache).Count(), 1);
 
       // Add a new item with the same ID
       TestItem newItem = new TestItem(5);
@@ -321,7 +324,7 @@ namespace Eve.Tests {
       Assert.AreEqual(cache.Statistics.Writes, 1);
 
       // Verify that the cache count remains the same
-      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 1);
+      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>)cache.InnerCache).Count(), 1);
     }
     //******************************************************************************
     /// <summary>
@@ -329,13 +332,14 @@ namespace Eve.Tests {
     /// a value factory.
     /// </summary>
     [Test()]
-    public void TestGetOrAddValueFactory() {
+    public void TestGetOrAddValueFactory()
+    {
 
       // Create the cache and register our test types
       EveCache cache = new EveCache(new MemoryCache("Eve.Tests"));
 
       // Verify the cache is initially empty
-      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 0);
+      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>)cache.InnerCache).Count(), 0);
 
       // Add a test item to the cache
       TestItem item = new TestItem(5);
@@ -348,7 +352,7 @@ namespace Eve.Tests {
       Assert.AreEqual(cache.Statistics.Writes, 1);
 
       // Verify that the item was added to the cache
-      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 1);
+      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>)cache.InnerCache).Count(), 1);
 
       // Add a new item with the same ID
       TestItem newItem = new TestItem(5);
@@ -361,14 +365,15 @@ namespace Eve.Tests {
       Assert.AreEqual(cache.Statistics.Writes, 1);
 
       // Verify that the cache count remains the same
-      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 1);
+      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>)cache.InnerCache).Count(), 1);
     }
     //******************************************************************************
     /// <summary>
     /// Test method for the <see cref="EveCache.Clear" /> method.
     /// </summary>
     [Test()]
-    public void TestRemove() {
+    public void TestRemove()
+    {
 
       // Create the cache and register our test types
       EveCache cache = new EveCache(new MemoryCache("Eve.Tests"));
@@ -378,7 +383,8 @@ namespace Eve.Tests {
       TestStringItem[] stringItems = new TestStringItem[10];
 
       // Populate with initial items
-      for (int i = 0; i < 10; i++) {
+      for (int i = 0; i < 10; i++)
+      {
         items[i] = new TestItem(i);
         childItems[i] = new TestChildItem(i + 100); // Add 100 to avoid ID collisions
         stringItems[i] = new TestStringItem("Test" + i.ToString());
@@ -388,10 +394,11 @@ namespace Eve.Tests {
       }
 
       // Verify that all test items have been added
-      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 30);
+      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>)cache.InnerCache).Count(), 30);
 
       // Remove the first 10 items
-      foreach (TestItem test1 in items) {
+      foreach (TestItem test1 in items)
+      {
         var result = cache.Remove<TestItem>(test1.Id);
 
         // Verify the return value
@@ -399,14 +406,15 @@ namespace Eve.Tests {
       }
 
       // Verify that the objects have been removed
-      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 20);
+      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>)cache.InnerCache).Count(), 20);
 
       // Try to remove a non-existent item
       var value = cache.Remove<TestItem>("Nonexistent");
       Assert.IsNull(value);
 
       // Remove the next 10 items
-      foreach (TestChildItem test2 in childItems) {
+      foreach (TestChildItem test2 in childItems)
+      {
         var result = cache.Remove<TestChildItem>(test2.Id);
 
         // Verify the return value
@@ -414,10 +422,11 @@ namespace Eve.Tests {
       }
 
       // Verify that the objects have been removed
-      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 10);
+      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>)cache.InnerCache).Count(), 10);
 
       // Remove the last 10 items
-      foreach (TestStringItem test3 in stringItems) {
+      foreach (TestStringItem test3 in stringItems)
+      {
         var result = cache.Remove<TestStringItem>(test3.Id);
 
         // Verify the return value
@@ -425,20 +434,21 @@ namespace Eve.Tests {
       }
 
       // Verify that the objects have been removed
-      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 0);
+      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>)cache.InnerCache).Count(), 0);
     }
     //******************************************************************************
     /// <summary>
     /// Test method for the <see cref="EveCache.TryGetValue" /> method.
     /// </summary>
     [Test()]
-    public void TestTryGetValue() {
+    public void TestTryGetValue()
+    {
 
       // Create the cache and register our test types
       EveCache cache = new EveCache(new MemoryCache("Eve.Tests"));
 
       // Verify the cache is initially empty
-      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>) cache.InnerCache).Count(), 0);
+      Assert.AreEqual(((IEnumerable<KeyValuePair<string, object>>)cache.InnerCache).Count(), 0);
 
       // Verify no item with ID 5 is in the cache
       TestItem result;

@@ -155,7 +155,7 @@ namespace Eve.Data
     public IReadOnlyList<Activity> GetActivities(params IQueryModifier<ActivityEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<ActivityEntity, Activity>(this.Context.Activities, modifiers, x => x.Id);
+      return LoadAndCacheResults<ActivityEntity, Activity>(this.Context.Activities, modifiers);
     }
     
     /// <inheritdoc />
@@ -186,17 +186,17 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Agent> GetAgents(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
+    public IReadOnlyList<Agent> GetAgents(Func<IQueryable<AgentEntity>, IQueryable<AgentEntity>> queryOperations)
     {
-      return this.GetAgents(new QueryTransform<ItemEntity>(queryOperations));
+      return this.GetAgents(new QueryTransform<AgentEntity>(queryOperations));
     }
 
     /// <inheritdoc />
     [EveQueryMethod(typeof(Agent))]
-    public IReadOnlyList<Agent> GetAgents(params IQueryModifier<ItemEntity>[] modifiers)
+    public IReadOnlyList<Agent> GetAgents(params IQueryModifier<AgentEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<ItemEntity, Item, Agent>(this.Context.Agents, modifiers, x => x.Id);
+      return LoadAndCacheResults<AgentEntity, Agent>(this.Context.Agents, modifiers);
     }
 
     /// <inheritdoc />
@@ -207,7 +207,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetAgents(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      value = this.GetAgents(q => q.Where(x => x.Id == id.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -237,7 +237,7 @@ namespace Eve.Data
     public IReadOnlyList<AgentType> GetAgentTypes(params IQueryModifier<AgentTypeEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<AgentTypeEntity, AgentType>(this.Context.AgentTypes, modifiers, x => x.Id);
+      return LoadAndCacheResults<AgentTypeEntity, AgentType>(this.Context.AgentTypes, modifiers);
     }
 
     /// <inheritdoc />
@@ -278,7 +278,7 @@ namespace Eve.Data
     public IReadOnlyList<Ancestry> GetAncestries(params IQueryModifier<AncestryEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<AncestryEntity, Ancestry>(this.Context.Ancestries, modifiers, x => x.Id);
+      return LoadAndCacheResults<AncestryEntity, Ancestry>(this.Context.Ancestries, modifiers);
     }
 
     /// <inheritdoc />
@@ -319,7 +319,7 @@ namespace Eve.Data
     public IReadOnlyList<AssemblyLine> GetAssemblyLines(params IQueryModifier<AssemblyLineEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<AssemblyLineEntity, AssemblyLine>(this.Context.AssemblyLines, modifiers, x => x.Id);
+      return LoadAndCacheResults<AssemblyLineEntity, AssemblyLine>(this.Context.AssemblyLines, modifiers);
     }
 
     /// <inheritdoc />
@@ -330,7 +330,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetAssemblyLines(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      value = this.GetAssemblyLines(q => q.Where(x => x.Id == id.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -360,10 +360,7 @@ namespace Eve.Data
     public IReadOnlyList<AssemblyLineStation> GetAssemblyLineStations(params IQueryModifier<AssemblyLineStationEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<AssemblyLineStationEntity, AssemblyLineStation>(
-        this.Context.AssemblyLineStations,
-        modifiers,
-        x => x.CacheKey);
+      return LoadAndCacheResults<AssemblyLineStationEntity, AssemblyLineStation>(this.Context.AssemblyLineStations, modifiers);
     }
 
     /// <inheritdoc />
@@ -374,7 +371,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetAssemblyLineStations(q => q.Where(x => x.StationId == stationId && x.AssemblyLineTypeId == assemblyLineTypeId)).SingleOrDefault();
+      value = this.GetAssemblyLineStations(q => q.Where(x => x.StationId == stationId.Value && x.AssemblyLineTypeId == assemblyLineTypeId.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -404,7 +401,7 @@ namespace Eve.Data
     public IReadOnlyList<AssemblyLineType> GetAssemblyLineTypes(params IQueryModifier<AssemblyLineTypeEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<AssemblyLineTypeEntity, AssemblyLineType>(this.Context.AssemblyLineTypes, modifiers, x => x.Id);
+      return LoadAndCacheResults<AssemblyLineTypeEntity, AssemblyLineType>(this.Context.AssemblyLineTypes, modifiers);
     }
 
     /// <inheritdoc />
@@ -415,7 +412,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetAssemblyLineTypes(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      value = this.GetAssemblyLineTypes(q => q.Where(x => x.Id == id.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -445,10 +442,7 @@ namespace Eve.Data
     public IReadOnlyList<AssemblyLineTypeCategoryDetail> GetAssemblyLineTypeCategoryDetails(params IQueryModifier<AssemblyLineTypeCategoryDetailEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<AssemblyLineTypeCategoryDetailEntity, AssemblyLineTypeCategoryDetail>(
-        this.Context.AssemblyLineTypeCategoryDetails,
-        modifiers,
-        x => AssemblyLineTypeCategoryDetailEntity.CreateCacheKey(x.AssemblyLineTypeId, x.CategoryId));
+      return LoadAndCacheResults<AssemblyLineTypeCategoryDetailEntity, AssemblyLineTypeCategoryDetail>(this.Context.AssemblyLineTypeCategoryDetails, modifiers);
     }
 
     /// <inheritdoc />
@@ -459,7 +453,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetAssemblyLineTypeCategoryDetails(q => q.Where(x => x.AssemblyLineTypeId == assemblyLineTypeId && x.CategoryId == categoryId)).SingleOrDefault();
+      value = this.GetAssemblyLineTypeCategoryDetails(q => q.Where(x => x.AssemblyLineTypeId == assemblyLineTypeId.Value && x.CategoryId == categoryId)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -489,10 +483,7 @@ namespace Eve.Data
     public IReadOnlyList<AssemblyLineTypeGroupDetail> GetAssemblyLineTypeGroupDetails(params IQueryModifier<AssemblyLineTypeGroupDetailEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<AssemblyLineTypeGroupDetailEntity, AssemblyLineTypeGroupDetail>(
-        this.Context.AssemblyLineTypeGroupDetails,
-        modifiers, 
-        x => AssemblyLineTypeGroupDetailEntity.CreateCacheKey(x.AssemblyLineTypeId, x.GroupId));
+      return LoadAndCacheResults<AssemblyLineTypeGroupDetailEntity, AssemblyLineTypeGroupDetail>(this.Context.AssemblyLineTypeGroupDetails, modifiers);
     }
 
     /// <inheritdoc />
@@ -503,7 +494,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetAssemblyLineTypeGroupDetails(q => q.Where(x => x.AssemblyLineTypeId == assemblyLineTypeId && x.GroupId == groupId)).SingleOrDefault();
+      value = this.GetAssemblyLineTypeGroupDetails(q => q.Where(x => x.AssemblyLineTypeId == assemblyLineTypeId.Value && x.GroupId == groupId)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -533,7 +524,7 @@ namespace Eve.Data
     public IReadOnlyList<AttributeCategory> GetAttributeCategories(params IQueryModifier<AttributeCategoryEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<AttributeCategoryEntity, AttributeCategory>(this.Context.AttributeCategories, modifiers, x => x.Id);
+      return LoadAndCacheResults<AttributeCategoryEntity, AttributeCategory>(this.Context.AttributeCategories, modifiers);
     }
 
     /// <inheritdoc />
@@ -574,7 +565,7 @@ namespace Eve.Data
     public IReadOnlyList<AttributeType> GetAttributeTypes(params IQueryModifier<AttributeTypeEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<AttributeTypeEntity, AttributeType>(this.Context.AttributeTypes, modifiers, x => x.Id);
+      return LoadAndCacheResults<AttributeTypeEntity, AttributeType>(this.Context.AttributeTypes, modifiers);
     }
 
     /// <inheritdoc />
@@ -628,7 +619,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetAttributeValues(q => q.Where(x => x.ItemTypeId == itemTypeId && x.AttributeId == attributeId)).SingleOrDefault();
+      value = this.GetAttributeValues(q => q.Where(x => x.ItemTypeId == itemTypeId.Value && x.AttributeId == attributeId)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -658,7 +649,7 @@ namespace Eve.Data
     public IReadOnlyList<Bloodline> GetBloodlines(params IQueryModifier<BloodlineEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<BloodlineEntity, Bloodline>(this.Context.Bloodlines, modifiers, x => x.Id);
+      return LoadAndCacheResults<BloodlineEntity, Bloodline>(this.Context.Bloodlines, modifiers);
     }
 
     /// <inheritdoc />
@@ -699,7 +690,7 @@ namespace Eve.Data
     public IReadOnlyList<Category> GetCategories(params IQueryModifier<CategoryEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<CategoryEntity, Category>(this.Context.Categories, modifiers, x => x.Id);
+      return LoadAndCacheResults<CategoryEntity, Category>(this.Context.Categories, modifiers);
     }
 
     /// <inheritdoc />
@@ -730,17 +721,17 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Celestial> GetCelestials(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
+    public IReadOnlyList<Celestial> GetCelestials(Func<IQueryable<CelestialEntity>, IQueryable<CelestialEntity>> queryOperations)
     {
-      return this.GetCelestials(new QueryTransform<ItemEntity>(queryOperations));
+      return this.GetCelestials(new QueryTransform<CelestialEntity>(queryOperations));
     }
 
     /// <inheritdoc />
     [EveQueryMethod(typeof(Celestial))]
-    public IReadOnlyList<Celestial> GetCelestials(params IQueryModifier<ItemEntity>[] modifiers)
+    public IReadOnlyList<Celestial> GetCelestials(params IQueryModifier<CelestialEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<ItemEntity, Item, Celestial>(this.Context.Celestials, modifiers, x => x.Id);
+      return LoadAndCacheResults<CelestialEntity, Celestial>(this.Context.Celestials, modifiers);
     }
 
     /// <inheritdoc />
@@ -751,7 +742,48 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetCelestials(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      value = this.GetCelestials(q => q.Where(x => x.Id == id.Value)).SingleOrDefault();
+      return value != null;
+    }
+    #endregion
+
+    #region Certificate Methods
+    /// <inheritdoc />
+    public Certificate GetCertificateById(CertificateId id)
+    {
+      Certificate result;
+
+      if (!this.TryGetCertificateById(id, out result))
+      {
+        throw new InvalidOperationException("No Certificate with ID " + id.ToString() + " could be found.");
+      }
+
+      return result;
+    }
+
+    /// <inheritdoc />
+    public IReadOnlyList<Certificate> GetCertificates(Func<IQueryable<CertificateEntity>, IQueryable<CertificateEntity>> queryOperations)
+    {
+      return this.GetCertificates(new QueryTransform<CertificateEntity>(queryOperations));
+    }
+
+    /// <inheritdoc />
+    [EveQueryMethod(typeof(Certificate))]
+    public IReadOnlyList<Certificate> GetCertificates(params IQueryModifier<CertificateEntity>[] modifiers)
+    {
+      // Construct the result set, filtering items through the global cache along the way
+      return LoadAndCacheResults<CertificateEntity, Certificate>(this.Context.Certificates, modifiers);
+    }
+
+    /// <inheritdoc />
+    public bool TryGetCertificateById(CertificateId id, out Certificate value)
+    {
+      if (this.Cache.TryGetValue<Certificate>(id, out value))
+      {
+        return true;
+      }
+
+      value = this.GetCertificates(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -781,7 +813,7 @@ namespace Eve.Data
     public IReadOnlyList<CertificateCategory> GetCertificateCategories(params IQueryModifier<CertificateCategoryEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<CertificateCategoryEntity, CertificateCategory>(this.Context.CertificateCategories, modifiers, x => x.Id);
+      return LoadAndCacheResults<CertificateCategoryEntity, CertificateCategory>(this.Context.CertificateCategories, modifiers);
     }
 
     /// <inheritdoc />
@@ -793,6 +825,47 @@ namespace Eve.Data
       }
 
       value = this.GetCertificateCategories(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      return value != null;
+    }
+    #endregion
+
+    #region CertificateClass Methods
+    /// <inheritdoc />
+    public CertificateClass GetCertificateClassById(CertificateClassId id)
+    {
+      CertificateClass result;
+
+      if (!this.TryGetCertificateClassById(id, out result))
+      {
+        throw new InvalidOperationException("No CertificateClass with ID " + id.ToString() + " could be found.");
+      }
+
+      return result;
+    }
+
+    /// <inheritdoc />
+    public IReadOnlyList<CertificateClass> GetCertificateClasses(Func<IQueryable<CertificateClassEntity>, IQueryable<CertificateClassEntity>> queryOperations)
+    {
+      return this.GetCertificateClasses(new QueryTransform<CertificateClassEntity>(queryOperations));
+    }
+
+    /// <inheritdoc />
+    [EveQueryMethod(typeof(CertificateClass))]
+    public IReadOnlyList<CertificateClass> GetCertificateClasses(params IQueryModifier<CertificateClassEntity>[] modifiers)
+    {
+      // Construct the result set, filtering items through the global cache along the way
+      return LoadAndCacheResults<CertificateClassEntity, CertificateClass>(this.Context.CertificateClasses, modifiers);
+    }
+
+    /// <inheritdoc />
+    public bool TryGetCertificateClassById(CertificateClassId id, out CertificateClass value)
+    {
+      if (this.Cache.TryGetValue<CertificateClass>(id, out value))
+      {
+        return true;
+      }
+
+      value = this.GetCertificateClasses(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -822,7 +895,7 @@ namespace Eve.Data
     public IReadOnlyList<CharacterAttributeType> GetCharacterAttributeTypes(params IQueryModifier<CharacterAttributeTypeEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<CharacterAttributeTypeEntity, CharacterAttributeType>(this.Context.CharacterAttributeTypes, modifiers, x => x.Id);
+      return LoadAndCacheResults<CharacterAttributeTypeEntity, CharacterAttributeType>(this.Context.CharacterAttributeTypes, modifiers);
     }
 
     /// <inheritdoc />
@@ -853,17 +926,17 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Constellation> GetConstellations(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
+    public IReadOnlyList<Constellation> GetConstellations(Func<IQueryable<ConstellationEntity>, IQueryable<ConstellationEntity>> queryOperations)
     {
-      return this.GetConstellations(new QueryTransform<ItemEntity>(queryOperations));
+      return this.GetConstellations(new QueryTransform<ConstellationEntity>(queryOperations));
     }
 
     /// <inheritdoc />
     [EveQueryMethod(typeof(Constellation))]
-    public IReadOnlyList<Constellation> GetConstellations(params IQueryModifier<ItemEntity>[] modifiers)
+    public IReadOnlyList<Constellation> GetConstellations(params IQueryModifier<ConstellationEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<ItemEntity, Item, Constellation>(this.Context.Constellations, modifiers, x => x.Id);
+      return LoadAndCacheResults<ConstellationEntity, Constellation>(this.Context.Constellations, modifiers);
     }
 
     /// <inheritdoc />
@@ -874,7 +947,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetConstellations(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      value = this.GetConstellations(q => q.Where(x => x.Id == id.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -904,10 +977,7 @@ namespace Eve.Data
     public IReadOnlyList<ConstellationJump> GetConstellationJumps(params IQueryModifier<ConstellationJumpEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<ConstellationJumpEntity, ConstellationJump>(
-        this.Context.ConstellationJumps, 
-        modifiers,
-        x => ConstellationJumpEntity.CreateCacheKey(x.FromConstellationId, x.ToConstellationId));
+      return LoadAndCacheResults<ConstellationJumpEntity, ConstellationJump>(this.Context.ConstellationJumps, modifiers);
     }
 
     /// <inheritdoc />
@@ -918,7 +988,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetConstellationJumps(q => q.Where(x => x.FromConstellationId == fromConstellationId && x.ToConstellationId == toConstellationId)).SingleOrDefault();
+      value = this.GetConstellationJumps(q => q.Where(x => x.FromConstellationId == fromConstellationId.Value && x.ToConstellationId == toConstellationId.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -948,7 +1018,7 @@ namespace Eve.Data
     public IReadOnlyList<CorporateActivity> GetCorporateActivities(params IQueryModifier<CorporateActivityEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<CorporateActivityEntity, CorporateActivity>(this.Context.CorporateActivities, modifiers, x => x.Id);
+      return LoadAndCacheResults<CorporateActivityEntity, CorporateActivity>(this.Context.CorporateActivities, modifiers);
     }
 
     /// <inheritdoc />
@@ -989,7 +1059,7 @@ namespace Eve.Data
     public IReadOnlyList<Division> GetDivisions(params IQueryModifier<DivisionEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<DivisionEntity, Division>(this.Context.Divisions, modifiers, x => x.Id);
+      return LoadAndCacheResults<DivisionEntity, Division>(this.Context.Divisions, modifiers);
     }
 
     /// <inheritdoc />
@@ -1073,7 +1143,7 @@ namespace Eve.Data
     public IReadOnlyList<EffectType> GetEffectTypes(params IQueryModifier<EffectTypeEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<EffectTypeEntity, EffectType>(this.Context.EffectTypes, modifiers, x => x.Id);
+      return LoadAndCacheResults<EffectTypeEntity, EffectType>(this.Context.EffectTypes, modifiers);
     }
 
     /// <inheritdoc />
@@ -1114,7 +1184,7 @@ namespace Eve.Data
     public IReadOnlyList<EveType> GetEveTypes(params IQueryModifier<EveTypeEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<EveTypeEntity, EveType>(this.Context.EveTypes, modifiers, x => x.Id);
+      return LoadAndCacheResults<EveTypeEntity, EveType>(this.Context.EveTypes, modifiers);
     }
 
     /// <inheritdoc />
@@ -1125,7 +1195,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetEveTypes(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      value = this.GetEveTypes(q => q.Where(x => x.Id == id.Value)).SingleOrDefault();
       return value != null;
     }
 
@@ -1152,7 +1222,7 @@ namespace Eve.Data
     public IReadOnlyList<TEveType> GetEveTypes<TEveType>(params IQueryModifier<EveTypeEntity>[] modifiers) where TEveType : EveType
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<EveTypeEntity, EveType, TEveType>(this.Context.EveTypes, modifiers, x => x.Id);
+      return LoadAndCacheResults<EveTypeEntity, EveType, TEveType>(this.Context.EveTypes, modifiers);
     }
 
     /// <inheritdoc />
@@ -1163,7 +1233,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetEveTypes<TEveType>(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      value = this.GetEveTypes<TEveType>(q => q.Where(x => x.Id == id.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1183,17 +1253,17 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Faction> GetFactions(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
+    public IReadOnlyList<Faction> GetFactions(Func<IQueryable<FactionEntity>, IQueryable<FactionEntity>> queryOperations)
     {
-      return this.GetFactions(new QueryTransform<ItemEntity>(queryOperations));
+      return this.GetFactions(new QueryTransform<FactionEntity>(queryOperations));
     }
 
     /// <inheritdoc />
     [EveQueryMethod(typeof(Faction))]
-    public IReadOnlyList<Faction> GetFactions(params IQueryModifier<ItemEntity>[] modifiers)
+    public IReadOnlyList<Faction> GetFactions(params IQueryModifier<FactionEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<ItemEntity, Item, Faction>(this.Context.Factions, modifiers, x => x.Id);
+      return LoadAndCacheResults<FactionEntity, Faction>(this.Context.Factions, modifiers);
     }
 
     /// <inheritdoc />
@@ -1204,7 +1274,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetFactions(q => q.Where(x => x.Id == (long)id)).SingleOrDefault();
+      value = this.GetFactions(q => q.Where(x => x.Id == id)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1234,7 +1304,7 @@ namespace Eve.Data
     public IReadOnlyList<Graphic> GetGraphics(params IQueryModifier<GraphicEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<GraphicEntity, Graphic>(this.Context.Graphics, modifiers, x => x.Id);
+      return LoadAndCacheResults<GraphicEntity, Graphic>(this.Context.Graphics, modifiers);
     }
 
     /// <inheritdoc />
@@ -1245,7 +1315,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetGraphics(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      value = this.GetGraphics(q => q.Where(x => x.Id == id.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1275,7 +1345,7 @@ namespace Eve.Data
     public IReadOnlyList<Group> GetGroups(params IQueryModifier<GroupEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<GroupEntity, Group>(this.Context.Groups, modifiers, x => x.Id);
+      return LoadAndCacheResults<GroupEntity, Group>(this.Context.Groups, modifiers);
     }
 
     /// <inheritdoc />
@@ -1316,7 +1386,7 @@ namespace Eve.Data
     public IReadOnlyList<Icon> GetIcons(params IQueryModifier<IconEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<IconEntity, Icon>(this.Context.Icons, modifiers, x => x.Id);
+      return LoadAndCacheResults<IconEntity, Icon>(this.Context.Icons, modifiers);
     }
 
     /// <inheritdoc />
@@ -1327,7 +1397,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetIcons(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      value = this.GetIcons(q => q.Where(x => x.Id == id.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1357,7 +1427,7 @@ namespace Eve.Data
     public IReadOnlyList<Item> GetItems(params IQueryModifier<ItemEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<ItemEntity, Item>(this.Context.Items, modifiers, x => x.Id);
+      return LoadAndCacheResults<ItemEntity, Item>(this.Context.Items, modifiers);
     }
 
     /// <inheritdoc />
@@ -1368,7 +1438,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetItems(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      value = this.GetItems(q => q.Where(x => x.Id == id.Value)).SingleOrDefault();
       return value != null;
     }
 
@@ -1392,11 +1462,10 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    [EveQueryMethod(typeof(Item))]
     public IReadOnlyList<TItem> GetItems<TItem>(params IQueryModifier<ItemEntity>[] modifiers) where TItem : Item
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<ItemEntity, Item, TItem>(this.Context.Items, modifiers, x => x.Id);
+      return LoadAndCacheResults<ItemEntity, Item, TItem>(this.Context.Items, modifiers);
     }
 
     /// <inheritdoc />
@@ -1407,7 +1476,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetItems<TItem>(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      value = this.GetItems<TItem>(q => q.Where(x => x.Id == id.Value)).SingleOrDefault();
 
       return value != null;
     }
@@ -1438,7 +1507,7 @@ namespace Eve.Data
     public IReadOnlyList<ItemPosition> GetItemPositions(params IQueryModifier<ItemPositionEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<ItemPositionEntity, ItemPosition>(this.Context.ItemPositions, modifiers, x => x.ItemId);
+      return LoadAndCacheResults<ItemPositionEntity, ItemPosition>(this.Context.ItemPositions, modifiers);
     }
 
     /// <inheritdoc />
@@ -1449,7 +1518,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetItemPositions(q => q.Where(x => x.ItemId == id)).SingleOrDefault();
+      value = this.GetItemPositions(q => q.Where(x => x.ItemId == id.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1479,7 +1548,7 @@ namespace Eve.Data
     public IReadOnlyList<MarketGroup> GetMarketGroups(params IQueryModifier<MarketGroupEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<MarketGroupEntity, MarketGroup>(this.Context.MarketGroups, modifiers, x => x.Id);
+      return LoadAndCacheResults<MarketGroupEntity, MarketGroup>(this.Context.MarketGroups, modifiers);
     }
 
     /// <inheritdoc />
@@ -1520,7 +1589,7 @@ namespace Eve.Data
     public IReadOnlyList<MetaGroup> GetMetaGroups(params IQueryModifier<MetaGroupEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<MetaGroupEntity, MetaGroup>(this.Context.MetaGroups, modifiers, x => x.Id);
+      return LoadAndCacheResults<MetaGroupEntity, MetaGroup>(this.Context.MetaGroups, modifiers);
     }
 
     /// <inheritdoc />
@@ -1561,7 +1630,7 @@ namespace Eve.Data
     public IReadOnlyList<MetaType> GetMetaTypes(params IQueryModifier<MetaTypeEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<MetaTypeEntity, MetaType>(this.Context.MetaTypes, modifiers, x => x.TypeId);
+      return LoadAndCacheResults<MetaTypeEntity, MetaType>(this.Context.MetaTypes, modifiers);
     }
 
     /// <inheritdoc />
@@ -1572,7 +1641,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetMetaTypes(q => q.Where(x => x.TypeId == id)).SingleOrDefault();
+      value = this.GetMetaTypes(q => q.Where(x => x.TypeId == id.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1592,17 +1661,17 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<NpcCorporation> GetNpcCorporations(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
+    public IReadOnlyList<NpcCorporation> GetNpcCorporations(Func<IQueryable<NpcCorporationEntity>, IQueryable<NpcCorporationEntity>> queryOperations)
     {
-      return this.GetNpcCorporations(new QueryTransform<ItemEntity>(queryOperations));
+      return this.GetNpcCorporations(new QueryTransform<NpcCorporationEntity>(queryOperations));
     }
 
     /// <inheritdoc />
     [EveQueryMethod(typeof(NpcCorporation))]
-    public IReadOnlyList<NpcCorporation> GetNpcCorporations(params IQueryModifier<ItemEntity>[] modifiers)
+    public IReadOnlyList<NpcCorporation> GetNpcCorporations(params IQueryModifier<NpcCorporationEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<ItemEntity, Item, NpcCorporation>(this.Context.NpcCorporations, modifiers, x => x.Id);
+      return LoadAndCacheResults<NpcCorporationEntity, NpcCorporation>(this.Context.NpcCorporations, modifiers);
     }
 
     /// <inheritdoc />
@@ -1613,7 +1682,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetNpcCorporations(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      value = this.GetNpcCorporations(q => q.Where(x => x.Id == id.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1643,10 +1712,7 @@ namespace Eve.Data
     public IReadOnlyList<NpcCorporationDivision> GetNpcCorporationDivisions(params IQueryModifier<NpcCorporationDivisionEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<NpcCorporationDivisionEntity, NpcCorporationDivision>(
-        this.Context.NpcCorporationDivisions,
-        modifiers,
-        x => NpcCorporationDivisionEntity.CreateCacheKey(x.CorporationId, x.DivisionId));
+      return LoadAndCacheResults<NpcCorporationDivisionEntity, NpcCorporationDivision>(this.Context.NpcCorporationDivisions, modifiers);
     }
 
     /// <inheritdoc />
@@ -1657,7 +1723,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetNpcCorporationDivisions(q => q.Where(x => x.CorporationId == corporationId && x.DivisionId == divisionId)).SingleOrDefault();
+      value = this.GetNpcCorporationDivisions(q => q.Where(x => x.CorporationId == corporationId.Value && x.DivisionId == divisionId)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1687,7 +1753,7 @@ namespace Eve.Data
     public IReadOnlyList<Race> GetRaces(params IQueryModifier<RaceEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<RaceEntity, Race>(this.Context.Races, modifiers, x => x.Id);
+      return LoadAndCacheResults<RaceEntity, Race>(this.Context.Races, modifiers);
     }
 
     /// <inheritdoc />
@@ -1718,17 +1784,17 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Region> GetRegions(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
+    public IReadOnlyList<Region> GetRegions(Func<IQueryable<RegionEntity>, IQueryable<RegionEntity>> queryOperations)
     {
-      return this.GetRegions(new QueryTransform<ItemEntity>(queryOperations));
+      return this.GetRegions(new QueryTransform<RegionEntity>(queryOperations));
     }
 
     /// <inheritdoc />
     [EveQueryMethod(typeof(Region))]
-    public IReadOnlyList<Region> GetRegions(params IQueryModifier<ItemEntity>[] modifiers)
+    public IReadOnlyList<Region> GetRegions(params IQueryModifier<RegionEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<ItemEntity, Item, Region>(this.Context.Regions, modifiers, x => x.Id);
+      return LoadAndCacheResults<RegionEntity, Region>(this.Context.Regions, modifiers);
     }
 
     /// <inheritdoc />
@@ -1739,7 +1805,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetRegions(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      value = this.GetRegions(q => q.Where(x => x.Id == id.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1769,10 +1835,7 @@ namespace Eve.Data
     public IReadOnlyList<RegionJump> GetRegionJumps(params IQueryModifier<RegionJumpEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<RegionJumpEntity, RegionJump>(
-        this.Context.RegionJumps,
-        modifiers,
-        x => SolarSystemJumpEntity.CreateCacheKey(x.FromRegionId, x.ToRegionId));
+      return LoadAndCacheResults<RegionJumpEntity, RegionJump>(this.Context.RegionJumps, modifiers);
     }
 
     /// <inheritdoc />
@@ -1783,7 +1846,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetRegionJumps(q => q.Where(x => x.FromRegionId == fromRegionId && x.ToRegionId == toRegionId)).SingleOrDefault();
+      value = this.GetRegionJumps(q => q.Where(x => x.FromRegionId == fromRegionId.Value && x.ToRegionId == toRegionId.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1803,17 +1866,17 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<SolarSystem> GetSolarSystems(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
+    public IReadOnlyList<SolarSystem> GetSolarSystems(Func<IQueryable<SolarSystemEntity>, IQueryable<SolarSystemEntity>> queryOperations)
     {
-      return this.GetSolarSystems(new QueryTransform<ItemEntity>(queryOperations));
+      return this.GetSolarSystems(new QueryTransform<SolarSystemEntity>(queryOperations));
     }
 
     /// <inheritdoc />
     [EveQueryMethod(typeof(SolarSystem))]
-    public IReadOnlyList<SolarSystem> GetSolarSystems(params IQueryModifier<ItemEntity>[] modifiers)
+    public IReadOnlyList<SolarSystem> GetSolarSystems(params IQueryModifier<SolarSystemEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<ItemEntity, Item, SolarSystem>(this.Context.SolarSystems, modifiers, x => x.Id);
+      return LoadAndCacheResults<SolarSystemEntity, SolarSystem>(this.Context.SolarSystems, modifiers);
     }
 
     /// <inheritdoc />
@@ -1824,7 +1887,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetSolarSystems(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      value = this.GetSolarSystems(q => q.Where(x => x.Id == id.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1854,10 +1917,7 @@ namespace Eve.Data
     public IReadOnlyList<SolarSystemJump> GetSolarSystemJumps(params IQueryModifier<SolarSystemJumpEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<SolarSystemJumpEntity, SolarSystemJump>(
-        this.Context.SolarSystemJumps,
-        modifiers,
-        x => SolarSystemJumpEntity.CreateCacheKey(x.FromSolarSystemId, x.ToSolarSystemId));
+      return LoadAndCacheResults<SolarSystemJumpEntity, SolarSystemJump>(this.Context.SolarSystemJumps, modifiers);
     }
 
     /// <inheritdoc />
@@ -1868,7 +1928,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetSolarSystemJumps(q => q.Where(x => x.FromSolarSystemId == fromSolarSystemId && x.ToSolarSystemId == toSolarSystemId)).SingleOrDefault();
+      value = this.GetSolarSystemJumps(q => q.Where(x => x.FromSolarSystemId == fromSolarSystemId.Value && x.ToSolarSystemId == toSolarSystemId.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1888,17 +1948,17 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Stargate> GetStargates(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
+    public IReadOnlyList<Stargate> GetStargates(Func<IQueryable<StargateEntity>, IQueryable<StargateEntity>> queryOperations)
     {
-      return this.GetStargates(new QueryTransform<ItemEntity>(queryOperations));
+      return this.GetStargates(new QueryTransform<StargateEntity>(queryOperations));
     }
 
     /// <inheritdoc />
     [EveQueryMethod(typeof(Stargate))]
-    public IReadOnlyList<Stargate> GetStargates(params IQueryModifier<ItemEntity>[] modifiers)
+    public IReadOnlyList<Stargate> GetStargates(params IQueryModifier<StargateEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<ItemEntity, Item, Stargate>(this.Context.Stargates, modifiers, x => x.Id);
+      return LoadAndCacheResults<StargateEntity, Stargate>(this.Context.Stargates, modifiers);
     }
 
     /// <inheritdoc />
@@ -1909,7 +1969,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetStargates(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      value = this.GetStargates(q => q.Where(x => x.Id == id.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1929,17 +1989,17 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Station> GetStations(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
+    public IReadOnlyList<Station> GetStations(Func<IQueryable<StationEntity>, IQueryable<StationEntity>> queryOperations)
     {
-      return this.GetStations(new QueryTransform<ItemEntity>(queryOperations));
+      return this.GetStations(new QueryTransform<StationEntity>(queryOperations));
     }
 
     /// <inheritdoc />
     [EveQueryMethod(typeof(Station))]
-    public IReadOnlyList<Station> GetStations(params IQueryModifier<ItemEntity>[] modifiers)
+    public IReadOnlyList<Station> GetStations(params IQueryModifier<StationEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<ItemEntity, Item, Station>(this.Context.Stations, modifiers, x => x.Id);
+      return LoadAndCacheResults<StationEntity, Station>(this.Context.Stations, modifiers);
     }
 
     /// <inheritdoc />
@@ -1950,7 +2010,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetStations(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      value = this.GetStations(q => q.Where(x => x.Id == id.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1980,7 +2040,7 @@ namespace Eve.Data
     public IReadOnlyList<StationOperation> GetStationOperations(params IQueryModifier<StationOperationEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<StationOperationEntity, StationOperation>(this.Context.StationOperations, modifiers, x => x.Id);
+      return LoadAndCacheResults<StationOperationEntity, StationOperation>(this.Context.StationOperations, modifiers);
     }
 
     /// <inheritdoc />
@@ -2021,7 +2081,7 @@ namespace Eve.Data
     public IReadOnlyList<StationService> GetStationServices(params IQueryModifier<StationServiceEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<StationServiceEntity, StationService>(this.Context.StationServices, modifiers, x => x.Id);
+      return LoadAndCacheResults<StationServiceEntity, StationService>(this.Context.StationServices, modifiers);
     }
 
     /// <inheritdoc />
@@ -2062,7 +2122,7 @@ namespace Eve.Data
     public IReadOnlyList<StationType> GetStationTypes(params IQueryModifier<StationTypeEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<StationTypeEntity, StationType>(this.Context.StationTypes, modifiers, x => x.Id);
+      return LoadAndCacheResults<StationTypeEntity, StationType>(this.Context.StationTypes, modifiers);
     }
 
     /// <inheritdoc />
@@ -2073,7 +2133,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetStationTypes(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      value = this.GetStationTypes(q => q.Where(x => x.Id == id.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -2103,7 +2163,7 @@ namespace Eve.Data
     public IReadOnlyList<Unit> GetUnits(params IQueryModifier<UnitEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<UnitEntity, Unit>(this.Context.Units, modifiers, x => x.Id);
+      return LoadAndCacheResults<UnitEntity, Unit>(this.Context.Units, modifiers);
     }
 
     /// <inheritdoc />
@@ -2134,17 +2194,17 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Universe> GetUniverses(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations)
+    public IReadOnlyList<Universe> GetUniverses(Func<IQueryable<UniverseEntity>, IQueryable<UniverseEntity>> queryOperations)
     {
-      return this.GetUniverses(new QueryTransform<ItemEntity>(queryOperations));
+      return this.GetUniverses(new QueryTransform<UniverseEntity>(queryOperations));
     }
 
     /// <inheritdoc />
     [EveQueryMethod(typeof(Universe))]
-    public IReadOnlyList<Universe> GetUniverses(params IQueryModifier<ItemEntity>[] modifiers)
+    public IReadOnlyList<Universe> GetUniverses(params IQueryModifier<UniverseEntity>[] modifiers)
     {
       // Construct the result set, filtering items through the global cache along the way
-      return LoadAndCacheResults<ItemEntity, Item, Universe>(this.Context.Universes, modifiers, x => x.Id);
+      return LoadAndCacheResults<UniverseEntity, Universe>(this.Context.Universes, modifiers);
     }
 
     /// <inheritdoc />
@@ -2155,7 +2215,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetUniverses(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      value = this.GetUniverses(q => q.Where(x => x.Id == id.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -2176,16 +2236,12 @@ namespace Eve.Data
     /// <param name="modifiers">
     /// The modifiers that are applied to the query.
     /// </param>
-    /// <param name="cacheKeyGenerator">
-    /// A delegate used to generate a cache key for a raw data entity.
-    /// </param>
     /// <returns>
     /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
     protected internal IReadOnlyList<TAdapter> LoadAndCacheResults<TEntity, TAdapter>(
       IQueryable<TEntity> query,
-      IQueryModifier<TEntity>[] modifiers,
-      Func<TEntity, IConvertible> cacheKeyGenerator)
+      IQueryModifier<TEntity>[] modifiers)
       where TEntity : IEveEntity<TAdapter>
       where TAdapter : IEveCacheable
     {
@@ -2195,7 +2251,7 @@ namespace Eve.Data
       lock (this.queryLock)
       {
         var results = GetResults(query, modifiers);
-        return results.Select(x => this.Cache.GetOrAdd<TAdapter>(cacheKeyGenerator(x), () => x.ToAdapter(this))).ToArray();
+        return results.Select(x => this.Cache.GetOrAdd<TAdapter>(x.CacheKey, () => x.ToAdapter(this))).ToArray();
       }
     }
 
@@ -2219,13 +2275,12 @@ namespace Eve.Data
     /// <param name="modifiers">
     /// The modifiers that are applied to the query.
     /// </param>
-    /// <param name="cacheKeyGenerator">
-    /// A delegate used to generate a cache key for a raw data entity.
-    /// </param>
     /// <returns>
     /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
-    protected internal IReadOnlyList<TResult> LoadAndCacheResults<TEntity, TAdapter, TResult>(IQueryable<TEntity> query, IQueryModifier<TEntity>[] modifiers, Func<TEntity, IConvertible> cacheKeyGenerator)
+    protected internal IReadOnlyList<TResult> LoadAndCacheResults<TEntity, TAdapter, TResult>(
+      IQueryable<TEntity> query,
+      IQueryModifier<TEntity>[] modifiers)
       where TEntity : IEveEntity<TAdapter>
       where TAdapter : IEveCacheable
     {
@@ -2235,7 +2290,7 @@ namespace Eve.Data
       lock (this.queryLock)
       {
         var results = GetResults(query, modifiers);
-        return results.Select(x => this.Cache.GetOrAdd<TAdapter>(cacheKeyGenerator(x), () => x.ToAdapter(this))).OfType<TResult>().ToArray();
+        return results.Select(x => this.Cache.GetOrAdd<TAdapter>(x.CacheKey, () => x.ToAdapter(this))).OfType<TResult>().ToArray();
       }
     }
 

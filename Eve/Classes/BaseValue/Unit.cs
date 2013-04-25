@@ -21,15 +21,15 @@ namespace Eve
     /// <summary>
     /// Initializes a new instance of the Unit class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal Unit(IEveRepository container, UnitEntity entity) : base(container, entity)
+    internal Unit(IEveRepository repository, UnitEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
@@ -104,7 +104,7 @@ namespace Eve
           break;
 
         case UnitId.AttributeId:
-          result = this.Container.GetAttributeTypeById((AttributeId)(int)value).DisplayName;
+          result = this.Repository.GetAttributeTypeById((AttributeId)(int)value).DisplayName;
           break;
 
         case UnitId.Boolean:
@@ -114,7 +114,7 @@ namespace Eve
         case UnitId.GroupId:
           Contract.Assume(Enum.IsDefined(typeof(GroupId), (GroupId)(int)value));
           GroupId groupId = (GroupId)(int)value;
-          result = this.Container.GetGroupById(groupId).Name;
+          result = this.Repository.GetGroupById(groupId).Name;
           break;
 
         case UnitId.InverseAbsolutePercent:
@@ -194,7 +194,7 @@ namespace Eve
           break;
 
         case UnitId.TypeId:
-          result = this.Container.GetEveTypeById<EveType>((int)value).Name;
+          result = this.Repository.GetEveTypeById<EveType>((int)value).Name;
           break;
 
         default:

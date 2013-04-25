@@ -34,7 +34,7 @@ namespace Eve.Character
       IKeyItem<SkillId>,
       ISkill
   {
-    private readonly IEveRepository container;
+    private readonly IEveRepository repository;
     private readonly byte level;
     private readonly SkillId skillId;
     private SkillType skillType;
@@ -44,7 +44,7 @@ namespace Eve.Character
     /// <summary>
     /// Initializes a new instance of the SkillLevel class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="skillId">
@@ -53,12 +53,12 @@ namespace Eve.Character
     /// <param name="level">
     /// The level of the skill.
     /// </param>
-    public SkillLevel(IEveRepository container, SkillId skillId, byte level)
+    public SkillLevel(IEveRepository repository, SkillId skillId, byte level)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(level <= SkillType.MaxSkillLevel, Resources.Messages.ISkill_LevelMustBeValid);
 
-      this.container = container;
+      this.repository = repository;
       this.level = level;
       this.skillId = skillId;
     }
@@ -92,7 +92,7 @@ namespace Eve.Character
         // If not already set, load from the data source
         LazyInitializer.EnsureInitialized(
           ref this.skillType,
-          () => this.Container.GetEveTypeById<SkillType>((TypeId)(int)SkillId));
+          () => this.Repository.GetEveTypeById<SkillType>((TypeId)(int)SkillId));
 
         Contract.Assume(this.skillType != null);
         return this.skillType;
@@ -106,12 +106,12 @@ namespace Eve.Character
     /// <value>
     /// The <see cref="IEveRepository" /> the item is associated with.
     /// </value>
-    private IEveRepository Container
+    private IEveRepository Repository
     {
       get
       {
         Contract.Ensures(Contract.Result<IEveRepository>() != null);
-        return this.container;
+        return this.repository;
       }
     }
 
@@ -180,7 +180,7 @@ namespace Eve.Character
     [ContractInvariantMethod]
     private void ObjectInvariant()
     {
-      Contract.Invariant(this.container != null);
+      Contract.Invariant(this.repository != null);
       Contract.Invariant(this.level >= 0);
       Contract.Invariant(this.level <= 5);
     }
@@ -224,9 +224,9 @@ namespace Eve.Character
   /// </content>
   public sealed partial class SkillLevel : IEveRepositoryItem
   {
-    IEveRepository IEveRepositoryItem.Container
+    IEveRepository IEveRepositoryItem.Repository
     {
-      get { return this.Container; }
+      get { return this.Repository; }
     }
   }
   #endregion

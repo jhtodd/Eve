@@ -35,15 +35,15 @@ namespace Eve
     /// <summary>
     /// Initializes a new instance of the MetaType class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal MetaType(IEveRepository container, MetaTypeEntity entity) : base(container, entity)
+    internal MetaType(IEveRepository repository, MetaTypeEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
@@ -62,12 +62,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<MetaGroup>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.metaGroup,
-          () => this.Container.GetOrAddStoredValue<MetaGroup>(this.MetaGroupId, () => this.Entity.MetaGroup.ToAdapter(this.Container)));
-
-        Contract.Assume(this.metaGroup != null);
-        return this.metaGroup;
+        return this.LazyInitializeAdapter(ref this.metaGroup, this.Entity.MetaGroupId, () => this.Entity.MetaGroup);
       }
     }
 
@@ -95,12 +90,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<EveType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.parentType,
-          () => this.Container.GetOrAddStoredValue<EveType>(this.ParentTypeId, () => Entity.ParentType.ToAdapter(this.Container)));
-
-        Contract.Assume(this.parentType != null);
-        return this.parentType;
+        return this.LazyInitializeAdapter(ref this.parentType, this.Entity.ParentTypeId, () => this.Entity.ParentType);
       }
     }
 
@@ -128,12 +118,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<EveType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.type,
-          () => this.Container.GetOrAddStoredValue<EveType>(this.TypeId, () => Entity.Type.ToAdapter(this.Container)));
-
-        Contract.Assume(this.type != null);
-        return this.type;
+        return this.LazyInitializeAdapter(ref this.type, this.Entity.TypeId, () => this.Entity.Type);
       }
     }
 

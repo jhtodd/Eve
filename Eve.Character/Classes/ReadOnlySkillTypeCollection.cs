@@ -5,73 +5,56 @@
 //-----------------------------------------------------------------------
 namespace Eve.Character
 {
-  using System;
   using System.Collections.Generic;
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve;
+  using Eve.Collections;
   using Eve.Data;
   using Eve.Data.Entities;
 
   using FreeNet.Collections.ObjectModel;
 
   /// <summary>
-  /// A read-only collection of skill types.
+  /// A read-only collection of <see cref="SkillType" /> objects.
   /// </summary>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
-  public sealed class ReadOnlySkillTypeCollection : ReadOnlyKeyedCollection<SkillId, SkillType>
+  public sealed partial class ReadOnlySkillTypeCollection
+    : ReadOnlyEveTypeCollection<SkillType>
   {
     /* Constructors */
 
     /// <summary>
     /// Initializes a new instance of the ReadOnlySkillTypeCollection class.
     /// </summary>
+    /// <param name="repository">
+    /// The <see cref="IEveRepository" /> associated with the items in the 
+    /// collection.
+    /// </param>
     /// <param name="contents">
     /// The contents of the collection.
     /// </param>
-    public ReadOnlySkillTypeCollection(IEnumerable<SkillType> contents) : base(contents == null ? 0 : contents.Count())
+    public ReadOnlySkillTypeCollection(IEveRepository repository, IEnumerable<SkillType> contents)
+      : base(repository, contents)
     {
-      if (contents != null)
-      {
-        foreach (SkillType item in contents)
-        {
-          Items.AddWithoutCallback(item);
-        }
-      }
+      Contract.Requires(repository != null, "The provided repository cannot be null.");
     }
 
     /// <summary>
     /// Initializes a new instance of the ReadOnlySkillTypeCollection class.
     /// </summary>
     /// <param name="repository">
-    /// The <see cref="IEveRepository" /> to which the contents will be added.
-    /// </param>
-    /// <param name="contents">
-    /// A sequence of <see cref="SkillTypeEntity" /> objects from which to create
-    /// the <see cref="SkillType" /> objects which will be contained in the
+    /// The <see cref="IEveRepository" /> associated with the items in the 
     /// collection.
     /// </param>
-    public ReadOnlySkillTypeCollection(IEveRepository repository, IEnumerable<EveTypeEntity> contents)
-      : base(contents == null ? 0 : contents.Count())
+    /// <param name="entities">
+    /// A sequence of entities from which to create the contents of the collection.
+    /// </param>
+    public ReadOnlySkillTypeCollection(IEveRepository repository, IEnumerable<EveTypeEntity> entities)
+      : base(repository, entities)
     {
-      Contract.Requires(contents == null || repository != null, "The provided repository cannot be null.");
-
-      if (contents != null)
-      {
-        var realContents = contents.Select(x => repository.GetOrAddStoredValue(x.Id, () => x.ToAdapter(repository)));
-
-        foreach (EveType item in realContents)
-        {
-          SkillType skillType = item as SkillType;
-
-          if (skillType == null)
-          {
-            throw new InvalidCastException("The types being added must all be skill types.");
-          }
-
-          Items.AddWithoutCallback(skillType);
-        }
-      }
+      Contract.Requires(repository != null, "The provided repository cannot be null.");
     }
   }
 }

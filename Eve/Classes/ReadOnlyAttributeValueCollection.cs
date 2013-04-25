@@ -17,49 +17,43 @@ namespace Eve
   using FreeNet.Utilities;
 
   /// <summary>
-  /// A read-only collection of attributes.
+  /// A read-only collection of <see cref="AttributeValue" /> objects.
   /// </summary>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
   public sealed partial class ReadOnlyAttributeValueCollection 
     : ReadOnlyKeyedEntityAdapterCollection<AttributeId, AttributeValueEntity, AttributeValue>,
-      IAttributeCollection,
-      IEveRepositoryItem
+      IAttributeCollection
   {
-    private readonly IEveRepository container;
-
     /* Constructors */
 
     /// <summary>
     /// Initializes a new instance of the ReadOnlyAttributeValueCollection class.
     /// </summary>
-    /// <param name="container">
-    /// The <see cref="IEveRepository" /> which contains the entity adapter.
+    /// <param name="repository">
+    /// The <see cref="IEveRepository" /> associated with the items in the 
+    /// collection.
     /// </param>
     /// <param name="contents">
     /// The contents of the collection.
     /// </param>
-    public ReadOnlyAttributeValueCollection(IEveRepository container, IEnumerable<AttributeValue> contents) : base(contents)
+    public ReadOnlyAttributeValueCollection(IEveRepository repository, IEnumerable<AttributeValue> contents) : base(repository, contents)
     {
-      Contract.Requires(container != null, "The provided repository cannot be null.");
-      this.container = container;
+      Contract.Requires(repository != null, "The provided repository cannot be null.");
     }
 
-    /* Properties */
-
     /// <summary>
-    /// Gets the <see cref="IEveRepository" /> the item is associated
-    /// with.
+    /// Initializes a new instance of the ReadOnlyAttributeValueCollection class.
     /// </summary>
-    /// <value>
-    /// The <see cref="IEveRepository" /> the item is associated with.
-    /// </value>
-    private IEveRepository Container
+    /// <param name="repository">
+    /// The <see cref="IEveRepository" /> associated with the items in the 
+    /// collection.
+    /// </param>
+    /// <param name="entities">
+    /// A sequence of entities from which to create the contents of the collection.
+    /// </param>
+    public ReadOnlyAttributeValueCollection(IEveRepository repository, IEnumerable<AttributeValueEntity> entities) : base(repository, entities)
     {
-      get
-      {
-        Contract.Ensures(Contract.Result<IEveRepository>() != null);
-        return this.container;
-      }
+      Contract.Requires(repository != null, "The provided repository cannot be null.");
     }
 
     /* Methods */
@@ -88,7 +82,7 @@ namespace Eve
         return attribute.BaseValue;
       }
 
-      AttributeType type = this.Container.GetAttributeTypeById(id);
+      AttributeType type = this.Repository.GetAttributeTypeById(id);
       return type.DefaultValue;
     }
 
@@ -116,7 +110,7 @@ namespace Eve
         return attribute.BaseValue;
       }
 
-      AttributeType type = this.Container.GetAttributeTypeById(id);
+      AttributeType type = this.Repository.GetAttributeTypeById(id);
       return type.DefaultValue;
     }
 
@@ -170,13 +164,6 @@ namespace Eve
 
       return defaultValue;
     }
-
-    [ContractInvariantMethod]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-    private void ObjectInvariant()
-    {
-      Contract.Invariant(this.container != null);
-    }
   }
 
   #region IAttributeCollection Implementation
@@ -218,19 +205,6 @@ namespace Eve
     IEnumerator<IAttribute> IEnumerable<IAttribute>.GetEnumerator()
     {
       return GetEnumerator();
-    }
-  }
-  #endregion
-
-  #region IEveRepositoryItem Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IEveRepositoryItem" /> interface.
-  /// </content>
-  public sealed partial class ReadOnlyAttributeValueCollection : IEveRepositoryItem
-  {
-    IEveRepository IEveRepositoryItem.Container
-    {
-      get { return this.Container; }
     }
   }
   #endregion

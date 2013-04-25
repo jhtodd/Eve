@@ -41,15 +41,15 @@ namespace Eve
     /// <summary>
     /// Initializes a new instance of the Item class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    protected Item(IEveRepository container, ItemEntity entity) : base(container, entity)
+    protected Item(IEveRepository repository, ItemEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
 
       this.id = entity.Id;
@@ -70,12 +70,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<Flag>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.flag,
-          () => this.Container.GetOrAddStoredValue<Flag>(this.FlagId, () => this.Entity.Flag.ToAdapter(this.Container)));
-
-        Contract.Assume(this.flag != null);
-        return this.flag;
+        return this.LazyInitializeAdapter(ref this.flag, this.Entity.FlagId, () => this.Entity.Flag);
       }
     }
 
@@ -114,12 +109,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<EveType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.itemType,
-          () => this.Container.GetOrAddStoredValue<EveType>(this.ItemTypeId, () => this.Entity.ItemType.ToAdapter(this.Container)));
-
-        Contract.Assume(this.itemType != null);
-        return this.itemType;
+        return this.LazyInitializeAdapter(ref this.itemType, this.Entity.ItemTypeId, () => this.Entity.ItemType);
       }
     }
 
@@ -147,12 +137,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<Item>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.location,
-          () => this.Container.GetOrAddStoredValue<Item>(this.LocationId, () => this.Entity.Location.ToAdapter(this.Container)));
-
-        Contract.Assume(this.location != null);
-        return this.location;
+        return this.LazyInitializeAdapter(ref this.location, this.Entity.LocationId, () => this.Entity.Location);
       }
     }
 
@@ -254,12 +239,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.owner,
-          () => this.Container.GetOrAddStoredValue<Item>(this.OwnerId, () => this.Entity.Owner.ToAdapter(this.Container)));
-
-        Contract.Assume(this.owner != null);
-        return this.owner;
+        return this.LazyInitializeAdapter(ref this.owner, this.Entity.OwnerId, () => this.Entity.Owner);
       }
     }
 
@@ -291,12 +271,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.position,
-          () => this.Container.GetOrAddStoredValue<ItemPosition>(this.Id, () => this.Entity.Position.ToAdapter(this.Container)));
-
-        Contract.Assume(this.position != null);
-        return this.position;
+        return this.LazyInitializeAdapter(ref this.position, this.Entity.Id, () => this.Entity.Position);
       }
     }
 
@@ -311,27 +286,12 @@ namespace Eve
       get { return Entity.Quantity; }
     }
 
-    /// <summary>
-    /// Gets the key used to cache the current item.
-    /// </summary>
-    /// <value>
-    /// The key used to cache the current item.
-    /// </value>
-    protected virtual IConvertible CacheKey
-    {
-      get 
-      {
-        Contract.Ensures(Contract.Result<IConvertible>() != null);
-        return this.Id;
-      }
-    }
-
     /* Methods */
 
     /// <summary>
     /// Creates an appropriate item for the specified entity.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
@@ -341,65 +301,65 @@ namespace Eve
     /// An <see cref="Item" /> of the appropriate derived type, based on the
     /// contents of <paramref name="entity" />.
     /// </returns>
-    public static Item Create(IEveRepository container, ItemEntity entity)
+    public static Item Create(IEveRepository repository, ItemEntity entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
       Contract.Ensures(Contract.Result<Item>() != null);
 
       if (entity.IsAgent)
       {
-        return new Agent(container, entity);
+        return new Agent(repository, entity);
       }
 
       if (entity.IsCelestial)
       {
-        return new Celestial(container, entity);
+        return new Celestial(repository, entity);
       }
 
       if (entity.IsConstellation)
       {
-        return new Constellation(container, entity);
+        return new Constellation(repository, entity);
       }
 
       if (entity.IsCorporation)
       {
-        return new NpcCorporation(container, entity);
+        return new NpcCorporation(repository, entity);
       }
 
       if (entity.IsFaction)
       {
-        return new Character.Faction(container, entity);
+        return new Character.Faction(repository, entity);
       }
 
       if (entity.IsRegion)
       {
-        return new Region(container, entity);
+        return new Region(repository, entity);
       }
 
       if (entity.IsSolarSystem)
       {
-        return new SolarSystem(container, entity);
+        return new SolarSystem(repository, entity);
       }
 
       if (entity.IsStargate)
       {
-        return new Stargate(container, entity);
+        return new Stargate(repository, entity);
       }
 
       if (entity.IsStation)
       {
-        return new Station(container, entity);
+        return new Station(repository, entity);
       }
 
       if (entity.IsUniverse)
       {
-        return new Universe.Universe(container, entity);
+        return new Universe.Universe(repository, entity);
       }
 
       // If we've failed to identify the specific item type, fall back on a 
       // generic item.
-      return new GenericItem(container, entity);
+      return new GenericItem(repository, entity);
     }
 
     /// <inheritdoc />

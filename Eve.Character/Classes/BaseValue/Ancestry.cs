@@ -26,15 +26,15 @@ namespace Eve.Character
     /// <summary>
     /// Initializes a new instance of the Ancestry class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal Ancestry(IEveRepository container, AncestryEntity entity) : base(container, entity)
+    internal Ancestry(IEveRepository repository, AncestryEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
@@ -51,12 +51,7 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<Bloodline>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.bloodline,
-          () => this.Container.GetOrAddStoredValue<Bloodline>(this.BloodlineId, () => this.Entity.Bloodline.ToAdapter(this.Container)));
-
-        Contract.Assume(this.bloodline != null);
-        return this.bloodline;
+        return this.LazyInitializeAdapter(ref this.bloodline, this.Entity.BloodlineId, () => this.Entity.Bloodline);
       }
     }
 
@@ -104,12 +99,7 @@ namespace Eve.Character
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.icon,
-          () => this.Container.GetOrAddStoredValue<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
-
-        Contract.Assume(this.icon != null);
-        return this.icon;
+        return this.LazyInitializeAdapter(ref this.icon, this.Entity.IconId, () => this.Entity.Icon);
       }
     }
 

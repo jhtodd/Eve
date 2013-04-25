@@ -3,7 +3,8 @@
 //     Copyright © Jeremy H. Todd 2012
 // </copyright>
 //-----------------------------------------------------------------------
-namespace EveUpdater {
+namespace EveUpdater
+{
   using System;
   using System.Collections.Generic;
   using System.Diagnostics.Contracts;
@@ -15,34 +16,45 @@ namespace EveUpdater {
   using FreeNet.Data;
   using FreeNet.Data.Schema;
 
-  //******************************************************************************
   /// <summary>
-  /// Converts a <see cref="SchemaComparison" /> object to appear in a treeview.
+  /// Converts a <see cref="SchemaComparison" /> object to appear in a TreeView.
   /// </summary>
-  public class SchemaComparisonTreeViewConverter : IValueConverter {
+  public class SchemaComparisonTreeViewConverter : IValueConverter
+  {
+    /* Constructors */
 
-    #region IValueConverter Members
-    //******************************************************************************
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "The purpose of the class is to implement the interface and it will not be accessed in another context.")]
-    object IValueConverter.Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) {
+    /// <summary>
+    /// Initializes a new instance of the SchemaComparisonTreeViewConverter class.
+    /// </summary>
+    public SchemaComparisonTreeViewConverter()
+    {
+    }
+
+    /* Methods */
+
+    /// <inheritdoc />
+    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    {
       SchemaComparison comparison = value as SchemaComparison;
 
-      if (comparison == null) {
+      if (comparison == null)
+      {
         return null;
       }
 
-      return new object[] { 
+      return new object[]
+      { 
         comparison.AddedTables,
         comparison.RemovedTables,
         comparison.ChangedTables,
         comparison.UnchangedTables 
       };
     }
-    //******************************************************************************
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "The purpose of the class is to implement the interface and it will not be accessed in another context.")]
-    object IValueConverter.ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) {
+
+    /// <inheritdoc />
+    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    {
       throw new InvalidOperationException("This converter is for one-way binding only.");
     }
-    #endregion
   }
 }

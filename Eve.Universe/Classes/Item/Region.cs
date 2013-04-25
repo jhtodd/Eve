@@ -27,17 +27,20 @@ namespace Eve.Universe
     /// <summary>
     /// Initializes a new instance of the Region class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal Region(IEveRepository container, ItemEntity entity) : base(container, entity)
+    internal Region(IEveRepository repository, ItemEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
       Contract.Requires(entity.IsRegion, "The entity must be a region.");
+
+      // Use Assume instead of Requires to avoid lazy loading on release build
+      Contract.Assert(this.Entity.RegionInfo != null);
     }
 
     /* Properties */
@@ -56,7 +59,7 @@ namespace Eve.Universe
 
         LazyInitializer.EnsureInitialized(
           ref this.constellations,
-          () => new ReadOnlyConstellationCollection(this.Container.GetConstellations(q => q.Where(x => x.ConstellationInfo.RegionId == this.Id.Value)).OrderBy(x => x)));
+          () => new ReadOnlyConstellationCollection(this.Repository, this.Entity.RegionInfo.Constellations));
 
         Contract.Assume(this.constellations != null);
         return this.constellations;
@@ -82,12 +85,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.faction,
-          () => this.Container.GetOrAddStoredValue<Faction>(this.FactionId, () => (Faction)this.RegionInfo.Faction.ItemInfo.ToAdapter(this.Container)));
-
-        Contract.Assume(this.faction != null);
-        return this.faction;
+        return this.LazyInitializeAdapter(ref this.faction, this.Entity.RegionInfo.FactionId, () => this.Entity.RegionInfo.Faction);
       }
     }
 
@@ -100,7 +98,7 @@ namespace Eve.Universe
     /// </value>
     public FactionId? FactionId
     {
-      get { return (FactionId?)this.RegionInfo.FactionId; }
+      get { return (FactionId?)this.Entity.RegionInfo.FactionId; }
     }
 
     /// <summary>
@@ -128,7 +126,7 @@ namespace Eve.Universe
 
         LazyInitializer.EnsureInitialized(
           ref this.jumps, 
-          () => new ReadOnlyRegionJumpCollection(this.Container.GetRegionJumps(q => q.Where(x => x.FromRegionId == this.Id.Value)).OrderBy(x => x)));
+          () => new ReadOnlyRegionJumpCollection(this.Repository, this.Entity.RegionInfo.Jumps));
 
         Contract.Assume(this.jumps != null);
         return this.jumps;
@@ -149,7 +147,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        double result = this.RegionInfo.Radius;
+        double result = this.Entity.RegionInfo.Radius;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -172,7 +170,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.RegionInfo.X;
+        double result = this.Entity.RegionInfo.X;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -194,7 +192,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.RegionInfo.Y;
+        double result = this.Entity.RegionInfo.Y;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -216,7 +214,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.RegionInfo.Z;
+        double result = this.Entity.RegionInfo.Z;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -238,7 +236,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.RegionInfo.XMax;
+        double result = this.Entity.RegionInfo.XMax;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -260,7 +258,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.RegionInfo.YMax;
+        double result = this.Entity.RegionInfo.YMax;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -282,7 +280,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.RegionInfo.ZMax;
+        double result = this.Entity.RegionInfo.ZMax;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -304,7 +302,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.RegionInfo.XMin;
+        double result = this.Entity.RegionInfo.XMin;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -326,7 +324,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.RegionInfo.YMin;
+        double result = this.Entity.RegionInfo.YMin;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -348,7 +346,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.RegionInfo.ZMin;
+        double result = this.Entity.RegionInfo.ZMin;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -357,17 +355,12 @@ namespace Eve.Universe
       }
     }
 
-    private RegionEntity RegionInfo
+    /* Methods */
+
+    [ContractInvariantMethod]
+    private void ObjectInvariant()
     {
-      get
-      {
-        Contract.Ensures(Contract.Result<RegionEntity>() != null);
-
-        var result = this.Entity.RegionInfo;
-
-        Contract.Assume(result != null);
-        return result;
-      }
+      Contract.Invariant(this.Entity.RegionInfo != null);
     }
   }
 }

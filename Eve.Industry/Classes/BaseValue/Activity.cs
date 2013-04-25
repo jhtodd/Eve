@@ -27,15 +27,15 @@ namespace Eve.Industry
     /// <summary>
     /// Initializes a new instance of the Activity class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal Activity(IEveRepository container, ActivityEntity entity) : base(container, entity)
+    internal Activity(IEveRepository repository, ActivityEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
@@ -64,7 +64,7 @@ namespace Eve.Industry
           ref this.icon,
           () => 
           {
-            Icon iconResult = this.Container.GetIcons(q => q.Where(x => x.Name == this.IconNo)).FirstOrDefault();
+            Icon iconResult = this.Repository.GetIcons(q => q.Where(x => x.Name == this.IconNo)).FirstOrDefault();
 
             // TODO: As of 84566, some iconNo values don't have a corresponding
             // entry in eveIcons, although the matching image file is available.
@@ -73,7 +73,7 @@ namespace Eve.Industry
             if (iconResult == null)
             {
               IconEntity iconEntity = new IconEntity() { Id = 0, Name = this.IconNo, Description = "Missing Icon" };
-              iconResult = new Icon(this.Container, iconEntity);
+              iconResult = new Icon(this.Repository, iconEntity);
             }
 
             return iconResult;

@@ -3,7 +3,8 @@
 //     Copyright © Jeremy H. Todd 2012
 // </copyright>
 //-----------------------------------------------------------------------
-namespace EveUpdater {
+namespace EveUpdater
+{
   using System;
   using System.Collections.Generic;
   using System.Data;
@@ -16,54 +17,73 @@ namespace EveUpdater {
   using FreeNet;
   using FreeNet.Data;
 
-  //******************************************************************************
   /// <summary>
   /// Returns a list of EVE groups from a category ID.
   /// </summary>
-  public class EnumToRadioCheckedConverter : IValueConverter {
+  public class EnumToRadioCheckedConverter : IValueConverter
+  {
+    /* Constructors */
 
-    #region IValueConverter Members
-    //******************************************************************************
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "The purpose of the class is to implement the interface and it will not be accessed in another context.")]
-    object IValueConverter.Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) {
-      if (value == null || parameter == null) {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="EnumToRadioCheckedConverter" /> class.
+    /// </summary>
+    public EnumToRadioCheckedConverter()
+    {
+    }
+
+    /* Methods */
+
+    /// <inheritdoc />
+    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    {
+      if (value == null || parameter == null)
+      {
         return false;
       }
 
       Type valueType = value.GetType();
       Type parameterType = parameter.GetType();
 
-      if (!valueType.IsEnum) {
+      if (!valueType.IsEnum)
+      {
         return false;
       }
 
       object otherValue;
 
-
-      if (parameterType == valueType) {
+      if (parameterType == valueType)
+      {
         otherValue = parameter;
-
-      } else {
-        try {
+      }
+      else
+      {
+        try
+        {
           otherValue = Enum.Parse(valueType, parameter.ToString(), true);
-        } catch {
+        }
+        catch
+        {
           return false;
         }
       }
 
       return Enum.Equals(value, otherValue);
     }
-    //******************************************************************************
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "The purpose of the class is to implement the interface and it will not be accessed in another context.")]
-    object IValueConverter.ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) {
-      if (value == null || parameter == null) {
+
+    /// <inheritdoc />
+    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    {
+      if (value == null || parameter == null)
+      {
         return null;
       }
 
-      bool useValue = (bool) value;
+      bool useValue = (bool)value;
 
-      if (useValue) {
-        if (parameter.GetType() == targetType) {
+      if (useValue)
+      {
+        if (parameter.GetType() == targetType)
+        {
           return parameter;
         }
 
@@ -74,6 +94,5 @@ namespace EveUpdater {
 
       return null;
     }
-    #endregion
   }
 }

@@ -3,7 +3,8 @@
 //     Copyright © Jeremy H. Todd 2012
 // </copyright>
 //-----------------------------------------------------------------------
-namespace EveUpdater {
+namespace EveUpdater
+{
   using System;
   using System.Collections.Generic;
   using System.Diagnostics.Contracts;
@@ -14,27 +15,24 @@ namespace EveUpdater {
   using FreeNet;
   using FreeNet.Windows;
 
-  //******************************************************************************
   /// <summary>
   /// A list entry for EVE categories.
   /// </summary>
-  public class CategoryListEntry : ListEntry<int, string> {
+  public class CategoryListEntry : ListEntry<int, string>
+  {
+    /* Constructors */
 
-    #region Constructors/Finalizers
-    //******************************************************************************
     /// <summary>
     /// Initializes a new instance of the CategoryListEntry class.
     /// </summary>
-    /// 
     /// <param name="value">
     /// The value.
     /// </param>
-    /// 
     /// <param name="displayValue">
     /// The display value.
     /// </param>
-    public CategoryListEntry(int value, string displayValue) : base(value, displayValue) {
+    public CategoryListEntry(int value, string displayValue) : base(value, displayValue)
+    {
     }
-    #endregion
   }
 }

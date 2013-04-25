@@ -27,17 +27,20 @@ namespace Eve.Universe
     /// <summary>
     /// Initializes a new instance of the SolarSystem class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal SolarSystem(IEveRepository container, ItemEntity entity) : base(container, entity)
+    internal SolarSystem(IEveRepository repository, ItemEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
       Contract.Requires(entity.IsSolarSystem, "The entity must be a solar system.");
+
+      // Use Assume instead of Requires to avoid lazy loading on release build
+      Contract.Assert(this.Entity.SolarSystemInfo != null);
     }
 
     /* Properties */
@@ -52,7 +55,7 @@ namespace Eve.Universe
     /// </value>
     public bool Border
     {
-      get { return this.SolarSystemInfo.Border; }
+      get { return this.Entity.SolarSystemInfo.Border; }
     }
 
     /// <summary>
@@ -68,12 +71,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Constellation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.constellation,
-          () => this.Container.GetOrAddStoredValue<Constellation>(this.ConstellationId, () => (Constellation)this.SolarSystemInfo.Constellation.ItemInfo.ToAdapter(this.Container)));
-
-        Contract.Assume(this.constellation != null);
-        return this.constellation;
+        return this.LazyInitializeAdapter(ref this.constellation, this.Entity.SolarSystemInfo.ConstellationId, () => this.Entity.SolarSystemInfo.Constellation);
       }
     }
 
@@ -85,7 +83,7 @@ namespace Eve.Universe
     /// </value>
     public ConstellationId ConstellationId
     {
-      get { return (ConstellationId)this.SolarSystemInfo.ConstellationId; }
+      get { return (ConstellationId)this.Entity.SolarSystemInfo.ConstellationId; }
     }
 
     /// <summary>
@@ -98,7 +96,7 @@ namespace Eve.Universe
     /// </value>
     public bool ConstellationBorder
     {
-      get { return this.SolarSystemInfo.ConstellationBorder; }
+      get { return this.Entity.SolarSystemInfo.ConstellationBorder; }
     }
 
     /// <summary>
@@ -111,7 +109,7 @@ namespace Eve.Universe
     /// </value>
     public bool Corridor
     {
-      get { return this.SolarSystemInfo.Corridor; }
+      get { return this.Entity.SolarSystemInfo.Corridor; }
     }
 
     /// <summary>
@@ -135,12 +133,12 @@ namespace Eve.Universe
           return this.faction;
         }
 
-        Contract.Assume(this.SolarSystemInfo.Constellation != null);
-        Contract.Assume(this.SolarSystemInfo.Region != null);
+        Contract.Assume(this.Entity.SolarSystemInfo.Constellation != null);
+        Contract.Assume(this.Entity.SolarSystemInfo.Region != null);
 
-        FactionEntity factionEntity = this.SolarSystemInfo.Faction ??
-                                      this.SolarSystemInfo.Constellation.Faction ??
-                                      this.SolarSystemInfo.Region.Faction;
+        FactionEntity factionEntity = this.Entity.SolarSystemInfo.Faction ??
+                                      this.Entity.SolarSystemInfo.Constellation.Faction ??
+                                      this.Entity.SolarSystemInfo.Region.Faction;
 
         if (factionEntity == null)
         {
@@ -148,7 +146,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.faction = this.Container.GetOrAddStoredValue<Faction>(factionEntity.Id, () => (Faction)factionEntity.ItemInfo.ToAdapter(this.Container));
+        return this.faction = this.Repository.GetOrAddStoredValue<Faction>(factionEntity.Id, () => (Faction)factionEntity.ItemInfo.ToAdapter(this.Repository));
       }
     }
 
@@ -164,22 +162,19 @@ namespace Eve.Universe
     {
       get
       {
-        Contract.Assume(this.SolarSystemInfo.Constellation != null);
-        Contract.Assume(this.SolarSystemInfo.Region != null);
-
-        if (this.SolarSystemInfo.FactionId.HasValue)
+        if (this.Entity.SolarSystemInfo.FactionId.HasValue)
         {
-          return (FactionId?)this.SolarSystemInfo.FactionId;
+          return (FactionId?)this.Entity.SolarSystemInfo.FactionId;
         }
 
-        Contract.Assume(this.SolarSystemInfo.Constellation != null);
-        if (this.SolarSystemInfo.Constellation.FactionId.HasValue)
+        Contract.Assume(this.Entity.SolarSystemInfo.Constellation != null);
+        if (this.Entity.SolarSystemInfo.Constellation.FactionId.HasValue)
         {
-          return (FactionId?)this.SolarSystemInfo.Constellation.FactionId;
+          return (FactionId?)this.Entity.SolarSystemInfo.Constellation.FactionId;
         }
 
-        Contract.Assume(this.SolarSystemInfo.Region != null);
-        return (FactionId?)this.SolarSystemInfo.Region.FactionId;
+        Contract.Assume(this.Entity.SolarSystemInfo.Region != null);
+        return (FactionId?)this.Entity.SolarSystemInfo.Region.FactionId;
       }
     }
 
@@ -193,7 +188,7 @@ namespace Eve.Universe
     /// </value>
     public bool Fringe
     {
-      get { return this.SolarSystemInfo.Fringe; }
+      get { return this.Entity.SolarSystemInfo.Fringe; }
     }
 
     /// <summary>
@@ -206,7 +201,7 @@ namespace Eve.Universe
     /// </value>
     public bool Hub
     {
-      get { return this.SolarSystemInfo.Hub; }
+      get { return this.Entity.SolarSystemInfo.Hub; }
     }
 
     /// <summary>
@@ -230,7 +225,7 @@ namespace Eve.Universe
     /// </value>
     public bool International
     {
-      get { return this.SolarSystemInfo.International; }
+      get { return this.Entity.SolarSystemInfo.International; }
     }
 
     /// <summary>
@@ -247,7 +242,7 @@ namespace Eve.Universe
 
         LazyInitializer.EnsureInitialized(
           ref this.jumps,
-          () => new ReadOnlySolarSystemJumpCollection(this.Container.GetSolarSystemJumps(q => q.Where(x => x.FromSolarSystemId == this.Id.Value)).OrderBy(x => x)));
+          () => new ReadOnlySolarSystemJumpCollection(this.Repository, this.Entity.SolarSystemInfo.Jumps));
 
         Contract.Assume(this.jumps != null);
         return this.jumps;
@@ -268,7 +263,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        double result = this.SolarSystemInfo.Luminosity;
+        double result = this.Entity.SolarSystemInfo.Luminosity;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -292,7 +287,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        double result = this.SolarSystemInfo.Radius;
+        double result = this.Entity.SolarSystemInfo.Radius;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -315,12 +310,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.region,
-          () => this.Container.GetOrAddStoredValue<Region>(this.RegionId, () => (Region)this.SolarSystemInfo.Region.ItemInfo.ToAdapter(this.Container)));
-
-        Contract.Assume(this.region != null);
-        return this.region;
+        return this.LazyInitializeAdapter(ref this.region, this.Entity.SolarSystemInfo.RegionId, () => this.Entity.SolarSystemInfo.Region);
       }
     }
 
@@ -332,7 +322,7 @@ namespace Eve.Universe
     /// </value>
     public RegionId RegionId
     {
-      get { return (RegionId)this.SolarSystemInfo.RegionId; }
+      get { return (RegionId)this.Entity.SolarSystemInfo.RegionId; }
     }
 
     /// <summary>
@@ -345,7 +335,7 @@ namespace Eve.Universe
     /// </value>
     public bool Regional
     {
-      get { return this.SolarSystemInfo.Regional; }
+      get { return this.Entity.SolarSystemInfo.Regional; }
     }
 
     /// <summary>
@@ -361,7 +351,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
 
-        double result = this.SolarSystemInfo.Security;
+        double result = this.Entity.SolarSystemInfo.Security;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -382,7 +372,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<string>() != null);
 
-        return this.SolarSystemInfo.SecurityClass ?? string.Empty;
+        return this.Entity.SolarSystemInfo.SecurityClass ?? string.Empty;
       }
     }
 
@@ -399,12 +389,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<EveType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.sunType,
-          () => this.Container.GetOrAddStoredValue<EveType>(this.SunTypeId, () => this.SolarSystemInfo.SunType.ToAdapter(this.Container)));
-
-        Contract.Assume(this.sunType != null);
-        return this.sunType;
+        return this.LazyInitializeAdapter(ref this.sunType, this.Entity.SolarSystemInfo.SunTypeId, () => this.Entity.SolarSystemInfo.SunType);
       }
     }
 
@@ -416,7 +401,7 @@ namespace Eve.Universe
     /// </value>
     public TypeId SunTypeId
     {
-      get { return this.SolarSystemInfo.SunTypeId; }
+      get { return this.Entity.SolarSystemInfo.SunTypeId; }
     }
 
     /// <summary>
@@ -432,7 +417,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.SolarSystemInfo.X;
+        double result = this.Entity.SolarSystemInfo.X;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -454,7 +439,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.SolarSystemInfo.Y;
+        double result = this.Entity.SolarSystemInfo.Y;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -476,7 +461,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.SolarSystemInfo.Z;
+        double result = this.Entity.SolarSystemInfo.Z;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -498,7 +483,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.SolarSystemInfo.XMax;
+        double result = this.Entity.SolarSystemInfo.XMax;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -520,7 +505,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.SolarSystemInfo.YMax;
+        double result = this.Entity.SolarSystemInfo.YMax;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -542,7 +527,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.SolarSystemInfo.ZMax;
+        double result = this.Entity.SolarSystemInfo.ZMax;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -564,7 +549,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.SolarSystemInfo.XMin;
+        double result = this.Entity.SolarSystemInfo.XMin;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -586,7 +571,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.SolarSystemInfo.YMin;
+        double result = this.Entity.SolarSystemInfo.YMin;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -608,7 +593,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.SolarSystemInfo.ZMin;
+        double result = this.Entity.SolarSystemInfo.ZMin;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -617,17 +602,12 @@ namespace Eve.Universe
       }
     }
 
-    private SolarSystemEntity SolarSystemInfo
+    /* Methods */
+
+    [ContractInvariantMethod]
+    private void ObjectInvariant()
     {
-      get
-      {
-        Contract.Ensures(Contract.Result<SolarSystemEntity>() != null);
-
-        var result = this.Entity.SolarSystemInfo;
-
-        Contract.Assume(result != null);
-        return result;
-      }
+      Contract.Invariant(this.Entity.SolarSystemInfo != null);
     }
   }
 }

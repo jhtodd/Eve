@@ -62,8 +62,8 @@ namespace Eve
     [Description("Asteroid OLD")]
     AsteroidOld = 11,
 
-    /// <summary>Cargo Container</summary>
-    [Description("Cargo Container")]
+    /// <summary>Cargo Repositoryyyy</summary>
+    [Description("Cargo Repositoryyyy")]
     CargoContainer = 12,
 
     /// <summary>Ring</summary>
@@ -890,8 +890,8 @@ namespace Eve
     [Description("Comet")]
     Comet = 305,
 
-    /// <summary>Spawn Container</summary>
-    [Description("Spawn Container")]
+    /// <summary>Spawn Repositoryyyy</summary>
+    [Description("Spawn Repositoryyyy")]
     SpawnContainer = 306,
 
     /// <summary>Construction Platform</summary>
@@ -1021,8 +1021,8 @@ namespace Eve
     [Description("Auxiliary Power Core")]
     AuxiliaryPowerCore = 339,
 
-    /// <summary>Secure Cargo Container</summary>
-    [Description("Secure Cargo Container")]
+    /// <summary>Secure Cargo Repositoryyyy</summary>
+    [Description("Secure Cargo Repositoryyyy")]
     SecureCargoContainer = 340,
 
     /// <summary>Signature Scrambling</summary>
@@ -1385,8 +1385,8 @@ namespace Eve
     [Description("Construction Component Blueprints")]
     ConstructionComponentBlueprints = 447,
 
-    /// <summary>Audit Log Secure Container</summary>
-    [Description("Audit Log Secure Container")]
+    /// <summary>Audit Log Secure Repositoryyyy</summary>
+    [Description("Audit Log Secure Repositoryyyy")]
     AuditLogSecureContainer = 448,
 
     /// <summary>Mobile Hybrid Sentry</summary>
@@ -1572,9 +1572,9 @@ namespace Eve
     [LongDescription("This sentry is controlled by the overseer of this deadspace pocket.")]
     DeadspaceOverseersSentry = 495,
 
-    /// <summary>This container is tagged as the property of this deadspace pocket's overseer.</summary>
+    /// <summary>This repositoryy is tagged as the property of this deadspace pocket's overseer.</summary>
     [Description("Deadspace Overseer\'s Belongings")]
-    [LongDescription("This container is tagged as the property of this deadspace pocket\'s overseer.")]
+    [LongDescription("This repositoryy is tagged as the property of this deadspace pocket\'s overseer.")]
     DeadspaceOverseersBelongings = 496,
 
     /// <summary>Fuel</summary>
@@ -2086,7 +2086,7 @@ namespace Eve
     AdvancedRocket = 648,
 
     /// <summary>Freight Containers are commonly used in Freighter-class ships to accomodate their massive cargobays.</summary>
-    [Description("Freight Container")]
+    [Description("Freight Repositoryyyy")]
     [LongDescription("Freight Containers are commonly used in Freighter-class ships to accomodate their" +
         " massive cargobays.")]
     FreightContainer = 649,
@@ -3195,7 +3195,7 @@ namespace Eve
     IndustrialCommandShipBlueprint = 945,
 
     /// <summary>Containers that can be deployed in dungeons and accept items to be placed into them. Can have triggers that check if specific item is placed in it (for mission completion for instance).</summary>
-    [Description("Mission Container")]
+    [Description("Mission Repositoryyyy")]
     [LongDescription("Containers that can be deployed in dungeons and accept items to be placed into th" +
         "em. Can have triggers that check if specific item is placed in it (for mission chars" +
         "ompletion for instance).")]
@@ -3788,9 +3788,9 @@ namespace Eve
     [Description("Orbital Bombardment")]
     OrbitalBombardment = 1161,
 
-    /// <summary>Container Blueprints</summary>
-    [Description("Container Blueprints")]
-    [LongDescription("Container Blueprints")]
+    /// <summary>Repositoryyyy Blueprints</summary>
+    [Description("Repositoryyyy Blueprints")]
+    [LongDescription("Repositoryyyy Blueprints")]
     ContainerBlueprints = 1162,
 
     /// <summary>Satellite</summary>

@@ -22,22 +22,22 @@ namespace Eve
     private ReadOnlyMarketGroupCollection childGroups;
     private Icon icon;
     private MarketGroup parentGroup;
-    private ReadOnlyTypeCollection types;
+    private ReadOnlyEveTypeCollection types;
 
     /* Constructors */
 
     /// <summary>
     /// Initializes a new instance of the MarketGroup class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal MarketGroup(IEveRepository container, MarketGroupEntity entity) : base(container, entity)
+    internal MarketGroup(IEveRepository repository, MarketGroupEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
@@ -58,7 +58,7 @@ namespace Eve
 
         LazyInitializer.EnsureInitialized(
           ref this.childGroups,
-          () => new ReadOnlyMarketGroupCollection(this.Container.GetMarketGroups(q => q.Where(x => x.ParentGroupId == this.Id)).OrderBy(x => x)));
+          () => new ReadOnlyMarketGroupCollection(this.Repository, this.Entity.ChildGroups));
 
         Contract.Assume(this.childGroups != null);
         return this.childGroups;
@@ -97,12 +97,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.icon,
-          () => this.Container.GetOrAddStoredValue<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
-
-        Contract.Assume(this.icon != null);
-        return this.icon;
+        return this.LazyInitializeAdapter(ref this.icon, this.Entity.IconId, () => this.Entity.Icon);
       }
     }
 
@@ -137,12 +132,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.parentGroup,
-          () => this.Container.GetOrAddStoredValue<MarketGroup>(this.ParentGroupId, () => this.Entity.ParentGroup.ToAdapter(this.Container)));
-
-        Contract.Assume(this.parentGroup != null);
-        return this.parentGroup;
+        return this.LazyInitializeAdapter(ref this.parentGroup, this.Entity.ParentGroupId, () => this.Entity.ParentGroup);
       }
     }
 
@@ -162,18 +152,18 @@ namespace Eve
     /// Gets the collection of items that belong to the current market group.
     /// </summary>
     /// <value>
-    /// A <see cref="ReadOnlyTypeCollection" /> containing the items that
+    /// A <see cref="ReadOnlyEveTypeCollection" /> containing the items that
     /// belong to the current market group.
     /// </value>
-    public ReadOnlyTypeCollection Types
+    public ReadOnlyEveTypeCollection Types
     {
       get
       {
-        Contract.Ensures(Contract.Result<ReadOnlyTypeCollection>() != null);
+        Contract.Ensures(Contract.Result<ReadOnlyEveTypeCollection>() != null);
 
         LazyInitializer.EnsureInitialized(
           ref this.types,
-          () => new ReadOnlyTypeCollection(this.Container.GetEveTypes(q => q.Where(x => x.MarketGroupId == this.Id)).OrderBy(x => x)));
+          () => new ReadOnlyEveTypeCollection(this.Repository, this.Entity.Types));
 
         Contract.Assume(this.types != null);
         return this.types;

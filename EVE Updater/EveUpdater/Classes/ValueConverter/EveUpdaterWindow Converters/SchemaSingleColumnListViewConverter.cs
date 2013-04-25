@@ -3,7 +3,8 @@
 //     Copyright © Jeremy H. Todd 2012
 // </copyright>
 //-----------------------------------------------------------------------
-namespace EveUpdater {
+namespace EveUpdater
+{
   using System;
   using System.Collections.Generic;
   using System.Diagnostics.Contracts;
@@ -15,37 +16,49 @@ namespace EveUpdater {
   using FreeNet.Data;
   using FreeNet.Data.Schema;
 
-  //******************************************************************************
   /// <summary>
   /// Converts a single-column schema type (SchemaColumn, SchemaTable,
   /// SchemaColumnCollection) to a type appropriate as the ItemsSource of a
-  /// ListView
+  /// ListView.
   /// </summary>
-  public class SchemaSingleColumnListViewConverter : IValueConverter {
+  public class SchemaSingleColumnListViewConverter : IValueConverter
+  {
+    /* Constructors */
 
-    #region IValueConverter Members
-    //******************************************************************************
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "The purpose of the class is to implement the interface and it will not be accessed in another context.")]
-    object IValueConverter.Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) {
-      if (value is SchemaColumn) {
+    /// <summary>
+    /// Initializes a new instance of the SchemaSingleColumnListViewConverter class.
+    /// </summary>
+    public SchemaSingleColumnListViewConverter()
+    {
+    }
+
+    /* Methods */
+
+    /// <inheritdoc />
+    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    {
+      if (value is SchemaColumn)
+      {
         return new object[] { value };
       }
 
-      if (value is SchemaColumnCollection) {
+      if (value is SchemaColumnCollection)
+      {
         return value;
       }
 
-      if (value is SchemaTable) {
-        return ((SchemaTable) value).Columns;
+      if (value is SchemaTable)
+      {
+        return ((SchemaTable)value).Columns;
       }
 
       return null;
     }
-    //******************************************************************************
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "The purpose of the class is to implement the interface and it will not be accessed in another context.")]
-    object IValueConverter.ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) {
+
+    /// <inheritdoc />
+    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    {
       throw new InvalidOperationException("This converter is for one-way binding only.");
     }
-    #endregion
   }
 }

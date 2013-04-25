@@ -16,7 +16,8 @@ namespace Eve.Universe
   /// <summary>
   /// An EVE item describing an in-game station.
   /// </summary>
-  public sealed class Station : Item
+  public sealed class Station
+    : Item
   {
     private ReadOnlyAgentCollection agents;
     private ReadOnlyAssemblyLineCollection assemblyLines;
@@ -33,17 +34,20 @@ namespace Eve.Universe
     /// <summary>
     /// Initializes a new instance of the Station class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal Station(IEveRepository container, ItemEntity entity) : base(container, entity)
+    internal Station(IEveRepository repository, ItemEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
       Contract.Requires(entity.IsStation, "The entity must be a station.");
+
+      // Use Assume instead of Requires to avoid lazy loading on release build
+      Contract.Assert(this.Entity.StationInfo != null);
     }
 
     /* Properties */
@@ -62,7 +66,7 @@ namespace Eve.Universe
 
         LazyInitializer.EnsureInitialized(
           ref this.agents,
-          () => new ReadOnlyAgentCollection(this.Container.GetAgents(q => q.Where(x => x.AgentInfo.LocationId == this.Id.Value)).OrderBy(x => x)));
+          () => new ReadOnlyAgentCollection(this.Repository, this.Entity.StationInfo.Agents));
 
         Contract.Assume(this.agents != null);
         return this.agents;
@@ -83,7 +87,7 @@ namespace Eve.Universe
 
         LazyInitializer.EnsureInitialized(
           ref this.assemblyLines,
-          () => new ReadOnlyAssemblyLineCollection(this.Container.GetAssemblyLines(q => q.Where(x => x.ContainerId == this.Id.Value)).OrderBy(x => x)));
+          () => new ReadOnlyAssemblyLineCollection(this.Repository, this.Entity.StationInfo.AssemblyLines));
 
         Contract.Assume(this.assemblyLines != null);
         return this.assemblyLines;
@@ -106,7 +110,7 @@ namespace Eve.Universe
 
         LazyInitializer.EnsureInitialized(
           ref this.assemblyLineTypes,
-          () => new ReadOnlyAssemblyLineStationCollection(this.Container.GetAssemblyLineStations(q => q.Where(x => x.StationId == this.Id.Value)).OrderBy(x => x)));
+          () => new ReadOnlyAssemblyLineStationCollection(this.Repository, this.Entity.StationInfo.AssemblyLineTypes));
 
         Contract.Assume(this.assemblyLineTypes != null);
         return this.assemblyLineTypes;
@@ -133,12 +137,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.constellation,
-          () => this.Container.GetOrAddStoredValue<Constellation>(this.ConstellationId, () => (Constellation)this.Entity.StationInfo.Constellation.ItemInfo.ToAdapter(this.Container)));
-
-        Contract.Assume(this.constellation != null);
-        return this.constellation;
+        return this.LazyInitializeAdapter(ref this.constellation, this.Entity.StationInfo.ConstellationId, () => this.Entity.StationInfo.Constellation);
       }
     }
 
@@ -178,12 +177,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.corporation,
-          () => this.Container.GetOrAddStoredValue<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.Entity.StationInfo.Corporation.ItemInfo.ToAdapter(this.Container)));
-
-        Contract.Assume(this.corporation != null);
-        return this.corporation;
+        return this.LazyInitializeAdapter(ref this.corporation, this.Entity.StationInfo.CorporationId, () => this.Entity.StationInfo.Corporation);
       }
     }
 
@@ -303,12 +297,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.operation,
-          () => this.Container.GetOrAddStoredValue<StationOperation>(this.OperationId, () => this.Entity.StationInfo.Operation.ToAdapter(this.Container)));
-
-        Contract.Assume(this.operation != null);
-        return this.operation;
+        return this.LazyInitializeAdapter(ref this.operation, this.Entity.StationInfo.OperationId, () => this.Entity.StationInfo.Operation);
       }
     }
 
@@ -346,12 +335,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.region,
-          () => this.Container.GetOrAddStoredValue<Region>(this.RegionId, () => (Region)this.Entity.StationInfo.Region.ItemInfo.ToAdapter(this.Container)));
-
-        Contract.Assume(this.region != null);
-        return this.region;
+        return this.LazyInitializeAdapter(ref this.region, this.Entity.StationInfo.RegionId, () => this.Entity.StationInfo.Region);
       }
     }
 
@@ -466,12 +450,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.solarSystem,
-          () => this.Container.GetOrAddStoredValue<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.Entity.StationInfo.SolarSystem.ItemInfo.ToAdapter(this.Container)));
-
-        Contract.Assume(this.solarSystem != null);
-        return this.solarSystem;
+        return this.LazyInitializeAdapter(ref this.solarSystem, this.Entity.StationInfo.SolarSystemId, () => this.Entity.StationInfo.SolarSystem);
       }
     }
 
@@ -509,12 +488,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.stationType,
-          () => this.Container.GetOrAddStoredValue<StationType>(this.StationTypeId, () => (StationType)this.Entity.StationInfo.StationType.ToAdapter(this.Container)));
-
-        Contract.Assume(this.stationType != null);
-        return this.stationType;
+        return this.LazyInitializeAdapter(ref this.stationType, this.Entity.StationInfo.StationTypeId, () => this.Entity.StationInfo.StationType);
       }
     }
 
@@ -600,6 +574,14 @@ namespace Eve.Universe
 
         return result;
       }
+    }
+
+    /* Methods */
+
+    [ContractInvariantMethod]
+    private void ObjectInvariant()
+    {
+      Contract.Invariant(this.Entity.StationInfo != null);
     }
   }
 }

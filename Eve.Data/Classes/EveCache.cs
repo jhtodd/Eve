@@ -28,12 +28,12 @@ namespace Eve.Data
     /// </summary>
     protected internal const string EveCacheRegionPrefix = "E_";
 
-    private static readonly CacheRegionMap RegionMapInstance = new CacheRegionMap();
+    private static readonly DomainMap RegionMapInstance = new DomainMap();
 
     private readonly ObjectCache innerCache;
     private readonly ReaderWriterLockSlim masterLock;
     private readonly ConcurrentDictionary<string, ReaderWriterLockSlim> regionLocks;
-    private readonly CacheStatistics statistics;
+    private readonly EveCacheStatistics statistics;
 
     /* Constructors */
 
@@ -53,7 +53,7 @@ namespace Eve.Data
       this.masterLock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
 
       this.regionLocks = new ConcurrentDictionary<string, ReaderWriterLockSlim>();
-      this.statistics = new CacheStatistics();
+      this.statistics = new EveCacheStatistics();
     }
 
     /// <summary>
@@ -86,7 +86,7 @@ namespace Eve.Data
       this.masterLock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
 
       this.regionLocks = new ConcurrentDictionary<string, ReaderWriterLockSlim>();
-      this.statistics = new CacheStatistics();
+      this.statistics = new EveCacheStatistics();
     }
 
     /* Properties */
@@ -95,14 +95,14 @@ namespace Eve.Data
     /// Gets statistics about cache usage.
     /// </summary>
     /// <value>
-    /// A <see cref="CacheStatistics" /> object containing statistics about how
+    /// A <see cref="EveCacheStatistics" /> object containing statistics about how
     /// the cache is being used.
     /// </value>
-    public CacheStatistics Statistics
+    public EveCacheStatistics Statistics
     {
       get
       {
-        Contract.Ensures(Contract.Result<CacheStatistics>() != null);
+        Contract.Ensures(Contract.Result<EveCacheStatistics>() != null);
         return this.statistics;
       }
     }
@@ -112,14 +112,14 @@ namespace Eve.Data
     /// cacheable objects.
     /// </summary>
     /// <value>
-    /// The <see cref="CacheRegionMap" /> used to define cache regions for different
+    /// The <see cref="DomainMap" /> used to define cache regions for different
     /// types of cacheable objects.
     /// </value>
-    internal static CacheRegionMap RegionMap
+    internal static DomainMap RegionMap
     {
       get
       {
-        Contract.Ensures(Contract.Result<CacheRegionMap>() != null);
+        Contract.Ensures(Contract.Result<DomainMap>() != null);
         return RegionMapInstance;
       }
     }

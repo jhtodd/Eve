@@ -24,7 +24,7 @@ namespace Eve.Universe
       IEveRepositoryItem,
       IKeyItem<NpcCorporationId>
   {
-    private readonly IEveRepository container;
+    private readonly IEveRepository repository;
     private readonly NpcCorporationId investorId;
     private readonly byte shares;
     private NpcCorporation investor;
@@ -34,7 +34,7 @@ namespace Eve.Universe
     /// <summary>
     /// Initializes a new instance of the <see cref="NpcCorporationInvestor" /> class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="investorId">
@@ -43,11 +43,11 @@ namespace Eve.Universe
     /// <param name="shares">
     /// The percentage of shares owned by the investing corporation.
     /// </param>
-    internal NpcCorporationInvestor(IEveRepository container, NpcCorporationId investorId, byte shares)
+    internal NpcCorporationInvestor(IEveRepository repository, NpcCorporationId investorId, byte shares)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
-      
-      this.container = container;
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
+
+      this.repository = repository;
       this.investorId = investorId;
       this.shares = shares;
     }
@@ -68,7 +68,7 @@ namespace Eve.Universe
 
         LazyInitializer.EnsureInitialized(
           ref this.investor,
-          () => this.Container.GetNpcCorporationById(this.InvestorId));
+          () => this.Repository.GetNpcCorporationById(this.InvestorId));
 
         Contract.Assume(this.investor != null);
         return this.investor;
@@ -105,12 +105,12 @@ namespace Eve.Universe
     /// The <see cref="IEveRepository" /> which contains the current
     /// entity adapter.
     /// </value>
-    private IEveRepository Container
+    private IEveRepository Repository
     {
       get
       {
         Contract.Ensures(Contract.Result<IEveRepository>() != null);
-        return this.container;
+        return this.repository;
       }
     }
 
@@ -166,7 +166,7 @@ namespace Eve.Universe
     [ContractInvariantMethod]
     private void ObjectInvariant()
     {
-      Contract.Invariant(this.container != null);
+      Contract.Invariant(this.repository != null);
     }
   }
 
@@ -203,9 +203,9 @@ namespace Eve.Universe
   /// </content>
   public sealed partial class NpcCorporationInvestor : IEveRepositoryItem
   {
-    IEveRepository IEveRepositoryItem.Container
+    IEveRepository IEveRepositoryItem.Repository
     {
-      get { return this.Container; }
+      get { return this.Repository; }
     }
   }
   #endregion

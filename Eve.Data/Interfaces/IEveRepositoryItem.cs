@@ -30,6 +30,6 @@ namespace Eve.Data
     /// <value>
     /// The <see cref="IEveRepository" /> the item is associated with.
     /// </value>
-    IEveRepository Container { get; }
+    IEveRepository Repository { get; }
   }
 }

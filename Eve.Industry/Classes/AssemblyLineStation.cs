@@ -39,15 +39,15 @@ namespace Eve.Industry
     /// <summary>
     /// Initializes a new instance of the AssemblyLineStation class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal AssemblyLineStation(IEveRepository container, AssemblyLineStationEntity entity) : base(container, entity)
+    internal AssemblyLineStation(IEveRepository repository, AssemblyLineStationEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
@@ -67,12 +67,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<AssemblyLineType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.assemblyLineType,
-          () => this.Container.GetOrAddStoredValue<AssemblyLineType>(this.AssemblyLineTypeId, () => this.Entity.AssemblyLineType.ToAdapter(this.Container)));
-
-        Contract.Assume(this.assemblyLineType != null);
-        return this.assemblyLineType;
+        return this.LazyInitializeAdapter(ref this.assemblyLineType, this.Entity.AssemblyLineTypeId, () => this.Entity.AssemblyLineType);
       }
     }
 
@@ -102,12 +97,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<NpcCorporation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.owner,
-          () => this.Container.GetOrAddStoredValue<NpcCorporation>(this.OwnerId, () => (NpcCorporation)this.Entity.Owner.ToAdapter(this.Container)));
-
-        Contract.Assume(this.owner != null);
-        return this.owner;
+        return this.LazyInitializeAdapter(ref this.owner, this.Entity.OwnerId, () => this.Entity.Owner);
       }
     }
 
@@ -156,12 +146,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.region,
-          () => this.Container.GetOrAddStoredValue<Region>(this.RegionId, () => (Region)this.Entity.Region.ToAdapter(this.Container)));
-
-        Contract.Assume(this.region != null);
-        return this.region;
+        return this.LazyInitializeAdapter(ref this.region, this.Entity.RegionId, () => this.Entity.Region);
       }
     }
 
@@ -189,12 +174,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<SolarSystem>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.solarSystem,
-          () => this.Container.GetOrAddStoredValue<SolarSystem>(this.SolarSystemId, () => (SolarSystem)this.Entity.SolarSystem.ToAdapter(this.Container)));
-
-        Contract.Assume(this.solarSystem != null);
-        return this.solarSystem;
+        return this.LazyInitializeAdapter(ref this.solarSystem, this.Entity.SolarSystemId, () => this.Entity.SolarSystem);
       }
     }
 
@@ -222,12 +202,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<Station>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.station, 
-          () => this.Container.GetOrAddStoredValue<Station>(this.StationId, () => (Station)this.Entity.Station.ToAdapter(this.Container)));
-
-        Contract.Assume(this.station != null);
-        return this.station;
+        return this.LazyInitializeAdapter(ref this.station, this.Entity.StationId, () => this.Entity.Station);
       }
     }
 
@@ -255,12 +230,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<StationType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.stationType,
-          () => this.Container.GetOrAddStoredValue<StationType>(this.StationTypeId, () => this.Entity.StationType.ToAdapter(this.Container)));
-
-        Contract.Assume(this.stationType != null);
-        return this.stationType;
+        return this.LazyInitializeAdapter(ref this.stationType, this.Entity.StationTypeId, () => this.Entity.StationType);
       }
     }
 

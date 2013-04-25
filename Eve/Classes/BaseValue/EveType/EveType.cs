@@ -75,22 +75,22 @@ namespace Eve
     private MetaGroup metaGroup;
     private MetaType metaType;
     private ReadOnlySkillLevelCollection requiredSkills;
-    private ReadOnlyTypeCollection variations;
+    private ReadOnlyEveTypeCollection variations;
 
     /* Constructors */
 
     /// <summary>
     /// Initializes a new instance of the EveType class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    protected EveType(IEveRepository container, EveTypeEntity entity) : base(container, entity)
+    protected EveType(IEveRepository repository, EveTypeEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
@@ -111,7 +111,7 @@ namespace Eve
         // If not already set, construct a collection of this type's attribute values.
         LazyInitializer.EnsureInitialized(
           ref this.attributes,
-          () => new ReadOnlyAttributeValueCollection(this.Container, this.Container.GetAttributeValues(q => q.Where(x => x.ItemTypeId == this.Id.Value))));
+          () => new ReadOnlyAttributeValueCollection(this.Repository, this.Entity.Attributes));
 
         Contract.Assume(this.attributes != null);
         return this.attributes;
@@ -219,7 +219,7 @@ namespace Eve
         // If not already set, construct a collection of this type's effects.
         LazyInitializer.EnsureInitialized(
           ref this.effects,
-          () => new ReadOnlyEffectCollection(this.Container.GetEffects(q => q.Where(x => x.ItemTypeId == this.Id.Value))));
+          () => new ReadOnlyEffectCollection(this.Repository, this.Entity.Effects));
 
         Contract.Assume(this.effects != null);
         return this.effects;
@@ -244,12 +244,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.graphic,
-          () => this.Container.GetOrAddStoredValue<Graphic>(this.GraphicId, () => this.Entity.Graphic.ToAdapter(this.Container)));
-
-        Contract.Assume(this.graphic != null);
-        return this.graphic;
+        return this.LazyInitializeAdapter(ref this.graphic, this.Entity.GraphicId, () => this.Entity.Graphic);
       }
     }
 
@@ -277,12 +272,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<Group>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.group,
-          () => this.Container.GetOrAddStoredValue<Group>(this.GroupId, () => this.Entity.Group.ToAdapter(this.Container)));
-
-        Contract.Assume(this.group != null);
-        return this.group;
+        return this.LazyInitializeAdapter(ref this.group, this.Entity.GroupId, () => this.Entity.Group);
       }
     }
 
@@ -316,12 +306,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.icon,
-          () => this.Container.GetOrAddStoredValue<Icon>(this.IconId, () => this.Entity.Icon.ToAdapter(this.Container)));
-
-        Contract.Assume(this.icon != null);
-        return this.icon;
+        return this.LazyInitializeAdapter(ref this.icon, this.Entity.IconId, () => this.Entity.Icon);
       }
     }
 
@@ -355,12 +340,7 @@ namespace Eve
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.marketGroup,
-          () => this.Container.GetOrAddStoredValue<MarketGroup>(this.MarketGroupId, () => this.Entity.MarketGroup.ToAdapter(this.Container)));
-
-        Contract.Assume(this.marketGroup != null);
-        return this.marketGroup;
+        return this.LazyInitializeAdapter(ref this.marketGroup, this.Entity.MarketGroupId, () => this.Entity.MarketGroup);
       }
     }
 
@@ -412,9 +392,7 @@ namespace Eve
           return null;
         }
 
-        LazyInitializer.EnsureInitialized(
-          ref this.metaGroup,
-          () => this.MetaType.MetaGroup);
+        LazyInitializer.EnsureInitialized(ref this.metaGroup, () => this.MetaType.MetaGroup);
 
         Contract.Assume(this.metaGroup != null);
         return this.metaGroup;
@@ -465,9 +443,7 @@ namespace Eve
 
         // If not already set, create an instance from the base entity.  Do not cache, because the
         // MetaType only has relevance to the current EveType, and that will be cached already.
-        LazyInitializer.EnsureInitialized(
-          ref this.metaType,
-          () => Entity.MetaType.ToAdapter(this.Container));
+        LazyInitializer.EnsureInitialized(ref this.metaType, () => this.Entity.MetaType.ToAdapter(this.Repository));
 
         Contract.Assume(this.metaType != null);
         return this.metaType;
@@ -578,13 +554,13 @@ namespace Eve
                   // Some items have duplicate skills
                   if (!skills.Any(x => x.SkillId == skillId))
                   {
-                    skills.Add(new SkillLevel(this.Container, skillId, skillLevel));
+                    skills.Add(new SkillLevel(this.Repository, skillId, skillLevel));
                   }
                 }
               }
             }
 
-            return new ReadOnlySkillLevelCollection(skills);
+            return new ReadOnlySkillLevelCollection(this.Repository, skills);
           });
 
         Contract.Assume(this.requiredSkills != null);
@@ -616,11 +592,11 @@ namespace Eve
     /// The collection will include the current item type.
     /// </para>
     /// </remarks>
-    public ReadOnlyTypeCollection Variations
+    public ReadOnlyEveTypeCollection Variations
     {
       get
       {
-        Contract.Ensures(Contract.Result<ReadOnlyTypeCollection>() != null);
+        Contract.Ensures(Contract.Result<ReadOnlyEveTypeCollection>() != null);
 
         LazyInitializer.EnsureInitialized(
           ref this.variations,
@@ -634,7 +610,7 @@ namespace Eve
             {
               variations.Add(MetaType.ParentType);
 
-              foreach (EveType type in this.Container.GetEveTypes(q => q.Where(x => x.MetaType.ParentTypeId == MetaType.ParentTypeId.Value)))
+              foreach (EveType type in this.Repository.GetEveTypes(q => q.Where(x => x.MetaType.ParentTypeId == MetaType.ParentTypeId.Value)))
               {
                 variations.Add(type);
               }
@@ -646,7 +622,7 @@ namespace Eve
             {
               variations.Add(this);
 
-              foreach (EveType type in this.Container.GetEveTypes(q => q.Where(x => x.MetaType.ParentTypeId == this.Id.Value)))
+              foreach (EveType type in this.Repository.GetEveTypes(q => q.Where(x => x.MetaType.ParentTypeId == this.Id.Value)))
               {
                 variations.Add(type);
               }
@@ -665,7 +641,7 @@ namespace Eve
                 return compareResult;
               });
 
-            return new ReadOnlyTypeCollection(variations);
+            return new ReadOnlyEveTypeCollection(this.Repository, variations);
           });
 
         Contract.Assume(this.variations != null);
@@ -699,7 +675,7 @@ namespace Eve
     /// <summary>
     /// Creates an appropriate type for the specified entity.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
@@ -709,9 +685,9 @@ namespace Eve
     /// An <see cref="EveType" /> of the appropriate derived type, based on the
     /// contents of <paramref name="entity" />.
     /// </returns>
-    public static EveType Create(IEveRepository container, EveTypeEntity entity)
+    public static EveType Create(IEveRepository repository, EveTypeEntity entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
       Contract.Ensures(Contract.Result<EveType>() != null);
 
@@ -722,25 +698,25 @@ namespace Eve
       StationTypeEntity stationTypeEntity = entity as StationTypeEntity;
       if (stationTypeEntity != null)
       {
-        return new StationType(container, stationTypeEntity);
+        return new StationType(repository, stationTypeEntity);
       }
 
       // For the remainder, the actual entity is the same type, and we need to
       // determine the EVE type based on its property values.
 
       // Use the item's group and category to determine the correct derived type
-      Group group = container.GetGroupById(entity.GroupId);
+      Group group = repository.GetGroupById(entity.GroupId);
 
       switch (group.CategoryId)
       {
         // All items under category Skill map to SkillType
         case CategoryId.Skill:
-          return new SkillType(container, entity);
+          return new SkillType(repository, entity);
       }
 
       // If we don't have a specific derived type for the provided entity, 
       // fall back on a GenericType wrapper.
-      return new GenericType(container, entity);
+      return new GenericType(repository, entity);
     }
 
     /// <inheritdoc />
@@ -763,8 +739,8 @@ namespace Eve
     }
 
     /// <summary>
-    /// Returns a value indicating whether the specified character has the skills
-    /// needed to use the item.
+    /// Returns a value indicating whether the specified character meets the
+    /// prerequisites necessary to use the item.
     /// </summary>
     /// <param name="character">
     /// The character to test against the skill requirements.
@@ -773,7 +749,7 @@ namespace Eve
     /// <see langword="true" /> if <paramref name="character" /> meets the skill
     /// requirements to use the item; otherwise <see langword="false" />.
     /// </returns>
-    public bool MeetsSkillRequirements(IHasSkills character)
+    public bool MeetsPrerequisites(IHasSkills character)
     {
       Contract.Requires(character != null, Resources.Messages.EveType_MeetsSkillRequirementsCharacterCannotBeNull);
 

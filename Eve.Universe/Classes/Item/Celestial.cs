@@ -22,17 +22,20 @@ namespace Eve.Universe
     /// <summary>
     /// Initializes a new instance of the Celestial class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal Celestial(IEveRepository container, ItemEntity entity) : base(container, entity)
+    internal Celestial(IEveRepository repository, ItemEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
       Contract.Requires(entity.IsCelestial, "The entity must be a celestial object.");
+
+      // Use Assume instead of Requires to avoid lazy loading on release build
+      Contract.Assert(this.Entity.CelestialInfo != null);
     }
 
     /* Properties */
@@ -487,6 +490,14 @@ namespace Eve.Universe
 
         return result;
       }
+    }
+
+    /* Methods */
+
+    [ContractInvariantMethod]
+    private void ObjectInvariant()
+    {
+      Contract.Invariant(this.Entity.CelestialInfo != null);
     }
   }
 }

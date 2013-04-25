@@ -3,7 +3,8 @@
 //     Copyright © Jeremy H. Todd 2012
 // </copyright>
 //-----------------------------------------------------------------------
-namespace EveUpdater {
+namespace EveUpdater 
+{
   using System;
   using System.Collections.Generic;
   using System.Configuration;
@@ -13,8 +14,9 @@ namespace EveUpdater {
   using System.Windows;
 
   /// <summary>
-  /// Interaction logic for App.xaml
+  /// Interaction logic for the application.
   /// </summary>
-  public partial class App : Application {
+  public partial class App : Application
+  {
   }
 }

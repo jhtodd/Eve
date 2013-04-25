@@ -6,6 +6,7 @@
 namespace Eve.Universe
 {
   using System;
+  using System.Collections.Generic;
   using System.Diagnostics.Contracts;
   using System.Linq;
   using System.Threading;
@@ -33,17 +34,20 @@ namespace Eve.Universe
     /// <summary>
     /// Initializes a new instance of the Agent class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal Agent(IEveRepository container, ItemEntity entity) : base(container, entity)
+    internal Agent(IEveRepository repository, ItemEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
       Contract.Requires(entity.IsAgent, "The entity must be an agent.");
+
+      // Use Assume instead of Requires to avoid lazy loading on release build
+      Contract.Assert(this.Entity.AgentInfo != null);
     }
 
     /* Properties */
@@ -67,12 +71,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.agentType,
-          () => this.Container.GetOrAddStoredValue<AgentType>(this.AgentTypeId, () => this.Entity.AgentInfo.AgentType.ToAdapter(this.Container)));
-
-        Contract.Assume(this.agentType != null);
-        return this.agentType;
+        return this.LazyInitializeAdapter(ref this.agentType, this.Entity.AgentInfo.AgentTypeId, () => this.Entity.AgentInfo.AgentType);
       }
     }
 
@@ -110,12 +109,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.corporation,
-          () => this.Container.GetOrAddStoredValue<NpcCorporation>(this.CorporationId, () => (NpcCorporation)this.Entity.AgentInfo.Corporation.ItemInfo.ToAdapter(this.Container)));
-
-        Contract.Assume(this.corporation != null);
-        return this.corporation;
+        return this.LazyInitializeAdapter(ref this.corporation, this.Entity.AgentInfo.CorporationId, () => this.Entity.AgentInfo.Corporation);
       }
     }
 
@@ -153,12 +147,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.division,
-          () => this.Container.GetOrAddStoredValue<Division>(this.DivisionId, () => this.Entity.AgentInfo.Division.ToAdapter(this.Container)));
-
-        Contract.Assume(this.division != null);
-        return this.division;
+        return this.LazyInitializeAdapter(ref this.division, this.Entity.AgentInfo.DivisionId, () => this.Entity.AgentInfo.Division);
       }
     }
 
@@ -247,12 +236,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.location,
-          () => this.Container.GetOrAddStoredValue<Item>(this.LocationId, () => this.Entity.AgentInfo.Location.ToAdapter(this.Container)));
-
-        Contract.Assume(this.location != null);
-        return this.location;
+        return this.LazyInitializeAdapter(ref this.location, this.Entity.AgentInfo.LocationId, () => this.Entity.AgentInfo.Location);
       }
     }
 
@@ -300,18 +284,7 @@ namespace Eve.Universe
 
         LazyInitializer.EnsureInitialized(
           ref this.researchFields,
-          () => 
-          {
-            if (this.Entity.AgentInfo == null || this.Entity.AgentInfo.ResearchFields == null)
-            {
-              return new ReadOnlySkillTypeCollection(null);
-            }
-
-            // Filter through the cache
-            return new ReadOnlySkillTypeCollection(
-              this.Entity.AgentInfo.ResearchFields.Select(x => this.Container.GetOrAddStoredValue<SkillType>(x.Id, () => (SkillType)x.ToAdapter(this.Container)))
-                                                  .OrderBy(x => x));
-          });
+          () => new ReadOnlySkillTypeCollection(this.Repository, this.Entity.AgentInfo.ResearchFields));
 
         Contract.Assume(this.researchFields != null);
         return this.researchFields;
@@ -383,6 +356,12 @@ namespace Eve.Universe
           this.researchFields.Dispose();
         }
       }
+    }
+
+    [ContractInvariantMethod]
+    private void ObjectInvariant()
+    {
+      Contract.Invariant(this.Entity.AgentInfo != null);
     }
   }
 }

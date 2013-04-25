@@ -155,7 +155,7 @@ namespace Eve.Data
     /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
     /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Agent> GetAgents(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations);
+    IReadOnlyList<Agent> GetAgents(Func<IQueryable<AgentEntity>, IQueryable<AgentEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Agent" /> objects.
@@ -166,7 +166,7 @@ namespace Eve.Data
     /// <returns>
     /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
-    IReadOnlyList<Agent> GetAgents(params IQueryModifier<ItemEntity>[] modifiers);
+    IReadOnlyList<Agent> GetAgents(params IQueryModifier<AgentEntity>[] modifiers);
 
     /// <summary>
     /// Attempts to retrieve the <see cref="Agent" /> object with the
@@ -1060,7 +1060,7 @@ namespace Eve.Data
     /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
     /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Celestial> GetCelestials(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations);
+    IReadOnlyList<Celestial> GetCelestials(Func<IQueryable<CelestialEntity>, IQueryable<CelestialEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Celestial" />
@@ -1072,7 +1072,7 @@ namespace Eve.Data
     /// <returns>
     /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
-    IReadOnlyList<Celestial> GetCelestials(params IQueryModifier<ItemEntity>[] modifiers);
+    IReadOnlyList<Celestial> GetCelestials(params IQueryModifier<CelestialEntity>[] modifiers);
 
     /// <summary>
     /// Attempts to retrieve the <see cref="Celestial" /> object with the
@@ -1093,6 +1093,74 @@ namespace Eve.Data
     /// Thrown if more than one item with the specified ID was found.
     /// </exception>
     bool TryGetCelestialById(CelestialId id, out Celestial value);
+    #endregion
+
+    #region Certificate Methods
+    /// <summary>
+    /// Returns the <see cref="Certificate" /> object with the specified ID.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <returns>
+    /// The item with the specified ID value(s).
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
+    Certificate GetCertificateById(CertificateId id);
+
+    /// <summary>
+    /// Returns all <see cref="Certificate" /> objects matching the specified criteria.
+    /// </summary>
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
+    /// </returns>
+    IReadOnlyList<Certificate> GetCertificates(Func<IQueryable<CertificateEntity>, IQueryable<CertificateEntity>> queryOperations);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="Certificate" />
+    /// objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
+    /// </returns>
+    IReadOnlyList<Certificate> GetCertificates(params IQueryModifier<CertificateEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="Certificate" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID value(s),
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
+    bool TryGetCertificateById(CertificateId id, out Certificate value);
     #endregion
 
     #region CertificateCategory Methods
@@ -1161,6 +1229,74 @@ namespace Eve.Data
     /// Thrown if more than one item with the specified ID was found.
     /// </exception>
     bool TryGetCertificateCategoryById(CertificateCategoryId id, out CertificateCategory value);
+    #endregion
+
+    #region CertificateClass Methods
+    /// <summary>
+    /// Returns the <see cref="CertificateClass" /> object with the specified ID.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <returns>
+    /// The item with the specified ID value(s).
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
+    CertificateClass GetCertificateClassById(CertificateClassId id);
+
+    /// <summary>
+    /// Returns all <see cref="CertificateClass" /> objects matching the specified criteria.
+    /// </summary>
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
+    /// </returns>
+    IReadOnlyList<CertificateClass> GetCertificateClasses(Func<IQueryable<CertificateClassEntity>, IQueryable<CertificateClassEntity>> queryOperations);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="CertificateClass" />
+    /// objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
+    /// </returns>
+    IReadOnlyList<CertificateClass> GetCertificateClasses(params IQueryModifier<CertificateClassEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="CertificateClass" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID value(s),
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
+    bool TryGetCertificateClassById(CertificateClassId id, out CertificateClass value);
     #endregion
 
     #region CharacterAttributeType Methods
@@ -1266,7 +1402,7 @@ namespace Eve.Data
     /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
     /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Constellation> GetConstellations(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations);
+    IReadOnlyList<Constellation> GetConstellations(Func<IQueryable<ConstellationEntity>, IQueryable<ConstellationEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Constellation" /> objects.
@@ -1277,7 +1413,7 @@ namespace Eve.Data
     /// <returns>
     /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
-    IReadOnlyList<Constellation> GetConstellations(params IQueryModifier<ItemEntity>[] modifiers);
+    IReadOnlyList<Constellation> GetConstellations(params IQueryModifier<ConstellationEntity>[] modifiers);
 
     /// <summary>
     /// Attempts to retrieve the <see cref="Constellation" /> object with the
@@ -1835,7 +1971,7 @@ namespace Eve.Data
     /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
     /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Faction> GetFactions(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations);
+    IReadOnlyList<Faction> GetFactions(Func<IQueryable<FactionEntity>, IQueryable<FactionEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Faction" /> objects.
@@ -1846,7 +1982,7 @@ namespace Eve.Data
     /// <returns>
     /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
-    IReadOnlyList<Faction> GetFactions(params IQueryModifier<ItemEntity>[] modifiers);
+    IReadOnlyList<Faction> GetFactions(params IQueryModifier<FactionEntity>[] modifiers);
 
     /// <summary>
     /// Attempts to retrieve the <see cref="Faction" /> object with the
@@ -2527,7 +2663,7 @@ namespace Eve.Data
     /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
     /// the specified criteria.
     /// </returns>
-    IReadOnlyList<NpcCorporation> GetNpcCorporations(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations);
+    IReadOnlyList<NpcCorporation> GetNpcCorporations(Func<IQueryable<NpcCorporationEntity>, IQueryable<NpcCorporationEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="NpcCorporation" /> objects.
@@ -2538,7 +2674,7 @@ namespace Eve.Data
     /// <returns>
     /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
-    IReadOnlyList<NpcCorporation> GetNpcCorporations(params IQueryModifier<ItemEntity>[] modifiers);
+    IReadOnlyList<NpcCorporation> GetNpcCorporations(params IQueryModifier<NpcCorporationEntity>[] modifiers);
 
     /// <summary>
     /// Attempts to retrieve the <see cref="NpcCorporation" /> object with the
@@ -2734,7 +2870,7 @@ namespace Eve.Data
     /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
     /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Region> GetRegions(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations);
+    IReadOnlyList<Region> GetRegions(Func<IQueryable<RegionEntity>, IQueryable<RegionEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Region" /> objects.
@@ -2745,7 +2881,7 @@ namespace Eve.Data
     /// <returns>
     /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
-    IReadOnlyList<Region> GetRegions(params IQueryModifier<ItemEntity>[] modifiers);
+    IReadOnlyList<Region> GetRegions(params IQueryModifier<RegionEntity>[] modifiers);
 
     /// <summary>
     /// Attempts to retrieve the <see cref="Region" /> object with the
@@ -2874,7 +3010,7 @@ namespace Eve.Data
     /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
     /// the specified criteria.
     /// </returns>
-    IReadOnlyList<SolarSystem> GetSolarSystems(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations);
+    IReadOnlyList<SolarSystem> GetSolarSystems(Func<IQueryable<SolarSystemEntity>, IQueryable<SolarSystemEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="SolarSystem" /> objects.
@@ -2885,7 +3021,7 @@ namespace Eve.Data
     /// <returns>
     /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
-    IReadOnlyList<SolarSystem> GetSolarSystems(params IQueryModifier<ItemEntity>[] modifiers);
+    IReadOnlyList<SolarSystem> GetSolarSystems(params IQueryModifier<SolarSystemEntity>[] modifiers);
 
     /// <summary>
     /// Attempts to retrieve the <see cref="SolarSystem" /> object with the
@@ -3014,7 +3150,7 @@ namespace Eve.Data
     /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
     /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Stargate> GetStargates(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations);
+    IReadOnlyList<Stargate> GetStargates(Func<IQueryable<StargateEntity>, IQueryable<StargateEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Stargate" />
@@ -3026,7 +3162,7 @@ namespace Eve.Data
     /// <returns>
     /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
-    IReadOnlyList<Stargate> GetStargates(params IQueryModifier<ItemEntity>[] modifiers);
+    IReadOnlyList<Stargate> GetStargates(params IQueryModifier<StargateEntity>[] modifiers);
 
     /// <summary>
     /// Attempts to retrieve the <see cref="Stargate" /> object with the
@@ -3049,7 +3185,7 @@ namespace Eve.Data
     bool TryGetStargateById(StargateId id, out Stargate value);
     #endregion
 
-    #region Station Methods
+    #region Container Methods
     /// <summary>
     /// Returns the <see cref="Station" /> object with the specified ID.
     /// </summary>
@@ -3082,7 +3218,7 @@ namespace Eve.Data
     /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
     /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Station> GetStations(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations);
+    IReadOnlyList<Station> GetStations(Func<IQueryable<StationEntity>, IQueryable<StationEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Station" /> objects.
@@ -3093,7 +3229,7 @@ namespace Eve.Data
     /// <returns>
     /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
-    IReadOnlyList<Station> GetStations(params IQueryModifier<ItemEntity>[] modifiers);
+    IReadOnlyList<Station> GetStations(params IQueryModifier<StationEntity>[] modifiers);
 
     /// <summary>
     /// Attempts to retrieve the <see cref="Station" /> object with the
@@ -3417,7 +3553,7 @@ namespace Eve.Data
     /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
     /// the specified criteria.
     /// </returns>
-    IReadOnlyList<Universe> GetUniverses(Func<IQueryable<ItemEntity>, IQueryable<ItemEntity>> queryOperations);
+    IReadOnlyList<Universe> GetUniverses(Func<IQueryable<UniverseEntity>, IQueryable<UniverseEntity>> queryOperations);
 
     /// <summary>
     /// Returns the results of the specified query for <see cref="Universe" /> objects.
@@ -3428,7 +3564,7 @@ namespace Eve.Data
     /// <returns>
     /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
     /// </returns>
-    IReadOnlyList<Universe> GetUniverses(params IQueryModifier<ItemEntity>[] modifiers);
+    IReadOnlyList<Universe> GetUniverses(params IQueryModifier<UniverseEntity>[] modifiers);
 
     /// <summary>
     /// Attempts to retrieve the <see cref="Universe" /> object with the

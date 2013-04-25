@@ -153,12 +153,20 @@
     <Compile Include="EveUpdater\Classes\ValueConverter\EveUpdaterWindow Converters\SchemaTableComparisonTreeViewConverter.cs" />
     <Compile Include="EveUpdater\Classes\ValueConverter\EveUpdaterWindow Converters\SchemaTableTreeViewConverter.cs" />
     <Compile Include="EveUpdater\Classes\ValueConverter\EveUpdaterWindow Converters\SchemaToImageConverter.cs" />
-    <Compile Include="EveUpdater\Enums\FindAttributesMethod.cs" />
-    <Compile Include="EveUpdater\Windows\IEveUpdaterWindowService.cs" />
+    <Compile Include="EveUpdater\Enums\CategoryAttributeDiscoveryMethod.cs" />
+    <Compile Include="EveUpdater\Interfaces\IEveUpdaterWindowService.cs" />
+    <Compile Include="EveUpdater\Windows\EveUpdaterWindowViewModel.TestEntitySimpleCommand.cs" />
+    <Compile Include="EveUpdater\Windows\EveUpdaterWindowViewModel.TestDataSourceSimpleCommand.cs" />
+    <Compile Include="EveUpdater\Windows\EveUpdaterWindowViewModel.LoadCategoriesSimpleCommand.cs" />
+    <Compile Include="EveUpdater\Windows\EveUpdaterWindowViewModel.GenerateTableCodeSimpleCommand.cs" />
+    <Compile Include="EveUpdater\Windows\EveUpdaterWindowViewModel.GenerateEnumCodeSimpleCommand.cs" />
+    <Compile Include="EveUpdater\Windows\EveUpdaterWindowViewModel.FindAttributesForCategorySimpleCommand.cs" />
+    <Compile Include="EveUpdater\Windows\EveUpdaterWindowViewModel.CompareDataSourcesSimpleCommand.cs" />
     <Compile Include="EveUpdater\Windows\EveUpdaterWindow.xaml.cs">
       <DependentUpon>EveUpdaterWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="EveUpdater\Windows\EveUpdaterWindowViewModel.cs" />
+    <Compile Include="EveUpdater\Windows\EveUpdaterWindowService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

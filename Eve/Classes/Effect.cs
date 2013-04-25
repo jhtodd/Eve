@@ -35,15 +35,15 @@ namespace Eve
     /// <summary>
     /// Initializes a new instance of the Effect class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    public Effect(IEveRepository container, EffectEntity entity) : base(container, entity)
+    public Effect(IEveRepository repository, EffectEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
@@ -85,12 +85,7 @@ namespace Eve
         Contract.Ensures(Contract.Result<EffectType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.effectType,
-          () => this.Container.GetOrAddStoredValue<EffectType>(this.Id, () => this.Entity.EffectType.ToAdapter(this.Container)));
-
-        Contract.Assume(this.effectType != null);
-        return this.effectType;
+        return this.LazyInitializeAdapter(ref this.effectType, this.Entity.EffectId, () => this.Entity.EffectType);
       }
     }
 

@@ -36,15 +36,15 @@ namespace Eve.Universe
     /// <summary>
     /// Initializes a new instance of the ConstellationJump class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal ConstellationJump(IEveRepository container, ConstellationJumpEntity entity) : base(container, entity)
+    internal ConstellationJump(IEveRepository repository, ConstellationJumpEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
@@ -63,12 +63,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Constellation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.fromConstellation,
-          () => this.Container.GetOrAddStoredValue<Constellation>(this.FromConstellationId, () => (Constellation)this.Entity.FromConstellation.ToAdapter(this.Container)));
-
-        Contract.Assume(this.fromConstellation != null);
-        return this.fromConstellation;
+        return this.LazyInitializeAdapter(ref this.fromConstellation, this.Entity.FromConstellationId, () => this.Entity.FromConstellation);
       }
     }
 
@@ -96,12 +91,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.fromRegion,
-          () => this.Container.GetOrAddStoredValue<Region>(this.FromRegionId, () => (Region)this.Entity.FromRegion.ToAdapter(this.Container)));
-
-        Contract.Assume(this.fromRegion != null);
-        return this.fromRegion;
+        return this.LazyInitializeAdapter(ref this.fromRegion, this.Entity.FromRegionId, () => this.Entity.FromRegion);
       }
     }
 
@@ -129,12 +119,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Constellation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.toConstellation,
-          () => this.Container.GetOrAddStoredValue<Constellation>(this.ToConstellationId, () => (Constellation)this.Entity.ToConstellation.ToAdapter(this.Container)));
-
-        Contract.Assume(this.toConstellation != null);
-        return this.toConstellation;
+        return this.LazyInitializeAdapter(ref this.toConstellation, this.Entity.ToConstellationId, () => this.Entity.ToConstellation);
       }
     }
 
@@ -162,12 +147,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Region>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.toRegion,
-          () => this.Container.GetOrAddStoredValue<Region>(this.ToRegionId, () => (Region)this.Entity.ToRegion.ToAdapter(this.Container)));
-
-        Contract.Assume(this.toRegion != null);
-        return this.toRegion;
+        return this.LazyInitializeAdapter(ref this.toRegion, this.Entity.ToRegionId, () => this.Entity.ToRegion);
       }
     }
 

@@ -24,6 +24,7 @@ namespace Eve.Industry
       IComparable<AssemblyLineTypeGroupDetail>,
       IEquatable<AssemblyLineTypeGroupDetail>,
       IEveCacheable,
+      IKeyItem<GroupId>,
       IKeyItem<long>
   {
     private AssemblyLineType assemblyLineType;
@@ -34,15 +35,15 @@ namespace Eve.Industry
     /// <summary>
     /// Initializes a new instance of the AssemblyLineTypeGroupDetail class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal AssemblyLineTypeGroupDetail(IEveRepository container, AssemblyLineTypeGroupDetailEntity entity) : base(container, entity)
+    internal AssemblyLineTypeGroupDetail(IEveRepository repository, AssemblyLineTypeGroupDetailEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
@@ -63,12 +64,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<AssemblyLineType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.assemblyLineType,
-          () => this.Container.GetOrAddStoredValue<AssemblyLineType>(this.AssemblyLineTypeId, () => this.Entity.AssemblyLineType.ToAdapter(this.Container)));
-
-        Contract.Assume(this.assemblyLineType != null);
-        return this.assemblyLineType;
+        return this.LazyInitializeAdapter(ref this.assemblyLineType, this.Entity.AssemblyLineTypeId, () => this.Entity.AssemblyLineType);
       }
     }
 
@@ -100,12 +96,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<Group>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.group,
-          () => this.Container.GetOrAddStoredValue<Group>(this.GroupId, () => this.Entity.Group.ToAdapter(this.Container)));
-
-        Contract.Assume(this.group != null);
-        return this.group;
+        return this.LazyInitializeAdapter(ref this.group, this.Entity.GroupId, () => this.Entity.Group);
       }
     }
 
@@ -234,6 +225,19 @@ namespace Eve.Industry
     {
       AssemblyLineTypeGroupDetail other = obj as AssemblyLineTypeGroupDetail;
       return this.CompareTo(other);
+    }
+  }
+  #endregion
+
+  #region IKeyItem<GroupId> Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.
+  /// </content>
+  public sealed partial class AssemblyLineTypeGroupDetail : IKeyItem<GroupId>
+  {
+    GroupId IKeyItem<GroupId>.Key
+    {
+      get { return this.GroupId; }
     }
   }
   #endregion

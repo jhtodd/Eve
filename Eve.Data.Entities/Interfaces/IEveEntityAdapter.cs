@@ -32,6 +32,7 @@ namespace Eve.Data.Entities
   /// </remarks>
   public interface IEveEntityAdapter<out TEntity> 
     : IEntityAdapter<TEntity>,
+      IEveCacheable,
       IEveRepositoryItem
     where TEntity : IEveEntity
   {

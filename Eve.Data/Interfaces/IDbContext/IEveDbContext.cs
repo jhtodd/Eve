@@ -36,7 +36,7 @@ namespace Eve.Data
     /// <value>
     /// The <see cref="IQueryable{T}" /> for agents.
     /// </value>
-    IQueryable<ItemEntity> Agents { get; }
+    IQueryable<AgentEntity> Agents { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query agent types.
@@ -137,6 +137,22 @@ namespace Eve.Data
     IQueryable<CategoryEntity> Categories { get; }
 
     /// <summary>
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query celestial objects.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IQueryable{T}" /> for celestials.
+    /// </value>
+    IQueryable<CelestialEntity> Celestials { get; }
+
+    /// <summary>
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query certificate.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IQueryable{T}" /> for certificates.
+    /// </value>
+    IQueryable<CertificateEntity> Certificates { get; }
+
+    /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query certificate categories.
     /// </summary>
     /// <value>
@@ -145,12 +161,12 @@ namespace Eve.Data
     IQueryable<CertificateCategoryEntity> CertificateCategories { get; }
 
     /// <summary>
-    /// Gets an <see cref="IQueryable{T}" /> that can be used to query categories.
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query certificate classes.
     /// </summary>
     /// <value>
-    /// The <see cref="IQueryable{T}" /> for categories.
+    /// The <see cref="IQueryable{T}" /> for certificate classes.
     /// </value>
-    IQueryable<ItemEntity> Celestials { get; }
+    IQueryable<CertificateClassEntity> CertificateClasses { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query character attribute types.
@@ -166,7 +182,7 @@ namespace Eve.Data
     /// <value>
     /// The <see cref="IQueryable{T}" /> for constellations.
     /// </value>
-    IQueryable<ItemEntity> Constellations { get; }
+    IQueryable<ConstellationEntity> Constellations { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query constellation jumps.
@@ -222,7 +238,7 @@ namespace Eve.Data
     /// <value>
     /// The <see cref="IQueryable{T}" /> for factions.
     /// </value>
-    IQueryable<ItemEntity> Factions { get; }
+    IQueryable<FactionEntity> Factions { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query flag types.
@@ -302,7 +318,7 @@ namespace Eve.Data
     /// <value>
     /// The <see cref="IQueryable{T}" /> for NPC corporations.
     /// </value>
-    IQueryable<ItemEntity> NpcCorporations { get; }
+    IQueryable<NpcCorporationEntity> NpcCorporations { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query divisions of NPC corporations.
@@ -326,7 +342,7 @@ namespace Eve.Data
     /// <value>
     /// The <see cref="IQueryable{T}" /> for regions.
     /// </value>
-    IQueryable<ItemEntity> Regions { get; }
+    IQueryable<RegionEntity> Regions { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query region jumps.
@@ -342,7 +358,7 @@ namespace Eve.Data
     /// <value>
     /// The <see cref="IQueryable{T}" /> for solar Systems.
     /// </value>
-    IQueryable<ItemEntity> SolarSystems { get; }
+    IQueryable<SolarSystemEntity> SolarSystems { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query solar system jumps.
@@ -358,7 +374,7 @@ namespace Eve.Data
     /// <value>
     /// The <see cref="IQueryable{T}" /> for stargates.
     /// </value>
-    IQueryable<ItemEntity> Stargates { get; }
+    IQueryable<StargateEntity> Stargates { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query stations.
@@ -366,7 +382,7 @@ namespace Eve.Data
     /// <value>
     /// The <see cref="IQueryable{T}" /> for stations.
     /// </value>
-    IQueryable<ItemEntity> Stations { get; }
+    IQueryable<StationEntity> Stations { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query station operations.
@@ -406,7 +422,7 @@ namespace Eve.Data
     /// <value>
     /// The <see cref="IQueryable{T}" /> for universes.
     /// </value>
-    IQueryable<ItemEntity> Universes { get; }
+    IQueryable<UniverseEntity> Universes { get; }
 
     /* Methods */
 

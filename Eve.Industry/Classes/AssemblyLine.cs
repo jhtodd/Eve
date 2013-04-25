@@ -36,15 +36,15 @@ namespace Eve.Industry
     /// <summary>
     /// Initializes a new instance of the AssemblyLine class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal AssemblyLine(IEveRepository container, AssemblyLineEntity entity) : base(container, entity)
+    internal AssemblyLine(IEveRepository repository, AssemblyLineEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
@@ -63,12 +63,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<Activity>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.activity,
-          () => this.Container.GetOrAddStoredValue<Activity>(this.ActivityId, () => this.Entity.Activity.ToAdapter(this.Container)));
-
-        Contract.Assume(this.activity != null);
-        return this.activity;
+        return this.LazyInitializeAdapter(ref this.activity, this.Entity.ActivityId, () => this.Entity.Activity);
       }
     }
 
@@ -81,6 +76,34 @@ namespace Eve.Industry
     public ActivityId ActivityId
     {
       get { return this.Entity.ActivityId; }
+    }
+
+    /// <summary>
+    /// Gets the <see cref="Station" /> where the assembly line is located.
+    /// </summary>
+    /// <value>
+    /// The <see cref="Station" /> where the assembly line is located.
+    /// </value>    
+    public Station Container
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<Station>() != null);
+
+        // If not already set, load from the cache, or else create an instance from the base entity
+        return this.LazyInitializeAdapter(ref this.station, this.Entity.ContainerId, () => this.Entity.Container);
+      }
+    }
+
+    /// <summary>
+    /// Gets the ID of the station where the assembly line is located.
+    /// </summary>
+    /// <value>
+    /// The ID of the station where the assembly line is located.
+    /// </value>   
+    public StationId ContainerId
+    {
+      get { return this.Entity.ContainerId; }
     }
 
     /// <summary>
@@ -308,12 +331,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<NpcCorporation>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.owner, 
-          () => this.Container.GetOrAddStoredValue<NpcCorporation>(this.OwnerId, () => (NpcCorporation)this.Entity.Owner.ToAdapter(this.Container)));
-
-        Contract.Assume(this.owner != null);
-        return this.owner;
+        return this.LazyInitializeAdapter(ref this.owner, this.Entity.OwnerId, () => this.Entity.Owner);
       }
     }
 
@@ -337,39 +355,6 @@ namespace Eve.Industry
     public byte RestrictionMask
     {
       get { return this.Entity.RestrictionMask; }
-    }
-
-    /// <summary>
-    /// Gets the <see cref="Station" /> where the assembly line is located.
-    /// </summary>
-    /// <value>
-    /// The <see cref="Station" /> where the assembly line is located.
-    /// </value>    
-    public Station Station
-    {
-      get
-      {
-        Contract.Ensures(Contract.Result<Station>() != null);
-
-        // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.station,
-          () => this.Container.GetOrAddStoredValue<Station>(this.StationId, () => (Station)this.Entity.Container.ToAdapter(this.Container)));
-
-        Contract.Assume(this.station != null);
-        return this.station;
-      }
-    }
-
-    /// <summary>
-    /// Gets the ID of the station where the assembly line is located.
-    /// </summary>
-    /// <value>
-    /// The ID of the station where the assembly line is located.
-    /// </value>   
-    public StationId StationId
-    {
-      get { return this.Entity.ContainerId; }
     }
 
     /// <summary>
@@ -412,12 +397,7 @@ namespace Eve.Industry
         Contract.Ensures(Contract.Result<AssemblyLineType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.assemblyLineType,
-          () => this.Container.GetOrAddStoredValue<AssemblyLineType>(this.TypeId, () => this.Entity.AssemblyLineType.ToAdapter(this.Container)));
-
-        Contract.Assume(this.assemblyLineType != null);
-        return this.assemblyLineType;
+        return this.LazyInitializeAdapter(ref this.assemblyLineType, this.Entity.AssemblyLineTypeId, () => this.Entity.AssemblyLineType);
       }
     }
 

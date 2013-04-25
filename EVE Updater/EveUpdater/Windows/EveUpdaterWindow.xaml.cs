@@ -3,7 +3,8 @@
 //     Copyright © Jeremy H. Todd 2012
 // </copyright>
 //-----------------------------------------------------------------------
-namespace EveUpdater {
+namespace EveUpdater
+{
   using System;
   using System.Collections.Generic;
   using System.Diagnostics.Contracts;
@@ -22,77 +23,77 @@ namespace EveUpdater {
   using FreeNet.Data;
 
   /// <summary>
-  /// Interaction logic for EveUpdaterWindow.xaml
+  /// Interaction logic for EveUpdaterWindow.
   /// </summary>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "The disposable fields are dealt with in OnClosed().")]
-  public partial class EveUpdaterWindow : Window {
+  public partial class EveUpdaterWindow : Window
+  {
+    private EveUpdaterWindowViewModel viewModel;
 
-    #region Instance Fields
-    private EveUpdaterWindowViewModel _vm;
-    #endregion
+    /* Constructors */
 
-    #region Constructors/Finalizers
-    //******************************************************************************
     /// <summary>
     /// Initializes a new instance of the EveUpdaterWindow class.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "Any virtual methods called are unavoidable: InitializeComponent() and ObjectInvariant() are both required.")]
-    public EveUpdaterWindow()
-      : base() {
-      InitializeComponent();
+    public EveUpdaterWindow() : base()
+    {
+      this.InitializeComponent();
 
       // Initialize the Data Source ViewModel
-      _vm = new EveUpdaterWindowViewModel(new DefaultEveUpdaterWindowService());
-      DataContext = _vm;
+      this.viewModel = new EveUpdaterWindowViewModel(new EveUpdaterWindowService());
+      this.DataContext = this.viewModel;
     }
-    //******************************************************************************
-    /// <summary>
-    /// Establishes object invariants of the class.
-    /// </summary>
-    [ContractInvariantMethod]
-    private void ObjectInvariant() {
-      Contract.Invariant(_vm != null);
-    }
-    #endregion
-    #region Public Properties
-    //******************************************************************************
+
+    /* Properties */
+
     /// <summary>
     /// Gets the view model for the current window.
     /// </summary>
-    /// 
     /// <value>
     /// An object derived from <see cref="ViewModelBase" /> representing the
     /// view model of the current window.
     /// </value>
-    public EveUpdaterWindowViewModel ViewModel {
-      get {
+    public EveUpdaterWindowViewModel ViewModel
+    {
+      get
+      {
         Contract.Ensures(Contract.Result<EveUpdaterWindowViewModel>() != null);
-        return _vm;
+        return this.viewModel;
       }
     }
-    #endregion
-    #region Protected Methods
-    //******************************************************************************
+
+    /* Methods */
+
     /// <inheritdoc />
-    protected override void OnClosed(EventArgs e) {
+    protected override void OnClosed(EventArgs e)
+    {
       base.OnClosed(e);
 
-      _vm.Dispose();
+      this.viewModel.Dispose();
     }
-    #endregion
-    #region Private Methods
-    //******************************************************************************
+
     // This is a kludge to get around the fact that the TreeView control doesn't
     // have a bindable SelectedItem property.
-    private void CategoryTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e) {
-      ViewModel.SelectedAttributeCategory = e.NewValue;
+    private void CategoryTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+    {
+      this.ViewModel.SelectedAttributeCategory = e.NewValue;
     }
-    //******************************************************************************
+
     // This is a kludge to get around the fact that the TreeView control doesn't
     // have a bindable SelectedItem property.
-    private void DataSourceOverviewTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e) {
-      ViewModel.DataSourceComparisonSelectedValue = e.NewValue;
+    private void DataSourceOverviewTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+    {
+      this.ViewModel.DataSourceComparisonSelectedValue = e.NewValue;
     }
-    #endregion
+
+    /// <summary>
+    /// Establishes object invariants of the class.
+    /// </summary>
+    [ContractInvariantMethod]
+    private void ObjectInvariant()
+    {
+      Contract.Invariant(this.viewModel != null);
+    }
   }
 }

@@ -59,7 +59,7 @@ namespace Eve
       IEveCacheable,
       IKeyItem<TId>
     where TId : IConvertible, new()
-    where TEntityId : IConvertible
+    where TEntityId : struct, IConvertible
     where TEntity : BaseValueEntity<TEntityId, TDerived>
     where TDerived : BaseValue<TId, TEntityId, TEntity, TDerived>
   {
@@ -70,18 +70,17 @@ namespace Eve
     /// <summary>
     /// Initializes a new instance of the BaseValue class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    protected BaseValue(IEveRepository container, TEntity entity) : base(container, entity)
+    protected BaseValue(IEveRepository repository, TEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
 
-      Contract.Assume(entity.Id != null);
       this.id = this.ConvertEntityId(entity.Id);
     }
 
@@ -145,21 +144,6 @@ namespace Eve
       }
     }
 
-    /// <summary>
-    /// Gets the key used to cache the current item.
-    /// </summary>
-    /// <value>
-    /// The key used to cache the current item.
-    /// </value>
-    protected virtual IConvertible CacheKey
-    {
-      get
-      {
-        Contract.Ensures(Contract.Result<IConvertible>() != null);
-        return this.Id;
-      }
-    }
-
     /* Methods */
 
     /// <inheritdoc />
@@ -213,7 +197,6 @@ namespace Eve
     /// </returns>
     protected virtual TId ConvertEntityId(TEntityId entityId)
     {
-      Contract.Requires(entityId != null, "The entity ID cannot be null.");
       Contract.Ensures(Contract.Result<TId>() != null);
 
       // Attempt automatic conversion

@@ -31,26 +31,49 @@ using System.Reflection;
 using YamlDotNet.RepresentationModel;
 using System.IO;
 
-namespace Eve.Sandbox {
+namespace Eve.Sandbox
+{
   /// <summary>
   /// Interaction logic for MainWindow.xaml
   /// </summary>
-  public partial class MainWindow : Window {
-    EveRepository ds = new EveRepository(null, null);
+  public partial class MainWindow : Window
+  {
+    private EveRepository ds = new EveRepository(null, null);
 
-    public MainWindow() {
+    public MainWindow()
+    {
       InitializeComponent();
     }
 
-    private void Button_Click_1(object sender, RoutedEventArgs e) {
+    public class Foo
+    {
+      MainWindow t;
+
+      public Foo(MainWindow w)
+      {
+        this.t = w;
+      }
+
+      public void Bar()
+      {
+        t.textBox1.Text = "nothing";
+      }
+
+      public void Bar(string a)
+      {
+        t.textBox1.Text = "string";
+      }
+    }
+
+    private void Button_Click_1(object sender, RoutedEventArgs e)
+    {
       EveDbContext ct = new EveDbContext();
 
-      var results = ds.GetStations(q => q.Where(s => s.StationInfo.Agents.Any(a => a.ResearchFields.Count > 0))
-                                         .OrderBy(s => s.Name.Value));
+      var result = ds.GetStations(q => q.Where(s => s.Agents.Count > 10));
 
-      foreach (var result in results)
+      foreach (var t in result)
       {
-        textBox1.AppendText(result.Name + Environment.NewLine);
+        textBox1.AppendText(t.Name + Environment.NewLine);
       }
     }
   }

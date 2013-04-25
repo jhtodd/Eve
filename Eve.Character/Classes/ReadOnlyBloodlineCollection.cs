@@ -9,62 +9,51 @@ namespace Eve.Character
   using System.Diagnostics.Contracts;
   using System.Linq;
 
+  using Eve.Collections;
   using Eve.Data;
   using Eve.Data.Entities;
 
   using FreeNet.Collections.ObjectModel;
 
   /// <summary>
-  /// A read-only collection of solar systems.
+  /// A read-only collection of <see cref="Bloodline" /> objects.
   /// </summary>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
-  public sealed class ReadOnlyBloodlineCollection : ReadOnlyCollection<Bloodline>
+  public sealed partial class ReadOnlyBloodlineCollection
+    : ReadOnlyKeyedEntityAdapterCollection<BloodlineId, BloodlineEntity, Bloodline>
   {
     /* Constructors */
 
     /// <summary>
     /// Initializes a new instance of the ReadOnlyBloodlineCollection class.
     /// </summary>
+    /// <param name="repository">
+    /// The <see cref="IEveRepository" /> associated with the items in the 
+    /// collection.
+    /// </param>
     /// <param name="contents">
     /// The contents of the collection.
     /// </param>
-    public ReadOnlyBloodlineCollection(IEnumerable<Bloodline> contents)
-      : base(contents == null ? 0 : contents.Count())
+    public ReadOnlyBloodlineCollection(IEveRepository repository, IEnumerable<Bloodline> contents)
+      : base(repository, contents)
     {
-      if (contents != null)
-      {
-        foreach (Bloodline bloodline in contents)
-        {
-          Items.AddWithoutCallback(bloodline);
-        }
-      }
+      Contract.Requires(repository != null, "The provided repository cannot be null.");
     }
 
     /// <summary>
     /// Initializes a new instance of the ReadOnlyBloodlineCollection class.
     /// </summary>
     /// <param name="repository">
-    /// The <see cref="IEveRepository" /> to which the contents will be added.
-    /// </param>
-    /// <param name="contents">
-    /// A sequence of <see cref="BloodlineEntity" /> objects from which to create
-    /// the <see cref="Bloodline" /> objects which will be contained in the
+    /// The <see cref="IEveRepository" /> associated with the items in the 
     /// collection.
     /// </param>
-    public ReadOnlyBloodlineCollection(IEveRepository repository, IEnumerable<BloodlineEntity> contents)
-      : base(contents == null ? 0 : contents.Count())
+    /// <param name="entities">
+    /// A sequence of entities from which to create the contents of the collection.
+    /// </param>
+    public ReadOnlyBloodlineCollection(IEveRepository repository, IEnumerable<BloodlineEntity> entities)
+      : base(repository, entities)
     {
-      Contract.Requires(contents == null || repository != null, "The provided repository cannot be null.");
-
-      if (contents != null)
-      {
-        var realContents = contents.Select(x => repository.GetOrAddStoredValue(x.Id, () => x.ToAdapter(repository)));
-
-        foreach (Bloodline item in realContents)
-        {
-          Items.AddWithoutCallback(item);
-        }
-      }
+      Contract.Requires(repository != null, "The provided repository cannot be null.");
     }
   }
 }

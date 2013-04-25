@@ -23,13 +23,13 @@ namespace Eve.Data.Entities
     /// <summary>
     /// Returns an instance of an adapter wrapping the current entity.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which will host the adapter.
     /// </param>
     /// <returns>
     /// A class implementing the <see cref="IEveEntityAdapter{TEntity}" />
     /// interface that encapsulates the current entity.
     /// </returns>
-    TAdapter ToAdapter(IEveRepository container);
+    TAdapter ToAdapter(IEveRepository repository);
   }
 }

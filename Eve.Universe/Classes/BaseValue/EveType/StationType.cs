@@ -27,15 +27,15 @@ namespace Eve.Universe
     /// <summary>
     /// Initializes a new instance of the StationType class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal StationType(IEveRepository container, StationTypeEntity entity) : base(container, entity)
+    internal StationType(IEveRepository repository, StationTypeEntity entity) : base(repository, entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
     }
 
@@ -220,12 +220,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
-          ref this.operation,
-          () => this.Container.GetOrAddStoredValue<StationOperation>(this.OperationId, () => this.Entity.Operation.ToAdapter(this.Container)));
-
-        Contract.Assume(this.operation != null);
-        return this.operation;
+        return this.LazyInitializeAdapter(ref this.operation, this.Entity.OperationId, () => this.Entity.Operation);
       }
     }
 

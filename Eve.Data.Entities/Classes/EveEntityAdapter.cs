@@ -7,6 +7,7 @@ namespace Eve.Data.Entities
 {
   using System;
   using System.Diagnostics.Contracts;
+  using System.Threading;
 
   using Eve.Data;
 
@@ -24,28 +25,43 @@ namespace Eve.Data.Entities
       IEveEntityAdapter<TEntity>
     where TEntity : IEveEntity
   {
-    private readonly IEveRepository container;
+    private readonly IEveRepository repository;
 
     /* Constructors */
 
     /// <summary>
     /// Initializes a new instance of the EveEntityAdapter class.
     /// </summary>
-    /// <param name="container">
+    /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
     /// </param>
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    protected EveEntityAdapter(IEveRepository container, TEntity entity) : base(entity)
+    protected EveEntityAdapter(IEveRepository repository, TEntity entity) : base(entity)
     {
-      Contract.Requires(container != null, "The containing repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
 
-      this.container = container;
+      this.repository = repository;
     }
 
     /* Properties */
+
+    /// <summary>
+    /// Gets the ID value used to store the object in the cache.
+    /// </summary>
+    /// <value>
+    /// A value which uniquely identifies the entity.
+    /// </value>
+    protected internal virtual IConvertible CacheKey
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IConvertible>() != null);
+        return this.Entity.CacheKey;
+      }
+    }
 
     /// <summary>
     /// Gets the <see cref="IEveRepository" /> the item is associated
@@ -54,30 +70,113 @@ namespace Eve.Data.Entities
     /// <value>
     /// The <see cref="IEveRepository" /> the item is associated with.
     /// </value>
-    protected IEveRepository Container
+    protected IEveRepository Repository
     {
       get
       {
         Contract.Ensures(Contract.Result<IEveRepository>() != null);
-        return this.container;
+        return this.repository;
       }
     }
 
+    /* Methods */
+
     /// <summary>
-    /// Gets the ID value used to store the object in the cache.
+    /// If a cached adapter for the specified entity type exists, returns that
+    /// cached adapter.  If not, creates a new adapter for the entity and
+    /// stores it in the cache.
     /// </summary>
-    /// <value>
-    /// A value which uniquely identifies the entity.
-    /// </value>
-    protected virtual IConvertible CacheKey
+    /// <typeparam name="TProvidedEntity">
+    /// The type of entity for which to return an adapter.
+    /// </typeparam>
+    /// <typeparam name="TAdapter">
+    /// The type of the adapter to retrieve or create.
+    /// </typeparam>
+    /// <param name="adapter">
+    /// The variable which will contain the retrieve or created adapter.
+    /// Passed by reference.
+    /// </param>
+    /// <param name="cacheKey">
+    /// The key for which to attempt to find a adapter for the entity
+    /// returned by <paramref name="entityProvider" />.
+    /// </param>
+    /// <param name="entityProvider">
+    /// A method which will return the entity for which to retrieve or create
+    /// an adapter.  This is only invoked if no cached adapter with
+    /// the specified <paramref name="cacheKey" /> is found.
+    /// </param>
+    /// <returns>
+    /// An entity adapter of type <typeparamref name="TAdapter" /> which
+    /// wraps the specified entity.
+    /// </returns>
+    protected TAdapter LazyInitializeAdapter<TProvidedEntity, TAdapter>(ref TAdapter adapter, IConvertible cacheKey, Func<TProvidedEntity> entityProvider)
+      where TProvidedEntity : IEveEntity<TAdapter>
+      where TAdapter : class, IEveCacheable
     {
-      get { return this.Entity.CacheKey; }
+      Contract.Requires(cacheKey != null, "The cache key cannot be null.");
+      Contract.Requires(entityProvider != null, "The entity factory method cannot be null.");
+      Contract.Ensures(Contract.Result<TAdapter>() != null);
+
+      LazyInitializer.EnsureInitialized(
+        ref adapter,
+        () => this.Repository.GetOrAddStoredValue<TAdapter>(cacheKey, () => entityProvider().ToAdapter(this.Repository)));
+
+      Contract.Assume(adapter != null);
+      return adapter;
+    }
+
+    /// <summary>
+    /// If a cached adapter for the specified entity type exists, returns that
+    /// cached adapter.  If not, creates a new adapter for the entity and
+    /// stores it in the cache.
+    /// </summary>
+    /// <typeparam name="TProvidedEntity">
+    /// The type of entity for which to return an adapter.
+    /// </typeparam>
+    /// <typeparam name="TAdapter">
+    /// The type of the adapter to retrieve or create.
+    /// </typeparam>
+    /// <typeparam name="TDerived">
+    /// The type to cast the adapter to.
+    /// </typeparam>
+    /// <param name="adapter">
+    /// The variable which will contain the retrieve or created adapter.
+    /// Passed by reference.
+    /// </param>
+    /// <param name="cacheKey">
+    /// The key for which to attempt to find a adapter for the entity
+    /// returned by <paramref name="entityProvider" />.
+    /// </param>
+    /// <param name="entityProvider">
+    /// A method which will return the entity for which to retrieve or create
+    /// an adapter.  This is only invoked if no cached adapter with
+    /// the specified <paramref name="cacheKey" /> is found.
+    /// </param>
+    /// <returns>
+    /// An entity adapter of type <typeparamref name="TAdapter" /> which
+    /// wraps the specified entity.
+    /// </returns>
+    protected TDerived LazyInitializeAdapter<TProvidedEntity, TAdapter, TDerived>(ref TDerived adapter, IConvertible cacheKey, Func<TProvidedEntity> entityProvider)
+      where TProvidedEntity : IEveEntity<TAdapter>
+      where TAdapter : class, IEveCacheable
+      where TDerived : class, TAdapter
+    {
+      Contract.Requires(cacheKey != null, "The cache key cannot be null.");
+      Contract.Requires(entityProvider != null, "The entity factory method cannot be null.");
+      Contract.Ensures(Contract.Result<TAdapter>() != null);
+
+      LazyInitializer.EnsureInitialized(
+        ref adapter,
+        () => this.Repository.GetOrAddStoredValue<TDerived>(cacheKey, () => (TDerived)entityProvider().ToAdapter(this.Repository)));
+
+      Contract.Assume(adapter != null);
+      return adapter;
     }
 
     [ContractInvariantMethod]
     private void ObjectInvariant()
     {
-      Contract.Invariant(this.container != null);
+      Contract.Invariant(this.repository != null);
     }
   }
 
@@ -100,9 +199,9 @@ namespace Eve.Data.Entities
   /// </content>
   public abstract partial class EveEntityAdapter<TEntity> : IEveRepositoryItem
   {
-    IEveRepository IEveRepositoryItem.Container
+    IEveRepository IEveRepositoryItem.Repository
     {
-      get { return this.Container; }
+      get { return this.Repository; }
     }
   }
   #endregion

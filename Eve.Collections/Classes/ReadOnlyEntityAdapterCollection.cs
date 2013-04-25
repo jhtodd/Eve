@@ -15,52 +15,52 @@ namespace Eve
   using FreeNet.Collections.ObjectModel;
 
   /// <summary>
-  /// A read-only collection of item types.
+  /// A read-only collection of <see cref="IEveEntityAdapter{TEntity}" /> objects,
+  /// retrieved by numeric index.
   /// </summary>
   /// <typeparam name="TEntity">
-  /// The type of the entity.
+  /// The type of entity encapsulated by <typeparamref name="TAdapter" />.
   /// </typeparam>
   /// <typeparam name="TAdapter">
-  /// The type of the adapter.
+  /// The type of <see cref="IEveEntityAdapter{TEntity}" /> contained in the collection.
   /// </typeparam>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
-  public class ReadOnlyEntityAdapterCollection<TEntity, TAdapter> : ReadOnlyCollection<TAdapter>
+  public class ReadOnlyEntityAdapterCollection<TEntity, TAdapter> : ReadOnlyRepositoryItemCollection<TAdapter>
     where TEntity : IEveEntity<TAdapter>
-    where TAdapter : IEveEntityAdapter<TEntity>, IEveCacheable
+    where TAdapter : IEveCacheable, IEveRepositoryItem
   {
     /* Constructors */
 
     /// <summary>
     /// Initializes a new instance of the ReadOnlyEntityAdapterCollection class.
     /// </summary>
+    /// <param name="repository">
+    /// The <see cref="IEveRepository" /> associated with the items in the 
+    /// collection.
+    /// </param>
     /// <param name="contents">
     /// The contents of the collection.
     /// </param>
-    public ReadOnlyEntityAdapterCollection(IEnumerable<TAdapter> contents)
-      : base(contents == null ? 0 : contents.Count())
+    public ReadOnlyEntityAdapterCollection(IEveRepository repository, IEnumerable<TAdapter> contents)
+      : base(repository, contents)
     {
-      if (contents != null)
-      {
-        foreach (TAdapter item in contents.OrderBy(x => x))
-        {
-          Items.AddWithoutCallback(item);
-        }
-      }
+      Contract.Requires(repository != null, "The repository associated with the collection cannot be null.");
     }
 
     /// <summary>
     /// Initializes a new instance of the ReadOnlyEntityAdapterCollection class.
     /// </summary>
     /// <param name="repository">
-    /// The <see cref="IEveRepository" /> to which the contents will be added.
+    /// The <see cref="IEveRepository" /> associated with the items in the 
+    /// collection.
     /// </param>
     /// <param name="entities">
     /// A sequence of entities from which to create the contents of the collection.
     /// </param>
     public ReadOnlyEntityAdapterCollection(IEveRepository repository, IEnumerable<TEntity> entities)
-      : this(CreateContents(repository, entities))
+      : this(repository, CreateContents(repository, entities))
     {
-      Contract.Requires(entities == null || repository != null, "The provided repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the collection cannot be null.");
     }
 
     /* Methods */

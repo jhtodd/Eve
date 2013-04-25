@@ -16,55 +16,55 @@ namespace Eve.Collections
   using FreeNet.Collections.ObjectModel;
 
   /// <summary>
-  /// A read-only collection of item types.
+  /// A read-only collection of <see cref="IEveEntityAdapter{TEntity}" /> objects,
+  /// retrieved by numeric index or a key value.
   /// </summary>
   /// <typeparam name="TKey">
-  /// The type of the key used to index the collection.
+  /// The type of key used to index the collection.
   /// </typeparam>
   /// <typeparam name="TEntity">
-  /// The type of the entity.
+  /// The type of entity encapsulated by <typeparamref name="TAdapter" />.
   /// </typeparam>
   /// <typeparam name="TAdapter">
-  /// The type of the adapter.
+  /// The type of <see cref="IEveEntityAdapter{TEntity}" /> contained in the collection.
   /// </typeparam>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
-  public class ReadOnlyKeyedEntityAdapterCollection<TKey, TEntity, TAdapter> : ReadOnlyKeyedCollection<TKey, TAdapter>
+  public class ReadOnlyKeyedEntityAdapterCollection<TKey, TEntity, TAdapter> : ReadOnlyKeyedRepositoryItemCollection<TKey, TAdapter>
     where TEntity : IEveEntity<TAdapter>
-    where TAdapter : IEveEntityAdapter<TEntity>, IEveCacheable, IKeyItem<TKey>
+    where TAdapter : IEveCacheable, IEveRepositoryItem, IKeyItem<TKey>
   {
     /* Constructors */
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ReadOnlyKeyedEntityAdapterCollection{TKey, TEntity, TAdapter}" /> class.
     /// </summary>
+    /// <param name="repository">
+    /// The <see cref="IEveRepository" /> associated with the items in the 
+    /// collection.
+    /// </param>
     /// <param name="contents">
     /// The contents of the collection.
     /// </param>
-    public ReadOnlyKeyedEntityAdapterCollection(IEnumerable<TAdapter> contents)
-      : base(contents == null ? 0 : contents.Count())
+    public ReadOnlyKeyedEntityAdapterCollection(IEveRepository repository, IEnumerable<TAdapter> contents)
+      : base(repository, contents)
     {
-      if (contents != null)
-      {
-        foreach (TAdapter item in contents.OrderBy(x => x))
-        {
-          Items.AddWithoutCallback(item);
-        }
-      }
+      Contract.Requires(repository != null, "The repository associated with the collection cannot be null.");
     }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ReadOnlyKeyedEntityAdapterCollection{TKey, TEntity, TAdapter}" /> class.
     /// </summary>
     /// <param name="repository">
-    /// The <see cref="IEveRepository" /> to which the contents will be added.
+    /// The <see cref="IEveRepository" /> associated with the items in the 
+    /// collection.
     /// </param>
     /// <param name="entities">
     /// A sequence of entities from which to create the contents of the collection.
     /// </param>
     public ReadOnlyKeyedEntityAdapterCollection(IEveRepository repository, IEnumerable<TEntity> entities)
-      : this(CreateContents(repository, entities))
+      : this(repository, CreateContents(repository, entities))
     {
-      Contract.Requires(entities == null || repository != null, "The provided repository cannot be null.");
+      Contract.Requires(repository != null, "The repository associated with the collection cannot be null.");
     }
 
     /* Methods */

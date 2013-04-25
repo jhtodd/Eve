@@ -259,6 +259,10 @@ namespace Eve.Data
       celestial.Property(c => c.Id).HasColumnName("celestialID");
       #endregion
 
+      #region CertificateEntity Mappings
+      var certificate = modelBuilder.Entity<CertificateEntity>();
+      #endregion
+
       #region CertificateCategoryEntity Mappings
       var certificateCategory = modelBuilder.Entity<CertificateCategoryEntity>();
 
@@ -268,6 +272,17 @@ namespace Eve.Data
       certificateCategory.Property(cc => cc.Description).HasColumnName("description");
       certificateCategory.Property(cc => cc.Id).HasColumnName("categoryID");
       certificateCategory.Property(cc => cc.Name).HasColumnName("categoryName");
+      #endregion
+
+      #region CertificateClassEntity Mappings
+      var certificateClass = modelBuilder.Entity<CertificateClassEntity>();
+
+      // Map properties inherited from BaseValueEntity<>
+      certificateClass.Map(m => m.MapInheritedProperties());
+      certificateClass.HasKey(cc => cc.Id);
+      certificateClass.Property(cc => cc.Description).HasColumnName("description");
+      certificateClass.Property(cc => cc.Id).HasColumnName("classID");
+      certificateClass.Property(cc => cc.Name).HasColumnName("className");
       #endregion
 
       #region CharacterAttributeTypeEntity Mappings
