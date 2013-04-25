@@ -82,6 +82,37 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <summary>
+    /// Lazily initializes the specified value, using the provided factory
+    /// delegate to create the value if necessary.
+    /// </summary>
+    /// <typeparam name="T">
+    /// The type of the value to initialize.
+    /// </typeparam>
+    /// <param name="value">
+    /// The value to initialize.
+    /// </param>
+    /// <param name="valueFactory">
+    /// A delegate that can be used to generate the value to be assigned
+    /// to <paramref name="value" /> if it has not already been initialized.
+    /// </param>
+    /// <returns>
+    /// The result of the initialization.
+    /// </returns>
+    protected static T LazyInitialize<T>(ref T value, Func<T> valueFactory) where T : class
+    {
+      Contract.Requires(valueFactory != null, "The value factory delegate cannot be null.");
+      Contract.Ensures(Contract.Result<T>() != null);
+      Contract.Ensures(Contract.ValueAtReturn(out value) != null);
+
+      var result = LazyInitializer.EnsureInitialized(ref value, valueFactory);
+
+      Contract.Assume(result != null);
+      Contract.Assume(value != null);
+
+      return result;
+    }
+
+    /// <summary>
     /// If a cached adapter for the specified entity type exists, returns that
     /// cached adapter.  If not, creates a new adapter for the entity and
     /// stores it in the cache.
@@ -107,22 +138,21 @@ namespace Eve.Data.Entities
     /// </param>
     /// <returns>
     /// An entity adapter of type <typeparamref name="TAdapter" /> which
-    /// wraps the specified entity.
+    /// wraps the specified entity.  This is the same value assigned to
+    /// <paramref name="adapter" />.
     /// </returns>
     protected TAdapter LazyInitializeAdapter<TProvidedEntity, TAdapter>(ref TAdapter adapter, IConvertible cacheKey, Func<TProvidedEntity> entityProvider)
       where TProvidedEntity : IEveEntity<TAdapter>
       where TAdapter : class, IEveCacheable
     {
       Contract.Requires(cacheKey != null, "The cache key cannot be null.");
-      Contract.Requires(entityProvider != null, "The entity factory method cannot be null.");
+      Contract.Requires(entityProvider != null, "The entity provider delegate cannot be null.");
       Contract.Ensures(Contract.Result<TAdapter>() != null);
+      Contract.Ensures(Contract.ValueAtReturn(out adapter) != null);
 
-      LazyInitializer.EnsureInitialized(
-        ref adapter,
+      return LazyInitialize(
+        ref adapter, 
         () => this.Repository.GetOrAddStoredValue<TAdapter>(cacheKey, () => entityProvider().ToAdapter(this.Repository)));
-
-      Contract.Assume(adapter != null);
-      return adapter;
     }
 
     /// <summary>
@@ -162,7 +192,7 @@ namespace Eve.Data.Entities
       where TDerived : class, TAdapter
     {
       Contract.Requires(cacheKey != null, "The cache key cannot be null.");
-      Contract.Requires(entityProvider != null, "The entity factory method cannot be null.");
+      Contract.Requires(entityProvider != null, "The entity provider delegate cannot be null.");
       Contract.Ensures(Contract.Result<TAdapter>() != null);
 
       LazyInitializer.EnsureInitialized(

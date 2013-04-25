@@ -1,23 +1,25 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="CertificateRelationshipEntity.cs" company="Jeremy H. Todd">
+// <copyright file="ContrabandInfoEntity.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
   using System;
+  using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
   using System.Diagnostics.Contracts;
 
   using Eve.Character;
+  using Eve.Universe;
 
   /// <summary>
-  /// The data entity for the <see cref="CertificateRelationship" /> class.
+  /// The data entity for the <see cref="ContrabandInfo" /> class.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("crtRelationships")]
-  public class CertificateRelationshipEntity : EveEntity<CertificateRelationship>
+  [Table("invContrabandTypes")]
+  public class ContrabandInfoEntity : EveEntity<ContrabandInfo>
   {
     // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
@@ -25,9 +27,9 @@ namespace Eve.Data.Entities
     /* Constructors */
 
     /// <summary>
-    /// Initializes a new instance of the CertificateRelationshipEntity class.
+    /// Initializes a new instance of the ContrabandInfoEntity class.
     /// </summary>
-    public CertificateRelationshipEntity() : base()
+    public ContrabandInfoEntity() : base()
     {
     }
 
@@ -39,8 +41,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("ChildId")]
-    public virtual CertificateEntity Child { get; internal set; }
+    [Column("attackMinSec")]
+    public double AttackMinimumSecurity { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -48,8 +50,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("childID")]
-    public int ChildId { get; internal set; }
+    [Column("confiscateMinSec")]
+    public double ConfiscateMinimumSecurity { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -57,8 +59,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("relationshipID")]
-    public int Id { get; internal set; }
+    [ForeignKey("FactionId")]
+    public virtual FactionEntity Faction { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -66,8 +68,9 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("ParentId")]
-    public virtual CertificateEntity Parent { get; internal set; }
+    [Column("factionID", Order = 1)]
+    [Key]
+    public long FactionId { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -75,8 +78,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("parentID")]
-    public int? ParentId { get; internal set; }
+    [Column("fineByValue")]
+    public double FineByValue { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -84,8 +87,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("parentLevel")]
-    public byte? ParentLevel { get; internal set; }
+    [Column("standingLoss")]
+    public double StandingLoss { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -93,8 +96,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("ParentTypeId")]
-    public virtual EveTypeEntity ParentType { get; internal set; }
+    [ForeignKey("TypeId")]
+    public virtual EveTypeEntity Type { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -102,23 +105,42 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("parentTypeID")]
-    public int? ParentTypeId { get; internal set; }
+    [Column("typeID", Order = 2)]
+    [Key]
+    public int TypeId { get; internal set; }
 
     /// <inheritdoc />
     [NotMapped]
     protected internal override IConvertible CacheKey
     {
-      get { return this.Id; }
+      get { return CreateCacheKey(this.FactionId, this.TypeId); }
     }
 
     /* Methods */
 
     /// <inheritdoc />
-    public override CertificateRelationship ToAdapter(IEveRepository repository)
+    public override ContrabandInfo ToAdapter(IEveRepository repository)
     {
       Contract.Assume(repository != null); // TODO: Should not be necessary due to base class requires -- check in future version of static checker
-      return new CertificateRelationship(repository, this);
+      return new ContrabandInfo(repository, this);
+    }
+
+    /// <summary>
+    /// Computes a compound ID for the specified sub-IDs.
+    /// </summary>
+    /// <param name="factionID">
+    /// The faction ID.
+    /// </param>
+    /// <param name="typeID">
+    /// The type ID.
+    /// </param>
+    /// <returns>
+    /// A compound ID combining the two sub-IDs.
+    /// </returns>
+    internal static long CreateCacheKey(long factionID, TypeId typeID)
+    {
+      // Faction ID is always small enough to fit in the lower 32 bits
+      return (long)((((ulong)(long)factionID) << 32) | ((ulong)(long)typeID));
     }
   }
 }

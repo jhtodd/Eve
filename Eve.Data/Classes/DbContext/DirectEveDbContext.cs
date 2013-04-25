@@ -285,6 +285,14 @@ namespace Eve.Data
       certificateClass.Property(cc => cc.Name).HasColumnName("className");
       #endregion
 
+      #region CertificateRecommendationEntity Mappings
+      var certificateRecommendation = modelBuilder.Entity<CertificateRecommendationEntity>();
+      #endregion
+
+      #region CertificateRelationshipEntity Mappings
+      var certificateRelationship = modelBuilder.Entity<CertificateRelationshipEntity>();
+      #endregion
+
       #region CharacterAttributeTypeEntity Mappings
       var characterAttributeType = modelBuilder.Entity<CharacterAttributeTypeEntity>();
 
@@ -309,6 +317,10 @@ namespace Eve.Data
 
       #region ConstellationJumpEntity Mappings
       // All mappings defined by Data Annotations
+      #endregion
+
+      #region ContrabandInfoEntity Mappings
+      var contrabandInfo = modelBuilder.Entity<ContrabandInfoEntity>();
       #endregion
 
       #region CorporateActivityEntity Mappings

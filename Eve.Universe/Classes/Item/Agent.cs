@@ -282,12 +282,9 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlySkillTypeCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return Agent.LazyInitialize(
           ref this.researchFields,
           () => new ReadOnlySkillTypeCollection(this.Repository, this.Entity.AgentInfo.ResearchFields));
-
-        Contract.Assume(this.researchFields != null);
-        return this.researchFields;
       }
     }
 

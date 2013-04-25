@@ -68,12 +68,9 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyAgentCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return NpcCorporation.LazyInitialize(
           ref this.agents,
           () => new ReadOnlyAgentCollection(this.Repository, this.Entity.CorporationInfo.Agents));
-
-        Contract.Assume(this.agents != null);
-        return this.agents;
       }
     }
 
@@ -137,12 +134,9 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyNpcCorporationDivisionCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return NpcCorporation.LazyInitialize(
           ref this.divisions,
           () => new ReadOnlyNpcCorporationDivisionCollection(this.Repository, this.Entity.CorporationInfo.Divisions));
-
-        Contract.Assume(this.divisions != null);
-        return this.divisions;
       }
     }
 
@@ -439,7 +433,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyNpcCorporationInvestorCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return NpcCorporation.LazyInitialize(
           ref this.investors,
           () =>
           {
@@ -472,9 +466,6 @@ namespace Eve.Universe
 
             return new ReadOnlyNpcCorporationInvestorCollection(this.Repository, items);
           });
-
-        Contract.Assume(this.investors != null);
-        return this.investors;
       }
     }
 
@@ -534,12 +525,9 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlySkillTypeCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return NpcCorporation.LazyInitialize(
           ref this.researchFields,
           () => new ReadOnlySkillTypeCollection(this.Repository, this.Entity.CorporationInfo.ResearchFields));
-
-        Contract.Assume(this.researchFields != null);
-        return this.researchFields;
       }
     }
 
@@ -732,12 +720,9 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyEveTypeCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return NpcCorporation.LazyInitialize(
           ref this.tradeGoods,
           () => new ReadOnlyEveTypeCollection(this.Repository, this.Entity.CorporationInfo.TradeGoods));
-
-        Contract.Assume(this.tradeGoods != null);
-        return this.tradeGoods;
       }
     }
 

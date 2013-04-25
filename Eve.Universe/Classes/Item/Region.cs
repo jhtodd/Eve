@@ -57,12 +57,9 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyConstellationCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return Region.LazyInitialize(
           ref this.constellations,
           () => new ReadOnlyConstellationCollection(this.Repository, this.Entity.RegionInfo.Constellations));
-
-        Contract.Assume(this.constellations != null);
-        return this.constellations;
       }
     }
 
@@ -124,12 +121,9 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyRegionJumpCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return Region.LazyInitialize(
           ref this.jumps, 
           () => new ReadOnlyRegionJumpCollection(this.Repository, this.Entity.RegionInfo.Jumps));
-
-        Contract.Assume(this.jumps != null);
-        return this.jumps;
       }
     }
 

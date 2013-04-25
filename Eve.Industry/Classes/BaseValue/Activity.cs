@@ -60,7 +60,7 @@ namespace Eve.Industry
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        LazyInitializer.EnsureInitialized(
+        return Activity.LazyInitialize(
           ref this.icon,
           () => 
           {
@@ -78,9 +78,6 @@ namespace Eve.Industry
 
             return iconResult;
           });
-
-        Contract.Assume(this.icon != null);
-        return this.icon;
       }
     }
 

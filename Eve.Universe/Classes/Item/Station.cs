@@ -64,12 +64,9 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyAgentCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return Station.LazyInitialize(
           ref this.agents,
           () => new ReadOnlyAgentCollection(this.Repository, this.Entity.StationInfo.Agents));
-
-        Contract.Assume(this.agents != null);
-        return this.agents;
       }
     }
 
@@ -85,12 +82,9 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyAssemblyLineCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return Station.LazyInitialize(
           ref this.assemblyLines,
           () => new ReadOnlyAssemblyLineCollection(this.Repository, this.Entity.StationInfo.AssemblyLines));
-
-        Contract.Assume(this.assemblyLines != null);
-        return this.assemblyLines;
       }
     }
 
@@ -108,12 +102,9 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyAssemblyLineStationCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return Station.LazyInitialize(
           ref this.assemblyLineTypes,
           () => new ReadOnlyAssemblyLineStationCollection(this.Repository, this.Entity.StationInfo.AssemblyLineTypes));
-
-        Contract.Assume(this.assemblyLineTypes != null);
-        return this.assemblyLineTypes;
       }
     }
     

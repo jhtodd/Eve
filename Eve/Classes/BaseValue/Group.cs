@@ -192,12 +192,9 @@ namespace Eve
       {
         Contract.Ensures(Contract.Result<ReadOnlyEveTypeCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return Group.LazyInitialize(
           ref this.types, 
           () => new ReadOnlyEveTypeCollection(this.Repository, this.Entity.Types));
-
-        Contract.Assume(this.types != null);
-        return this.types;
       }
     }
 

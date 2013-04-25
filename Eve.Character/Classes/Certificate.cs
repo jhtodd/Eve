@@ -221,12 +221,9 @@ namespace Eve.Character
       {
         Contract.Ensures(Contract.Result<ReadOnlyCertificateRelationshipCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return Certificate.LazyInitialize(
           ref this.prerequisites,
           () => new ReadOnlyCertificateRelationshipCollection(this.Repository, this.Entity.Prerequisites));
-
-        Contract.Assume(this.prerequisites != null);
-        return this.prerequisites;
       }
     } 
 

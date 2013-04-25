@@ -211,12 +211,6 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public IQueryable<CharacterAttributeTypeEntity> CharacterAttributeTypes
-    {
-      get { return this.Query<CharacterAttributeTypeEntity>(); }
-    }
-
-    /// <inheritdoc />
     public IQueryable<CelestialEntity> Celestials
     {
       get
@@ -248,6 +242,24 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
+    public IQueryable<CertificateRecommendationEntity> CertificateRecommendations
+    {
+      get { return this.Query<CertificateRecommendationEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<CertificateRelationshipEntity> CertificateRelationships
+    {
+      get { return this.Query<CertificateRelationshipEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<CharacterAttributeTypeEntity> CharacterAttributeTypes
+    {
+      get { return this.Query<CharacterAttributeTypeEntity>(); }
+    }
+
+    /// <inheritdoc />
     public IQueryable<ConstellationEntity> Constellations
     {
       get
@@ -264,6 +276,12 @@ namespace Eve.Data
     public IQueryable<ConstellationJumpEntity> ConstellationJumps
     {
       get { return this.Query<ConstellationJumpEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<ContrabandInfoEntity> ContrabandInfo
+    {
+      get { return this.Query<ContrabandInfoEntity>(); }
     }
 
     /// <inheritdoc />

@@ -1299,6 +1299,142 @@ namespace Eve.Data
     bool TryGetCertificateClassById(CertificateClassId id, out CertificateClass value);
     #endregion
 
+    #region CertificateRecommendation Methods
+    /// <summary>
+    /// Returns the <see cref="CertificateRecommendation" /> object with the specified ID.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <returns>
+    /// The item with the specified ID value(s).
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
+    CertificateRecommendation GetCertificateRecommendationById(CertificateRecommendationId id);
+
+    /// <summary>
+    /// Returns all <see cref="CertificateRecommendation" /> objects matching the specified criteria.
+    /// </summary>
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
+    /// </returns>
+    IReadOnlyList<CertificateRecommendation> GetCertificateRecommendations(Func<IQueryable<CertificateRecommendationEntity>, IQueryable<CertificateRecommendationEntity>> queryOperations);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="CertificateRecommendation" />
+    /// objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
+    /// </returns>
+    IReadOnlyList<CertificateRecommendation> GetCertificateRecommendations(params IQueryModifier<CertificateRecommendationEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="CertificateRecommendation" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID value(s),
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
+    bool TryGetCertificateRecommendationById(CertificateRecommendationId id, out CertificateRecommendation value);
+    #endregion
+
+    #region CertificateRelationship Methods
+    /// <summary>
+    /// Returns the <see cref="CertificateRelationship" /> object with the specified ID.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <returns>
+    /// The item with the specified ID value(s).
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
+    CertificateRelationship GetCertificateRelationshipById(CertificateRelationshipId id);
+
+    /// <summary>
+    /// Returns all <see cref="CertificateRelationship" /> objects matching the specified criteria.
+    /// </summary>
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
+    /// </returns>
+    IReadOnlyList<CertificateRelationship> GetCertificateRelationships(Func<IQueryable<CertificateRelationshipEntity>, IQueryable<CertificateRelationshipEntity>> queryOperations);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="CertificateRelationship" />
+    /// objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
+    /// </returns>
+    IReadOnlyList<CertificateRelationship> GetCertificateRelationships(params IQueryModifier<CertificateRelationshipEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="CertificateRelationship" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID value(s),
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
+    bool TryGetCertificateRelationshipById(CertificateRelationshipId id, out CertificateRelationship value);
+    #endregion
+
     #region CharacterAttributeType Methods
     /// <summary>
     /// Returns the <see cref="CharacterAttributeType" /> object with the
@@ -1507,6 +1643,79 @@ namespace Eve.Data
     /// Thrown if more than one item with the specified ID was found.
     /// </exception>
     bool TryGetConstellationJumpById(ConstellationId fromConstellationId, ConstellationId toConstellationId, out ConstellationJump value);
+    #endregion
+
+    #region ContrabandInfo Methods
+    /// <summary>
+    /// Returns the <see cref="ContrabandInfo" /> object with the specified IDs.
+    /// </summary>
+    /// <param name="factionId">
+    /// The ID of faction in which the item is contraband.
+    /// </param>
+    /// <param name="typeId">
+    /// The ID of the type of contraband item.
+    /// </param>
+    /// <returns>
+    /// The item with the specified ID value(s).
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
+    ContrabandInfo GetContrabandInfoById(FactionId factionId, TypeId typeId);
+
+    /// <summary>
+    /// Returns all <see cref="ContrabandInfo" /> objects matching the specified criteria.
+    /// </summary>
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
+    /// </returns>
+    IReadOnlyList<ContrabandInfo> GetContrabandInfo(Func<IQueryable<ContrabandInfoEntity>, IQueryable<ContrabandInfoEntity>> queryOperations);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="ContrabandInfo" /> objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
+    /// </returns>
+    IReadOnlyList<ContrabandInfo> GetContrabandInfo(params IQueryModifier<ContrabandInfoEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="ContrabandInfo" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="factionId">
+    /// The ID of faction in which the item is contraband.
+    /// </param>
+    /// <param name="typeId">
+    /// The ID of the type of contraband item.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID value(s),
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
+    bool TryGetContrabandInfoById(FactionId factionId, TypeId typeId, out ContrabandInfo value);
     #endregion
 
     #region CorporateActivity Methods

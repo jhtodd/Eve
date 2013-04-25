@@ -870,6 +870,88 @@ namespace Eve.Data
     }
     #endregion
 
+    #region CertificateRecommendation Methods
+    /// <inheritdoc />
+    public CertificateRecommendation GetCertificateRecommendationById(CertificateRecommendationId id)
+    {
+      CertificateRecommendation result;
+
+      if (!this.TryGetCertificateRecommendationById(id, out result))
+      {
+        throw new InvalidOperationException("No CertificateRecommendation with ID " + id.ToString() + " could be found.");
+      }
+
+      return result;
+    }
+
+    /// <inheritdoc />
+    public IReadOnlyList<CertificateRecommendation> GetCertificateRecommendations(Func<IQueryable<CertificateRecommendationEntity>, IQueryable<CertificateRecommendationEntity>> queryOperations)
+    {
+      return this.GetCertificateRecommendations(new QueryTransform<CertificateRecommendationEntity>(queryOperations));
+    }
+
+    /// <inheritdoc />
+    [EveQueryMethod(typeof(CertificateRecommendation))]
+    public IReadOnlyList<CertificateRecommendation> GetCertificateRecommendations(params IQueryModifier<CertificateRecommendationEntity>[] modifiers)
+    {
+      // Construct the result set, filtering items through the global cache along the way
+      return LoadAndCacheResults<CertificateRecommendationEntity, CertificateRecommendation>(this.Context.CertificateRecommendations, modifiers);
+    }
+
+    /// <inheritdoc />
+    public bool TryGetCertificateRecommendationById(CertificateRecommendationId id, out CertificateRecommendation value)
+    {
+      if (this.Cache.TryGetValue<CertificateRecommendation>(id, out value))
+      {
+        return true;
+      }
+
+      value = this.GetCertificateRecommendations(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      return value != null;
+    }
+    #endregion
+
+    #region CertificateRelationship Methods
+    /// <inheritdoc />
+    public CertificateRelationship GetCertificateRelationshipById(CertificateRelationshipId id)
+    {
+      CertificateRelationship result;
+
+      if (!this.TryGetCertificateRelationshipById(id, out result))
+      {
+        throw new InvalidOperationException("No CertificateRelationship with ID " + id.ToString() + " could be found.");
+      }
+
+      return result;
+    }
+
+    /// <inheritdoc />
+    public IReadOnlyList<CertificateRelationship> GetCertificateRelationships(Func<IQueryable<CertificateRelationshipEntity>, IQueryable<CertificateRelationshipEntity>> queryOperations)
+    {
+      return this.GetCertificateRelationships(new QueryTransform<CertificateRelationshipEntity>(queryOperations));
+    }
+
+    /// <inheritdoc />
+    [EveQueryMethod(typeof(CertificateRelationship))]
+    public IReadOnlyList<CertificateRelationship> GetCertificateRelationships(params IQueryModifier<CertificateRelationshipEntity>[] modifiers)
+    {
+      // Construct the result set, filtering items through the global cache along the way
+      return LoadAndCacheResults<CertificateRelationshipEntity, CertificateRelationship>(this.Context.CertificateRelationships, modifiers);
+    }
+
+    /// <inheritdoc />
+    public bool TryGetCertificateRelationshipById(CertificateRelationshipId id, out CertificateRelationship value)
+    {
+      if (this.Cache.TryGetValue<CertificateRelationship>(id, out value))
+      {
+        return true;
+      }
+
+      value = this.GetCertificateRelationships(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      return value != null;
+    }
+    #endregion
+
     #region CharacterAttributeType Methods
     /// <inheritdoc />
     public CharacterAttributeType GetCharacterAttributeTypeById(CharacterAttributeId id)
@@ -989,6 +1071,47 @@ namespace Eve.Data
       }
 
       value = this.GetConstellationJumps(q => q.Where(x => x.FromConstellationId == fromConstellationId.Value && x.ToConstellationId == toConstellationId.Value)).SingleOrDefault();
+      return value != null;
+    }
+    #endregion
+
+    #region ContrabandInfo Methods
+    /// <inheritdoc />
+    public ContrabandInfo GetContrabandInfoById(FactionId factionId, TypeId typeId)
+    {
+      ContrabandInfo result;
+
+      if (!this.TryGetContrabandInfoById(factionId, typeId, out result))
+      {
+        throw new InvalidOperationException("No ContrabandInfo with ID (" + factionId.ToString() + ", " + typeId.ToString() + ") could be found.");
+      }
+
+      return result;
+    }
+
+    /// <inheritdoc />
+    public IReadOnlyList<ContrabandInfo> GetContrabandInfo(Func<IQueryable<ContrabandInfoEntity>, IQueryable<ContrabandInfoEntity>> queryOperations)
+    {
+      return this.GetContrabandInfo(new QueryTransform<ContrabandInfoEntity>(queryOperations));
+    }
+
+    /// <inheritdoc />
+    [EveQueryMethod(typeof(ContrabandInfo))]
+    public IReadOnlyList<ContrabandInfo> GetContrabandInfo(params IQueryModifier<ContrabandInfoEntity>[] modifiers)
+    {
+      // Construct the result set, filtering items through the global cache along the way
+      return LoadAndCacheResults<ContrabandInfoEntity, ContrabandInfo>(this.Context.ContrabandInfo, modifiers);
+    }
+
+    /// <inheritdoc />
+    public bool TryGetContrabandInfoById(FactionId factionId, TypeId typeId, out ContrabandInfo value)
+    {
+      if (this.Cache.TryGetValue<ContrabandInfo>(ContrabandInfoEntity.CreateCacheKey((long)factionId, typeId), out value))
+      {
+        return true;
+      }
+
+      value = this.GetContrabandInfo(q => q.Where(x => x.FactionId == (long)factionId && x.TypeId == typeId.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion
@@ -1274,7 +1397,7 @@ namespace Eve.Data
         return true;
       }
 
-      value = this.GetFactions(q => q.Where(x => x.Id == id)).SingleOrDefault();
+      value = this.GetFactions(q => q.Where(x => x.Id == (long)id)).SingleOrDefault();
       return value != null;
     }
     #endregion

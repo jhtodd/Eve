@@ -131,7 +131,7 @@ namespace Eve.Character
     /// </value>
     public byte ParentLevel
     {
-      get { return this.Entity.ParentLevel; }
+      get { return this.Entity.ParentLevel.HasValue ? this.Entity.ParentLevel.Value : (byte)0; }
     }
 
     /// <summary>

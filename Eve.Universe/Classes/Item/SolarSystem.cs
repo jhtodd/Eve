@@ -240,12 +240,9 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlySolarSystemJumpCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return SolarSystem.LazyInitialize(
           ref this.jumps,
           () => new ReadOnlySolarSystemJumpCollection(this.Repository, this.Entity.SolarSystemInfo.Jumps));
-
-        Contract.Assume(this.jumps != null);
-        return this.jumps;
       }
     }
 

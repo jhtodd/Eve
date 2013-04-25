@@ -56,12 +56,9 @@ namespace Eve
       {
         Contract.Ensures(Contract.Result<ReadOnlyMarketGroupCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return MarketGroup.LazyInitialize(
           ref this.childGroups,
           () => new ReadOnlyMarketGroupCollection(this.Repository, this.Entity.ChildGroups));
-
-        Contract.Assume(this.childGroups != null);
-        return this.childGroups;
       }
     }
 
@@ -161,12 +158,9 @@ namespace Eve
       {
         Contract.Ensures(Contract.Result<ReadOnlyEveTypeCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return MarketGroup.LazyInitialize(
           ref this.types,
           () => new ReadOnlyEveTypeCollection(this.Repository, this.Entity.Types));
-
-        Contract.Assume(this.types != null);
-        return this.types;
       }
     }
 

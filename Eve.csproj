@@ -131,6 +131,8 @@
     <Compile Include="Eve.Character\Classes\BaseValue\CertificateClass.cs" />
     <Compile Include="Eve.Character\Classes\Certificate.cs" />
     <Compile Include="Eve.Character\Classes\CertificateRelationship.cs" />
+    <Compile Include="Eve.Character\Classes\CertificateRecommendation.cs" />
+    <Compile Include="Eve.Character\Classes\ID Types\CertificateRecommendationId.cs" />
     <Compile Include="Eve.Character\Classes\ReadOnlyCertificateRelationshipCollection.cs" />
     <Compile Include="Eve.Character\Classes\ID Types\CertificateId.cs" />
     <Compile Include="Eve.Character\Classes\ID Types\CertificateRelationshipId.cs" />
@@ -175,6 +177,8 @@
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\BaseValueEntity\CertificateClassEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\CertificateEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\CertificateRelationshipEntity.cs" />
+    <Compile Include="Eve.Data.Entities\Classes\EveEntity\CertificateRecommendationEntity.cs" />
+    <Compile Include="Eve.Data.Entities\Classes\EveEntity\ContrabandInfoEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\EveEntityContracts.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\ItemNameEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\EveEntity.cs" />
@@ -253,6 +257,7 @@
     <Compile Include="Eve.Industry\Classes\ID Types\AssemblyLineTypeId.cs" />
     <Compile Include="Eve.Industry\Classes\ReadOnlyAssemblyLineTypeCategoryDetailCollection.cs" />
     <Compile Include="Eve.Industry\Enums\ActivityId.cs" />
+    <Compile Include="Eve.Universe\Classes\ContrabandInfo.cs" />
     <Compile Include="Eve.Universe\Classes\ID Types\ItemID Types\AgentId.cs" />
     <Compile Include="Eve.Universe\Classes\ID Types\ItemID Types\ConstellationId.cs" />
     <Compile Include="Eve.Universe\Classes\ID Types\ItemID Types\CelestialId.cs" />

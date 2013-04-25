@@ -136,12 +136,9 @@ namespace Eve.Industry
       {
         Contract.Ensures(Contract.Result<ReadOnlyAssemblyLineTypeCategoryDetailCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return AssemblyLineType.LazyInitialize(
           ref this.categoryDetails,
           () => new ReadOnlyAssemblyLineTypeCategoryDetailCollection(this.Repository, this.Entity.CategoryDetails));
-
-        Contract.Assume(this.categoryDetails != null);
-        return this.categoryDetails;
       }
     }
 
@@ -159,12 +156,9 @@ namespace Eve.Industry
       {
         Contract.Ensures(Contract.Result<ReadOnlyAssemblyLineTypeGroupDetailCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return AssemblyLineType.LazyInitialize(
           ref this.groupDetails,
           () => new ReadOnlyAssemblyLineTypeGroupDetailCollection(this.Repository, this.Entity.GroupDetails));
-
-        Contract.Assume(this.groupDetails != null);
-        return this.groupDetails;
       }
     }
 

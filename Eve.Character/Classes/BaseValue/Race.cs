@@ -53,12 +53,9 @@ namespace Eve.Character
       {
         Contract.Ensures(Contract.Result<ReadOnlyBloodlineCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return Race.LazyInitialize(
           ref this.bloodlines,
           () => new ReadOnlyBloodlineCollection(this.Repository, this.Entity.Bloodlines));
-
-        Contract.Assume(this.bloodlines != null);
-        return this.bloodlines;
       }
     }
 

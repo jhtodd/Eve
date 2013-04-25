@@ -97,7 +97,7 @@ namespace Eve.Data.Entities
     /// The ID of the faction.
     /// </value>
     [Key]
-    public FactionId Id { get; internal set; }
+    public long Id { get; internal set; }
 
     /// <summary>
     /// Gets the <see cref="ItemEntity" /> associated with the current object.

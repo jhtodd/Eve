@@ -179,6 +179,24 @@ namespace Eve.Data
       }
     }
 
+    IQueryable<CertificateRecommendationEntity> IEveDbContext.CertificateRecommendations
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IQueryable<CertificateRecommendationEntity>>() != null);
+        throw new NotImplementedException();
+      }
+    }
+
+    IQueryable<CertificateRelationshipEntity> IEveDbContext.CertificateRelationships
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IQueryable<CertificateRelationshipEntity>>() != null);
+        throw new NotImplementedException();
+      }
+    }
+
     IQueryable<CharacterAttributeTypeEntity> IEveDbContext.CharacterAttributeTypes
     {
       get
@@ -202,6 +220,15 @@ namespace Eve.Data
       get
       {
         Contract.Ensures(Contract.Result<IQueryable<ConstellationJumpEntity>>() != null);
+        throw new NotImplementedException();
+      }
+    }
+
+    IQueryable<ContrabandInfoEntity> IEveDbContext.ContrabandInfo
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IQueryable<ContrabandInfoEntity>>() != null);
         throw new NotImplementedException();
       }
     }

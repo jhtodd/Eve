@@ -57,12 +57,9 @@ namespace Eve.Character
       {
         Contract.Ensures(Contract.Result<ReadOnlyAncestryCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return Bloodline.LazyInitialize(
           ref this.ancestries,
           () => new ReadOnlyAncestryCollection(this.Repository, this.Entity.Ancestries));
-
-        Contract.Assume(this.ancestries != null);
-        return this.ancestries;
       }
     }
 

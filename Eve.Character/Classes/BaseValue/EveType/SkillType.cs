@@ -92,12 +92,9 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<CharacterAttributeType>() != null);
 
         // If not already set, load from the data source
-        LazyInitializer.EnsureInitialized(
+        return SkillType.LazyInitialize(
           ref this.primaryAttribute,
           () => this.Repository.GetCharacterAttributeTypeById(this.PrimaryAttributeId));
-
-        Contract.Assume(this.primaryAttribute != null);
-        return this.primaryAttribute;
       }
     }
 
@@ -150,12 +147,9 @@ namespace Eve.Character
         Contract.Ensures(Contract.Result<CharacterAttributeType>() != null);
 
         // If not already set, load from the data source
-        LazyInitializer.EnsureInitialized(
+        return SkillType.LazyInitialize(
           ref this.secondaryAttribute,
           () => this.Repository.GetCharacterAttributeTypeById(this.SecondaryAttributeId));
-
-        Contract.Assume(this.secondaryAttribute != null);
-        return this.secondaryAttribute;
       }
     }
 

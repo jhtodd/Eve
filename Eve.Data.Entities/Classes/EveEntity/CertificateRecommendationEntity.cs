@@ -1,11 +1,12 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="CertificateRelationshipEntity.cs" company="Jeremy H. Todd">
+// <copyright file="CertificateRecommendationEntity.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
   using System;
+  using System.Collections.Generic;
   using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
   using System.Diagnostics.Contracts;
@@ -13,11 +14,11 @@ namespace Eve.Data.Entities
   using Eve.Character;
 
   /// <summary>
-  /// The data entity for the <see cref="CertificateRelationship" /> class.
+  /// The data entity for the <see cref="CertificateRecommendation" /> class.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("crtRelationships")]
-  public class CertificateRelationshipEntity : EveEntity<CertificateRelationship>
+  [Table("crtRecommendations")]
+  public class CertificateRecommendationEntity : EveEntity<CertificateRecommendation>
   {
     // Check DirectEveDbContext.OnModelCreating() for customization of this type's
     // data mappings.
@@ -25,9 +26,9 @@ namespace Eve.Data.Entities
     /* Constructors */
 
     /// <summary>
-    /// Initializes a new instance of the CertificateRelationshipEntity class.
+    /// Initializes a new instance of the CertificateRecommendationEntity class.
     /// </summary>
-    public CertificateRelationshipEntity() : base()
+    public CertificateRecommendationEntity() : base()
     {
     }
 
@@ -39,8 +40,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("ChildId")]
-    public virtual CertificateEntity Child { get; internal set; }
+    [ForeignKey("CertificateId")]
+    public virtual CertificateEntity Certificate { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -48,8 +49,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("childID")]
-    public int ChildId { get; internal set; }
+    [Column("certificateID")]
+    public int CertificateId { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -57,7 +58,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("relationshipID")]
+    [Column("recommendationID")]
     public int Id { get; internal set; }
 
     /// <summary>
@@ -66,8 +67,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("ParentId")]
-    public virtual CertificateEntity Parent { get; internal set; }
+    [Column("recommendationLevel")]
+    public byte RecommendationLevel { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -75,8 +76,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("parentID")]
-    public int? ParentId { get; internal set; }
+    [ForeignKey("ShipTypeId")]
+    public virtual EveTypeEntity ShipType { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -84,26 +85,8 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("parentLevel")]
-    public byte? ParentLevel { get; internal set; }
-
-    /// <summary>
-    /// Gets the underlying database value of the corresponding adapter property.
-    /// </summary>
-    /// <value>
-    /// The underlying database value of the corresponding adapter property.
-    /// </value>
-    [ForeignKey("ParentTypeId")]
-    public virtual EveTypeEntity ParentType { get; internal set; }
-
-    /// <summary>
-    /// Gets the underlying database value of the corresponding adapter property.
-    /// </summary>
-    /// <value>
-    /// The underlying database value of the corresponding adapter property.
-    /// </value>
-    [Column("parentTypeID")]
-    public int? ParentTypeId { get; internal set; }
+    [Column("shipTypeID")]
+    public int ShipTypeId { get; internal set; }
 
     /// <inheritdoc />
     [NotMapped]
@@ -115,10 +98,10 @@ namespace Eve.Data.Entities
     /* Methods */
 
     /// <inheritdoc />
-    public override CertificateRelationship ToAdapter(IEveRepository repository)
+    public override CertificateRecommendation ToAdapter(IEveRepository repository)
     {
       Contract.Assume(repository != null); // TODO: Should not be necessary due to base class requires -- check in future version of static checker
-      return new CertificateRelationship(repository, this);
+      return new CertificateRecommendation(repository, this);
     }
   }
 }

@@ -538,6 +538,62 @@ namespace Eve.Data
     }
     #endregion
 
+    #region CertificateRecommendation Methods
+    CertificateRecommendation IEveRepository.GetCertificateRecommendationById(CertificateRecommendationId id)
+    {
+      Contract.Ensures(Contract.Result<CertificateRecommendation>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<CertificateRecommendation> IEveRepository.GetCertificateRecommendations(Func<IQueryable<CertificateRecommendationEntity>, IQueryable<CertificateRecommendationEntity>> queryOperations)
+    {
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
+      Contract.Ensures(Contract.Result<IReadOnlyList<CertificateRecommendation>>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<CertificateRecommendation> IEveRepository.GetCertificateRecommendations(params IQueryModifier<CertificateRecommendationEntity>[] modifiers)
+    {
+      Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<CertificateRecommendation>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetCertificateRecommendationById(CertificateRecommendationId id, out CertificateRecommendation value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
+    #endregion
+
+    #region CertificateRelationship Methods
+    CertificateRelationship IEveRepository.GetCertificateRelationshipById(CertificateRelationshipId id)
+    {
+      Contract.Ensures(Contract.Result<CertificateRelationship>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<CertificateRelationship> IEveRepository.GetCertificateRelationships(Func<IQueryable<CertificateRelationshipEntity>, IQueryable<CertificateRelationshipEntity>> queryOperations)
+    {
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
+      Contract.Ensures(Contract.Result<IReadOnlyList<CertificateRelationship>>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<CertificateRelationship> IEveRepository.GetCertificateRelationships(params IQueryModifier<CertificateRelationshipEntity>[] modifiers)
+    {
+      Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<CertificateRelationship>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetCertificateRelationshipById(CertificateRelationshipId id, out CertificateRelationship value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
+    #endregion
+
     #region CharacterAttributeType Methods
     CharacterAttributeType IEveRepository.GetCharacterAttributeTypeById(CharacterAttributeId id)
     {
@@ -616,6 +672,34 @@ namespace Eve.Data
     }
 
     bool IEveRepository.TryGetConstellationJumpById(ConstellationId fromConstellationId, ConstellationId toConstellationId, out ConstellationJump value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
+    #endregion
+
+    #region ContrabandInfo Methods
+    ContrabandInfo IEveRepository.GetContrabandInfoById(FactionId factionId, TypeId typeId)
+    {
+      Contract.Ensures(Contract.Result<ContrabandInfo>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<ContrabandInfo> IEveRepository.GetContrabandInfo(Func<IQueryable<ContrabandInfoEntity>, IQueryable<ContrabandInfoEntity>> queryOperations)
+    {
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
+      Contract.Ensures(Contract.Result<IReadOnlyList<ContrabandInfo>>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<ContrabandInfo> IEveRepository.GetContrabandInfo(params IQueryModifier<ContrabandInfoEntity>[] modifiers)
+    {
+      Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<ContrabandInfo>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetContrabandInfoById(FactionId factionId, TypeId typeId, out ContrabandInfo value)
     {
       Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();

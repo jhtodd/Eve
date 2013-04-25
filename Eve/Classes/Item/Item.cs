@@ -165,7 +165,7 @@ namespace Eve
       {
         Contract.Ensures(!string.IsNullOrWhiteSpace(Contract.Result<string>()));
 
-        LazyInitializer.EnsureInitialized(
+        Item.LazyInitialize(
           ref this.name,
           () =>
           {

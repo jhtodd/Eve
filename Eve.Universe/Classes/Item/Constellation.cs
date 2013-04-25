@@ -124,12 +124,9 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyConstellationJumpCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return Constellation.LazyInitialize(
           ref this.jumps,
           () => new ReadOnlyConstellationJumpCollection(this.Repository, this.Entity.ConstellationInfo.Jumps));
-
-        Contract.Assume(this.jumps != null);
-        return this.jumps;
       }
     }
 
@@ -197,12 +194,9 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlySolarSystemCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return Constellation.LazyInitialize(
           ref this.solarSystems,
           () => new ReadOnlySolarSystemCollection(this.Repository, this.Entity.ConstellationInfo.SolarSystems));
-
-        Contract.Assume(this.solarSystems != null);
-        return this.solarSystems;
       }
     }
 

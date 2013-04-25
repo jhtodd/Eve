@@ -61,12 +61,9 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyAgentCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return NpcCorporation.LazyInitialize(
           ref this.agents,
           () => new ReadOnlyAgentCollection(this.Repository, this.Entity.Agents));
-
-        Contract.Assume(this.agents != null);
-        return this.agents;
       }
     }
 

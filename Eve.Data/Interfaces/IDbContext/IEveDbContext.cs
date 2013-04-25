@@ -145,7 +145,7 @@ namespace Eve.Data
     IQueryable<CelestialEntity> Celestials { get; }
 
     /// <summary>
-    /// Gets an <see cref="IQueryable{T}" /> that can be used to query certificate.
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query certificates.
     /// </summary>
     /// <value>
     /// The <see cref="IQueryable{T}" /> for certificates.
@@ -167,6 +167,22 @@ namespace Eve.Data
     /// The <see cref="IQueryable{T}" /> for certificate classes.
     /// </value>
     IQueryable<CertificateClassEntity> CertificateClasses { get; }
+
+    /// <summary>
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query certificate recommendations.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IQueryable{T}" /> for certificate recommendations.
+    /// </value>
+    IQueryable<CertificateRecommendationEntity> CertificateRecommendations { get; }
+
+    /// <summary>
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query certificate relationships.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IQueryable{T}" /> for certificate relationships.
+    /// </value>
+    IQueryable<CertificateRelationshipEntity> CertificateRelationships { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query character attribute types.
@@ -191,6 +207,14 @@ namespace Eve.Data
     /// The <see cref="IQueryable{T}" /> for constellation jumps.
     /// </value>
     IQueryable<ConstellationJumpEntity> ConstellationJumps { get; }
+
+    /// <summary>
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query contraband info.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IQueryable{T}" /> for contraband info.
+    /// </value>
+    IQueryable<ContrabandInfoEntity> ContrabandInfo { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query corporate activities.

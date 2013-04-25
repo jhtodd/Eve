@@ -109,12 +109,9 @@ namespace Eve
         Contract.Ensures(Contract.Result<ReadOnlyAttributeValueCollection>() != null);
 
         // If not already set, construct a collection of this type's attribute values.
-        LazyInitializer.EnsureInitialized(
+        return EveType.LazyInitialize(
           ref this.attributes,
           () => new ReadOnlyAttributeValueCollection(this.Repository, this.Entity.Attributes));
-
-        Contract.Assume(this.attributes != null);
-        return this.attributes;
       }
     }
 
@@ -217,12 +214,9 @@ namespace Eve
         Contract.Ensures(Contract.Result<ReadOnlyEffectCollection>() != null);
 
         // If not already set, construct a collection of this type's effects.
-        LazyInitializer.EnsureInitialized(
+        return EveType.LazyInitialize(
           ref this.effects,
           () => new ReadOnlyEffectCollection(this.Repository, this.Entity.Effects));
-
-        Contract.Assume(this.effects != null);
-        return this.effects;
       }
     }
 
@@ -392,10 +386,7 @@ namespace Eve
           return null;
         }
 
-        LazyInitializer.EnsureInitialized(ref this.metaGroup, () => this.MetaType.MetaGroup);
-
-        Contract.Assume(this.metaGroup != null);
-        return this.metaGroup;
+        return EveType.LazyInitialize(ref this.metaGroup, () => this.MetaType.MetaGroup);
       }
     }
 
@@ -443,10 +434,7 @@ namespace Eve
 
         // If not already set, create an instance from the base entity.  Do not cache, because the
         // MetaType only has relevance to the current EveType, and that will be cached already.
-        LazyInitializer.EnsureInitialized(ref this.metaType, () => this.Entity.MetaType.ToAdapter(this.Repository));
-
-        Contract.Assume(this.metaType != null);
-        return this.metaType;
+        return LazyInitializer.EnsureInitialized(ref this.metaType, () => this.Entity.MetaType.ToAdapter(this.Repository));
       }
     }
 
@@ -524,7 +512,7 @@ namespace Eve
       {
         Contract.Ensures(Contract.Result<ReadOnlySkillLevelCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return EveType.LazyInitialize(
           ref this.requiredSkills,
           () =>
           {
@@ -562,9 +550,6 @@ namespace Eve
 
             return new ReadOnlySkillLevelCollection(this.Repository, skills);
           });
-
-        Contract.Assume(this.requiredSkills != null);
-        return this.requiredSkills;
       }
     }
 
@@ -598,7 +583,7 @@ namespace Eve
       {
         Contract.Ensures(Contract.Result<ReadOnlyEveTypeCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return EveType.LazyInitialize(
           ref this.variations,
           () => 
           {
@@ -643,9 +628,6 @@ namespace Eve
 
             return new ReadOnlyEveTypeCollection(this.Repository, variations);
           });
-
-        Contract.Assume(this.variations != null);
-        return this.variations;
       }
     }
 

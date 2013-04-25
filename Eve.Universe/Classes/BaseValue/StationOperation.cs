@@ -309,12 +309,9 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<ReadOnlyStationServiceCollection>() != null);
 
-        LazyInitializer.EnsureInitialized(
+        return StationOperation.LazyInitialize(
           ref this.services,
           () => new ReadOnlyStationServiceCollection(this.Repository, this.Entity.Services));
-
-        Contract.Assume(this.services != null);
-        return this.services;
       }
     }
 
