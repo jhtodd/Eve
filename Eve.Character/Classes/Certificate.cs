@@ -24,6 +24,7 @@ namespace Eve.Character
       IComparable<Certificate>,
       IEquatable<Certificate>,
       IEveCacheable,
+      IHasIcon,
       IKeyItem<CertificateId>
   {
     private CertificateCategory category;
@@ -223,7 +224,7 @@ namespace Eve.Character
 
         return Certificate.LazyInitialize(
           ref this.prerequisites,
-          () => new ReadOnlyCertificateRelationshipCollection(this.Repository, this.Entity.Prerequisites));
+          () => ReadOnlyCertificateRelationshipCollection.Create(this.Repository, this.Entity.Prerequisites));
       }
     } 
 
@@ -287,6 +288,24 @@ namespace Eve.Character
     {
       Certificate other = obj as Certificate;
       return this.CompareTo(other);
+    }
+  }
+  #endregion
+
+  #region IHasIcon Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IHasIcon" /> interface.
+  /// </content>
+  public partial class Certificate : IHasIcon
+  {
+    Icon IHasIcon.Icon
+    {
+      get { return this.Icon; }
+    }
+
+    IconId? IHasIcon.IconId
+    {
+      get { return this.IconId; }
     }
   }
   #endregion

@@ -138,7 +138,7 @@ namespace Eve.Industry
 
         return AssemblyLineType.LazyInitialize(
           ref this.categoryDetails,
-          () => new ReadOnlyAssemblyLineTypeCategoryDetailCollection(this.Repository, this.Entity.CategoryDetails));
+          () => ReadOnlyAssemblyLineTypeCategoryDetailCollection.Create(this.Repository, this.Entity.CategoryDetails));
       }
     }
 
@@ -158,7 +158,7 @@ namespace Eve.Industry
 
         return AssemblyLineType.LazyInitialize(
           ref this.groupDetails,
-          () => new ReadOnlyAssemblyLineTypeGroupDetailCollection(this.Repository, this.Entity.GroupDetails));
+          () => ReadOnlyAssemblyLineTypeGroupDetailCollection.Create(this.Repository, this.Entity.GroupDetails));
       }
     }
 

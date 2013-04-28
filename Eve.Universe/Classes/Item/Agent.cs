@@ -284,7 +284,7 @@ namespace Eve.Universe
 
         return Agent.LazyInitialize(
           ref this.researchFields,
-          () => new ReadOnlySkillTypeCollection(this.Repository, this.Entity.AgentInfo.ResearchFields));
+          () => ReadOnlySkillTypeCollection.Create(this.Repository, this.Entity.AgentInfo.ResearchFields));
       }
     }
 

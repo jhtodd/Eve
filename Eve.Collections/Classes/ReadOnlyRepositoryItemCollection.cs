@@ -3,7 +3,7 @@
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Eve
+namespace Eve.Collections
 {
   using System;
   using System.Collections.Generic;
@@ -39,23 +39,11 @@ namespace Eve
     /// The <see cref="IEveRepository" /> associated with the items in the 
     /// collection.
     /// </param>
-    /// <param name="contents">
-    /// The contents of the collection.
-    /// </param>
-    public ReadOnlyRepositoryItemCollection(IEveRepository repository, IEnumerable<T> contents)
-      : base(contents == null ? 0 : contents.Count())
+    public ReadOnlyRepositoryItemCollection(IEveRepository repository) : base()
     {
       Contract.Requires(repository != null, "The repository associated with the collection cannot be null.");
 
       this.repository = repository;
-
-      if (contents != null)
-      {
-        foreach (T item in contents.Where(x => x != null).OrderBy(x => x))
-        {
-          Items.AddWithoutCallback(item);
-        }
-      }
     }
 
     /* Properties */

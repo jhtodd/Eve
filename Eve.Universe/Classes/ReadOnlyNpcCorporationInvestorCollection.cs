@@ -31,13 +31,41 @@ namespace Eve.Universe
     /// The <see cref="IEveRepository" /> associated with the items in the 
     /// collection.
     /// </param>
+    internal ReadOnlyNpcCorporationInvestorCollection(IEveRepository repository) : base(repository)
+    {
+      Contract.Requires(repository != null, "The provided repository cannot be null.");
+    }
+
+    /* Methods */
+
+    /// <summary>
+    /// Creates a new instance of the <see cref="ReadOnlyNpcCorporationInvestorCollection" /> class.
+    /// </summary>
+    /// <param name="repository">
+    /// The <see cref="IEveRepository" /> associated with the items in the 
+    /// collection.
+    /// </param>
     /// <param name="contents">
     /// The contents of the collection.
     /// </param>
-    public ReadOnlyNpcCorporationInvestorCollection(IEveRepository repository, IEnumerable<NpcCorporationInvestor> contents)
-      : base(repository, contents)
+    /// <returns>
+    /// A newly created collection containing the specified items.
+    /// </returns>
+    public static ReadOnlyNpcCorporationInvestorCollection Create(IEveRepository repository, IEnumerable<NpcCorporationInvestor> contents)
     {
       Contract.Requires(repository != null, "The provided repository cannot be null.");
+
+      var result = new ReadOnlyNpcCorporationInvestorCollection(repository);
+
+      if (contents != null)
+      {
+        foreach (var item in contents)
+        {
+          result.Items.AddWithoutCallback(item);
+        }
+      }
+
+      return result;
     }
   }
 }

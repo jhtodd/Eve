@@ -66,7 +66,7 @@ namespace Eve.Universe
 
         return Station.LazyInitialize(
           ref this.agents,
-          () => new ReadOnlyAgentCollection(this.Repository, this.Entity.StationInfo.Agents));
+          () => ReadOnlyAgentCollection.Create(this.Repository, this.Entity.StationInfo.Agents));
       }
     }
 
@@ -84,7 +84,7 @@ namespace Eve.Universe
 
         return Station.LazyInitialize(
           ref this.assemblyLines,
-          () => new ReadOnlyAssemblyLineCollection(this.Repository, this.Entity.StationInfo.AssemblyLines));
+          () => ReadOnlyAssemblyLineCollection.Create(this.Repository, this.Entity.StationInfo.AssemblyLines));
       }
     }
 
@@ -104,7 +104,7 @@ namespace Eve.Universe
 
         return Station.LazyInitialize(
           ref this.assemblyLineTypes,
-          () => new ReadOnlyAssemblyLineStationCollection(this.Repository, this.Entity.StationInfo.AssemblyLineTypes));
+          () => ReadOnlyAssemblyLineStationCollection.Create(this.Repository, this.Entity.StationInfo.AssemblyLineTypes));
       }
     }
     

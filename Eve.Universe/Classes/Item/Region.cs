@@ -59,7 +59,7 @@ namespace Eve.Universe
 
         return Region.LazyInitialize(
           ref this.constellations,
-          () => new ReadOnlyConstellationCollection(this.Repository, this.Entity.RegionInfo.Constellations));
+          () => ReadOnlyConstellationCollection.Create(this.Repository, this.Entity.RegionInfo.Constellations));
       }
     }
 
@@ -122,8 +122,8 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<ReadOnlyRegionJumpCollection>() != null);
 
         return Region.LazyInitialize(
-          ref this.jumps, 
-          () => new ReadOnlyRegionJumpCollection(this.Repository, this.Entity.RegionInfo.Jumps));
+          ref this.jumps,
+          () => ReadOnlyRegionJumpCollection.Create(this.Repository, this.Entity.RegionInfo.Jumps));
       }
     }
 

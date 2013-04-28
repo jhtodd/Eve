@@ -70,7 +70,7 @@ namespace Eve.Universe
 
         return NpcCorporation.LazyInitialize(
           ref this.agents,
-          () => new ReadOnlyAgentCollection(this.Repository, this.Entity.CorporationInfo.Agents));
+          () => ReadOnlyAgentCollection.Create(this.Repository, this.Entity.CorporationInfo.Agents));
       }
     }
 
@@ -136,7 +136,7 @@ namespace Eve.Universe
 
         return NpcCorporation.LazyInitialize(
           ref this.divisions,
-          () => new ReadOnlyNpcCorporationDivisionCollection(this.Repository, this.Entity.CorporationInfo.Divisions));
+          () => ReadOnlyNpcCorporationDivisionCollection.Create(this.Repository, this.Entity.CorporationInfo.Divisions));
       }
     }
 
@@ -439,7 +439,7 @@ namespace Eve.Universe
           {
             if (this.Entity.CorporationInfo == null)
             {
-              return new ReadOnlyNpcCorporationInvestorCollection(this.Repository, null);
+              return ReadOnlyNpcCorporationInvestorCollection.Create(this.Repository, null);
             }
 
             List<NpcCorporationInvestor> items = new List<NpcCorporationInvestor>(4);
@@ -464,7 +464,7 @@ namespace Eve.Universe
               items.Add(new NpcCorporationInvestor(this.Repository, this.Entity.CorporationInfo.InvestorId4.Value, this.Entity.CorporationInfo.InvestorShares1));
             }
 
-            return new ReadOnlyNpcCorporationInvestorCollection(this.Repository, items);
+            return ReadOnlyNpcCorporationInvestorCollection.Create(this.Repository, items);
           });
       }
     }
@@ -527,7 +527,7 @@ namespace Eve.Universe
 
         return NpcCorporation.LazyInitialize(
           ref this.researchFields,
-          () => new ReadOnlySkillTypeCollection(this.Repository, this.Entity.CorporationInfo.ResearchFields));
+          () => ReadOnlySkillTypeCollection.Create(this.Repository, this.Entity.CorporationInfo.ResearchFields));
       }
     }
 
@@ -722,7 +722,7 @@ namespace Eve.Universe
 
         return NpcCorporation.LazyInitialize(
           ref this.tradeGoods,
-          () => new ReadOnlyEveTypeCollection(this.Repository, this.Entity.CorporationInfo.TradeGoods));
+          () => ReadOnlyEveTypeCollection.Create(this.Repository, this.Entity.CorporationInfo.TradeGoods));
       }
     }
 

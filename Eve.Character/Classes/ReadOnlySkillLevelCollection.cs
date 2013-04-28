@@ -31,16 +31,42 @@ namespace Eve.Character
     /// The <see cref="IEveRepository" /> associated with the items in the 
     /// collection.
     /// </param>
-    /// <param name="contents">
-    /// The contents of the collection.
-    /// </param>
-    public ReadOnlySkillLevelCollection(IEveRepository repository, IEnumerable<SkillLevel> contents)
-      : base(repository, contents)
+    internal ReadOnlySkillLevelCollection(IEveRepository repository) : base(repository)
     {
       Contract.Requires(repository != null, "The provided repository cannot be null.");
     }
 
     /* Methods */
+
+    /// <summary>
+    /// Creates a new instance of the ReadOnlySkillLevelCollection class.
+    /// </summary>
+    /// <param name="repository">
+    /// The <see cref="IEveRepository" /> associated with the items in the 
+    /// collection.
+    /// </param>
+    /// <param name="contents">
+    /// The contents of the collection.
+    /// </param>
+    /// <returns>
+    /// A newly created collection containing the specified items.
+    /// </returns>
+    public static ReadOnlySkillLevelCollection Create(IEveRepository repository, IEnumerable<SkillLevel> contents)
+    {
+      Contract.Requires(repository != null, "The provided repository cannot be null.");
+
+      var result = new ReadOnlySkillLevelCollection(repository);
+
+      if (contents != null)
+      {
+        foreach (var item in contents)
+        {
+          result.Items.AddWithoutCallback(item);
+        }
+      }
+
+      return result;
+    }
 
     /// <summary>
     /// Gets the level of the specified skill, or 0 if no matching skill is found

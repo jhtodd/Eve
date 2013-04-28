@@ -126,7 +126,7 @@ namespace Eve.Universe
 
         return Constellation.LazyInitialize(
           ref this.jumps,
-          () => new ReadOnlyConstellationJumpCollection(this.Repository, this.Entity.ConstellationInfo.Jumps));
+          () => ReadOnlyConstellationJumpCollection.Create(this.Repository, this.Entity.ConstellationInfo.Jumps));
       }
     }
 
@@ -196,7 +196,7 @@ namespace Eve.Universe
 
         return Constellation.LazyInitialize(
           ref this.solarSystems,
-          () => new ReadOnlySolarSystemCollection(this.Repository, this.Entity.ConstellationInfo.SolarSystems));
+          () => ReadOnlySolarSystemCollection.Create(this.Repository, this.Entity.ConstellationInfo.SolarSystems));
       }
     }
 

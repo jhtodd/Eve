@@ -160,12 +160,8 @@
     <Compile Include="Eve.Character\Interfaces\IHasCharacterAttributes.cs" />
     <Compile Include="Eve.Character\Interfaces\IHasSkills.cs" />
     <Compile Include="Eve.Character\Interfaces\ISkill.cs" />
-    <Compile Include="Eve.Collections\Classes\ReadOnlyKeyedEntityAdapterCollection{TKey,TEntity,TAdapter,TDerived}.cs" />
-    <Compile Include="Eve.Collections\Classes\ReadOnlyEntityAdapterCollection{TEntity,TAdapter,TDerived}.cs" />
     <Compile Include="Eve.Collections\Classes\ReadOnlyKeyedRepositoryItemCollection.cs" />
     <Compile Include="Eve.Collections\Classes\ReadOnlyRepositoryItemCollection.cs" />
-    <Compile Include="Eve.Collections\Classes\ReadOnlyKeyedEntityAdapterCollection.cs" />
-    <Compile Include="Eve.Collections\Classes\ReadOnlyEntityAdapterCollection.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\BaseValueEntity\AncestryEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\BaseValueEntity\ActivityEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\BaseValueEntity\AssemblyLineTypeEntity.cs" />
@@ -299,6 +295,7 @@
     <Compile Include="Eve.Universe\Classes\RegionJump.cs" />
     <Compile Include="Eve.Universe\Classes\ReadOnlyStationServiceCollection.cs" />
     <Compile Include="Eve.Universe\Classes\ReadOnlyStationCollection.cs" />
+    <Compile Include="Eve.Universe\Enums\ControlTowerResourcePurpose.cs" />
     <Compile Include="Eve.Universe\Enums\CorporateActivityId.cs" />
     <Compile Include="Eve.Universe\Enums\DivisionId.cs" />
     <Compile Include="Eve.Universe\Enums\NpcCorporationExtent.cs" />

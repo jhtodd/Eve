@@ -63,7 +63,7 @@ namespace Eve.Universe
 
         return NpcCorporation.LazyInitialize(
           ref this.agents,
-          () => new ReadOnlyAgentCollection(this.Repository, this.Entity.Agents));
+          () => ReadOnlyAgentCollection.Create(this.Repository, this.Entity.Agents));
       }
     }
 

@@ -58,7 +58,7 @@ namespace Eve
 
         return MarketGroup.LazyInitialize(
           ref this.childGroups,
-          () => new ReadOnlyMarketGroupCollection(this.Repository, this.Entity.ChildGroups));
+          () => ReadOnlyMarketGroupCollection.Create(this.Repository, this.Entity.ChildGroups));
       }
     }
 
@@ -160,7 +160,7 @@ namespace Eve
 
         return MarketGroup.LazyInitialize(
           ref this.types,
-          () => new ReadOnlyEveTypeCollection(this.Repository, this.Entity.Types));
+          () => ReadOnlyEveTypeCollection.Create(this.Repository, this.Entity.Types));
       }
     }
 

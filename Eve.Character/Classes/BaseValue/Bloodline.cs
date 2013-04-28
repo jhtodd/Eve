@@ -59,7 +59,7 @@ namespace Eve.Character
 
         return Bloodline.LazyInitialize(
           ref this.ancestries,
-          () => new ReadOnlyAncestryCollection(this.Repository, this.Entity.Ancestries));
+          () => ReadOnlyAncestryCollection.Create(this.Repository, this.Entity.Ancestries));
       }
     }
 

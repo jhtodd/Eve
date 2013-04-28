@@ -111,7 +111,7 @@ namespace Eve
         // If not already set, construct a collection of this type's attribute values.
         return EveType.LazyInitialize(
           ref this.attributes,
-          () => new ReadOnlyAttributeValueCollection(this.Repository, this.Entity.Attributes));
+          () => ReadOnlyAttributeValueCollection.Create(this.Repository, this.Entity.Attributes));
       }
     }
 
@@ -216,7 +216,7 @@ namespace Eve
         // If not already set, construct a collection of this type's effects.
         return EveType.LazyInitialize(
           ref this.effects,
-          () => new ReadOnlyEffectCollection(this.Repository, this.Entity.Effects));
+          () => ReadOnlyEffectCollection.Create(this.Repository, this.Entity.Effects));
       }
     }
 
@@ -548,7 +548,7 @@ namespace Eve
               }
             }
 
-            return new ReadOnlySkillLevelCollection(this.Repository, skills);
+            return ReadOnlySkillLevelCollection.Create(this.Repository, skills);
           });
       }
     }
@@ -626,7 +626,7 @@ namespace Eve
                 return compareResult;
               });
 
-            return new ReadOnlyEveTypeCollection(this.Repository, variations);
+            return ReadOnlyEveTypeCollection.Create(this.Repository, variations);
           });
       }
     }

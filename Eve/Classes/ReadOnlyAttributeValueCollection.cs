@@ -20,8 +20,8 @@ namespace Eve
   /// A read-only collection of <see cref="AttributeValue" /> objects.
   /// </summary>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
-  public sealed partial class ReadOnlyAttributeValueCollection 
-    : ReadOnlyKeyedEntityAdapterCollection<AttributeId, AttributeValueEntity, AttributeValue>,
+  public sealed partial class ReadOnlyAttributeValueCollection
+    : ReadOnlyKeyedRepositoryItemCollection<AttributeId, AttributeValue>,
       IAttributeCollection
   {
     /* Constructors */
@@ -33,16 +33,45 @@ namespace Eve
     /// The <see cref="IEveRepository" /> associated with the items in the 
     /// collection.
     /// </param>
-    /// <param name="contents">
-    /// The contents of the collection.
-    /// </param>
-    public ReadOnlyAttributeValueCollection(IEveRepository repository, IEnumerable<AttributeValue> contents) : base(repository, contents)
+    internal ReadOnlyAttributeValueCollection(IEveRepository repository) : base(repository)
     {
       Contract.Requires(repository != null, "The provided repository cannot be null.");
     }
 
+    /* Methods */
+
     /// <summary>
-    /// Initializes a new instance of the ReadOnlyAttributeValueCollection class.
+    /// Creates a new instance of the ReadOnlyAttributeValueCollection class.
+    /// </summary>
+    /// <param name="repository">
+    /// The <see cref="IEveRepository" /> associated with the items in the 
+    /// collection.
+    /// </param>
+    /// <param name="contents">
+    /// The contents of the collection.
+    /// </param>
+    /// <returns>
+    /// A newly created collection containing the specified items.
+    /// </returns>
+    public static ReadOnlyAttributeValueCollection Create(IEveRepository repository, IEnumerable<AttributeValue> contents)
+    {
+      Contract.Requires(repository != null, "The provided repository cannot be null.");
+
+      var result = new ReadOnlyAttributeValueCollection(repository);
+
+      if (contents != null)
+      {
+        foreach (var item in contents)
+        {
+          result.Items.AddWithoutCallback(item);
+        }
+      }
+
+      return result;
+    }
+
+    /// <summary>
+    /// Creates a new instance of the ReadOnlyAttributeValueCollection class.
     /// </summary>
     /// <param name="repository">
     /// The <see cref="IEveRepository" /> associated with the items in the 
@@ -51,12 +80,15 @@ namespace Eve
     /// <param name="entities">
     /// A sequence of entities from which to create the contents of the collection.
     /// </param>
-    public ReadOnlyAttributeValueCollection(IEveRepository repository, IEnumerable<AttributeValueEntity> entities) : base(repository, entities)
+    /// <returns>
+    /// A newly created collection containing the specified items.
+    /// </returns>
+    public static ReadOnlyAttributeValueCollection Create(IEveRepository repository, IEnumerable<AttributeValueEntity> entities)
     {
       Contract.Requires(repository != null, "The provided repository cannot be null.");
-    }
 
-    /* Methods */
+      return Create(repository, entities == null ? null : entities.Select(x => x.ToAdapter(repository)));
+    }
 
     /// <summary>
     /// Gets the numeric value of the specified attribute, or the default value

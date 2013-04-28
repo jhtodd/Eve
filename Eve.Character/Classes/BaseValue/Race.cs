@@ -55,7 +55,7 @@ namespace Eve.Character
 
         return Race.LazyInitialize(
           ref this.bloodlines,
-          () => new ReadOnlyBloodlineCollection(this.Repository, this.Entity.Bloodlines));
+          () => ReadOnlyBloodlineCollection.Create(this.Repository, this.Entity.Bloodlines));
       }
     }
 

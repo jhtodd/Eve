@@ -242,7 +242,7 @@ namespace Eve.Universe
 
         return SolarSystem.LazyInitialize(
           ref this.jumps,
-          () => new ReadOnlySolarSystemJumpCollection(this.Repository, this.Entity.SolarSystemInfo.Jumps));
+          () => ReadOnlySolarSystemJumpCollection.Create(this.Repository, this.Entity.SolarSystemInfo.Jumps));
       }
     }
 

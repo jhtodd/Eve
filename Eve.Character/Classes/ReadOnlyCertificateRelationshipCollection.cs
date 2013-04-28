@@ -20,7 +20,7 @@ namespace Eve.Character
   /// </summary>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
   public sealed partial class ReadOnlyCertificateRelationshipCollection
-    : ReadOnlyEntityAdapterCollection<CertificateRelationshipEntity, CertificateRelationship>
+    : ReadOnlyRepositoryItemCollection<CertificateRelationship>
   {
     /* Constructors */
 
@@ -31,17 +31,45 @@ namespace Eve.Character
     /// The <see cref="IEveRepository" /> associated with the items in the 
     /// collection.
     /// </param>
-    /// <param name="contents">
-    /// The contents of the collection.
-    /// </param>
-    public ReadOnlyCertificateRelationshipCollection(IEveRepository repository, IEnumerable<CertificateRelationship> contents)
-      : base(repository, contents)
+    internal ReadOnlyCertificateRelationshipCollection(IEveRepository repository) : base(repository)
     {
       Contract.Requires(repository != null, "The provided repository cannot be null.");
     }
 
+    /* Methods */
+
     /// <summary>
-    /// Initializes a new instance of the ReadOnlyCertificateRelationshipCollection class.
+    /// Creates a new instance of the ReadOnlyCertificateRelationshipCollection class.
+    /// </summary>
+    /// <param name="repository">
+    /// The <see cref="IEveRepository" /> associated with the items in the 
+    /// collection.
+    /// </param>
+    /// <param name="contents">
+    /// The contents of the collection.
+    /// </param>
+    /// <returns>
+    /// A newly created collection containing the specified items.
+    /// </returns>
+    public static ReadOnlyCertificateRelationshipCollection Create(IEveRepository repository, IEnumerable<CertificateRelationship> contents)
+    {
+      Contract.Requires(repository != null, "The provided repository cannot be null.");
+
+      var result = new ReadOnlyCertificateRelationshipCollection(repository);
+
+      if (contents != null)
+      {
+        foreach (var item in contents)
+        {
+          result.Items.AddWithoutCallback(item);
+        }
+      }
+
+      return result;
+    }
+
+    /// <summary>
+    /// Creates a new instance of the ReadOnlyCertificateRelationshipCollection class.
     /// </summary>
     /// <param name="repository">
     /// The <see cref="IEveRepository" /> associated with the items in the 
@@ -50,10 +78,14 @@ namespace Eve.Character
     /// <param name="entities">
     /// A sequence of entities from which to create the contents of the collection.
     /// </param>
-    public ReadOnlyCertificateRelationshipCollection(IEveRepository repository, IEnumerable<CertificateRelationshipEntity> entities)
-      : base(repository, entities)
+    /// <returns>
+    /// A newly created collection containing the specified items.
+    /// </returns>
+    public static ReadOnlyCertificateRelationshipCollection Create(IEveRepository repository, IEnumerable<CertificateRelationshipEntity> entities)
     {
       Contract.Requires(repository != null, "The provided repository cannot be null.");
+
+      return Create(repository, entities == null ? null : entities.Select(x => x.ToAdapter(repository)));
     }
   }
 }

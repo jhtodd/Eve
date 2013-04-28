@@ -311,7 +311,7 @@ namespace Eve.Universe
 
         return StationOperation.LazyInitialize(
           ref this.services,
-          () => new ReadOnlyStationServiceCollection(this.Repository, this.Entity.Services));
+          () => ReadOnlyStationServiceCollection.Create(this.Repository, this.Entity.Services));
       }
     }
 

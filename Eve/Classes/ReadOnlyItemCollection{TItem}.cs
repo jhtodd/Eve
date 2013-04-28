@@ -23,7 +23,7 @@ namespace Eve
   /// </typeparam>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
   public partial class ReadOnlyItemCollection<TItem>
-    : ReadOnlyEntityAdapterCollection<ItemEntity, Item, TItem>
+    : ReadOnlyRepositoryItemCollection<TItem>
     where TItem : Item
   {
     /* Constructors */
@@ -35,17 +35,45 @@ namespace Eve
     /// The <see cref="IEveRepository" /> associated with the items in the 
     /// collection.
     /// </param>
-    /// <param name="contents">
-    /// The contents of the collection.
-    /// </param>
-    public ReadOnlyItemCollection(IEveRepository repository, IEnumerable<TItem> contents)
-      : base(repository, contents)
+    internal ReadOnlyItemCollection(IEveRepository repository) : base(repository)
     {
       Contract.Requires(repository != null, "The provided repository cannot be null.");
     }
 
+    /* Methods */
+
     /// <summary>
-    /// Initializes a new instance of the ReadOnlyItemCollection class.
+    /// Creates a new instance of the ReadOnlyItemCollection class.
+    /// </summary>
+    /// <param name="repository">
+    /// The <see cref="IEveRepository" /> associated with the items in the 
+    /// collection.
+    /// </param>
+    /// <param name="contents">
+    /// The contents of the collection.
+    /// </param>
+    /// <returns>
+    /// A newly created collection containing the specified items.
+    /// </returns>
+    public static ReadOnlyItemCollection<TItem> Create(IEveRepository repository, IEnumerable<TItem> contents)
+    {
+      Contract.Requires(repository != null, "The provided repository cannot be null.");
+
+      var result = new ReadOnlyItemCollection<TItem>(repository);
+
+      if (contents != null)
+      {
+        foreach (var item in contents)
+        {
+          result.Items.AddWithoutCallback(item);
+        }
+      }
+
+      return result;
+    }
+
+    /// <summary>
+    /// Creates a new instance of the ReadOnlyItemCollection class.
     /// </summary>
     /// <param name="repository">
     /// The <see cref="IEveRepository" /> associated with the items in the 
@@ -54,10 +82,14 @@ namespace Eve
     /// <param name="entities">
     /// A sequence of entities from which to create the contents of the collection.
     /// </param>
-    public ReadOnlyItemCollection(IEveRepository repository, IEnumerable<ItemEntity> entities)
-      : base(repository, entities)
+    /// <returns>
+    /// A newly created collection containing the specified items.
+    /// </returns>
+    public static ReadOnlyItemCollection<TItem> Create(IEveRepository repository, IEnumerable<ItemEntity> entities)
     {
       Contract.Requires(repository != null, "The provided repository cannot be null.");
+
+      return Create(repository, entities == null ? null : entities.Select(x => x.ToAdapter(repository)).Cast<TItem>());
     }
   }
 }
