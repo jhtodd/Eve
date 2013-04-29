@@ -24,15 +24,12 @@ namespace Eve
       }
     }
 
-    AttributeId IAttribute.Id
+    AttributeId IAttribute.AttributeId
     {
-      get
-      {
-        throw new NotImplementedException();
-      }
+      get { throw new NotImplementedException(); }
     }
 
-    AttributeType IAttribute.Type
+    AttributeType IAttribute.AttributeType
     {
       get
       {

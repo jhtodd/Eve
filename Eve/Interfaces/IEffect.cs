@@ -22,7 +22,15 @@ namespace Eve
     /// <value>
     /// The ID of the effect.
     /// </value>
-    EffectId Id { get; }
+    EffectId EffectId { get; }
+
+    /// <summary>
+    /// Gets the type of the effect.
+    /// </summary>
+    /// <value>
+    /// The type of the effect.
+    /// </value>
+    EffectType EffectType { get; }
 
     /// <summary>
     /// Gets a value indicating whether it is the default effect for the item.
@@ -32,13 +40,5 @@ namespace Eve
     /// otherwise <see langword="false" />.
     /// </value>
     bool IsDefault { get; }
-
-    /// <summary>
-    /// Gets the type of the effect.
-    /// </summary>
-    /// <value>
-    /// The type of the effect.
-    /// </value>
-    EffectType Type { get; }
   }
 }

@@ -16,20 +16,12 @@ namespace Eve
     /* Properties */
 
     /// <summary>
-    /// Gets the base value of the attribute.
-    /// </summary>
-    /// <value>
-    /// The base value of the attribute.
-    /// </value>
-    double BaseValue { get; }
-
-    /// <summary>
     /// Gets the ID of the attribute.
     /// </summary>
     /// <value>
     /// The ID of the attribute.
     /// </value>
-    AttributeId Id { get; }
+    AttributeId AttributeId { get; }
 
     /// <summary>
     /// Gets the type of the attribute.
@@ -37,6 +29,14 @@ namespace Eve
     /// <value>
     /// The type of the attribute.
     /// </value>
-    AttributeType Type { get; }
+    AttributeType AttributeType { get; }
+
+    /// <summary>
+    /// Gets the base value of the attribute.
+    /// </summary>
+    /// <value>
+    /// The base value of the attribute.
+    /// </value>
+    double BaseValue { get; }
   }
 }

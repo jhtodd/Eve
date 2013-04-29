@@ -27,7 +27,7 @@ namespace Eve.Data.Entities
   /// about certain rows.
   /// </para>
   /// <para>
-  /// Normally, we would use Table-Per-Type inheritance to model this
+  /// Normally, we would use Table-Per-AttributeType inheritance to model this
   /// relationship, with a base <c>ItemEntity</c> class, and then
   /// derived <c>AgentEntity</c>, <c>ConstellationEntity</c>, etc.
   /// classes, each pulling additional data from one of those related tables.

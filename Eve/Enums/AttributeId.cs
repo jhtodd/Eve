@@ -3683,9 +3683,9 @@ namespace Eve
         "")]
     PlanetAnchorDistance = 865,
 
-    /// <summary>Type that is used for consumption from cargo hold when activating jump drive operation.</summary>
+    /// <summary>AttributeType that is used for consumption from cargo hold when activating jump drive operation.</summary>
     [Description("jumpDriveConsumptionType")]
-    [LongDescription("Type that is used for consumption from cargo hold when activating jump drive oper" +
+    [LongDescription("AttributeType that is used for consumption from cargo hold when activating jump drive oper" +
         "ation.")]
     JumpDriveConsumptionType = 866,
 
@@ -7586,9 +7586,9 @@ namespace Eve
     [LongDescription("Capacity of material bay")]
     SpecialMaterialBayCapacity = 1770,
 
-    /// <summary>Type of object which this object transforms into.</summary>
+    /// <summary>AttributeType of object which this object transforms into.</summary>
     [Description("constructionType")]
-    [LongDescription("Type of object which this object transforms into.")]
+    [LongDescription("AttributeType of object which this object transforms into.")]
     ConstructionType = 1771,
 
     /// <summary>Bonus to chance of opening a repositoryy (for skills).</summary>

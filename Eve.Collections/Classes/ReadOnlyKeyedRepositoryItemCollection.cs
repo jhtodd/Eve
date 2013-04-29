@@ -43,9 +43,13 @@ namespace Eve.Collections
     /// The <see cref="IEveRepository" /> associated with the items in the 
     /// collection.
     /// </param>
-    public ReadOnlyKeyedRepositoryItemCollection(IEveRepository repository) : base()
+    /// <param name="capacity">
+    /// The capacity of the collection.
+    /// </param>
+    public ReadOnlyKeyedRepositoryItemCollection(IEveRepository repository, int capacity) : base(capacity)
     {
       Contract.Requires(repository != null, "The repository associated with the collection cannot be null.");
+      Contract.Requires(capacity >= 0, "The capacity cannot be less than zero.");
 
       this.repository = repository;
     }

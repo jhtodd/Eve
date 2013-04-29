@@ -1,0 +1,152 @@
+﻿//-----------------------------------------------------------------------
+// <copyright file="ReadOnlyEffectCollection.cs" company="Jeremy H. Todd">
+//     Copyright © Jeremy H. Todd 2011
+// </copyright>
+//-----------------------------------------------------------------------
+namespace Eve
+{
+  using System.Collections.Generic;
+  using System.Diagnostics.Contracts;
+  using System.Linq;
+
+  using Eve.Collections;
+  using Eve.Data;
+  using Eve.Data.Entities;
+
+  using FreeNet.Collections.ObjectModel;
+
+  /// <summary>
+  /// A read-only collection of <see cref="Effect" /> objects.
+  /// </summary>
+  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
+  public sealed partial class ReadOnlyEffectCollection
+    : ReadOnlyKeyedRepositoryItemCollection<EffectId, Effect>,
+      IEffectCollection
+  {
+    /* Constructors */
+
+    /// <summary>
+    /// Initializes a new instance of the ReadOnlyEffectCollection class.
+    /// </summary>
+    /// <param name="repository">
+    /// The <see cref="IEveRepository" /> associated with the items in the 
+    /// collection.
+    /// </param>
+    /// <param name="capacity">
+    /// The capacity of the collection.
+    /// </param>
+    internal ReadOnlyEffectCollection(IEveRepository repository, int capacity) : base(repository, capacity)
+    {
+      Contract.Requires(repository != null, "The provided repository cannot be null.");
+      Contract.Requires(capacity >= 0, "The capacity cannot be less than zero.");
+    }
+
+    /* Methods */
+
+    /// <summary>
+    /// Creates a new instance of the ReadOnlyAttributeValueCollection class.
+    /// </summary>
+    /// <param name="repository">
+    /// The <see cref="IEveRepository" /> associated with the items in the 
+    /// collection.
+    /// </param>
+    /// <param name="contents">
+    /// The contents of the collection.
+    /// </param>
+    /// <returns>
+    /// A newly created collection containing the specified items.
+    /// </returns>
+    public static ReadOnlyEffectCollection Create(IEveRepository repository, IEnumerable<Effect> contents)
+    {
+      Contract.Requires(repository != null, "The provided repository cannot be null.");
+
+      var result = new ReadOnlyEffectCollection(repository, contents == null ? 0 : contents.Count());
+
+      if (contents != null)
+      {
+        foreach (var item in contents)
+        {
+          result.Items.AddWithoutCallback(item);
+        }
+      }
+
+      return result;
+    }
+
+    /// <summary>
+    /// Creates a new instance of the ReadOnlyEffectCollection class.
+    /// </summary>
+    /// <param name="repository">
+    /// The <see cref="IEveRepository" /> associated with the items in the 
+    /// collection.
+    /// </param>
+    /// <param name="entities">
+    /// A sequence of entities from which to create the contents of the collection.
+    /// </param>
+    /// <returns>
+    /// A newly created collection containing the specified items.
+    /// </returns>
+    public static ReadOnlyEffectCollection Create(IEveRepository repository, IEnumerable<EffectEntity> entities)
+    {
+      Contract.Requires(repository != null, "The provided repository cannot be null.");
+
+      return Create(repository, entities == null ? null : entities.Select(x => x.ToAdapter(repository)).OrderBy(x => x));
+    }
+  }
+
+  #region IEffectCollection Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IEffectCollection" /> interface.
+  /// </content>
+  public sealed partial class ReadOnlyEffectCollection : IEffectCollection
+  {
+    IEffect IEffectCollection.this[EffectId effectId]
+    {
+      get
+      {
+        var result = this[effectId];
+
+        Contract.Assume(result != null);
+        return result;
+      }
+    }
+
+    bool IEffectCollection.TryGetValue(EffectId effectId, out IEffect value)
+    {
+      Effect containedValue;
+
+      bool success = TryGetValue(effectId, out containedValue);
+      value = containedValue;
+
+      Contract.Assume(!success || value != null);
+      return success;
+    }
+  }
+  #endregion
+
+  #region IEnumerable<IEffect> Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IEnumerable{T}" /> interface.
+  /// </content>
+  public sealed partial class ReadOnlyEffectCollection : IEnumerable<IEffect>
+  {
+    IEnumerator<IEffect> IEnumerable<IEffect>.GetEnumerator()
+    {
+      return GetEnumerator();
+    }
+  }
+  #endregion
+
+  #region IReadOnlyList<IEffect> Implementation
+  /// <content>
+  /// Explicit implementation of the <see cref="IReadOnlyList{T}" /> interface.
+  /// </content>
+  public sealed partial class ReadOnlyEffectCollection : IReadOnlyList<IEffect>
+  {
+    IEffect IReadOnlyList<IEffect>.this[int index]
+    {
+      get { return this[index]; }
+    }
+  }
+  #endregion
+}

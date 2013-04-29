@@ -29,7 +29,7 @@ namespace Eve.Data
     /// Initializes a new instance of the EveQueryMethodAttribute class.
     /// </summary>
     /// <param name="queryType">
-    /// The <see cref="Type" /> returned by the query performed by the target
+    /// The <see cref="AttributeType" /> returned by the query performed by the target
     /// method.
     /// </param>
     public EveQueryMethodAttribute(Type queryType)
@@ -45,7 +45,7 @@ namespace Eve.Data
     /// Gets the type returned by the query performed by the target method.
     /// </summary>
     /// <value>
-    /// The <see cref="Type" /> of the returned type.
+    /// The <see cref="AttributeType" /> of the returned type.
     /// </value>
     public Type QueryType
     {

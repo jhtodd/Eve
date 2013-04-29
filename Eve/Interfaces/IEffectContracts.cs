@@ -14,23 +14,23 @@ namespace Eve
   [ContractClassFor(typeof(IEffect))]
   internal abstract class IEffectContracts : IEffect
   {
-    EffectId IEffect.Id
+    EffectId IEffect.EffectId
     {
       get { throw new NotImplementedException(); }
     }
 
-    bool IEffect.IsDefault
-    {
-      get { throw new NotImplementedException(); }
-    }
-
-    EffectType IEffect.Type
+    EffectType IEffect.EffectType
     {
       get
       {
         Contract.Ensures(Contract.Result<EffectType>() != null);
         throw new NotImplementedException();
       }
+    }
+
+    bool IEffect.IsDefault
+    {
+      get { throw new NotImplementedException(); }
     }
   }
 }

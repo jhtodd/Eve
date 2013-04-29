@@ -19,12 +19,17 @@ namespace Eve.Data.Entities
   /// <typeparam name="TEntity">
   /// The type of entity wrapped by the adapter.
   /// </typeparam>
-  public abstract partial class EveEntityAdapter<TEntity> 
-    : EntityAdapter<TEntity>,
-      IEveCacheable,
+  /// <typeparam name="TDerived">
+  /// The type of the concrete derived class.  For more information, see
+  /// the <see cref="EveDataObject{TDerived}" /> class.
+  /// </typeparam>
+  public abstract partial class EveEntityAdapter<TEntity, TDerived> 
+    : EveDataObject<TDerived>,
       IEveEntityAdapter<TEntity>
     where TEntity : IEveEntity
+    where TDerived : class
   {
+    private readonly TEntity entity;
     private readonly IEveRepository repository;
 
     /* Constructors */
@@ -38,28 +43,39 @@ namespace Eve.Data.Entities
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    protected EveEntityAdapter(IEveRepository repository, TEntity entity) : base(entity)
+    protected EveEntityAdapter(IEveRepository repository, TEntity entity)
     {
       Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
 
+      this.entity = entity;
       this.repository = repository;
     }
 
     /* Properties */
 
-    /// <summary>
-    /// Gets the ID value used to store the object in the cache.
-    /// </summary>
-    /// <value>
-    /// A value which uniquely identifies the entity.
-    /// </value>
-    protected internal virtual IConvertible CacheKey
+    /// <inheritdoc />
+    protected internal override IConvertible CacheKey
     {
       get
       {
         Contract.Ensures(Contract.Result<IConvertible>() != null);
         return this.Entity.CacheKey;
+      }
+    }
+
+    /// <summary>
+    /// Gets the entity encapsulated by the adapter.
+    /// </summary>
+    /// <value>
+    /// The entity encapsulated by the adapter.
+    /// </value>
+    protected TEntity Entity
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<TEntity>() != null);
+        return this.entity;
       }
     }
 
@@ -166,7 +182,7 @@ namespace Eve.Data.Entities
     /// <typeparam name="TAdapter">
     /// The type of the adapter to retrieve or create.
     /// </typeparam>
-    /// <typeparam name="TDerived">
+    /// <typeparam name="TOutput">
     /// The type to cast the adapter to.
     /// </typeparam>
     /// <param name="adapter">
@@ -186,18 +202,19 @@ namespace Eve.Data.Entities
     /// An entity adapter of type <typeparamref name="TAdapter" /> which
     /// wraps the specified entity.
     /// </returns>
-    protected TDerived LazyInitializeAdapter<TProvidedEntity, TAdapter, TDerived>(ref TDerived adapter, IConvertible cacheKey, Func<TProvidedEntity> entityProvider)
+    protected TOutput LazyInitializeAdapter<TProvidedEntity, TAdapter, TOutput>(ref TOutput adapter, IConvertible cacheKey, Func<TProvidedEntity> entityProvider)
       where TProvidedEntity : IEveEntity<TAdapter>
       where TAdapter : class, IEveCacheable
-      where TDerived : class, TAdapter
+      where TOutput : class, TAdapter
     {
       Contract.Requires(cacheKey != null, "The cache key cannot be null.");
       Contract.Requires(entityProvider != null, "The entity provider delegate cannot be null.");
       Contract.Ensures(Contract.Result<TAdapter>() != null);
+      Contract.Ensures(Contract.ValueAtReturn(out adapter) != null);
 
       LazyInitializer.EnsureInitialized(
         ref adapter,
-        () => this.Repository.GetOrAddStoredValue<TDerived>(cacheKey, () => (TDerived)entityProvider().ToAdapter(this.Repository)));
+        () => this.Repository.GetOrAddStoredValue<TOutput>(cacheKey, () => (TOutput)entityProvider().ToAdapter(this.Repository)));
 
       Contract.Assume(adapter != null);
       return adapter;
@@ -206,19 +223,20 @@ namespace Eve.Data.Entities
     [ContractInvariantMethod]
     private void ObjectInvariant()
     {
+      Contract.Invariant(this.entity != null);
       Contract.Invariant(this.repository != null);
     }
   }
 
-  #region IEveCacheable Implementation
+  #region IEntityAdapter<TEntity> Implementation
   /// <content>
-  /// Explicit implementation of the <see cref="IEveCacheable" /> interface.
+  /// Explicit implementation of the <see cref="IEntityAdapter{TEntity}" /> interface.
   /// </content>
-  public abstract partial class EveEntityAdapter<TEntity> : IEveCacheable
+  public partial class EveEntityAdapter<TEntity, TDerived> : IEntityAdapter<TEntity>
   {
-    IConvertible IEveCacheable.CacheKey
+    TEntity IEntityAdapter<TEntity>.Entity
     {
-      get { return this.CacheKey; }
+      get { return this.Entity; }
     }
   }
   #endregion
@@ -227,7 +245,7 @@ namespace Eve.Data.Entities
   /// <content>
   /// Explicit implementation of the <see cref="IEveRepositoryItem" /> interface.
   /// </content>
-  public abstract partial class EveEntityAdapter<TEntity> : IEveRepositoryItem
+  public abstract partial class EveEntityAdapter<TEntity, TDerived> : IEveRepositoryItem
   {
     IEveRepository IEveRepositoryItem.Repository
     {

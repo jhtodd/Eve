@@ -48,7 +48,7 @@ namespace Eve.Data
     /// Initializes a new instance of the <see cref="EveCacheDomainAttribute" /> class.
     /// </summary>
     /// <param name="cacheDomain">
-    /// The <see cref="Type" /> specifying the cache domain of the target class.
+    /// The <see cref="AttributeType" /> specifying the cache domain of the target class.
     /// </param>
     public EveCacheDomainAttribute(Type cacheDomain)
     {
