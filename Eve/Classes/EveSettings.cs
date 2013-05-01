@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Eve
 {
+  using System;
   using System.Diagnostics.Contracts;
   using System.Globalization;
 
@@ -49,6 +50,42 @@ namespace Eve
     }
 
     /* Properties */
+
+    /// <summary>
+    /// Gets the amount of time between inspections of the cache to
+    /// determine whether entries can be expired.
+    /// </summary>
+    /// <value>
+    /// The amount of time between inspections of the cache to
+    /// determine whether entries can be expired.
+    /// </value>
+    public TimeSpan CachePollingInterval
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<TimeSpan>() >= TimeSpan.Zero);
+        Contract.Ensures(Contract.Result<TimeSpan>() < TimeSpan.FromDays(1));
+
+        int interval = this.Settings.GetValue<int>(SettingKeys.CachePollingIntervalKey, SettingKeys.CachePollingIntervalDefaultValue);
+
+        if (interval < 0)
+        {
+          interval = 0;
+        }
+
+        if (interval >= 60 * 60 * 24)
+        {
+          interval = 60 * 60 * 24;
+        }
+
+        TimeSpan result = TimeSpan.FromSeconds(interval);
+
+        Contract.Assume(result >= TimeSpan.Zero);
+        Contract.Assume(result < TimeSpan.FromDays(1));
+
+        return result;
+      }
+    }
 
     /// <summary>
     /// Gets the amount of memory (in megabytes) the cache is allowed to use.
@@ -149,6 +186,12 @@ namespace Eve
     internal static class SettingKeys
     {
       // Keys and default values for settings
+
+      /// <summary>The key for the CachePollingInterval setting.</summary>
+      internal const string CachePollingIntervalKey = "CachePollingInterval";
+
+      /// <summary>The default value for the CachePollingInterval setting.</summary>
+      internal const int CachePollingIntervalDefaultValue = 5;
 
       /// <summary>The key for the CacheSize setting.</summary>
       internal const string CacheSizeKey = "CacheSize";

@@ -52,7 +52,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\DummyEveRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\Eve.Data\ReferenceCollectionTests.cs" />
+    <Compile Include="Tests\Eve.Data\DomainMapTests.cs" />
     <Compile Include="Tests\Eve.Data\EveCacheTests.cs" />
     <Compile Include="Tests\Eve\UnitTests.cs" />
   </ItemGroup>

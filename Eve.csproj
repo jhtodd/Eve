@@ -188,6 +188,7 @@
     <Compile Include="Eve.Data.Entities\Interfaces\IEveEntity{TAdapter}.cs" />
     <Compile Include="Eve.Data\Classes\Attribute\EveCacheDomainAttribute.cs" />
     <Compile Include="Eve.Data\Classes\Attribute\EveQueryMethodAttribute.cs" />
+    <Compile Include="Eve.Data\Classes\EveCache.ReferenceCollection.cs" />
     <Compile Include="Eve.Data\Classes\DbContext\EveDbContext.cs" />
     <Compile Include="Eve.Data\Classes\EveCacheStatistics.cs" />
     <Compile Include="Eve.Data\Classes\EveCache.DomainMap.cs" />

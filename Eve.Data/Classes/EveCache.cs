@@ -18,9 +18,7 @@ namespace Eve.Data
   /// <summary>
   /// A central cache for storing commonly used EVE values.
   /// </summary>
-  public partial class EveCache
-    : IDisposable,
-      IEnumerable<KeyValuePair<string, object>>
+  public partial class EveCache : IDisposable
   {
     /// <summary>
     /// The prefix used to simulate a cache region for EVE-related items if using a shared cache
@@ -28,9 +26,11 @@ namespace Eve.Data
     /// </summary>
     protected internal const string EveCacheRegionPrefix = "E_";
 
+    private static readonly CacheItemPolicy DefaultPolicy = new CacheItemPolicy() { Priority = CacheItemPriority.Default };
     private static readonly DomainMap RegionMapInstance = new DomainMap();
 
     private readonly ObjectCache innerCache;
+    private readonly ReferenceCollection innerReferenceCollection;
     private readonly ReaderWriterLockSlim masterLock;
     private readonly ConcurrentDictionary<string, ReaderWriterLockSlim> regionLocks;
     private readonly EveCacheStatistics statistics;
@@ -41,19 +41,8 @@ namespace Eve.Data
     /// Initializes a new instance of the EveCache class that uses the default
     /// <see cref="MemoryCache" /> to store data.
     /// </summary>
-    public EveCache() : base()
+    public EveCache() : this(General.Settings.CacheSize, General.Settings.CachePollingInterval)
     {
-      string name = this.GetType().FullName;
-      Contract.Assume(!string.Equals(name, "default", StringComparison.OrdinalIgnoreCase));
-
-      this.innerCache = new MemoryCache(name);
-
-      // The master lock needs recursive read locks so that region locks don't
-      // unnecessarily block.
-      this.masterLock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
-
-      this.regionLocks = new ConcurrentDictionary<string, ReaderWriterLockSlim>();
-      this.statistics = new EveCacheStatistics();
     }
 
     /// <summary>
@@ -61,11 +50,19 @@ namespace Eve.Data
     /// cache with the specified size to store data.
     /// </summary>
     /// <param name="cacheSize">
-    /// The size of the cache, in megabytes.
+    /// The maximum size of the cache in megabytes, or 0 to use the default
+    /// maximum size.
     /// </param>
-    public EveCache(int cacheSize) : this(CreateCache(cacheSize))
+    /// <param name="pollingInterval">
+    /// How often to check to see if the cache has reached its maximum
+    /// capacity, or <see cref="TimeSpan.Zero" /> to use the default
+    /// polling interval.
+    /// </param>
+    public EveCache(int cacheSize, TimeSpan pollingInterval) : this(CreateCache(cacheSize, pollingInterval))
     {
-      Contract.Requires(cacheSize > 0, Resources.Messages.EveCache_CacheSizeCannotBeNegative);
+      Contract.Requires(cacheSize >= 0, "The cache size must be a positive number, or 0 to use the default size.");
+      Contract.Requires(pollingInterval >= TimeSpan.Zero, "The polling interval must be a positive value, or TimeSpan.Zero to use the default interval.");
+      Contract.Requires(pollingInterval < TimeSpan.FromDays(1.0D), "The polling interval must be less than one day.");
     }
 
     /// <summary>
@@ -80,6 +77,7 @@ namespace Eve.Data
       Contract.Requires(cache != null, Resources.Messages.EveCache_CacheCannotBeNull);
 
       this.innerCache = cache;
+      this.innerReferenceCollection = new ReferenceCollection();
 
       // The master lock needs recursive read locks so that region locks don't
       // unnecessarily block.
@@ -130,12 +128,28 @@ namespace Eve.Data
     /// <value>
     /// The <see cref="ObjectCache" /> used to store data.
     /// </value>
-    protected internal ObjectCache InnerCache
+    internal ObjectCache InnerCache
     {
       get
       {
         Contract.Ensures(Contract.Result<ObjectCache>() != null);
         return this.innerCache;
+      }
+    }
+
+    /// <summary>
+    /// Gets the inner collection used to track external references to cached objects.
+    /// </summary>
+    /// <value>
+    /// The <see cref="ReferenceCollection" /> used to store information about
+    /// references to cached objects.
+    /// </value>
+    internal ReferenceCollection InnerReferenceCollection
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<ReferenceCollection>() != null);
+        return this.innerReferenceCollection;
       }
     }
 
@@ -146,7 +160,7 @@ namespace Eve.Data
     /// A <see cref="ReaderWriterLockSlim" /> used to restrict concurrent access
     /// to the cache.
     /// </value>
-    protected internal ReaderWriterLockSlim MasterLock
+    internal ReaderWriterLockSlim MasterLock
     {
       get
       {
@@ -163,7 +177,7 @@ namespace Eve.Data
     /// A collection of region locks used to restrict concurrent access to the
     /// cache.
     /// </value>
-    protected internal ConcurrentDictionary<string, ReaderWriterLockSlim> RegionLocks
+    internal ConcurrentDictionary<string, ReaderWriterLockSlim> RegionLocks
     {
       get
       {
@@ -220,8 +234,7 @@ namespace Eve.Data
 
       try
       {
-        this.Statistics.Writes++;
-        this.InnerCache.Set(key, value, new CacheItemPolicy { Priority = permanent ? CacheItemPriority.NotRemovable : CacheItemPriority.Default });
+        this.InnerSet(key, value, permanent);
       }
       finally
       {
@@ -240,19 +253,7 @@ namespace Eve.Data
 
       try
       {
-        foreach (KeyValuePair<string, object> entry in this.InnerCache)
-        {
-          Contract.Assume(entry.Key != null);
-          if (entry.Key.StartsWith(EveCacheRegionPrefix))
-          {
-            keysToRemove.Add(entry.Key);
-          }
-        }
-
-        foreach (string key in keysToRemove)
-        {
-          this.InnerCache.Remove(key);
-        }
+        this.InnerClear();
       }
       finally
       {
@@ -285,7 +286,7 @@ namespace Eve.Data
 
       try
       {
-        return this.InnerCache.Contains(key);
+        return this.InnerContains(key);
       }
       finally
       {
@@ -299,12 +300,6 @@ namespace Eve.Data
     public void Dispose()
     {
       this.Dispose(true);
-    }
-
-    /// <inheritdoc />
-    public IEnumerator<KeyValuePair<string, object>> GetEnumerator()
-    {
-      return ((IEnumerable<KeyValuePair<string, object>>)this.InnerCache).Where(x => x.Key.StartsWith(EveCacheRegionPrefix)).GetEnumerator();
     }
 
     /// <summary>
@@ -333,46 +328,6 @@ namespace Eve.Data
       Contract.Requires(valueFactory != null, Resources.Messages.EveCache_ValueFactoryCannotBeNull);
       Contract.Ensures(Contract.Result<T>() != null);
 
-      return this.GetOrAdd(id, valueFactory, false);
-    }
-
-    /// <summary>
-    /// Retrieves the item with the specified ID from the cache, or, if no
-    /// matching item is present, adds the specified value to the cache and 
-    /// returns it.
-    /// </summary>
-    /// <typeparam name="T">
-    /// The type of item to add to or retrieve from the cache.
-    /// </typeparam>
-    /// <param name="id">
-    /// The ID of the item to add or retrieve.
-    /// </param>
-    /// <param name="valueFactory">
-    /// The <see cref="Func{TOutput}" /> which will generate the value to be
-    /// added if a matching item cannot be found in the cache.
-    /// </param>
-    /// <param name="permanent">
-    /// Specifies whether to add the value permanently or whether it can be
-    /// automatically evicted.
-    /// </param>
-    /// <returns>
-    /// The item of the desired type and with the specified key, if a matching
-    /// item is contained in the cache.  Otherwise, the result of executing
-    /// <paramref name="valueFactory" />.
-    /// </returns>
-    /// <remarks>
-    /// <para>
-    /// Items added with <paramref name="permanent" /> equal to
-    /// <see langword="true" /> are immune to automatic eviction, but can
-    /// still be removed or overwritten manually.
-    /// </para>
-    /// </remarks>
-    public T GetOrAdd<T>(IConvertible id, Func<T> valueFactory, bool permanent) where T : IEveCacheable
-    {
-      Contract.Requires(id != null, Resources.Messages.EveCache_IdCannotBeNull);
-      Contract.Requires(valueFactory != null, Resources.Messages.EveCache_ValueFactoryCannotBeNull);
-      Contract.Ensures(Contract.Result<T>() != null);
-
       string region = RegionMap.GetRegion(typeof(T));
       string key = EveCache.CreateCacheKey(region, id);
 
@@ -380,12 +335,10 @@ namespace Eve.Data
 
       try
       {
-        // If the cache contains the desired key, return it
-        if (this.InnerCache.Contains(key))
+        object result;
+
+        if (this.InnerTryGetValue(key, out result))
         {
-          this.Statistics.Hits++;
-          var result = this.InnerCache[key];
-          Contract.Assume(result != null);
           return (T)result;
         }
       }
@@ -415,19 +368,15 @@ namespace Eve.Data
 
       try
       {
-        // If an item with the desired key has been added while we were waiting
-        // on the lock, return it.
-        if (this.InnerCache.Contains(key))
+        object result;
+
+        if (this.InnerTryGetValue(key, out result))
         {
-          this.Statistics.Hits++;
-          var result = this.InnerCache[key];
-          Contract.Assume(result != null);
           return (T)result;
         }
 
         this.Statistics.Misses++;
-        this.Statistics.Writes++;
-        this.InnerCache.Add(key, value, new CacheItemPolicy { Priority = permanent ? CacheItemPriority.NotRemovable : CacheItemPriority.Default });
+        this.InnerSet(key, value, false);
         return value;
       }
       finally
@@ -458,42 +407,6 @@ namespace Eve.Data
       Contract.Requires(value != null, Resources.Messages.EveCache_ValueCannotBeNull);
       Contract.Ensures(Contract.Result<T>() != null);
 
-      return this.GetOrAdd(value, false);
-    }
-
-    /// <summary>
-    /// Retrieves the item with the specified ID from the cache, or, if no
-    /// matching item is present, adds the specified value to the cache and 
-    /// returns it.
-    /// </summary>
-    /// <typeparam name="T">
-    /// The type of item to add to or retrieve from the cache.
-    /// </typeparam>
-    /// <param name="value">
-    /// The value which will be added and returned if a matching item cannot
-    /// be found in the cache.
-    /// </param>
-    /// <param name="permanent">
-    /// Specifies whether to add the value permanently or whether it can be
-    /// automatically evicted.
-    /// </param>
-    /// <returns>
-    /// The cached item with the same key as <paramref name="value" />, if
-    /// such an item exists.  Otherwise, <paramref name="value" /> will be
-    /// added to the cache and then returned.
-    /// </returns>
-    /// <remarks>
-    /// <para>
-    /// Items added with <paramref name="permanent" /> equal to
-    /// <see langword="true" /> are immune to automatic eviction, but can
-    /// still be removed or overwritten manually.
-    /// </para>
-    /// </remarks>
-    public T GetOrAdd<T>(T value, bool permanent) where T : IEveCacheable
-    {
-      Contract.Requires(value != null, Resources.Messages.EveCache_ValueCannotBeNull);
-      Contract.Ensures(Contract.Result<T>() != null);
-
       string region = RegionMap.GetRegion(value.GetType());
       string key = EveCache.CreateCacheKey(region, value.CacheKey);
 
@@ -501,12 +414,10 @@ namespace Eve.Data
 
       try
       {
-        // If the cache contains the desired key, return it
-        if (this.InnerCache.Contains(key))
+        object result;
+
+        if (this.InnerTryGetValue(key, out result))
         {
-          this.Statistics.Hits++;
-          var result = this.InnerCache[key];
-          Contract.Assume(result != null);
           return (T)result;
         }
       }
@@ -520,20 +431,15 @@ namespace Eve.Data
 
       try
       {
-        // If an item with the desired key has been added while we were waiting
-        // on the lock, return it.
-        if (this.InnerCache.Contains(key))
+        object result;
+
+        if (this.InnerTryGetValue(key, out result))
         {
-          this.Statistics.Hits++;
-          var result = this.InnerCache[key];
-          Contract.Assume(result != null);
           return (T)result;
         }
 
-        // Otherwise, add it to the cache
         this.Statistics.Misses++;
-        this.Statistics.Writes++;
-        this.InnerCache.Add(key, value, new CacheItemPolicy { Priority = permanent ? CacheItemPriority.NotRemovable : CacheItemPriority.Default });
+        this.InnerSet(key, value, false);
         return value;
       }
       finally
@@ -565,14 +471,8 @@ namespace Eve.Data
 
       try
       {
-        if (!this.InnerCache.Contains(key))
-        {
-          return default(T);
-        }
-
-        var result = this.InnerCache.Remove(key);
-        Contract.Assume(result != null);
-        return (T)result;
+        var result = this.InnerRemove(key);
+        return (result == null) ? default(T) : (T)result;
       }
       finally
       {
@@ -610,11 +510,10 @@ namespace Eve.Data
 
       try
       {
-        if (this.InnerCache.Contains(key))
+        object result;
+
+        if (this.InnerTryGetValue(key, out result))
         {
-          this.Statistics.Hits++;
-          var result = this.InnerCache.Get(key);
-          Contract.Assume(result != null);
           value = (T)result;
           return true;
         }
@@ -677,118 +576,42 @@ namespace Eve.Data
     }
 
     /// <summary>
-    /// Begins a read lock for the specified cache region.
-    /// </summary>
-    /// <param name="region">
-    /// The cache region to lock.
-    /// </param>
-    protected internal void EnterReadLock(string region)
-    {
-      this.MasterLock.EnterReadLock();
-
-      if (region != null)
-      {
-        ReaderWriterLockSlim regionLock = this.RegionLocks.GetOrAdd(region, s => new ReaderWriterLockSlim());
-        Contract.Assume(regionLock != null);
-        regionLock.EnterReadLock();
-      }
-    }
-
-    /// <summary>
-    /// Begins a read lock for the specified cache region.
-    /// </summary>
-    /// <param name="region">
-    /// The cache region to lock, or <see langword="null" /> to lock the entire
-    /// cache.
-    /// </param>
-    protected internal void EnterWriteLock(string region)
-    {
-      // If blocking the entire cache, lock the master lock
-      if (region == null)
-      {
-        this.MasterLock.EnterWriteLock();
-
-      // Otherwise lock the region lock
-      }
-      else
-      {
-        ReaderWriterLockSlim regionLock = this.RegionLocks.GetOrAdd(region, s => new ReaderWriterLockSlim());
-        Contract.Assume(regionLock != null);
-        regionLock.EnterWriteLock();
-
-        // Put a read lock on the master lock so that master writes can't take place
-        // while the region is locked
-        this.MasterLock.EnterReadLock();
-      }
-    }
-
-    /// <summary>
-    /// Ends a read lock for the specified cache region.
-    /// </summary>
-    /// <param name="region">
-    /// The cache region to lock.
-    /// </param>
-    protected internal void ExitReadLock(string region)
-    {
-      this.MasterLock.ExitReadLock();
-
-      if (region != null)
-      {
-        ReaderWriterLockSlim regionLock = this.RegionLocks.GetOrAdd(region, s => new ReaderWriterLockSlim());
-        Contract.Assume(regionLock != null);
-        regionLock.ExitReadLock();
-      }
-    }
-
-    /// <summary>
-    /// Ends a write lock for the specified cache region.
-    /// </summary>
-    /// <param name="region">
-    /// The cache region to lock, or <see langword="null" /> to lock the entire
-    /// cache.
-    /// </param>
-    protected internal void ExitWriteLock(string region)
-    {
-      // If blocking the entire cache, unlock the master lock
-      if (region == null)
-      {
-        this.MasterLock.ExitWriteLock();
-
-      // Otherwise unlock the region lock
-      }
-      else
-      {
-        ReaderWriterLockSlim regionLock = this.RegionLocks.GetOrAdd(region, s => new ReaderWriterLockSlim());
-        Contract.Assume(regionLock != null);
-        regionLock.ExitWriteLock();
-
-        // We put a read lock on the master lock so that master writes can't take place
-        // while the region is locked
-        this.MasterLock.ExitReadLock();
-      }
-    }
-
-    /// <summary>
-    /// Creates a new cache with the specified size.
+    /// Creates a new cache with the specified settings.
     /// </summary>
     /// <param name="cacheSize">
-    /// The size of the cache, in megabytes.
+    /// The maximum size of the cache in megabytes, or 0 to use the default
+    /// maximum size.
+    /// </param>
+    /// <param name="pollingInterval">
+    /// How often to check to see if the cache has reached its maximum
+    /// capacity, or <see cref="TimeSpan.Zero" /> to use the default
+    /// polling interval.
     /// </param>
     /// <returns>
-    /// A new <see cref="MemoryCache" /> with the specified size.
+    /// A new <see cref="MemoryCache" /> with the specified settings.
     /// </returns>
-    protected static MemoryCache CreateCache(int cacheSize)
+    internal static MemoryCache CreateCache(int cacheSize, TimeSpan pollingInterval)
     {
+      Contract.Requires(cacheSize >= 0, "The cache size must be a positive number, or 0 to use the default size.");
+      Contract.Requires(pollingInterval >= TimeSpan.Zero, "The polling interval cannot be less than zero.");
+      Contract.Requires(pollingInterval < TimeSpan.FromDays(1.0D), "The polling interval must be less than one day.");
       Contract.Ensures(Contract.Result<MemoryCache>() != null);
 
       var config = new NameValueCollection();
-      config.Add("pollingInterval", "00:05:00");
-      config.Add("physicalMemoryLimitPercentage", "0");
-      config.Add("cacheMemoryLimitMegabytes", cacheSize.ToString());
+
+      if (cacheSize > 0)
+      {
+        config.Add("cacheMemoryLimitMegabytes", cacheSize.ToString());
+      }
+
+      if (pollingInterval > TimeSpan.Zero)
+      {
+        config.Add("pollingInterval", pollingInterval.ToString("hh\\:mm\\:ss"));
+      }
 
       string name = "EveCache";
       Contract.Assume(!string.Equals(name, "default", StringComparison.OrdinalIgnoreCase));
-      return new MemoryCache("EveCache", config);
+      return new MemoryCache(name, config);
     }
 
     /// <summary>
@@ -806,8 +629,8 @@ namespace Eve.Data
     /// </returns>
     protected static string CreateCacheKey(string region, IConvertible id)
     {
-      Contract.Requires(id != null, Resources.Messages.BaseValueCache_IdCannotBeNull);
       Contract.Requires(region != null, Resources.Messages.BaseValueCache_RegionCannotBeNull);
+      Contract.Requires(id != null, Resources.Messages.BaseValueCache_IdCannotBeNull);
       Contract.Ensures(Contract.Result<string>() != null);
 
       string idKey;
@@ -927,29 +750,268 @@ namespace Eve.Data
     }
 
     /// <summary>
+    /// Begins a read lock for the specified cache region.
+    /// </summary>
+    /// <param name="region">
+    /// The cache region to lock.
+    /// </param>
+    protected void EnterReadLock(string region)
+    {
+      this.MasterLock.EnterReadLock();
+
+      if (region != null)
+      {
+        ReaderWriterLockSlim regionLock = this.RegionLocks.GetOrAdd(region, s => new ReaderWriterLockSlim());
+        Contract.Assume(regionLock != null);
+        regionLock.EnterReadLock();
+      }
+    }
+
+    /// <summary>
+    /// Begins a read lock for the specified cache region.
+    /// </summary>
+    /// <param name="region">
+    /// The cache region to lock, or <see langword="null" /> to lock the entire
+    /// cache.
+    /// </param>
+    protected void EnterWriteLock(string region)
+    {
+      // If blocking the entire cache, lock the master lock
+      if (region == null)
+      {
+        this.MasterLock.EnterWriteLock();
+
+      // Otherwise lock the region lock
+      }
+      else
+      {
+        ReaderWriterLockSlim regionLock = this.RegionLocks.GetOrAdd(region, s => new ReaderWriterLockSlim());
+        Contract.Assume(regionLock != null);
+        regionLock.EnterWriteLock();
+
+        // Put a read lock on the master lock so that master writes can't take place
+        // while the region is locked
+        this.MasterLock.EnterReadLock();
+      }
+    }
+
+    /// <summary>
+    /// Ends a read lock for the specified cache region.
+    /// </summary>
+    /// <param name="region">
+    /// The cache region to lock.
+    /// </param>
+    protected void ExitReadLock(string region)
+    {
+      this.MasterLock.ExitReadLock();
+
+      if (region != null)
+      {
+        ReaderWriterLockSlim regionLock = this.RegionLocks.GetOrAdd(region, s => new ReaderWriterLockSlim());
+        Contract.Assume(regionLock != null);
+        regionLock.ExitReadLock();
+      }
+    }
+
+    /// <summary>
+    /// Ends a write lock for the specified cache region.
+    /// </summary>
+    /// <param name="region">
+    /// The cache region to lock, or <see langword="null" /> to lock the entire
+    /// cache.
+    /// </param>
+    protected void ExitWriteLock(string region)
+    {
+      // If blocking the entire cache, unlock the master lock
+      if (region == null)
+      {
+        this.MasterLock.ExitWriteLock();
+
+      // Otherwise unlock the region lock
+      }
+      else
+      {
+        ReaderWriterLockSlim regionLock = this.RegionLocks.GetOrAdd(region, s => new ReaderWriterLockSlim());
+        Contract.Assume(regionLock != null);
+        regionLock.ExitWriteLock();
+
+        // We put a read lock on the master lock so that master writes can't take place
+        // while the region is locked
+        this.MasterLock.ExitReadLock();
+      }
+    }
+
+    /// <summary>
+    /// Performs the low-level actions necessary to clear the 
+    /// contents of the cache.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// This method performs no locking and assumes that thread safety
+    /// concerns have been addressed by the calling method.
+    /// </para>
+    /// </remarks>
+    protected void InnerClear()
+    {
+      // First, clear all inactive references
+      this.InnerReferenceCollection.Clear();
+
+      // Construct a list of all keys to remove from the cache
+      var keysToRemove = this.InnerCache.Where(x => x.Key.StartsWith(EveCacheRegionPrefix)).Select(x => x.Key).ToArray();
+
+      foreach (string key in keysToRemove)
+      {
+        this.InnerCache.Remove(key);
+      }
+    }
+
+    /// <summary>
+    /// Performs the low-level actions necessary to determine if the
+    /// cache contains an item with the specified key.
+    /// </summary>
+    /// <param name="key">
+    /// The key to locate in the cache.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if an item with the specified key is
+    /// contained in the collection; otherwise <see langword="false" />.
+    /// </returns>
+    /// <remarks>
+    /// <para>
+    /// This method performs no locking and assumes that thread safety
+    /// concerns have been addressed by the calling method.
+    /// </para>
+    /// </remarks>
+    protected bool InnerContains(string key)
+    {
+      Contract.Requires(key != null);
+      return this.InnerReferenceCollection.Contains(key) || this.InnerCache.Contains(key);
+    }
+
+    /// <summary>
+    /// Performs the low-level actions necessary to remove an item from
+    /// the cache.
+    /// </summary>
+    /// <param name="key">
+    /// The key of the item to remove.
+    /// </param>
+    /// <returns>
+    /// The item that was removed, or <see langword="null" /> if no
+    /// item with the specified key was found.
+    /// </returns>
+    /// <remarks>
+    /// <para>
+    /// This method performs no locking and assumes that thread safety
+    /// concerns have been addressed by the calling method.
+    /// </para>
+    /// </remarks>
+    protected object InnerRemove(string key)
+    {
+      Contract.Requires(key != null);
+
+      // First, check to see if there's an active reference to the
+      // specified value.
+      object result = this.InnerReferenceCollection.Remove(key);
+
+      // If there is, remove it from the cache and return it.
+      if (result != null)
+      {
+        this.InnerCache.Remove(key);
+        return result;
+      }
+
+      // Otherwise, check the cache and remove it there.
+      return this.InnerCache.Remove(key);
+    }
+
+    /// <summary>
+    /// Performs the low-level actions necessary to set an item in the
+    /// cache.
+    /// </summary>
+    /// <param name="key">
+    /// The key of the item to set.
+    /// </param>
+    /// <param name="value">
+    /// The value to set.
+    /// </param>
+    /// <param name="permanent">
+    /// Specifies whether the item should be added permanently.
+    /// </param>
+    /// <remarks>
+    /// <para>
+    /// This method performs no locking and assumes that thread safety
+    /// concerns have been addressed by the calling method.
+    /// </para>
+    /// </remarks>
+    protected void InnerSet(string key, object value, bool permanent)
+    {
+      this.Statistics.Writes++;
+
+      this.InnerReferenceCollection.Set(key, value, permanent);
+
+      // If the item was already added as a permanent reference, there's
+      // no need to add it to the cache as well.
+      if (!permanent)
+      {
+        CacheItem cacheItem = new CacheItem(key, value);
+        this.InnerCache.Add(cacheItem, DefaultPolicy);
+      }
+    }
+
+    /// <summary>
+    /// Performs the low-level actions necessary to retrieve an item
+    /// from the cache.
+    /// </summary>
+    /// <param name="key">
+    /// The key of the item to remove.
+    /// </param>
+    /// <param name="value">
+    /// The object which will hold the retrieved value.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if an item with the specified key was found 
+    /// and returned; otherwise <see langword="false" />.
+    /// </returns>
+    /// <remarks>
+    /// <para>
+    /// This method performs no locking and assumes that thread safety
+    /// concerns have been addressed by the calling method.
+    /// </para>
+    /// </remarks>
+    protected bool InnerTryGetValue(string key, out object value)
+    {
+      Contract.Requires(key != null);
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+
+      // If there's an active reference to the desired item, return it.
+      if (this.InnerReferenceCollection.TryGetValue(key, out value))
+      {
+        this.Statistics.ReferenceHits++;
+        return true;
+      }
+
+      // Otherwise, look in the cache.
+      if (this.InnerCache.Contains(key))
+      {
+        this.Statistics.CacheHits++;
+        value = this.InnerCache[key];
+        return true;
+      }
+
+      return false;
+    }
+
+    /// <summary>
     /// Establishes object invariants of the class.
     /// </summary>
     [ContractInvariantMethod]
     private void ObjectInvariant()
     {
       Contract.Invariant(this.innerCache != null);
+      Contract.Invariant(this.innerReferenceCollection != null);
       Contract.Invariant(this.masterLock != null);
       Contract.Invariant(this.regionLocks != null);
       Contract.Invariant(this.statistics != null);
     }
   }
-
-  #region IEnumerable Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IEnumerable" /> interface.
-  /// </content>
-  public partial class EveCache : IEnumerable
-  {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Standard practice for read-only collections.")]
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-      return this.GetEnumerator();
-    }
-  }
-  #endregion
 }

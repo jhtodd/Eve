@@ -24,6 +24,13 @@ namespace Eve
   /// see or care about these inner workings, I'm going to do it anyway in the
   /// interests of pragmatism :).
   /// </typeparam>
+  /// <remarks>
+  /// <para>
+  /// This class contains boilerplate code common to all (or almost all)
+  /// objects loaded from the EVE database.  Classes derived from this type
+  /// should be declared either <c>abstract</c> or <c>sealed</c>.
+  /// </para>
+  /// </remarks>
   [ContractClass(typeof(EveDataObjectContracts<>))]
   public abstract partial class EveDataObject<TDerived>
     : IComparable,
@@ -68,7 +75,7 @@ namespace Eve
     /// <inheritdoc />
     public override int GetHashCode()
     {
-      // Necessary to suppress warning about not override GetHashCode().
+      // Necessary to suppress warning about not overriding GetHashCode().
       return base.GetHashCode();
     }
   }

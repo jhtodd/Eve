@@ -14,8 +14,9 @@ namespace Eve.Data
   /// </summary>
   public class EveCacheStatistics : IDisposable
   {
-    private long hits;
+    private long cacheHits;
     private long misses;
+    private long referenceHits;
     private ReaderWriterLockSlim statisticsLock;
     private long writes;
 
@@ -26,8 +27,9 @@ namespace Eve.Data
     /// </summary>
     public EveCacheStatistics()
     {
-      this.hits = 0L;
+      this.cacheHits = 0L;
       this.misses = 0L;
+      this.referenceHits = 0L;
       this.statisticsLock = new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
       this.writes = 0L;
     }
@@ -35,13 +37,13 @@ namespace Eve.Data
     /* Properties */
 
     /// <summary>
-    /// Gets the number of requests in which a result was successfully found and
-    /// returned.
+    /// Gets the number of requests in which a result was successfully found in the
+    /// cache and returned.
     /// </summary>
     /// <value>
     /// The number of cache hits.
     /// </value>
-    public long Hits
+    public long CacheHits
     {
       get
       {
@@ -51,7 +53,7 @@ namespace Eve.Data
 
         try
         {
-          return this.hits;
+          return this.cacheHits;
         }
         finally
         {
@@ -67,7 +69,7 @@ namespace Eve.Data
 
         try
         {
-          this.hits = value;
+          this.cacheHits = value;
         }
         finally
         {
@@ -77,10 +79,37 @@ namespace Eve.Data
     }
 
     /// <summary>
-    /// Gets the number of requests in which no result was found.
+    /// Gets the number of requests in which a result was successfully found in
+    /// either the reference tracker or the cache.
     /// </summary>
     /// <value>
-    /// The number of cache misses.
+    /// The total number of hits across both the reference tracker and the cache.
+    /// </value>
+    public long Hits
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<long>() >= 0L);
+
+        this.StatisticsLock.EnterReadLock();
+
+        try
+        {
+          return this.cacheHits + this.referenceHits;
+        }
+        finally
+        {
+          this.StatisticsLock.ExitReadLock();
+        }
+      }
+    }
+
+    /// <summary>
+    /// Gets the number of requests in which no result was found in either
+    /// the reference tracker or the cache.
+    /// </summary>
+    /// <value>
+    /// The number of failed requests.
     /// </value>
     public long Misses
     {
@@ -109,6 +138,48 @@ namespace Eve.Data
         try
         {
           this.misses = value;
+        }
+        finally
+        {
+          this.StatisticsLock.ExitWriteLock();
+        }
+      }
+    }
+
+    /// <summary>
+    /// Gets the number of requests in which a result was successfully found in the
+    /// reference tracker and returned.
+    /// </summary>
+    /// <value>
+    /// The number of reference tracker hits.
+    /// </value>
+    public long ReferenceHits
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<long>() >= 0L);
+
+        this.StatisticsLock.EnterReadLock();
+
+        try
+        {
+          return this.referenceHits;
+        }
+        finally
+        {
+          this.StatisticsLock.ExitReadLock();
+        }
+      }
+
+      internal set
+      {
+        Contract.Requires(value >= 0L, "The number of cache hits cannot be less than zero.");
+
+        this.StatisticsLock.EnterWriteLock();
+
+        try
+        {
+          this.referenceHits = value;
         }
         finally
         {
@@ -217,8 +288,9 @@ namespace Eve.Data
 
       try
       {
-        this.Hits = 0L;
+        this.CacheHits = 0L;
         this.Misses = 0L;
+        this.ReferenceHits = 0L;
         this.Writes = 0L;
       }
       finally
@@ -231,7 +303,9 @@ namespace Eve.Data
     public override string ToString()
     {
       return "Writes: " + this.Writes.ToString() +
-             ", Hits: " + this.Hits.ToString() +
+             ", Cache Hits: " + this.CacheHits.ToString() +
+             ", Reference Hits: " + this.ReferenceHits.ToString() +
+             ", Total Hits: " + this.Hits.ToString() +
              ", Misses: " + this.Misses.ToString() +
              ", Total Requests: " + this.TotalRequests.ToString();
     }
@@ -256,8 +330,9 @@ namespace Eve.Data
     [ContractInvariantMethod]
     private void ObjectInvariant()
     {
-      Contract.Invariant(this.hits >= 0L);
+      Contract.Invariant(this.cacheHits >= 0L);
       Contract.Invariant(this.misses >= 0L);
+      Contract.Invariant(this.referenceHits >= 0L);
       Contract.Invariant(this.statisticsLock != null);
       Contract.Invariant(this.writes >= 0L);
     }

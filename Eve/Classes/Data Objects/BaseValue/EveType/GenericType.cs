@@ -19,7 +19,7 @@ namespace Eve
   /// This is a "fallback" class for all EVE types which don't belong in a more
   /// specific class (e.g. <see cref="SkillType" />).  It provides access to
   /// the basic data for the type (name, description, attributes, effects, etc.),
-  /// but doesn't provide any convenience attributes or special functionality.
+  /// but doesn't provide any convenience properties or special functionality.
   /// </para>
   /// </remarks>
   public sealed class GenericType : EveType

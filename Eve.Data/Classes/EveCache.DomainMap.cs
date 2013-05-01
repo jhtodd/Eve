@@ -145,31 +145,40 @@ namespace Eve.Data
             return region;
           }
 
-          // First, check to see if the type (or a base type) has an
+          // Now we check to see if the type (or a base type) has an
           // [EveCacheDomainAttribute] attached.  
-          var cacheDomainAttributes = type.GetCustomAttributes<EveCacheDomainAttribute>(true);
-          Contract.Assume(cacheDomainAttributes != null);
-          var cacheDomainAttribute = cacheDomainAttributes.SingleOrDefault();
+          var cacheDomainAttribute = type.GetCustomAttribute<EveCacheDomainAttribute>(true);
 
+          // If it does, use the region for the type specified in the attribute
           if (cacheDomainAttribute != null)
           {
-            region = this.ConstructRegionForType(cacheDomainAttribute.CacheDomain);
+            if (!this.InnerDomainMap.TryGetValue(cacheDomainAttribute.CacheDomain, out region))
+            {
+              region = ConstructRegionForType(cacheDomainAttribute.CacheDomain);
+              this.InnerDomainMap.Add(cacheDomainAttribute.CacheDomain, region);
+            }
+
+            Contract.Assume(region != null); // InnerDomainMap always returns non-null
           }
           else
           {
             // If no EveCacheDomainAttribute was found, just use the type itself
             // as the domain.
-            region = this.ConstructRegionForType(type);
+            region = ConstructRegionForType(type);
           }
 
           // Associate the region with the type and return
-          this.InnerDomainMap.Add(type, region);
-          return region;
+          if (!this.InnerDomainMap.ContainsKey(type))
+          {
+            this.InnerDomainMap.Add(type, region);
+          }
         }
         finally
         {
           this.DomainMapLock.ExitWriteLock();
         }
+
+        return region;
       }
 
       /// <summary>
@@ -203,7 +212,7 @@ namespace Eve.Data
       /// for that type.
       /// </para>
       /// </remarks>
-      private string ConstructRegionForType(Type type)
+      private static string ConstructRegionForType(Type type)
       {
         Contract.Requires(type != null, "The type cannot be null.");
         Contract.Ensures(Contract.Result<string>() != null);
