@@ -175,6 +175,8 @@
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\CertificateRelationshipEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\CertificateRecommendationEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\ContrabandInfoEntity.cs" />
+    <Compile Include="Eve.Data.Entities\Classes\EveEntity\ControlTowerResourceEntity.cs" />
+    <Compile Include="Eve.Data.Entities\Classes\EveEntity\TypeMaterialEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\EveEntityContracts.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\ItemNameEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\EveEntity.cs" />
@@ -188,10 +190,10 @@
     <Compile Include="Eve.Data.Entities\Interfaces\IEveEntity{TAdapter}.cs" />
     <Compile Include="Eve.Data\Classes\Attribute\EveCacheDomainAttribute.cs" />
     <Compile Include="Eve.Data\Classes\Attribute\EveQueryMethodAttribute.cs" />
-    <Compile Include="Eve.Data\Classes\EveCache.ReferenceCollection.cs" />
+    <Compile Include="Eve.Data\Classes\EveCache.ReferenceTracker.cs" />
     <Compile Include="Eve.Data\Classes\DbContext\EveDbContext.cs" />
     <Compile Include="Eve.Data\Classes\EveCacheStatistics.cs" />
-    <Compile Include="Eve.Data\Classes\EveCache.DomainMap.cs" />
+    <Compile Include="Eve.Data\Classes\EveCache.CacheRegionMap.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\BaseValueEntity\BaseValueEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\BaseValueEntity\AttributeCategoryEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\BaseValueEntity\CategoryEntity.cs" />
@@ -255,6 +257,7 @@
     <Compile Include="Eve.Industry\Classes\Collections\ReadOnlyAssemblyLineTypeCategoryDetailCollection.cs" />
     <Compile Include="Eve.Industry\Enums\ActivityId.cs" />
     <Compile Include="Eve.Universe\Classes\Data Objects\ContrabandInfo.cs" />
+    <Compile Include="Eve.Universe\Classes\Data Objects\ControlTowerResource.cs" />
     <Compile Include="Eve.Universe\Classes\ID Types\ItemID Types\AgentId.cs" />
     <Compile Include="Eve.Universe\Classes\ID Types\ItemID Types\ConstellationId.cs" />
     <Compile Include="Eve.Universe\Classes\ID Types\ItemID Types\CelestialId.cs" />
@@ -304,6 +307,8 @@
     <Compile Include="Eve.Universe\Enums\StationOperationId.cs" />
     <Compile Include="Eve.Universe\Enums\StationServiceId.cs" />
     <Compile Include="Eve.Universe\Interfaces\ILocation.cs" />
+    <Compile Include="Eve\Classes\Collections\ReadOnlyTypeMaterialCollection.cs" />
+    <Compile Include="Eve\Classes\Data Objects\TypeMaterial.cs" />
     <Compile Include="Eve\Classes\Data Objects\EveDataObjectContracts.cs" />
     <Compile Include="Eve\Classes\Data Objects\EveDataObject.cs" />
     <Compile Include="Eve\Classes\Collections\ReadOnlyItemCollection{TItem}.cs" />

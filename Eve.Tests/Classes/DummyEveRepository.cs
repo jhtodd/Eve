@@ -505,6 +505,26 @@ namespace Eve.Tests
       throw new NotImplementedException();
     }
 
+    Universe.ControlTowerResource IEveRepository.GetControlTowerResourceById(TypeId controlTowerTypeId, TypeId resourceTypeId)
+    {
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<Universe.ControlTowerResource> IEveRepository.GetControlTowerResources(Func<IQueryable<Data.Entities.ControlTowerResourceEntity>, IQueryable<Data.Entities.ControlTowerResourceEntity>> queryOperations)
+    {
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<Universe.ControlTowerResource> IEveRepository.GetControlTowerResources(params FreeNet.Data.Entity.IQueryModifier<Data.Entities.ControlTowerResourceEntity>[] modifiers)
+    {
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetControlTowerResourceById(TypeId controlTowerTypeId, TypeId resourceTypeId, out Universe.ControlTowerResource value)
+    {
+      throw new NotImplementedException();
+    }
+
     Universe.CorporateActivity IEveRepository.GetCorporateActivityById(Universe.CorporateActivityId id)
     {
       throw new NotImplementedException();
@@ -1065,6 +1085,26 @@ namespace Eve.Tests
       throw new NotImplementedException();
     }
 
+    TypeMaterial IEveRepository.GetTypeMaterialById(TypeId typeId, TypeId materialTypeId)
+    {
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<TypeMaterial> IEveRepository.GetTypeMaterials(Func<IQueryable<Data.Entities.TypeMaterialEntity>, IQueryable<Data.Entities.TypeMaterialEntity>> queryOperations)
+    {
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<TypeMaterial> IEveRepository.GetTypeMaterials(params FreeNet.Data.Entity.IQueryModifier<Data.Entities.TypeMaterialEntity>[] modifiers)
+    {
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetTypeMaterialById(TypeId typeId, TypeId materialTypeId, out TypeMaterial value)
+    {
+      throw new NotImplementedException();
+    }
+
     Unit IEveRepository.GetUnitById(UnitId id)
     {
       throw new NotImplementedException();
@@ -1089,6 +1129,7 @@ namespace Eve.Tests
     {
       throw new NotImplementedException();
     }
+
 
     IReadOnlyList<Universe.Universe> IEveRepository.GetUniverses(Func<IQueryable<Data.Entities.UniverseEntity>, IQueryable<Data.Entities.UniverseEntity>> queryOperations)
     {

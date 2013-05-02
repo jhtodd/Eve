@@ -12,9 +12,9 @@ namespace Eve.Data
   using Eve.Universe;
 
   /// <summary>
-  /// Indicates that the target class has a cache domain other than the
-  /// class itself.  This also applies to all derived classes as well,
-  /// unless they have a <c>EveCacheDomainAttribute</c> themselves.
+  /// Indicates that the target type has a cache domain other than the
+  /// type itself.  This also applies to all derived classes as well,
+  /// unless they have a <c>EveCacheDomainAttribute</c> of their own.
   /// </summary>
   /// <remarks>
   /// <para>

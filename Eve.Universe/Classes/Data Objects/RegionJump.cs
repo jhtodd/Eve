@@ -121,23 +121,6 @@ namespace Eve.Universe
     }
 
     /// <inheritdoc />
-    public override bool Equals(RegionJump other)
-    {
-      if (other == null)
-      {
-        return false;
-      }
-
-      return this.FromRegionId == other.FromRegionId && this.ToRegionId == other.ToRegionId;
-    }
-
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-      return CompoundHashCode.Create(this.FromRegionId, this.ToRegionId);
-    }
-
-    /// <inheritdoc />
     public override string ToString()
     {
       return this.FromRegion.Name + " to " + this.ToRegion.Name;

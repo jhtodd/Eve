@@ -263,23 +263,6 @@ namespace Eve.Industry
     }
 
     /// <inheritdoc />
-    public override bool Equals(AssemblyLineStation other)
-    {
-      if (other == null)
-      {
-        return false;
-      }
-
-      return this.StationId == other.StationId && this.AssemblyLineTypeId == other.AssemblyLineTypeId;
-    }
-
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-      return CompoundHashCode.Create(this.StationId, this.AssemblyLineTypeId);
-    }
-
-    /// <inheritdoc />
     public override string ToString()
     {
       return this.AssemblyLineType.Name + " (" + this.Quantity.ToString() + ")";

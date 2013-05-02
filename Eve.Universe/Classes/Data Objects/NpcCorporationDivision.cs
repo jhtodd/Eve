@@ -127,25 +127,6 @@ namespace Eve.Universe
     }
 
     /// <inheritdoc />
-    public override bool Equals(NpcCorporationDivision other)
-    {
-      if (other == null)
-      {
-        return false;
-      }
-
-      return this.CorporationId == other.CorporationId &&
-             this.DivisionId == other.DivisionId &&
-             this.Size == other.Size;
-    }
-
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-      return CompoundHashCode.Create(this.CorporationId, this.DivisionId, this.Size);
-    }
-
-    /// <inheritdoc />
     public override string ToString()
     {
       return this.Division.Name;

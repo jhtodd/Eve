@@ -370,23 +370,6 @@ namespace Eve
     }
 
     /// <inheritdoc />
-    public override bool Equals(Item other)
-    {
-      if (other == null)
-      {
-        return false;
-      }
-
-      return this.Id.Equals(other.Id);
-    }
-
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-      return this.Id.GetHashCode();
-    }
-
-    /// <inheritdoc />
     public override string ToString()
     {
       return this.Name;

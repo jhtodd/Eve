@@ -147,23 +147,6 @@ namespace Eve
     }
 
     /// <inheritdoc />
-    public override bool Equals(TDerived other)
-    {
-      if (other == null)
-      {
-        return false;
-      }
-
-      return this.Id.Equals(other.Id);
-    }
-
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-      return CompoundHashCode.Create(this.GetType().GetHashCode(), this.Id.GetHashCode());
-    }
-
-    /// <inheritdoc />
     public override string ToString()
     {
       return this.Name;

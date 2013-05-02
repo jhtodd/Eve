@@ -27,10 +27,10 @@ namespace Eve.Data
     protected internal const string EveCacheRegionPrefix = "E_";
 
     private static readonly CacheItemPolicy DefaultPolicy = new CacheItemPolicy() { Priority = CacheItemPriority.Default };
-    private static readonly DomainMap RegionMapInstance = new DomainMap();
+    private static readonly CacheRegionMap RegionMapInstance = new CacheRegionMap();
 
     private readonly ObjectCache innerCache;
-    private readonly ReferenceCollection innerReferenceCollection;
+    private readonly ReferenceTracker innerReferenceCollection;
     private readonly ReaderWriterLockSlim masterLock;
     private readonly ConcurrentDictionary<string, ReaderWriterLockSlim> regionLocks;
     private readonly EveCacheStatistics statistics;
@@ -77,7 +77,7 @@ namespace Eve.Data
       Contract.Requires(cache != null, Resources.Messages.EveCache_CacheCannotBeNull);
 
       this.innerCache = cache;
-      this.innerReferenceCollection = new ReferenceCollection();
+      this.innerReferenceCollection = new ReferenceTracker();
 
       // The master lock needs recursive read locks so that region locks don't
       // unnecessarily block.
@@ -110,14 +110,14 @@ namespace Eve.Data
     /// cacheable objects.
     /// </summary>
     /// <value>
-    /// The <see cref="DomainMap" /> used to define cache regions for different
+    /// The <see cref="CacheRegionMap" /> used to define cache regions for different
     /// types of cacheable objects.
     /// </value>
-    internal static DomainMap RegionMap
+    internal static CacheRegionMap RegionMap
     {
       get
       {
-        Contract.Ensures(Contract.Result<DomainMap>() != null);
+        Contract.Ensures(Contract.Result<CacheRegionMap>() != null);
         return RegionMapInstance;
       }
     }
@@ -141,14 +141,14 @@ namespace Eve.Data
     /// Gets the inner collection used to track external references to cached objects.
     /// </summary>
     /// <value>
-    /// The <see cref="ReferenceCollection" /> used to store information about
+    /// The <see cref="ReferenceTracker" /> used to store information about
     /// references to cached objects.
     /// </value>
-    internal ReferenceCollection InnerReferenceCollection
+    internal ReferenceTracker InnerReferenceCollection
     {
       get
       {
-        Contract.Ensures(Contract.Result<ReferenceCollection>() != null);
+        Contract.Ensures(Contract.Result<ReferenceTracker>() != null);
         return this.innerReferenceCollection;
       }
     }

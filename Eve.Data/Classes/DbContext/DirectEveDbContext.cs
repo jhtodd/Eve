@@ -323,6 +323,10 @@ namespace Eve.Data
       var contrabandInfo = modelBuilder.Entity<ContrabandInfoEntity>();
       #endregion
 
+      #region ControlTowerResourceEntity Mappings
+      var controlTowerResource = modelBuilder.Entity<ControlTowerResourceEntity>();
+      #endregion
+
       #region CorporateActivityEntity Mappings
       var corporateActivity = modelBuilder.Entity<CorporateActivityEntity>();
 
@@ -618,6 +622,10 @@ namespace Eve.Data
 
       #region StationTypeEntity Mappings
       // All mappings defined by Data Annotations
+      #endregion
+
+      #region TypeMaterialEntity Mappings
+      var typeMaterial = modelBuilder.Entity<TypeMaterialEntity>();
       #endregion
 
       #region UnitEntity Mappings

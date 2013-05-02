@@ -217,6 +217,14 @@ namespace Eve.Data
     IQueryable<ContrabandInfoEntity> ContrabandInfo { get; }
 
     /// <summary>
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query control tower resources.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IQueryable{T}" /> for control tower resources.
+    /// </value>
+    IQueryable<ControlTowerResourceEntity> ControlTowerResources { get; }
+
+    /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query corporate activities.
     /// </summary>
     /// <value>
@@ -431,6 +439,14 @@ namespace Eve.Data
     /// The <see cref="IQueryable{T}" /> for station types.
     /// </value>
     IQueryable<StationTypeEntity> StationTypes { get; }
+
+    /// <summary>
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query materials required by types.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IQueryable{T}" /> for materials required by types.
+    /// </value>
+    IQueryable<TypeMaterialEntity> TypeMaterials { get; }
 
     /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query units.

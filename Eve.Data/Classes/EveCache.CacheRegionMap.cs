@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="EveCache.DomainMap.cs" company="Jeremy H. Todd">
+// <copyright file="EveCache.CacheRegionMap.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
@@ -13,7 +13,7 @@ namespace Eve.Data
   using System.Threading;
 
   /// <content>
-  /// Contains the definition of the <see cref="DomainMap" /> helper class.
+  /// Contains the definition of the <see cref="CacheRegionMap" /> helper class.
   /// </content>
   public partial class EveCache
   {
@@ -32,25 +32,25 @@ namespace Eve.Data
     /// for blueprints.
     /// </para>
     /// </remarks>
-    internal class DomainMap : IDisposable
+    internal class CacheRegionMap : IDisposable
     {
       // Used to generate the shortest possible region string for a type.
       // Incremented every time a new type is registered.  The resulting
       // numeric value is then used to generate the region string.
       private static long currentKeyIndex = 0L;
 
-      private readonly Dictionary<Type, string> innerDomainMap;
-      private readonly ReaderWriterLockSlim domainMapLock;
+      private readonly Dictionary<Type, string> innerRegionMap;
+      private readonly ReaderWriterLockSlim regionMapLock;
 
       /* Constructors */
 
       /// <summary>
-      /// Initializes a new instance of the DomainMap class.
+      /// Initializes a new instance of the CacheRegionMap class.
       /// </summary>
-      public DomainMap()
+      public CacheRegionMap()
       {
-        this.domainMapLock = new ReaderWriterLockSlim();
-        this.innerDomainMap = new Dictionary<Type, string>();
+        this.regionMapLock = new ReaderWriterLockSlim();
+        this.innerRegionMap = new Dictionary<Type, string>();
       }
 
       /* Properties */
@@ -62,12 +62,12 @@ namespace Eve.Data
       /// A <see cref="Dictionary{TKey, TValue}" /> containing the mapping from
       /// types to cache region strings.
       /// </value>
-      protected internal Dictionary<Type, string> InnerDomainMap
+      protected internal Dictionary<Type, string> InnerRegionMap
       {
         get
         {
           Contract.Ensures(Contract.Result<Dictionary<Type, string>>() != null);
-          return this.innerDomainMap;
+          return this.innerRegionMap;
         }
       }
 
@@ -77,12 +77,12 @@ namespace Eve.Data
       /// <value>
       /// The <see cref="ReaderWriterLockSlim" /> used to synchronize the map.
       /// </value>
-      protected internal ReaderWriterLockSlim DomainMapLock
+      protected internal ReaderWriterLockSlim RegionMapLock
       {
         get
         {
           Contract.Ensures(Contract.Result<ReaderWriterLockSlim>() != null);
-          return this.domainMapLock;
+          return this.regionMapLock;
         }
       }
 
@@ -116,12 +116,12 @@ namespace Eve.Data
 
         string region = null;
 
-        this.DomainMapLock.EnterReadLock();
+        this.RegionMapLock.EnterReadLock();
 
         try
         {
           // First check to see if the current type is already assigned to a region
-          if (this.InnerDomainMap.TryGetValue(type, out region))
+          if (this.InnerRegionMap.TryGetValue(type, out region))
           {
             Contract.Assume(region != null);
             return region;
@@ -129,17 +129,17 @@ namespace Eve.Data
         }
         finally
         {
-          this.DomainMapLock.ExitReadLock();
+          this.RegionMapLock.ExitReadLock();
         }
 
         // If no region has already been assigned, create one now
-        this.DomainMapLock.EnterWriteLock();
+        this.RegionMapLock.EnterWriteLock();
 
         try
         {
           // Make sure no region was added while we were acquiring the
           // write lock.
-          if (this.InnerDomainMap.TryGetValue(type, out region))
+          if (this.InnerRegionMap.TryGetValue(type, out region))
           {
             Contract.Assume(region != null);
             return region;
@@ -152,13 +152,13 @@ namespace Eve.Data
           // If it does, use the region for the type specified in the attribute
           if (cacheDomainAttribute != null)
           {
-            if (!this.InnerDomainMap.TryGetValue(cacheDomainAttribute.CacheDomain, out region))
+            if (!this.InnerRegionMap.TryGetValue(cacheDomainAttribute.CacheDomain, out region))
             {
               region = ConstructRegionForType(cacheDomainAttribute.CacheDomain);
-              this.InnerDomainMap.Add(cacheDomainAttribute.CacheDomain, region);
+              this.InnerRegionMap.Add(cacheDomainAttribute.CacheDomain, region);
             }
 
-            Contract.Assume(region != null); // InnerDomainMap always returns non-null
+            Contract.Assume(region != null); // InnerRegionMap always returns non-null
           }
           else
           {
@@ -168,14 +168,14 @@ namespace Eve.Data
           }
 
           // Associate the region with the type and return
-          if (!this.InnerDomainMap.ContainsKey(type))
+          if (!this.InnerRegionMap.ContainsKey(type))
           {
-            this.InnerDomainMap.Add(type, region);
+            this.InnerRegionMap.Add(type, region);
           }
         }
         finally
         {
-          this.DomainMapLock.ExitWriteLock();
+          this.RegionMapLock.ExitWriteLock();
         }
 
         return region;
@@ -189,7 +189,7 @@ namespace Eve.Data
       {
         if (disposing)
         {
-          this.domainMapLock.Dispose();
+          this.regionMapLock.Dispose();
         }
       }
 
@@ -233,8 +233,8 @@ namespace Eve.Data
       [ContractInvariantMethod]
       private void ObjectInvariant()
       {
-        Contract.Invariant(this.innerDomainMap != null);
-        Contract.Invariant(this.domainMapLock != null);
+        Contract.Invariant(this.innerRegionMap != null);
+        Contract.Invariant(this.regionMapLock != null);
       }
     }
   }

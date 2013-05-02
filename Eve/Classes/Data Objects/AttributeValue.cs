@@ -167,17 +167,6 @@ namespace Eve
       return result;
     }
 
-    /// <inheritdoc />
-    public override bool Equals(AttributeValue other)
-    {
-      if (other == null)
-      {
-        return false;
-      }
-
-      return this.AttributeId.Equals(other.AttributeId) && this.ItemTypeId.Equals(other.ItemTypeId);
-    }
-
     /// <summary>
     /// Formats the current value according to the attribute type.
     /// </summary>
@@ -208,12 +197,6 @@ namespace Eve
 
       // Otherwise, just format the number
       return this.BaseValue.ToString(format);
-    }
-
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-      return CompoundHashCode.Create(this.AttributeId, this.ItemTypeId);
     }
 
     /// <inheritdoc />

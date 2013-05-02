@@ -706,6 +706,34 @@ namespace Eve.Data
     }
     #endregion
 
+    #region ControlTowerResource Methods
+    ControlTowerResource IEveRepository.GetControlTowerResourceById(TypeId controlTowerTypeId, TypeId resourceTypeId)
+    {
+      Contract.Ensures(Contract.Result<ControlTowerResource>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<ControlTowerResource> IEveRepository.GetControlTowerResources(Func<IQueryable<ControlTowerResourceEntity>, IQueryable<ControlTowerResourceEntity>> queryOperations)
+    {
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
+      Contract.Ensures(Contract.Result<IReadOnlyList<ControlTowerResource>>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<ControlTowerResource> IEveRepository.GetControlTowerResources(params IQueryModifier<ControlTowerResourceEntity>[] modifiers)
+    {
+      Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<ControlTowerResource>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetControlTowerResourceById(TypeId controlTowerTypeId, TypeId resourceTypeId, out ControlTowerResource value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
+    #endregion
+
     #region CorporateActivity Methods
     CorporateActivity IEveRepository.GetCorporateActivityById(CorporateActivityId id)
     {
@@ -1480,6 +1508,34 @@ namespace Eve.Data
     }
 
     bool IEveRepository.TryGetStationTypeById(TypeId id, out StationType value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
+    #endregion
+
+    #region TypeMaterial Methods
+    TypeMaterial IEveRepository.GetTypeMaterialById(TypeId typeId, TypeId materialTypeId)
+    {
+      Contract.Ensures(Contract.Result<TypeMaterial>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<TypeMaterial> IEveRepository.GetTypeMaterials(Func<IQueryable<TypeMaterialEntity>, IQueryable<TypeMaterialEntity>> queryOperations)
+    {
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
+      Contract.Ensures(Contract.Result<IReadOnlyList<TypeMaterial>>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<TypeMaterial> IEveRepository.GetTypeMaterials(params IQueryModifier<TypeMaterialEntity>[] modifiers)
+    {
+      Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<TypeMaterial>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetTypeMaterialById(TypeId typeId, TypeId materialTypeId, out TypeMaterial value)
     {
       Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();

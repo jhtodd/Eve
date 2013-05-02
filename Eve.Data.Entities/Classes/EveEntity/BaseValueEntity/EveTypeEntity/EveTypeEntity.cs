@@ -169,6 +169,15 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
+    [ForeignKey("TypeId")]
+    public virtual ICollection<TypeMaterialEntity> Materials { get; internal set; }
+
+    /// <summary>
+    /// Gets the underlying database value of the corresponding adapter property.
+    /// </summary>
+    /// <value>
+    /// The underlying database value of the corresponding adapter property.
+    /// </value>
     public virtual MetaTypeEntity MetaType { get; internal set; }
 
     /// <summary>

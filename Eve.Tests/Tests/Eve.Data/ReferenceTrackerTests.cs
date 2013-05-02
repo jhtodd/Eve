@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ReferenceCollectionTests.cs" company="Jeremy H. Todd">
+// <copyright file="ReferenceTrackerTests.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
@@ -15,7 +15,7 @@ namespace Eve.Tests
   using NUnit.Framework;
 
   /// <summary>
-  /// Contains test functions for the <see cref="EveCache.ReferenceCollection" />
+  /// Contains test functions for the <see cref="EveCache.ReferenceTracker" />
   /// class.
   /// </summary>
   [TestFixture]
@@ -28,7 +28,7 @@ namespace Eve.Tests
     [Test]
     public void TestAddPermanent()
     {
-      EveCache.ReferenceCollection collection = new EveCache.ReferenceCollection();
+      EveCache.ReferenceTracker collection = new EveCache.ReferenceTracker();
 
       string addedKey = "Permanent";
       object addedValue = new object();
@@ -55,7 +55,7 @@ namespace Eve.Tests
     [Test]
     public void TestAddMixed()
     {
-      EveCache.ReferenceCollection collection = new EveCache.ReferenceCollection();
+      EveCache.ReferenceTracker collection = new EveCache.ReferenceTracker();
 
       // The collection of permanent items to add
       var permanentItems = new[] 

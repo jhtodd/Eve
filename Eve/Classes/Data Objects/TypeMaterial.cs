@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="MetaType.cs" company="Jeremy H. Todd">
+// <copyright file="TypeMaterial.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
@@ -15,21 +15,22 @@ namespace Eve
   using FreeNet.Collections;
 
   /// <summary>
-  /// Contains meta-information about an EVE item type.
+  /// Contains information about the materials required to manufacture
+  /// a type of EVE item.  This is also used to determine which materials
+  /// are recovered when an item is reprocessed.
   /// </summary>
-  public sealed partial class MetaType
-    : EveEntityAdapter<MetaTypeEntity, MetaType>,
+  public sealed partial class TypeMaterial
+    : EveEntityAdapter<TypeMaterialEntity, TypeMaterial>,
       IHasIcon,
       IKeyItem<TypeId>
   {
-    private MetaGroup metaGroup;
-    private EveType parentType;
+    private EveType materialType;
     private EveType type;
 
     /* Constructors */
 
     /// <summary>
-    /// Initializes a new instance of the MetaType class.
+    /// Initializes a new instance of the TypeMaterial class.
     /// </summary>
     /// <param name="repository">
     /// The <see cref="IEveRepository" /> which contains the entity adapter.
@@ -37,7 +38,7 @@ namespace Eve
     /// <param name="entity">
     /// The data entity that forms the basis of the adapter.
     /// </param>
-    internal MetaType(IEveRepository repository, MetaTypeEntity entity) : base(repository, entity)
+    internal TypeMaterial(IEveRepository repository, TypeMaterialEntity entity) : base(repository, entity)
     {
       Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
@@ -46,66 +47,57 @@ namespace Eve
     /* Properties */
 
     /// <summary>
-    /// Gets the meta group of the item.
+    /// Gets the type of the required material.
     /// </summary>
     /// <value>
-    /// The meta group of the item.
+    /// The type of the required material.
     /// </value>
-    public MetaGroup MetaGroup
-    {
-      get
-      {
-        Contract.Ensures(Contract.Result<MetaGroup>() != null);
-
-        // If not already set, load from the cache, or else create an instance from the base entity
-        return this.LazyInitializeAdapter(ref this.metaGroup, this.Entity.MetaGroupId, () => this.Entity.MetaGroup);
-      }
-    }
-
-    /// <summary>
-    /// Gets the ID of the meta group of the item.
-    /// </summary>
-    /// <value>
-    /// The ID of the meta group of the item.
-    /// </value>
-    public MetaGroupId MetaGroupId
-    {
-      get { return Entity.MetaGroupId; }
-    }
-
-    /// <summary>
-    /// Gets the parent type.
-    /// </summary>
-    /// <value>
-    /// The parent type.
-    /// </value>
-    public EveType ParentType
+    public EveType MaterialType
     {
       get
       {
         Contract.Ensures(Contract.Result<EveType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.LazyInitializeAdapter(ref this.parentType, this.Entity.ParentTypeId, () => this.Entity.ParentType);
+        return this.LazyInitializeAdapter(ref this.materialType, this.Entity.MaterialTypeId, () => this.Entity.MaterialType);
       }
     }
 
     /// <summary>
-    /// Gets the ID of the parent type.
+    /// Gets the ID of the required material.
     /// </summary>
     /// <value>
-    /// The ID of the parent type.
+    /// The ID of the required material.
     /// </value>
-    public TypeId ParentTypeId
+    public TypeId MaterialTypeId
     {
-      get { return Entity.ParentTypeId; }
+      get { return this.Entity.MaterialTypeId; }
     }
 
     /// <summary>
-    /// Gets the item type the value describes.
+    /// Gets the required quantity of the material.
     /// </summary>
     /// <value>
-    /// The item type the value describes.
+    /// The required quantity of the material.
+    /// </value>
+    public int Quantity
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<int>() > 0);
+
+        var result = this.Entity.Quantity;
+
+        Contract.Assume(result > 0);
+        return result;
+      }
+    }
+
+    /// <summary>
+    /// Gets the type to which the material requirement applies.
+    /// </summary>
+    /// <value>
+    /// The type to which the material requirement applies.
     /// </value>
     private EveType Type
     {
@@ -119,36 +111,36 @@ namespace Eve
     }
 
     /// <summary>
-    /// Gets the ID of the item type the value describes.
+    /// Gets the ID of the type to which the material requirement applies.
     /// </summary>
     /// <value>
-    /// The ID of the item type the value describes.
+    /// The ID of the type to which the material requirement applies.
     /// </value>
     private TypeId TypeId
     {
-      get { return Entity.TypeId; }
+      get { return this.Entity.TypeId; }
     }
 
     /* Methods */
 
     /// <inheritdoc />
-    public override int CompareTo(MetaType other)
+    public override int CompareTo(TypeMaterial other)
     {
       if (other == null)
       {
         return 1;
       }
 
-      int result = this.MetaGroupId.CompareTo(other.MetaGroupId);
+      int result = this.Type.CompareTo(other.Type);
 
       if (result == 0)
       {
-        result = this.Type.MetaLevel.CompareTo(other.Type.MetaLevel);
+        result = this.MaterialType.CompareTo(other.MaterialType);
       }
 
       if (result == 0)
       {
-        result = this.Type.CompareTo(other.Type);
+        result = this.Quantity.CompareTo(other.Quantity);
       }
 
       return result;
@@ -157,7 +149,7 @@ namespace Eve
     /// <inheritdoc />
     public override string ToString()
     {
-      return this.Type.Name + " (" + this.MetaGroup.Name + ")";
+      return this.MaterialType.Name + " (" + this.Quantity.ToString("#,##0") + ")";
     }
   }
 
@@ -165,16 +157,16 @@ namespace Eve
   /// <content>
   /// Explicit implementation of the <see cref="IHasIcon" /> interface.
   /// </content>
-  public partial class MetaType : IHasIcon
+  public partial class TypeMaterial : IHasIcon
   {
     Icon IHasIcon.Icon
     {
-      get { return this.Type.Icon; }
+      get { return this.MaterialType.Icon; }
     }
 
     IconId? IHasIcon.IconId
     {
-      get { return this.Type.IconId; }
+      get { return this.MaterialType.IconId; }
     }
   }
   #endregion
@@ -183,11 +175,11 @@ namespace Eve
   /// <content>
   /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.
   /// </content>
-  public partial class MetaType : IKeyItem<TypeId>
+  public partial class TypeMaterial : IKeyItem<TypeId>
   {
     TypeId IKeyItem<TypeId>.Key
     {
-      get { return this.TypeId; }
+      get { return this.MaterialTypeId; }
     }
   }
   #endregion

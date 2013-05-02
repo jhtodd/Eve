@@ -237,23 +237,6 @@ namespace Eve.Universe
     }
 
     /// <inheritdoc />
-    public override bool Equals(SolarSystemJump other)
-    {
-      if (other == null)
-      {
-        return false;
-      }
-
-      return this.FromSolarSystemId == other.FromSolarSystemId && this.ToSolarSystemId == other.ToSolarSystemId;
-    }
-
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-      return CompoundHashCode.Create(this.FromSolarSystemId, this.ToSolarSystemId);
-    }
-
-    /// <inheritdoc />
     public override string ToString()
     {
       return this.FromSolarSystem.Name + " to " + this.ToSolarSystem.Name;

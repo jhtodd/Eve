@@ -216,23 +216,6 @@ namespace Eve.Universe
     }
 
     /// <inheritdoc />
-    public override bool Equals(ContrabandInfo other)
-    {
-      if (other == null)
-      {
-        return false;
-      }
-
-      return this.FactionId == other.FactionId && this.TypeId == other.TypeId;
-    }
-
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-      return this.CacheKey.GetHashCode();
-    }
-
-    /// <inheritdoc />
     public override string ToString()
     {
       return this.Type.Name + " (" + this.Faction.Name + ")";

@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="EveCache.ReferenceCollection.cs" company="Jeremy H. Todd">
+// <copyright file="EveCache.ReferenceTracker.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
@@ -13,21 +13,21 @@ namespace Eve.Data
   using System.Threading;
 
   /// <content>
-  /// Contains the definition of the <see cref="ReferenceCollection" /> helper class.
+  /// Contains the definition of the <see cref="ReferenceTracker" /> helper class.
   /// </content>
   public partial class EveCache
   {
     /// <summary>
     /// A collection that keeps track of active references to objects.
     /// </summary>
-    internal class ReferenceCollection
+    internal class ReferenceTracker
     {
       private Dictionary<string, object> innerItems;
 
       /// <summary>
-      /// Initializes a new instance of the <see cref="ReferenceCollection" /> class.
+      /// Initializes a new instance of the <see cref="ReferenceTracker" /> class.
       /// </summary>
-      public ReferenceCollection()
+      public ReferenceTracker()
       {
         this.innerItems = new Dictionary<string, object>();
       }

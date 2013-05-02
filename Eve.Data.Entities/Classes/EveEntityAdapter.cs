@@ -26,8 +26,8 @@ namespace Eve.Data.Entities
   public abstract partial class EveEntityAdapter<TEntity, TDerived> 
     : EveDataObject<TDerived>,
       IEveEntityAdapter<TEntity>
-    where TEntity : IEveEntity
-    where TDerived : class
+    where TEntity : IEveEntity<TDerived>
+    where TDerived : EveEntityAdapter<TEntity, TDerived>
   {
     private readonly TEntity entity;
     private readonly IEveRepository repository;

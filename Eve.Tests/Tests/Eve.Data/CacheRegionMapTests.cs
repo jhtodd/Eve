@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="DomainMapTests.cs" company="Jeremy H. Todd">
+// <copyright file="CacheRegionMapTests.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
@@ -15,7 +15,7 @@ namespace Eve.Tests
   using NUnit.Framework;
 
   /// <summary>
-  /// Contains test functions for the <see cref="EveCache.DomainMap" />
+  /// Contains test functions for the <see cref="EveCache.CacheRegionMap" />
   /// class.
   /// </summary>
   [TestFixture]
@@ -23,54 +23,54 @@ namespace Eve.Tests
   {
     #region Test Methods
     /// <summary>
-    /// Test method for the <see cref="EveCache.DomainMap.GetRegion" /> method.
+    /// Test method for the <see cref="EveCache.CacheRegionMap.GetRegion" /> method.
     /// </summary>
     [Test]
     public void TestGetRegion()
     {
-      EveCache.DomainMap map = new EveCache.DomainMap();
+      EveCache.CacheRegionMap map = new EveCache.CacheRegionMap();
 
       // Verify that the map is initially empty
-      Assert.That(map.InnerDomainMap.Count == 0);
+      Assert.That(map.InnerRegionMap.Count == 0);
 
       // Get the region for the default parent class and verify it was cached
       string defaultParentRegion = map.GetRegion(typeof(ParentWithDefaultDomain));
-      Assert.IsTrue(map.InnerDomainMap.ContainsKey(typeof(ParentWithDefaultDomain)));
-      Assert.AreEqual(map.InnerDomainMap[typeof(ParentWithDefaultDomain)], defaultParentRegion);
+      Assert.IsTrue(map.InnerRegionMap.ContainsKey(typeof(ParentWithDefaultDomain)));
+      Assert.AreEqual(map.InnerRegionMap[typeof(ParentWithDefaultDomain)], defaultParentRegion);
 
       // Get the region for the default child class and verify it was cached
       string defaultChildRegion = map.GetRegion(typeof(ChildWithDefaultDomain));
-      Assert.IsTrue(map.InnerDomainMap.ContainsKey(typeof(ChildWithDefaultDomain)));
-      Assert.AreEqual(map.InnerDomainMap[typeof(ChildWithDefaultDomain)], defaultChildRegion);
+      Assert.IsTrue(map.InnerRegionMap.ContainsKey(typeof(ChildWithDefaultDomain)));
+      Assert.AreEqual(map.InnerRegionMap[typeof(ChildWithDefaultDomain)], defaultChildRegion);
 
       // The default parent and child domains should be different
       Assert.AreNotEqual(defaultParentRegion, defaultChildRegion);
 
       // Get the region for the custom parent class and verify it was cached
       string customParentRegion = map.GetRegion(typeof(ParentWithCustomDomain));
-      Assert.IsTrue(map.InnerDomainMap.ContainsKey(typeof(ParentWithCustomDomain)));
-      Assert.AreEqual(map.InnerDomainMap[typeof(ParentWithCustomDomain)], customParentRegion);
+      Assert.IsTrue(map.InnerRegionMap.ContainsKey(typeof(ParentWithCustomDomain)));
+      Assert.AreEqual(map.InnerRegionMap[typeof(ParentWithCustomDomain)], customParentRegion);
 
       // Get the region for the child of the custom parent class and verify it was cached
       string customChildRegion = map.GetRegion(typeof(ChildWithCustomDomain));
-      Assert.IsTrue(map.InnerDomainMap.ContainsKey(typeof(ChildWithCustomDomain)));
-      Assert.AreEqual(map.InnerDomainMap[typeof(ChildWithCustomDomain)], customChildRegion);
+      Assert.IsTrue(map.InnerRegionMap.ContainsKey(typeof(ChildWithCustomDomain)));
+      Assert.AreEqual(map.InnerRegionMap[typeof(ChildWithCustomDomain)], customChildRegion);
 
       // The custom parent and child domains should be the same
       Assert.AreEqual(customParentRegion, customChildRegion);
 
       // Get the region for the child class with the overridden domain and verify it was cached
       string overriddenChildRegion = map.GetRegion(typeof(ChildWithOverriddenDomain));
-      Assert.IsTrue(map.InnerDomainMap.ContainsKey(typeof(ChildWithOverriddenDomain)));
-      Assert.AreEqual(map.InnerDomainMap[typeof(ChildWithOverriddenDomain)], overriddenChildRegion);
+      Assert.IsTrue(map.InnerRegionMap.ContainsKey(typeof(ChildWithOverriddenDomain)));
+      Assert.AreEqual(map.InnerRegionMap[typeof(ChildWithOverriddenDomain)], overriddenChildRegion);
 
       // The custom parent and the overridden child should be different
       Assert.AreNotEqual(customParentRegion, overriddenChildRegion);
 
       // Get the region for the child class that inherits the overridden domain and verify it was cached
       string overriddenGrandchildRegion = map.GetRegion(typeof(GrandchildOfOverriddenDomain));
-      Assert.IsTrue(map.InnerDomainMap.ContainsKey(typeof(GrandchildOfOverriddenDomain)));
-      Assert.AreEqual(map.InnerDomainMap[typeof(GrandchildOfOverriddenDomain)], overriddenGrandchildRegion);
+      Assert.IsTrue(map.InnerRegionMap.ContainsKey(typeof(GrandchildOfOverriddenDomain)));
+      Assert.AreEqual(map.InnerRegionMap[typeof(GrandchildOfOverriddenDomain)], overriddenGrandchildRegion);
 
       // The overridden child and the grandchild should be the same
       Assert.AreEqual(overriddenChildRegion, overriddenGrandchildRegion);

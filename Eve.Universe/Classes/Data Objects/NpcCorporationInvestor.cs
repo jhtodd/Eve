@@ -141,23 +141,6 @@ namespace Eve.Universe
     }
 
     /// <inheritdoc />
-    public override bool Equals(NpcCorporationInvestor other)
-    {
-      if (other == null)
-      {
-        return false;
-      }
-
-      return this.InvestorId.Equals(other.InvestorId);
-    }
-
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-      return this.InvestorId.GetHashCode();
-    }
-
-    /// <inheritdoc />
     public override string ToString()
     {
       return this.Investor.Name + " (" + this.Shares.ToString() + " shares)";

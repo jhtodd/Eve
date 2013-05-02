@@ -18,10 +18,10 @@ namespace Eve
   /// base value, you would write <c>public class Ship : EveDataObject&lt;Ship&gt;</c>.
   /// I know this sort of pseudo-circular "Curiously Recurring Template Pattern"
   /// has its pitfalls, but it allows me to write many useful methods
-  /// (Equals, CompareTo, etc.) at this base class level and save myself an
-  /// awful lot of hard-to-maintain boilerplate in derived classes.  Since I
-  /// have a lot(!) of derived classes to write, and not many people will ever
-  /// see or care about these inner workings, I'm going to do it anyway in the
+  /// (Equals, GetHashCode, CompareTo, etc.) at this base class level and save
+  /// myself an awful lot of hard-to-maintain boilerplate in derived classes.  
+  /// Since I have a lot(!) of derived classes to write, and not many people will
+  /// ever see or care about these inner workings, I'm going to do it anyway in the
   /// interests of pragmatism :).
   /// </typeparam>
   /// <remarks>
@@ -37,7 +37,7 @@ namespace Eve
       IComparable<TDerived>,
       IEquatable<TDerived>,
       IEveCacheable
-    where TDerived : class
+    where TDerived : EveDataObject<TDerived>
   {
     /* Constructors */
 
@@ -70,13 +70,20 @@ namespace Eve
     }
 
     /// <inheritdoc />
-    public abstract bool Equals(TDerived other);
+    public virtual bool Equals(TDerived other)
+    {
+      if (other == null)
+      {
+        return false;
+      }
+
+      return this.CacheKey.Equals(other.CacheKey);
+    }
 
     /// <inheritdoc />
     public override int GetHashCode()
     {
-      // Necessary to suppress warning about not overriding GetHashCode().
-      return base.GetHashCode();
+      return this.CacheKey.GetHashCode();
     }
   }
 

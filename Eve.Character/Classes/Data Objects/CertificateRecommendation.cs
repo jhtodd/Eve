@@ -136,23 +136,6 @@ namespace Eve.Character
     }
 
     /// <inheritdoc />
-    public override bool Equals(CertificateRecommendation other)
-    {
-      if (other == null)
-      {
-        return false;
-      }
-
-      return this.Id.Equals(other.Id);
-    }
-
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-      return this.Id.GetHashCode();
-    }
-
-    /// <inheritdoc />
     public override string ToString()
     {
       return this.ShipType.Name + ": " + this.Certificate.ToString() + " (" + this.RecommendationLevel.ToString() + ")";

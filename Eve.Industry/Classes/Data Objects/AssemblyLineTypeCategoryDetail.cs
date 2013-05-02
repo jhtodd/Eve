@@ -183,23 +183,6 @@ namespace Eve.Industry
     }
 
     /// <inheritdoc />
-    public override bool Equals(AssemblyLineTypeCategoryDetail other)
-    {
-      if (other == null)
-      {
-        return false;
-      }
-
-      return this.AssemblyLineTypeId == other.AssemblyLineTypeId && this.CategoryId == other.CategoryId;
-    }
-
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-      return CompoundHashCode.Create(this.AssemblyLineTypeId, this.CategoryId);
-    }
-
-    /// <inheritdoc />
     public override string ToString()
     {
       return this.AssemblyLineType.Name + " (" + this.Category.Name + ")";

@@ -72,6 +72,7 @@ namespace Eve
     private Group group;
     private Icon icon;
     private MarketGroup marketGroup;
+    private ReadOnlyTypeMaterialCollection materials;
     private MetaGroup metaGroup;
     private MetaType metaType;
     private ReadOnlySkillLevelCollection requiredSkills;
@@ -368,6 +369,34 @@ namespace Eve
         Contract.Assume(!double.IsNaN(result));
 
         return result;
+      }
+    }
+
+    /// <summary>
+    /// Gets the collection of materials required to manufacture an
+    /// item of this type.  This is also used to determine which materials 
+    /// are recovered when a lot of items of this type is reprocessed.
+    /// </summary>
+    /// <value>
+    /// A <see cref="ReadOnlyTypeMaterialCollection" /> containing the materials.
+    /// </value>
+    /// <remarks>
+    /// <para>
+    /// For some types (especially T2 items), additional materials may be
+    /// required.  These will be contained in the blueprint type's
+    /// <see cref="BlueprintType.Requirements" /> collection.
+    /// </para>
+    /// </remarks>
+    public ReadOnlyTypeMaterialCollection Materials
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<ReadOnlyTypeMaterialCollection>() != null);
+
+        // If not already set, construct a collection of this type's attribute values.
+        return EveType.LazyInitialize(
+          ref this.materials,
+          () => ReadOnlyTypeMaterialCollection.Create(this.Repository, this.Entity.Materials));
       }
     }
 

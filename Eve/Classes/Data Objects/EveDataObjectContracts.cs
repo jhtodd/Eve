@@ -26,7 +26,7 @@ namespace Eve
   /// </typeparam>
   [ContractClassFor(typeof(EveDataObject<>))]
   internal abstract class EveDataObjectContracts<TDerived> : EveDataObject<TDerived>
-    where TDerived : class
+    where TDerived : EveDataObject<TDerived>
   {
     /* Properties */
 

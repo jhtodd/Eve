@@ -1116,6 +1116,47 @@ namespace Eve.Data
     }
     #endregion
 
+    #region ControlTowerResource Methods
+    /// <inheritdoc />
+    public ControlTowerResource GetControlTowerResourceById(TypeId controlTowerTypeId, TypeId resourceTypeId)
+    {
+      ControlTowerResource result;
+
+      if (!this.TryGetControlTowerResourceById(controlTowerTypeId, resourceTypeId, out result))
+      {
+        throw new InvalidOperationException("No ControlTowerResource with ID (" + controlTowerTypeId.ToString() + ", " + resourceTypeId.ToString() + ") could be found.");
+      }
+
+      return result;
+    }
+
+    /// <inheritdoc />
+    public IReadOnlyList<ControlTowerResource> GetControlTowerResources(Func<IQueryable<ControlTowerResourceEntity>, IQueryable<ControlTowerResourceEntity>> queryOperations)
+    {
+      return this.GetControlTowerResources(new QueryTransform<ControlTowerResourceEntity>(queryOperations));
+    }
+
+    /// <inheritdoc />
+    [EveQueryMethod(typeof(ControlTowerResource))]
+    public IReadOnlyList<ControlTowerResource> GetControlTowerResources(params IQueryModifier<ControlTowerResourceEntity>[] modifiers)
+    {
+      // Construct the result set, filtering items through the global cache along the way
+      return LoadAndCacheResults<ControlTowerResourceEntity, ControlTowerResource>(this.Context.ControlTowerResources, modifiers);
+    }
+
+    /// <inheritdoc />
+    public bool TryGetControlTowerResourceById(TypeId controlTowerTypeId, TypeId resourceTypeId, out ControlTowerResource value)
+    {
+      if (this.Cache.TryGetValue<ControlTowerResource>(ControlTowerResourceEntity.CreateCacheKey(controlTowerTypeId, resourceTypeId), out value))
+      {
+        return true;
+      }
+
+      value = this.GetControlTowerResources(q => q.Where(x => x.ControlTowerTypeId == controlTowerTypeId.Value && x.ResourceTypeId == resourceTypeId.Value)).SingleOrDefault();
+      return value != null;
+    }
+    #endregion
+
     #region CorporateActivity Methods
     /// <inheritdoc />
     public CorporateActivity GetCorporateActivityById(CorporateActivityId id)
@@ -2257,6 +2298,47 @@ namespace Eve.Data
       }
 
       value = this.GetStationTypes(q => q.Where(x => x.Id == id.Value)).SingleOrDefault();
+      return value != null;
+    }
+    #endregion
+
+    #region TypeMaterial Methods
+    /// <inheritdoc />
+    public TypeMaterial GetTypeMaterialById(TypeId typeId, TypeId materialTypeId)
+    {
+      TypeMaterial result;
+
+      if (!this.TryGetTypeMaterialById(typeId, materialTypeId, out result))
+      {
+        throw new InvalidOperationException("No TypeMaterial with ID (" + typeId.ToString() + ", " + materialTypeId.ToString() + ") could be found.");
+      }
+
+      return result;
+    }
+
+    /// <inheritdoc />
+    public IReadOnlyList<TypeMaterial> GetTypeMaterials(Func<IQueryable<TypeMaterialEntity>, IQueryable<TypeMaterialEntity>> queryOperations)
+    {
+      return this.GetTypeMaterials(new QueryTransform<TypeMaterialEntity>(queryOperations));
+    }
+
+    /// <inheritdoc />
+    [EveQueryMethod(typeof(TypeMaterial))]
+    public IReadOnlyList<TypeMaterial> GetTypeMaterials(params IQueryModifier<TypeMaterialEntity>[] modifiers)
+    {
+      // Construct the result set, filtering items through the global cache along the way
+      return LoadAndCacheResults<TypeMaterialEntity, TypeMaterial>(this.Context.TypeMaterials, modifiers);
+    }
+
+    /// <inheritdoc />
+    public bool TryGetTypeMaterialById(TypeId typeId, TypeId materialTypeId, out TypeMaterial value)
+    {
+      if (this.Cache.TryGetValue<TypeMaterial>(TypeMaterialEntity.CreateCacheKey(typeId, materialTypeId), out value))
+      {
+        return true;
+      }
+
+      value = this.GetTypeMaterials(q => q.Where(x => x.TypeId == typeId.Value && x.MaterialTypeId == materialTypeId.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion

@@ -69,11 +69,11 @@ namespace Eve.Sandbox
     {
       EveDbContext ct = new EveDbContext();
 
-      var result = ds.GetStations(q => q.Where(s => s.Agents.Count > 10));
+      var result = ds.GetEveTypes(q => q.Where(x => x.Name == "Condor")).Single();
 
-      foreach (var t in result)
+      foreach (var t in result.Materials)
       {
-        textBox1.AppendText(t.Name + Environment.NewLine);
+        textBox1.AppendText(t.ToString() + Environment.NewLine);
       }
     }
   }

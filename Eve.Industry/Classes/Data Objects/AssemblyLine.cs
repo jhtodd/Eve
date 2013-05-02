@@ -435,23 +435,6 @@ namespace Eve.Industry
     }
 
     /// <inheritdoc />
-    public override bool Equals(AssemblyLine other)
-    {
-      if (other == null)
-      {
-        return false;
-      }
-
-      return this.Id == other.Id;
-    }
-
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-      return this.Id.GetHashCode();
-    }
-
-    /// <inheritdoc />
     public override string ToString()
     {
       return this.AssemblyLineType.Name;

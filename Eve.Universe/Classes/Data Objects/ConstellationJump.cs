@@ -179,23 +179,6 @@ namespace Eve.Universe
     }
 
     /// <inheritdoc />
-    public override bool Equals(ConstellationJump other)
-    {
-      if (other == null)
-      {
-        return false;
-      }
-
-      return this.FromConstellationId == other.FromConstellationId && this.ToConstellationId == other.ToConstellationId;
-    }
-
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-      return CompoundHashCode.Create(this.FromConstellationId, this.ToConstellationId);
-    }
-
-    /// <inheritdoc />
     public override string ToString()
     {
       return this.FromConstellation.Name + " to " + this.ToConstellation.Name;

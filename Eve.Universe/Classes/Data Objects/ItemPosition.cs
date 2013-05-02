@@ -236,23 +236,6 @@ namespace Eve.Universe
     }
 
     /// <inheritdoc />
-    public override bool Equals(ItemPosition other)
-    {
-      if (other == null)
-      {
-        return false;
-      }
-
-      return this.ItemId == other.ItemId;
-    }
-
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-      return this.ItemId.GetHashCode();
-    }
-
-    /// <inheritdoc />
     public override string ToString()
     {
       return this.Item.Name + " (" + this.X.ToString() + ", " + this.Y.ToString() + ", " + this.Z.ToString() + ")";

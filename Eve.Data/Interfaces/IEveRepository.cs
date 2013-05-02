@@ -1718,6 +1718,79 @@ namespace Eve.Data
     bool TryGetContrabandInfoById(FactionId factionId, TypeId typeId, out ContrabandInfo value);
     #endregion
 
+    #region ControlTowerResource Methods
+    /// <summary>
+    /// Returns the <see cref="ControlTowerResource" /> object with the specified IDs.
+    /// </summary>
+    /// <param name="controlTowerTypeId">
+    /// The ID of the control tower type.
+    /// </param>
+    /// <param name="resourceTypeId">
+    /// The ID of the resource type.
+    /// </param>
+    /// <returns>
+    /// The item with the specified ID value(s).
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
+    ControlTowerResource GetControlTowerResourceById(TypeId controlTowerTypeId, TypeId resourceTypeId);
+
+    /// <summary>
+    /// Returns all <see cref="ControlTowerResource" /> objects matching the specified criteria.
+    /// </summary>
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
+    /// </returns>
+    IReadOnlyList<ControlTowerResource> GetControlTowerResources(Func<IQueryable<ControlTowerResourceEntity>, IQueryable<ControlTowerResourceEntity>> queryOperations);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="ControlTowerResource" /> objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
+    /// </returns>
+    IReadOnlyList<ControlTowerResource> GetControlTowerResources(params IQueryModifier<ControlTowerResourceEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="ControlTowerResource" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="controlTowerTypeId">
+    /// The ID of the control tower type.
+    /// </param>
+    /// <param name="resourceTypeId">
+    /// The ID of the resource type.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID value(s),
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
+    bool TryGetControlTowerResourceById(TypeId controlTowerTypeId, TypeId resourceTypeId, out ControlTowerResource value);
+    #endregion
+
     #region CorporateActivity Methods
     /// <summary>
     /// Returns the <see cref="CorporateActivity" /> object with the specified ID.
@@ -3660,6 +3733,79 @@ namespace Eve.Data
     /// Thrown if more than one item with the specified ID was found.
     /// </exception>
     bool TryGetStationTypeById(TypeId id, out StationType value);
+    #endregion
+
+    #region TypeMaterial Methods
+    /// <summary>
+    /// Returns the <see cref="TypeMaterial" /> object with the specified ID.
+    /// </summary>
+    /// <param name="typeId">
+    /// The ID of the type being manufactured or reprocessed.
+    /// </param>
+    /// <param name="materialTypeId">
+    /// The ID of the required material type.
+    /// </param>
+    /// <returns>
+    /// The item with the specified ID value(s).
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
+    TypeMaterial GetTypeMaterialById(TypeId typeId, TypeId materialTypeId);
+
+    /// <summary>
+    /// Returns all <see cref="TypeMaterial" /> objects matching the specified criteria.
+    /// </summary>
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
+    /// </returns>
+    IReadOnlyList<TypeMaterial> GetTypeMaterials(Func<IQueryable<TypeMaterialEntity>, IQueryable<TypeMaterialEntity>> queryOperations);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="TypeMaterial" /> objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
+    /// </returns>
+    IReadOnlyList<TypeMaterial> GetTypeMaterials(params IQueryModifier<TypeMaterialEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="TypeMaterial" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="typeId">
+    /// The ID of the type being manufactured or reprocessed.
+    /// </param>
+    /// <param name="materialTypeId">
+    /// The ID of the required material type.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID value(s),
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
+    bool TryGetTypeMaterialById(TypeId typeId, TypeId materialTypeId, out TypeMaterial value);
     #endregion
 
     #region Unit Methods

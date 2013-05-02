@@ -285,6 +285,12 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
+    public IQueryable<ControlTowerResourceEntity> ControlTowerResources
+    {
+      get { return this.Query<ControlTowerResourceEntity>(); }
+    }
+
+    /// <inheritdoc />
     public IQueryable<CorporateActivityEntity> CorporateActivities
     {
       get { return this.Query<CorporateActivityEntity>(); }
@@ -486,6 +492,12 @@ namespace Eve.Data
     public IQueryable<StationTypeEntity> StationTypes
     {
       get { return this.Query<StationTypeEntity>(); }
+    }
+
+    /// <inheritdoc />
+    public IQueryable<TypeMaterialEntity> TypeMaterials
+    {
+      get { return this.Query<TypeMaterialEntity>(); }
     }
 
     /// <inheritdoc />

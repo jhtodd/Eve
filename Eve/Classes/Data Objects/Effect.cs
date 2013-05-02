@@ -144,23 +144,6 @@ namespace Eve
     }
 
     /// <inheritdoc />
-    public override bool Equals(Effect other)
-    {
-      if (other == null)
-      {
-        return false;
-      }
-
-      return this.EffectId.Equals(other.EffectId) && this.ItemTypeId.Equals(other.ItemTypeId);
-    }
-
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-      return CompoundHashCode.Create(this.EffectId, this.ItemTypeId);
-    }
-
-    /// <inheritdoc />
     public override string ToString()
     {
       return this.ToString(string.Empty);

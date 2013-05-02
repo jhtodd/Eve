@@ -233,6 +233,15 @@ namespace Eve.Data
       }
     }
 
+    IQueryable<ControlTowerResourceEntity> IEveDbContext.ControlTowerResources
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IQueryable<ControlTowerResourceEntity>>() != null);
+        throw new NotImplementedException();
+      }
+    }
+
     IQueryable<CorporateActivityEntity> IEveDbContext.CorporateActivities
     {
       get
@@ -472,6 +481,15 @@ namespace Eve.Data
       get
       {
         Contract.Ensures(Contract.Result<IQueryable<StationTypeEntity>>() != null);
+        throw new NotImplementedException();
+      }
+    }
+
+    IQueryable<TypeMaterialEntity> IEveDbContext.TypeMaterials
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IQueryable<TypeMaterialEntity>>() != null);
         throw new NotImplementedException();
       }
     }
