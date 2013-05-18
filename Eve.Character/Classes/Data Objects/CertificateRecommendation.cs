@@ -117,7 +117,7 @@ namespace Eve.Character
     /// <value>
     /// The ID of the type of ship the recommendation applies to.
     /// </value>
-    public TypeId ShipTypeId
+    public EveTypeId ShipTypeId
     {
       get { return this.Entity.ShipTypeId; }
     }

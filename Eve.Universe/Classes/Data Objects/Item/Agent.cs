@@ -45,9 +45,6 @@ namespace Eve.Universe
       Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
       Contract.Requires(entity.IsAgent, "The entity must be an agent.");
-
-      // Use Assume instead of Requires to avoid lazy loading on release build
-      Contract.Assert(this.Entity.AgentInfo != null);
     }
 
     /* Properties */
@@ -85,7 +82,8 @@ namespace Eve.Universe
     public AgentTypeId? AgentTypeId
     {
       get 
-      { 
+      {
+        Contract.Ensures(this.Entity.AgentInfo != null || Contract.Result<AgentTypeId?>() == null);
         return this.Entity.AgentInfo == null ? (AgentTypeId?)null : (AgentTypeId?)this.Entity.AgentInfo.AgentTypeId; 
       }
     }
@@ -162,6 +160,7 @@ namespace Eve.Universe
     {
       get
       {
+        Contract.Ensures(this.Entity.AgentInfo != null || Contract.Result<DivisionId?>() == null);
         return this.Entity.AgentInfo == null ? (DivisionId?)null : (DivisionId?)this.Entity.AgentInfo.DivisionId;
       }
     }
@@ -201,7 +200,7 @@ namespace Eve.Universe
     public byte Level
     {
       get
-      { 
+      {
         return this.Entity.AgentInfo == null ? (byte)1 : this.Entity.AgentInfo.Level;
       }
     }
@@ -251,6 +250,7 @@ namespace Eve.Universe
     {
       get
       {
+        Contract.Ensures(this.Entity.AgentInfo != null || Contract.Result<ItemId?>() == null);
         return this.Entity.AgentInfo == null ? (ItemId?)null : this.Entity.AgentInfo.LocationId;
       }
     }
@@ -284,7 +284,7 @@ namespace Eve.Universe
 
         return Agent.LazyInitialize(
           ref this.researchFields,
-          () => ReadOnlySkillTypeCollection.Create(this.Repository, this.Entity.AgentInfo.ResearchFields));
+          () => ReadOnlySkillTypeCollection.Create(this.Repository, this.Entity.AgentInfo == null ? null : this.Entity.AgentInfo.ResearchFields));
       }
     }
 
@@ -353,12 +353,6 @@ namespace Eve.Universe
           this.researchFields.Dispose();
         }
       }
-    }
-
-    [ContractInvariantMethod]
-    private void ObjectInvariant()
-    {
-      Contract.Invariant(this.Entity.AgentInfo != null);
     }
   }
 }

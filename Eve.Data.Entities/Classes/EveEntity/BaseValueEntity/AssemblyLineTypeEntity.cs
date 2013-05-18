@@ -6,7 +6,6 @@
 namespace Eve.Data.Entities
 {
   using System.Collections.Generic;
-  using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
   using System.Diagnostics.Contracts;
 
@@ -16,12 +15,8 @@ namespace Eve.Data.Entities
   /// The data entity for the <see cref="AssemblyLineType" /> class.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("ramAssemblyLineTypes")]
   public class AssemblyLineTypeEntity : BaseValueEntity<byte, AssemblyLineType>
   {
-    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
-    // data mappings.
-
     /* Constructors */
 
     /// <summary>
@@ -39,7 +34,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>    
-    [ForeignKey("ActivityId")]
     public virtual ActivityEntity Activity { get; internal set; }
 
     /// <summary>
@@ -48,7 +42,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>    
-    [Column("activityID")]
     public ActivityId ActivityId { get; internal set; }
 
     /// <summary>
@@ -57,7 +50,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>    
-    [Column("baseMaterialMultiplier")]
     public double BaseMaterialMultiplier { get; internal set; }
 
     /// <summary>
@@ -66,7 +58,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>    
-    [Column("baseTimeMultiplier")]
     public double BaseTimeMultiplier { get; internal set; }
 
     /// <summary>
@@ -91,7 +82,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>    
-    [Column("minCostPerHour")]
     public double? MinCostPerHour { get; internal set; }
 
     /// <summary>
@@ -100,7 +90,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>    
-    [Column("volume")]
     public double? Volume { get; internal set; }
 
     /* Methods */

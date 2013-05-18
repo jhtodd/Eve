@@ -841,7 +841,7 @@ namespace Eve.Data
     /// dramatically increasing performance.
     /// </para>
     /// </remarks>
-    AttributeValue GetAttributeValueById(TypeId itemTypeId, AttributeId attributeId);
+    AttributeValue GetAttributeValueById(EveTypeId itemTypeId, AttributeId attributeId);
 
     /// <summary>
     /// Returns all <see cref="AttributeValue" /> objects matching the specified criteria.
@@ -888,7 +888,7 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if more than one item with the specified ID was found.
     /// </exception>
-    bool TryGetAttributeValueById(TypeId itemTypeId, AttributeId attributeId, out AttributeValue value);
+    bool TryGetAttributeValueById(EveTypeId itemTypeId, AttributeId attributeId, out AttributeValue value);
     #endregion
 
     #region Bloodline Methods
@@ -1669,7 +1669,7 @@ namespace Eve.Data
     /// dramatically increasing performance.
     /// </para>
     /// </remarks>
-    ContrabandInfo GetContrabandInfoById(FactionId factionId, TypeId typeId);
+    ContrabandInfo GetContrabandInfoById(FactionId factionId, EveTypeId typeId);
 
     /// <summary>
     /// Returns all <see cref="ContrabandInfo" /> objects matching the specified criteria.
@@ -1715,7 +1715,7 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if more than one item with the specified ID was found.
     /// </exception>
-    bool TryGetContrabandInfoById(FactionId factionId, TypeId typeId, out ContrabandInfo value);
+    bool TryGetContrabandInfoById(FactionId factionId, EveTypeId typeId, out ContrabandInfo value);
     #endregion
 
     #region ControlTowerResource Methods
@@ -1742,7 +1742,7 @@ namespace Eve.Data
     /// dramatically increasing performance.
     /// </para>
     /// </remarks>
-    ControlTowerResource GetControlTowerResourceById(TypeId controlTowerTypeId, TypeId resourceTypeId);
+    ControlTowerResource GetControlTowerResourceById(EveTypeId controlTowerTypeId, EveTypeId resourceTypeId);
 
     /// <summary>
     /// Returns all <see cref="ControlTowerResource" /> objects matching the specified criteria.
@@ -1788,7 +1788,7 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if more than one item with the specified ID was found.
     /// </exception>
-    bool TryGetControlTowerResourceById(TypeId controlTowerTypeId, TypeId resourceTypeId, out ControlTowerResource value);
+    bool TryGetControlTowerResourceById(EveTypeId controlTowerTypeId, EveTypeId resourceTypeId, out ControlTowerResource value);
     #endregion
 
     #region CorporateActivity Methods
@@ -1949,7 +1949,7 @@ namespace Eve.Data
     /// dramatically increasing performance.
     /// </para>
     /// </remarks>
-    Effect GetEffectById(TypeId itemTypeId, EffectId effectId);
+    Effect GetEffectById(EveTypeId itemTypeId, EffectId effectId);
 
     /// <summary>
     /// Returns all <see cref="Effect" /> objects matching the specified criteria.
@@ -1996,7 +1996,7 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if more than one item with the specified ID was found.
     /// </exception>
-    bool TryGetEffectById(TypeId itemTypeId, EffectId effectId, out Effect value);
+    bool TryGetEffectById(EveTypeId itemTypeId, EffectId effectId, out Effect value);
     #endregion
 
     #region EffectType Methods
@@ -2088,7 +2088,7 @@ namespace Eve.Data
     /// dramatically increasing performance.
     /// </para>
     /// </remarks>
-    EveType GetEveTypeById(TypeId id);
+    EveType GetEveTypeById(EveTypeId id);
 
     /// <summary>
     /// Returns all <see cref="EveType" /> objects matching the specified criteria.
@@ -2131,7 +2131,7 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if more than one item with the specified ID was found.
     /// </exception>
-    bool TryGetEveTypeById(TypeId id, out EveType value);
+    bool TryGetEveTypeById(EveTypeId id, out EveType value);
 
     /// <summary>
     /// Returns the <see cref="EveType" /> object of the desired type and
@@ -2161,7 +2161,7 @@ namespace Eve.Data
     /// dramatically increasing performance.
     /// </para>
     /// </remarks>
-    TEveType GetEveTypeById<TEveType>(TypeId id) where TEveType : EveType;
+    TEveType GetEveTypeById<TEveType>(EveTypeId id) where TEveType : EveType;
 
     /// <summary>
     /// Returns all <see cref="EveType" /> objects matching the specified criteria.
@@ -2217,7 +2217,7 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if more than one item with the specified ID was found.
     /// </exception>
-    bool TryGetEveTypeById<TEveType>(TypeId id, out TEveType value) where TEveType : EveType;
+    bool TryGetEveTypeById<TEveType>(EveTypeId id, out TEveType value) where TEveType : EveType;
     #endregion
 
     #region Faction Methods
@@ -2862,7 +2862,7 @@ namespace Eve.Data
     /// dramatically increasing performance.
     /// </para>
     /// </remarks>
-    MetaType GetMetaTypeById(TypeId typeId);
+    MetaType GetMetaTypeById(EveTypeId typeId);
 
     /// <summary>
     /// Returns all <see cref="MetaType" /> objects matching the specified criteria.
@@ -2906,7 +2906,7 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if more than one item with the specified ID was found.
     /// </exception>
-    bool TryGetMetaTypeById(TypeId id, out MetaType value);
+    bool TryGetMetaTypeById(EveTypeId id, out MetaType value);
     #endregion
 
     #region NpcCorporation Methods
@@ -3689,7 +3689,7 @@ namespace Eve.Data
     /// dramatically increasing performance.
     /// </para>
     /// </remarks>
-    StationType GetStationTypeById(TypeId id);
+    StationType GetStationTypeById(EveTypeId id);
 
     /// <summary>
     /// Returns all <see cref="StationType" /> objects matching the specified criteria.
@@ -3732,7 +3732,7 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if more than one item with the specified ID was found.
     /// </exception>
-    bool TryGetStationTypeById(TypeId id, out StationType value);
+    bool TryGetStationTypeById(EveTypeId id, out StationType value);
     #endregion
 
     #region TypeMaterial Methods
@@ -3759,7 +3759,7 @@ namespace Eve.Data
     /// dramatically increasing performance.
     /// </para>
     /// </remarks>
-    TypeMaterial GetTypeMaterialById(TypeId typeId, TypeId materialTypeId);
+    TypeMaterial GetTypeMaterialById(EveTypeId typeId, EveTypeId materialTypeId);
 
     /// <summary>
     /// Returns all <see cref="TypeMaterial" /> objects matching the specified criteria.
@@ -3805,7 +3805,88 @@ namespace Eve.Data
     /// <exception cref="InvalidOperationException">
     /// Thrown if more than one item with the specified ID was found.
     /// </exception>
-    bool TryGetTypeMaterialById(TypeId typeId, TypeId materialTypeId, out TypeMaterial value);
+    bool TryGetTypeMaterialById(EveTypeId typeId, EveTypeId materialTypeId, out TypeMaterial value);
+    #endregion
+
+    #region TypeReaction Methods
+    /// <summary>
+    /// Returns the <see cref="TypeReaction" /> object with the specified ID.
+    /// </summary>
+    /// <param name="reactionTypeId">
+    /// The ID of the reaction type.
+    /// </param>
+    /// <param name="input">
+    /// Specifies whether the type specified by <paramref name="typeId" />
+    /// is input or output for the reaction.
+    /// </param>
+    /// <param name="typeId">
+    /// The ID of the type required by or produced by the reaction.
+    /// </param>
+    /// <returns>
+    /// The item with the specified ID value(s).
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
+    TypeReaction GetTypeReactionById(EveTypeId reactionTypeId, bool input, EveTypeId typeId);
+
+    /// <summary>
+    /// Returns all <see cref="TypeReaction" /> objects matching the specified criteria.
+    /// </summary>
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
+    /// </returns>
+    IReadOnlyList<TypeReaction> GetTypeReactions(Func<IQueryable<TypeReactionEntity>, IQueryable<TypeReactionEntity>> queryOperations);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="TypeReaction" /> objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
+    /// </returns>
+    IReadOnlyList<TypeReaction> GetTypeReactions(params IQueryModifier<TypeReactionEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="TypeReaction" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="reactionTypeId">
+    /// The ID of the reaction type.
+    /// </param>
+    /// <param name="input">
+    /// Specifies whether the type specified by <paramref name="typeId" />
+    /// is input or output for the reaction.
+    /// </param>
+    /// <param name="typeId">
+    /// The ID of the type required by or produced by the reaction.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID value(s),
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
+    bool TryGetTypeReactionById(EveTypeId reactionTypeId, bool input, EveTypeId typeId, out TypeReaction value);
     #endregion
 
     #region Unit Methods

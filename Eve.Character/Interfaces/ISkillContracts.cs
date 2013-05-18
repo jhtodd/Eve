@@ -56,7 +56,7 @@ namespace Eve.Character
   /// </content>
   internal abstract partial class ISkillContracts : IEveTypeInstance
   {
-    TypeId IEveTypeInstance.Id
+    EveTypeId IEveTypeInstance.Id
     {
       get { throw new NotImplementedException(); }
     }

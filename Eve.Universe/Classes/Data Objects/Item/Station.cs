@@ -490,11 +490,11 @@ namespace Eve.Universe
     /// The ID of the type of the station, or <see langword="null" />
     /// if no station information exists.
     /// </value>
-    public TypeId? StationTypeId
+    public EveTypeId? StationTypeId
     {
       get
       {
-        return this.Entity.StationInfo == null ? (TypeId?)null : (TypeId?)this.Entity.StationInfo.StationTypeId;
+        return this.Entity.StationInfo == null ? (EveTypeId?)null : (EveTypeId?)this.Entity.StationInfo.StationTypeId;
       }
     }
 

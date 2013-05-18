@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="TypeId.cs" company="Jeremy H. Todd">
+// <copyright file="EveTypeId.cs" company="Jeremy H. Todd">
 //     Copyright © Jeremy H. Todd 2011
 // </copyright>
 //-----------------------------------------------------------------------
@@ -10,21 +10,21 @@ namespace Eve
   /// <summary>
   /// Represents an ID value for the <see cref="EveType" /> class.
   /// </summary>
-  public partial struct TypeId
+  public partial struct EveTypeId
     : IConvertible,
-      IEquatable<TypeId>
+      IEquatable<EveTypeId>
   {
     private readonly int value;
 
     /* Constructors */
 
     /// <summary>
-    /// Initializes a new instance of the TypeId structure.
+    /// Initializes a new instance of the EveTypeId structure.
     /// </summary>
     /// <param name="value">
     /// The value of the structure.
     /// </param>
-    public TypeId(int value)
+    public EveTypeId(int value)
     {
       this.value = value;
     }
@@ -57,7 +57,7 @@ namespace Eve
     /// <see langword="true" /> if the two values are equal; otherwise
     /// <see langword="false" />.
     /// </returns>
-    public static bool operator ==(TypeId left, TypeId right)
+    public static bool operator ==(EveTypeId left, EveTypeId right)
     {
       return left.Value.Equals(right.Value);
     }
@@ -75,7 +75,7 @@ namespace Eve
     /// <see langword="true" /> if the two values are unequal; otherwise
     /// <see langword="false" />.
     /// </returns>
-    public static bool operator !=(TypeId left, TypeId right)
+    public static bool operator !=(EveTypeId left, EveTypeId right)
     {
       return !left.Value.Equals(right.Value);
     }
@@ -89,9 +89,9 @@ namespace Eve
     /// <returns>
     /// The converted value.
     /// </returns>
-    public static implicit operator TypeId(int value)
+    public static implicit operator EveTypeId(int value)
     {
-      return new TypeId(value);
+      return new EveTypeId(value);
     }
 
     /// <summary>
@@ -103,7 +103,7 @@ namespace Eve
     /// <returns>
     /// The converted value.
     /// </returns>
-    public static implicit operator int(TypeId value)
+    public static implicit operator int(EveTypeId value)
     {
       return value.Value;
     }
@@ -116,16 +116,16 @@ namespace Eve
         return false;
       }
 
-      if (!typeof(TypeId).IsAssignableFrom(obj.GetType()))
+      if (!typeof(EveTypeId).IsAssignableFrom(obj.GetType()))
       {
         return false;
       }
 
-      return this.Equals((TypeId)obj);
+      return this.Equals((EveTypeId)obj);
     }
 
     /// <inheritdoc />
-    public bool Equals(TypeId other)
+    public bool Equals(EveTypeId other)
     {
       return this.Value.Equals(other.Value);
     }
@@ -147,7 +147,7 @@ namespace Eve
   /// <content>
   /// Explicit implementation of the <see cref="IConvertible" /> interface.
   /// </content>
-  public partial struct TypeId : IConvertible
+  public partial struct EveTypeId : IConvertible
   {
     TypeCode IConvertible.GetTypeCode()
     {

@@ -22,7 +22,7 @@ namespace Eve
   public sealed partial class TypeMaterial
     : EveEntityAdapter<TypeMaterialEntity, TypeMaterial>,
       IHasIcon,
-      IKeyItem<TypeId>
+      IKeyItem<EveTypeId>
   {
     private EveType materialType;
     private EveType type;
@@ -69,7 +69,7 @@ namespace Eve
     /// <value>
     /// The ID of the required material.
     /// </value>
-    public TypeId MaterialTypeId
+    public EveTypeId MaterialTypeId
     {
       get { return this.Entity.MaterialTypeId; }
     }
@@ -116,7 +116,7 @@ namespace Eve
     /// <value>
     /// The ID of the type to which the material requirement applies.
     /// </value>
-    private TypeId TypeId
+    private EveTypeId TypeId
     {
       get { return this.Entity.TypeId; }
     }
@@ -171,13 +171,13 @@ namespace Eve
   }
   #endregion
 
-  #region IKeyItem<TypeId> Implementation
+  #region IKeyItem<EveTypeId> Implementation
   /// <content>
   /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.
   /// </content>
-  public partial class TypeMaterial : IKeyItem<TypeId>
+  public partial class TypeMaterial : IKeyItem<EveTypeId>
   {
-    TypeId IKeyItem<TypeId>.Key
+    EveTypeId IKeyItem<EveTypeId>.Key
     {
       get { return this.MaterialTypeId; }
     }

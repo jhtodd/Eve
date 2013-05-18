@@ -5,7 +5,6 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
-  using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
   using System.Diagnostics.Contracts;
 
@@ -13,12 +12,8 @@ namespace Eve.Data.Entities
   /// The base class for data entities for EVE flags.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("invFlags")]
   public class FlagEntity : BaseValueEntity<FlagId, Flag>
   {
-    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
-    // data mappings.
-
     /* Constructors */
 
     /// <summary>
@@ -36,7 +31,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("orderID")]
     public int OrderId { get; internal set; }
 
     /* Methods */

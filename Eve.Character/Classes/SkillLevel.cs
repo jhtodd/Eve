@@ -92,7 +92,7 @@ namespace Eve.Character
         // If not already set, load from the data source
         LazyInitializer.EnsureInitialized(
           ref this.skillType,
-          () => this.Repository.GetEveTypeById<SkillType>((TypeId)(int)SkillId));
+          () => this.Repository.GetEveTypeById<SkillType>((EveTypeId)(int)SkillId));
 
         Contract.Assume(this.skillType != null);
         return this.skillType;
@@ -237,9 +237,9 @@ namespace Eve.Character
   /// </content>
   public partial class SkillLevel : IEveTypeInstance
   {
-    TypeId IEveTypeInstance.Id
+    EveTypeId IEveTypeInstance.Id
     {
-      get { return (TypeId)(int)SkillId; }
+      get { return (EveTypeId)(int)SkillId; }
     }
 
     EveType IEveTypeInstance.Type

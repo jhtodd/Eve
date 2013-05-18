@@ -494,6 +494,15 @@ namespace Eve.Data
       }
     }
 
+    IQueryable<TypeReactionEntity> IEveDbContext.TypeReactions
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IQueryable<TypeReactionEntity>>() != null);
+        throw new NotImplementedException();
+      }
+    }
+
     IQueryable<UnitEntity> IEveDbContext.Units
     {
       get

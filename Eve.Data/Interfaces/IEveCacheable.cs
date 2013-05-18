@@ -32,7 +32,7 @@ namespace Eve.Data
   /// For example, the <see cref="EveType" /> class has several derived
   /// classes (e.g. <see cref="SkillType" />, <see cref="StationType" />,
   /// and so on).  Even though these are separate types, they all share
-  /// the same range of ID values (i.e. their <c>TypeId</c>).  As a result,
+  /// the same range of ID values (i.e. their <c>EveTypeId</c>).  As a result,
   /// they are all part of the same cache domain.
   /// </para>
   /// </remarks>

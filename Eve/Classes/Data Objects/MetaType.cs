@@ -20,7 +20,7 @@ namespace Eve
   public sealed partial class MetaType
     : EveEntityAdapter<MetaTypeEntity, MetaType>,
       IHasIcon,
-      IKeyItem<TypeId>
+      IKeyItem<EveTypeId>
   {
     private MetaGroup metaGroup;
     private EveType parentType;
@@ -96,7 +96,7 @@ namespace Eve
     /// <value>
     /// The ID of the parent type.
     /// </value>
-    public TypeId ParentTypeId
+    public EveTypeId ParentTypeId
     {
       get { return Entity.ParentTypeId; }
     }
@@ -124,7 +124,7 @@ namespace Eve
     /// <value>
     /// The ID of the item type the value describes.
     /// </value>
-    private TypeId TypeId
+    private EveTypeId TypeId
     {
       get { return Entity.TypeId; }
     }
@@ -179,13 +179,13 @@ namespace Eve
   }
   #endregion
 
-  #region IKeyItem<TypeId> Implementation
+  #region IKeyItem<EveTypeId> Implementation
   /// <content>
   /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.
   /// </content>
-  public partial class MetaType : IKeyItem<TypeId>
+  public partial class MetaType : IKeyItem<EveTypeId>
   {
-    TypeId IKeyItem<TypeId>.Key
+    EveTypeId IKeyItem<EveTypeId>.Key
     {
       get { return this.TypeId; }
     }

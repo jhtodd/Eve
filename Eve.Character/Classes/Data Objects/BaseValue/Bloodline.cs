@@ -233,7 +233,7 @@ namespace Eve.Character
     /// <value>
     /// The ID of type of rookie ship characters of the bloodline begin with.
     /// </value>
-    public TypeId ShipTypeId
+    public EveTypeId ShipTypeId
     {
       get { return this.Entity.ShipTypeId; }
     }

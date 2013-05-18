@@ -58,6 +58,9 @@ namespace Eve
       // Perform any garbage collecting that needs to be done.  This will
       // help clean out cached data by freeing weak references.
       GC.Collect();
+      GC.WaitForPendingFinalizers();
+      GC.WaitForFullGCComplete();
+      GC.Collect();
 
       // Raise the Clean event so that dependent objects know they should
       // put their house in order.

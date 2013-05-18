@@ -343,7 +343,7 @@ namespace Eve.Data
     #endregion
 
     #region AttributeValue Methods
-    AttributeValue IEveRepository.GetAttributeValueById(TypeId itemTypeId, AttributeId attributeId)
+    AttributeValue IEveRepository.GetAttributeValueById(EveTypeId itemTypeId, AttributeId attributeId)
     {
       Contract.Ensures(Contract.Result<AttributeValue>() != null);
       throw new NotImplementedException();
@@ -363,7 +363,7 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    bool IEveRepository.TryGetAttributeValueById(TypeId itemTypeId, AttributeId attributeId, out AttributeValue value)
+    bool IEveRepository.TryGetAttributeValueById(EveTypeId itemTypeId, AttributeId attributeId, out AttributeValue value)
     {
       Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
@@ -679,7 +679,7 @@ namespace Eve.Data
     #endregion
 
     #region ContrabandInfo Methods
-    ContrabandInfo IEveRepository.GetContrabandInfoById(FactionId factionId, TypeId typeId)
+    ContrabandInfo IEveRepository.GetContrabandInfoById(FactionId factionId, EveTypeId typeId)
     {
       Contract.Ensures(Contract.Result<ContrabandInfo>() != null);
       throw new NotImplementedException();
@@ -699,7 +699,7 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    bool IEveRepository.TryGetContrabandInfoById(FactionId factionId, TypeId typeId, out ContrabandInfo value)
+    bool IEveRepository.TryGetContrabandInfoById(FactionId factionId, EveTypeId typeId, out ContrabandInfo value)
     {
       Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
@@ -707,7 +707,7 @@ namespace Eve.Data
     #endregion
 
     #region ControlTowerResource Methods
-    ControlTowerResource IEveRepository.GetControlTowerResourceById(TypeId controlTowerTypeId, TypeId resourceTypeId)
+    ControlTowerResource IEveRepository.GetControlTowerResourceById(EveTypeId controlTowerTypeId, EveTypeId resourceTypeId)
     {
       Contract.Ensures(Contract.Result<ControlTowerResource>() != null);
       throw new NotImplementedException();
@@ -727,7 +727,7 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    bool IEveRepository.TryGetControlTowerResourceById(TypeId controlTowerTypeId, TypeId resourceTypeId, out ControlTowerResource value)
+    bool IEveRepository.TryGetControlTowerResourceById(EveTypeId controlTowerTypeId, EveTypeId resourceTypeId, out ControlTowerResource value)
     {
       Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
@@ -819,7 +819,7 @@ namespace Eve.Data
     #endregion
 
     #region Effect Methods
-    Effect IEveRepository.GetEffectById(TypeId itemTypeId, EffectId effectId)
+    Effect IEveRepository.GetEffectById(EveTypeId itemTypeId, EffectId effectId)
     {
       Contract.Ensures(Contract.Result<Effect>() != null);
       throw new NotImplementedException();
@@ -839,7 +839,7 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    bool IEveRepository.TryGetEffectById(TypeId itemTypeId, EffectId effectId, out Effect value)
+    bool IEveRepository.TryGetEffectById(EveTypeId itemTypeId, EffectId effectId, out Effect value)
     {
       Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
@@ -847,7 +847,7 @@ namespace Eve.Data
     #endregion
 
     #region EveType Methods
-    EveType IEveRepository.GetEveTypeById(TypeId id)
+    EveType IEveRepository.GetEveTypeById(EveTypeId id)
     {
       Contract.Ensures(Contract.Result<EveType>() != null);
       throw new NotImplementedException();
@@ -867,13 +867,13 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    bool IEveRepository.TryGetEveTypeById(TypeId id, out EveType value)
+    bool IEveRepository.TryGetEveTypeById(EveTypeId id, out EveType value)
     {
       Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
     }
 
-    TEveType IEveRepository.GetEveTypeById<TEveType>(TypeId id)
+    TEveType IEveRepository.GetEveTypeById<TEveType>(EveTypeId id)
     {
       Contract.Ensures(Contract.Result<TEveType>() != null);
       throw new NotImplementedException();
@@ -893,7 +893,7 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    bool IEveRepository.TryGetEveTypeById<TEveType>(TypeId id, out TEveType value)
+    bool IEveRepository.TryGetEveTypeById<TEveType>(EveTypeId id, out TEveType value)
     {
       Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
@@ -1151,7 +1151,7 @@ namespace Eve.Data
     #endregion
 
     #region MetaType Methods
-    MetaType IEveRepository.GetMetaTypeById(TypeId id)
+    MetaType IEveRepository.GetMetaTypeById(EveTypeId id)
     {
       Contract.Ensures(Contract.Result<MetaType>() != null);
       throw new NotImplementedException();
@@ -1171,7 +1171,7 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    bool IEveRepository.TryGetMetaTypeById(TypeId id, out MetaType value)
+    bool IEveRepository.TryGetMetaTypeById(EveTypeId id, out MetaType value)
     {
       Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
@@ -1487,7 +1487,7 @@ namespace Eve.Data
     #endregion
 
     #region StationType Methods
-    StationType IEveRepository.GetStationTypeById(TypeId id)
+    StationType IEveRepository.GetStationTypeById(EveTypeId id)
     {
       Contract.Ensures(Contract.Result<StationType>() != null);
       throw new NotImplementedException();
@@ -1507,7 +1507,7 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    bool IEveRepository.TryGetStationTypeById(TypeId id, out StationType value)
+    bool IEveRepository.TryGetStationTypeById(EveTypeId id, out StationType value)
     {
       Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();
@@ -1515,7 +1515,7 @@ namespace Eve.Data
     #endregion
 
     #region TypeMaterial Methods
-    TypeMaterial IEveRepository.GetTypeMaterialById(TypeId typeId, TypeId materialTypeId)
+    TypeMaterial IEveRepository.GetTypeMaterialById(EveTypeId typeId, EveTypeId materialTypeId)
     {
       Contract.Ensures(Contract.Result<TypeMaterial>() != null);
       throw new NotImplementedException();
@@ -1535,7 +1535,35 @@ namespace Eve.Data
       throw new NotImplementedException();
     }
 
-    bool IEveRepository.TryGetTypeMaterialById(TypeId typeId, TypeId materialTypeId, out TypeMaterial value)
+    bool IEveRepository.TryGetTypeMaterialById(EveTypeId typeId, EveTypeId materialTypeId, out TypeMaterial value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
+    #endregion
+
+    #region TypeReaction Methods
+    TypeReaction IEveRepository.GetTypeReactionById(EveTypeId reactionTypeId, bool input, EveTypeId typeId)
+    {
+      Contract.Ensures(Contract.Result<TypeReaction>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<TypeReaction> IEveRepository.GetTypeReactions(Func<IQueryable<TypeReactionEntity>, IQueryable<TypeReactionEntity>> queryOperations)
+    {
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
+      Contract.Ensures(Contract.Result<IReadOnlyList<TypeReaction>>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<TypeReaction> IEveRepository.GetTypeReactions(params IQueryModifier<TypeReactionEntity>[] modifiers)
+    {
+      Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<TypeReaction>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetTypeReactionById(EveTypeId reactionTypeId, bool input, EveTypeId typeId, out TypeReaction value)
     {
       Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
       throw new NotImplementedException();

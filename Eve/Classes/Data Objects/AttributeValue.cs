@@ -24,7 +24,7 @@ namespace Eve
       IComparable<IAttribute>,
       IHasIcon,
       IKeyItem<AttributeId>,
-      IKeyItem<TypeId>
+      IKeyItem<EveTypeId>
   {
     private AttributeType attributeType;
     private EveType itemType;
@@ -119,9 +119,9 @@ namespace Eve
     /// <value>
     /// The ID of the <see cref="EveType" /> to which the value applies.
     /// </value>
-    public TypeId ItemTypeId
+    public EveTypeId ItemTypeId
     {
-      get { return (TypeId)this.Entity.ItemTypeId; }
+      get { return (EveTypeId)this.Entity.ItemTypeId; }
     }
 
     /// <summary>
@@ -252,13 +252,13 @@ namespace Eve
   }
   #endregion
 
-  #region IKeyItem<TypeId> Implementation
+  #region IKeyItem<EveTypeId> Implementation
   /// <content>
   /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.
   /// </content>
-  public partial class AttributeValue : IKeyItem<TypeId>
+  public partial class AttributeValue : IKeyItem<EveTypeId>
   {
-    TypeId IKeyItem<TypeId>.Key
+    EveTypeId IKeyItem<EveTypeId>.Key
     {
       get { return this.ItemTypeId; }
     }

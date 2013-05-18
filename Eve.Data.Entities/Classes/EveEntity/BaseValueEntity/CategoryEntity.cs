@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
-  using System.ComponentModel.DataAnnotations.Schema;
+  using System.Collections.Generic;
   using System.Diagnostics.CodeAnalysis;
   using System.Diagnostics.Contracts;
 
@@ -13,12 +13,8 @@ namespace Eve.Data.Entities
   /// The data entity for the <see cref="Category" /> class.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("invCategories")]
   public class CategoryEntity : BaseValueEntity<CategoryId, Category>
   {
-    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
-    // data mappings.
-
     /* Constructors */
 
     /// <summary>
@@ -28,7 +24,7 @@ namespace Eve.Data.Entities
     {
     }
 
-    /* Constructors */
+    /* Properties */
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -36,7 +32,14 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("IconId")]
+    public virtual ICollection<GroupEntity> Groups { get; internal set; }
+
+    /// <summary>
+    /// Gets the underlying database value of the corresponding adapter property.
+    /// </summary>
+    /// <value>
+    /// The underlying database value of the corresponding adapter property.
+    /// </value>
     public virtual IconEntity Icon { get; internal set; }
 
     /// <summary>
@@ -45,7 +48,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("iconID")]
     public int? IconId { get; internal set; }
 
     /// <summary>
@@ -54,7 +56,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>    
-    [Column("published")]
     public bool Published { get; internal set; }
 
     /* Methods */

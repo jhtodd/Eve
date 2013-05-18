@@ -501,6 +501,12 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
+    public IQueryable<TypeReactionEntity> TypeReactions
+    {
+      get { return this.Query<TypeReactionEntity>(); }
+    }
+
+    /// <inheritdoc />
     public IQueryable<UnitEntity> Units
     {
       get { return this.Query<UnitEntity>(); }

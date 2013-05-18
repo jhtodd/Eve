@@ -70,9 +70,9 @@ namespace Eve.Universe
     /// <value>
     /// The ID of the type of the control tower that requires the resource.
     /// </value>
-    public TypeId ControlTowerTypeId
+    public EveTypeId ControlTowerTypeId
     {
-      get { return (TypeId)this.Entity.ControlTowerTypeId; }
+      get { return (EveTypeId)this.Entity.ControlTowerTypeId; }
     }
 
     /// <summary>
@@ -188,9 +188,9 @@ namespace Eve.Universe
     /// <value>
     /// The ID of the type of the required resource.
     /// </value>
-    public TypeId ResourceTypeId
+    public EveTypeId ResourceTypeId
     {
-      get { return (TypeId)this.Entity.ResourceTypeId; }
+      get { return (EveTypeId)this.Entity.ResourceTypeId; }
     }
 
     /* Methods */

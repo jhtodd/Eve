@@ -165,12 +165,12 @@ namespace Eve.Character
     /// The ID of the type of the parent required skill, or
     /// <see langword="null" /> if no parent skill is specified.
     /// </value>
-    public TypeId? ParentTypeId
+    public EveTypeId? ParentTypeId
     {
       get
       {
         // Non-skill records contain a 0, but we want to translate to a null
-        return this.Entity.ParentTypeId == 0 ? (TypeId?)null : (TypeId?)this.Entity.ParentTypeId;
+        return this.Entity.ParentTypeId == 0 ? (EveTypeId?)null : (EveTypeId?)this.Entity.ParentTypeId;
       }
     }
 

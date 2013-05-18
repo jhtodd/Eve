@@ -237,7 +237,7 @@ namespace Eve.Industry
     /// <value>
     /// The ID of the type of the current station.
     /// </value>   
-    public TypeId StationTypeId
+    public EveTypeId StationTypeId
     {
       get { return this.Entity.StationTypeId; }
     }

@@ -245,7 +245,7 @@ namespace Eve.Tests
       throw new NotImplementedException();
     }
 
-    AttributeValue IEveRepository.GetAttributeValueById(TypeId itemTypeId, AttributeId attributeId)
+    AttributeValue IEveRepository.GetAttributeValueById(EveTypeId itemTypeId, AttributeId attributeId)
     {
       throw new NotImplementedException();
     }
@@ -260,7 +260,7 @@ namespace Eve.Tests
       throw new NotImplementedException();
     }
 
-    bool IEveRepository.TryGetAttributeValueById(TypeId itemTypeId, AttributeId attributeId, out AttributeValue value)
+    bool IEveRepository.TryGetAttributeValueById(EveTypeId itemTypeId, AttributeId attributeId, out AttributeValue value)
     {
       throw new NotImplementedException();
     }
@@ -485,7 +485,7 @@ namespace Eve.Tests
       throw new NotImplementedException();
     }
 
-    Universe.ContrabandInfo IEveRepository.GetContrabandInfoById(Character.FactionId factionId, TypeId typeId)
+    Universe.ContrabandInfo IEveRepository.GetContrabandInfoById(Character.FactionId factionId, EveTypeId typeId)
     {
       throw new NotImplementedException();
     }
@@ -500,12 +500,12 @@ namespace Eve.Tests
       throw new NotImplementedException();
     }
 
-    bool IEveRepository.TryGetContrabandInfoById(Character.FactionId factionId, TypeId typeId, out Universe.ContrabandInfo value)
+    bool IEveRepository.TryGetContrabandInfoById(Character.FactionId factionId, EveTypeId typeId, out Universe.ContrabandInfo value)
     {
       throw new NotImplementedException();
     }
 
-    Universe.ControlTowerResource IEveRepository.GetControlTowerResourceById(TypeId controlTowerTypeId, TypeId resourceTypeId)
+    Universe.ControlTowerResource IEveRepository.GetControlTowerResourceById(EveTypeId controlTowerTypeId, EveTypeId resourceTypeId)
     {
       throw new NotImplementedException();
     }
@@ -520,7 +520,7 @@ namespace Eve.Tests
       throw new NotImplementedException();
     }
 
-    bool IEveRepository.TryGetControlTowerResourceById(TypeId controlTowerTypeId, TypeId resourceTypeId, out Universe.ControlTowerResource value)
+    bool IEveRepository.TryGetControlTowerResourceById(EveTypeId controlTowerTypeId, EveTypeId resourceTypeId, out Universe.ControlTowerResource value)
     {
       throw new NotImplementedException();
     }
@@ -565,7 +565,7 @@ namespace Eve.Tests
       throw new NotImplementedException();
     }
 
-    Effect IEveRepository.GetEffectById(TypeId itemTypeId, EffectId effectId)
+    Effect IEveRepository.GetEffectById(EveTypeId itemTypeId, EffectId effectId)
     {
       throw new NotImplementedException();
     }
@@ -580,7 +580,7 @@ namespace Eve.Tests
       throw new NotImplementedException();
     }
 
-    bool IEveRepository.TryGetEffectById(TypeId itemTypeId, EffectId effectId, out Effect value)
+    bool IEveRepository.TryGetEffectById(EveTypeId itemTypeId, EffectId effectId, out Effect value)
     {
       throw new NotImplementedException();
     }
@@ -605,7 +605,7 @@ namespace Eve.Tests
       throw new NotImplementedException();
     }
 
-    EveType IEveRepository.GetEveTypeById(TypeId id)
+    EveType IEveRepository.GetEveTypeById(EveTypeId id)
     {
       throw new NotImplementedException();
     }
@@ -620,12 +620,12 @@ namespace Eve.Tests
       throw new NotImplementedException();
     }
 
-    bool IEveRepository.TryGetEveTypeById(TypeId id, out EveType value)
+    bool IEveRepository.TryGetEveTypeById(EveTypeId id, out EveType value)
     {
       throw new NotImplementedException();
     }
 
-    TEveType IEveRepository.GetEveTypeById<TEveType>(TypeId id)
+    TEveType IEveRepository.GetEveTypeById<TEveType>(EveTypeId id)
     {
       throw new NotImplementedException();
     }
@@ -640,7 +640,7 @@ namespace Eve.Tests
       throw new NotImplementedException();
     }
 
-    bool IEveRepository.TryGetEveTypeById<TEveType>(TypeId id, out TEveType value)
+    bool IEveRepository.TryGetEveTypeById<TEveType>(EveTypeId id, out TEveType value)
     {
       throw new NotImplementedException();
     }
@@ -825,7 +825,7 @@ namespace Eve.Tests
       throw new NotImplementedException();
     }
 
-    MetaType IEveRepository.GetMetaTypeById(TypeId typeId)
+    MetaType IEveRepository.GetMetaTypeById(EveTypeId typeId)
     {
       throw new NotImplementedException();
     }
@@ -840,7 +840,7 @@ namespace Eve.Tests
       throw new NotImplementedException();
     }
 
-    bool IEveRepository.TryGetMetaTypeById(TypeId id, out MetaType value)
+    bool IEveRepository.TryGetMetaTypeById(EveTypeId id, out MetaType value)
     {
       throw new NotImplementedException();
     }
@@ -1065,7 +1065,7 @@ namespace Eve.Tests
       throw new NotImplementedException();
     }
 
-    Universe.StationType IEveRepository.GetStationTypeById(TypeId id)
+    Universe.StationType IEveRepository.GetStationTypeById(EveTypeId id)
     {
       throw new NotImplementedException();
     }
@@ -1080,12 +1080,12 @@ namespace Eve.Tests
       throw new NotImplementedException();
     }
 
-    bool IEveRepository.TryGetStationTypeById(TypeId id, out Universe.StationType value)
+    bool IEveRepository.TryGetStationTypeById(EveTypeId id, out Universe.StationType value)
     {
       throw new NotImplementedException();
     }
 
-    TypeMaterial IEveRepository.GetTypeMaterialById(TypeId typeId, TypeId materialTypeId)
+    TypeMaterial IEveRepository.GetTypeMaterialById(EveTypeId typeId, EveTypeId materialTypeId)
     {
       throw new NotImplementedException();
     }
@@ -1100,7 +1100,27 @@ namespace Eve.Tests
       throw new NotImplementedException();
     }
 
-    bool IEveRepository.TryGetTypeMaterialById(TypeId typeId, TypeId materialTypeId, out TypeMaterial value)
+    bool IEveRepository.TryGetTypeMaterialById(EveTypeId typeId, EveTypeId materialTypeId, out TypeMaterial value)
+    {
+      throw new NotImplementedException();
+    }
+
+    TypeReaction IEveRepository.GetTypeReactionById(EveTypeId reactionTypeId, bool input, EveTypeId typeId)
+    {
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<TypeReaction> IEveRepository.GetTypeReactions(Func<IQueryable<Data.Entities.TypeReactionEntity>, IQueryable<Data.Entities.TypeReactionEntity>> queryOperations)
+    {
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<TypeReaction> IEveRepository.GetTypeReactions(params FreeNet.Data.Entity.IQueryModifier<Data.Entities.TypeReactionEntity>[] modifiers)
+    {
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetTypeReactionById(EveTypeId reactionTypeId, bool input, EveTypeId typeId, out TypeReaction value)
     {
       throw new NotImplementedException();
     }

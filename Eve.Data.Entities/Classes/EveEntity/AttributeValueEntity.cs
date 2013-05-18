@@ -6,8 +6,6 @@
 namespace Eve.Data.Entities
 {
   using System;
-  using System.ComponentModel.DataAnnotations;
-  using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
   using System.Diagnostics.Contracts;
 
@@ -15,12 +13,8 @@ namespace Eve.Data.Entities
   /// The data entity for the <see cref="AttributeValue" /> class.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("dgmTypeAttributes")]
   public class AttributeValueEntity : EveEntity<AttributeValue>
   {
-    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
-    // data mappings.
-
     /* Constructors */
 
     /// <summary>
@@ -38,8 +32,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property. 
     /// </value>
-    [Column("attributeID", Order = 1)]
-    [Key]
     public AttributeId AttributeId { get; internal set; }
 
     /// <summary>
@@ -48,7 +40,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("AttributeId")]
     public virtual AttributeTypeEntity AttributeType { get; internal set; }
 
     /// <summary>
@@ -57,7 +48,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("ItemTypeId")]
     public virtual EveTypeEntity ItemType { get; internal set; }
 
     /// <summary>
@@ -66,8 +56,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("typeID", Order = 2)]
-    [Key]
     public int ItemTypeId { get; internal set; }
 
     /// <summary>
@@ -76,7 +64,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("valueFloat")]
     public double? ValueFloat { get; internal set; }
 
     /// <summary>
@@ -85,7 +72,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("valueInt")]
     public int? ValueInt { get; internal set; }
 
     /// <inheritdoc />

@@ -6,8 +6,6 @@
 namespace Eve.Data.Entities
 {
   using System;
-  using System.ComponentModel.DataAnnotations;
-  using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
   using System.Diagnostics.Contracts;
 
@@ -17,14 +15,10 @@ namespace Eve.Data.Entities
   /// The data entity for the <see cref="Stargate" /> class.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("mapJumps")]
   public class StargateEntity 
     : ItemExtensionEntity,
       IEveEntity<Stargate>
   {
-    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
-    // data mappings.
-
     /* Constructors */
 
     /// <summary>
@@ -42,7 +36,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("DestinationId")]
     public virtual StargateEntity Destination { get; internal set; }
 
     /// <summary>
@@ -51,7 +44,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("celestialID")]
     public long DestinationId { get; internal set; }
 
     /// <summary>
@@ -60,7 +52,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The ID of the stargate.
     /// </value>
-    [Key]
     public long Id { get; internal set; }
 
     /// <summary>
@@ -73,7 +64,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The <see cref="ItemEntity" /> associated with the current object.
     /// </value>
-    [ForeignKey("Id")]
     public virtual ItemEntity ItemInfo { get; internal set; }
 
     /// <inheritdoc />

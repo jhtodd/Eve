@@ -6,7 +6,6 @@
 namespace Eve.Data.Entities
 {
   using System.Collections.Generic;
-  using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
   using System.Diagnostics.Contracts;
 
@@ -14,12 +13,8 @@ namespace Eve.Data.Entities
   /// The data entity for the <see cref="MarketGroup" /> class.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("invMarketGroups")]
   public class MarketGroupEntity : BaseValueEntity<MarketGroupId, MarketGroup>
   {
-    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
-    // data mappings.
-
     /* Constructors */
 
     /// <summary>
@@ -37,7 +32,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("ParentGroupId")]
     public virtual ICollection<MarketGroupEntity> ChildGroups { get; internal set; }
 
     /// <summary>
@@ -46,7 +40,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("hasTypes")]
     public bool HasTypes { get; internal set; }
 
     /// <summary>
@@ -55,7 +48,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("IconId")]
     public virtual IconEntity Icon { get; internal set; }
 
     /// <summary>
@@ -64,7 +56,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("iconID")]
     public int? IconId { get; internal set; }
 
     /// <summary>
@@ -73,7 +64,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("ParentGroupId")]
     public virtual MarketGroupEntity ParentGroup { get; internal set; }
 
     /// <summary>
@@ -82,7 +72,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("parentGroupID")]
     public MarketGroupId? ParentGroupId { get; internal set; }
 
     /// <summary>
@@ -91,7 +80,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("MarketGroupId")]
     public virtual ICollection<EveTypeEntity> Types { get; internal set; }
 
     /* Methods */

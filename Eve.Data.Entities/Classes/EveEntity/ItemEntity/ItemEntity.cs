@@ -6,8 +6,6 @@
 namespace Eve.Data.Entities
 {
   using System;
-  using System.ComponentModel.DataAnnotations;
-  using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
   using System.Diagnostics.Contracts;
 
@@ -15,11 +13,8 @@ namespace Eve.Data.Entities
   /// The base class for data entities for EVE items.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("invItems")]
   public partial class ItemEntity : EveEntity<Item>
   {
-    // Check DirectEveDbContext.OnModelCreating() for customization of this type's data mappings.
-
     /// <summary>
     /// Defines the range of ID values belonging to Agent items.
     /// </summary>
@@ -139,7 +134,6 @@ namespace Eve.Data.Entities
     /// item, or <see langword="null" /> if the current item does not describe
     /// an agent.
     /// </value>
-    [ForeignKey("Id")]
     public virtual AgentEntity AgentInfo { get; internal set; }
 
     /// <summary>
@@ -150,7 +144,6 @@ namespace Eve.Data.Entities
     /// item, or <see langword="null" /> if the current item does not describe
     /// a celestial object.
     /// </value>
-    [ForeignKey("Id")]
     public virtual CelestialEntity CelestialInfo { get; internal set; }
 
     /// <summary>
@@ -161,7 +154,6 @@ namespace Eve.Data.Entities
     /// item, or <see langword="null" /> if the current item does not describe
     /// a constellation.
     /// </value>
-    [ForeignKey("Id")]
     public virtual ConstellationEntity ConstellationInfo { get; internal set; }
 
     /// <summary>
@@ -172,7 +164,6 @@ namespace Eve.Data.Entities
     /// item, or <see langword="null" /> if the current item does not describe
     /// a corporation.
     /// </value>
-    [ForeignKey("Id")]
     public virtual NpcCorporationEntity CorporationInfo { get; internal set; }
 
     /// <summary>
@@ -183,7 +174,6 @@ namespace Eve.Data.Entities
     /// item, or <see langword="null" /> if the current item does not describe
     /// a faction.
     /// </value>
-    [ForeignKey("Id")]
     public virtual FactionEntity FactionInfo { get; internal set; }
 
     /// <summary>
@@ -192,7 +182,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("FlagId")]
     public virtual FlagEntity Flag { get; internal set; }
 
     /// <summary>
@@ -201,7 +190,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("flagID")]
     public FlagId FlagId { get; internal set; }
 
     /// <summary>
@@ -210,8 +198,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("itemID")]
-    [Key]
     public long Id { get; internal set; }
 
     /// <summary>
@@ -228,7 +214,6 @@ namespace Eve.Data.Entities
     /// information about the item.
     /// </para>
     /// </remarks>
-    [NotMapped]
     public bool IsAgent
     {
       get 
@@ -251,7 +236,6 @@ namespace Eve.Data.Entities
     /// information about the item.
     /// </para>
     /// </remarks>
-    [NotMapped]
     public bool IsCelestial
     {
       get
@@ -274,7 +258,6 @@ namespace Eve.Data.Entities
     /// information about the item.
     /// </para>
     /// </remarks>
-    [NotMapped]
     public bool IsConstellation
     {
       get
@@ -297,7 +280,6 @@ namespace Eve.Data.Entities
     /// information about the item.
     /// </para>
     /// </remarks>
-    [NotMapped]
     public bool IsCorporation
     {
       get
@@ -320,7 +302,6 @@ namespace Eve.Data.Entities
     /// information about the item.
     /// </para>
     /// </remarks>
-    [NotMapped]
     public bool IsFaction
     {
       get
@@ -343,7 +324,6 @@ namespace Eve.Data.Entities
     /// information about the item.
     /// </para>
     /// </remarks>
-    [NotMapped]
     public bool IsRegion
     {
       get
@@ -366,7 +346,6 @@ namespace Eve.Data.Entities
     /// information about the item.
     /// </para>
     /// </remarks>
-    [NotMapped]
     public bool IsSolarSystem
     {
       get
@@ -389,7 +368,6 @@ namespace Eve.Data.Entities
     /// information about the item.
     /// </para>
     /// </remarks>
-    [NotMapped]
     public bool IsStargate
     {
       get
@@ -412,7 +390,6 @@ namespace Eve.Data.Entities
     /// information about the item.
     /// </para>
     /// </remarks>
-    [NotMapped]
     public bool IsStation
     {
       get
@@ -435,7 +412,6 @@ namespace Eve.Data.Entities
     /// information about the item.
     /// </para>
     /// </remarks>
-    [NotMapped]
     public bool IsUniverse
     {
       get
@@ -450,7 +426,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("ItemTypeId")]
     public virtual EveTypeEntity ItemType { get; internal set; }
 
     /// <summary>
@@ -459,7 +434,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("typeID")]
     public int ItemTypeId { get; internal set; }
 
     /// <summary>
@@ -468,7 +442,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("LocationId")]
     public virtual ItemEntity Location { get; internal set; }
 
     /// <summary>
@@ -477,7 +450,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("locationID")]
     public long LocationId { get; internal set; }
 
     /// <summary>
@@ -494,7 +466,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("OwnerId")]
     public virtual ItemEntity Owner { get; internal set; }
 
     /// <summary>
@@ -503,7 +474,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("ownerID")]
     public long OwnerId { get; internal set; }
 
     /// <summary>
@@ -512,7 +482,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("ItemId")]
     public virtual ItemPositionEntity Position { get; internal set; }
 
     /// <summary>
@@ -521,7 +490,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("quantity")]
     public int Quantity { get; internal set; }
 
     /// <summary>
@@ -532,7 +500,6 @@ namespace Eve.Data.Entities
     /// item, or <see langword="null" /> if the current item does not describe
     /// a region.
     /// </value>
-    [ForeignKey("Id")]
     public virtual RegionEntity RegionInfo { get; internal set; }
 
     /// <summary>
@@ -543,7 +510,6 @@ namespace Eve.Data.Entities
     /// item, or <see langword="null" /> if the current item does not describe
     /// a solar system.
     /// </value>
-    [ForeignKey("Id")]
     public virtual SolarSystemEntity SolarSystemInfo { get; internal set; }
 
     /// <summary>
@@ -554,7 +520,6 @@ namespace Eve.Data.Entities
     /// item, or <see langword="null" /> if the current item does not describe
     /// a stargate.
     /// </value>
-    [ForeignKey("Id")]
     public virtual StargateEntity StargateInfo { get; internal set; }
 
     /// <summary>
@@ -565,7 +530,6 @@ namespace Eve.Data.Entities
     /// item, or <see langword="null" /> if the current item does not describe
     /// a station.
     /// </value>
-    [ForeignKey("Id")]
     public virtual StationEntity StationInfo { get; internal set; }
 
     /// <summary>
@@ -576,7 +540,6 @@ namespace Eve.Data.Entities
     /// item, or <see langword="null" /> if the current item does not describe
     /// a universe.
     /// </value>
-    [ForeignKey("Id")]
     public virtual UniverseEntity UniverseInfo { get; internal set; }
 
     /// <inheritdoc />

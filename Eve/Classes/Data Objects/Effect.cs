@@ -24,7 +24,7 @@ namespace Eve
       IEffect,
       IHasIcon,
       IKeyItem<EffectId>,
-      IKeyItem<TypeId>
+      IKeyItem<EveTypeId>
   {
     private EffectType effectType;
     private EveType itemType;
@@ -94,9 +94,9 @@ namespace Eve
     /// <value>
     /// The ID of the <see cref="EveType" /> to which the effect applies.
     /// </value>
-    public TypeId ItemTypeId
+    public EveTypeId ItemTypeId
     {
-      get { return (TypeId)this.Entity.ItemTypeId; }
+      get { return (EveTypeId)this.Entity.ItemTypeId; }
     }
 
     /// <summary>
@@ -196,13 +196,13 @@ namespace Eve
   }
   #endregion
 
-  #region IKeyItem<TypeId> Implementation
+  #region IKeyItem<EveTypeId> Implementation
   /// <content>
   /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.
   /// </content>
-  public partial class Effect : IKeyItem<TypeId>
+  public partial class Effect : IKeyItem<EveTypeId>
   {
-    TypeId IKeyItem<TypeId>.Key
+    EveTypeId IKeyItem<EveTypeId>.Key
     {
       get { return this.ItemTypeId; }
     }

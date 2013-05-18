@@ -5,7 +5,6 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
-  using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
   using System.Diagnostics.Contracts;
 
@@ -15,12 +14,8 @@ namespace Eve.Data.Entities
   /// The data entity for the <see cref="StationService" /> class.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("staServices")]
   public class StationServiceEntity : BaseValueEntity<StationServiceId, StationService>
   {
-    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
-    // data mappings.
-
     /* Constructors */
 
     /// <summary>

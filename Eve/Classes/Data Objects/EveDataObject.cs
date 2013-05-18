@@ -15,7 +15,7 @@ namespace Eve
   /// </summary>
   /// <typeparam name="TDerived">
   /// The type of the concrete derived class; i.e. to declare a "Ship"
-  /// base value, you would write <c>public class Ship : EveDataObject&lt;Ship&gt;</c>.
+  /// class, you would write <c>public class Ship : EveDataObject&lt;Ship&gt;</c>.
   /// I know this sort of pseudo-circular "Curiously Recurring Template Pattern"
   /// has its pitfalls, but it allows me to write many useful methods
   /// (Equals, GetHashCode, CompareTo, etc.) at this base class level and save
@@ -54,7 +54,7 @@ namespace Eve
     /// Gets the ID value used to store the object in the cache.
     /// </summary>
     /// <value>
-    /// A value which uniquely identifies the entity.
+    /// A value which uniquely identifies the object.
     /// </value>
     protected internal abstract IConvertible CacheKey { get; }
 
@@ -72,12 +72,7 @@ namespace Eve
     /// <inheritdoc />
     public virtual bool Equals(TDerived other)
     {
-      if (other == null)
-      {
-        return false;
-      }
-
-      return this.CacheKey.Equals(other.CacheKey);
+      return (other == null) ? false : this.CacheKey.Equals(other.CacheKey);
     }
 
     /// <inheritdoc />

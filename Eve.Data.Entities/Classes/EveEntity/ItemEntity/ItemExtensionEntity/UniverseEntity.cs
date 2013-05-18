@@ -6,8 +6,6 @@
 namespace Eve.Data.Entities
 {
   using System;
-  using System.ComponentModel.DataAnnotations;
-  using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
   using System.Diagnostics.Contracts;
 
@@ -17,14 +15,10 @@ namespace Eve.Data.Entities
   /// The data entity for the <see cref="Universe" /> class.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("mapUniverse")]
   public class UniverseEntity 
     : ItemExtensionEntity,
       IEveEntity<Universe>
   {
-    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
-    // data mappings.
-
     /* Constructors */
 
     /// <summary>
@@ -42,7 +36,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The ID of the universe.
     /// </value>
-    [Key]
     public long Id { get; internal set; }
 
     /// <summary>
@@ -55,7 +48,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The <see cref="ItemEntity" /> associated with the current object.
     /// </value>
-    [ForeignKey("Id")]
     public virtual ItemEntity ItemInfo { get; internal set; }
 
     /// <summary>
@@ -64,7 +56,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("radius")]
     public double Radius { get; internal set; }
 
     /// <summary>
@@ -73,7 +64,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("universeName")]
     public string UniverseName { get; internal set; }
 
     /// <summary>
@@ -82,7 +72,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("x")]
     public double X { get; internal set; }
 
     /// <summary>
@@ -91,7 +80,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("xMax")]
     public double XMax { get; internal set; }
 
     /// <summary>
@@ -100,7 +88,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("xMin")]
     public double XMin { get; internal set; }
 
     /// <summary>
@@ -109,7 +96,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("y")]
     public double Y { get; internal set; }
 
     /// <summary>
@@ -118,7 +104,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("yMax")]
     public double YMax { get; internal set; }
 
     /// <summary>
@@ -127,7 +112,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("yMin")]
     public double YMin { get; internal set; }
 
     /// <summary>
@@ -136,7 +120,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("z")]
     public double Z { get; internal set; }
 
     /// <summary>
@@ -145,7 +128,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("zMax")]
     public double ZMax { get; internal set; }
 
     /// <summary>
@@ -154,7 +136,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("zMin")]
     public double ZMin { get; internal set; }
 
     /// <inheritdoc />

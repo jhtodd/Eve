@@ -5,7 +5,6 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
-  using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
   using System.Diagnostics.Contracts;
 
@@ -15,12 +14,8 @@ namespace Eve.Data.Entities
   /// The data entity for the <see cref="Activity" /> class.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("ramActivities")]
   public class ActivityEntity : BaseValueEntity<ActivityId, Activity>
   {
-    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
-    // data mappings.
-
     /* Constructors */
 
     /// <summary>
@@ -38,7 +33,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("iconNo")]
     public string IconNo { get; internal set; }
 
     /// <summary>
@@ -47,7 +41,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>    
-    [Column("published")]
     public bool Published { get; internal set; }
 
     /* Methods */

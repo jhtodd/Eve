@@ -45,36 +45,12 @@ namespace Eve.Sandbox
       InitializeComponent();
     }
 
-    public class Foo
-    {
-      MainWindow t;
-
-      public Foo(MainWindow w)
-      {
-        this.t = w;
-      }
-
-      public void Bar()
-      {
-        t.textBox1.Text = "nothing";
-      }
-
-      public void Bar(string a)
-      {
-        t.textBox1.Text = "string";
-      }
-    }
-
     private void Button_Click_1(object sender, RoutedEventArgs e)
     {
-      EveDbContext ct = new EveDbContext();
+      var t = ds.GetItemById(3003877);
 
-      var result = ds.GetEveTypes(q => q.Where(x => x.Name == "Condor")).Single();
+      textBox1.AppendText(t.Name);
 
-      foreach (var t in result.Materials)
-      {
-        textBox1.AppendText(t.ToString() + Environment.NewLine);
-      }
     }
   }
 }

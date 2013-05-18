@@ -18,6 +18,7 @@ namespace Eve
     : BaseValue<CategoryId, CategoryId, CategoryEntity, Category>,
       IHasIcon
   {
+    private ReadOnlyGroupCollection groups;
     private Icon icon;
 
     /* Constructors */
@@ -38,6 +39,25 @@ namespace Eve
     }
 
     /* Properties */
+
+    /// <summary>
+    /// Gets the collection of groups that belong to the current category.
+    /// </summary>
+    /// <value>
+    /// A <see cref="ReadOnlyGroupCollection" /> containing the groups that
+    /// belong to the current category.
+    /// </value>
+    public ReadOnlyGroupCollection Groups
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<ReadOnlyGroupCollection>() != null);
+
+        return Group.LazyInitialize(
+          ref this.groups,
+          () => ReadOnlyGroupCollection.Create(this.Repository, this.Entity.Groups));
+      }
+    }
 
     /// <summary>
     /// Gets the icon associated with the item, if any.

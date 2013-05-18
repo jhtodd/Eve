@@ -190,7 +190,7 @@ namespace Eve.Universe
     /// <value>
     /// The ID of the type of the contraband item.
     /// </value>
-    public TypeId TypeId
+    public EveTypeId TypeId
     {
       get { return this.Entity.TypeId; }
     }

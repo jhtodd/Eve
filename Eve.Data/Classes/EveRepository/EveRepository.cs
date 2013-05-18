@@ -583,7 +583,7 @@ namespace Eve.Data
 
     #region AttributeValue Methods
     /// <inheritdoc />
-    public AttributeValue GetAttributeValueById(TypeId itemTypeId, AttributeId attributeId)
+    public AttributeValue GetAttributeValueById(EveTypeId itemTypeId, AttributeId attributeId)
     {
       AttributeValue result;
 
@@ -612,7 +612,7 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public bool TryGetAttributeValueById(TypeId itemTypeId, AttributeId attributeId, out AttributeValue value)
+    public bool TryGetAttributeValueById(EveTypeId itemTypeId, AttributeId attributeId, out AttributeValue value)
     {
       if (this.Cache.TryGetValue<AttributeValue>(AttributeValueEntity.CreateCacheKey(itemTypeId, attributeId), out value))
       {
@@ -1077,7 +1077,7 @@ namespace Eve.Data
 
     #region ContrabandInfo Methods
     /// <inheritdoc />
-    public ContrabandInfo GetContrabandInfoById(FactionId factionId, TypeId typeId)
+    public ContrabandInfo GetContrabandInfoById(FactionId factionId, EveTypeId typeId)
     {
       ContrabandInfo result;
 
@@ -1104,7 +1104,7 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public bool TryGetContrabandInfoById(FactionId factionId, TypeId typeId, out ContrabandInfo value)
+    public bool TryGetContrabandInfoById(FactionId factionId, EveTypeId typeId, out ContrabandInfo value)
     {
       if (this.Cache.TryGetValue<ContrabandInfo>(ContrabandInfoEntity.CreateCacheKey((long)factionId, typeId), out value))
       {
@@ -1118,7 +1118,7 @@ namespace Eve.Data
 
     #region ControlTowerResource Methods
     /// <inheritdoc />
-    public ControlTowerResource GetControlTowerResourceById(TypeId controlTowerTypeId, TypeId resourceTypeId)
+    public ControlTowerResource GetControlTowerResourceById(EveTypeId controlTowerTypeId, EveTypeId resourceTypeId)
     {
       ControlTowerResource result;
 
@@ -1145,7 +1145,7 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public bool TryGetControlTowerResourceById(TypeId controlTowerTypeId, TypeId resourceTypeId, out ControlTowerResource value)
+    public bool TryGetControlTowerResourceById(EveTypeId controlTowerTypeId, EveTypeId resourceTypeId, out ControlTowerResource value)
     {
       if (this.Cache.TryGetValue<ControlTowerResource>(ControlTowerResourceEntity.CreateCacheKey(controlTowerTypeId, resourceTypeId), out value))
       {
@@ -1241,7 +1241,7 @@ namespace Eve.Data
 
     #region Effect Methods
     /// <inheritdoc />
-    public Effect GetEffectById(TypeId itemTypeId, EffectId effectId)
+    public Effect GetEffectById(EveTypeId itemTypeId, EffectId effectId)
     {
       Effect result;
 
@@ -1270,7 +1270,7 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public bool TryGetEffectById(TypeId itemTypeId, EffectId effectId, out Effect value)
+    public bool TryGetEffectById(EveTypeId itemTypeId, EffectId effectId, out Effect value)
     {
       if (this.Cache.TryGetValue<Effect>(EffectEntity.CreateCacheKey(itemTypeId, effectId), out value))
       {
@@ -1325,7 +1325,7 @@ namespace Eve.Data
 
     #region EveType Methods
     /// <inheritdoc />
-    public EveType GetEveTypeById(TypeId id)
+    public EveType GetEveTypeById(EveTypeId id)
     {
       EveType result;
 
@@ -1352,7 +1352,7 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public bool TryGetEveTypeById(TypeId id, out EveType value)
+    public bool TryGetEveTypeById(EveTypeId id, out EveType value)
     {
       if (this.Cache.TryGetValue<EveType>(id, out value))
       {
@@ -1364,7 +1364,7 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public TEveType GetEveTypeById<TEveType>(TypeId id) where TEveType : EveType
+    public TEveType GetEveTypeById<TEveType>(EveTypeId id) where TEveType : EveType
     {
       TEveType result;
 
@@ -1390,7 +1390,7 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public bool TryGetEveTypeById<TEveType>(TypeId id, out TEveType value) where TEveType : EveType
+    public bool TryGetEveTypeById<TEveType>(EveTypeId id, out TEveType value) where TEveType : EveType
     {
       if (this.Cache.TryGetValue<TEveType>(id, out value))
       {
@@ -1771,7 +1771,7 @@ namespace Eve.Data
 
     #region MetaType Methods
     /// <inheritdoc />
-    public MetaType GetMetaTypeById(TypeId id)
+    public MetaType GetMetaTypeById(EveTypeId id)
     {
       MetaType result;
 
@@ -1798,7 +1798,7 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public bool TryGetMetaTypeById(TypeId id, out MetaType value)
+    public bool TryGetMetaTypeById(EveTypeId id, out MetaType value)
     {
       if (this.Cache.TryGetValue<MetaType>(id, out value))
       {
@@ -2263,7 +2263,7 @@ namespace Eve.Data
 
     #region StationType Methods
     /// <inheritdoc />
-    public StationType GetStationTypeById(TypeId id)
+    public StationType GetStationTypeById(EveTypeId id)
     {
       StationType result;
 
@@ -2290,7 +2290,7 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public bool TryGetStationTypeById(TypeId id, out StationType value)
+    public bool TryGetStationTypeById(EveTypeId id, out StationType value)
     {
       if (this.Cache.TryGetValue<StationType>(id, out value))
       {
@@ -2304,7 +2304,7 @@ namespace Eve.Data
 
     #region TypeMaterial Methods
     /// <inheritdoc />
-    public TypeMaterial GetTypeMaterialById(TypeId typeId, TypeId materialTypeId)
+    public TypeMaterial GetTypeMaterialById(EveTypeId typeId, EveTypeId materialTypeId)
     {
       TypeMaterial result;
 
@@ -2331,7 +2331,7 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
-    public bool TryGetTypeMaterialById(TypeId typeId, TypeId materialTypeId, out TypeMaterial value)
+    public bool TryGetTypeMaterialById(EveTypeId typeId, EveTypeId materialTypeId, out TypeMaterial value)
     {
       if (this.Cache.TryGetValue<TypeMaterial>(TypeMaterialEntity.CreateCacheKey(typeId, materialTypeId), out value))
       {
@@ -2339,6 +2339,47 @@ namespace Eve.Data
       }
 
       value = this.GetTypeMaterials(q => q.Where(x => x.TypeId == typeId.Value && x.MaterialTypeId == materialTypeId.Value)).SingleOrDefault();
+      return value != null;
+    }
+    #endregion
+
+    #region TypeReaction Methods
+    /// <inheritdoc />
+    public TypeReaction GetTypeReactionById(EveTypeId reactionTypeId, bool input, EveTypeId typeId)
+    {
+      TypeReaction result;
+
+      if (!this.TryGetTypeReactionById(reactionTypeId, input, typeId, out result))
+      {
+        throw new InvalidOperationException("No TypeReaction with ID (" + reactionTypeId.ToString() + ", " + input.ToString() + ", " + typeId.ToString() + ") could be found.");
+      }
+
+      return result;
+    }
+
+    /// <inheritdoc />
+    public IReadOnlyList<TypeReaction> GetTypeReactions(Func<IQueryable<TypeReactionEntity>, IQueryable<TypeReactionEntity>> queryOperations)
+    {
+      return this.GetTypeReactions(new QueryTransform<TypeReactionEntity>(queryOperations));
+    }
+
+    /// <inheritdoc />
+    [EveQueryMethod(typeof(TypeReaction))]
+    public IReadOnlyList<TypeReaction> GetTypeReactions(params IQueryModifier<TypeReactionEntity>[] modifiers)
+    {
+      // Construct the result set, filtering items through the global cache along the way
+      return LoadAndCacheResults<TypeReactionEntity, TypeReaction>(this.Context.TypeReactions, modifiers);
+    }
+
+    /// <inheritdoc />
+    public bool TryGetTypeReactionById(EveTypeId reactionTypeId, bool input, EveTypeId typeId, out TypeReaction value)
+    {
+      if (this.Cache.TryGetValue<TypeReaction>(TypeReactionEntity.CreateCacheKey(reactionTypeId, input, typeId), out value))
+      {
+        return true;
+      }
+
+      value = this.GetTypeReactions(q => q.Where(x => x.ReactionTypeId == reactionTypeId.Value && x.Input == input && x.TypeId == typeId.Value)).SingleOrDefault();
       return value != null;
     }
     #endregion

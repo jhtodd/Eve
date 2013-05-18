@@ -104,7 +104,7 @@ namespace Eve.Universe
     /// <value>
     /// The ID of the type of the Amarrian version of this type of station.
     /// </value>
-    public TypeId? AmarrStationTypeId
+    public EveTypeId? AmarrStationTypeId
     {
       get { return Entity.AmarrStationTypeId; }
     }
@@ -148,7 +148,7 @@ namespace Eve.Universe
     /// <value>
     /// The ID of the type of the Caldari version of this type of station.
     /// </value>
-    public TypeId? CaldariStationTypeId
+    public EveTypeId? CaldariStationTypeId
     {
       get { return Entity.CaldariStationTypeId; }
     }
@@ -203,7 +203,7 @@ namespace Eve.Universe
     /// <value>
     /// The ID of the type of the Gallente version of this type of station.
     /// </value>
-    public TypeId? GallenteStationTypeId
+    public EveTypeId? GallenteStationTypeId
     {
       get { return Entity.GallenteStationTypeId;  }
     }
@@ -247,7 +247,7 @@ namespace Eve.Universe
     /// <value>
     /// The ID of the type of the Jovian version of this type of station.
     /// </value>
-    public TypeId? JoveStationTypeId
+    public EveTypeId? JoveStationTypeId
     {
       get { return Entity.JoveStationTypeId; }
     }
@@ -280,7 +280,7 @@ namespace Eve.Universe
     /// <value>
     /// The ID of the type of the Minmatar version of this type of station.
     /// </value>
-    public TypeId? MinmatarStationTypeId
+    public EveTypeId? MinmatarStationTypeId
     {
       get { return Entity.MinmatarStationTypeId; }
     }

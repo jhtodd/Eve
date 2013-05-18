@@ -6,7 +6,6 @@
 namespace Eve.Data.Entities
 {
   using System.Collections.Generic;
-  using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
   using System.Diagnostics.Contracts;
 
@@ -16,12 +15,8 @@ namespace Eve.Data.Entities
   /// The data entity for the <see cref="EveType" /> class.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("invTypes")]
   public class EveTypeEntity : BaseValueEntity<int, EveType>
   {
-    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
-    // data mappings.
-
     /// <summary>
     /// Initializes a new instance of the EveTypeEntity class.
     /// </summary>
@@ -37,7 +32,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    public virtual ICollection<AttributeValueEntity> Attributes { get; internal set; }
+    public virtual ICollection<AttributeValueEntity> Attributes { get; set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -45,8 +40,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("basePrice")]
-    public decimal BasePrice { get; internal set; }
+    public decimal BasePrice { get; set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -54,8 +48,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("capacity")]
-    public double Capacity { get; internal set; }
+    public double Capacity { get; set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -63,8 +56,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("chanceOfDuplicating")]
-    public double ChanceOfDuplicating { get; internal set; }
+    public double ChanceOfDuplicating { get; set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -72,7 +64,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    public virtual ICollection<MetaTypeEntity> ChildMetaTypes { get; internal set; }
+    public virtual ICollection<MetaTypeEntity> ChildMetaTypes { get; set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -80,7 +72,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    public virtual ICollection<EffectEntity> Effects { get; internal set; }
+    public virtual ICollection<ContrabandInfoEntity> ContrabandInfo { get; set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -88,8 +80,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("GraphicId")]
-    public virtual GraphicEntity Graphic { get; internal set; }
+    public virtual ICollection<EffectEntity> Effects { get; set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -97,8 +88,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("graphicID")]
-    public int? GraphicId { get; internal set; }
+    public virtual GraphicEntity Graphic { get; set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -106,8 +96,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("GroupId")]
-    public virtual GroupEntity Group { get; internal set; }
+    public int? GraphicId { get; set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -115,8 +104,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("groupID")]
-    public GroupId GroupId { get; internal set; }
+    public virtual GroupEntity Group { get; set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -124,8 +112,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("IconId")]
-    public virtual IconEntity Icon { get; internal set; }
+    public GroupId GroupId { get; set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -133,8 +120,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("iconID")]
-    public int? IconId { get; internal set; }
+    public virtual IconEntity Icon { get; set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -142,8 +128,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("MarketGroupId")]
-    public virtual MarketGroupEntity MarketGroup { get; internal set; }
+    public int? IconId { get; set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -151,8 +136,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("marketGroupID")]
-    public MarketGroupId? MarketGroupId { get; internal set; }
+    public virtual MarketGroupEntity MarketGroup { get; set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -160,8 +144,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("mass")]
-    public double Mass { get; internal set; }
+    public MarketGroupId? MarketGroupId { get; set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -169,8 +152,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("TypeId")]
-    public virtual ICollection<TypeMaterialEntity> Materials { get; internal set; }
+    public double Mass { get; set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -178,7 +160,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    public virtual MetaTypeEntity MetaType { get; internal set; }
+    public virtual ICollection<TypeMaterialEntity> Materials { get; set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -186,8 +168,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("raceID")]
-    public RaceId? RaceId { get; internal set; }
+    public virtual MetaTypeEntity MetaType { get; set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -195,8 +176,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("radius")]
-    public double Radius { get; internal set; }
+    public RaceId? RaceId { get; set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -204,8 +184,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("portionSize")]
-    public int PortionSize { get; internal set; }
+    public double Radius { get; set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -213,8 +192,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("published")]
-    public bool Published { get; internal set; }
+    public int PortionSize { get; set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -222,8 +200,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("soundID")]
-    public int? SoundId { get; internal set; }
+    public bool Published { get; set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.
@@ -231,8 +208,15 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("volume")]
-    public double Volume { get; internal set; }
+    public int? SoundId { get; set; }
+
+    /// <summary>
+    /// Gets the underlying database value of the corresponding adapter property.
+    /// </summary>
+    /// <value>
+    /// The underlying database value of the corresponding adapter property.
+    /// </value>
+    public double Volume { get; set; }
 
     /* Methods */
 

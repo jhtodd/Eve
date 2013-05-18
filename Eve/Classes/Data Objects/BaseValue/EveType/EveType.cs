@@ -34,7 +34,7 @@ namespace Eve
   /// </remarks>
   [EveCacheDomain(typeof(EveType))]
   public abstract partial class EveType 
-    : BaseValue<TypeId, int, EveTypeEntity, EveType>,
+    : BaseValue<EveTypeId, int, EveTypeEntity, EveType>,
       IComparable,
       IComparable<IEveTypeInstance>,
       IDisposable,
@@ -67,6 +67,7 @@ namespace Eve
     };
 
     private ReadOnlyAttributeValueCollection attributes;
+    private ReadOnlyContrabandInfoCollection contrabandInfo;
     private ReadOnlyEffectCollection effects;
     private Graphic graphic;
     private Group group;
@@ -199,6 +200,27 @@ namespace Eve
         Contract.Assume(!double.IsNaN(result));
 
         return result;
+      }
+    }
+
+    /// <summary>
+    /// Gets the collection of <see cref="ContrabandInfo" /> objects describing
+    /// where the type is contraband.
+    /// </summary>
+    /// <value>
+    /// A <see cref="ReadOnlyContrabandInfoCollection" /> containing
+    /// information about where the type is contraband.
+    /// </value>
+    public ReadOnlyContrabandInfoCollection ContrabandInfo
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<ReadOnlyContrabandInfoCollection>() != null);
+
+        // If not already set, construct a collection of this type's effects.
+        return EveType.LazyInitialize(
+          ref this.contrabandInfo,
+          () => ReadOnlyContrabandInfoCollection.Create(this.Repository, this.Entity.ContrabandInfo));
       }
     }
 
@@ -375,7 +397,7 @@ namespace Eve
     /// <summary>
     /// Gets the collection of materials required to manufacture an
     /// item of this type.  This is also used to determine which materials 
-    /// are recovered when a lot of items of this type is reprocessed.
+    /// are recovered when a full lot of items of this type is reprocessed.
     /// </summary>
     /// <value>
     /// A <see cref="ReadOnlyTypeMaterialCollection" /> containing the materials.
@@ -385,6 +407,10 @@ namespace Eve
     /// For some types (especially T2 items), additional materials may be
     /// required.  These will be contained in the blueprint type's
     /// <see cref="BlueprintType.Requirements" /> collection.
+    /// </para>
+    /// <para>
+    /// This property is only relevant to types that can be manufactured
+    /// or reprocessed.
     /// </para>
     /// </remarks>
     public ReadOnlyTypeMaterialCollection Materials
@@ -860,7 +886,7 @@ namespace Eve
   /// </content>
   public abstract partial class EveType : IEveTypeInstance
   {
-    TypeId IEveTypeInstance.Id
+    EveTypeId IEveTypeInstance.Id
     {
       get { return Id; }
     }

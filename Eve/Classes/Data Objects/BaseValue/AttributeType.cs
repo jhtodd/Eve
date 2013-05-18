@@ -21,8 +21,6 @@ namespace Eve
       IComparable<IAttribute>,
       IHasIcon
   {
-    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
-    // data mappings.
     private AttributeCategory category;
     private Icon icon;
     private Unit unit;

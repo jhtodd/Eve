@@ -20,7 +20,7 @@ namespace Eve
   /// </summary>
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Base class implements ISerializable but the contents of the collection cannot be serialized.")]
   public sealed partial class ReadOnlyTypeMaterialCollection
-    : ReadOnlyKeyedRepositoryItemCollection<TypeId, TypeMaterial>
+    : ReadOnlyKeyedRepositoryItemCollection<EveTypeId, TypeMaterial>
   {
     /* Constructors */
 

@@ -6,7 +6,6 @@
 namespace Eve.Data.Entities
 {
   using System;
-  using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
   using System.Diagnostics.Contracts;
 
@@ -16,12 +15,8 @@ namespace Eve.Data.Entities
   /// The data entity for the <see cref="CertificateRelationship" /> class.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("crtRelationships")]
   public class CertificateRelationshipEntity : EveEntity<CertificateRelationship>
   {
-    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
-    // data mappings.
-
     /* Constructors */
 
     /// <summary>
@@ -39,7 +34,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("ChildId")]
     public virtual CertificateEntity Child { get; internal set; }
 
     /// <summary>
@@ -48,7 +42,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("childID")]
     public int ChildId { get; internal set; }
 
     /// <summary>
@@ -57,7 +50,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("relationshipID")]
     public int Id { get; internal set; }
 
     /// <summary>
@@ -66,7 +58,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("ParentId")]
     public virtual CertificateEntity Parent { get; internal set; }
 
     /// <summary>
@@ -75,7 +66,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("parentID")]
     public int? ParentId { get; internal set; }
 
     /// <summary>
@@ -84,7 +74,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("parentLevel")]
     public byte? ParentLevel { get; internal set; }
 
     /// <summary>
@@ -93,7 +82,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("ParentTypeId")]
     public virtual EveTypeEntity ParentType { get; internal set; }
 
     /// <summary>
@@ -102,11 +90,9 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("parentTypeID")]
     public int? ParentTypeId { get; internal set; }
 
     /// <inheritdoc />
-    [NotMapped]
     protected internal override IConvertible CacheKey
     {
       get { return this.Id; }

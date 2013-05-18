@@ -396,7 +396,7 @@ namespace Eve.Universe
     /// <value>
     /// The ID of the type of the solar system's star.
     /// </value>
-    public TypeId SunTypeId
+    public EveTypeId SunTypeId
     {
       get { return this.Entity.SolarSystemInfo.SunTypeId; }
     }

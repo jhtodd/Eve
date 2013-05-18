@@ -6,8 +6,6 @@
 namespace Eve.Data.Entities
 {
   using System;
-  using System.ComponentModel.DataAnnotations;
-  using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
   using System.Diagnostics.Contracts;
 
@@ -18,12 +16,8 @@ namespace Eve.Data.Entities
   /// The data entity for the <see cref="ContrabandInfo" /> class.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("invContrabandTypes")]
   public class ContrabandInfoEntity : EveEntity<ContrabandInfo>
   {
-    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
-    // data mappings.
-
     /* Constructors */
 
     /// <summary>
@@ -41,7 +35,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("attackMinSec")]
     public double AttackMinimumSecurity { get; internal set; }
 
     /// <summary>
@@ -50,7 +43,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("confiscateMinSec")]
     public double ConfiscateMinimumSecurity { get; internal set; }
 
     /// <summary>
@@ -59,7 +51,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("FactionId")]
     public virtual FactionEntity Faction { get; internal set; }
 
     /// <summary>
@@ -68,8 +59,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("factionID", Order = 1)]
-    [Key]
     public long FactionId { get; internal set; }
 
     /// <summary>
@@ -78,7 +67,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("fineByValue")]
     public double FineByValue { get; internal set; }
 
     /// <summary>
@@ -87,7 +75,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("standingLoss")]
     public double StandingLoss { get; internal set; }
 
     /// <summary>
@@ -96,7 +83,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("TypeId")]
     public virtual EveTypeEntity Type { get; internal set; }
 
     /// <summary>
@@ -105,12 +91,9 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("typeID", Order = 2)]
-    [Key]
     public int TypeId { get; internal set; }
 
     /// <inheritdoc />
-    [NotMapped]
     protected internal override IConvertible CacheKey
     {
       get { return CreateCacheKey(this.FactionId, this.TypeId); }
@@ -137,7 +120,7 @@ namespace Eve.Data.Entities
     /// <returns>
     /// A compound ID combining the two sub-IDs.
     /// </returns>
-    internal static long CreateCacheKey(long factionID, TypeId typeID)
+    internal static long CreateCacheKey(long factionID, EveTypeId typeID)
     {
       // Faction ID is always small enough to fit in the lower 32 bits
       return (long)((((ulong)(long)factionID) << 32) | ((ulong)(long)typeID));

@@ -5,7 +5,6 @@
 //-----------------------------------------------------------------------
 namespace Eve.Data.Entities
 {
-  using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
   using System.Diagnostics.Contracts;
 
@@ -13,12 +12,8 @@ namespace Eve.Data.Entities
   /// The data entity for the <see cref="AttributeType" /> class.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("dgmAttributeTypes")]
   public class AttributeTypeEntity : BaseValueEntity<AttributeId, AttributeType>
   {
-    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
-    // data mappings.
-
     /* Constructors */
 
     /// <summary>
@@ -36,7 +31,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("CategoryId")]
     public virtual AttributeCategoryEntity Category { get; internal set; }
 
     /// <summary>
@@ -45,7 +39,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("categoryID")]
     public AttributeCategoryId? CategoryId { get; internal set; }
 
     /// <summary>
@@ -54,7 +47,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("defaultValue")]
     public double DefaultValue { get; internal set; }
 
     /// <summary>
@@ -63,7 +55,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("displayName")]
     public string DisplayName { get; internal set; }
 
     /// <summary>
@@ -72,7 +63,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("highIsGood")]
     public bool HighIsGood { get; internal set; }
 
     /// <summary>
@@ -81,7 +71,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("IconId")]
     public virtual IconEntity Icon { get; internal set; }
 
     /// <summary>
@@ -90,7 +79,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("iconID")]
     public int? IconId { get; internal set; }
 
     /// <summary>
@@ -99,7 +87,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("published")]
     public bool Published { get; internal set; }
 
     /// <summary>
@@ -108,7 +95,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("stackable")]
     public bool Stackable { get; internal set; }
 
     /// <summary>
@@ -117,7 +103,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [ForeignKey("UnitId")]
     public virtual UnitEntity Unit { get; internal set; }
 
     /// <summary>
@@ -126,7 +111,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("unitID")]
     public UnitId? UnitId { get; internal set; }
 
     /* Methods */

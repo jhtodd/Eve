@@ -22,7 +22,7 @@ namespace Eve
     /// <value>
     /// The ID of the item.
     /// </value>
-    TypeId Id { get; }
+    EveTypeId Id { get; }
 
     /// <summary>
     /// Gets the type of the item.

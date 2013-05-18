@@ -7,8 +7,6 @@ namespace Eve.Data.Entities
 {
   using System;
   using System.Collections.Generic;
-  using System.ComponentModel.DataAnnotations;
-  using System.ComponentModel.DataAnnotations.Schema;
   using System.Diagnostics.CodeAnalysis;
   using System.Diagnostics.Contracts;
 
@@ -18,14 +16,10 @@ namespace Eve.Data.Entities
   /// The data entity for the <see cref="Celestial" /> class.
   /// </summary>
   [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "Boilerplate classes do not need details documentation headers.")]
-  [Table("mapCelestialStatistics")]
   public class CelestialEntity
     : ItemExtensionEntity,
       IEveEntity<Celestial>
   {
-    // Check DirectEveDbContext.OnModelCreating() for customization of this type's
-    // data mappings.
-
     /* Constructors */
 
     /// <summary>
@@ -43,7 +37,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("age")]
     public double Age { get; internal set; }
 
     /// <summary>
@@ -52,7 +45,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("density")]
     public double Density { get; internal set; }
 
     /// <summary>
@@ -61,7 +53,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("eccentricity")]
     public double Eccentricity { get; internal set; }
 
     /// <summary>
@@ -70,7 +61,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("escapeVelocity")]
     public double EscapeVelocity { get; internal set; }
 
     /// <summary>
@@ -79,7 +69,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("fragmented")]
     public bool Fragmented { get; internal set; }
 
     /// <summary>
@@ -88,7 +77,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The ID of the celestial object.
     /// </value>
-    [Key]
     public long Id { get; internal set; }
 
     /// <summary>
@@ -101,7 +89,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The <see cref="ItemEntity" /> associated with the current object.
     /// </value>
-    [ForeignKey("Id")]
     public virtual ItemEntity ItemInfo { get; internal set; }
 
     /// <summary>
@@ -110,7 +97,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("life")]
     public double Life { get; internal set; }
 
     /// <summary>
@@ -119,7 +105,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("locked")]
     public bool Locked { get; internal set; }
 
     /// <summary>
@@ -128,7 +113,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("luminosity")]
     public double Luminosity { get; internal set; }
 
     /// <summary>
@@ -137,7 +121,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("mass")]
     public double Mass { get; internal set; }
 
     /// <summary>
@@ -146,7 +129,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("massDust")]
     public double MassDust { get; internal set; }
 
     /// <summary>
@@ -155,7 +137,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("massGas")]
     public double MassGas { get; internal set; }
 
     /// <summary>
@@ -164,7 +145,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("orbitPeriod")]
     public double OrbitPeriod { get; internal set; }
 
     /// <summary>
@@ -173,7 +153,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("orbitRadius")]
     public double OrbitRadius { get; internal set; }
 
     /// <summary>
@@ -182,7 +161,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("pressure")]
     public double Pressure { get; internal set; }
 
     /// <summary>
@@ -191,7 +169,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("radius")]
     public double Radius { get; internal set; }
 
     /// <summary>
@@ -200,7 +177,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("rotationRate")]
     public double RotationRate { get; internal set; }
 
     /// <summary>
@@ -209,7 +185,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("spectralClass")]
     public string SpectralClass { get; internal set; }
 
     /// <summary>
@@ -218,7 +193,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("surfaceGravity")]
     public double SurfaceGravity { get; internal set; }
 
     /// <summary>
@@ -227,7 +201,6 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    [Column("temperature")]
     public double Temperature { get; internal set; }
 
     /// <inheritdoc />

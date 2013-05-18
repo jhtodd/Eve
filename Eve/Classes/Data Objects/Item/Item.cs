@@ -115,7 +115,7 @@ namespace Eve
     /// <value>
     /// The ID of the <see cref="EveType" /> specifying the type of the item.
     /// </value>
-    public TypeId ItemTypeId
+    public EveTypeId ItemTypeId
     {
       get { return Entity.ItemTypeId; }
     }

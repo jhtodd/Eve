@@ -14,7 +14,7 @@ namespace Eve
   [ContractClassFor(typeof(IEveTypeInstance))]
   internal abstract class IEveTypeInstanceContracts : IEveTypeInstance
   {
-    TypeId IEveTypeInstance.Id
+    EveTypeId IEveTypeInstance.Id
     {
       get { throw new NotImplementedException(); }
     }

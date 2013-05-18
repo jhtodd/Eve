@@ -449,6 +449,14 @@ namespace Eve.Data
     IQueryable<TypeMaterialEntity> TypeMaterials { get; }
 
     /// <summary>
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query items associated with reactions.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IQueryable{T}" /> for items associated with reactions.
+    /// </value>
+    IQueryable<TypeReactionEntity> TypeReactions { get; }
+
+    /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query units.
     /// </summary>
     /// <value>
