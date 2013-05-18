@@ -16,8 +16,7 @@ namespace Eve.Universe
   /// <summary>
   /// An EVE item describing an in-game station.
   /// </summary>
-  public sealed class Station
-    : Item
+  public sealed class Station : Item
   {
     private ReadOnlyAgentCollection agents;
     private ReadOnlyAssemblyLineCollection assemblyLines;
@@ -45,9 +44,6 @@ namespace Eve.Universe
       Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
       Contract.Requires(entity.IsStation, "The entity must be a station.");
-
-      // Use Assume instead of Requires to avoid lazy loading on release build
-      Contract.Assert(this.Entity.StationInfo != null);
     }
 
     /* Properties */
@@ -66,7 +62,7 @@ namespace Eve.Universe
 
         return Station.LazyInitialize(
           ref this.agents,
-          () => ReadOnlyAgentCollection.Create(this.Repository, this.Entity.StationInfo.Agents));
+          () => ReadOnlyAgentCollection.Create(this.Repository, this.StationInfo == null ? null : this.StationInfo.Agents));
       }
     }
 
@@ -84,7 +80,7 @@ namespace Eve.Universe
 
         return Station.LazyInitialize(
           ref this.assemblyLines,
-          () => ReadOnlyAssemblyLineCollection.Create(this.Repository, this.Entity.StationInfo.AssemblyLines));
+          () => ReadOnlyAssemblyLineCollection.Create(this.Repository, this.StationInfo == null ? null : this.StationInfo.AssemblyLines));
       }
     }
 
@@ -104,7 +100,7 @@ namespace Eve.Universe
 
         return Station.LazyInitialize(
           ref this.assemblyLineTypes,
-          () => ReadOnlyAssemblyLineStationCollection.Create(this.Repository, this.Entity.StationInfo.AssemblyLineTypes));
+          () => ReadOnlyAssemblyLineStationCollection.Create(this.Repository, this.StationInfo == null ? null : this.StationInfo.AssemblyLineTypes));
       }
     }
     
@@ -128,7 +124,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.LazyInitializeAdapter(ref this.constellation, this.Entity.StationInfo.ConstellationId, () => this.Entity.StationInfo.Constellation);
+        return this.LazyInitializeAdapter(ref this.constellation, this.StationInfo.ConstellationId, () => this.StationInfo.Constellation);
       }
     }
 
@@ -144,7 +140,8 @@ namespace Eve.Universe
     {
       get 
       {
-        return this.Entity.StationInfo == null ? (ConstellationId?)null : (ConstellationId?)this.Entity.StationInfo.ConstellationId;
+        Contract.Ensures(Contract.Result<ConstellationId?>() == null || this.StationInfo != null);
+        return this.StationInfo == null ? (ConstellationId?)null : (ConstellationId?)this.StationInfo.ConstellationId;
       }
     }
 
@@ -168,7 +165,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.LazyInitializeAdapter(ref this.corporation, this.Entity.StationInfo.CorporationId, () => this.Entity.StationInfo.Corporation);
+        return this.LazyInitializeAdapter(ref this.corporation, this.StationInfo.CorporationId, () => this.StationInfo.Corporation);
       }
     }
 
@@ -184,7 +181,8 @@ namespace Eve.Universe
     {
       get
       {
-        return this.Entity.StationInfo == null ? (NpcCorporationId?)null : (NpcCorporationId?)this.Entity.StationInfo.CorporationId;
+        Contract.Ensures(Contract.Result<NpcCorporationId?>() == null || this.StationInfo != null);
+        return this.StationInfo == null ? (NpcCorporationId?)null : (NpcCorporationId?)this.StationInfo.CorporationId;
       }
     }
 
@@ -203,7 +201,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.Entity.StationInfo == null ? 0.0D : this.Entity.StationInfo.DockingCostPerVolume;
+        var result = this.StationInfo == null ? 0.0D : this.StationInfo.DockingCostPerVolume;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -238,7 +236,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.Entity.StationInfo == null ? 0.0D : this.Entity.StationInfo.MaxShipVolumeDockable;
+        var result = this.StationInfo == null ? 0.0D : this.StationInfo.MaxShipVolumeDockable;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -261,7 +259,7 @@ namespace Eve.Universe
       {
         Contract.Ensures(Contract.Result<int>() >= 0);
 
-        var result = this.Entity.StationInfo == null ? 0 : this.Entity.StationInfo.OfficeRentalCost;
+        var result = this.StationInfo == null ? 0 : this.StationInfo.OfficeRentalCost;
 
         Contract.Assume(result >= 0);
 
@@ -288,7 +286,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.LazyInitializeAdapter(ref this.operation, this.Entity.StationInfo.OperationId, () => this.Entity.StationInfo.Operation);
+        return this.LazyInitializeAdapter(ref this.operation, this.StationInfo.OperationId, () => this.StationInfo.Operation);
       }
     }
 
@@ -303,7 +301,8 @@ namespace Eve.Universe
     {
       get
       {
-        return this.Entity.StationInfo == null ? (StationOperationId?)null : (StationOperationId?)this.Entity.StationInfo.OperationId;
+        Contract.Ensures(Contract.Result<StationOperationId?>() == null || this.StationInfo != null);
+        return this.StationInfo == null ? (StationOperationId?)null : (StationOperationId?)this.StationInfo.OperationId;
       }
     }
 
@@ -326,7 +325,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.LazyInitializeAdapter(ref this.region, this.Entity.StationInfo.RegionId, () => this.Entity.StationInfo.Region);
+        return this.LazyInitializeAdapter(ref this.region, this.StationInfo.RegionId, () => this.StationInfo.Region);
       }
     }
 
@@ -341,7 +340,8 @@ namespace Eve.Universe
     {
       get 
       {
-        return this.Entity.StationInfo == null ? (RegionId?)null : (RegionId?)this.Entity.StationInfo.RegionId;
+        Contract.Ensures(Contract.Result<RegionId?>() == null || this.StationInfo != null);
+        return this.StationInfo == null ? (RegionId?)null : (RegionId?)this.StationInfo.RegionId;
       }
     }
 
@@ -360,7 +360,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
         Contract.Ensures(Contract.Result<double>() <= 1.0D);
 
-        var result = this.Entity.StationInfo == null ? 0.0D : this.Entity.StationInfo.ReprocessingEfficiency;
+        var result = this.StationInfo == null ? 0.0D : this.StationInfo.ReprocessingEfficiency;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -380,7 +380,7 @@ namespace Eve.Universe
     /// </value>
     public byte ReprocessingHangarFlag
     {
-      get { return this.Entity.StationInfo == null ? (byte)0 : this.Entity.StationInfo.ReprocessingHangarFlag; }
+      get { return this.StationInfo == null ? (byte)0 : this.StationInfo.ReprocessingHangarFlag; }
     }
 
     /// <summary>
@@ -398,7 +398,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
         Contract.Ensures(Contract.Result<double>() <= 1.0D);
 
-        var result = this.Entity.StationInfo == null ? 0.0D : this.Entity.StationInfo.ReprocessingStationsTake;
+        var result = this.StationInfo == null ? 0.0D : this.StationInfo.ReprocessingStationsTake;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -419,7 +419,7 @@ namespace Eve.Universe
     /// </value>
     public short Security
     {
-      get { return this.Entity.StationInfo == null ? (short)0 : this.Entity.StationInfo.Security; }
+      get { return this.StationInfo == null ? (short)0 : this.StationInfo.Security; }
     }
 
     /// <summary>
@@ -441,7 +441,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.LazyInitializeAdapter(ref this.solarSystem, this.Entity.StationInfo.SolarSystemId, () => this.Entity.StationInfo.SolarSystem);
+        return this.LazyInitializeAdapter(ref this.solarSystem, this.StationInfo.SolarSystemId, () => this.StationInfo.SolarSystem);
       }
     }
 
@@ -456,7 +456,8 @@ namespace Eve.Universe
     {
       get
       {
-        return this.Entity.StationInfo == null ? (SolarSystemId?)null : (SolarSystemId?)this.Entity.StationInfo.SolarSystemId;
+        Contract.Ensures(Contract.Result<SolarSystemId?>() == null || this.StationInfo != null);
+        return this.StationInfo == null ? (SolarSystemId?)null : (SolarSystemId?)this.StationInfo.SolarSystemId;
       }
     }
 
@@ -479,7 +480,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.LazyInitializeAdapter(ref this.stationType, this.Entity.StationInfo.StationTypeId, () => this.Entity.StationInfo.StationType);
+        return this.LazyInitializeAdapter(ref this.stationType, this.StationInfo.StationTypeId, () => this.StationInfo.StationType);
       }
     }
 
@@ -494,7 +495,8 @@ namespace Eve.Universe
     {
       get
       {
-        return this.Entity.StationInfo == null ? (EveTypeId?)null : (EveTypeId?)this.Entity.StationInfo.StationTypeId;
+        Contract.Ensures(Contract.Result<EveTypeId?>() == null || this.StationInfo != null);
+        return this.StationInfo == null ? (EveTypeId?)null : (EveTypeId?)this.StationInfo.StationTypeId;
       }
     }
 
@@ -512,7 +514,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.StationInfo == null ? 0.0D : this.Entity.StationInfo.X;
+        double result = this.StationInfo == null ? 0.0D : this.StationInfo.X;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -535,7 +537,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.StationInfo == null ? 0.0D : this.Entity.StationInfo.Y;
+        double result = this.StationInfo == null ? 0.0D : this.StationInfo.Y;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -558,7 +560,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.StationInfo == null ? 0.0D : this.Entity.StationInfo.Z;
+        double result = this.StationInfo == null ? 0.0D : this.StationInfo.Z;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -567,12 +569,17 @@ namespace Eve.Universe
       }
     }
 
-    /* Methods */
-
-    [ContractInvariantMethod]
-    private void ObjectInvariant()
+    /// <summary>
+    /// Gets the <see cref="StationEntity" /> containing the specific
+    /// information for the current item type.
+    /// </summary>
+    /// <value>
+    /// The <see cref="StationEntity" /> containing the specific
+    /// information for the current item type.
+    /// </value>
+    private StationEntity StationInfo
     {
-      Contract.Invariant(this.Entity.StationInfo != null);
+      get { return this.Entity.StationInfo; }
     }
   }
 }

@@ -68,7 +68,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.LazyInitializeAdapter(ref this.agentType, this.Entity.AgentInfo.AgentTypeId, () => this.Entity.AgentInfo.AgentType);
+        return this.LazyInitializeAdapter(ref this.agentType, this.AgentInfo.AgentTypeId, () => this.AgentInfo.AgentType);
       }
     }
 
@@ -83,8 +83,8 @@ namespace Eve.Universe
     {
       get 
       {
-        Contract.Ensures(this.Entity.AgentInfo != null || Contract.Result<AgentTypeId?>() == null);
-        return this.Entity.AgentInfo == null ? (AgentTypeId?)null : (AgentTypeId?)this.Entity.AgentInfo.AgentTypeId; 
+        Contract.Ensures(this.AgentInfo != null || Contract.Result<AgentTypeId?>() == null);
+        return this.AgentInfo == null ? (AgentTypeId?)null : (AgentTypeId?)this.AgentInfo.AgentTypeId; 
       }
     }
 
@@ -99,15 +99,15 @@ namespace Eve.Universe
     {
       get
       {
-        Contract.Ensures(this.Entity.AgentInfo == null || Contract.Result<NpcCorporation>() != null);
+        Contract.Ensures(this.AgentInfo == null || Contract.Result<NpcCorporation>() != null);
 
-        if (this.Entity.AgentInfo == null)
+        if (this.AgentInfo == null)
         {
           return null;
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.LazyInitializeAdapter(ref this.corporation, this.Entity.AgentInfo.CorporationId, () => this.Entity.AgentInfo.Corporation);
+        return this.LazyInitializeAdapter(ref this.corporation, this.AgentInfo.CorporationId, () => this.AgentInfo.Corporation);
       }
     }
 
@@ -122,7 +122,7 @@ namespace Eve.Universe
     {
       get
       {
-        return this.Entity.AgentInfo == null ? (NpcCorporationId?)null : (NpcCorporationId?)this.Entity.AgentInfo.CorporationId;
+        return this.AgentInfo == null ? (NpcCorporationId?)null : (NpcCorporationId?)this.AgentInfo.CorporationId;
       }
     }
 
@@ -145,7 +145,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.LazyInitializeAdapter(ref this.division, this.Entity.AgentInfo.DivisionId, () => this.Entity.AgentInfo.Division);
+        return this.LazyInitializeAdapter(ref this.division, this.AgentInfo.DivisionId, () => this.AgentInfo.Division);
       }
     }
 
@@ -160,8 +160,8 @@ namespace Eve.Universe
     {
       get
       {
-        Contract.Ensures(this.Entity.AgentInfo != null || Contract.Result<DivisionId?>() == null);
-        return this.Entity.AgentInfo == null ? (DivisionId?)null : (DivisionId?)this.Entity.AgentInfo.DivisionId;
+        Contract.Ensures(this.AgentInfo != null || Contract.Result<DivisionId?>() == null);
+        return this.AgentInfo == null ? (DivisionId?)null : (DivisionId?)this.AgentInfo.DivisionId;
       }
     }
 
@@ -187,7 +187,7 @@ namespace Eve.Universe
     {
       get
       {
-        return this.Entity.AgentInfo == null ? false : this.Entity.AgentInfo.IsLocator;
+        return this.AgentInfo == null ? false : this.AgentInfo.IsLocator;
       }
     }
 
@@ -201,7 +201,7 @@ namespace Eve.Universe
     {
       get
       {
-        return this.Entity.AgentInfo == null ? (byte)1 : this.Entity.AgentInfo.Level;
+        return this.AgentInfo == null ? (byte)1 : this.AgentInfo.Level;
       }
     }
 
@@ -235,7 +235,7 @@ namespace Eve.Universe
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.LazyInitializeAdapter(ref this.location, this.Entity.AgentInfo.LocationId, () => this.Entity.AgentInfo.Location);
+        return this.LazyInitializeAdapter(ref this.location, this.AgentInfo.LocationId, () => this.AgentInfo.Location);
       }
     }
 
@@ -250,8 +250,8 @@ namespace Eve.Universe
     {
       get
       {
-        Contract.Ensures(this.Entity.AgentInfo != null || Contract.Result<ItemId?>() == null);
-        return this.Entity.AgentInfo == null ? (ItemId?)null : this.Entity.AgentInfo.LocationId;
+        Contract.Ensures(this.AgentInfo != null || Contract.Result<ItemId?>() == null);
+        return this.AgentInfo == null ? (ItemId?)null : this.AgentInfo.LocationId;
       }
     }
 
@@ -266,7 +266,7 @@ namespace Eve.Universe
     {
       get 
       { 
-        return this.Entity.AgentInfo == null ? (short)0 : this.Entity.AgentInfo.Quality;
+        return this.AgentInfo == null ? (short)0 : this.AgentInfo.Quality;
       }
     }
 
@@ -284,8 +284,21 @@ namespace Eve.Universe
 
         return Agent.LazyInitialize(
           ref this.researchFields,
-          () => ReadOnlySkillTypeCollection.Create(this.Repository, this.Entity.AgentInfo == null ? null : this.Entity.AgentInfo.ResearchFields));
+          () => ReadOnlySkillTypeCollection.Create(this.Repository, this.AgentInfo == null ? null : this.AgentInfo.ResearchFields));
       }
+    }
+
+    /// <summary>
+    /// Gets the <see cref="AgentEntity" /> containing the specific
+    /// information for the current item type.
+    /// </summary>
+    /// <value>
+    /// The <see cref="AgentEntity" /> containing the specific
+    /// information for the current item type.
+    /// </value>
+    private AgentEntity AgentInfo
+    {
+      get { return this.Entity.AgentInfo; }
     }
 
     /* Methods */

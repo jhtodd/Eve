@@ -41,7 +41,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    public int Quantity { get; internal set; }
+    public short Quantity { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.

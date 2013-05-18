@@ -41,9 +41,6 @@ namespace Eve.Character
       Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
       Contract.Requires(entity.IsFaction, "The entity must be a faction.");
-
-      // Use Assume instead of Requires to avoid lazy loading on release build
-      Contract.Assert(this.Entity.FactionInfo != null);
     }
 
     /* Properties */
@@ -67,7 +64,7 @@ namespace Eve.Character
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.LazyInitializeAdapter(ref this.corporation, this.Entity.FactionInfo.CorporationId, () => this.Entity.FactionInfo.Corporation);
+        return this.LazyInitializeAdapter(ref this.corporation, this.FactionInfo.CorporationId, () => this.FactionInfo.Corporation);
       }
     }
 
@@ -82,7 +79,8 @@ namespace Eve.Character
     {
       get 
       {
-        return this.Entity.FactionInfo == null ? (NpcCorporationId?)null : this.Entity.FactionInfo.CorporationId;
+        Contract.Ensures(Contract.Result<NpcCorporationId?>() == null || this.FactionInfo != null);
+        return this.FactionInfo == null ? (NpcCorporationId?)null : this.FactionInfo.CorporationId;
       }
     }
 
@@ -105,7 +103,7 @@ namespace Eve.Character
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.LazyInitializeAdapter(ref this.icon, this.Entity.FactionInfo.IconId, () => this.Entity.FactionInfo.Icon);
+        return this.LazyInitializeAdapter(ref this.icon, this.FactionInfo.IconId, () => this.FactionInfo.Icon);
       }
     }
 
@@ -120,7 +118,8 @@ namespace Eve.Character
     {
       get 
       {
-        return this.Entity.FactionInfo == null ? (IconId?)null : this.Entity.FactionInfo.IconId;
+        Contract.Ensures(Contract.Result<IconId?>() == null || this.FactionInfo != null);
+        return this.FactionInfo == null ? (IconId?)null : this.FactionInfo.IconId;
       }
     }
 
@@ -143,7 +142,7 @@ namespace Eve.Character
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.LazyInitializeAdapter(ref this.militiaCorporation, this.Entity.FactionInfo.MilitiaCorporationId, () => this.Entity.FactionInfo.MilitiaCorporation);
+        return this.LazyInitializeAdapter(ref this.militiaCorporation, this.FactionInfo.MilitiaCorporationId, () => this.FactionInfo.MilitiaCorporation);
       }
     }
 
@@ -158,7 +157,8 @@ namespace Eve.Character
     {
       get
       {
-        return this.Entity.FactionInfo == null ? (NpcCorporationId?)null : (NpcCorporationId?)this.Entity.FactionInfo.MilitiaCorporationId;
+        Contract.Ensures(Contract.Result<NpcCorporationId?>() == null || this.FactionInfo != null);
+        return this.FactionInfo == null ? (NpcCorporationId?)null : (NpcCorporationId?)this.FactionInfo.MilitiaCorporationId;
       }
     }
 
@@ -175,7 +175,7 @@ namespace Eve.Character
       get 
       {
         // TODO: Replace with race array
-        return this.Entity.FactionInfo == null ? (RaceId?)null : (RaceId?)this.Entity.FactionInfo.RaceIds;
+        return this.FactionInfo == null ? (RaceId?)null : (RaceId?)this.FactionInfo.RaceIds;
       }
     }
 
@@ -194,7 +194,7 @@ namespace Eve.Character
         Contract.Ensures(!double.IsNaN(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        var result = this.Entity.FactionInfo == null ? 0.0D : this.Entity.FactionInfo.SizeFactor;
+        var result = this.FactionInfo == null ? 0.0D : this.FactionInfo.SizeFactor;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -223,7 +223,7 @@ namespace Eve.Character
         }
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.LazyInitializeAdapter(ref this.solarSystem, this.Entity.FactionInfo.SolarSystemId, () => this.Entity.FactionInfo.SolarSystem);
+        return this.LazyInitializeAdapter(ref this.solarSystem, this.FactionInfo.SolarSystemId, () => this.FactionInfo.SolarSystem);
       }
     }
 
@@ -238,7 +238,8 @@ namespace Eve.Character
     {
       get
       {
-        return this.Entity.FactionInfo == null ? (SolarSystemId?)null : this.Entity.FactionInfo.SolarSystemId;
+        Contract.Ensures(Contract.Result<SolarSystemId?>() == null || this.FactionInfo != null);
+        return this.FactionInfo == null ? (SolarSystemId?)null : this.FactionInfo.SolarSystemId;
       }
     }
 
@@ -254,7 +255,7 @@ namespace Eve.Character
       {
         Contract.Ensures(Contract.Result<short>() >= 0);
 
-        var result = this.Entity.FactionInfo == null ? (short)0 : this.Entity.FactionInfo.StationCount;
+        var result = this.FactionInfo == null ? (short)0 : this.FactionInfo.StationCount;
 
         Contract.Assume(result >= 0);
 
@@ -276,7 +277,7 @@ namespace Eve.Character
       {
         Contract.Ensures(Contract.Result<short>() >= 0);
 
-        var result = this.Entity.FactionInfo == null ? (short)0 : this.Entity.FactionInfo.StationSystemCount;
+        var result = this.FactionInfo == null ? (short)0 : this.FactionInfo.StationSystemCount;
 
         Contract.Assume(result >= 0);
 
@@ -284,12 +285,17 @@ namespace Eve.Character
       }
     }
 
-    /* Methods */
-
-    [ContractInvariantMethod]
-    private void ObjectInvariant()
+    /// <summary>
+    /// Gets the <see cref="FactionEntity" /> containing the specific
+    /// information for the current item type.
+    /// </summary>
+    /// <value>
+    /// The <see cref="FactionEntity" /> containing the specific
+    /// information for the current item type.
+    /// </value>
+    private FactionEntity FactionInfo
     {
-      Contract.Invariant(this.Entity.FactionInfo != null);
+      get { return this.Entity.FactionInfo; }
     }
   }
 

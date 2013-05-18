@@ -31,9 +31,6 @@ namespace Eve.Universe
       Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
       Contract.Requires(entity.IsUniverse, "The entity must be a universe.");
-
-      // Use Assume instead of Requires to avoid lazy loading on release build
-      Contract.Assert(this.Entity.UniverseInfo != null);
     }
 
     /* Properties */
@@ -63,7 +60,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(Contract.Result<double>() >= 0.0D);
 
-        double result = this.Entity.UniverseInfo.Radius;
+        double result = this.UniverseInfo.Radius;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -86,7 +83,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.UniverseInfo.X;
+        double result = this.UniverseInfo.X;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -108,7 +105,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.UniverseInfo.Y;
+        double result = this.UniverseInfo.Y;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -130,7 +127,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.UniverseInfo.Z;
+        double result = this.UniverseInfo.Z;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -152,7 +149,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.UniverseInfo.XMax;
+        double result = this.UniverseInfo.XMax;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -174,7 +171,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.UniverseInfo.YMax;
+        double result = this.UniverseInfo.YMax;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -196,7 +193,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.UniverseInfo.ZMax;
+        double result = this.UniverseInfo.ZMax;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -218,7 +215,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.UniverseInfo.XMin;
+        double result = this.UniverseInfo.XMin;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -240,7 +237,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.UniverseInfo.YMin;
+        double result = this.UniverseInfo.YMin;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -262,7 +259,7 @@ namespace Eve.Universe
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
         Contract.Ensures(!double.IsInfinity(Contract.Result<double>()));
 
-        double result = this.Entity.UniverseInfo.ZMin;
+        double result = this.UniverseInfo.ZMin;
 
         Contract.Assume(!double.IsInfinity(result));
         Contract.Assume(!double.IsNaN(result));
@@ -271,12 +268,25 @@ namespace Eve.Universe
       }
     }
 
-    /* Methods */
-
-    [ContractInvariantMethod]
-    private void ObjectInvariant()
+    /// <summary>
+    /// Gets the <see cref="UniverseEntity" /> containing the specific
+    /// information for the current item type.
+    /// </summary>
+    /// <value>
+    /// The <see cref="UniverseEntity" /> containing the specific
+    /// information for the current item type.
+    /// </value>
+    private UniverseEntity UniverseInfo
     {
-      Contract.Invariant(this.Entity.UniverseInfo != null);
+      get
+      {
+        Contract.Ensures(Contract.Result<UniverseEntity>() != null);
+
+        var result = this.Entity.UniverseInfo;
+
+        Contract.Assume(result != null);
+        return result;
+      }
     }
   }
 }

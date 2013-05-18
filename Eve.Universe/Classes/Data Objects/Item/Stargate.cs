@@ -36,9 +36,6 @@ namespace Eve.Universe
       Contract.Requires(repository != null, "The repository associated with the object cannot be null.");
       Contract.Requires(entity != null, "The entity cannot be null.");
       Contract.Requires(entity.IsStargate, "The entity must be a station.");
-
-      // Use Assume instead of Requires to avoid lazy loading on release build
-      Contract.Assert(this.Entity.StargateInfo != null);
     }
 
     /* Properties */
@@ -56,7 +53,7 @@ namespace Eve.Universe
         Contract.Ensures(Contract.Result<Stargate>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
-        return this.LazyInitializeAdapter(ref this.destination, this.Entity.StargateInfo.DestinationId, () => this.Entity.StargateInfo.Destination);
+        return this.LazyInitializeAdapter(ref this.destination, this.StargateInfo.DestinationId, () => this.StargateInfo.Destination);
       }
     }
 
@@ -68,7 +65,7 @@ namespace Eve.Universe
     /// </value>
     public StargateId DestinationId
     {
-      get { return this.Entity.StargateInfo.DestinationId; }
+      get { return this.StargateInfo.DestinationId; }
     }
 
     /// <summary>
@@ -82,12 +79,25 @@ namespace Eve.Universe
       get { return (StargateId)base.Id.Value; }
     }
 
-    /* Methods */
-
-    [ContractInvariantMethod]
-    private void ObjectInvariant()
+    /// <summary>
+    /// Gets the <see cref="StargateEntity" /> containing the specific
+    /// information for the current item type.
+    /// </summary>
+    /// <value>
+    /// The <see cref="StargateEntity" /> containing the specific
+    /// information for the current item type.
+    /// </value>
+    private StargateEntity StargateInfo
     {
-      Contract.Invariant(this.Entity.StargateInfo != null);
+      get
+      {
+        Contract.Ensures(Contract.Result<StargateEntity>() != null);
+
+        var result = this.Entity.StargateInfo;
+
+        Contract.Assume(result != null);
+        return result;
+      }
     }
   }
 }

@@ -30,7 +30,7 @@ namespace Eve.Data.Entities.Configuration
       // Column level mappings
       this.Property(tr => tr.Input).HasColumnName("input");
       this.Property(tr => tr.Quantity).HasColumnName("quantity");
-      this.Property(tr => tr.ReactionTypeId).HasColumnName("reactionTypeId");
+      this.Property(tr => tr.ReactionTypeId).HasColumnName("reactionTypeID");
       this.Property(tr => tr.TypeId).HasColumnName("typeID");
 
       // Relationship mappings
