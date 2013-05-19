@@ -80,9 +80,9 @@ namespace Eve.Data.Entities
     /// <returns>
     /// A compound ID combining the two sub-IDs.
     /// </returns>
-    public static long CreateCacheKey(long fromRegionId, long toRegionId)
+    public static IConvertible CreateCacheKey(long fromRegionId, long toRegionId)
     {
-      return (long)((((ulong)(long)fromRegionId.GetHashCode()) << 32) | ((ulong)(long)toRegionId.GetHashCode()));
+      return EveCache.CreateCompoundCacheKey(fromRegionId, toRegionId);
     }
 
     /// <inheritdoc />

@@ -18,9 +18,7 @@ namespace Eve.Universe
   /// <summary>
   /// Contains information about a jump link between constellations.
   /// </summary>
-  public sealed partial class ConstellationJump
-    : EveEntityAdapter<ConstellationJumpEntity, ConstellationJump>,
-      IKeyItem<long>
+  public sealed partial class ConstellationJump : EveEntityAdapter<ConstellationJumpEntity, ConstellationJump>
   {
     private Constellation fromConstellation;
     private Region fromRegion;
@@ -184,17 +182,4 @@ namespace Eve.Universe
       return this.FromConstellation.Name + " to " + this.ToConstellation.Name;
     }
   }
-
-  #region IKeyItem<long> Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.
-  /// </content>
-  public partial class ConstellationJump : IKeyItem<long>
-  {
-    long IKeyItem<long>.Key
-    {
-      get { return ConstellationJumpEntity.CreateCacheKey(this.FromConstellationId, this.ToConstellationId); }
-    }
-  }
-  #endregion
 }

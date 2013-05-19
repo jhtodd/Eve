@@ -96,9 +96,9 @@ namespace Eve.Data.Entities
     /// <returns>
     /// A compound ID combining the two sub-IDs.
     /// </returns>
-    public static long CreateCacheKey(byte assemblyLineTypeId, CategoryId categoryId)
+    public static IConvertible CreateCacheKey(byte assemblyLineTypeId, CategoryId categoryId)
     {
-      return (long)((((ulong)(long)assemblyLineTypeId) << 32) | ((ulong)(long)categoryId));
+      return EveCache.CreateCompoundCacheKey(assemblyLineTypeId, categoryId);
     }
 
     /// <inheritdoc />

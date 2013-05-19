@@ -18,9 +18,7 @@ namespace Eve.Universe
   /// <summary>
   /// Contains information about a jump link between regions.
   /// </summary>
-  public sealed partial class RegionJump
-    : EveEntityAdapter<RegionJumpEntity, RegionJump>,
-      IKeyItem<long>
+  public sealed partial class RegionJump : EveEntityAdapter<RegionJumpEntity, RegionJump>
   {
     private Region fromRegion;
     private Region toRegion;
@@ -126,17 +124,4 @@ namespace Eve.Universe
       return this.FromRegion.Name + " to " + this.ToRegion.Name;
     }
   }
-
-  #region IKeyItem<long> Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.
-  /// </content>
-  public partial class RegionJump : IKeyItem<long>
-  {
-    long IKeyItem<long>.Key
-    {
-      get { return RegionJumpEntity.CreateCacheKey(this.FromRegionId, this.ToRegionId); }
-    }
-  }
-  #endregion
 }

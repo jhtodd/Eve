@@ -615,21 +615,34 @@ namespace Eve.Data
     }
 
     /// <summary>
-    /// Gets the cache key for an item with the specified type, region, and ID
-    /// value.
+    /// Creates a cache key based on two separate values.
     /// </summary>
-    /// <param name="region">
-    /// The region for which to generate the key.
+    /// <param name="values">
+    /// The values from which to create the cache key.
     /// </param>
+    /// <returns>
+    /// A cache key that is guaranteed to be unique for any values of
+    /// the supplied parameters.
+    /// </returns>
+    protected internal static string CreateCompoundCacheKey(params IConvertible[] values)
+    {
+      Contract.Requires(values != null, "The values from which to create the cache key cannot be null.");
+      Contract.Ensures(Contract.Result<string>() != null);
+
+      return string.Join("_", values.Select(x => CreateCacheKey(x)));
+    }
+
+    /// <summary>
+    /// Gets the cache key for an item with the specified ID value.
+    /// </summary>
     /// <param name="id">
     /// The ID for which to generate a cache key.
     /// </param>
     /// <returns>
     /// The cache key for an item with the specified type and ID.
     /// </returns>
-    protected static string CreateCacheKey(string region, IConvertible id)
+    protected static string CreateCacheKey(IConvertible id)
     {
-      Contract.Requires(region != null, Resources.Messages.BaseValueCache_RegionCannotBeNull);
       Contract.Requires(id != null, Resources.Messages.BaseValueCache_IdCannotBeNull);
       Contract.Ensures(Contract.Result<string>() != null);
 
@@ -733,7 +746,27 @@ namespace Eve.Data
           break;
       }
 
-      return EveCacheRegionPrefix + region + "_" + idKey;
+      return idKey;
+    }
+
+    /// <summary>
+    /// Gets the cache key for an item with the specified region and ID value.
+    /// </summary>
+    /// <param name="region">
+    /// The region for which to generate the key.
+    /// </param>
+    /// <param name="id">
+    /// The ID for which to generate a cache key.
+    /// </param>
+    /// <returns>
+    /// The cache key for an item with the specified type and ID.
+    /// </returns>
+    protected static string CreateCacheKey(string region, IConvertible id)
+    {
+      Contract.Requires(region != null, Resources.Messages.BaseValueCache_RegionCannotBeNull);
+      Contract.Requires(id != null, Resources.Messages.BaseValueCache_IdCannotBeNull);
+      Contract.Ensures(Contract.Result<string>() != null);
+      return string.Concat(EveCacheRegionPrefix, region, "_", CreateCacheKey(id));
     }
 
     /// <summary>

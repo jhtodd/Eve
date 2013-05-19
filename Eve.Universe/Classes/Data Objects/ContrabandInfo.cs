@@ -19,9 +19,7 @@ namespace Eve.Universe
   /// <summary>
   /// Contains information about a jump link between constellations.
   /// </summary>
-  public sealed partial class ContrabandInfo
-    : EveEntityAdapter<ContrabandInfoEntity, ContrabandInfo>,
-      IKeyItem<long>
+  public sealed partial class ContrabandInfo : EveEntityAdapter<ContrabandInfoEntity, ContrabandInfo>
   {
     private Faction faction;
     private EveType type;
@@ -221,17 +219,4 @@ namespace Eve.Universe
       return this.Type.Name + " (" + this.Faction.Name + ")";
     }
   }
-
-  #region IKeyItem<long> Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.
-  /// </content>
-  public partial class ContrabandInfo : IKeyItem<long>
-  {
-    long IKeyItem<long>.Key
-    {
-      get { return ContrabandInfoEntity.CreateCacheKey((long)this.FactionId, this.TypeId); }
-    }
-  }
-  #endregion
 }

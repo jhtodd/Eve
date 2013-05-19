@@ -87,9 +87,9 @@ namespace Eve.Data.Entities
     /// <returns>
     /// A compound ID combining the two sub-IDs.
     /// </returns>
-    public static long CreateCacheKey(int typeId, int materialTypeId)
+    public static IConvertible CreateCacheKey(int typeId, int materialTypeId)
     {
-      return (long)((((ulong)(long)typeId) << 32) | ((ulong)(long)materialTypeId));
+      return EveCache.CreateCompoundCacheKey(typeId, materialTypeId);
     }
 
     /// <inheritdoc />

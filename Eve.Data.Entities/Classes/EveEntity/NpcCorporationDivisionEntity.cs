@@ -97,9 +97,9 @@ namespace Eve.Data.Entities
     /// <returns>
     /// A compound ID combining the two sub-IDs.
     /// </returns>
-    public static long CreateCacheKey(long corporationId, DivisionId divisionId)
+    public static IConvertible CreateCacheKey(long corporationId, DivisionId divisionId)
     {
-      return (long)((((ulong)(long)divisionId) << 32) | (ulong)(long)corporationId);
+      return EveCache.CreateCompoundCacheKey(corporationId, divisionId);
     }
 
     /// <inheritdoc />

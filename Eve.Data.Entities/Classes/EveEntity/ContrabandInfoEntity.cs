@@ -111,19 +111,18 @@ namespace Eve.Data.Entities
     /// <summary>
     /// Computes a compound ID for the specified sub-IDs.
     /// </summary>
-    /// <param name="factionID">
+    /// <param name="factionId">
     /// The faction ID.
     /// </param>
-    /// <param name="typeID">
+    /// <param name="typeId">
     /// The type ID.
     /// </param>
     /// <returns>
     /// A compound ID combining the two sub-IDs.
     /// </returns>
-    internal static long CreateCacheKey(long factionID, EveTypeId typeID)
+    internal static IConvertible CreateCacheKey(long factionId, EveTypeId typeId)
     {
-      // Faction ID is always small enough to fit in the lower 32 bits
-      return (long)((((ulong)(long)factionID) << 32) | ((ulong)(long)typeID));
+      return EveCache.CreateCompoundCacheKey(factionId, typeId);
     }
   }
 }

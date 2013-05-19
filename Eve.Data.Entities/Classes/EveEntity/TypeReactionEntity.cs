@@ -98,9 +98,9 @@ namespace Eve.Data.Entities
     /// <returns>
     /// A compound ID combining the sub-IDs.
     /// </returns>
-    public static long CreateCacheKey(int reactionTypeId, bool input, int typeId)
+    public static IConvertible CreateCacheKey(int reactionTypeId, bool input, int typeId)
     {
-      return (long)((((ulong)(long)reactionTypeId) << 32) | ((ulong)(input ? (ulong)1 << 31 : 0)) | ((ulong)(long)typeId));
+      return EveCache.CreateCompoundCacheKey(reactionTypeId, input, typeId);
     }
 
     /// <inheritdoc />

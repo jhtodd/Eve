@@ -121,9 +121,9 @@ namespace Eve.Data.Entities
     /// <returns>
     /// A compound ID combining the two sub-IDs.
     /// </returns>
-    public static long CreateCacheKey(int controlTowerTypeId, int resourceTypeId)
+    public static IConvertible CreateCacheKey(int controlTowerTypeId, int resourceTypeId)
     {
-      return (long)((((ulong)(long)controlTowerTypeId) << 32) | ((ulong)(long)resourceTypeId));
+      return EveCache.CreateCompoundCacheKey(controlTowerTypeId, resourceTypeId);
     }
 
     /// <inheritdoc />

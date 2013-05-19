@@ -101,9 +101,9 @@ namespace Eve.Data.Entities
     /// <returns>
     /// A compound ID combining the two sub-IDs.
     /// </returns>
-    internal static long CreateCacheKey(int itemTypeId, AttributeId attributeId)
+    internal static IConvertible CreateCacheKey(int itemTypeId, AttributeId attributeId)
     {
-      return (long)((((ulong)(long)itemTypeId) << 32) | ((ulong)(long)attributeId));
+      return EveCache.CreateCompoundCacheKey(itemTypeId, attributeId);
     }
   }
 }

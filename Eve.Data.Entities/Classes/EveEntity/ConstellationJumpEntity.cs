@@ -103,18 +103,18 @@ namespace Eve.Data.Entities
     /// <summary>
     /// Computes a compound ID for the specified sub-IDs.
     /// </summary>
-    /// <param name="fromId">
+    /// <param name="fromConstellationId">
     /// The ID of the origin constellation.
     /// </param>
-    /// <param name="toId">
+    /// <param name="toConstellationId">
     /// The ID of the destination constellation.
     /// </param>
     /// <returns>
     /// A compound ID combining the two sub-IDs.
     /// </returns>
-    public static long CreateCacheKey(ConstellationId fromId, ConstellationId toId)
+    public static IConvertible CreateCacheKey(ConstellationId fromConstellationId, ConstellationId toConstellationId)
     {
-      return (long)((((ulong)(long)fromId.GetHashCode()) << 32) | ((ulong)(long)toId.GetHashCode()));
+      return EveCache.CreateCompoundCacheKey(fromConstellationId, toConstellationId);
     }
 
     /// <inheritdoc />

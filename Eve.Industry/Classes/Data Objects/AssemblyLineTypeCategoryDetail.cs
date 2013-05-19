@@ -21,8 +21,7 @@ namespace Eve.Industry
   /// </summary>
   public sealed partial class AssemblyLineTypeCategoryDetail
     : EveEntityAdapter<AssemblyLineTypeCategoryDetailEntity, AssemblyLineTypeCategoryDetail>,
-      IKeyItem<CategoryId>,
-      IKeyItem<long>
+      IKeyItem<CategoryId>
   {
     private AssemblyLineType assemblyLineType;
     private Category category;
@@ -198,19 +197,6 @@ namespace Eve.Industry
     CategoryId IKeyItem<CategoryId>.Key
     {
       get { return this.CategoryId; }
-    }
-  }
-  #endregion
-
-  #region IKeyItem<long> Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.
-  /// </content>
-  public sealed partial class AssemblyLineTypeCategoryDetail : IKeyItem<long>
-  {
-    long IKeyItem<long>.Key
-    {
-      get { return AssemblyLineTypeCategoryDetailEntity.CreateCacheKey(this.AssemblyLineTypeId, this.CategoryId); }
     }
   }
   #endregion

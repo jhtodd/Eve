@@ -22,8 +22,7 @@ namespace Eve.Universe
   /// </summary>
   public sealed partial class ControlTowerResource
     : EveEntityAdapter<ControlTowerResourceEntity, ControlTowerResource>,
-      IHasIcon,
-      IKeyItem<long>
+      IHasIcon
   {
     private EveType controlTowerType; // TODO: Change to ControlTowerType
     private EveType resourceType;
@@ -227,19 +226,6 @@ namespace Eve.Universe
     IconId? IHasIcon.IconId
     {
       get { return this.ResourceType.IconId; }
-    }
-  }
-  #endregion
-
-  #region IKeyItem<long> Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.
-  /// </content>
-  public partial class ControlTowerResource : IKeyItem<long>
-  {
-    long IKeyItem<long>.Key
-    {
-      get { return ControlTowerResourceEntity.CreateCacheKey(this.ResourceTypeId, this.ControlTowerTypeId); }
     }
   }
   #endregion

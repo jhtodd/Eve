@@ -20,9 +20,7 @@ namespace Eve.Industry
   /// Contains a summary of the number of assembly lines of a particular
   /// type that are located at a particular station.
   /// </summary>
-  public sealed partial class AssemblyLineStation
-    : EveEntityAdapter<AssemblyLineStationEntity, AssemblyLineStation>,
-      IKeyItem<long>
+  public sealed partial class AssemblyLineStation : EveEntityAdapter<AssemblyLineStationEntity, AssemblyLineStation>
   {
     private AssemblyLineType assemblyLineType;
     private NpcCorporation owner;
@@ -268,17 +266,4 @@ namespace Eve.Industry
       return this.AssemblyLineType.Name + " (" + this.Quantity.ToString() + ")";
     }
   }
-
-  #region IKeyItem<long> Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.
-  /// </content>
-  public sealed partial class AssemblyLineStation : IKeyItem<long>
-  {
-    long IKeyItem<long>.Key
-    {
-      get { return AssemblyLineStationEntity.CreateCacheKey(this.StationId, this.AssemblyLineTypeId); }
-    }
-  }
-  #endregion
 }

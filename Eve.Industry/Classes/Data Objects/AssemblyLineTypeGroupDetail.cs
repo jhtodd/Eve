@@ -21,8 +21,7 @@ namespace Eve.Industry
   /// </summary>
   public sealed partial class AssemblyLineTypeGroupDetail
     : EveEntityAdapter<AssemblyLineTypeGroupDetailEntity, AssemblyLineTypeGroupDetail>,
-      IKeyItem<GroupId>,
-      IKeyItem<long>
+      IKeyItem<GroupId>
   {
     private AssemblyLineType assemblyLineType;
     private Group group;
@@ -198,19 +197,6 @@ namespace Eve.Industry
     GroupId IKeyItem<GroupId>.Key
     {
       get { return this.GroupId; }
-    }
-  }
-  #endregion
-
-  #region IKeyItem<long> Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.
-  /// </content>
-  public sealed partial class AssemblyLineTypeGroupDetail : IKeyItem<long>
-  {
-    long IKeyItem<long>.Key
-    {
-      get { return AssemblyLineTypeGroupDetailEntity.CreateCacheKey(this.AssemblyLineTypeId, this.GroupId); }
     }
   }
   #endregion

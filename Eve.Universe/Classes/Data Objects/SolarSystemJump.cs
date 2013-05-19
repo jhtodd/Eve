@@ -18,9 +18,7 @@ namespace Eve.Universe
   /// <summary>
   /// Contains information about a jump link between solar systems.
   /// </summary>
-  public sealed partial class SolarSystemJump
-    : EveEntityAdapter<SolarSystemJumpEntity, SolarSystemJump>,
-      IKeyItem<long>
+  public sealed partial class SolarSystemJump : EveEntityAdapter<SolarSystemJumpEntity, SolarSystemJump>
   {
     private Constellation fromConstellation;
     private Region fromRegion;
@@ -242,17 +240,4 @@ namespace Eve.Universe
       return this.FromSolarSystem.Name + " to " + this.ToSolarSystem.Name;
     }
   }
-
-  #region IKeyItem<long> Implementation
-  /// <content>
-  /// Explicit implementation of the <see cref="IKeyItem{TKey}" /> interface.
-  /// </content>
-  public partial class SolarSystemJump : IKeyItem<long>
-  {
-    long IKeyItem<long>.Key
-    {
-      get { return SolarSystemJumpEntity.CreateCacheKey(this.FromSolarSystemId, this.ToSolarSystemId); }
-    }
-  }
-  #endregion
 }
