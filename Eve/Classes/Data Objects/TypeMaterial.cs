@@ -11,6 +11,7 @@ namespace Eve
 
   using Eve.Data;
   using Eve.Data.Entities;
+  using Eve.Industry;
 
   using FreeNet.Collections;
 
@@ -25,7 +26,7 @@ namespace Eve
       IKeyItem<EveTypeId>
   {
     private EveType materialType;
-    private EveType type;
+    private BlueprintType type;
 
     /* Constructors */
 
@@ -99,11 +100,11 @@ namespace Eve
     /// <value>
     /// The type to which the material requirement applies.
     /// </value>
-    private EveType Type
+    private BlueprintType Type
     {
       get
       {
-        Contract.Ensures(Contract.Result<EveType>() != null);
+        Contract.Ensures(Contract.Result<BlueprintType>() != null);
 
         // If not already set, load from the cache, or else create an instance from the base entity
         return this.LazyInitializeAdapter(ref this.type, this.Entity.TypeId, () => this.Entity.Type);

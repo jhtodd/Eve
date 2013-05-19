@@ -205,6 +205,12 @@ namespace Eve.Data
     }
 
     /// <inheritdoc />
+    public IQueryable<BlueprintTypeEntity> BlueprintTypes
+    {
+      get { return this.Query<BlueprintTypeEntity>(); }
+    }
+
+    /// <inheritdoc />
     public IQueryable<CategoryEntity> Categories
     {
       get { return this.Query<CategoryEntity>(); }

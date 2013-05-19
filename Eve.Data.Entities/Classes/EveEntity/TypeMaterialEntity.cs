@@ -57,7 +57,7 @@ namespace Eve.Data.Entities
     /// <value>
     /// The underlying database value of the corresponding adapter property.
     /// </value>
-    public virtual EveTypeEntity Type { get; internal set; }
+    public virtual BlueprintTypeEntity Type { get; internal set; }
 
     /// <summary>
     /// Gets the underlying database value of the corresponding adapter property.

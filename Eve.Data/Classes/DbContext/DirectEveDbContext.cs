@@ -133,7 +133,7 @@ namespace Eve.Data
       base.OnModelCreating(modelBuilder);
 
       // Load all entity configuration classes in the current assembly, and add them
-      // to the model builder
+      // to the model builder.
       foreach (var configurationType in this.GetEntityConfigurationTypes())
       {
         object configuration = Activator.CreateInstance(configurationType);

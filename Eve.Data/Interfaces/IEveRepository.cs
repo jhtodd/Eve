@@ -959,6 +959,73 @@ namespace Eve.Data
     bool TryGetBloodlineById(BloodlineId id, out Bloodline value);
     #endregion
 
+    #region BlueprintType Methods
+    /// <summary>
+    /// Returns the <see cref="BlueprintType" /> object with the specified ID.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <returns>
+    /// The item with the specified ID value(s).
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if no unique item with the specified ID was found.
+    /// </exception>
+    /// <remarks>
+    /// <para>
+    /// When retrieving a single item, this method should be used whenever
+    /// possible, because retrieving by the ID value allows a cached version
+    /// of the item to be returned without requiring a database query,
+    /// dramatically increasing performance.
+    /// </para>
+    /// </remarks>
+    BlueprintType GetBlueprintTypeById(EveTypeId id);
+
+    /// <summary>
+    /// Returns all <see cref="BlueprintType" /> objects matching the specified criteria.
+    /// </summary>
+    /// <param name="queryOperations">
+    /// A delegate specifying what operation to perform on the data source to return the desired items.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IReadOnlyList{T}" /> containing the items that meet
+    /// the specified criteria.
+    /// </returns>
+    IReadOnlyList<BlueprintType> GetBlueprintTypes(Func<IQueryable<BlueprintTypeEntity>, IQueryable<BlueprintTypeEntity>> queryOperations);
+
+    /// <summary>
+    /// Returns the results of the specified query for <see cref="BlueprintType" /> objects.
+    /// </summary>
+    /// <param name="modifiers">
+    /// The modifiers that are applied to the query.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IReadOnlyList{T}" /> containing the results of the query.
+    /// </returns>
+    IReadOnlyList<BlueprintType> GetBlueprintTypes(params IQueryModifier<BlueprintTypeEntity>[] modifiers);
+
+    /// <summary>
+    /// Attempts to retrieve the <see cref="BlueprintType" /> object with the
+    /// specified ID, returning success or failure.
+    /// </summary>
+    /// <param name="id">
+    /// The ID of the item to return.
+    /// </param>
+    /// <param name="value">
+    /// The parameter which will hold the item with the specified ID value(s),
+    /// if a matching item is found.  Output parameter.
+    /// </param>
+    /// <returns>
+    /// <see langword="true" /> if a matching item is found; otherwise
+    /// <see langword="false" />.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if more than one item with the specified ID was found.
+    /// </exception>
+    bool TryGetBlueprintTypeById(EveTypeId id, out BlueprintType value);
+    #endregion
+
     #region Category Methods
     /// <summary>
     /// Returns the <see cref="Category" /> object with the specified ID.

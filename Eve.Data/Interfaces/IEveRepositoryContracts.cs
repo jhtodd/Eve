@@ -398,6 +398,34 @@ namespace Eve.Data
     }
     #endregion
 
+    #region BlueprintType Methods
+    BlueprintType IEveRepository.GetBlueprintTypeById(EveTypeId id)
+    {
+      Contract.Ensures(Contract.Result<BlueprintType>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<BlueprintType> IEveRepository.GetBlueprintTypes(Func<IQueryable<BlueprintTypeEntity>, IQueryable<BlueprintTypeEntity>> queryOperations)
+    {
+      Contract.Requires(queryOperations != null, "The query operations delegate cannot be null.");
+      Contract.Ensures(Contract.Result<IReadOnlyList<BlueprintType>>() != null);
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<BlueprintType> IEveRepository.GetBlueprintTypes(params IQueryModifier<BlueprintTypeEntity>[] modifiers)
+    {
+      Contract.Requires(modifiers != null, Resources.Messages.IEveDataSource_QueryModifierCannotBeNull);
+      Contract.Ensures(Contract.Result<IReadOnlyList<BlueprintType>>() != null);
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetBlueprintTypeById(EveTypeId id, out BlueprintType value)
+    {
+      Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out value) != null);
+      throw new NotImplementedException();
+    }
+    #endregion
+
     #region Category Methods
     Category IEveRepository.GetCategoryById(CategoryId id)
     {

@@ -1170,5 +1170,26 @@ namespace Eve.Tests
     {
       throw new NotImplementedException();
     }
+
+
+    Industry.BlueprintType IEveRepository.GetBlueprintTypeById(EveTypeId id)
+    {
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<Industry.BlueprintType> IEveRepository.GetBlueprintTypes(Func<IQueryable<Data.Entities.BlueprintTypeEntity>, IQueryable<Data.Entities.BlueprintTypeEntity>> queryOperations)
+    {
+      throw new NotImplementedException();
+    }
+
+    IReadOnlyList<Industry.BlueprintType> IEveRepository.GetBlueprintTypes(params FreeNet.Data.Entity.IQueryModifier<Data.Entities.BlueprintTypeEntity>[] modifiers)
+    {
+      throw new NotImplementedException();
+    }
+
+    bool IEveRepository.TryGetBlueprintTypeById(EveTypeId id, out Industry.BlueprintType value)
+    {
+      throw new NotImplementedException();
+    }
   }
 }

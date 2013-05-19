@@ -129,6 +129,14 @@ namespace Eve.Data
     IQueryable<BloodlineEntity> Bloodlines { get; }
 
     /// <summary>
+    /// Gets an <see cref="IQueryable{T}" /> that can be used to query station types.
+    /// </summary>
+    /// <value>
+    /// The <see cref="IQueryable{T}" /> for station types.
+    /// </value>
+    IQueryable<BlueprintTypeEntity> BlueprintTypes { get; }
+
+    /// <summary>
     /// Gets an <see cref="IQueryable{T}" /> that can be used to query categories.
     /// </summary>
     /// <value>

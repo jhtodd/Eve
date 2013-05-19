@@ -55,7 +55,6 @@ namespace Eve.Data.Entities.Configuration
       this.HasRequired(et => et.Group).WithMany(g => g.Types).HasForeignKey(et => et.GroupId);
       this.HasOptional(et => et.Icon).WithMany().HasForeignKey(et => et.IconId);
       this.HasOptional(et => et.MarketGroup).WithMany(mg => mg.Types).HasForeignKey(et => et.MarketGroupId);
-      this.HasMany(et => et.Materials).WithRequired(tm => tm.Type).HasForeignKey(tm => tm.TypeId);
       this.HasMany(et => et.ChildMetaTypes).WithRequired(mt => mt.ParentType).HasForeignKey(mt => mt.ParentTypeId);
     }
   }

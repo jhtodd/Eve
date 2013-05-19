@@ -665,6 +665,47 @@ namespace Eve.Data
     }
     #endregion
 
+    #region BlueprintType Methods
+    /// <inheritdoc />
+    public BlueprintType GetBlueprintTypeById(EveTypeId id)
+    {
+      BlueprintType result;
+
+      if (!this.TryGetBlueprintTypeById(id, out result))
+      {
+        throw new InvalidOperationException("No BlueprintType with ID " + id.ToString() + " could be found.");
+      }
+
+      return result;
+    }
+
+    /// <inheritdoc />
+    public IReadOnlyList<BlueprintType> GetBlueprintTypes(Func<IQueryable<BlueprintTypeEntity>, IQueryable<BlueprintTypeEntity>> queryOperations)
+    {
+      return this.GetBlueprintTypes(new QueryTransform<BlueprintTypeEntity>(queryOperations));
+    }
+
+    /// <inheritdoc />
+    [EveQueryMethod(typeof(BlueprintType))]
+    public IReadOnlyList<BlueprintType> GetBlueprintTypes(params IQueryModifier<BlueprintTypeEntity>[] modifiers)
+    {
+      // Construct the result set, filtering items through the global cache along the way
+      return LoadAndCacheResults<BlueprintTypeEntity, BlueprintType>(this.Context.BlueprintTypes, modifiers);
+    }
+
+    /// <inheritdoc />
+    public bool TryGetBlueprintTypeById(EveTypeId id, out BlueprintType value)
+    {
+      if (this.Cache.TryGetValue<BlueprintType>(id, out value))
+      {
+        return true;
+      }
+
+      value = this.GetBlueprintTypes(q => q.Where(x => x.Id == id.Value)).SingleOrDefault();
+      return value != null;
+    }
+    #endregion
+
     #region Category Methods
     /// <inheritdoc />
     public Category GetCategoryById(CategoryId id)

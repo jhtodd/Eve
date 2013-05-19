@@ -134,6 +134,15 @@ namespace Eve.Data
       }
     }
 
+    IQueryable<BlueprintTypeEntity> IEveDbContext.BlueprintTypes
+    {
+      get
+      {
+        Contract.Ensures(Contract.Result<IQueryable<BlueprintTypeEntity>>() != null);
+        throw new NotImplementedException();
+      }
+    }
+
     IQueryable<CategoryEntity> IEveDbContext.Categories
     {
       get

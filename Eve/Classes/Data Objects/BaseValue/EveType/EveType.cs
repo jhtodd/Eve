@@ -14,6 +14,7 @@ namespace Eve
   using Eve.Character;
   using Eve.Data;
   using Eve.Data.Entities;
+  using Eve.Industry;
   using Eve.Universe;
 
   using FreeNet.Collections;
@@ -73,7 +74,6 @@ namespace Eve
     private Group group;
     private Icon icon;
     private MarketGroup marketGroup;
-    private ReadOnlyTypeMaterialCollection materials;
     private MetaGroup metaGroup;
     private MetaType metaType;
     private ReadOnlySkillLevelCollection requiredSkills;
@@ -395,38 +395,6 @@ namespace Eve
     }
 
     /// <summary>
-    /// Gets the collection of materials required to manufacture an
-    /// item of this type.  This is also used to determine which materials 
-    /// are recovered when a full lot of items of this type is reprocessed.
-    /// </summary>
-    /// <value>
-    /// A <see cref="ReadOnlyTypeMaterialCollection" /> containing the materials.
-    /// </value>
-    /// <remarks>
-    /// <para>
-    /// For some types (especially T2 items), additional materials may be
-    /// required.  These will be contained in the blueprint type's
-    /// <see cref="BlueprintType.Requirements" /> collection.
-    /// </para>
-    /// <para>
-    /// This property is only relevant to types that can be manufactured
-    /// or reprocessed.
-    /// </para>
-    /// </remarks>
-    public ReadOnlyTypeMaterialCollection Materials
-    {
-      get
-      {
-        Contract.Ensures(Contract.Result<ReadOnlyTypeMaterialCollection>() != null);
-
-        // If not already set, construct a collection of this type's attribute values.
-        return EveType.LazyInitialize(
-          ref this.materials,
-          () => ReadOnlyTypeMaterialCollection.Create(this.Repository, this.Entity.Materials));
-      }
-    }
-
-    /// <summary>
     /// Gets the meta group the current item is a member of.
     /// </summary>
     /// <value>
@@ -730,6 +698,13 @@ namespace Eve
 
       // First, check for derived entity types.  These are entities that
       // have additional fields in ancillary tables.
+
+      // BlueprintTypeEntities always map to StationType
+      BlueprintTypeEntity blueprintTypeEntity = entity as BlueprintTypeEntity;
+      if (blueprintTypeEntity != null)
+      {
+        return new BlueprintType(repository, blueprintTypeEntity);
+      }
 
       // StationTypeEntities always map to StationType
       StationTypeEntity stationTypeEntity = entity as StationTypeEntity;

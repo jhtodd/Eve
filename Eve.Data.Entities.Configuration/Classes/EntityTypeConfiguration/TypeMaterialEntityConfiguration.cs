@@ -34,7 +34,7 @@ namespace Eve.Data.Entities.Configuration
 
       // Relationship mappings
       this.HasRequired(tm => tm.MaterialType).WithMany().HasForeignKey(tm => tm.MaterialTypeId);
-      this.HasRequired(tm => tm.Type).WithMany(et => et.Materials).HasForeignKey(tm => tm.TypeId);
+      this.HasRequired(tm => tm.Type).WithMany(bt => bt.Materials).HasForeignKey(tm => tm.TypeId);
     }
   }
 }

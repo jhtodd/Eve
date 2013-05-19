@@ -177,6 +177,7 @@
     <Compile Include="Eve.Data.Entities.Configuration\Classes\EntityTypeConfiguration\ConstellationJumpEntityConfiguration.cs" />
     <Compile Include="Eve.Data.Entities.Configuration\Classes\EntityTypeConfiguration\ContrabandInfoEntityConfiguration.cs" />
     <Compile Include="Eve.Data.Entities.Configuration\Classes\EntityTypeConfiguration\ControlTowerResourceEntityConfiguration.cs" />
+    <Compile Include="Eve.Data.Entities.Configuration\Classes\EntityTypeConfiguration\BlueprintTypeEntityConfiguration.cs" />
     <Compile Include="Eve.Data.Entities.Configuration\Classes\EntityTypeConfiguration\TypeReactionEntityConfiguration.cs" />
     <Compile Include="Eve.Data.Entities.Configuration\Classes\EntityTypeConfiguration\TypeMaterialEntityConfiguration.cs" />
     <Compile Include="Eve.Data.Entities.Configuration\Classes\EntityTypeConfiguration\SolarSystemJumpEntityConfiguration.cs" />
@@ -215,7 +216,7 @@
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\AssemblyLineEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\BaseValueEntity\CertificateCategoryEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\BaseValueEntity\CertificateClassEntity.cs" />
-    <None Include="Eve.Data.Entities\Classes\EveEntity\BaseValueEntity\EveTypeEntity\BlueprintTypeEntity.cs" />
+    <Compile Include="Eve.Data.Entities\Classes\EveEntity\BaseValueEntity\EveTypeEntity\BlueprintTypeEntity.cs" />
     <Compile Include="Eve.Data.Entities.Configuration\Classes\EntityTypeConfiguration\AgentTypeEntityConfiguration.cs" />
     <Compile Include="Eve.Data.Entities.Configuration\Classes\EntityTypeConfiguration\AncestryEntityConfiguration.cs" />
     <Compile Include="Eve.Data.Entities.Configuration\Classes\EntityTypeConfiguration\AssemblyLineTypeEntityConfiguration.cs" />
@@ -311,7 +312,7 @@
     <Compile Include="Eve.Industry\Classes\Data Objects\AssemblyLineStation.cs" />
     <Compile Include="Eve.Industry\Classes\Data Objects\AssemblyLine.cs" />
     <Compile Include="Eve.Industry\Classes\Collections\ReadOnlyAssemblyLineCollection.cs" />
-    <None Include="Eve.Industry\Classes\Data Objects\BaseValue\EveType\BlueprintType.cs" />
+    <Compile Include="Eve.Industry\Classes\Data Objects\BaseValue\EveType\BlueprintType.cs" />
     <Compile Include="Eve.Industry\Classes\ID Types\AssemblyLineId.cs" />
     <Compile Include="Eve.Industry\Classes\Collections\ReadOnlyAssemblyLineTypeGroupDetailCollection.cs" />
     <Compile Include="Eve.Industry\Classes\ID Types\AssemblyLineTypeId.cs" />
