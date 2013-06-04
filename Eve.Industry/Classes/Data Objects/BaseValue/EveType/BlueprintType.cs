@@ -83,7 +83,7 @@ namespace Eve.Industry
     /// </remarks>
     public ReadOnlyTypeMaterialCollection Materials
     {
-      get
+      get 
       {
         Contract.Ensures(Contract.Result<ReadOnlyTypeMaterialCollection>() != null);
 

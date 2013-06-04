@@ -112,7 +112,7 @@ namespace Eve
     /// <value>
     /// The type required by or produced by the reaction.
     /// </value>
-    private EveType Type
+    public EveType Type
     {
       get
       {
@@ -129,7 +129,7 @@ namespace Eve
     /// <value>
     /// The ID of the type required by or produced by the reaction.
     /// </value>
-    private EveTypeId TypeId
+    public EveTypeId TypeId
     {
       get { return this.Entity.TypeId; }
     }

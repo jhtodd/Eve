@@ -178,6 +178,7 @@
     <Compile Include="Eve.Data.Entities.Configuration\Classes\EntityTypeConfiguration\ContrabandInfoEntityConfiguration.cs" />
     <Compile Include="Eve.Data.Entities.Configuration\Classes\EntityTypeConfiguration\ControlTowerResourceEntityConfiguration.cs" />
     <Compile Include="Eve.Data.Entities.Configuration\Classes\EntityTypeConfiguration\BlueprintTypeEntityConfiguration.cs" />
+    <Compile Include="Eve.Data.Entities.Configuration\Classes\EntityTypeConfiguration\TypeRequirementEntityConfiguration.cs" />
     <Compile Include="Eve.Data.Entities.Configuration\Classes\EntityTypeConfiguration\TypeReactionEntityConfiguration.cs" />
     <Compile Include="Eve.Data.Entities.Configuration\Classes\EntityTypeConfiguration\TypeMaterialEntityConfiguration.cs" />
     <Compile Include="Eve.Data.Entities.Configuration\Classes\EntityTypeConfiguration\SolarSystemJumpEntityConfiguration.cs" />
@@ -236,6 +237,7 @@
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\CertificateRecommendationEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\ContrabandInfoEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\ControlTowerResourceEntity.cs" />
+    <Compile Include="Eve.Data.Entities\Classes\EveEntity\TypeRequirementEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\TypeReactionEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\TypeMaterialEntity.cs" />
     <Compile Include="Eve.Data.Entities\Classes\EveEntity\EveEntityContracts.cs" />
@@ -373,6 +375,7 @@
     <Compile Include="Eve\Classes\Collections\ReadOnlyGroupCollection.cs" />
     <Compile Include="Eve\Classes\Collections\ReadOnlyTypeReactionCollection.cs" />
     <Compile Include="Eve\Classes\Collections\ReadOnlyTypeMaterialCollection.cs" />
+    <Compile Include="Eve\Classes\Data Objects\TypeRequirement.cs" />
     <Compile Include="Eve\Classes\Data Objects\TypeReaction.cs" />
     <Compile Include="Eve\Classes\Data Objects\TypeMaterial.cs" />
     <Compile Include="Eve\Classes\Data Objects\EveDataObjectContracts.cs" />

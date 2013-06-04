@@ -100,7 +100,7 @@ namespace Eve
     /// <value>
     /// The type to which the material requirement applies.
     /// </value>
-    private BlueprintType Type
+    public BlueprintType Type
     {
       get
       {
@@ -117,7 +117,7 @@ namespace Eve
     /// <value>
     /// The ID of the type to which the material requirement applies.
     /// </value>
-    private EveTypeId TypeId
+    public EveTypeId TypeId
     {
       get { return this.Entity.TypeId; }
     }
